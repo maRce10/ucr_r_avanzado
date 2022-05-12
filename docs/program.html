@@ -319,7 +319,7 @@ div.tocify {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">BOKU bioacoustics R 2022</a>
+      <a class="navbar-brand" href="index.html">OTS Bioacoustic Analysis in R 2022</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -423,14 +423,14 @@ div.tocify {
 </div>
 </div>
 <p> </p>
-<p><strong>Introduction</strong> <a href="https://marce10.github.io/BOKU-Analysis-of-animal-acoustic-signals-in-R-2022/introduction.html" class="btn btn-warning btn-xs" role="button">Introduction</a></p>
+<p><strong>Introduction</strong> <a href="https://marce10.github.io/OTS_BIR_2022/introduction.html" class="btn btn-warning btn-xs" role="button">Introduction</a></p>
 <ul>
 <li>How animal acoustic signals look like?</li>
 <li>Analytical workflow in bioacoustics research</li>
 <li>Advantages of programming</li>
 <li>Course outline</li>
 </ul>
-<p><strong>Basic R concepts</strong> <a href="https://marce10.github.io/BOKU-Analysis-of-animal-acoustic-signals-in-R-2022/r_basics.html" class="btn btn-warning btn-xs" role="button">R basics</a></p>
+<p><strong>Basic R concepts</strong> <a href="https://marce10.github.io/OTS_BIR_2022/r_basics.html" class="btn btn-warning btn-xs" role="button">R basics</a></p>
 <ul>
 <li>Object types in R</li>
 <li>Subsetting</li>
@@ -441,7 +441,7 @@ div.tocify {
 <div id="project-assignment" class="section level3 alert alert-info">
 <h3>Project assignment</h3>
 <ol style="list-style-type: decimal">
-<li><p>Use the function <code>query_xc()</code> to check the availability of recordings for some bird species you have in mind for your project (do not download at this step) (<a href="https://marce10.github.io/BOKU-Analysis-of-animal-acoustic-signals-in-R-2022/get_xc_recordings.html"><em>check this brief tutorial on how to do that</em></a>)</p></li>
+<li><p>Use the function <code>query_xc()</code> to check the availability of recordings for some bird species you have in mind for your project (do not download at this step) (<a href="https://marce10.github.io/OTS_BIR_2022/get_xc_recordings.html"><em>check this brief tutorial on how to do that</em></a>)</p></li>
 <li><p>Subset the data frame returned by the function to get the subspecies/populations and vocalization type you are interested in (using base R subsetting tools)</p></li>
 <li><p>Download the associated recordings using <code>query_xc()</code> again</p></li>
 </ol>
@@ -465,7 +465,7 @@ div.tocify {
 </div>
 </div>
 <p> </p>
-<p><strong>What is sound?</strong> <a href="https://marce10.github.io/BOKU-Analysis-of-animal-acoustic-signals-in-R-2022/sound.html" class="btn btn-warning btn-xs" role="button">Sound</a></p>
+<p><strong>What is sound?</strong> <a href="https://marce10.github.io/OTS_BIR_2022/sound.html" class="btn btn-warning btn-xs" role="button">Sound</a></p>
 <div class="alert alert-warning">
 <ul>
 <li><p>Create a Rstudio project for the course</p></li>
@@ -479,6 +479,21 @@ div.tocify {
 <li>‘wave’ object structure</li>
 <li>‘wave’ object manipulations</li>
 <li>additional formats</li>
+</ul>
+<p> </p>
+<p><strong>Building spectrograms</strong> <a href="https://marce10.github.io/OTS_BIR_2022/spectrograms.html" class="btn btn-warning btn-xs" role="button">Building spectrograms</a></p>
+<ul>
+<li>Fourier transform</li>
+<li>Building a spectrogram</li>
+<li>Characteristics and limitations</li>
+<li>Spectrograms in R</li>
+</ul>
+<p><strong>Annotation software</strong> <a href="https://marce10.github.io/OTS_BIR_2022/annotations.html" class="btn btn-warning btn-xs" role="button">annotations</a></p>
+<ul>
+<li>Raven / audacity</li>
+<li>Open and explore recordings</li>
+<li>Modify-optimize visualization parameters</li>
+<li>Annotate signals</li>
 </ul>
 <p> </p>
 <div id="project-assignment-1" class="section level3 alert alert-info">
@@ -500,12 +515,27 @@ div.tocify {
 </ul>
 </div>
 <p> </p>
-<p><strong>Building spectrograms</strong> <a href="https://marce10.github.io/BOKU-Analysis-of-animal-acoustic-signals-in-R-2022/spectrograms.html" class="btn btn-warning btn-xs" role="button">Building spectrograms</a></p>
+<p><strong>Package seewave</strong> <a href="https://marce10.github.io/OTS_BIR_2022/seewave.html" class="btn btn-warning btn-xs" role="button">seewave</a></p>
 <ul>
-<li>Fourier transform</li>
-<li>Building a spectrogram</li>
-<li>Characteristics and limitations</li>
-<li>Spectrograms in R</li>
+<li>Explore, modify and measure ‘wave’ objects</li>
+<li>Spectrograms and oscillograms</li>
+<li>Filtering and re-sampling</li>
+<li>Acoustic measurements</li>
+</ul>
+<p><strong>Automatic detection</strong> <a href="https://marce10.github.io/OTS_BIR_2022/ohun.html" class="btn btn-warning btn-xs" role="button">Automatic detection</a></p>
+<ul>
+<li>ohun package for optimize acoustic signal detection</li>
+<li>Detection using amplitude, frequency, and time filters (<code>ohun::energy_detector()</code>)</li>
+<li>Detection using cross-correlation (<code>ohun::template_detector()</code>)</li>
+<li>Frequency range detection (<code>warbleR::freq_range()</code> and <code>warbleR::freq_range_detec()</code>)</li>
+</ul>
+<p><strong>Intro to warbleR</strong> <a href="https://marce10.github.io/OTS_BIR_2022/intro_to_warbler.html" class="btn btn-warning btn-xs" role="button">Intro to warbleR</a></p>
+<ul>
+<li>Intro to warbleR</li>
+<li>Selection tables</li>
+<li>Extended selection tables</li>
+<li>Selection table manipulation</li>
+<li>warbleR functions and the bioacoustics analysis workflow</li>
 </ul>
 <p> </p>
 <div id="project-assignment-2" class="section level3 alert alert-info">
@@ -539,14 +569,14 @@ div.tocify {
 </div>
 </div>
 <p> </p>
-<p><strong>Package seewave</strong> <a href="https://marce10.github.io/BOKU-Analysis-of-animal-acoustic-signals-in-R-2022/seewave.html" class="btn btn-warning btn-xs" role="button">seewave</a></p>
+<p><strong>Quality control in recordings and annotation</strong> <a href="https://marce10.github.io/OTS_BIR_2022/quality_checks.html" class="btn btn-warning btn-xs" role="button">Quality checks</a></p>
 <ul>
-<li>Explore, modify and measure ‘wave’ objects</li>
-<li>Spectrograms and oscillograms</li>
-<li>Filtering and re-sampling</li>
-<li>Acoustic measurements</li>
+<li>Check and modify sound file format (<code>check_wavs()</code>, <code>info_wavs()</code>, <code>duration_wavs()</code>, <code>mp32wav()</code> y <code>fix_wavs()</code>)</li>
+<li>Tuning spectrogram parameters (<code>tweak_spectro()</code>)</li>
+<li>Double-checking selection tables (<code>check_sels()</code>, <code>spectrograms()</code>, <code>full_spectrograms()</code> &amp; <code>catalog()</code>)</li>
+<li>Re-adjusting selections (<code>tailor_sels()</code>)</li>
 </ul>
-<p><strong>Quantifying acoustic signal structure</strong> <a href="https://marce10.github.io/BOKU-Analysis-of-animal-acoustic-signals-in-R-2022/measure_acoustic_structure.html" class="btn btn-warning btn-xs" role="button">Quantify structure</a></p>
+<p><strong>Quantifying acoustic signal structure</strong> <a href="https://marce10.github.io/OTS_BIR_2022/measure_acoustic_structure.html" class="btn btn-warning btn-xs" role="button">Quantify structure</a></p>
 <ul>
 <li>Spectro-temporal measurements (<code>spectro_analysis()</code>)</li>
 <li>Parameter description</li>
@@ -557,16 +587,32 @@ div.tocify {
 <li>Signal-to-noise ratio (<code>sig2noise()</code>)</li>
 <li>Inflections (<code>inflections()</code>)</li>
 <li>Parameters at other levels (<code>song_analysis()</code>)</li>
-<li>Acoustic space using Principal Component Analysis</li>
+</ul>
+<p><strong>Characterizing hierarchical levels in acoustic signals</strong></p>
+<ul>
+<li>Creating ‘song’ spectrograms (<code>full_spectrograms()</code>, <code>spectrograms()</code>)</li>
+<li>‘Song’ parameters (<code>song_analysis()</code>)</li>
 </ul>
 <p> </p>
 <div id="project-assignment-3" class="section level3 alert alert-info">
 <h3>Project assignment</h3>
+<div id="geographic-variation" class="section level4">
+<h4>Geographic variation</h4>
 <ol style="list-style-type: decimal">
 <li>Select best quality signals for analysis</li>
 <li>Measure acoustic parameters</li>
 <li>Summarize variation at higher hierachical levels (if necessary)</li>
 </ol>
+</div>
+<div id="automatic-detection" class="section level4">
+<h4>Automatic detection</h4>
+<ol style="list-style-type: decimal">
+<li>Define templates</li>
+<li>Optimize detection using training data set</li>
+<li>Determine best performance parameters</li>
+<li>Double-check detection by exporting to Raven (Rraven)</li>
+</ol>
+</div>
 </div>
 <hr />
 <p> </p>
@@ -574,21 +620,53 @@ div.tocify {
 <div id="day-5" class="section level2">
 <h2>Day 5</h2>
 <hr />
-<p><strong>Quality control in recordings and annotation</strong> <a href="https://marce10.github.io/BOKU-Analysis-of-animal-acoustic-signals-in-R-2022/quality_checks.html" class="btn btn-warning btn-xs" role="button">Quality checks</a></p>
+<div id="readings-3" class="section level3 alert alert-warning">
+<h3>Readings</h3>
+<div id="signal-transmission" class="section level4">
+<h4>Signal transmission</h4>
 <ul>
-<li>Check and modify sound file format (<code>check_wavs()</code>, <code>info_wavs()</code>, <code>duration_wavs()</code>, <code>mp32wav()</code> y <code>fix_wavs()</code>)</li>
-<li>Tuning spectrogram parameters (<code>tweak_spectro()</code>)</li>
-<li>Double-checking selection tables (<code>check_sels()</code>, <code>spectrograms()</code>, <code>full_spectrograms()</code> &amp; <code>catalog()</code>)</li>
-<li>Re-adjusting selections (<code>tailor_sels()</code>)</li>
+<li><p>Graham, B. A., Sandoval, L., Dabelsteen, T., &amp; Mennill, D. J. (2017). <a href="https://www.tandfonline.com/doi/pdf/10.1080/09524622.2016.1181574?casa_token=AzHx1ABmGXUAAAAA:f33oQnqbUrBR2q6om8FmkKjRNOxN_WDQqIa1Szly_rdUlvV4pLffuFXZtWyj6T6FQyV5NhVqIdwOITZqKw">A test of the Acoustic Adaptation Hypothesis in three types of tropical forest: degradation of male and female Rufous-and-white Wren songs</a>. Bioacoustics, 26(1), 37-61.</p></li>
+<li><p>Dabelsteen, T., Larsen, O. N., &amp; Pedersen, S. B. (1993). <a href="https://www.academia.edu/download/72224403/eed203af725673bae94999ae0258049db24c.pdf">Habitat‐induced degradation of sound signals: Quantifying the effects of communication sounds and bird location on blur ratio, excess attenuation, and signal‐to‐noise ratio in blackbird song</a>. The Journal of the Acoustical Society of America, 93(4), 2206-2220. (<em>Mostly to get the definitions of the degradation metrics used in Graham et al. 2017</em>)</p></li>
+</ul>
+</div>
+</div>
+<p> </p>
+<p><strong>Choosing the right method for quantifying structure</strong> <a href="https://marce10.github.io/OTS_BIR_2022/comparing_methods.html" class="btn btn-warning btn-xs" role="button">Comparing methods</a></p>
+<ul>
+<li>Compare different methods for quantifying structure (<code>compare_methods()</code>)</li>
+</ul>
+<p><strong>Quantifying acoustic spaces</strong> <a href="https://marce10.github.io/OTS_BIR_2022/acoustic_space.html" class="btn btn-warning btn-xs" role="button">Acoustic space</a></p>
+<ul>
+<li>Intro to PhenotypeSpace</li>
+<li>Quanitfying space size</li>
+<li>Comparing sub-spaces</li>
+</ul>
+<p><strong>Quantifying acoustic signal degradation</strong> <a href="https://marce10.github.io/OTS_BIR_2022/degradation.html" class="btn btn-warning btn-xs" role="button">Degradation</a></p>
+<ul>
+<li>Intro to baRulho</li>
+<li>Creating master sound files</li>
+<li>Finding the position of re-recorded signals</li>
+<li>Measuring acoustic degradation</li>
 </ul>
 <p> </p>
 <div id="project-assignment-4" class="section level3 alert alert-info">
 <h3>Project assignment</h3>
+<div id="geographic-variation-1" class="section level4">
+<h4>Geographic variation</h4>
 <ol style="list-style-type: decimal">
 <li>Plot acoustic spaces</li>
+<li>Measure similarity of geographic variants using PhenotypeSpace</li>
 <li>Write report</li>
 </ol>
-<p><em><a href="https://marce10.github.io/BOKU-Analysis-of-animal-acoustic-signals-in-R-2022/measure_structure_green_hermit.html">Check out this guide on how to measure acoustic structure on Xeno-Canto recordings</a></em></p>
+</div>
+<div id="automatic-detection-1" class="section level4">
+<h4>Automatic detection</h4>
+<ol style="list-style-type: decimal">
+<li>Run detection over testing data</li>
+<li>Double-check detections on testing data</li>
+<li>Write report</li>
+</ol>
+</div>
 </div>
 <p> </p>
 </div>
