@@ -607,7 +607,7 @@ This new object class allows to share complete data sets, including acoustic dat
 
 ```{r extn.sel_19}
 
-URL <- "https://github.com/maRce10/BOKU-Analysis-of-animal-acoustic-signals-in-R-2022/raw/master/data/extended.selection.table.araya-salas.et.al.2017.bioacoustics.100.sels.rds"
+URL <- "https://github.com/maRce10/OTS_BIR_2022/raw/master/data/extended.selection.table.araya-salas.et.al.2017.bioacoustics.100.sels.rds"
 
 dat <- readRDS(gzcon(url(URL)))
 

@@ -44,7 +44,7 @@ editor_options:
 
 
 **Introduction**
-<a href="https://marce10.github.io/BOKU-Analysis-of-animal-acoustic-signals-in-R-2022/introduction.html" class="btn btn-warning btn-xs" role="button">Introduction</a>
+<a href="https://marce10.github.io/OTS_BIR_2022/introduction.html" class="btn btn-warning btn-xs" role="button">Introduction</a>
 
 -   How animal acoustic signals look like?
 -   Analytical workflow in bioacoustics research
@@ -52,7 +52,7 @@ editor_options:
 -   Course outline
 
 **Basic R concepts**
-<a href="https://marce10.github.io/BOKU-Analysis-of-animal-acoustic-signals-in-R-2022/r_basics.html" class="btn btn-warning btn-xs" role="button">R basics</a>
+<a href="https://marce10.github.io/OTS_BIR_2022/r_basics.html" class="btn btn-warning btn-xs" role="button">R basics</a>
 
 -   Object types in R
 -   Subsetting
@@ -65,7 +65,7 @@ editor_options:
 
 ### Project assignment
 
-1. Use the function `query_xc()` to check the availability of recordings for some bird species you have in mind for your project (do not download at this step) ([*check this brief tutorial on how to do that*](https://marce10.github.io/BOKU-Analysis-of-animal-acoustic-signals-in-R-2022/get_xc_recordings.html))
+1. Use the function `query_xc()` to check the availability of recordings for some bird species you have in mind for your project (do not download at this step) ([*check this brief tutorial on how to do that*](https://marce10.github.io/OTS_BIR_2022/get_xc_recordings.html))
 
 1. Subset the data frame returned by the function to get the subspecies/populations and vocalization type you are interested in (using base R subsetting tools)
 
@@ -97,7 +97,7 @@ editor_options:
 &nbsp; 
 
 **What is sound?**
-<a href="https://marce10.github.io/BOKU-Analysis-of-animal-acoustic-signals-in-R-2022/sound.html" class="btn btn-warning btn-xs" role="button">Sound</a>
+<a href="https://marce10.github.io/OTS_BIR_2022/sound.html" class="btn btn-warning btn-xs" role="button">Sound</a>
 
 <div class="alert alert-warning">
 
@@ -144,7 +144,7 @@ editor_options:
 &nbsp; 
 
 **Building spectrograms**
-<a href="https://marce10.github.io/BOKU-Analysis-of-animal-acoustic-signals-in-R-2022/spectrograms.html" class="btn btn-warning btn-xs" role="button">Building
+<a href="https://marce10.github.io/OTS_BIR_2022/spectrograms.html" class="btn btn-warning btn-xs" role="button">Building
 spectrograms</a>
 
 -   Fourier transform
@@ -193,7 +193,7 @@ spectrograms</a>
 
 
 **Package seewave**
-<a href="https://marce10.github.io/BOKU-Analysis-of-animal-acoustic-signals-in-R-2022/seewave.html" class="btn btn-warning btn-xs" role="button">seewave</a>
+<a href="https://marce10.github.io/OTS_BIR_2022/seewave.html" class="btn btn-warning btn-xs" role="button">seewave</a>
 
 -   Explore, modify and measure ‘wave’ objects
 -   Spectrograms and oscillograms
@@ -201,7 +201,7 @@ spectrograms</a>
 -   Acoustic measurements
 
 **Quantifying acoustic signal structure**
-<a href="https://marce10.github.io/BOKU-Analysis-of-animal-acoustic-signals-in-R-2022/measure_acoustic_structure.html" class="btn btn-warning btn-xs" role="button">Quantify structure</a>
+<a href="https://marce10.github.io/OTS_BIR_2022/measure_acoustic_structure.html" class="btn btn-warning btn-xs" role="button">Quantify structure</a>
 
 -   Spectro-temporal measurements (`spectro_analysis()`)
 -   Parameter description
@@ -235,7 +235,7 @@ spectrograms</a>
 ---
 
 **Quality control in recordings and annotation**
-<a href="https://marce10.github.io/BOKU-Analysis-of-animal-acoustic-signals-in-R-2022/quality_checks.html" class="btn btn-warning btn-xs" role="button">Quality checks</a>
+<a href="https://marce10.github.io/OTS_BIR_2022/quality_checks.html" class="btn btn-warning btn-xs" role="button">Quality checks</a>
 
 -   Check and modify sound file format (`check_wavs()`, `info_wavs()`,
     `duration_wavs()`, `mp32wav()` y `fix_wavs()`)
@@ -254,7 +254,7 @@ spectrograms</a>
 1. Plot acoustic spaces
 1. Write report
 
-*[Check out this guide on how to measure acoustic structure on Xeno-Canto recordings](https://marce10.github.io/BOKU-Analysis-of-animal-acoustic-signals-in-R-2022/measure_structure_green_hermit.html)*
+*[Check out this guide on how to measure acoustic structure on Xeno-Canto recordings](https://marce10.github.io/OTS_BIR_2022/measure_structure_green_hermit.html)*
 
 
 </div>

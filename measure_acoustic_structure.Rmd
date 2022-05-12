@@ -572,7 +572,7 @@ box_css = "border: 1px solid #ddd; padding: 5px; ", extra_css = NULL)
 An extended selection table with response calls can be read from github as follows:
 ```{r, eval = FALSE, echo = FALSE}
 
-download.file(url = "https://github.com/maRce10/BOKU-Analysis-of-animal-acoustic-signals-in-R-2022/raw/master/examples/response_calls.RDS", 
+download.file(url = "https://github.com/maRce10/OTS_BIR_2022/raw/master/examples/response_calls.RDS", 
  destfile = "./examples/response_calls.RDS")
 
 response_calls <- readRDS("./examples/response_calls.RDS")
@@ -588,7 +588,7 @@ sp_resp_by_call <- song_analysis(response_calls, song_colm = "call")
 
 ```{r, eval = FALSE}
 
-download.file(url = "https://github.com/maRce10/BOKU-Analysis-of-animal-acoustic-signals-in-R-2022/raw/master/examples/response_calls.RDS", 
+download.file(url = "https://github.com/maRce10/OTS_BIR_2022/raw/master/examples/response_calls.RDS", 
  destfile = "./examples/response_calls.RDS")
 
 response_calls <- readRDS("./examples/response_calls.RDS")

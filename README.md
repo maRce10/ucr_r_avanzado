@@ -1,6 +1,5 @@
 <center>
-</font><font size="6"><br><b>Analysis of animal acoustic signals in
-R</b></font>
+</font><font size="6"><br><b>Bioacoustic Analysis in R</b></font>
 </center>
 <br>
 
@@ -11,14 +10,14 @@ R</b></font>
 <br>
 
 <center>
-<font size="5"><b><a href="https://boku.ac.at/en/lehrveranstaltungen/lva/296713">BOKU
-International wildlife lectures</a><br></b></font>
+<font size="5"><b><a href="https://tropicalstudies.org/">Organization
+for Tropical Studies</a><br></b></font>
 </center>
 
 <br>
 
 <center>
-<font size="4">March 14 - 18, 2022</font>
+<font size="4">May 16-20, 2022</font>
 </center>
 
  

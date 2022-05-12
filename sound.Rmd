@@ -358,7 +358,7 @@ rsf5 <- read_sound_file(X = "https://xeno-canto.org/35340/download")
 
 class(rsf5)
 
-rsf5 <- read_sound_file(X = "https://github.com/maRce10/BOKU-Analysis-of-animal-acoustic-signals-in-R-2022/raw/master/examples/Phae.long1.flac")
+rsf5 <- read_sound_file(X = "https://github.com/maRce10/OTS_BIR_2022/raw/master/examples/Phae.long1.flac")
 
 class(rsf6)
 

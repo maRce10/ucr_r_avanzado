@@ -237,7 +237,7 @@ $(document).ready(function () {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">BOKU bioacoustics R 2022</a>
+      <a class="navbar-brand" href="index.html">OTS bioacoustic analysis in R 2022</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -284,6 +284,9 @@ $(document).ready(function () {
     <li>
       <a href="quality_checks.html">Quality checks</a>
     </li>
+    <li>
+      <a href="measure_structure_green_hermit.html">Measure structure on XC recordings</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -315,10 +318,10 @@ $(document).ready(function () {
 <pre class="r"><code>version$version.string</code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li><p>Install or update the RStudio interface (<a href="https://www.rstudio.com/products/rstudio/download/" class="uri">https://www.rstudio.com/products/rstudio/download/</a>, choose the free version). Optional but advised.</p></li>
-<li><p>Make a directory called “BIR_BOKU_2022”, this will be your working directory for the course.</p></li>
+<li><p>Make a directory called “BIR_OTS_2022”, this will be your working directory for the course.</p></li>
 <li><p>Open RStudio and select the tab “Tools” then “Global Options” (last option). Select the “Code” option, then select the box for “Soft-wrap R source files”.</p></li>
 <li><p>Also in Rstudio: Select the “Pane Layout” option and move “Source” to the top left pane and “Console” to the top right pane. For those of you unfamiliar with RStudio, the source is your script, where you save code in a physical file (usually .R script) and the console prints the output of the code you run from the source. You can write code in the console, but it will not be saved in a physical file. This layout allocates more screen space to the most useful panes. Hit “Apply” and “Ok”.</p></li>
-<li><p>Also in Rstudio: Go back up to the “File” tab and select “New Project”, then select the “BIR_BOKU_2022” directory.</p></li>
+<li><p>Also in Rstudio: Go back up to the “File” tab and select “New Project”, then select the “BIR_OTS_2022” directory.</p></li>
 <li><p>Now in the R console in Rstudio: Run the following code to install the latest developmental versions (from github) of warbleR, Rraven, PhenotypeSpace, ohun, baRulho and dynaSpec (remove the packages first if you have them installed already).</p></li>
 </ol>
 <pre class="r"><code># package to install other packages from github

@@ -5,8 +5,7 @@
 <font size="6"><b>Bioacoustic Analysis in R</b></font>
 </center>
 
-<center><font size="5"><b><a href="https://boku.ac.at/en/lehrveranstaltungen/lva/296713">BOKU
-International wildlife lectures</a><br></b></font></center>
+<center><font size="5"><b><a href="https://tropicalstudies.org/">Organization for Tropical Studies</a><br></b></font></center>
 
 <i><center><font size="5"><b><a href="marceloarayasalas.weebly.com/">Marcelo Araya-Salas, PhD</a><br></b></font></center></i>
 

@@ -44,7 +44,7 @@ editor_options:
 
 
 **Introduction**
-<a href="https://marce10.github.io/BOKU-Analysis-of-animal-acoustic-signals-in-R-2022/introduction.html" class="btn btn-warning btn-xs" role="button">Introduction</a>
+<a href="https://marce10.github.io/OTS_BIR_2022/introduction.html" class="btn btn-warning btn-xs" role="button">Introduction</a>
 
 -   How animal acoustic signals look like?
 -   Analytical workflow in bioacoustics research
@@ -52,7 +52,7 @@ editor_options:
 -   Course outline
 
 **Basic R concepts**
-<a href="https://marce10.github.io/BOKU-Analysis-of-animal-acoustic-signals-in-R-2022/r_basics.html" class="btn btn-warning btn-xs" role="button">R basics</a>
+<a href="https://marce10.github.io/OTS_BIR_2022/r_basics.html" class="btn btn-warning btn-xs" role="button">R basics</a>
 
 -   Object types in R
 -   Subsetting
@@ -65,7 +65,7 @@ editor_options:
 
 ### Project assignment
 
-1. Use the function `query_xc()` to check the availability of recordings for some bird species you have in mind for your project (do not download at this step) ([*check this brief tutorial on how to do that*](https://marce10.github.io/BOKU-Analysis-of-animal-acoustic-signals-in-R-2022/get_xc_recordings.html))
+1. Use the function `query_xc()` to check the availability of recordings for some bird species you have in mind for your project (do not download at this step) ([*check this brief tutorial on how to do that*](https://marce10.github.io/OTS_BIR_2022/get_xc_recordings.html))
 
 1. Subset the data frame returned by the function to get the subspecies/populations and vocalization type you are interested in (using base R subsetting tools)
 
@@ -97,7 +97,7 @@ editor_options:
 &nbsp; 
 
 **What is sound?**
-<a href="https://marce10.github.io/BOKU-Analysis-of-animal-acoustic-signals-in-R-2022/sound.html" class="btn btn-warning btn-xs" role="button">Sound</a>
+<a href="https://marce10.github.io/OTS_BIR_2022/sound.html" class="btn btn-warning btn-xs" role="button">Sound</a>
 
 <div class="alert alert-warning">
 
@@ -117,7 +117,7 @@ editor_options:
 &nbsp; 
 
 **Building spectrograms**
-<a href="https://marce10.github.io/BOKU-Analysis-of-animal-acoustic-signals-in-R-2022/spectrograms.html" class="btn btn-warning btn-xs" role="button">Building
+<a href="https://marce10.github.io/OTS_BIR_2022/spectrograms.html" class="btn btn-warning btn-xs" role="button">Building
 spectrograms</a>
 
 -   Fourier transform
@@ -127,7 +127,7 @@ spectrograms</a>
 
 
 **Annotation software**
-<a href="https://marce10.github.io/BOKU-Analysis-of-animal-acoustic-signals-in-R-2022/annotations.html" class="btn btn-warning btn-xs" role="button">annotations</a>
+<a href="https://marce10.github.io/OTS_BIR_2022/annotations.html" class="btn btn-warning btn-xs" role="button">annotations</a>
 
 -   Raven / audacity
 -   Open and explore recordings
@@ -164,7 +164,7 @@ spectrograms</a>
 &nbsp; 
 
 **Package seewave**
-<a href="https://marce10.github.io/BOKU-Analysis-of-animal-acoustic-signals-in-R-2022/seewave.html" class="btn btn-warning btn-xs" role="button">seewave</a>
+<a href="https://marce10.github.io/OTS_BIR_2022/seewave.html" class="btn btn-warning btn-xs" role="button">seewave</a>
 
 -   Explore, modify and measure ‘wave’ objects
 -   Spectrograms and oscillograms
@@ -172,7 +172,7 @@ spectrograms</a>
 -   Acoustic measurements
 
 **Automatic detection**
-<a href="https://marce10.github.io/BOKU-Analysis-of-animal-acoustic-signals-in-R-2022/ohun.html" class="btn btn-warning btn-xs" role="button">Automatic detection</a>
+<a href="https://marce10.github.io/OTS_BIR_2022/ohun.html" class="btn btn-warning btn-xs" role="button">Automatic detection</a>
 
 -   ohun package for optimize acoustic signal detection
 -   Detection using amplitude, frequency, and time filters
@@ -181,7 +181,7 @@ spectrograms</a>
 -   Frequency range detection (`warbleR::freq_range()` and `warbleR::freq_range_detec()`)
 
 **Intro to warbleR**
-<a href="https://marce10.github.io/BOKU-Analysis-of-animal-acoustic-signals-in-R-2022/intro_to_warbler.html" class="btn btn-warning btn-xs" role="button">Intro
+<a href="https://marce10.github.io/OTS_BIR_2022/intro_to_warbler.html" class="btn btn-warning btn-xs" role="button">Intro
 to warbleR</a>
 
 -   Intro to warbleR
@@ -230,7 +230,7 @@ to warbleR</a>
 &nbsp; 
 
 **Quality control in recordings and annotation**
-<a href="https://marce10.github.io/BOKU-Analysis-of-animal-acoustic-signals-in-R-2022/quality_checks.html" class="btn btn-warning btn-xs" role="button">Quality checks</a>
+<a href="https://marce10.github.io/OTS_BIR_2022/quality_checks.html" class="btn btn-warning btn-xs" role="button">Quality checks</a>
 
 -   Check and modify sound file format (`check_wavs()`, `info_wavs()`,
     `duration_wavs()`, `mp32wav()` y `fix_wavs()`)
@@ -240,7 +240,7 @@ to warbleR</a>
 -   Re-adjusting selections (`tailor_sels()`)
 
 **Quantifying acoustic signal structure**
-<a href="https://marce10.github.io/BOKU-Analysis-of-animal-acoustic-signals-in-R-2022/measure_acoustic_structure.html" class="btn btn-warning btn-xs" role="button">Quantify structure</a>
+<a href="https://marce10.github.io/OTS_BIR_2022/measure_acoustic_structure.html" class="btn btn-warning btn-xs" role="button">Quantify structure</a>
 
 -   Spectro-temporal measurements (`spectro_analysis()`)
 -   Parameter description
@@ -303,20 +303,20 @@ to warbleR</a>
 
 
 **Choosing the right method for quantifying structure**
-<a href="https://marce10.github.io/BOKU-Analysis-of-animal-acoustic-signals-in-R-2022/comparing_methods.html" class="btn btn-warning btn-xs" role="button">Comparing methods</a>
+<a href="https://marce10.github.io/OTS_BIR_2022/comparing_methods.html" class="btn btn-warning btn-xs" role="button">Comparing methods</a>
 
 -   Compare different methods for quantifying structure
     (`compare_methods()`)
 
 **Quantifying acoustic spaces**
-<a href="https://marce10.github.io/BOKU-Analysis-of-animal-acoustic-signals-in-R-2022/acoustic_space.html" class="btn btn-warning btn-xs" role="button">Acoustic space</a>
+<a href="https://marce10.github.io/OTS_BIR_2022/acoustic_space.html" class="btn btn-warning btn-xs" role="button">Acoustic space</a>
 
 - Intro to PhenotypeSpace 
 - Quanitfying space size
 - Comparing sub-spaces
 
 **Quantifying acoustic signal degradation**
-<a href="https://marce10.github.io/BOKU-Analysis-of-animal-acoustic-signals-in-R-2022/degradation.html" class="btn btn-warning btn-xs" role="button">Degradation</a>
+<a href="https://marce10.github.io/OTS_BIR_2022/degradation.html" class="btn btn-warning btn-xs" role="button">Degradation</a>
 
 - Intro to baRulho 
 - Creating master sound files
