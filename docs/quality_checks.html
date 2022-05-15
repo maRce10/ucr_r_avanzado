@@ -13,8 +13,8 @@
 
 <title>Quality checks for recordings and annotations</title>
 
-<script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -65,6 +65,7 @@ if (window.hljs) {
 
 
 
+
 <style type = "text/css">
 .main-container {
   max-width: 940px;
@@ -85,6 +86,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -316,12 +320,12 @@ div.tocify {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">BOKU bioacoustics R 2022</a>
+      <a class="navbar-brand" href="index.html">OTS Bioacoustic Analysis in R 2022</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -329,12 +333,15 @@ div.tocify {
   <a href="program.html">Program</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Tutorials
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="introduction.html">Introduction</a>
+    </li>
     <li>
       <a href="r_basics.html">R basics</a>
     </li>
@@ -351,10 +358,10 @@ div.tocify {
       <a href="annotations.html">Annotations</a>
     </li>
     <li>
-      <a href="intro_to_warbler.html">Intro to warbleR</a>
+      <a href="ohun.html">ohun: automatic detection</a>
     </li>
     <li>
-      <a href="ohun.html">ohun: automatic detection</a>
+      <a href="intro_to_warbler.html">Intro to warbleR</a>
     </li>
     <li>
       <a href="measure_acoustic_structure.html">Measure acoustic structure</a>
@@ -365,13 +372,16 @@ div.tocify {
     <li>
       <a href="quality_checks.html">Quality checks</a>
     </li>
+    <li>
+      <a href="measure_structure_green_hermit.html">Measure structure on XC recordings</a>
+    </li>
   </ul>
 </li>
 <li>
   <a href="course_prep.html">Course prep</a>
 </li>
 <li>
-  <a href="about.html">About</a>
+  <a href="instructor.html">Instructor</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -387,13 +397,13 @@ div.tocify {
 
 <h1 class="title toc-ignore"><font size="7"><b>Quality checks for recordings and annotations</b></font></h1>
 <h3 class="subtitle"><center>
-<font size="4"><b>Analysis of animal acoustic signals in R</b> <br> BOKU International Wildlife Lectures</font>
+<font size="4"><b>Bioacoustic Analysis in R</b> <br> Organization for Tropical Studies</font>
 </center></h3>
 <h4 class="author"><center>
 <font size="3"><a href="http://marceloarayasalas.weebly.com/">Marcelo Araya-Salas, PhD</a></font>
 </center></h4>
 <h4 class="date"><center>
-“2022-03-10”
+“2022-05-14”
 </center></h4>
 
 </div>
@@ -411,15 +421,23 @@ list.files(path = &quot;./examples/mp3&quot;)
 mp32wav(path = &quot;./examples/mp3&quot;)
 
 list.files(path = &quot;./examples/mp3&quot;)</code></pre>
-<pre><code>## [1] &quot;BlackCappedVireo.mp3&quot;                     &quot;BowheadWhaleSong.mp3&quot;                    
-## [3] &quot;CanyonWren.mp3&quot;                           &quot;converted_sound_files&quot;                   
-## [5] &quot;Map of Colibri coruscans recordings.jpeg&quot; &quot;Map of Colibri cyanotus recordings.jpeg&quot; 
+<pre><code>## [1] &quot;BlackCappedVireo.mp3&quot;                    
+## [2] &quot;BowheadWhaleSong.mp3&quot;                    
+## [3] &quot;CanyonWren.mp3&quot;                          
+## [4] &quot;converted_sound_files&quot;                   
+## [5] &quot;Map of Colibri coruscans recordings.jpeg&quot;
+## [6] &quot;Map of Colibri cyanotus recordings.jpeg&quot; 
 ## [7] &quot;Map of Colibri delphinae recordings.jpeg&quot;</code></pre>
-<pre><code>##  [1] &quot;BlackCappedVireo.mp3&quot;                     &quot;BlackCappedVireo.wav&quot;                    
-##  [3] &quot;BowheadWhaleSong.mp3&quot;                     &quot;BowheadWhaleSong.wav&quot;                    
-##  [5] &quot;CanyonWren.mp3&quot;                           &quot;CanyonWren.wav&quot;                          
-##  [7] &quot;converted_sound_files&quot;                    &quot;Map of Colibri coruscans recordings.jpeg&quot;
-##  [9] &quot;Map of Colibri cyanotus recordings.jpeg&quot;  &quot;Map of Colibri delphinae recordings.jpeg&quot;</code></pre>
+<pre><code>##  [1] &quot;BlackCappedVireo.mp3&quot;                    
+##  [2] &quot;BlackCappedVireo.wav&quot;                    
+##  [3] &quot;BowheadWhaleSong.mp3&quot;                    
+##  [4] &quot;BowheadWhaleSong.wav&quot;                    
+##  [5] &quot;CanyonWren.mp3&quot;                          
+##  [6] &quot;CanyonWren.wav&quot;                          
+##  [7] &quot;converted_sound_files&quot;                   
+##  [8] &quot;Map of Colibri coruscans recordings.jpeg&quot;
+##  [9] &quot;Map of Colibri cyanotus recordings.jpeg&quot; 
+## [10] &quot;Map of Colibri delphinae recordings.jpeg&quot;</code></pre>
 <p> </p>
 <p>We can also modify the sampling rate and/or dynamic range with <code>mp32wav()</code>:</p>
 <pre class="r"><code>mp32wav(path = &quot;./examples/mp3&quot;, samp.rate = 48, bit.depth = 24, overwrite = TRUE)
@@ -460,7 +478,7 @@ samples
 BlackCappedVireo.mp3
 </td>
 <td style="text-align:center;">
-5.45959
+5.459592
 </td>
 <td style="text-align:center;">
 22.05
@@ -472,7 +490,7 @@ BlackCappedVireo.mp3
 16
 </td>
 <td style="text-align:center;">
-0.470703
+0.4707031
 </td>
 <td style="text-align:center;">
 120384
@@ -483,7 +501,7 @@ BlackCappedVireo.mp3
 BlackCappedVireo.wav
 </td>
 <td style="text-align:center;">
-5.45959
+5.459592
 </td>
 <td style="text-align:center;">
 22.05
@@ -495,7 +513,7 @@ BlackCappedVireo.wav
 16
 </td>
 <td style="text-align:center;">
-0.470703
+0.4707031
 </td>
 <td style="text-align:center;">
 120384
@@ -506,7 +524,7 @@ BlackCappedVireo.wav
 BowheadWhaleSong.mp3
 </td>
 <td style="text-align:center;">
-86.64816
+86.648163
 </td>
 <td style="text-align:center;">
 22.05
@@ -518,7 +536,7 @@ BowheadWhaleSong.mp3
 16
 </td>
 <td style="text-align:center;">
-7.462891
+7.4628906
 </td>
 <td style="text-align:center;">
 1910592
@@ -529,7 +547,7 @@ BowheadWhaleSong.mp3
 BowheadWhaleSong.wav
 </td>
 <td style="text-align:center;">
-86.64816
+86.648163
 </td>
 <td style="text-align:center;">
 22.05
@@ -541,7 +559,7 @@ BowheadWhaleSong.wav
 16
 </td>
 <td style="text-align:center;">
-7.462891
+7.4628906
 </td>
 <td style="text-align:center;">
 1910592
@@ -552,7 +570,7 @@ BowheadWhaleSong.wav
 CanyonWren.mp3
 </td>
 <td style="text-align:center;">
-5.43347
+5.433469
 </td>
 <td style="text-align:center;">
 44.10
@@ -564,7 +582,7 @@ CanyonWren.mp3
 16
 </td>
 <td style="text-align:center;">
-0.935547
+0.9355469
 </td>
 <td style="text-align:center;">
 239616
@@ -575,7 +593,7 @@ CanyonWren.mp3
 CanyonWren.wav
 </td>
 <td style="text-align:center;">
-5.43347
+5.433469
 </td>
 <td style="text-align:center;">
 44.10
@@ -587,7 +605,7 @@ CanyonWren.wav
 16
 </td>
 <td style="text-align:center;">
-0.935547
+0.9355469
 </td>
 <td style="text-align:center;">
 239616
@@ -635,7 +653,7 @@ samples
 BlackCappedVireo.mp3
 </td>
 <td style="text-align:center;">
-5.45959
+5.459592
 </td>
 <td style="text-align:center;background-color: #ccebff !important;">
 22.05
@@ -647,7 +665,7 @@ BlackCappedVireo.mp3
 16
 </td>
 <td style="text-align:center;">
-0.470703
+0.4707031
 </td>
 <td style="text-align:center;">
 120384
@@ -658,7 +676,7 @@ BlackCappedVireo.mp3
 BlackCappedVireo.wav
 </td>
 <td style="text-align:center;">
-5.45959
+5.459592
 </td>
 <td style="text-align:center;background-color: #ccebff !important;">
 22.05
@@ -670,7 +688,7 @@ BlackCappedVireo.wav
 16
 </td>
 <td style="text-align:center;">
-0.470703
+0.4707031
 </td>
 <td style="text-align:center;">
 120384
@@ -681,7 +699,7 @@ BlackCappedVireo.wav
 BowheadWhaleSong.mp3
 </td>
 <td style="text-align:center;">
-86.64816
+86.648163
 </td>
 <td style="text-align:center;background-color: #ccebff !important;">
 22.05
@@ -693,7 +711,7 @@ BowheadWhaleSong.mp3
 16
 </td>
 <td style="text-align:center;">
-7.462891
+7.4628906
 </td>
 <td style="text-align:center;">
 1910592
@@ -704,7 +722,7 @@ BowheadWhaleSong.mp3
 BowheadWhaleSong.wav
 </td>
 <td style="text-align:center;">
-86.64816
+86.648163
 </td>
 <td style="text-align:center;background-color: #ccebff !important;">
 22.05
@@ -716,7 +734,7 @@ BowheadWhaleSong.wav
 16
 </td>
 <td style="text-align:center;">
-7.462891
+7.4628906
 </td>
 <td style="text-align:center;">
 1910592
@@ -727,7 +745,7 @@ BowheadWhaleSong.wav
 CanyonWren.mp3
 </td>
 <td style="text-align:center;">
-5.43347
+5.433469
 </td>
 <td style="text-align:center;background-color: #ccebff !important;">
 44.10
@@ -739,7 +757,7 @@ CanyonWren.mp3
 16
 </td>
 <td style="text-align:center;">
-0.935547
+0.9355469
 </td>
 <td style="text-align:center;">
 239616
@@ -750,7 +768,7 @@ CanyonWren.mp3
 CanyonWren.wav
 </td>
 <td style="text-align:center;">
-5.43347
+5.433469
 </td>
 <td style="text-align:center;background-color: #ccebff !important;">
 44.10
@@ -762,7 +780,7 @@ CanyonWren.wav
 16
 </td>
 <td style="text-align:center;">
-0.935547
+0.9355469
 </td>
 <td style="text-align:center;">
 239616
@@ -807,7 +825,7 @@ samples
 BlackCappedVireo.wav
 </td>
 <td style="text-align:center;">
-5.45959
+5.459592
 </td>
 <td style="text-align:center;background-color: #ccebff !important;">
 44.1
@@ -819,7 +837,7 @@ BlackCappedVireo.wav
 24
 </td>
 <td style="text-align:center;">
-1.41113
+1.411133
 </td>
 <td style="text-align:center;">
 240768
@@ -830,7 +848,7 @@ BlackCappedVireo.wav
 BowheadWhaleSong.wav
 </td>
 <td style="text-align:center;">
-86.64816
+86.648163
 </td>
 <td style="text-align:center;background-color: #ccebff !important;">
 44.1
@@ -842,7 +860,7 @@ BowheadWhaleSong.wav
 24
 </td>
 <td style="text-align:center;">
-22.38965
+22.389648
 </td>
 <td style="text-align:center;">
 3821184
@@ -853,7 +871,7 @@ BowheadWhaleSong.wav
 CanyonWren.wav
 </td>
 <td style="text-align:center;">
-5.43347
+5.433469
 </td>
 <td style="text-align:center;background-color: #ccebff !important;">
 44.1
@@ -865,7 +883,7 @@ CanyonWren.wav
 24
 </td>
 <td style="text-align:center;">
-1.40430
+1.404297
 </td>
 <td style="text-align:center;">
 239616
@@ -880,11 +898,12 @@ CanyonWren.wav
 <h2>Check recordings</h2>
 <p><code>check_sound_files()</code> should be the first function that should be used before running any <strong>warbleR</strong> analysis. The function simply checks if the sound files in ‘.wav’ format in the working directory can be read in R. For example, the following code checks all the files in the ‘examples’ folder, which should detect the ‘corrupted_file.wav’:</p>
 <pre class="r"><code>check_sound_files()</code></pre>
-<pre><code>## Some file(s) cannot be read</code></pre>
-<pre><code>## [1] &quot;corrupted_file.wav&quot;</code></pre>
+<pre><code>## WAC with trigger(s), converting individual segment(s) to WAV file(s).
+## All files can be read</code></pre>
 <p>If we remove that file from the folder, the function returns the following message:</p>
 <pre class="r"><code>check_sound_files()</code></pre>
-<pre><code>## All files can be read</code></pre>
+<pre><code>## WAC with trigger(s), converting individual segment(s) to WAV file(s).
+## All files can be read</code></pre>
 <p> </p>
 </div>
 <div id="spectrograph-settings" class="section level2">
@@ -971,9 +990,6 @@ bottom.freq
 top.freq
 </th>
 <th style="text-align:center;">
-song
-</th>
-<th style="text-align:center;">
 check.res
 </th>
 <th style="text-align:center;">
@@ -1008,27 +1024,24 @@ Phae.long1.wav
 1
 </td>
 <td style="text-align:center;">
-1.169355
+1.1693549
 </td>
 <td style="text-align:center;">
-1.342388
+1.3423884
 </td>
 <td style="text-align:center;">
-2.22011
+2.220105
 </td>
 <td style="text-align:center;">
-8.60438
-</td>
-<td style="text-align:center;">
-1
+8.604378
 </td>
 <td style="text-align:center;">
 OK
 </td>
-<td style="text-align:center;background-color: #ccebff !important;">
-0.173033
-</td>
 <td style="text-align:center;">
+0.1730334
+</td>
+<td style="text-align:center;background-color: #ccebff !important;">
 3893
 </td>
 <td style="text-align:center;">
@@ -1055,27 +1068,24 @@ Phae.long1.wav
 2
 </td>
 <td style="text-align:center;">
-2.158408
+2.1584085
 </td>
 <td style="text-align:center;">
-2.321457
+2.3214565
 </td>
 <td style="text-align:center;">
-2.16944
+2.169437
 </td>
 <td style="text-align:center;">
-8.80705
-</td>
-<td style="text-align:center;">
-1
+8.807053
 </td>
 <td style="text-align:center;">
 OK
 </td>
-<td style="text-align:center;background-color: #ccebff !important;">
-0.163048
-</td>
 <td style="text-align:center;">
+0.1630480
+</td>
+<td style="text-align:center;background-color: #ccebff !important;">
 3668
 </td>
 <td style="text-align:center;">
@@ -1102,27 +1112,24 @@ Phae.long1.wav
 3
 </td>
 <td style="text-align:center;">
-0.343337
+0.3433366
 </td>
 <td style="text-align:center;">
-0.518255
+0.5182553
 </td>
 <td style="text-align:center;">
-2.21829
+2.218294
 </td>
 <td style="text-align:center;">
-8.75660
-</td>
-<td style="text-align:center;">
-1
+8.756604
 </td>
 <td style="text-align:center;">
 OK
 </td>
-<td style="text-align:center;background-color: #ccebff !important;">
-0.174919
-</td>
 <td style="text-align:center;">
+0.1749187
+</td>
+<td style="text-align:center;background-color: #ccebff !important;">
 3935
 </td>
 <td style="text-align:center;">
@@ -1149,27 +1156,24 @@ Phae.long2.wav
 1
 </td>
 <td style="text-align:center;">
-0.159598
+0.1595983
 </td>
 <td style="text-align:center;">
-0.292169
+0.2921692
 </td>
 <td style="text-align:center;">
-2.31686
+2.316862
 </td>
 <td style="text-align:center;">
-8.82232
-</td>
-<td style="text-align:center;">
-2
+8.822316
 </td>
 <td style="text-align:center;">
 OK
 </td>
-<td style="text-align:center;background-color: #ccebff !important;">
-0.132571
-</td>
 <td style="text-align:center;">
+0.1325709
+</td>
+<td style="text-align:center;background-color: #ccebff !important;">
 2982
 </td>
 <td style="text-align:center;">
@@ -1196,27 +1200,24 @@ Phae.long2.wav
 2
 </td>
 <td style="text-align:center;">
-1.457058
+1.4570585
 </td>
 <td style="text-align:center;">
-1.583209
+1.5832087
 </td>
 <td style="text-align:center;">
-2.28401
+2.284006
 </td>
 <td style="text-align:center;">
-8.88803
-</td>
-<td style="text-align:center;">
-2
+8.888027
 </td>
 <td style="text-align:center;">
 OK
 </td>
-<td style="text-align:center;background-color: #ccebff !important;">
-0.126150
-</td>
 <td style="text-align:center;">
+0.1261502
+</td>
+<td style="text-align:center;background-color: #ccebff !important;">
 2838
 </td>
 <td style="text-align:center;">
@@ -1243,27 +1244,24 @@ Phae.long3.wav
 1
 </td>
 <td style="text-align:center;">
-0.626552
+0.6265520
 </td>
 <td style="text-align:center;">
-0.757771
+0.7577715
 </td>
 <td style="text-align:center;">
-3.00683
+3.006834
 </td>
 <td style="text-align:center;">
-8.82232
-</td>
-<td style="text-align:center;">
-2
+8.822316
 </td>
 <td style="text-align:center;">
 OK
 </td>
-<td style="text-align:center;background-color: #ccebff !important;">
-0.131220
-</td>
 <td style="text-align:center;">
+0.1312195
+</td>
+<td style="text-align:center;background-color: #ccebff !important;">
 2952
 </td>
 <td style="text-align:center;">
@@ -1290,27 +1288,24 @@ Phae.long3.wav
 2
 </td>
 <td style="text-align:center;">
-1.974213
+1.9742132
 </td>
 <td style="text-align:center;">
-2.104392
+2.1043921
 </td>
 <td style="text-align:center;">
-2.77684
+2.776843
 </td>
 <td style="text-align:center;">
-8.88803
-</td>
-<td style="text-align:center;">
-3
+8.888027
 </td>
 <td style="text-align:center;">
 OK
 </td>
-<td style="text-align:center;background-color: #ccebff !important;">
-0.130179
-</td>
 <td style="text-align:center;">
+0.1301789
+</td>
+<td style="text-align:center;background-color: #ccebff !important;">
 2929
 </td>
 <td style="text-align:center;">
@@ -1337,27 +1332,24 @@ Phae.long3.wav
 3
 </td>
 <td style="text-align:center;">
-0.123364
+0.1233643
 </td>
 <td style="text-align:center;">
-0.254581
+0.2545812
 </td>
 <td style="text-align:center;">
-2.31686
+2.316862
 </td>
 <td style="text-align:center;">
-9.31515
-</td>
-<td style="text-align:center;">
-3
+9.315153
 </td>
 <td style="text-align:center;">
 OK
 </td>
-<td style="text-align:center;background-color: #ccebff !important;">
-0.131217
-</td>
 <td style="text-align:center;">
+0.1312170
+</td>
+<td style="text-align:center;background-color: #ccebff !important;">
 2952
 </td>
 <td style="text-align:center;">
@@ -1384,27 +1376,24 @@ Phae.long4.wav
 1
 </td>
 <td style="text-align:center;">
-1.516812
+1.5168116
 </td>
 <td style="text-align:center;">
-1.662236
+1.6622365
 </td>
 <td style="text-align:center;">
-2.51400
+2.513997
 </td>
 <td style="text-align:center;">
-9.21659
-</td>
-<td style="text-align:center;">
-3
+9.216586
 </td>
 <td style="text-align:center;">
 OK
 </td>
-<td style="text-align:center;background-color: #ccebff !important;">
-0.145425
-</td>
 <td style="text-align:center;">
+0.1454249
+</td>
+<td style="text-align:center;background-color: #ccebff !important;">
 3272
 </td>
 <td style="text-align:center;">
@@ -1431,27 +1420,24 @@ Phae.long4.wav
 2
 </td>
 <td style="text-align:center;">
-2.932692
+2.9326920
 </td>
 <td style="text-align:center;">
-3.076878
+3.0768784
 </td>
 <td style="text-align:center;">
-2.57971
+2.579708
 </td>
 <td style="text-align:center;">
-10.23512
-</td>
-<td style="text-align:center;">
-4
+10.235116
 </td>
 <td style="text-align:center;">
 OK
 </td>
-<td style="text-align:center;background-color: #ccebff !important;">
-0.144186
-</td>
 <td style="text-align:center;">
+0.1441864
+</td>
+<td style="text-align:center;background-color: #ccebff !important;">
 3244
 </td>
 <td style="text-align:center;">
@@ -1478,27 +1464,24 @@ Phae.long4.wav
 3
 </td>
 <td style="text-align:center;">
-0.145398
+0.1453977
 </td>
 <td style="text-align:center;">
-0.290497
+0.2904966
 </td>
 <td style="text-align:center;">
-2.57971
+2.579708
 </td>
 <td style="text-align:center;">
-9.74228
-</td>
-<td style="text-align:center;">
-4
+9.742279
 </td>
 <td style="text-align:center;">
 OK
 </td>
-<td style="text-align:center;background-color: #ccebff !important;">
-0.145099
-</td>
 <td style="text-align:center;">
+0.1450989
+</td>
+<td style="text-align:center;background-color: #ccebff !important;">
 3264
 </td>
 <td style="text-align:center;">
@@ -1572,7 +1555,7 @@ bottom.freq
 top.freq
 </th>
 <th style="text-align:center;">
-duration
+min.n.samples
 </th>
 </tr>
 </thead>
@@ -1588,16 +1571,16 @@ aaa.wav
 1
 </td>
 <td style="text-align:center;">
-1.169355
+1.1693549
 </td>
 <td style="text-align:center;">
-1.342388
+1.3423884
 </td>
 <td style="text-align:center;">
-2.22011
+2.220105
 </td>
 <td style="text-align:center;">
-8.60438
+8.604378
 </td>
 <td style="text-align:center;background-color: #ccebff !important;">
 NA
@@ -1614,19 +1597,19 @@ Phae.long1.wav
 2
 </td>
 <td style="text-align:center;">
-2.158408
+2.1584085
 </td>
 <td style="text-align:center;">
-2.321457
+2.3214565
 </td>
 <td style="text-align:center;">
-2.16944
+2.169437
 </td>
 <td style="text-align:center;">
-8.80705
+8.807053
 </td>
 <td style="text-align:center;background-color: #ccebff !important;">
-0.163048
+3668
 </td>
 </tr>
 <tr>
@@ -1640,19 +1623,19 @@ Phae.long1.wav
 3
 </td>
 <td style="text-align:center;">
-0.343337
+0.3433366
 </td>
 <td style="text-align:center;">
-100.000000
+100.0000000
 </td>
 <td style="text-align:center;">
-2.21829
+2.218294
 </td>
 <td style="text-align:center;">
-2.21829
+2.218294
 </td>
 <td style="text-align:center;background-color: #ccebff !important;">
-99.656663
+2242274
 </td>
 </tr>
 <tr>
@@ -1666,19 +1649,19 @@ Phae.long2.wav
 1
 </td>
 <td style="text-align:center;">
-0.159598
+0.1595983
 </td>
 <td style="text-align:center;">
-0.292169
+0.2921692
 </td>
 <td style="text-align:center;">
-2.31686
+2.316862
 </td>
 <td style="text-align:center;">
-8.82232
+8.822316
 </td>
 <td style="text-align:center;background-color: #ccebff !important;">
-0.132571
+2982
 </td>
 </tr>
 <tr>
@@ -1692,19 +1675,19 @@ Phae.long2.wav
 2
 </td>
 <td style="text-align:center;">
-1.457058
+1.4570585
 </td>
 <td style="text-align:center;">
-1.583209
+1.5832087
 </td>
 <td style="text-align:center;">
-2.28401
+2.284006
 </td>
 <td style="text-align:center;">
-200.00000
+200.000000
 </td>
 <td style="text-align:center;background-color: #ccebff !important;">
-0.126150
+2838
 </td>
 </tr>
 <tr>
@@ -1718,19 +1701,19 @@ Phae.long3.wav
 1
 </td>
 <td style="text-align:center;">
-0.626552
+0.6265520
 </td>
 <td style="text-align:center;">
-0.757771
+0.7577715
 </td>
 <td style="text-align:center;">
-3.00683
+3.006834
 </td>
 <td style="text-align:center;">
-8.82232
+8.822316
 </td>
 <td style="text-align:center;background-color: #ccebff !important;">
-0.131220
+2952
 </td>
 </tr>
 </tbody>
@@ -1826,54 +1809,41 @@ tail.cntours &lt;-tailor_sels(X = lbh_selec_table[1:5, ], ts.df = cntours,
 <p> </p>
 <hr />
 <p><font size="4">Session information</font></p>
-<pre><code>## R version 4.1.1 (2021-08-10)
+<pre><code>## R version 4.1.0 (2021-05-18)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
 ## Running under: Ubuntu 20.04.2 LTS
 ## 
 ## Matrix products: default
-## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0
-## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0
+## BLAS:   /usr/lib/x86_64-linux-gnu/atlas/libblas.so.3.10.3
+## LAPACK: /usr/lib/x86_64-linux-gnu/atlas/liblapack.so.3.10.3
 ## 
 ## locale:
-##  [1] LC_CTYPE=es_ES.UTF-8       LC_NUMERIC=C               LC_TIME=es_CR.UTF-8       
-##  [4] LC_COLLATE=es_ES.UTF-8     LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=es_ES.UTF-8   
-##  [7] LC_PAPER=es_CR.UTF-8       LC_NAME=C                  LC_ADDRESS=C              
-## [10] LC_TELEPHONE=C             LC_MEASUREMENT=es_CR.UTF-8 LC_IDENTIFICATION=C       
+##  [1] LC_CTYPE=pt_BR.UTF-8       LC_NUMERIC=C              
+##  [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=pt_BR.UTF-8    
+##  [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=pt_BR.UTF-8   
+##  [7] LC_PAPER=es_CR.UTF-8       LC_NAME=C                 
+##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+## [11] LC_MEASUREMENT=es_CR.UTF-8 LC_IDENTIFICATION=C       
 ## 
 ## attached base packages:
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] kableExtra_1.3.4   warbleR_1.1.27     NatureSounds_1.0.4 knitr_1.37         seewave_2.2.0     
-## [6] tuneR_1.3.3.1     
+## [1] kableExtra_1.3.1   warbleR_1.1.27     NatureSounds_1.0.4 knitr_1.39        
+## [5] seewave_2.2.0      tuneR_1.4.0       
 ## 
 ## loaded via a namespace (and not attached):
-##   [1] nlme_3.1-152          bitops_1.0-7          spatstat.sparse_2.1-0 webshot_0.5.2        
-##   [5] httr_1.4.2            Deriv_4.1.3           tools_4.1.1           bslib_0.2.5.1        
-##   [9] DT_0.19               ohun_0.1.0            vegan_2.5-7           utf8_1.2.2           
-##  [13] R6_2.5.1              rpart_4.1-15          mgcv_1.8-36           DBI_1.1.1            
-##  [17] colorspace_2.0-3      permute_0.9-5         raster_3.5-11         withr_2.5.0          
-##  [21] sp_1.4-6              gridExtra_2.3         tidyselect_1.1.1      moments_0.14         
-##  [25] bioacoustics_0.2.8    compiler_4.1.1        soundgen_2.2.0        cli_3.2.0            
-##  [29] rvest_1.0.1           formatR_1.11          xml2_1.3.2            microbenchmark_1.4-7 
-##  [33] sass_0.4.0            xaringanthemer_0.4.1  scales_1.1.1          spatstat.data_2.1-2  
-##  [37] pbapply_1.5-0         proxy_0.4-26          dtw_1.22-3            goftest_1.2-3        
-##  [41] systemfonts_1.0.2     stringr_1.4.0         digest_0.6.29         Sim.DiffProc_4.8     
-##  [45] shinyBS_0.61          spatstat.utils_2.3-0  rmarkdown_2.10        svglite_2.0.0        
-##  [49] pkgconfig_2.0.3       htmltools_0.5.2       PhenotypeSpace_0.1.0  fastmap_1.1.0        
-##  [53] highr_0.9             htmlwidgets_1.5.3     rlang_1.0.2           rstudioapi_0.13      
-##  [57] xaringan_0.22         baRulho_1.0.6         jquerylib_0.1.4       farver_2.1.0         
-##  [61] generics_0.1.0        jsonlite_1.7.2        dplyr_1.0.7           RCurl_1.98-1.6       
-##  [65] magrittr_2.0.2        Matrix_1.3-4          Rcpp_1.0.8            munsell_0.5.0        
-##  [69] fansi_1.0.2           viridis_0.6.2         abind_1.4-5           lifecycle_1.0.1      
-##  [73] terra_1.5-12          whisker_0.4           stringi_1.7.6         yaml_2.3.5           
-##  [77] MASS_7.3-54           grid_4.1.1            parallel_4.1.1        crayon_1.5.0         
-##  [81] deldir_1.0-6          lattice_0.20-44       splines_4.1.1         tensor_1.5           
-##  [85] pillar_1.7.0          rjson_0.2.21          spatstat.geom_2.3-1   fftw_1.0-6.1         
-##  [89] codetools_0.2-18      glue_1.6.2            evaluate_0.15         remotes_2.4.0        
-##  [93] png_0.1-7             vctrs_0.3.8           polyclip_1.10-0       gtable_0.3.0         
-##  [97] purrr_0.3.4           spatstat.core_2.3-2   assertthat_0.2.1      ggplot2_3.3.5        
-##  [ reached getOption(&quot;max.print&quot;) -- omitted 7 entries ]</code></pre>
+##  [1] Rcpp_1.0.8.3       bslib_0.2.5.1      compiler_4.1.0     jquerylib_0.1.4   
+##  [5] moments_0.14.1     bitops_1.0-7       tools_4.1.0        digest_0.6.29     
+##  [9] viridisLite_0.4.0  jsonlite_1.8.0     evaluate_0.15      lifecycle_1.0.1   
+## [13] fftw_1.0-7         rlang_1.0.2        cli_3.1.0          rstudioapi_0.13   
+## [17] yaml_2.3.5         parallel_4.1.0     xfun_0.31          fastmap_1.1.0     
+## [21] xml2_1.3.2         stringr_1.4.0      httr_1.4.2         sass_0.4.0        
+## [25] webshot_0.5.2      glue_1.6.2         R6_2.5.1           dtw_1.22-3        
+## [29] pbapply_1.5-0      rmarkdown_2.13     magrittr_2.0.3     bioacoustics_0.2.8
+## [33] scales_1.1.1       htmltools_0.5.2    MASS_7.3-54        rvest_1.0.0       
+## [37] colorspace_2.0-2   stringi_1.7.6      proxy_0.4-26       munsell_0.5.0     
+## [41] signal_0.7-7       RCurl_1.98-1.6     rjson_0.2.21</code></pre>
 </div>
 
 
