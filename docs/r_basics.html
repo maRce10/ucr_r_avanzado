@@ -13,8 +13,8 @@
 
 <title>r_basics.knit</title>
 
-<script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -33,6 +33,8 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
@@ -45,102 +47,18 @@
   ul.task-list{list-style: none;}
     </style>
 
-
-<style type="text/css">
-  code {
-    white-space: pre;
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
   }
-  .sourceCode {
-    overflow: visible;
-  }
-</style>
-<style type="text/css" data-origin="pandoc">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
 }
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-
-</style>
-<script>
-// apply pandoc div.sourceCode style to pre.sourceCode instead
-(function() {
-  var sheets = document.styleSheets;
-  for (var i = 0; i < sheets.length; i++) {
-    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
-    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
-    for (var j = 0; j < rules.length; j++) {
-      var rule = rules[j];
-      // check if there is a div.sourceCode rule
-      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
-      var style = rule.style.cssText;
-      // check if color or background-color is set
-      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
-      // replace div.sourceCode by a pre.sourceCode rule
-      sheets[i].deleteRule(j);
-      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
-    }
-  }
-})();
 </script>
+
+
 
 
 
@@ -168,6 +86,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -399,12 +320,12 @@ div.tocify {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">BOKU bioacoustics R 2022</a>
+      <a class="navbar-brand" href="index.html">OTS Bioacoustic Analysis in R 2022</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -412,7 +333,7 @@ div.tocify {
   <a href="program.html">Program</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Tutorials
      
     <span class="caret"></span>
@@ -451,6 +372,9 @@ div.tocify {
     <li>
       <a href="quality_checks.html">Quality checks</a>
     </li>
+    <li>
+      <a href="measure_structure_green_hermit.html">Measure structure on XC recordings</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -475,13 +399,13 @@ div.tocify {
 <font size="7"><b>R basics</b></font>
 </center></h1>
 <h3 class="subtitle"><center>
-<font size="4"><b>Analysis of animal acoustic signals in R</b> <br> BOKU International Wildlife Lectures</font>
+<font size="4"><b>Bioacoustic Analysis in R</b> <br> Organization for Tropical Studies</font>
 </center></h3>
 <h4 class="author"><center>
 <font size="3"><a href="http://marceloarayasalas.weebly.com/">Marcelo Araya-Salas, PhD</a></font>
 </center></h4>
 <h4 class="date"><center>
-“2022-03-13”
+“2022-05-13”
 </center></h4>
 
 </div>
@@ -596,153 +520,153 @@ Array
 <li>Character</li>
 </ul>
 <p>Vectors are built using <code>c()</code>:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">all.equal</span>(x, x1)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] TRUE</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(x)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;numeric&quot;</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="st">&quot;something&quot;</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(y)</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;character&quot;</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>w <span class="ot">&lt;-</span> 1L</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(w)</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;integer&quot;</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(z)</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;logical&quot;</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>q <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="dv">1</span>)</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(q)</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;factor&quot;</span></span></code></pre></div>
+<pre class="r"><code>
+x &lt;- 1
+x1 &lt;- c(1)
+
+all.equal(x, x1)
+## [1] TRUE
+
+class(x)
+## [1] &quot;numeric&quot;
+
+y &lt;- &quot;something&quot;
+
+class(y)
+## [1] &quot;character&quot;
+
+w &lt;- 1L
+
+class(w)
+## [1] &quot;integer&quot;
+ 
+z &lt;- TRUE
+
+class(z)
+## [1] &quot;logical&quot;
+
+q &lt;- factor(1)
+
+class(q)
+## [1] &quot;factor&quot;</code></pre>
 <p> </p>
 <p>Vectors can only contain entries of the same type. Different types will be coerced to the most flexible type:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">12</span>, <span class="dv">13</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(v)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;numeric&quot;</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(v)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;double&quot;</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">is.integer</span>(v)</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] FALSE</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Amazona&quot;</span>, <span class="st">&quot;Ara&quot;</span>, <span class="st">&quot;Eupsittula&quot;</span>, <span class="st">&quot;Myiopsitta&quot;</span>)</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(y)</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;character&quot;</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="fu">is.integer</span>(y)</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] FALSE</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>, <span class="st">&quot;Myiopsitta&quot;</span>)</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>x</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;1&quot;          &quot;2&quot;          &quot;3&quot;          &quot;Myiopsitta&quot;</span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(x)</span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;character&quot;</span></span></code></pre></div>
+<pre class="r"><code>
+v &lt;- c(10, 11, 12, 13)
+
+class(v)
+## [1] &quot;numeric&quot;
+
+typeof(v)
+## [1] &quot;double&quot;
+
+is.integer(v)
+## [1] FALSE
+
+y &lt;- c(&quot;Amazona&quot;, &quot;Ara&quot;, &quot;Eupsittula&quot;, &quot;Myiopsitta&quot;)
+
+class(y)
+## [1] &quot;character&quot;
+
+is.integer(y)
+## [1] FALSE
+
+x &lt;- c(1,2,3, &quot;Myiopsitta&quot;)
+
+x
+## [1] &quot;1&quot;          &quot;2&quot;          &quot;3&quot;          &quot;Myiopsitta&quot;
+
+class(x)
+## [1] &quot;character&quot;</code></pre>
 <p> </p>
 <p>Missing values are specified with NA, which is a logical vector of length 1. NA will always be coerced to the correct type if used inside <code>c()</code>:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">12</span>, <span class="dv">13</span>, <span class="cn">NA</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(v)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;numeric&quot;</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>], <span class="cn">NA</span>)</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(v)</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;character&quot;</span></span></code></pre></div>
+<pre class="r"><code>
+v &lt;- c(10, 11, 12, 13, NA)
+
+class(v)
+## [1] &quot;numeric&quot;
+
+v &lt;- c(letters[1:3], NA)
+
+class(v)
+## [1] &quot;character&quot;</code></pre>
 <p> </p>
 <p><font size="5">Lists</font></p>
 <p>Can contain objects of different classes and sizes. Lists are built using list():</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>l <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">ID =</span> letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>], <span class="at">size =</span> <span class="fu">rnorm</span>(<span class="dv">6</span>), <span class="at">observed =</span> <span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>))</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>l</span></code></pre></div>
+<pre class="r"><code>l &lt;- list(ID = c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;), size = c(1, 2, 3, 4, 5), observed = c(FALSE, TRUE, FALSE, FALSE, FALSE))
+
+l</code></pre>
 <pre><code>## $ID
 ## [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot;
 ## 
 ## $size
-## [1] -1.91076  1.48046  2.38150  1.56967  0.60655 -0.33370
+## [1] 1 2 3 4 5
 ## 
 ## $observed
 ## [1] FALSE  TRUE FALSE FALSE FALSE</code></pre>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(l)</span></code></pre></div>
+<pre class="r"><code>class(l)</code></pre>
 <pre><code>## [1] &quot;list&quot;</code></pre>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(l)</span></code></pre></div>
+<pre class="r"><code>str(l)</code></pre>
 <pre><code>## List of 3
 ##  $ ID      : chr [1:5] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...
-##  $ size    : num [1:6] -1.911 1.48 2.382 1.57 0.607 ...
+##  $ size    : num [1:5] 1 2 3 4 5
 ##  $ observed: logi [1:5] FALSE TRUE FALSE FALSE FALSE</code></pre>
 <p>… and dimensions:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>l <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">ID =</span> letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>], <span class="at">size =</span> <span class="fu">rnorm</span>(<span class="dv">6</span>), <span class="at">observed =</span> <span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>), l)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(l)</span></code></pre></div>
+<pre class="r"><code>l &lt;- list(ID = c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;), size = c(1, 2, 3, 4, 5, 6), observed = c(FALSE, TRUE, FALSE, FALSE, FALSE), l)
+
+str(l)</code></pre>
 <pre><code>## List of 4
 ##  $ ID      : chr [1:5] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...
-##  $ size    : num [1:6] 1.28 -0.437 1.273 -1.447 -1.306 ...
+##  $ size    : num [1:6] 1 2 3 4 5 6
 ##  $ observed: logi [1:5] FALSE TRUE FALSE FALSE FALSE
 ##  $         :List of 3
 ##   ..$ ID      : chr [1:5] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...
-##   ..$ size    : num [1:6] -1.911 1.48 2.382 1.57 0.607 ...
+##   ..$ size    : num [1:5] 1 2 3 4 5
 ##   ..$ observed: logi [1:5] FALSE TRUE FALSE FALSE FALSE</code></pre>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>l2 <span class="ot">&lt;-</span> <span class="fu">list</span>(l, l)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(l2)</span></code></pre></div>
+<pre class="r"><code>l2 &lt;- list(l, l)
+
+str(l2)</code></pre>
 <pre><code>## List of 2
 ##  $ :List of 4
 ##   ..$ ID      : chr [1:5] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...
-##   ..$ size    : num [1:6] 1.28 -0.437 1.273 -1.447 -1.306 ...
+##   ..$ size    : num [1:6] 1 2 3 4 5 6
 ##   ..$ observed: logi [1:5] FALSE TRUE FALSE FALSE FALSE
 ##   ..$         :List of 3
 ##   .. ..$ ID      : chr [1:5] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...
-##   .. ..$ size    : num [1:6] -1.911 1.48 2.382 1.57 0.607 ...
+##   .. ..$ size    : num [1:5] 1 2 3 4 5
 ##   .. ..$ observed: logi [1:5] FALSE TRUE FALSE FALSE FALSE
 ##  $ :List of 4
 ##   ..$ ID      : chr [1:5] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...
-##   ..$ size    : num [1:6] 1.28 -0.437 1.273 -1.447 -1.306 ...
+##   ..$ size    : num [1:6] 1 2 3 4 5 6
 ##   ..$ observed: logi [1:5] FALSE TRUE FALSE FALSE FALSE
 ##   ..$         :List of 3
 ##   .. ..$ ID      : chr [1:5] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...
-##   .. ..$ size    : num [1:6] -1.911 1.48 2.382 1.57 0.607 ...
+##   .. ..$ size    : num [1:5] 1 2 3 4 5
 ##   .. ..$ observed: logi [1:5] FALSE TRUE FALSE FALSE FALSE</code></pre>
 <p> </p>
 <p><font size="5">Attributes</font></p>
 <p>Objects can have attributes. Attributes allow to store metadata about the object. Attributes are kind of named lists. Attributes can be accessed individually with <code>attr()</code> or all at once (as a list) with <code>attributes()</code>:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(y)</span></code></pre></div>
+<pre class="r"><code>y &lt;- 1:10
+
+mean(y)</code></pre>
 <pre><code>## [1] 5.5</code></pre>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(y, <span class="st">&quot;my_attribute&quot;</span>) <span class="ot">&lt;-</span> <span class="st">&quot;This is an attribute&quot;</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(y, <span class="st">&quot;my_attribute&quot;</span>)</span></code></pre></div>
+<pre class="r"><code>attr(y, &quot;my_attribute&quot;) &lt;- &quot;This is an attribute&quot;
+
+
+attr(y, &quot;my_attribute&quot;)</code></pre>
 <pre><code>## [1] &quot;This is an attribute&quot;</code></pre>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(y)</span></code></pre></div>
+<pre class="r"><code>str(y)</code></pre>
 <pre><code>##  int [1:10] 1 2 3 4 5 6 7 8 9 10
 ##  - attr(*, &quot;my_attribute&quot;)= chr &quot;This is an attribute&quot;</code></pre>
 <p> </p>
 <p><code>structure()</code> returns a new object with modified attributes:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">structure</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">my_attribute =</span> <span class="st">&quot;This is an attribute&quot;</span>)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(y)</span></code></pre></div>
+<pre class="r"><code>y &lt;- structure(1:10, my_attribute = &quot;This is an attribute&quot;)
+attributes(y)</code></pre>
 <pre><code>## $my_attribute
 ## [1] &quot;This is an attribute&quot;</code></pre>
 <p> </p>
 <p>Most attributes are lost when modifying a vector:</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(y[<span class="dv">1</span>])</span></code></pre></div>
+<pre class="r"><code>attributes(y[1])</code></pre>
 <pre><code>## NULL</code></pre>
 <p> </p>
 <p>The only attributes not lost are the three most important:</p>
@@ -752,18 +676,18 @@ Array
 <li>Class</li>
 </ul>
 <hr />
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>w <span class="ot">&lt;-</span> <span class="fu">structure</span>(<span class="fu">c</span>(<span class="at">a =</span><span class="dv">1</span>, <span class="at">b =</span> <span class="dv">2</span>), <span class="at">my_attribute =</span> <span class="st">&quot;This is not an apple&quot;</span>)</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(w)</span></code></pre></div>
+<pre class="r"><code>w &lt;- structure(c(a =1, b = 2), my_attribute = &quot;This is not an apple&quot;)
+
+attributes(w)</code></pre>
 <pre><code>## $names
 ## [1] &quot;a&quot; &quot;b&quot;
 ## 
 ## $my_attribute
 ## [1] &quot;This is not an apple&quot;</code></pre>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(w[<span class="dv">1</span>])</span></code></pre></div>
+<pre class="r"><code>attributes(w[1])</code></pre>
 <pre><code>## $names
 ## [1] &quot;a&quot;</code></pre>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(w[<span class="dv">1</span>])</span></code></pre></div>
+<pre class="r"><code>class(w[1])</code></pre>
 <pre><code>## [1] &quot;numeric&quot;</code></pre>
 <p> </p>
 <p><font size="5">Names</font></p>
@@ -773,19 +697,19 @@ Array
 <li>By modifying an existing vector in place: <code>x &lt;- 1:3</code>; <code>names(x) &lt;- c("a", "b", "c")</code> Or: <code>x &lt;- 1:3</code>; <code>names(x)[[1]] &lt;- c("a")</code></li>
 <li>By creating a modified copy of a vector: <code>x &lt;- setNames(1:3, c("a", "b", "c"))</code></li>
 </ul>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">a =</span> <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(y)</span></code></pre></div>
+<pre class="r"><code>y &lt;- c(a = 1, 2, 3)
+
+names(y)</code></pre>
 <pre><code>## [1] &quot;a&quot; &quot;&quot;  &quot;&quot;</code></pre>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(v) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;a&#39;</span>)</span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(v)</span></code></pre></div>
+<pre class="r"><code>v &lt;- c(1, 2, 3)
+
+names(v) &lt;- c(&#39;a&#39;)
+
+names(v)</code></pre>
 <pre><code>## [1] &quot;a&quot; NA  NA</code></pre>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">setNames</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>))</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(z)</span></code></pre></div>
+<pre class="r"><code>z &lt;- setNames(1:3, c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;))
+
+names(z)</code></pre>
 <pre><code>## [1] &quot;a&quot; &quot;b&quot; &quot;c&quot;</code></pre>
 <p> </p>
 <p><font size="5">Factors</font></p>
@@ -795,113 +719,88 @@ Array
 <li>class “factor”: makes them behave differently from regular integer vectors</li>
 <li>levels: defines the set of allowed values</li>
 </ul>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;a&quot;</span>))</span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<pre class="r"><code>x &lt;- factor(c(&quot;a&quot;, &quot;b&quot;, &quot;b&quot;, &quot;a&quot;))
+x</code></pre>
 <pre><code>## [1] a b b a
 ## Levels: a b</code></pre>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(x)</span></code></pre></div>
+<pre class="r"><code>levels(x)</code></pre>
 <pre><code>## [1] &quot;a&quot; &quot;b&quot;</code></pre>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(x)</span></code></pre></div>
+<pre class="r"><code>str(x)</code></pre>
 <pre><code>##  Factor w/ 2 levels &quot;a&quot;,&quot;b&quot;: 1 2 2 1</code></pre>
 <p> </p>
 <p>Factors look like character vectors but they are actually integers:</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;a&quot;</span>))</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(x)</span></code></pre></div>
+<pre class="r"><code>x &lt;- factor(c(&quot;a&quot;, &quot;b&quot;, &quot;b&quot;, &quot;a&quot;))
+
+c(x)</code></pre>
 <pre><code>## [1] a b b a
 ## Levels: a b</code></pre>
 <p> </p>
 <p><font size="5">Matrices</font></p>
 <p>All entries are of the same type:</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">11</span>, <span class="dv">12</span>, <span class="dv">13</span>), <span class="at">nrow =</span> <span class="dv">2</span>)</span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(m)</span></code></pre></div>
+<pre class="r"><code>m &lt;- matrix(c(1, 2, 3, 11, 12, 13), nrow = 2)
+
+dim(m)</code></pre>
 <pre><code>## [1] 2 3</code></pre>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>m</span></code></pre></div>
+<pre class="r"><code>m</code></pre>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    1    3   12
 ## [2,]    2   11   13</code></pre>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(m)</span></code></pre></div>
+<pre class="r"><code>class(m)</code></pre>
 <pre><code>## [1] &quot;matrix&quot; &quot;array&quot;</code></pre>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">11</span>, <span class="dv">12</span>,<span class="st">&quot;13&quot;</span>), <span class="at">nrow =</span> <span class="dv">2</span>)</span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>m</span></code></pre></div>
+<pre class="r"><code>m &lt;- matrix(c(1, 2, 3, 11, 12,&quot;13&quot;), nrow = 2)
+m</code></pre>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,] &quot;1&quot;  &quot;3&quot;  &quot;12&quot;
 ## [2,] &quot;2&quot;  &quot;11&quot; &quot;13&quot;</code></pre>
 <p> </p>
 <p>Can be created by modifying the dimension attribute:</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span></span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="fu">is.matrix</span>(c)</span></code></pre></div>
+<pre class="r"><code>c &lt;- 1:6
+
+is.matrix(c)</code></pre>
 <pre><code>## [1] FALSE</code></pre>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(c)</span></code></pre></div>
+<pre class="r"><code>attributes(c)</code></pre>
 <pre><code>## NULL</code></pre>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(c) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">2</span>)</span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>c</span></code></pre></div>
+<pre class="r"><code>dim(c) &lt;- c(3, 2)
+
+c</code></pre>
 <pre><code>##      [,1] [,2]
 ## [1,]    1    4
 ## [2,]    2    5
 ## [3,]    3    6</code></pre>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.matrix</span>(c)</span></code></pre></div>
+<pre class="r"><code>is.matrix(c)</code></pre>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(c)</span></code></pre></div>
+<pre class="r"><code>attributes(c)</code></pre>
 <pre><code>## $dim
 ## [1] 3 2</code></pre>
 <p> </p>
 <p><font size="5">Data frames</font></p>
 <p>Special case of lists. Can contain entries of different types:</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">ID =</span> letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>], <span class="at">size =</span> <span class="fu">rnorm</span>(<span class="dv">5</span>), <span class="at">observed =</span> <span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>))</span>
-<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(m)</span></code></pre></div>
+<pre class="r"><code>m &lt;- data.frame(ID = c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;), size = c(1, 2, 3, 4, 5), observed = c(FALSE, TRUE, FALSE, FALSE, FALSE))
+
+dim(m)</code></pre>
 <pre><code>## [1] 5 3</code></pre>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>m</span></code></pre></div>
-<pre><code>##   ID    size observed
-## 1  a 0.69341    FALSE
-## 2  b 1.41333     TRUE
-## 3  c 0.76004    FALSE
-## 4  d 0.75104    FALSE
-## 5  e 1.92036    FALSE</code></pre>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(m)</span></code></pre></div>
+<pre class="r"><code>m</code></pre>
+<pre><code>##   ID size observed
+## 1  a    1    FALSE
+## 2  b    2     TRUE
+## 3  c    3    FALSE
+## 4  d    4    FALSE
+## 5  e    5    FALSE</code></pre>
+<pre class="r"><code>class(m)</code></pre>
 <pre><code>## [1] &quot;data.frame&quot;</code></pre>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.data.frame</span>(m)</span></code></pre></div>
+<pre class="r"><code>is.data.frame(m)</code></pre>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.list</span>(m)</span></code></pre></div>
+<pre class="r"><code>is.list(m)</code></pre>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(m)</span></code></pre></div>
+<pre class="r"><code>str(m)</code></pre>
 <pre><code>## &#39;data.frame&#39;:    5 obs. of  3 variables:
 ##  $ ID      : chr  &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...
-##  $ size    : num  0.693 1.413 0.76 0.751 1.92
+##  $ size    : num  1 2 3 4 5
 ##  $ observed: logi  FALSE TRUE FALSE FALSE FALSE</code></pre>
 <p> </p>
 <p>But vectors should have the same length:</p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">ID =</span> letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>], <span class="at">size =</span> <span class="fu">rnorm</span>(<span class="dv">6</span>), <span class="at">observed =</span> <span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>))</span></code></pre></div>
-<pre><code>## Error in data.frame(ID = letters[1:5], size = rnorm(6), observed = c(FALSE, : arguments imply differing number of rows: 5, 6</code></pre>
-<p> </p>
-<p>Note: <code>data.frame()</code> turns strings into factors by default. Use <code>stringsAsFactors = FALSE</code> to suppress this behavior:</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">ID =</span> letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>], <span class="at">size =</span> <span class="fu">rnorm</span>(<span class="dv">6</span>), <span class="at">observed =</span> <span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>), <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<pre><code>## Error in data.frame(ID = letters[1:5], size = rnorm(6), observed = c(FALSE, : arguments imply differing number of rows: 5, 6</code></pre>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(m)</span></code></pre></div>
-<pre><code>## &#39;data.frame&#39;:    5 obs. of  3 variables:
-##  $ ID      : chr  &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...
-##  $ size    : num  0.693 1.413 0.76 0.751 1.92
-##  $ observed: logi  FALSE TRUE FALSE FALSE FALSE</code></pre>
-<p> </p>
-<p>Complex elements can be added to a data frame using <code>I()</code> to treat the list as one unit:</p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">ID =</span> letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>], <span class="at">size =</span> <span class="fu">I</span>(<span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">nrow =</span> <span class="dv">5</span>)), <span class="at">observed =</span> <span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>))</span>
-<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a>m</span></code></pre></div>
-<pre><code>##   ID size.1 size.2 observed
-## 1  a      1      6    FALSE
-## 2  b      2      7     TRUE
-## 3  c      3      8    FALSE
-## 4  d      4      9    FALSE
-## 5  e      5     10    FALSE</code></pre>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(m)</span></code></pre></div>
-<pre><code>## &#39;data.frame&#39;:    5 obs. of  3 variables:
-##  $ ID      : chr  &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...
-##  $ size    : &#39;AsIs&#39; int [1:5, 1:2] 1 2 3 4 5 6 7 8 9 10
-##  $ observed: logi  FALSE TRUE FALSE FALSE FALSE</code></pre>
+<pre class="r"><code>m &lt;- data.frame(ID = c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;), size = c(1, 2, 3, 4, 5, 6), observed = c(FALSE, TRUE, FALSE, FALSE, FALSE))</code></pre>
+<pre><code>## Error in data.frame(ID = c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;), size = c(1, 2, 3, : arguments imply differing number of rows: 5, 6</code></pre>
 <p> </p>
 <hr />
 </div>
@@ -909,123 +808,123 @@ Array
 <h2>Data subsetting</h2>
 <p><font size="5">Indexing</font></p>
 <p>Elements within objects can be called by indexing. To subset a vector simply call the object position using square brackets:</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">50</span>, <span class="dv">1</span>, <span class="dv">6</span>)</span>
-<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">1</span>]</span></code></pre></div>
+<pre class="r"><code>x &lt;- c(1, 3, 4, 10, 15, 20, 50, 1, 6)
+
+x[1]</code></pre>
 <pre><code>## [1] 1</code></pre>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">2</span>]</span></code></pre></div>
+<pre class="r"><code>x[2]</code></pre>
 <pre><code>## [1] 3</code></pre>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>]</span></code></pre></div>
+<pre class="r"><code>x[2:3]</code></pre>
 <pre><code>## [1] 3 4</code></pre>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>x[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)]</span></code></pre></div>
+<pre class="r"><code>x[c(1,3)]</code></pre>
 <pre><code>## [1] 1 4</code></pre>
 <p> </p>
 <p>Elements can be removed in the same way:</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>x[<span class="sc">-</span><span class="dv">1</span>]</span></code></pre></div>
+<pre class="r"><code>x[-1]</code></pre>
 <pre><code>## [1]  3  4 10 15 20 50  1  6</code></pre>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a>x[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)]</span></code></pre></div>
+<pre class="r"><code>x[-c(1,3)]</code></pre>
 <pre><code>## [1]  3 10 15 20 50  1  6</code></pre>
 <p> </p>
 <p>Matrices and data frames required 2 indices <code>[row, column]</code>:</p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">11</span>, <span class="dv">12</span>, <span class="dv">13</span>), <span class="at">nrow =</span> <span class="dv">2</span>)</span>
-<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb96-3"><a href="#cb96-3" aria-hidden="true" tabindex="-1"></a>m[<span class="dv">1</span>, ]</span></code></pre></div>
+<pre class="r"><code>m &lt;- matrix(c(1, 2, 3, 11, 12, 13), nrow = 2)
+
+m[1, ]</code></pre>
 <pre><code>## [1]  1  3 12</code></pre>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a>m[, <span class="dv">1</span>]</span></code></pre></div>
+<pre class="r"><code>m[, 1]</code></pre>
 <pre><code>## [1] 1 2</code></pre>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a>m[<span class="dv">1</span>, <span class="dv">1</span>]</span></code></pre></div>
+<pre class="r"><code>m[1, 1]</code></pre>
 <pre><code>## [1] 1</code></pre>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a>m[<span class="sc">-</span><span class="dv">1</span>, ]</span></code></pre></div>
+<pre class="r"><code>m[-1, ]</code></pre>
 <pre><code>## [1]  2 11 13</code></pre>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a>m[, <span class="sc">-</span><span class="dv">1</span>]</span></code></pre></div>
+<pre class="r"><code>m[, -1]</code></pre>
 <pre><code>##      [,1] [,2]
 ## [1,]    3   12
 ## [2,]   11   13</code></pre>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a>m[<span class="sc">-</span><span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>]</span></code></pre></div>
+<pre class="r"><code>m[-1, -1]</code></pre>
 <pre><code>## [1] 11 13</code></pre>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">family =</span> <span class="fu">c</span>(<span class="st">&quot;Psittacidae&quot;</span>, <span class="st">&quot;Trochilidae&quot;</span>, </span>
-<span id="cb108-2"><a href="#cb108-2" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;Psittacidae&quot;</span>), </span>
-<span id="cb108-3"><a href="#cb108-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">genus =</span> <span class="fu">c</span>(<span class="st">&quot;Amazona&quot;</span>, <span class="st">&quot;Phaethornis&quot;</span>, <span class="st">&quot;Ara&quot;</span>), </span>
-<span id="cb108-4"><a href="#cb108-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">species =</span> <span class="fu">c</span>(<span class="st">&quot;aestiva&quot;</span>, <span class="st">&quot;philippii&quot;</span>, <span class="st">&quot;ararauna&quot;</span>))</span>
-<span id="cb108-5"><a href="#cb108-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb108-6"><a href="#cb108-6" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div>
+<pre class="r"><code>df &lt;- data.frame(family = c(&quot;Psittacidae&quot;, &quot;Trochilidae&quot;, 
+                            &quot;Psittacidae&quot;), 
+  genus = c(&quot;Amazona&quot;, &quot;Phaethornis&quot;, &quot;Ara&quot;), 
+    species = c(&quot;aestiva&quot;, &quot;philippii&quot;, &quot;ararauna&quot;))
+
+df</code></pre>
 <pre><code>##        family       genus   species
 ## 1 Psittacidae     Amazona   aestiva
 ## 2 Trochilidae Phaethornis philippii
 ## 3 Psittacidae         Ara  ararauna</code></pre>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a>df[<span class="dv">1</span>, ]</span></code></pre></div>
+<pre class="r"><code>df[1, ]</code></pre>
 <pre><code>##        family   genus species
 ## 1 Psittacidae Amazona aestiva</code></pre>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a>df[, <span class="dv">1</span>]</span></code></pre></div>
+<pre class="r"><code>df[, 1]</code></pre>
 <pre><code>## [1] &quot;Psittacidae&quot; &quot;Trochilidae&quot; &quot;Psittacidae&quot;</code></pre>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a>df[<span class="dv">1</span>, <span class="dv">1</span>]</span></code></pre></div>
+<pre class="r"><code>df[1, 1]</code></pre>
 <pre><code>## [1] &quot;Psittacidae&quot;</code></pre>
-<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>df[<span class="sc">-</span><span class="dv">1</span>, ]</span></code></pre></div>
+<pre class="r"><code>df[-1, ]</code></pre>
 <pre><code>##        family       genus   species
 ## 2 Trochilidae Phaethornis philippii
 ## 3 Psittacidae         Ara  ararauna</code></pre>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a>df[, <span class="sc">-</span><span class="dv">1</span>]</span></code></pre></div>
+<pre class="r"><code>df[, -1]</code></pre>
 <pre><code>##         genus   species
 ## 1     Amazona   aestiva
 ## 2 Phaethornis philippii
 ## 3         Ara  ararauna</code></pre>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a>df[<span class="sc">-</span><span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>]</span></code></pre></div>
+<pre class="r"><code>df[-1, -1]</code></pre>
 <pre><code>##         genus   species
 ## 2 Phaethornis philippii
 ## 3         Ara  ararauna</code></pre>
-<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a>df[,<span class="st">&quot;family&quot;</span>]</span></code></pre></div>
+<pre class="r"><code>df[,&quot;family&quot;]</code></pre>
 <pre><code>## [1] &quot;Psittacidae&quot; &quot;Trochilidae&quot; &quot;Psittacidae&quot;</code></pre>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a>df[,<span class="fu">c</span>(<span class="st">&quot;family&quot;</span>, <span class="st">&quot;genus&quot;</span>)]</span></code></pre></div>
+<pre class="r"><code>df[,c(&quot;family&quot;, &quot;genus&quot;)]</code></pre>
 <pre><code>##        family       genus
 ## 1 Psittacidae     Amazona
 ## 2 Trochilidae Phaethornis
 ## 3 Psittacidae         Ara</code></pre>
 <p> </p>
 <p>Lists require 1 index within double square brackets <code>[[index]]</code>:</p>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="#cb126-1" aria-hidden="true" tabindex="-1"></a>l <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">ID =</span> letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>], <span class="at">size =</span> <span class="fu">rnorm</span>(<span class="dv">6</span>), <span class="at">observed =</span> <span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>))</span>
-<span id="cb126-2"><a href="#cb126-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb126-3"><a href="#cb126-3" aria-hidden="true" tabindex="-1"></a>l[[<span class="dv">1</span>]]</span></code></pre></div>
+<pre class="r"><code>l &lt;- list(ID = c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;), size = c(1, 2, 3, 4, 5), observed = c(FALSE, TRUE, FALSE, FALSE, FALSE))
+
+l[[1]]</code></pre>
 <pre><code>## [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot;</code></pre>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a>l[[<span class="dv">3</span>]]</span></code></pre></div>
+<pre class="r"><code>l[[3]]</code></pre>
 <pre><code>## [1] FALSE  TRUE FALSE FALSE FALSE</code></pre>
 <p> </p>
 <p>Elements within lists can also be subset in the same string of code:</p>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="#cb130-1" aria-hidden="true" tabindex="-1"></a>l[[<span class="dv">1</span>]][<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span></code></pre></div>
+<pre class="r"><code>l[[1]][1:2]</code></pre>
 <pre><code>## [1] &quot;a&quot; &quot;b&quot;</code></pre>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="#cb132-1" aria-hidden="true" tabindex="-1"></a>l[[<span class="dv">3</span>]][<span class="dv">2</span>]</span></code></pre></div>
+<pre class="r"><code>l[[3]][2]</code></pre>
 <pre><code>## [1] TRUE</code></pre>
 <p> </p>
 <p><font size="5">Exploring objects</font></p>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="#cb134-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
+<pre class="r"><code>str(df)</code></pre>
 <pre><code>## &#39;data.frame&#39;:    3 obs. of  3 variables:
 ##  $ family : chr  &quot;Psittacidae&quot; &quot;Trochilidae&quot; &quot;Psittacidae&quot;
 ##  $ genus  : chr  &quot;Amazona&quot; &quot;Phaethornis&quot; &quot;Ara&quot;
 ##  $ species: chr  &quot;aestiva&quot; &quot;philippii&quot; &quot;ararauna&quot;</code></pre>
-<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="#cb136-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df)</span></code></pre></div>
+<pre class="r"><code>names(df)</code></pre>
 <pre><code>## [1] &quot;family&quot;  &quot;genus&quot;   &quot;species&quot;</code></pre>
-<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(df)</span></code></pre></div>
+<pre class="r"><code>dim(df)</code></pre>
 <pre><code>## [1] 3 3</code></pre>
-<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(df)</span></code></pre></div>
+<pre class="r"><code>nrow(df)</code></pre>
 <pre><code>## [1] 3</code></pre>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(df)</span></code></pre></div>
+<pre class="r"><code>ncol(df)</code></pre>
 <pre><code>## [1] 3</code></pre>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="#cb144-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span></code></pre></div>
+<pre class="r"><code>head(df)</code></pre>
 <pre><code>##        family       genus   species
 ## 1 Psittacidae     Amazona   aestiva
 ## 2 Trochilidae Phaethornis philippii
 ## 3 Psittacidae         Ara  ararauna</code></pre>
-<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="#cb146-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(df)</span></code></pre></div>
+<pre class="r"><code>tail(df)</code></pre>
 <pre><code>##        family       genus   species
 ## 1 Psittacidae     Amazona   aestiva
 ## 2 Trochilidae Phaethornis philippii
 ## 3 Psittacidae         Ara  ararauna</code></pre>
-<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(df<span class="sc">$</span>genus)</span></code></pre></div>
+<pre class="r"><code>table(df$genus)</code></pre>
 <pre><code>## 
 ##     Amazona         Ara Phaethornis 
 ##           1           1           1</code></pre>
-<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(df)</span></code></pre></div>
+<pre class="r"><code>typeof(df)</code></pre>
 <pre><code>## [1] &quot;list&quot;</code></pre>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(df)</span></code></pre></div>
+<pre class="r"><code>View(df)</code></pre>
 <p> </p>
 <div class="alert alert-info">
 <p><font size="5">Exercise</font></p>
@@ -1047,26 +946,25 @@ Array
 <p><img src="images/function.png" alt="R" height="350" width="900"></p>
 <p><font size="2">* Modified from <i>Grolemund 2014</i></font>  </p>
 <p>R comes with many functions that you can use to do sophisticated tasks:</p>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="co"># built in functions</span></span>
-<span id="cb153-2"><a href="#cb153-2" aria-hidden="true" tabindex="-1"></a>bi <span class="ot">&lt;-</span> <span class="fu">builtins</span>()</span>
-<span id="cb153-3"><a href="#cb153-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb153-4"><a href="#cb153-4" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(bi)</span></code></pre></div>
-<pre><code>## [1] 1370</code></pre>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="#cb155-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(bi, <span class="dv">10</span>)</span></code></pre></div>
-<pre><code>##  [1] &quot;print.NativeRoutineList&quot; &quot;restartDescription&quot;     
-##  [3] &quot;.F_dqrcf&quot;                &quot;substring&lt;-&quot;            
-##  [5] &quot;mat.or.vec&quot;              &quot;sys.on.exit&quot;            
-##  [7] &quot;as.function&quot;             &quot;backsolve&quot;              
-##  [9] &quot;=&quot;                       &quot;close&quot;</code></pre>
+<pre class="r"><code># built in functions
+bi &lt;- builtins()
+
+length(bi)</code></pre>
+<pre><code>## [1] 1368</code></pre>
+<pre class="r"><code>sample(bi, 10)</code></pre>
+<pre><code>##  [1] &quot;environmentIsLocked&quot;  &quot;require&quot;              &quot;print.connection&quot;    
+##  [4] &quot;format.data.frame&quot;    &quot;memDecompress&quot;        &quot;getNamespaceVersion&quot; 
+##  [7] &quot;..getNamespace&quot;       &quot;as.data.frame.factor&quot; &quot;anyDuplicated&quot;       
+## [10] &quot;provideDimnames&quot;</code></pre>
 <p> </p>
 <p>Operators are functions:</p>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="#cb157-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code></pre></div>
+<pre class="r"><code>1 + 1</code></pre>
 <pre><code>## [1] 2</code></pre>
-<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;+&#39;</span>(<span class="dv">1</span>, <span class="dv">1</span>)</span></code></pre></div>
+<pre class="r"><code>&#39;+&#39;(1, 1)</code></pre>
 <pre><code>## [1] 2</code></pre>
-<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="#cb161-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">*</span> <span class="dv">3</span></span></code></pre></div>
+<pre class="r"><code>2 * 3</code></pre>
 <pre><code>## [1] 6</code></pre>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="#cb163-1" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;*&#39;</span>(<span class="dv">2</span>, <span class="dv">3</span>)</span></code></pre></div>
+<pre class="r"><code>&#39;*&#39;(2, 3)</code></pre>
 <pre><code>## [1] 6</code></pre>
 <p> </p>
 <p><font size="5">Most commonly used R operators</font></p>
@@ -1142,17 +1040,17 @@ integer division
 </tbody>
 </table>
 <p> </p>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="dv">2</span></span></code></pre></div>
+<pre class="r"><code>1 - 2</code></pre>
 <pre><code>## [1] -1</code></pre>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="#cb167-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">2</span></span></code></pre></div>
+<pre class="r"><code>1 + 2</code></pre>
 <pre><code>## [1] 3</code></pre>
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">^</span> <span class="dv">2</span></span></code></pre></div>
+<pre class="r"><code>2 ^ 2</code></pre>
 <pre><code>## [1] 4</code></pre>
-<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="#cb171-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">**</span> <span class="dv">2</span></span></code></pre></div>
+<pre class="r"><code>2 ** 2</code></pre>
 <pre><code>## [1] 4</code></pre>
-<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="#cb173-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">%%</span> <span class="dv">2</span></span></code></pre></div>
+<pre class="r"><code>5 %% 2</code></pre>
 <pre><code>## [1] 1</code></pre>
-<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="#cb175-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">%/%</span> <span class="dv">2</span></span></code></pre></div>
+<pre class="r"><code>5 %/% 2</code></pre>
 <pre><code>## [1] 2</code></pre>
 <p> </p>
 <p>Logical operators:</p>
@@ -1251,42 +1149,42 @@ match
 </tbody>
 </table>
 <p> </p>
-<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="#cb177-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">&lt;</span> <span class="dv">2</span> </span></code></pre></div>
+<pre class="r"><code>1 &lt; 2 </code></pre>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="#cb179-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">&gt;</span> <span class="dv">2</span> </span></code></pre></div>
+<pre class="r"><code>1 &gt; 2 </code></pre>
 <pre><code>## [1] FALSE</code></pre>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="#cb181-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">&lt;=</span> <span class="dv">2</span> </span></code></pre></div>
+<pre class="r"><code>1 &lt;= 2 </code></pre>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="#cb183-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">==</span> <span class="dv">2</span></span></code></pre></div>
+<pre class="r"><code>1 == 2</code></pre>
 <pre><code>## [1] FALSE</code></pre>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="#cb185-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">!=</span> <span class="dv">2</span></span></code></pre></div>
+<pre class="r"><code>1 != 2</code></pre>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="#cb187-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">&gt;</span> <span class="dv">2</span> </span></code></pre></div>
+<pre class="r"><code>1 &gt; 2 </code></pre>
 <pre><code>## [1] FALSE</code></pre>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="#cb189-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">%in%</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span></span></code></pre></div>
+<pre class="r"><code>5 %in% 1:6</code></pre>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="#cb191-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">%in%</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span></span></code></pre></div>
+<pre class="r"><code>5 %in% 1:4</code></pre>
 <pre><code>## [1] FALSE</code></pre>
 <p> </p>
 <p>Most functions are vectorized:</p>
-<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="#cb193-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">6</span> <span class="sc">*</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span></span></code></pre></div>
+<pre class="r"><code>1:6 * 1:6</code></pre>
 <p><img src="images/vectorize.png" alt="R" height="350" width="900"></p>
 <p><font size="2">* Modified from <i>Grolemund &amp; Wickham 2017</i></font></p>
 <p> </p>
 <pre><code>## [1]  1  4  9 16 25 36</code></pre>
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="#cb195-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">6</span> <span class="sc">-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span></span></code></pre></div>
+<pre class="r"><code>1:6 - 1:6</code></pre>
 <pre><code>## [1] 0 0 0 0 0 0</code></pre>
 <p>R recycles vectors of unequal length:</p>
-<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="#cb197-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">6</span> <span class="sc">*</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span></code></pre></div>
+<pre class="r"><code>1:6 * 1:5</code></pre>
 <p><img src="images/recycle.png" alt="R" height="350" width="900"></p>
 <p><font size="2">* Modified from <i>Grolemund &amp; Wickham 2017</i></font></p>
 <p> </p>
-<pre><code>## Warning in 1:6 * 1:5: longitud de objeto mayor no es múltiplo de la longitud de
-## uno menor</code></pre>
+<pre><code>## Warning in 1:6 * 1:5: comprimento do objeto maior não é múltiplo do comprimento
+## do objeto menor</code></pre>
 <pre><code>## [1]  1  4  9 16 25  6</code></pre>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="#cb200-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">6</span> <span class="sc">+</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span></code></pre></div>
-<pre><code>## Warning in 1:6 + 1:5: longitud de objeto mayor no es múltiplo de la longitud de
-## uno menor</code></pre>
+<pre class="r"><code>1:6 + 1:5</code></pre>
+<pre><code>## Warning in 1:6 + 1:5: comprimento do objeto maior não é múltiplo do comprimento
+## do objeto menor</code></pre>
 <pre><code>## [1]  2  4  6  8 10  7</code></pre>
 <p> </p>
 <hr />
@@ -1309,9 +1207,9 @@ match
 <li>Strive for names that are concise and meaningful (not always easy)</li>
 <li>Avoid using names of existing functions of variables</li>
 </ul>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="#cb203-1" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span> GOOD<span class="sc">:</span> day_one<span class="sc">:</span> day_1, <span class="fu">mean.day</span>(),</span>
-<span id="cb203-2"><a href="#cb203-2" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb203-3"><a href="#cb203-3" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span> BAD<span class="sc">:</span> dayOne, day1, firstDay_of.month, mean <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">sum</span>(x), c <span class="ot">&lt;-</span> <span class="dv">10</span></span></code></pre></div>
+<pre class="r"><code>  - GOOD: day_one: day_1, mean.day(),
+  
+  - BAD: dayOne, day1, firstDay_of.month, mean &lt;- function(x) sum(x), c &lt;- 10</code></pre>
 <p> </p>
 <p><font size="5">Syntax</font></p>
 <p>Spacing:</p>
@@ -1320,24 +1218,24 @@ match
 <li>Always put a space after a comma, and never before (just like in regular English)</li>
 <li>Place a space before left parenthesis, except in a function call</li>
 </ul>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="#cb204-1" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span> GOOD<span class="sc">:</span> </span>
-<span id="cb204-2"><a href="#cb204-2" aria-hidden="true" tabindex="-1"></a>          a <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">10</span>, <span class="at">mean =</span> <span class="dv">1</span>)</span>
-<span id="cb204-3"><a href="#cb204-3" aria-hidden="true" tabindex="-1"></a>          tab.prior <span class="ot">&lt;-</span> <span class="fu">table</span>(df[df<span class="sc">$</span>days.from.opt <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="st">&quot;campaign.id&quot;</span>])</span>
-<span id="cb204-4"><a href="#cb204-4" aria-hidden="true" tabindex="-1"></a>          total <span class="ot">&lt;-</span> <span class="fu">sum</span>(x[, <span class="dv">1</span>])</span>
-<span id="cb204-5"><a href="#cb204-5" aria-hidden="true" tabindex="-1"></a>          total <span class="ot">&lt;-</span> <span class="fu">sum</span>(x[<span class="dv">1</span>, ])</span>
-<span id="cb204-6"><a href="#cb204-6" aria-hidden="true" tabindex="-1"></a>          <span class="cf">if</span> (debug)</span>
-<span id="cb204-7"><a href="#cb204-7" aria-hidden="true" tabindex="-1"></a>          <span class="fu">mean</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
-<span id="cb204-8"><a href="#cb204-8" aria-hidden="true" tabindex="-1"></a>          </span>
-<span id="cb204-9"><a href="#cb204-9" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span> BAD<span class="sc">:</span> </span>
-<span id="cb204-10"><a href="#cb204-10" aria-hidden="true" tabindex="-1"></a>         a<span class="ot">&lt;-</span><span class="fu">rnorm</span>(<span class="at">n=</span><span class="dv">10</span>,<span class="at">sd=</span><span class="dv">10</span>,<span class="at">mean=</span><span class="dv">1</span>)</span>
-<span id="cb204-11"><a href="#cb204-11" aria-hidden="true" tabindex="-1"></a>         tab.prior <span class="ot">&lt;-</span> <span class="fu">table</span>(df[df<span class="sc">$</span>days.from.opt<span class="sc">&lt;</span><span class="dv">0</span>, <span class="st">&quot;campaign.id&quot;</span>])  <span class="co"># Needs spaces around &#39;&lt;&#39;</span></span>
-<span id="cb204-12"><a href="#cb204-12" aria-hidden="true" tabindex="-1"></a>         tab.prior <span class="ot">&lt;-</span> <span class="fu">table</span>(df[df<span class="sc">$</span>days.from.opt <span class="sc">&lt;</span> <span class="dv">0</span>,<span class="st">&quot;campaign.id&quot;</span>])  <span class="co"># Needs a space after the comma</span></span>
-<span id="cb204-13"><a href="#cb204-13" aria-hidden="true" tabindex="-1"></a>         tab.prior<span class="ot">&lt;-</span> <span class="fu">table</span>(df[df<span class="sc">$</span>days.from.opt <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="st">&quot;campaign.id&quot;</span>])  <span class="co"># Needs a space before &lt;-</span></span>
-<span id="cb204-14"><a href="#cb204-14" aria-hidden="true" tabindex="-1"></a>         tab.prior<span class="ot">&lt;-</span><span class="fu">table</span>(df[df<span class="sc">$</span>days.from.opt <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="st">&quot;campaign.id&quot;</span>])  <span class="co"># Needs spaces around &lt;-</span></span>
-<span id="cb204-15"><a href="#cb204-15" aria-hidden="true" tabindex="-1"></a>         total <span class="ot">&lt;-</span> <span class="fu">sum</span>(x[,<span class="dv">1</span>])  <span class="co"># Needs a space after the comma</span></span>
-<span id="cb204-16"><a href="#cb204-16" aria-hidden="true" tabindex="-1"></a>         total <span class="ot">&lt;-</span> <span class="fu">sum</span>(x[ ,<span class="dv">1</span>])  <span class="co"># Needs a space after the comma, not before  </span></span>
-<span id="cb204-17"><a href="#cb204-17" aria-hidden="true" tabindex="-1"></a>         <span class="cf">if</span>(debug) <span class="co"># Needs a space before parenthesis</span></span>
-<span id="cb204-18"><a href="#cb204-18" aria-hidden="true" tabindex="-1"></a>         <span class="fu">mean</span> (<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) <span class="co"># ) # Extra space before parenthesis</span></span></code></pre></div>
+<pre class="r"><code>  - GOOD: 
+          a &lt;- rnorm(n = 10, sd = 10, mean = 1)
+          tab.prior &lt;- table(df[df$days.from.opt &lt; 0, &quot;campaign.id&quot;])
+          total &lt;- sum(x[, 1])
+          total &lt;- sum(x[1, ])
+          if (debug)
+          mean(1:10)
+          
+  - BAD: 
+         a&lt;-rnorm(n=10,sd=10,mean=1)
+         tab.prior &lt;- table(df[df$days.from.opt&lt;0, &quot;campaign.id&quot;])  # Needs spaces around &#39;&lt;&#39;
+         tab.prior &lt;- table(df[df$days.from.opt &lt; 0,&quot;campaign.id&quot;])  # Needs a space after the comma
+         tab.prior&lt;- table(df[df$days.from.opt &lt; 0, &quot;campaign.id&quot;])  # Needs a space before &lt;-
+         tab.prior&lt;-table(df[df$days.from.opt &lt; 0, &quot;campaign.id&quot;])  # Needs spaces around &lt;-
+         total &lt;- sum(x[,1])  # Needs a space after the comma
+         total &lt;- sum(x[ ,1])  # Needs a space after the comma, not before  
+         if(debug) # Needs a space before parenthesis
+         mean (1:10) # ) # Extra space before parenthesis</code></pre>
 <p> </p>
 <p>Curly braces:</p>
 <ul>
@@ -1345,33 +1243,33 @@ match
 <li>Closing curly brace should always go on its own line</li>
 <li>You may omit curly braces when a block consists of a single statement</li>
 </ul>
-<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="#cb205-1" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span> GOOD<span class="sc">:</span></span>
-<span id="cb205-2"><a href="#cb205-2" aria-hidden="true" tabindex="-1"></a>              <span class="cf">if</span> (<span class="fu">is.null</span>(ylim)) {</span>
-<span id="cb205-3"><a href="#cb205-3" aria-hidden="true" tabindex="-1"></a>              ylim <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.06</span>)</span>
-<span id="cb205-4"><a href="#cb205-4" aria-hidden="true" tabindex="-1"></a>            }</span>
-<span id="cb205-5"><a href="#cb205-5" aria-hidden="true" tabindex="-1"></a>                      </span>
-<span id="cb205-6"><a href="#cb205-6" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> (<span class="fu">is.null</span>(ylim))</span>
-<span id="cb205-7"><a href="#cb205-7" aria-hidden="true" tabindex="-1"></a>              ylim <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.06</span>)</span>
-<span id="cb205-8"><a href="#cb205-8" aria-hidden="true" tabindex="-1"></a>          </span>
-<span id="cb205-9"><a href="#cb205-9" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span> BAD<span class="sc">:</span></span>
-<span id="cb205-10"><a href="#cb205-10" aria-hidden="true" tabindex="-1"></a>            </span>
-<span id="cb205-11"><a href="#cb205-11" aria-hidden="true" tabindex="-1"></a>         <span class="cf">if</span> (<span class="fu">is.null</span>(ylim)) ylim <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.06</span>)</span>
-<span id="cb205-12"><a href="#cb205-12" aria-hidden="true" tabindex="-1"></a>                    </span>
-<span id="cb205-13"><a href="#cb205-13" aria-hidden="true" tabindex="-1"></a>         <span class="cf">if</span> (<span class="fu">is.null</span>(ylim)) {ylim <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.06</span>)} </span>
-<span id="cb205-14"><a href="#cb205-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb205-15"><a href="#cb205-15" aria-hidden="true" tabindex="-1"></a>         <span class="cf">if</span> (<span class="fu">is.null</span>(ylim)) {</span>
-<span id="cb205-16"><a href="#cb205-16" aria-hidden="true" tabindex="-1"></a>           ylim <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.06</span>)</span>
-<span id="cb205-17"><a href="#cb205-17" aria-hidden="true" tabindex="-1"></a>           } </span></code></pre></div>
+<pre class="r"><code>  - GOOD:
+              if (is.null(ylim)) {
+              ylim &lt;- c(0, 0.06)
+            }
+                      
+            if (is.null(ylim))
+              ylim &lt;- c(0, 0.06)
+          
+  - BAD:
+            
+         if (is.null(ylim)) ylim &lt;- c(0, 0.06)
+                    
+         if (is.null(ylim)) {ylim &lt;- c(0, 0.06)} 
+
+         if (is.null(ylim)) {
+           ylim &lt;- c(0, 0.06)
+           } </code></pre>
 <p> </p>
 <p>Assigments:</p>
 <ul>
 <li>Use &lt;-, not =</li>
 </ul>
-<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="#cb206-1" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span> GOOD<span class="sc">:</span></span>
-<span id="cb206-2"><a href="#cb206-2" aria-hidden="true" tabindex="-1"></a>         x <span class="ot">&lt;-</span> <span class="dv">5</span> </span>
-<span id="cb206-3"><a href="#cb206-3" aria-hidden="true" tabindex="-1"></a>          </span>
-<span id="cb206-4"><a href="#cb206-4" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span> BAD<span class="sc">:</span></span>
-<span id="cb206-5"><a href="#cb206-5" aria-hidden="true" tabindex="-1"></a>         x <span class="ot">=</span> <span class="dv">5</span></span></code></pre></div>
+<pre class="r"><code>  - GOOD:
+         x &lt;- 5 
+          
+  - BAD:
+         x = 5</code></pre>
 <p> </p>
 <p>Commenting guidelines:</p>
 <ul>
@@ -1379,12 +1277,12 @@ match
 <li>Entire commented lines should begin with # and one space</li>
 <li>Short comments can be placed after code preceded by two spaces, #, and then one space</li>
 </ul>
-<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="#cb207-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create histogram of frequency of campaigns by pct budget spent.</span></span>
-<span id="cb207-2"><a href="#cb207-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df<span class="sc">$</span>pct.spent,</span>
-<span id="cb207-3"><a href="#cb207-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">breaks =</span> <span class="st">&quot;scott&quot;</span>,  <span class="co"># method for choosing number of buckets</span></span>
-<span id="cb207-4"><a href="#cb207-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">main   =</span> <span class="st">&quot;Histogram: fraction budget spent by campaignid&quot;</span>,</span>
-<span id="cb207-5"><a href="#cb207-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab   =</span> <span class="st">&quot;Fraction of budget spent&quot;</span>,</span>
-<span id="cb207-6"><a href="#cb207-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab   =</span> <span class="st">&quot;Frequency (count of campaignids)&quot;</span>)</span></code></pre></div>
+<pre class="r"><code># Create histogram of frequency of campaigns by pct budget spent.
+hist(df$pct.spent,
+     breaks = &quot;scott&quot;,  # method for choosing number of buckets
+     main   = &quot;Histogram: fraction budget spent by campaignid&quot;,
+     xlab   = &quot;Fraction of budget spent&quot;,
+     ylab   = &quot;Frequency (count of campaignids)&quot;)</code></pre>
 <p> </p>
 <p>General Layout and Ordering (google style):</p>
 <ul>
@@ -1400,6 +1298,7 @@ match
 </div>
 <div id="r-documentation" class="section level2">
 <h2>R documentation</h2>
+<p>Most R resources are extremely well documented. So the first source for help you should go to when writting R code is the R documention itself. All packages are documented in the same standard way. Getting familiar with the format can simplify things a lot.</p>
 <p><font size="5">Package documentation</font></p>
 <p><img src="images/packagepage.png" alt="R" height="900" width="800" style="border:3px solid gray"></p>
 <p> </p>
@@ -1412,14 +1311,14 @@ match
 <p> </p>
 <p><font size="5">Function documentation</font></p>
 <p>All functions (default or from loaded packages) must have a documentation that follows a standard format:</p>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="#cb208-1" aria-hidden="true" tabindex="-1"></a>?mean</span>
-<span id="cb208-2"><a href="#cb208-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb208-3"><a href="#cb208-3" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(<span class="st">&quot;mean&quot;</span>)</span></code></pre></div>
+<pre class="r"><code>?mean
+
+help(&quot;mean&quot;)</code></pre>
 <p><img src="images/documentation.png" alt="R" height="700" width="800" style="border:3px solid gray">  </p>
 <p>This documentation can also be shown in Rstudio by pressing <code>F1</code> when the cursor is on the function name</p>
 <p> </p>
 <p>If you don’t recall the function name try <code>apropos()</code>:</p>
-<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="#cb209-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apropos</span>(<span class="st">&quot;mean&quot;</span>)</span></code></pre></div>
+<pre class="r"><code>apropos(&quot;mean&quot;)</code></pre>
 <pre><code>##  [1] &quot;.colMeans&quot;     &quot;.rowMeans&quot;     &quot;colMeans&quot;      &quot;kmeans&quot;       
 ##  [5] &quot;mean&quot;          &quot;mean.Date&quot;     &quot;mean.default&quot;  &quot;mean.difftime&quot;
 ##  [9] &quot;mean.POSIXct&quot;  &quot;mean.POSIXlt&quot;  &quot;rowMeans&quot;      &quot;weighted.mean&quot;</code></pre>
@@ -1427,16 +1326,16 @@ match
 <p><font size="5">Vignettes</font></p>
 <p>Vignettes are illustrative documents or study cases detailing the use of a package (optional, can be several per package).</p>
 <p>Vignettes can be called directly from R:</p>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="#cb211-1" aria-hidden="true" tabindex="-1"></a>vgn <span class="ot">&lt;-</span> <span class="fu">browseVignettes</span>() </span></code></pre></div>
-<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="#cb212-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vignette</span>()</span></code></pre></div>
+<pre class="r"><code>vgn &lt;- browseVignettes() </code></pre>
+<pre class="r"><code>vignette()</code></pre>
 <p>They should also be listed in the package CRAN page.</p>
 <p> </p>
 <p><font size="5">Demonstrations</font></p>
 <p>Packages may also include extended code demonstrations (‘demos’). To list demos in a package run <code>demo("package name")</code>:</p>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="#cb213-1" aria-hidden="true" tabindex="-1"></a><span class="fu">demo</span>(<span class="at">package=</span><span class="st">&quot;stats&quot;</span>)</span>
-<span id="cb213-2"><a href="#cb213-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb213-3"><a href="#cb213-3" aria-hidden="true" tabindex="-1"></a><span class="co"># call demo directly</span></span>
-<span id="cb213-4"><a href="#cb213-4" aria-hidden="true" tabindex="-1"></a><span class="fu">demo</span>(<span class="st">&quot;nlm&quot;</span>)</span></code></pre></div>
+<pre class="r"><code>demo(package=&quot;stats&quot;)
+
+# call demo directly
+demo(&quot;nlm&quot;)</code></pre>
 <p> </p>
 <div class="alert alert-info">
 <p><font size="5">Exercise</font></p>

@@ -13,8 +13,8 @@
 
 <title>sound.knit</title>
 
-<script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -42,6 +42,7 @@
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   ul.task-list{list-style: none;}
     </style>
+
 
 
 <style type="text/css">
@@ -166,6 +167,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -397,12 +401,12 @@ div.tocify {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">BOKU bioacoustics R 2022</a>
+      <a class="navbar-brand" href="index.html">OTS Bioacoustic Analysis in R 2022</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -410,7 +414,7 @@ div.tocify {
   <a href="program.html">Program</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Tutorials
      
     <span class="caret"></span>
@@ -449,6 +453,9 @@ div.tocify {
     <li>
       <a href="quality_checks.html">Quality checks</a>
     </li>
+    <li>
+      <a href="measure_structure_green_hermit.html">Measure structure on XC recordings</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -473,13 +480,13 @@ div.tocify {
 <font size="7"><b>Sound</b></font>
 </center></h1>
 <h3 class="subtitle"><center>
-<font size="4"><b>Analysis of animal acoustic signals in R</b> <br> BOKU International Wildlife Lectures</font>
+<font size="4"><b>Bioacoustic Analysis in R</b> <br> Organization for Tropical Studies</font>
 </center></h3>
 <h4 class="author"><center>
 <font size="3"><a href="http://marceloarayasalas.weebly.com/">Marcelo Araya-Salas, PhD</a></font>
 </center></h4>
 <h4 class="date"><center>
-“2022-03-14”
+“2022-05-13”
 </center></h4>
 
 </div>
@@ -493,6 +500,8 @@ div.tocify {
 <p>The variation in pressure that is perceived at a fixed point in space can be represented by a graph of pressure (amplitude) by time:</p>
 <p><img src="images/amplitude.gif" alt="wave and oscillogram"></p>
 <p> </p>
+<p>Sounds waves are typically quantified by their frequency (number of cycles per second, Hz) and amplitude (relative intensity).</p>
+<p><img src="sound_files/figure-html/unnamed-chunk-2-1.png" width="85%" /></p>
 <div id="sounds-in-r" class="section level1">
 <h1>Sounds in R</h1>
 <p>Sound waves can be represented by 3 kinds of R objects:</p>
@@ -519,7 +528,7 @@ div.tocify {
 <p> </p>
 <p>These sequences of values only make sense when specifying the sampling rate at which they were created:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">oscillo</span>(s1, <span class="at">f =</span> <span class="dv">8000</span>, <span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="fl">0.01</span>)</span></code></pre></div>
-<p><img src="sound_files/figure-html/unnamed-chunk-3-1.png" width="672" />  </p>
+<p><img src="sound_files/figure-html/unnamed-chunk-4-1.png" width="672" />  </p>
 </div>
 <div id="matrices" class="section level3">
 <h3>Matrices</h3>
@@ -531,7 +540,7 @@ div.tocify {
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(s2)</span></code></pre></div>
 <pre><code>## [1] 8000    1</code></pre>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">oscillo</span>(s2, <span class="at">f =</span> <span class="dv">8000</span>, <span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="fl">0.01</span>)</span></code></pre></div>
-<p><img src="sound_files/figure-html/unnamed-chunk-4-1.png" width="672" />  </p>
+<p><img src="sound_files/figure-html/unnamed-chunk-5-1.png" width="672" />  </p>
 <p>If the matrix has more than one column, only the first column will be considered:</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">8000</span>)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -542,7 +551,7 @@ div.tocify {
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(s3)</span></code></pre></div>
 <pre><code>## [1] 8000    2</code></pre>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">oscillo</span>(s3, <span class="at">f =</span> <span class="dv">8000</span>, <span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="fl">0.01</span>)</span></code></pre></div>
-<p><img src="sound_files/figure-html/unnamed-chunk-5-1.png" width="672" />  </p>
+<p><img src="sound_files/figure-html/unnamed-chunk-6-1.png" width="672" />  </p>
 </div>
 <div id="time-series" class="section level3">
 <h3>Time series</h3>
@@ -556,7 +565,7 @@ div.tocify {
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>s4 <span class="ot">&lt;-</span> <span class="fu">ts</span>(<span class="at">data =</span> <span class="fu">runif</span>(<span class="dv">4000</span>, <span class="at">min =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">max =</span> <span class="dv">1</span>), <span class="at">start =</span> <span class="dv">0</span>, <span class="at">end =</span> <span class="fl">0.5</span>, <span class="at">frequency =</span> <span class="dv">8000</span>)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(s4)</span></code></pre></div>
-<pre><code>##  Time-Series [1:4001] from 0 to 0.5: 0.851 -0.08 -0.304 -0.889 -0.145 ...</code></pre>
+<pre><code>##  Time-Series [1:4001] from 0 to 0.5: -0.2966 0.00506 -0.37431 0.04377 -0.49811 ...</code></pre>
 <p> </p>
 <p>The <code>frequency()</code> and <code>deltat()</code> functions return the sampling frequency (<span class="math inline">\(f\)</span>) and the time resolution (<span class="math inline">\(Delta t\)</span>) respectively:</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frequency</span>(s4)</span></code></pre></div>
@@ -566,14 +575,14 @@ div.tocify {
 <p> </p>
 <p>As the frequency is incorporated into the <code>ts</code> objects, it is not necessary to specify it when used within functions dedicated to audio:</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">oscillo</span>(s4, <span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="fl">0.01</span>)</span></code></pre></div>
-<p><img src="sound_files/figure-html/unnamed-chunk-9-1.png" width="672" />  </p>
+<p><img src="sound_files/figure-html/unnamed-chunk-10-1.png" width="672" />  </p>
 <p>In the case of multiple time series, <strong>seewave</strong> functions will consider only the first series:</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>s5 <span class="ot">&lt;-</span> <span class="fu">ts</span>(<span class="at">data =</span> s3, <span class="at">f =</span> <span class="dv">8000</span>)</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(s5)</span></code></pre></div>
 <pre><code>## [1] &quot;mts&quot;    &quot;ts&quot;     &quot;matrix&quot;</code></pre>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">oscillo</span>(s5, <span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="fl">0.01</span>)</span></code></pre></div>
-<p><img src="sound_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="sound_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 </div>
 </div>
 <div id="dedicated-r-classes-for-sound" class="section level2">
@@ -727,9 +736,9 @@ div.tocify {
 <pre><code>## [1] &quot;Wave&quot;
 ## attr(,&quot;package&quot;)
 ## [1] &quot;tuneR&quot;</code></pre>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>rsf5 <span class="ot">&lt;-</span> <span class="fu">read_sound_file</span>(<span class="at">X =</span> <span class="st">&quot;https://github.com/maRce10/BOKU-Analysis-of-animal-acoustic-signals-in-R-2022/raw/master/examples/Phae.long1.flac&quot;</span>)</span>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>rsf6 <span class="ot">&lt;-</span> <span class="fu">read_sound_file</span>(<span class="at">X =</span> <span class="st">&quot;https://github.com/maRce10/OTS_BIR_2022/raw/master/examples/Phae.long1.flac&quot;</span>)</span>
 <span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(rsf5)</span></code></pre></div>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(rsf6)</span></code></pre></div>
 <pre><code>## [1] &quot;Wave&quot;
 ## attr(,&quot;package&quot;)
 ## [1] &quot;tuneR&quot;</code></pre>
@@ -761,6 +770,7 @@ div.tocify {
 ##  - attr(*, &quot;class&quot;)= chr &quot;sound&quot;</code></pre>
 <p> </p>
 <p>This function only imports files with a dynamic range of 8 or 16 bits.</p>
+<p> </p>
 </div>
 <div id="class-audiosample-audio" class="section level2">
 <h2>Class <code>audioSample</code> (<strong>audio</strong>)</h2>
@@ -784,6 +794,7 @@ div.tocify {
 <span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a><span class="fu">record</span>(s11, <span class="dv">16000</span>, <span class="dv">1</span>)</span></code></pre></div>
 <p> </p>
 <p>A recording session can be controlled by three complementary functions: <code>pause()</code>, <code>rewind()</code>, and <code>resume()</code>.</p>
+<p> </p>
 </div>
 <div id="export-sounds-from-r" class="section level2">
 <h2>Export sounds from R</h2>
@@ -808,24 +819,6 @@ div.tocify {
 <p>To compress a <code>.wav</code> file to a <code>.flac</code> format, the argument <code>reverse = TRUE</code> must be used:</p>
 <div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wav2flac</span>(<span class="st">&quot;Phae.long1.flac&quot;</span>, <span class="at">reverse =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p> </p>
-</div>
-<div id="play-wave-objects" class="section level2">
-<h2>Play <code>wave</code> objects</h2>
-<p><code>Wave</code> objects can be played with the <code>play()</code> function of <strong>tuneR</strong>. It may happen that the default players of the <code>play()</code> function are not installed in the operating system. <code>setWavPlayer()</code> can be used to define the command that will be used by <code>play</code>. For example, if <a href="http://audacious-media-player.org">Audacious</a> is the player to use on Linux:</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setWavPlayer</span>(<span class="st">&quot;audacious&quot;</span>)</span>
-<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a><span class="fu">play</span>(tico)</span></code></pre></div>
-<p> </p>
-<p>The homonymous function of the <strong>audio</strong> package does the same on <code>audioSample</code> objects:</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">audioSample</span>(<span class="fu">sin</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">8000</span><span class="sc">/</span><span class="dv">10</span>), <span class="dv">8000</span>)</span>
-<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a><span class="fu">play</span>(x)</span></code></pre></div>
-<p> </p>
-<p>The <strong>seewave</strong> package includes the <code>listen()</code> (based on <code>play()</code> of <strong>tuneR</strong>) function that works similarly, but also accepts all specific and non-specific kinds of sound objects in R and also allows to reproduce segments using the arguments <code>from</code> and<code>to</code>:</p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">sin</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">160000</span><span class="sc">/</span><span class="dv">10</span>)</span>
-<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a><span class="fu">listen</span>(x, <span class="at">f =</span> <span class="dv">16000</span>, <span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p> </p>
 <p>This table, taken from Sueur (2018), summarizes the functions available to import and export sound files in R. The table is incomplete since it does not mention the functions of the <code>phonTools</code> package:</p>
 <p><img src="images/tabla-waves.png" alt="tabla imp exp waves"></p>
 <hr />
@@ -833,21 +826,20 @@ div.tocify {
 <div class="alert alert-info">
 <p><font size="5">Exercise</font></p>
 <ul>
-<li><p>How does the sampling rate affect the size of an audio file?</p></li>
+<li><p>How does the sampling rate affect the size of an audio file? (hint: create 2 sounds files with the same data but different sampling rates; use <code>sine()</code>)</p></li>
 <li><p>How does the dynamic range affect the size of an audio file?</p></li>
 <li><p>Use the <code>system.time()</code> function to compare the performance of the different functions to import audio files in R. For this use the file “LBH.374.SUR.wav” (Long-billed hermit songs) which lasts about 2 min</p></li>
-<li><p>Earlier we created wave objects using the <code>sine</code> function and analogous functions. Import those wave objects as audio files and play them. Try increasing their duration to get a better sense how they sound like.</p></li>
 </ul>
 <p>The following code creates a plot similar to <code>oscillo</code> but using dots instead of lines:</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="co"># generate sine wave</span></span>
-<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>wav <span class="ot">&lt;-</span> <span class="fu">sine</span>(<span class="at">freq =</span> <span class="dv">440</span>, <span class="at">duration =</span> <span class="dv">500</span>, <span class="at">xunit =</span> <span class="st">&quot;samples&quot;</span>, <span class="at">samp.rate =</span> <span class="dv">44100</span>)</span>
-<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a><span class="co"># plot</span></span>
-<span id="cb81-5"><a href="#cb81-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(wav<span class="sc">@</span>left)</span></code></pre></div>
-<p><img src="sound_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="co"># generate sine wave</span></span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>wav <span class="ot">&lt;-</span> <span class="fu">sine</span>(<span class="at">freq =</span> <span class="dv">440</span>, <span class="at">duration =</span> <span class="dv">500</span>, <span class="at">xunit =</span> <span class="st">&quot;samples&quot;</span>, <span class="at">samp.rate =</span> <span class="dv">44100</span>)</span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-4"><a href="#cb78-4" aria-hidden="true" tabindex="-1"></a><span class="co"># plot</span></span>
+<span id="cb78-5"><a href="#cb78-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(wav<span class="sc">@</span>left)</span></code></pre></div>
+<p><img src="sound_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
 <p> </p>
 <ul>
-<li>Use the function <code>downsample</code> to reduce the sampling rate of ‘wav’ (below 44100) and plot the output object. Decrease the sampling rate until you cannot recognize the wave pattern from the original wave object. Try several values so you get a sense at which sampling rate this happens.</li>
+<li>Use the function <code>downsample()</code> to reduce the sampling rate of ‘wav’ (below 44100) and plot the output object. Decrease the sampling rate until you cannot recognize the wave pattern from the original wave object. Try several values so you get a sense at which sampling rate this happens.</li>
 </ul>
 </div>
 <p> </p>
@@ -862,18 +854,18 @@ div.tocify {
 </ol>
 <hr />
 <p><font size="4">Session information</font></p>
-<pre><code>## R version 4.1.1 (2021-08-10)
+<pre><code>## R version 4.1.0 (2021-05-18)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
 ## Running under: Ubuntu 20.04.2 LTS
 ## 
 ## Matrix products: default
-## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0
-## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0
+## BLAS:   /usr/lib/x86_64-linux-gnu/atlas/libblas.so.3.10.3
+## LAPACK: /usr/lib/x86_64-linux-gnu/atlas/liblapack.so.3.10.3
 ## 
 ## locale:
-##  [1] LC_CTYPE=es_ES.UTF-8       LC_NUMERIC=C              
-##  [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=es_ES.UTF-8    
-##  [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=es_ES.UTF-8   
+##  [1] LC_CTYPE=pt_BR.UTF-8       LC_NUMERIC=C              
+##  [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=pt_BR.UTF-8    
+##  [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=pt_BR.UTF-8   
 ##  [7] LC_PAPER=es_CR.UTF-8       LC_NAME=C                 
 ##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
 ## [11] LC_MEASUREMENT=es_CR.UTF-8 LC_IDENTIFICATION=C       
@@ -883,18 +875,24 @@ div.tocify {
 ## 
 ## other attached packages:
 ## [1] audio_0.1-10       phonTools_0.2-2.1  warbleR_1.1.27     NatureSounds_1.0.4
-## [5] tuneR_1.3.3.1      seewave_2.2.0      knitr_1.37        
+## [5] tuneR_1.3.3.1      seewave_2.1.8      knitr_1.38        
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] Rcpp_1.0.8         bslib_0.2.5.1      compiler_4.1.1     formatR_1.11      
-##  [5] jquerylib_0.1.4    highr_0.9          moments_0.14       bitops_1.0-7      
-##  [9] tools_4.1.1        digest_0.6.29      jsonlite_1.7.2     evaluate_0.15     
-## [13] fftw_1.0-6.1       rlang_1.0.2        cli_3.2.0          rstudioapi_0.13   
-## [17] yaml_2.3.5         parallel_4.1.1     xfun_0.30          fastmap_1.1.0     
-## [21] stringr_1.4.0      sass_0.4.0         R6_2.5.1           dtw_1.22-3        
-## [25] pbapply_1.5-0      rmarkdown_2.10     magrittr_2.0.2     htmltools_0.5.2   
-## [29] bioacoustics_0.2.8 MASS_7.3-54        stringi_1.7.6      proxy_0.4-26      
-## [33] signal_0.7-7       RCurl_1.98-1.6     rjson_0.2.21</code></pre>
+##  [1] tidyselect_1.1.1   xfun_0.30          bslib_0.2.5.1      pbapply_1.5-0     
+##  [5] purrr_0.3.4        colorspace_2.0-2   vctrs_0.3.8        generics_0.1.0    
+##  [9] htmltools_0.5.2    viridisLite_0.4.0  yaml_2.3.5         utf8_1.2.2        
+## [13] rlang_1.0.1        jquerylib_0.1.4    pillar_1.6.4       glue_1.6.2        
+## [17] DBI_1.1.1          lifecycle_1.0.1    stringr_1.4.0      munsell_0.5.0     
+## [21] gtable_0.3.0       moments_0.14       evaluate_0.15      fftw_1.0-6.1      
+## [25] fastmap_1.1.0      parallel_4.1.0     fansi_1.0.0        highr_0.9         
+## [29] Rcpp_1.0.8.3       scales_1.1.1       formatR_1.11       jsonlite_1.8.0    
+## [33] gridExtra_2.3      rjson_0.2.21       ggplot2_3.3.5      digest_0.6.29     
+## [37] stringi_1.7.6      dplyr_1.0.7        bioacoustics_0.2.8 dtw_1.22-3        
+## [41] grid_4.1.0         bitops_1.0-7       cli_3.1.0          tools_4.1.0       
+## [45] magrittr_2.0.3     sass_0.4.0         proxy_0.4-26       RCurl_1.98-1.6    
+## [49] tibble_3.1.6       crayon_1.5.0       pkgconfig_2.0.3    ellipsis_0.3.2    
+## [53] MASS_7.3-54        assertthat_0.2.1   rmarkdown_2.13     rstudioapi_0.13   
+## [57] viridis_0.6.2      R6_2.5.1           signal_0.7-7       compiler_4.1.0</code></pre>
 </div>
 </div>
 

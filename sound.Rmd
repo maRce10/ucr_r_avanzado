@@ -39,6 +39,75 @@ The variation in pressure that is perceived at a fixed point in space can be rep
 
 &nbsp; 
 
+Sounds waves are typically quantified by their frequency (number of cycles per second, Hz) and amplitude (relative intensity).
+
+```{r, echo = FALSE, out.width="85%"}
+
+x <- c(0, 0.1, 0.55, 1)
+y <- c(0, 0.4, 0.8, 1)
+
+lwd <-4
+col <- viridis::viridis(10)[3]
+mat <- matrix(c(
+  c(x[1], x[2], y[1], y[4]), # 1 left amptliude panel
+  c(x[1], x[4], y[3], y[4]), # 2 upper freq panel
+  c(x[2], x[3], y[2], y[3]), # 3 left upper oscillo
+  c(x[3], x[4], y[2], y[3]), # 4 right upper oscillo
+  c(x[2], x[3], y[1], y[2]), # 5 left lower oscillo
+  c(x[3], x[4], y[1], y[2]) # 6 left upper oscillo
+),  ncol = 4, byrow = TRUE
+)
+
+a <- split.screen(figs = mat)
+
+screen(1)
+
+par(mar = c(0, 0, 0, 0), bg = "white", new = T)
+plot(1, frame.plot = FALSE, type = "n", xaxt='n', yaxt='n')
+text(x = 0.8, y = 0.98, "Frequency", srt = 90,  cex = 2)
+text(x = 1.2, y = 1.2, "High", srt = 90,  cex = 1.2)
+text(x = 1.2, y = 0.8, "Low", srt = 90,  cex = 1.2)
+
+
+screen(2)
+
+par(mar = c(0, 0, 0, 0), bg = "white", new = T)
+plot(1, frame.plot = FALSE, type = "n", xaxt='n', yaxt='n')
+text(x = 1.04, y = 1.1, "Amplitude",  cex = 2)
+text(x = 0.8, y = 0.8, "Low", cex = 1.2)
+text(x = 1.2, y = 0.8, "High", cex = 1.2)
+
+# generate sine wave
+high.freq <- tuneR::sine(freq = 440, duration = 500, xunit = "samples", samp.rate = 44100)
+low.freq <- tuneR::sine(freq = 220, duration = 500, xunit = "samples", samp.rate = 44100)
+
+screen(3)
+par(mar = rep(0, 4))
+
+# plot
+plot(high.freq@left / 2, type = "l", xaxt='n', yaxt='n', ylim = c(-1, 1), lwd = lwd, col = col) 
+
+screen(4)
+par(mar = rep(0, 4))
+plot(high.freq@left, type = "l", xaxt='n', yaxt='n', ylim = c(-1, 1), lwd = lwd, col = col)
+# 
+screen(5)
+par(mar = rep(0, 4))
+plot(low.freq@left / 2, type = "l", xaxt='n', yaxt='n', ylim = c(-1, 1), lwd = lwd, col = col)
+
+screen(6)
+par(mar = rep(0, 4))
+plot(low.freq@left, type = "l", xaxt='n', ann=FALSE, yaxt='n', ylim = c(-1, 1), lwd = lwd, col = col)
+ 
+close.screen(all.screens = TRUE)
+
+# dev.off()
+
+
+```
+
+
+
 # Sounds in R
 
 Sound waves can be represented by 3 kinds of R objects:
@@ -358,7 +427,7 @@ rsf5 <- read_sound_file(X = "https://xeno-canto.org/35340/download")
 
 class(rsf5)
 
-rsf5 <- read_sound_file(X = "https://github.com/maRce10/OTS_BIR_2022/raw/master/examples/Phae.long1.flac")
+rsf6 <- read_sound_file(X = "https://github.com/maRce10/OTS_BIR_2022/raw/master/examples/Phae.long1.flac")
 
 class(rsf6)
 
@@ -467,42 +536,6 @@ wav2flac("Phae.long1.flac", reverse = TRUE)
 ```
 &nbsp; 
 
-## Play `wave` objects
-
-`Wave` objects can be played with the `play()` function of **tuneR**. It may happen that the default players of the `play()` function are not installed in the operating system. `setWavPlayer()` can be used to define the command that will be used by `play`. For example, if [Audacious](http://audacious-media-player.org) is the player to use on Linux:
-
-```{r, eval = FALSE}
-
-setWavPlayer("audacious")
-
-play(tico)
-
-```
-&nbsp; 
-
-The homonymous function of the **audio** package does the same on `audioSample` objects:
-
-```{r, eval = FALSE}
-
-x <- audioSample(sin(1:8000/10), 8000)
-
-play(x)
-
-
-```
-&nbsp; 
-
-The **seewave** package includes the `listen()` (based on `play()` of **tuneR**) function that works similarly, but also accepts all specific and non-specific kinds of sound objects in R and also allows to reproduce segments using the arguments `from` and` to`:
-
-```{r, eval = FALSE}
-
-x <- sin(1:160000/10)
-
-listen(x, f = 16000, from = 0, to = 2)
-
-```
-&nbsp;
-
 This table, taken from Sueur (2018), summarizes the functions available to import and export sound files in R. The table is incomplete since it does not mention the functions of the `phonTools` package:
 
 <img src="images/tabla-waves.png" alt="tabla imp exp waves">
@@ -516,13 +549,12 @@ This table, taken from Sueur (2018), summarizes the functions available to impor
 
 <font size="5">Exercise</font> 
 
-- How does the sampling rate affect the size of an audio file?
+- How does the sampling rate affect the size of an audio file? (hint: create 2 sounds files  with the same data but different sampling rates; use `sine()`)
 
 - How does the dynamic range affect the size of an audio file?
 
 - Use the `system.time()` function to compare the performance of the different functions to import audio files in R. For this use the file "LBH.374.SUR.wav" (Long-billed hermit songs) which lasts about 2 min
 
-- Earlier we created wave objects using the `sine` function and analogous functions. Import those wave objects as audio files and play them. Try increasing their duration to get a better sense how they sound like.  
 
 The following code creates a plot similar to `oscillo` but using dots instead of lines:
 
@@ -550,7 +582,7 @@ plot(wav@left)
 
 &nbsp; 
 
-- Use the function `downsample` to reduce the sampling rate of 'wav' (below 44100) and plot the output object. Decrease the sampling rate until you cannot recognize the wave pattern from the original wave object. Try several values so you get a sense at which sampling rate this happens.
+- Use the function `downsample()` to reduce the sampling rate of 'wav' (below 44100) and plot the output object. Decrease the sampling rate until you cannot recognize the wave pattern from the original wave object. Try several values so you get a sense at which sampling rate this happens.
 
 ```{r, eval =  FALSE, echo = FALSE}
 

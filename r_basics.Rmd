@@ -200,7 +200,7 @@ Can contain objects of different classes and sizes. Lists are built using list()
 
 ```{r}
 
-l <- list(ID = letters[1:5], size = rnorm(6), observed = c(FALSE, TRUE, FALSE, FALSE, FALSE))
+l <- list(ID = c("a", "b", "c", "d", "e"), size = c(1, 2, 3, 4, 5), observed = c(FALSE, TRUE, FALSE, FALSE, FALSE))
 
 l
 
@@ -214,7 +214,7 @@ str(l)
 
 ```{r}
 
-l <- list(ID = letters[1:5], size = rnorm(6), observed = c(FALSE, TRUE, FALSE, FALSE, FALSE), l)
+l <- list(ID = c("a", "b", "c", "d", "e"), size = c(1, 2, 3, 4, 5, 6), observed = c(FALSE, TRUE, FALSE, FALSE, FALSE), l)
 
 str(l)
 
@@ -398,7 +398,7 @@ Special case of lists. Can contain entries of different types:
 
 ```{r}
 
-m <- data.frame(ID = letters[1:5], size = rnorm(5), observed = c(FALSE, TRUE, FALSE, FALSE, FALSE))
+m <- data.frame(ID = c("a", "b", "c", "d", "e"), size = c(1, 2, 3, 4, 5), observed = c(FALSE, TRUE, FALSE, FALSE, FALSE))
 
 dim(m)
 
@@ -419,32 +419,8 @@ But vectors should have the same length:
 
 ```{r, error = TRUE}
 
-m <- data.frame(ID = letters[1:5], size = rnorm(6), observed = c(FALSE, TRUE, FALSE, FALSE, FALSE))
+m <- data.frame(ID = c("a", "b", "c", "d", "e"), size = c(1, 2, 3, 4, 5, 6), observed = c(FALSE, TRUE, FALSE, FALSE, FALSE))
 
-```
-&nbsp;
-
-Note: `data.frame()` turns strings into factors by default. Use `stringsAsFactors = FALSE` to suppress this behavior: 
-
-```{r, error = TRUE}
-
-m <- data.frame(ID = letters[1:5], size = rnorm(6), observed = c(FALSE, TRUE, FALSE, FALSE, FALSE), stringsAsFactors = FALSE)
-
-str(m)
-
-```
-&nbsp;
-
-
-Complex elements can be added to a data frame using `I()` to treat the list as one unit:
-
-```{r, error = TRUE}
-
-m <- data.frame(ID = letters[1:5], size = I(matrix(1:10, nrow = 5)), observed = c(FALSE, TRUE, FALSE, FALSE, FALSE))
-
-m
-
-str(m)
 ```
 &nbsp;
 
@@ -533,7 +509,7 @@ Lists require 1 index within double square brackets `[[index]]`:
 
 ```{r}
 
-l <- list(ID = letters[1:5], size = rnorm(6), observed = c(FALSE, TRUE, FALSE, FALSE, FALSE))
+l <- list(ID = c("a", "b", "c", "d", "e"), size = c(1, 2, 3, 4, 5), observed = c(FALSE, TRUE, FALSE, FALSE, FALSE))
 
 l[[1]]
 
@@ -934,6 +910,8 @@ General Layout and Ordering (google style):
 &nbsp;
 
 ## R documentation
+
+Most R resources are extremely well documented. So the first source for help you should go to when writting R code is the R documention itself. All packages are documented in the same standard way. Getting familiar with the format can simplify things a lot. 
 
 <font size="5">Package documentation</font>  
 

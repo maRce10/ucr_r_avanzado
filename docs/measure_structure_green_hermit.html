@@ -13,8 +13,8 @@
 
 <title>measure_structure_green_hermit.knit</title>
 
-<script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
-<script src="site_libs/jquery-1.12.4/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -81,6 +81,7 @@ if (window.hljs) {
 
 
 
+
 <style type = "text/css">
 .main-container {
   max-width: 940px;
@@ -101,6 +102,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -332,12 +336,12 @@ div.tocify {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">BOKU bioacoustics R 2022</a>
+      <a class="navbar-brand" href="index.html">OTS Bioacoustic Analysis in R 2022</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -345,7 +349,7 @@ div.tocify {
   <a href="program.html">Program</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Tutorials
      
     <span class="caret"></span>
@@ -417,7 +421,7 @@ div.tocify {
 <font size="3"><a href="http://marceloarayasalas.weebly.com/">Marcelo Araya-Salas, PhD</a></font>
 </center></h4>
 <h4 class="date"><center>
-“2022-03-18”
+“2022-05-13”
 </center></h4>
 
 </div>
@@ -440,8 +444,8 @@ song_pg &lt;- song_pg[song_pg$Locality != &quot;Suaita, Santander&quot;, ]</code
 <p> </p>
 <p>Map locations using <a href="https://marce10.github.io/warbleR/reference/map_xc.html"><code>map_xc()</code></a>:</p>
 <pre class="r"><code>map_xc(song_pg, leaflet.map = TRUE)</code></pre>
-<div id="htmlwidget-877ee3f5f7b4b340f5d5" style="width:864px;height:480px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-877ee3f5f7b4b340f5d5">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addAwesomeMarkers","args":[[5.113,10.3064,8.6001,10.1614,7.998,5.0791,-4.108,-2.42,-5.6708],[-75.9401,-84.8075,-80.1251,-83.9376,-77.7138,-75.6852,-78.964,-78.06,-77.6953],{"icon":"ios-close","markerColor":["white","darkgreen","white","darkgreen","darkgreen","white","darkred","darkred","white"],"iconColor":"black","spin":false,"squareMarker":false,"iconRotate":0,"font":"monospace","prefix":"ion"},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["<b><a href='https://www.xeno-canto.org/687234'>XC687234<\/a><\/b><br/><i>Phaethornis guy<\/i><br/> Subspecies: not provided<br/> Country: Colombia<br/> Locality: Distrito de Manejo Integrado Agua linda - Apía, Risaralda <br/> Voc.type: adult, female, song<br/> Recordist: Fabio Agudelo Zapata<b><a href='https://www.xeno-canto.org/687234/download'><br/>listen<\/a>","<b><a href='https://www.xeno-canto.org/665512'>XC665512<\/a><\/b><br/><i>Phaethornis guy<\/i><br/> Subspecies: coruscus<br/> Country: Costa Rica<br/> Locality: Monteverde, Provincia de Puntarenas<br/> Voc.type: adult, male, song<br/> Recordist: Alexis Bukowski<b><a href='https://www.xeno-canto.org/665512/download'><br/>listen<\/a>","<b><a href='https://www.xeno-canto.org/541543'>XC541543<\/a><\/b><br/><i>Phaethornis guy<\/i><br/> Subspecies: not provided<br/> Country: Panama<br/> Locality: El Valle de Antón, Coclé Province<br/> Voc.type: adult, song<br/> Recordist: Kent Livezey<b><a href='https://www.xeno-canto.org/541543/download'><br/>listen<\/a>","<b><a href='https://www.xeno-canto.org/518285'>XC518285<\/a><\/b><br/><i>Phaethornis guy<\/i><br/> Subspecies: coruscus<br/> Country: Costa Rica<br/> Locality: Braulio Carillo NP, San José<br/> Voc.type: song<br/> Recordist: Hans Matheve<b><a href='https://www.xeno-canto.org/518285/download'><br/>listen<\/a>","<b><a href='https://www.xeno-canto.org/359439'>XC359439<\/a><\/b><br/><i>Phaethornis guy<\/i><br/> Subspecies: coruscus<br/> Country: Panama<br/> Locality: Cerro Pirre (middle)<br/> Voc.type: song<br/> Recordist: Hans Matheve<b><a href='https://www.xeno-canto.org/359439/download'><br/>listen<\/a>","<b><a href='https://www.xeno-canto.org/344329'>XC344329<\/a><\/b><br/><i>Phaethornis guy<\/i><br/> Subspecies: not provided<br/> Country: Colombia<br/> Locality: Hotel Tinamú Birding Nature Reserve<br/> Voc.type: song<br/> Recordist: Hotel Tinamu<b><a href='https://www.xeno-canto.org/344329/download'><br/>listen<\/a>","<b><a href='https://www.xeno-canto.org/257788'>XC257788<\/a><\/b><br/><i>Phaethornis guy<\/i><br/> Subspecies: apicalis<br/> Country: Ecuador<br/> Locality: Zamora-Chinchipe: Río Bombuscaro<br/> Voc.type: song<br/> Recordist: John V. Moore<b><a href='https://www.xeno-canto.org/257788/download'><br/>listen<\/a>","<b><a href='https://www.xeno-canto.org/238804'>XC238804<\/a><\/b><br/><i>Phaethornis guy<\/i><br/> Subspecies: apicalis<br/> Country: Ecuador<br/> Locality: Morona-Santiago: w-slope Cord. de Cutucú<br/> Voc.type: song<br/> Recordist: Niels Krabbe<b><a href='https://www.xeno-canto.org/238804/download'><br/>listen<\/a>","<b><a href='https://www.xeno-canto.org/227574'>XC227574<\/a><\/b><br/><i>Phaethornis guy<\/i><br/> Subspecies: not provided<br/> Country: Peru<br/> Locality: Abra Patricia road, San Martín<br/> Voc.type: song<br/> Recordist: Peter Boesman<b><a href='https://www.xeno-canto.org/227574/download'><br/>listen<\/a>"],null,null,null,["Subsp. not provided","coruscus","Subsp. not provided","coruscus","coruscus","Subsp. not provided","apicalis","apicalis","Subsp. not provided"],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMiniMap","args":[null,null,"bottomright",150,150,19,19,-5,false,false,false,false,false,false,{"color":"#ff7800","weight":1,"clickable":false},{"color":"#000000","weight":1,"clickable":false,"opacity":0,"fillOpacity":0},{"hideText":"Hide MiniMap","showText":"Show MiniMap"},[]]},{"method":"addEasyButton","args":[{"icon":"fa-globe","title":"Zoom to full view","onClick":"function(btn, map){ map.setZoom(1); }","position":"topleft"}]}],"limits":{"lat":[-5.6708,10.3064],"lng":[-84.8075,-75.6852]}},"evals":["calls.3.args.0.onClick"],"jsHooks":[]}</script>
+<div id="htmlwidget-10baf9fa216d16686751" style="width:864px;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-10baf9fa216d16686751">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addAwesomeMarkers","args":[[5.113,10.3064,8.6001,10.1614,7.998,5.0791,-4.108,-2.42,-5.6708],[-75.9401,-84.8075,-80.1251,-83.9376,-77.7138,-75.6852,-78.964,-78.06,-77.6953],{"icon":"ios-close","markerColor":["white","darkgreen","white","darkgreen","darkgreen","white","darkred","darkred","white"],"iconColor":"black","spin":false,"squareMarker":false,"iconRotate":0,"font":"monospace","prefix":"ion"},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["<b><a href='https://www.xeno-canto.org/687234'>XC687234<\/a><\/b><br/><i>Phaethornis guy<\/i><br/> Subspecies: not provided<br/> Country: Colombia<br/> Locality: Distrito de Manejo Integrado Agua linda - Apía, Risaralda <br/> Voc.type: adult, female, song<br/> Recordist: Fabio Agudelo Zapata<b><a href='https://www.xeno-canto.org/687234/download'><br/>listen<\/a>","<b><a href='https://www.xeno-canto.org/665512'>XC665512<\/a><\/b><br/><i>Phaethornis guy<\/i><br/> Subspecies: coruscus<br/> Country: Costa Rica<br/> Locality: Monteverde, Provincia de Puntarenas<br/> Voc.type: adult, male, song<br/> Recordist: Alexis Bukowski<b><a href='https://www.xeno-canto.org/665512/download'><br/>listen<\/a>","<b><a href='https://www.xeno-canto.org/541543'>XC541543<\/a><\/b><br/><i>Phaethornis guy<\/i><br/> Subspecies: not provided<br/> Country: Panama<br/> Locality: El Valle de Antón, Coclé Province<br/> Voc.type: adult, song<br/> Recordist: Kent Livezey<b><a href='https://www.xeno-canto.org/541543/download'><br/>listen<\/a>","<b><a href='https://www.xeno-canto.org/518285'>XC518285<\/a><\/b><br/><i>Phaethornis guy<\/i><br/> Subspecies: coruscus<br/> Country: Costa Rica<br/> Locality: Braulio Carillo NP, San José<br/> Voc.type: song<br/> Recordist: Hans Matheve<b><a href='https://www.xeno-canto.org/518285/download'><br/>listen<\/a>","<b><a href='https://www.xeno-canto.org/359439'>XC359439<\/a><\/b><br/><i>Phaethornis guy<\/i><br/> Subspecies: coruscus<br/> Country: Panama<br/> Locality: Cerro Pirre (middle)<br/> Voc.type: song<br/> Recordist: Hans Matheve<b><a href='https://www.xeno-canto.org/359439/download'><br/>listen<\/a>","<b><a href='https://www.xeno-canto.org/344329'>XC344329<\/a><\/b><br/><i>Phaethornis guy<\/i><br/> Subspecies: not provided<br/> Country: Colombia<br/> Locality: Hotel Tinamú Birding Nature Reserve<br/> Voc.type: song<br/> Recordist: Hotel Tinamu<b><a href='https://www.xeno-canto.org/344329/download'><br/>listen<\/a>","<b><a href='https://www.xeno-canto.org/257788'>XC257788<\/a><\/b><br/><i>Phaethornis guy<\/i><br/> Subspecies: apicalis<br/> Country: Ecuador<br/> Locality: Zamora-Chinchipe: Río Bombuscaro<br/> Voc.type: song<br/> Recordist: John V. Moore<b><a href='https://www.xeno-canto.org/257788/download'><br/>listen<\/a>","<b><a href='https://www.xeno-canto.org/238804'>XC238804<\/a><\/b><br/><i>Phaethornis guy<\/i><br/> Subspecies: apicalis<br/> Country: Ecuador<br/> Locality: Morona-Santiago: w-slope Cord. de Cutucú<br/> Voc.type: song<br/> Recordist: Niels Krabbe<b><a href='https://www.xeno-canto.org/238804/download'><br/>listen<\/a>","<b><a href='https://www.xeno-canto.org/227574'>XC227574<\/a><\/b><br/><i>Phaethornis guy<\/i><br/> Subspecies: not provided<br/> Country: Peru<br/> Locality: Abra Patricia road, San Martín<br/> Voc.type: song<br/> Recordist: Peter Boesman<b><a href='https://www.xeno-canto.org/227574/download'><br/>listen<\/a>"],null,null,null,["Subsp. not provided","coruscus","Subsp. not provided","coruscus","coruscus","Subsp. not provided","apicalis","apicalis","Subsp. not provided"],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMiniMap","args":[null,null,"bottomright",150,150,19,19,-5,false,false,false,false,false,false,{"color":"#ff7800","weight":1,"clickable":false},{"color":"#000000","weight":1,"clickable":false,"opacity":0,"fillOpacity":0},{"hideText":"Hide MiniMap","showText":"Show MiniMap"},[]]},{"method":"addEasyButton","args":[{"icon":"fa-globe","title":"Zoom to full view","onClick":"function(btn, map){ map.setZoom(1); }","position":"topleft"}]}],"limits":{"lat":[-5.6708,10.3064],"lng":[-84.8075,-75.6852]}},"evals":["calls.3.args.0.onClick"],"jsHooks":[]}</script>
 <p> </p>
 <p>Once you feel fine with the subset of data you can go ahead and download the sound files and save the metadata as a .csv file:</p>
 <pre class="r"><code>query_xc(X = song_pg, path = &quot;./examples/p_guy&quot;, parallel = 3)
@@ -648,7 +652,7 @@ library(ggplot2)
 
 # install.packages(&quot;viridis&quot;)
 library(viridis)</code></pre>
-<pre><code>## Loading required package: viridisLite</code></pre>
+<pre><code>## Carregando pacotes exigidos: viridisLite</code></pre>
 <pre class="r"><code># plot
 ggplot(data = pca_data_md, aes(x = PC1, y = PC2, color = Country, shape = Country)) +
   geom_point(size = 3) + 
@@ -679,29 +683,29 @@ mantel(geo_dist, acoust_dist)</code></pre>
 ## mantel(xdis = geo_dist, ydis = acoust_dist) 
 ## 
 ## Mantel statistic r: 0.02928 
-##       Significance: 0.247 
+##       Significance: 0.257 
 ## 
 ## Upper quantiles of permutations (null model):
-##    90%    95%  97.5%    99% 
-## 0.0742 0.1098 0.1414 0.1870 
+##   90%   95% 97.5%   99% 
+## 0.073 0.105 0.138 0.178 
 ## Permutation: free
 ## Number of permutations: 999</code></pre>
 <p> </p>
 <p>In this example no association between geographic and acoustic distance was detected (p value &gt; 0.05).</p>
 <hr />
 <p><font size="4">Session information</font></p>
-<pre><code>## R version 4.1.1 (2021-08-10)
+<pre><code>## R version 4.1.0 (2021-05-18)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
 ## Running under: Ubuntu 20.04.2 LTS
 ## 
 ## Matrix products: default
-## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0
-## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0
+## BLAS:   /usr/lib/x86_64-linux-gnu/atlas/libblas.so.3.10.3
+## LAPACK: /usr/lib/x86_64-linux-gnu/atlas/liblapack.so.3.10.3
 ## 
 ## locale:
-##  [1] LC_CTYPE=es_ES.UTF-8       LC_NUMERIC=C              
-##  [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=es_ES.UTF-8    
-##  [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=es_ES.UTF-8   
+##  [1] LC_CTYPE=pt_BR.UTF-8       LC_NUMERIC=C              
+##  [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=pt_BR.UTF-8    
+##  [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=pt_BR.UTF-8   
 ##  [7] LC_PAPER=es_CR.UTF-8       LC_NAME=C                 
 ##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
 ## [11] LC_MEASUREMENT=es_CR.UTF-8 LC_IDENTIFICATION=C       
@@ -712,26 +716,26 @@ mantel(geo_dist, acoust_dist)</code></pre>
 ## other attached packages:
 ##  [1] vegan_2.5-7        lattice_0.20-44    permute_0.9-5      viridis_0.6.2     
 ##  [5] viridisLite_0.4.0  ggplot2_3.3.5      readxl_1.3.1       warbleR_1.1.27    
-##  [9] NatureSounds_1.0.4 knitr_1.37         seewave_2.2.0      tuneR_1.3.3.1     
+##  [9] NatureSounds_1.0.4 knitr_1.38         seewave_2.1.8      tuneR_1.3.3.1     
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] Rcpp_1.0.8        fftw_1.0-6.1      assertthat_0.2.1  digest_0.6.29    
+##  [1] Rcpp_1.0.8.3      fftw_1.0-6.1      assertthat_0.2.1  digest_0.6.29    
 ##  [5] utf8_1.2.2        R6_2.5.1          cellranger_1.1.0  signal_0.7-7     
-##  [9] evaluate_0.15     highr_0.9         pillar_1.7.0      rlang_1.0.2      
-## [13] rstudioapi_0.13   jquerylib_0.1.4   Matrix_1.3-4      rmarkdown_2.10   
-## [17] splines_4.1.1     labeling_0.4.2    stringr_1.4.0     htmlwidgets_1.5.3
-## [21] RCurl_1.98-1.6    munsell_0.5.0     proxy_0.4-26      compiler_4.1.1   
+##  [9] evaluate_0.15     highr_0.9         pillar_1.6.4      rlang_1.0.1      
+## [13] rstudioapi_0.13   jquerylib_0.1.4   Matrix_1.3-4      rmarkdown_2.13   
+## [17] splines_4.1.0     labeling_0.4.2    stringr_1.4.0     htmlwidgets_1.5.3
+## [21] RCurl_1.98-1.6    munsell_0.5.0     proxy_0.4-26      compiler_4.1.0   
 ## [25] xfun_0.30         pkgconfig_2.0.3   mgcv_1.8-36       htmltools_0.5.2  
 ## [29] tidyselect_1.1.1  gridExtra_2.3     tibble_3.1.6      dtw_1.22-3       
-## [33] fansi_1.0.2       crayon_1.5.0      dplyr_1.0.7       withr_2.5.0      
-## [37] shinyBS_0.61      MASS_7.3-54       bitops_1.0-7      grid_4.1.1       
-## [41] nlme_3.1-152      jsonlite_1.7.2    gtable_0.3.0      lifecycle_1.0.1  
-## [45] DBI_1.1.1         magrittr_2.0.2    scales_1.1.1      cli_3.2.0        
+## [33] fansi_1.0.0       crayon_1.5.0      dplyr_1.0.7       withr_2.4.3      
+## [37] shinyBS_0.61      MASS_7.3-54       bitops_1.0-7      grid_4.1.0       
+## [41] nlme_3.1-152      jsonlite_1.8.0    gtable_0.3.0      lifecycle_1.0.1  
+## [45] DBI_1.1.1         magrittr_2.0.3    scales_1.1.1      cli_3.1.0        
 ## [49] stringi_1.7.6     pbapply_1.5-0     farver_2.1.0      leaflet_2.0.4.1  
 ## [53] bslib_0.2.5.1     ellipsis_0.3.2    vctrs_0.3.8       generics_0.1.0   
-## [57] rjson_0.2.21      tools_4.1.1       glue_1.6.2        purrr_0.3.4      
-## [61] maps_3.3.0        crosstalk_1.1.1   parallel_4.1.1    fastmap_1.1.0    
-## [65] yaml_2.3.5        colorspace_2.0-3  cluster_2.1.2     soundgen_2.2.0   
+## [57] rjson_0.2.21      tools_4.1.0       glue_1.6.2        purrr_0.3.4      
+## [61] maps_3.3.0        crosstalk_1.1.1   parallel_4.1.0    fastmap_1.1.0    
+## [65] yaml_2.3.5        colorspace_2.0-2  cluster_2.1.2     soundgen_2.1.0   
 ## [69] sass_0.4.0</code></pre>
 </div>
 

@@ -17,8 +17,6 @@ editor_options:
 ---
 
 ```{r setup, include=FALSE}
-# clean up
-rm(list=ls())
 
 x <- c("remotes", "maRce10/warbleR", "maRce10/baRulho", "ggplot2", "png", "maRce10/PhenotypeSpace", "maRce10/ohun",  "DT", "kableExtra", "xaringan", "xaringanthemer", "maRce10/Rraven", "formatR")
 
@@ -139,7 +137,6 @@ class: inverse
 
 ## __Why bioacoustics in R?__
 
-
 - Improves reproducibility of research
 
 - Allows conducting analyses that better fit our research questions and study systems
@@ -154,44 +151,4 @@ class: inverse
 - Tutorials with combinations of theoretical background, demonstrations and proofs of concept using R code and self-learning practices on their own acoustic data or supplied example data
 
 - Additional practices and readings assigned after each session
-
-- Research project split in assignments throughout the week
-
----
-class: middle
-
-## __Research project__
-
-2 options:
-
- 1. Assess the geographic variation of a vocalization type (or any acoustic signal) in a single species
- 
- 1. Optimize an automatic detection routine for a highly stereotyped vocalization in a single species 
-  
----
-class: middle
-
-## __Research project__
-
- __Assess the geographic variation of a vocalization type (or any acoustic signal) in a single species__
- - Describe and quantify differences within and between individuals and populations
- - At least 30 recordings from 3 or more localities
- - At least 1 figure with spectrograms summarizing the observed variation
- - Turn in the analysis code along with a summary of findings
-
----
-class: middle
-
-## __Research project__
-
- __Optimize an automatic detection routine for a highly stereotyped vocalization in a single species__
-
-  - Use template-based detection for finding the location in time of single-unit acoustic signal
-  - Between 20-30 recordings from 3 or more localities
-  - At least 1 figure with spectrograms summarizing signal structure
-  - Report performance statistics of the optimized routine
-  - Turn in the analysis code along with a summary of findings
-
-
----
 

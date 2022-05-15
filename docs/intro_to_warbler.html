@@ -13,8 +13,8 @@
 
 <title>intro_to_warbler.knit</title>
 
-<script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -65,6 +65,7 @@ if (window.hljs) {
 
 
 
+
 <style type = "text/css">
 .main-container {
   max-width: 940px;
@@ -85,6 +86,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -316,12 +320,12 @@ div.tocify {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">BOKU bioacoustics R 2022</a>
+      <a class="navbar-brand" href="index.html">OTS Bioacoustic Analysis in R 2022</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -329,7 +333,7 @@ div.tocify {
   <a href="program.html">Program</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Tutorials
      
     <span class="caret"></span>
@@ -368,6 +372,9 @@ div.tocify {
     <li>
       <a href="quality_checks.html">Quality checks</a>
     </li>
+    <li>
+      <a href="measure_structure_green_hermit.html">Measure structure on XC recordings</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -392,13 +399,13 @@ div.tocify {
 <font size="7"><b>Introduction to warbleR</b></font>
 </center></h1>
 <h3 class="subtitle"><center>
-<font size="4"><b>Analysis of animal acoustic signals in R</b> <br> BOKU International Wildlife Lectures</font>
+<font size="4"><b>Bioacoustic Analysis in R</b> <br> Organization for Tropical Studies</font>
 </center></h3>
 <h4 class="author"><center>
 <font size="3"><a href="http://marceloarayasalas.weebly.com/">Marcelo Araya-Salas, PhD</a></font>
 </center></h4>
 <h4 class="date"><center>
-“2022-03-12”
+“2022-05-13”
 </center></h4>
 
 </div>
@@ -494,16 +501,16 @@ Phae.long1.wav
 1
 </td>
 <td style="text-align:center;">
-1.169355
+1.1693549
 </td>
 <td style="text-align:center;">
-1.342388
+1.3423884
 </td>
 <td style="text-align:center;">
-2.22011
+2.220105
 </td>
 <td style="text-align:center;">
-8.60438
+8.604378
 </td>
 </tr>
 <tr>
@@ -517,16 +524,16 @@ Phae.long1.wav
 2
 </td>
 <td style="text-align:center;">
-2.158408
+2.1584085
 </td>
 <td style="text-align:center;">
-2.321457
+2.3214565
 </td>
 <td style="text-align:center;">
-2.16944
+2.169437
 </td>
 <td style="text-align:center;">
-8.80705
+8.807053
 </td>
 </tr>
 <tr>
@@ -540,16 +547,16 @@ Phae.long1.wav
 3
 </td>
 <td style="text-align:center;">
-0.343337
+0.3433366
 </td>
 <td style="text-align:center;">
-0.518255
+0.5182553
 </td>
 <td style="text-align:center;">
-2.21829
+2.218294
 </td>
 <td style="text-align:center;">
-8.75660
+8.756604
 </td>
 </tr>
 <tr>
@@ -563,16 +570,16 @@ Phae.long2.wav
 1
 </td>
 <td style="text-align:center;">
-0.159598
+0.1595983
 </td>
 <td style="text-align:center;">
-0.292169
+0.2921692
 </td>
 <td style="text-align:center;">
-2.31686
+2.316862
 </td>
 <td style="text-align:center;">
-8.82232
+8.822316
 </td>
 </tr>
 <tr>
@@ -586,16 +593,16 @@ Phae.long2.wav
 2
 </td>
 <td style="text-align:center;">
-1.457058
+1.4570585
 </td>
 <td style="text-align:center;">
-1.583209
+1.5832087
 </td>
 <td style="text-align:center;">
-2.28401
+2.284006
 </td>
 <td style="text-align:center;">
-8.88803
+8.888027
 </td>
 </tr>
 <tr>
@@ -609,16 +616,16 @@ Phae.long3.wav
 1
 </td>
 <td style="text-align:center;">
-0.626552
+0.6265520
 </td>
 <td style="text-align:center;">
-0.757771
+0.7577715
 </td>
 <td style="text-align:center;">
-3.00683
+3.006834
 </td>
 <td style="text-align:center;">
-8.82232
+8.822316
 </td>
 </tr>
 <tr>
@@ -632,16 +639,16 @@ Phae.long3.wav
 2
 </td>
 <td style="text-align:center;">
-1.974213
+1.9742132
 </td>
 <td style="text-align:center;">
-2.104392
+2.1043921
 </td>
 <td style="text-align:center;">
-2.77684
+2.776843
 </td>
 <td style="text-align:center;">
-8.88803
+8.888027
 </td>
 </tr>
 <tr>
@@ -655,16 +662,16 @@ Phae.long3.wav
 3
 </td>
 <td style="text-align:center;">
-0.123364
+0.1233643
 </td>
 <td style="text-align:center;">
-0.254581
+0.2545812
 </td>
 <td style="text-align:center;">
-2.31686
+2.316862
 </td>
 <td style="text-align:center;">
-9.31515
+9.315153
 </td>
 </tr>
 <tr>
@@ -678,16 +685,16 @@ Phae.long4.wav
 1
 </td>
 <td style="text-align:center;">
-1.516812
+1.5168116
 </td>
 <td style="text-align:center;">
-1.662236
+1.6622365
 </td>
 <td style="text-align:center;">
-2.51400
+2.513997
 </td>
 <td style="text-align:center;">
-9.21659
+9.216586
 </td>
 </tr>
 <tr>
@@ -701,16 +708,16 @@ Phae.long4.wav
 2
 </td>
 <td style="text-align:center;">
-2.932692
+2.9326920
 </td>
 <td style="text-align:center;">
-3.076878
+3.0768784
 </td>
 <td style="text-align:center;">
-2.57971
+2.579708
 </td>
 <td style="text-align:center;">
-10.23512
+10.235116
 </td>
 </tr>
 <tr>
@@ -724,16 +731,16 @@ Phae.long4.wav
 3
 </td>
 <td style="text-align:center;">
-0.145398
+0.1453977
 </td>
 <td style="text-align:center;">
-0.290497
+0.2904966
 </td>
 <td style="text-align:center;">
-2.57971
+2.579708
 </td>
 <td style="text-align:center;">
-9.74228
+9.742279
 </td>
 </tr>
 </tbody>
@@ -1103,82 +1110,82 @@ Phae.long1.wav_1
 1
 </td>
 <td style="text-align:center;">
-0.173033
+0.1730334
 </td>
 <td style="text-align:center;">
-5.91706
+5.981221
 </td>
 <td style="text-align:center;">
-1.98509
+1.399804
 </td>
 <td style="text-align:center;">
-6.33314
+6.331716
 </td>
 <td style="text-align:center;">
-5.11278
+5.296584
 </td>
 <td style="text-align:center;">
-6.95778
+6.869521
 </td>
 <td style="text-align:center;">
-1.84500
+1.572937
 </td>
 <td style="text-align:center;">
-0.077060
+0.0798564
 </td>
 <td style="text-align:center;">
-0.049435
+0.0532376
 </td>
 <td style="text-align:center;">
-0.117771
+0.1197846
 </td>
 <td style="text-align:center;">
-0.068337
+0.0665470
 </td>
 <td style="text-align:center;">
-2.55569
+2.001382
 </td>
 <td style="text-align:center;">
-10.19518
+7.025606
 </td>
 <td style="text-align:center;">
-0.930148
+0.9434888
 </td>
 <td style="text-align:center;">
-0.893591
+0.9493322
 </td>
 <td style="text-align:center;">
-0.831172
+0.8956843
 </td>
 <td style="text-align:center;">
-0.575701
+0.6518306
 </td>
 <td style="text-align:center;">
-6.58500
+6.663993
 </td>
 <td style="text-align:center;">
-4.3125
+5.251465
 </td>
 <td style="text-align:center;">
-8.2875
+7.360840
 </td>
 <td style="text-align:center;">
-3.975
+2.109375
 </td>
 <td style="text-align:center;">
-4.90566
+2.895833
 </td>
 <td style="text-align:center;">
-7.1625
+7.316895
 </td>
 <td style="text-align:center;">
-7.1625
+7.185059
 </td>
 <td style="text-align:center;">
-0.000000
+-0.7619101
 </td>
 <td style="text-align:center;">
-7.13514
+7.108806
 </td>
 </tr>
 <tr>
@@ -1189,82 +1196,82 @@ Phae.long1.wav_2
 1
 </td>
 <td style="text-align:center;">
-0.163048
+0.1630480
 </td>
 <td style="text-align:center;">
-5.90489
+5.997299
 </td>
 <td style="text-align:center;">
-1.96549
+1.422930
 </td>
 <td style="text-align:center;">
-6.20859
+6.212125
 </td>
 <td style="text-align:center;">
-5.20859
+5.328746
 </td>
 <td style="text-align:center;">
-6.95706
+6.880795
 </td>
 <td style="text-align:center;">
-1.74847
+1.552049
 </td>
 <td style="text-align:center;">
-0.077165
+0.0815333
 </td>
 <td style="text-align:center;">
-0.045135
+0.0407667
 </td>
 <td style="text-align:center;">
-0.116476
+0.1223000
 </td>
 <td style="text-align:center;">
-0.071342
+0.0815333
 </td>
 <td style="text-align:center;">
-2.39934
+1.918356
 </td>
 <td style="text-align:center;">
-9.94032
+7.334323
 </td>
 <td style="text-align:center;">
-0.933989
+0.9468217
 </td>
 <td style="text-align:center;">
-0.897093
+0.9536154
 </td>
 <td style="text-align:center;">
-0.837876
+0.9029038
 </td>
 <td style="text-align:center;">
-0.594429
+0.6678647
 </td>
 <td style="text-align:center;">
-6.76626
+6.830116
 </td>
 <td style="text-align:center;">
-4.4625
+5.295410
 </td>
 <td style="text-align:center;">
-8.5125
+8.283691
 </td>
 <td style="text-align:center;">
-4.050
+2.988281
 </td>
 <td style="text-align:center;">
-4.07407
+2.661765
 </td>
 <td style="text-align:center;">
-6.9375
+7.185059
 </td>
 <td style="text-align:center;">
-7.2375
+7.229004
 </td>
 <td style="text-align:center;">
-1.839949
+0.2695238
 </td>
 <td style="text-align:center;">
-6.90862
+6.931635
 </td>
 </tr>
 <tr>
@@ -1275,82 +1282,82 @@ Phae.long1.wav_3
 1
 </td>
 <td style="text-align:center;">
-0.174919
+0.1749187
 </td>
 <td style="text-align:center;">
-5.94003
+6.018300
 </td>
 <td style="text-align:center;">
-2.04754
+1.514853
 </td>
 <td style="text-align:center;">
-6.43225
+6.424759
 </td>
 <td style="text-align:center;">
-4.89994
+5.150246
 </td>
 <td style="text-align:center;">
-7.07261
+6.979144
 </td>
 <td style="text-align:center;">
-2.17267
+1.828898
 </td>
 <td style="text-align:center;">
-0.089635
+0.0941949
 </td>
 <td style="text-align:center;">
-0.054938
+0.0538256
 </td>
 <td style="text-align:center;">
-0.128670
+0.1345641
 </td>
 <td style="text-align:center;">
-0.073732
+0.0807385
 </td>
 <td style="text-align:center;">
-2.99989
+2.496740
 </td>
 <td style="text-align:center;">
-14.94906
+11.147728
 </td>
 <td style="text-align:center;">
-0.932716
+0.9450838
 </td>
 <td style="text-align:center;">
-0.893109
+0.9515916
 </td>
 <td style="text-align:center;">
-0.833017
+0.8993339
 </td>
 <td style="text-align:center;">
-0.592655
+0.6716602
 </td>
 <td style="text-align:center;">
-6.80103
+6.773856
 </td>
 <td style="text-align:center;">
-3.8625
+4.899902
 </td>
 <td style="text-align:center;">
-8.6625
+8.371582
 </td>
 <td style="text-align:center;">
-4.800
+3.471680
 </td>
 <td style="text-align:center;">
-5.25000
+3.240506
 </td>
 <td style="text-align:center;">
-7.0875
+7.185059
 </td>
 <td style="text-align:center;">
-7.2375
+7.185059
 </td>
 <td style="text-align:center;">
-0.857541
+0.0000000
 </td>
 <td style="text-align:center;">
-6.83311
+6.798757
 </td>
 </tr>
 <tr>
@@ -1361,82 +1368,82 @@ Phae.long2.wav_1
 1
 </td>
 <td style="text-align:center;">
-0.132571
+0.1325709
 </td>
 <td style="text-align:center;">
-6.39401
+6.398304
 </td>
 <td style="text-align:center;">
-1.77094
+1.340412
 </td>
 <td style="text-align:center;">
-6.66415
+6.595971
 </td>
 <td style="text-align:center;">
-5.56226
+5.607323
 </td>
 <td style="text-align:center;">
-7.47170
+7.380852
 </td>
 <td style="text-align:center;">
-1.90943
+1.773529
 </td>
 <td style="text-align:center;">
-0.077461
+0.0736543
 </td>
 <td style="text-align:center;">
-0.053627
+0.0589235
 </td>
 <td style="text-align:center;">
-0.104275
+0.1031160
 </td>
 <td style="text-align:center;">
-0.050648
+0.0441926
 </td>
 <td style="text-align:center;">
-2.04464
+1.568523
 </td>
 <td style="text-align:center;">
-8.05258
+6.016392
 </td>
 <td style="text-align:center;">
-0.922802
+0.9424661
 </td>
 <td style="text-align:center;">
-0.910264
+0.9433998
 </td>
 <td style="text-align:center;">
-0.839993
+0.8891223
 </td>
 <td style="text-align:center;">
-0.505319
+0.6086184
 </td>
 <td style="text-align:center;">
-6.50014
+6.341309
 </td>
 <td style="text-align:center;">
-4.9875
+5.075684
 </td>
 <td style="text-align:center;">
-7.8375
+7.404785
 </td>
 <td style="text-align:center;">
-2.850
+2.329102
 </td>
 <td style="text-align:center;">
-6.50000
+2.830189
 </td>
 <td style="text-align:center;">
-7.1625
+5.075684
 </td>
 <td style="text-align:center;">
-6.1875
+6.657715
 </td>
 <td style="text-align:center;">
--7.354555
+11.9334722
 </td>
 <td style="text-align:center;">
-7.36165
+7.463147
 </td>
 </tr>
 <tr>
@@ -1447,82 +1454,82 @@ Phae.long2.wav_2
 1
 </td>
 <td style="text-align:center;">
-0.126150
+0.1261502
 </td>
 <td style="text-align:center;">
-6.25484
+6.308252
 </td>
 <td style="text-align:center;">
-1.80648
+1.369242
 </td>
 <td style="text-align:center;">
-6.60587
+6.596836
 </td>
 <td style="text-align:center;">
-5.44806
+5.605837
 </td>
 <td style="text-align:center;">
-7.31959
+7.207292
 </td>
 <td style="text-align:center;">
-1.87153
+1.601455
 </td>
 <td style="text-align:center;">
-0.078083
+0.0840889
 </td>
 <td style="text-align:center;">
-0.054057
+0.0560593
 </td>
 <td style="text-align:center;">
-0.099105
+0.0981037
 </td>
 <td style="text-align:center;">
-0.045048
+0.0420444
 </td>
 <td style="text-align:center;">
-2.96411
+2.470897
 </td>
 <td style="text-align:center;">
-14.49506
+10.896039
 </td>
 <td style="text-align:center;">
-0.917199
+0.9357725
 </td>
 <td style="text-align:center;">
-0.913833
+0.9436684
 </td>
 <td style="text-align:center;">
-0.838167
+0.8830589
 </td>
 <td style="text-align:center;">
-0.515082
+0.6152336
 </td>
 <td style="text-align:center;">
-6.29515
+6.411621
 </td>
 <td style="text-align:center;">
-3.0375
+5.075684
 </td>
 <td style="text-align:center;">
-7.6125
+7.580566
 </td>
 <td style="text-align:center;">
-4.575
+2.504883
 </td>
 <td style="text-align:center;">
-3.80328
+2.087719
 </td>
 <td style="text-align:center;">
-4.8375
+5.075684
 </td>
 <td style="text-align:center;">
-6.6375
+7.580566
 </td>
 <td style="text-align:center;">
-14.268705
+19.8563528
 </td>
 <td style="text-align:center;">
-6.75760
+6.710171
 </td>
 </tr>
 <tr>
@@ -1533,82 +1540,82 @@ Phae.long3.wav_1
 1
 </td>
 <td style="text-align:center;">
-0.131220
+0.1312195
 </td>
 <td style="text-align:center;">
-6.48030
+6.605993
 </td>
 <td style="text-align:center;">
-1.71110
+1.090498
 </td>
 <td style="text-align:center;">
-6.65904
+6.665328
 </td>
 <td style="text-align:center;">
-5.97254
+6.063201
 </td>
 <td style="text-align:center;">
-7.45233
+7.336052
 </td>
 <td style="text-align:center;">
-1.47979
+1.272851
 </td>
 <td style="text-align:center;">
-0.062618
+0.0583111
 </td>
 <td style="text-align:center;">
-0.040255
+0.0437333
 </td>
 <td style="text-align:center;">
-0.089455
+0.1020444
 </td>
 <td style="text-align:center;">
-0.049200
+0.0583111
 </td>
 <td style="text-align:center;">
-2.47759
+1.770551
 </td>
 <td style="text-align:center;">
-10.29901
+6.665163
 </td>
 <td style="text-align:center;">
-0.906241
+0.9303558
 </td>
 <td style="text-align:center;">
-0.911341
+0.9460672
 </td>
 <td style="text-align:center;">
-0.825894
+0.8801790
 </td>
 <td style="text-align:center;">
-0.465522
+0.5664857
 </td>
 <td style="text-align:center;">
-6.62233
+6.481934
 </td>
 <td style="text-align:center;">
-4.8375
+4.899902
 </td>
 <td style="text-align:center;">
-8.0625
+7.009277
 </td>
 <td style="text-align:center;">
-3.225
+2.109375
 </td>
 <td style="text-align:center;">
-3.67442
+1.520833
 </td>
 <td style="text-align:center;">
-7.0125
+4.899902
 </td>
 <td style="text-align:center;">
-8.0625
+6.965332
 </td>
 <td style="text-align:center;">
-8.001857
+15.7402610
 </td>
 <td style="text-align:center;">
-6.75760
+6.710171
 </td>
 </tr>
 <tr>
@@ -1619,82 +1626,82 @@ Phae.long3.wav_2
 1
 </td>
 <td style="text-align:center;">
-0.130179
+0.1301789
 </td>
 <td style="text-align:center;">
-6.54728
+6.639859
 </td>
 <td style="text-align:center;">
-1.66118
+1.117356
 </td>
 <td style="text-align:center;">
-6.67179
+6.674164
 </td>
 <td style="text-align:center;">
-6.04151
+6.105325
 </td>
 <td style="text-align:center;">
-7.50961
+7.427493
 </td>
 <td style="text-align:center;">
-1.46810
+1.322168
 </td>
 <td style="text-align:center;">
-0.068830
+0.0723210
 </td>
 <td style="text-align:center;">
-0.043393
+0.0433926
 </td>
 <td style="text-align:center;">
-0.094267
+0.1012494
 </td>
 <td style="text-align:center;">
-0.050874
+0.0578568
 </td>
 <td style="text-align:center;">
-2.22587
+1.545851
 </td>
 <td style="text-align:center;">
-7.92601
+4.969900
 </td>
 <td style="text-align:center;">
-0.901351
+0.9232849
 </td>
 <td style="text-align:center;">
-0.912495
+0.9490351
 </td>
 <td style="text-align:center;">
-0.822478
+0.8762298
 </td>
 <td style="text-align:center;">
-0.448897
+0.5317422
 </td>
 <td style="text-align:center;">
-6.38352
+6.244629
 </td>
 <td style="text-align:center;">
-4.6125
+5.031738
 </td>
 <td style="text-align:center;">
-7.5375
+6.701660
 </td>
 <td style="text-align:center;">
-2.925
+1.669922
 </td>
 <td style="text-align:center;">
-4.35897
+1.368421
 </td>
 <td style="text-align:center;">
-6.7125
+5.031738
 </td>
 <td style="text-align:center;">
-7.0125
+6.613770
 </td>
 <td style="text-align:center;">
-2.304520
+12.1527447
 </td>
 <td style="text-align:center;">
-6.68210
+6.665879
 </td>
 </tr>
 <tr>
@@ -1705,82 +1712,82 @@ Phae.long3.wav_3
 1
 </td>
 <td style="text-align:center;">
-0.131217
+0.1312170
 </td>
 <td style="text-align:center;">
-6.39641
+6.580739
 </td>
 <td style="text-align:center;">
-1.74753
+1.253000
 </td>
 <td style="text-align:center;">
-6.62090
+6.646959
 </td>
 <td style="text-align:center;">
-5.89626
+6.029463
 </td>
 <td style="text-align:center;">
-7.42944
+7.394054
 </td>
 <td style="text-align:center;">
-1.53318
+1.364591
 </td>
 <td style="text-align:center;">
-0.064109
+0.0583111
 </td>
 <td style="text-align:center;">
-0.038764
+0.0437333
 </td>
 <td style="text-align:center;">
-0.093927
+0.1020444
 </td>
 <td style="text-align:center;">
-0.055164
+0.0583111
 </td>
 <td style="text-align:center;">
-2.31111
+1.802520
 </td>
 <td style="text-align:center;">
-8.30633
+5.886959
 </td>
 <td style="text-align:center;">
-0.904421
+0.9191879
 </td>
 <td style="text-align:center;">
-0.912315
+0.9533815
 </td>
 <td style="text-align:center;">
-0.825117
+0.8763367
 </td>
 <td style="text-align:center;">
-0.474448
+0.5258369
 </td>
 <td style="text-align:center;">
-6.24817
+6.231445
 </td>
 <td style="text-align:center;">
-4.6875
+5.427246
 </td>
 <td style="text-align:center;">
-7.0125
+6.833496
 </td>
 <td style="text-align:center;">
-2.325
+1.406250
 </td>
 <td style="text-align:center;">
-4.06452
+1.656250
 </td>
 <td style="text-align:center;">
-4.6875
+5.471191
 </td>
 <td style="text-align:center;">
-6.6375
+6.657715
 </td>
 <td style="text-align:center;">
-14.860884
+9.0424551
 </td>
 <td style="text-align:center;">
-6.75760
+6.710171
 </td>
 </tr>
 <tr>
@@ -1791,82 +1798,82 @@ Phae.long4.wav_1
 1
 </td>
 <td style="text-align:center;">
-0.145425
+0.1454249
 </td>
 <td style="text-align:center;">
-6.00224
+6.219479
 </td>
 <td style="text-align:center;">
-1.94330
+1.478869
 </td>
 <td style="text-align:center;">
-6.18294
+6.233074
 </td>
 <td style="text-align:center;">
-5.16506
+5.456261
 </td>
 <td style="text-align:center;">
-7.31774
+7.305488
 </td>
 <td style="text-align:center;">
-2.15268
+1.849227
 </td>
 <td style="text-align:center;">
-0.083728
+0.0872533
 </td>
 <td style="text-align:center;">
-0.044067
+0.0436267
 </td>
 <td style="text-align:center;">
-0.113106
+0.1163378
 </td>
 <td style="text-align:center;">
-0.069039
+0.0727111
 </td>
 <td style="text-align:center;">
-1.60426
+1.274811
 </td>
 <td style="text-align:center;">
-5.48360
+4.458109
 </td>
 <td style="text-align:center;">
-0.944668
+0.9643357
 </td>
 <td style="text-align:center;">
-0.904381
+0.9520564
 </td>
 <td style="text-align:center;">
-0.854339
+0.9181020
 </td>
 <td style="text-align:center;">
-0.624541
+0.7599268
 </td>
 <td style="text-align:center;">
-6.12825
+6.270197
 </td>
 <td style="text-align:center;">
-3.5625
+5.119629
 </td>
 <td style="text-align:center;">
-8.2875
+7.844238
 </td>
 <td style="text-align:center;">
-4.725
+2.724609
 </td>
 <td style="text-align:center;">
-2.76191
+2.709677
 </td>
 <td style="text-align:center;">
-5.3625
+5.383301
 </td>
 <td style="text-align:center;">
-3.5625
+6.262207
 </td>
 <td style="text-align:center;">
--12.377522
+6.0437118
 </td>
 <td style="text-align:center;">
-6.30456
+6.222951
 </td>
 </tr>
 <tr>
@@ -1877,82 +1884,82 @@ Phae.long4.wav_2
 1
 </td>
 <td style="text-align:center;">
-0.144186
+0.1441864
 </td>
 <td style="text-align:center;">
-6.11418
+6.462809
 </td>
 <td style="text-align:center;">
-1.96027
+1.592876
 </td>
 <td style="text-align:center;">
-6.21790
+6.338070
 </td>
 <td style="text-align:center;">
-5.35045
+5.630777
 </td>
 <td style="text-align:center;">
-7.46010
+7.572366
 </td>
 <td style="text-align:center;">
-2.10965
+1.941589
 </td>
 <td style="text-align:center;">
-0.083859
+0.0865067
 </td>
 <td style="text-align:center;">
-0.042665
+0.0432533
 </td>
 <td style="text-align:center;">
-0.108869
+0.1153422
 </td>
 <td style="text-align:center;">
-0.066204
+0.0720889
 </td>
 <td style="text-align:center;">
-1.87987
+1.695847
 </td>
 <td style="text-align:center;">
-7.22913
+6.442755
 </td>
 <td style="text-align:center;">
-0.944252
+0.9585943
 </td>
 <td style="text-align:center;">
-0.905089
+0.9526078
 </td>
 <td style="text-align:center;">
-0.854633
+0.9131645
 </td>
 <td style="text-align:center;">
-0.620154
+0.7199148
 </td>
 <td style="text-align:center;">
-6.34508
+6.294167
 </td>
 <td style="text-align:center;">
-3.6375
+4.108887
 </td>
 <td style="text-align:center;">
-8.9625
+8.151855
 </td>
 <td style="text-align:center;">
-5.325
+4.042969
 </td>
 <td style="text-align:center;">
-5.56338
+2.478261
 </td>
 <td style="text-align:center;">
-8.0625
+5.427246
 </td>
 <td style="text-align:center;">
-3.6375
+4.108887
 </td>
 <td style="text-align:center;">
--30.689430
+-9.1434347
 </td>
 <td style="text-align:center;">
-6.22905
+6.222951
 </td>
 </tr>
 <tr>
@@ -1963,82 +1970,82 @@ Phae.long4.wav_3
 1
 </td>
 <td style="text-align:center;">
-0.145099
+0.1450989
 </td>
 <td style="text-align:center;">
-5.84222
+6.122156
 </td>
 <td style="text-align:center;">
-1.93942
+1.541046
 </td>
 <td style="text-align:center;">
-6.00690
+6.081716
 </td>
 <td style="text-align:center;">
-4.85517
+5.178639
 </td>
 <td style="text-align:center;">
-7.20000
+7.239860
 </td>
 <td style="text-align:center;">
-2.34483
+2.061221
 </td>
 <td style="text-align:center;">
-0.081440
+0.0870667
 </td>
 <td style="text-align:center;">
-0.044422
+0.0435333
 </td>
 <td style="text-align:center;">
-0.111054
+0.1160889
 </td>
 <td style="text-align:center;">
-0.066633
+0.0725556
 </td>
 <td style="text-align:center;">
-1.37025
+1.083042
 </td>
 <td style="text-align:center;">
-4.79206
+4.194037
 </td>
 <td style="text-align:center;">
-0.947509
+0.9642064
 </td>
 <td style="text-align:center;">
-0.905043
+0.9536971
 </td>
 <td style="text-align:center;">
-0.857536
+0.9195608
 </td>
 <td style="text-align:center;">
-0.621575
+0.7332565
 </td>
 <td style="text-align:center;">
-6.12008
+6.150346
 </td>
 <td style="text-align:center;">
-3.7125
+4.943848
 </td>
 <td style="text-align:center;">
-8.5875
+7.888184
 </td>
 <td style="text-align:center;">
-4.875
+2.944336
 </td>
 <td style="text-align:center;">
-4.76923
+3.149254
 </td>
 <td style="text-align:center;">
-7.9125
+5.339355
 </td>
 <td style="text-align:center;">
-3.7125
+5.031738
 </td>
 <td style="text-align:center;">
--28.945769
+-2.1200514
 </td>
 <td style="text-align:center;">
-6.00253
+5.912903
 </td>
 </tr>
 </tbody>
@@ -2096,16 +2103,16 @@ Phae.long1.wav_1
 0.1
 </td>
 <td style="text-align:center;">
-0.273033
+0.2730334
 </td>
 <td style="text-align:center;">
-2.22011
+2.220105
 </td>
 <td style="text-align:center;">
-8.60438
+8.604378
 </td>
 <td style="text-align:center;">
-21.2716
+21.17229
 </td>
 </tr>
 <tr>
@@ -2122,16 +2129,16 @@ Phae.long1.wav_2
 0.1
 </td>
 <td style="text-align:center;">
-0.263048
+0.2630480
 </td>
 <td style="text-align:center;">
-2.16944
+2.169437
 </td>
 <td style="text-align:center;">
-8.80705
+8.807053
 </td>
 <td style="text-align:center;">
-20.0787
+20.36896
 </td>
 </tr>
 <tr>
@@ -2148,16 +2155,16 @@ Phae.long1.wav_3
 0.1
 </td>
 <td style="text-align:center;">
-0.274919
+0.2749187
 </td>
 <td style="text-align:center;">
-2.21829
+2.218294
 </td>
 <td style="text-align:center;">
-8.75660
+8.756604
 </td>
 <td style="text-align:center;">
-18.9644
+19.18211
 </td>
 </tr>
 <tr>
@@ -2174,16 +2181,16 @@ Phae.long2.wav_1
 0.1
 </td>
 <td style="text-align:center;">
-0.232571
+0.2325709
 </td>
 <td style="text-align:center;">
-2.31686
+2.316862
 </td>
 <td style="text-align:center;">
-8.82232
+8.822316
 </td>
 <td style="text-align:center;">
-23.4963
+23.27961
 </td>
 </tr>
 <tr>
@@ -2200,16 +2207,16 @@ Phae.long2.wav_2
 0.1
 </td>
 <td style="text-align:center;">
-0.226150
+0.2261502
 </td>
 <td style="text-align:center;">
-2.28401
+2.284006
 </td>
 <td style="text-align:center;">
-8.88803
+8.888027
 </td>
 <td style="text-align:center;">
-25.9055
+26.21774
 </td>
 </tr>
 <tr>
@@ -2226,16 +2233,16 @@ Phae.long3.wav_1
 0.1
 </td>
 <td style="text-align:center;">
-0.231220
+0.2312195
 </td>
 <td style="text-align:center;">
-3.00683
+3.006834
 </td>
 <td style="text-align:center;">
-8.82232
+8.822316
 </td>
 <td style="text-align:center;">
-26.2175
+25.34264
 </td>
 </tr>
 <tr>
@@ -2252,16 +2259,16 @@ Phae.long3.wav_2
 0.1
 </td>
 <td style="text-align:center;">
-0.230179
+0.2301789
 </td>
 <td style="text-align:center;">
-2.77684
+2.776843
 </td>
 <td style="text-align:center;">
-8.88803
+8.888027
 </td>
 <td style="text-align:center;">
-25.5638
+25.51099
 </td>
 </tr>
 <tr>
@@ -2278,16 +2285,16 @@ Phae.long3.wav_3
 0.1
 </td>
 <td style="text-align:center;">
-0.231217
+0.2312170
 </td>
 <td style="text-align:center;">
-2.31686
+2.316862
 </td>
 <td style="text-align:center;">
-9.31515
+9.315153
 </td>
 <td style="text-align:center;">
-25.5538
+24.68619
 </td>
 </tr>
 <tr>
@@ -2304,16 +2311,16 @@ Phae.long4.wav_1
 0.1
 </td>
 <td style="text-align:center;">
-0.245425
+0.2454249
 </td>
 <td style="text-align:center;">
-2.51400
+2.513997
 </td>
 <td style="text-align:center;">
-9.21659
+9.216586
 </td>
 <td style="text-align:center;">
-27.9043
+27.61899
 </td>
 </tr>
 <tr>
@@ -2330,16 +2337,16 @@ Phae.long4.wav_2
 0.1
 </td>
 <td style="text-align:center;">
-0.244186
+0.2441864
 </td>
 <td style="text-align:center;">
-2.57971
+2.579708
 </td>
 <td style="text-align:center;">
-10.23512
+10.235116
 </td>
 <td style="text-align:center;">
-28.6007
+28.87451
 </td>
 </tr>
 <tr>
@@ -2356,16 +2363,16 @@ Phae.long4.wav_3
 0.1
 </td>
 <td style="text-align:center;">
-0.245099
+0.2450989
 </td>
 <td style="text-align:center;">
-2.57971
+2.579708
 </td>
 <td style="text-align:center;">
-9.74228
+9.742279
 </td>
 <td style="text-align:center;">
-24.4342
+24.30149
 </td>
 </tr>
 </tbody>
@@ -2378,6 +2385,8 @@ Phae.long4.wav_3
 <pre class="r"><code>dtw.dist &lt;- freq_DTW(ext_st, img = FALSE)
 
 dtw.dist</code></pre>
+<pre><code>measuring dominant frequency contours (step 1 of 2):
+Measuring fundamental frequency:calculating DTW distances (step 2 of 2, no progress bar):</code></pre>
 <div style="border: 1px solid #ddd; padding: 1px; overflow-x: scroll; width:740px; ">
 <table class="table table-striped" style="font-size: 14px; margin-left: auto; margin-right: auto;">
 <thead>
@@ -2428,34 +2437,34 @@ Phae.long1.wav_1-1
 0.000
 </td>
 <td style="text-align:center;">
-6.134
+8.631
 </td>
 <td style="text-align:center;">
-10.597
+4.343
 </td>
 <td style="text-align:center;">
-8.867
+16.633
 </td>
 <td style="text-align:center;">
-15.329
+16.611
 </td>
 <td style="text-align:center;">
-9.310
+13.813
 </td>
 <td style="text-align:center;">
-10.316
+15.675
 </td>
 <td style="text-align:center;">
-15.528
+15.516
 </td>
 <td style="text-align:center;">
-23.427
+18.661
 </td>
 <td style="text-align:center;">
-22.011
+20.886
 </td>
 <td style="text-align:center;">
-23.768
+21.559
 </td>
 </tr>
 <tr>
@@ -2463,37 +2472,37 @@ Phae.long1.wav_1-1
 Phae.long1.wav_2-1
 </td>
 <td style="text-align:center;">
-6.134
+8.631
 </td>
 <td style="text-align:center;">
 0.000
 </td>
 <td style="text-align:center;">
-9.128
+6.981
 </td>
 <td style="text-align:center;">
-11.939
+22.115
 </td>
 <td style="text-align:center;">
-21.299
+29.123
 </td>
 <td style="text-align:center;">
-13.185
+16.735
 </td>
 <td style="text-align:center;">
-13.584
+22.374
 </td>
 <td style="text-align:center;">
-22.565
+23.024
 </td>
 <td style="text-align:center;">
-25.262
+15.824
 </td>
 <td style="text-align:center;">
-24.802
+16.635
 </td>
 <td style="text-align:center;">
-26.605
+19.452
 </td>
 </tr>
 <tr>
@@ -2501,37 +2510,37 @@ Phae.long1.wav_2-1
 Phae.long1.wav_3-1
 </td>
 <td style="text-align:center;">
-10.597
+4.343
 </td>
 <td style="text-align:center;">
-9.128
+6.981
 </td>
 <td style="text-align:center;">
 0.000
 </td>
 <td style="text-align:center;">
-15.535
+18.252
 </td>
 <td style="text-align:center;">
-21.041
+20.535
 </td>
 <td style="text-align:center;">
-14.604
+15.206
 </td>
 <td style="text-align:center;">
-15.380
+18.451
 </td>
 <td style="text-align:center;">
-21.831
+16.468
 </td>
 <td style="text-align:center;">
-28.276
+17.262
 </td>
 <td style="text-align:center;">
-27.814
+19.147
 </td>
 <td style="text-align:center;">
-28.204
+21.154
 </td>
 </tr>
 <tr>
@@ -2539,37 +2548,37 @@ Phae.long1.wav_3-1
 Phae.long2.wav_1-1
 </td>
 <td style="text-align:center;">
-8.867
+16.633
 </td>
 <td style="text-align:center;">
-11.939
+22.115
 </td>
 <td style="text-align:center;">
-15.535
+18.252
 </td>
 <td style="text-align:center;">
 0.000
 </td>
 <td style="text-align:center;">
-10.570
+12.159
 </td>
 <td style="text-align:center;">
-10.623
+10.369
 </td>
 <td style="text-align:center;">
-10.204
+11.213
 </td>
 <td style="text-align:center;">
-10.909
+12.043
 </td>
 <td style="text-align:center;">
-17.888
+12.446
 </td>
 <td style="text-align:center;">
-17.292
+13.535
 </td>
 <td style="text-align:center;">
-19.602
+15.304
 </td>
 </tr>
 <tr>
@@ -2577,37 +2586,37 @@ Phae.long2.wav_1-1
 Phae.long2.wav_2-1
 </td>
 <td style="text-align:center;">
-15.329
+16.611
 </td>
 <td style="text-align:center;">
-21.299
+29.123
 </td>
 <td style="text-align:center;">
-21.041
+20.535
 </td>
 <td style="text-align:center;">
-10.570
+12.159
 </td>
 <td style="text-align:center;">
 0.000
 </td>
 <td style="text-align:center;">
-7.488
+6.762
 </td>
 <td style="text-align:center;">
-7.317
+5.341
 </td>
 <td style="text-align:center;">
-4.027
+8.698
 </td>
 <td style="text-align:center;">
-18.139
+17.521
 </td>
 <td style="text-align:center;">
-24.295
+20.599
 </td>
 <td style="text-align:center;">
-23.008
+18.922
 </td>
 </tr>
 <tr>
@@ -2615,37 +2624,37 @@ Phae.long2.wav_2-1
 Phae.long3.wav_1-1
 </td>
 <td style="text-align:center;">
-9.310
+13.813
 </td>
 <td style="text-align:center;">
-13.185
+16.735
 </td>
 <td style="text-align:center;">
-14.604
+15.206
 </td>
 <td style="text-align:center;">
-10.623
+10.369
 </td>
 <td style="text-align:center;">
-7.488
+6.762
 </td>
 <td style="text-align:center;">
 0.000
 </td>
 <td style="text-align:center;">
-5.940
+3.639
 </td>
 <td style="text-align:center;">
-8.833
+4.422
 </td>
 <td style="text-align:center;">
-25.193
+13.252
 </td>
 <td style="text-align:center;">
-26.461
+15.629
 </td>
 <td style="text-align:center;">
-26.199
+15.669
 </td>
 </tr>
 <tr>
@@ -2653,37 +2662,37 @@ Phae.long3.wav_1-1
 Phae.long3.wav_2-1
 </td>
 <td style="text-align:center;">
-10.316
+15.675
 </td>
 <td style="text-align:center;">
-13.584
+22.374
 </td>
 <td style="text-align:center;">
-15.380
+18.451
 </td>
 <td style="text-align:center;">
-10.204
+11.213
 </td>
 <td style="text-align:center;">
-7.317
+5.341
 </td>
 <td style="text-align:center;">
-5.940
+3.639
 </td>
 <td style="text-align:center;">
 0.000
 </td>
 <td style="text-align:center;">
-7.786
+3.644
 </td>
 <td style="text-align:center;">
-21.060
+13.655
 </td>
 <td style="text-align:center;">
-22.788
+15.946
 </td>
 <td style="text-align:center;">
-22.402
+14.420
 </td>
 </tr>
 <tr>
@@ -2691,37 +2700,37 @@ Phae.long3.wav_2-1
 Phae.long3.wav_3-1
 </td>
 <td style="text-align:center;">
-15.528
+15.516
 </td>
 <td style="text-align:center;">
-22.565
+23.024
 </td>
 <td style="text-align:center;">
-21.831
+16.468
 </td>
 <td style="text-align:center;">
-10.909
+12.043
 </td>
 <td style="text-align:center;">
-4.027
+8.698
 </td>
 <td style="text-align:center;">
-8.833
+4.422
 </td>
 <td style="text-align:center;">
-7.786
+3.644
 </td>
 <td style="text-align:center;">
 0.000
 </td>
 <td style="text-align:center;">
-18.949
+11.029
 </td>
 <td style="text-align:center;">
-24.264
+13.718
 </td>
 <td style="text-align:center;">
-23.456
+12.302
 </td>
 </tr>
 <tr>
@@ -2729,37 +2738,37 @@ Phae.long3.wav_3-1
 Phae.long4.wav_1-1
 </td>
 <td style="text-align:center;">
-23.427
+18.661
 </td>
 <td style="text-align:center;">
-25.262
+15.824
 </td>
 <td style="text-align:center;">
-28.276
+17.262
 </td>
 <td style="text-align:center;">
-17.888
+12.446
 </td>
 <td style="text-align:center;">
-18.139
+17.521
 </td>
 <td style="text-align:center;">
-25.193
+13.252
 </td>
 <td style="text-align:center;">
-21.060
+13.655
 </td>
 <td style="text-align:center;">
-18.949
+11.029
 </td>
 <td style="text-align:center;">
 0.000
 </td>
 <td style="text-align:center;">
-12.639
+5.381
 </td>
 <td style="text-align:center;">
-7.574
+5.880
 </td>
 </tr>
 <tr>
@@ -2767,37 +2776,37 @@ Phae.long4.wav_1-1
 Phae.long4.wav_2-1
 </td>
 <td style="text-align:center;">
-22.011
+20.886
 </td>
 <td style="text-align:center;">
-24.802
+16.635
 </td>
 <td style="text-align:center;">
-27.814
+19.147
 </td>
 <td style="text-align:center;">
-17.292
+13.535
 </td>
 <td style="text-align:center;">
-24.295
+20.599
 </td>
 <td style="text-align:center;">
-26.461
+15.629
 </td>
 <td style="text-align:center;">
-22.788
+15.946
 </td>
 <td style="text-align:center;">
-24.264
+13.718
 </td>
 <td style="text-align:center;">
-12.639
+5.381
 </td>
 <td style="text-align:center;">
 0.000
 </td>
 <td style="text-align:center;">
-8.492
+6.201
 </td>
 </tr>
 <tr>
@@ -2805,34 +2814,34 @@ Phae.long4.wav_2-1
 Phae.long4.wav_3-1
 </td>
 <td style="text-align:center;">
-23.768
+21.559
 </td>
 <td style="text-align:center;">
-26.605
+19.452
 </td>
 <td style="text-align:center;">
-28.204
+21.154
 </td>
 <td style="text-align:center;">
-19.602
+15.304
 </td>
 <td style="text-align:center;">
-23.008
+18.922
 </td>
 <td style="text-align:center;">
-26.199
+15.669
 </td>
 <td style="text-align:center;">
-22.402
+14.420
 </td>
 <td style="text-align:center;">
-23.456
+12.302
 </td>
 <td style="text-align:center;">
-7.574
+5.880
 </td>
 <td style="text-align:center;">
-8.492
+6.201
 </td>
 <td style="text-align:center;">
 0.000
@@ -2857,13 +2866,14 @@ mbmrk.snr &lt;- microbenchmark(extended = sig2noise(lng_ext_st[1:100, ],
                     mar = 0.05), times = 50)
 
 autoplot(mbmrk.snr) + ggtitle(&quot;sig2noise&quot;)</code></pre>
+<pre><code>Coordinate system already present. Adding new coordinate system, which will replace the existing one.</code></pre>
 <p><img src="intro_to_warbler_files/figure-html/extn_sel_13-1.png" width="750" />  </p>
 <p>The function runs much faster in the extended selection tables. Performance gain is likely to improve when longer recordings and data sets are used (that is, to compensate for computer overload).</p>
 <p> </p>
 </div>
 <div id="create-selections-by-song" class="section level3">
 <h3>Create selections ‘by song’</h3>
-<p>The extended selection above were made by element. That is, each sound file within the object contains a single selection (that is, a 1: 1 correspondence between the selections and the ‘wave’ objects). However, extended selection tables can also be created using a higher hierarchical level with the argument <code>by.song</code>. In this case, “song” represents a higher level that contains one or more selections and that the user may want to keep together for a particular analysis (for example, the duration of the intervals). The <code>by.song</code> argument takes the name of the column of characters or factors with the IDs of the different” songs “within a sound file (note that the function assumes that a given song can only be found in only one sound file, so the selections with the same song ID, but from different sound files are taken as different ‘songs’).</p>
+<p>The extended selection above were made by element. That is, each sound file within the object contains a single selection (that is, a 1: 1 correspondence between the selections and the ‘wave’ objects). However, extended selection tables can also be created using a higher hierarchical level with the argument <code>by.song</code>. In this case, “song” represents a higher level that contains one or more selections and that the user may want to keep together for a particular analysis (for example, the duration of the intervals). The <code>by.song</code> argument takes the name of the column of characters or factors with the IDs of the different" songs "within a sound file (note that the function assumes that a given song can only be found in only one sound file, so the selections with the same song ID, but from different sound files are taken as different ‘songs’).</p>
 <p>To create a selection table by song, let’s add an artificial song column to our example data in which each of the sound files has 2 songs:</p>
 <pre class="r"><code># add column
 lbh_selec_table$song &lt;- c(1, 1, 2, 1, 2, 1, 1, 2, 1, 2, 2)</code></pre>
@@ -2911,16 +2921,16 @@ Phae.long1.wav
 1
 </td>
 <td style="text-align:center;">
-1.169355
+1.1693549
 </td>
 <td style="text-align:center;">
-1.342388
+1.3423884
 </td>
 <td style="text-align:center;">
-2.22011
+2.220105
 </td>
 <td style="text-align:center;">
-8.60438
+8.604378
 </td>
 <td style="text-align:center;">
 1
@@ -2937,16 +2947,16 @@ Phae.long1.wav
 2
 </td>
 <td style="text-align:center;">
-2.158408
+2.1584085
 </td>
 <td style="text-align:center;">
-2.321457
+2.3214565
 </td>
 <td style="text-align:center;">
-2.16944
+2.169437
 </td>
 <td style="text-align:center;">
-8.80705
+8.807053
 </td>
 <td style="text-align:center;">
 1
@@ -2963,16 +2973,16 @@ Phae.long1.wav
 3
 </td>
 <td style="text-align:center;">
-0.343337
+0.3433366
 </td>
 <td style="text-align:center;">
-0.518255
+0.5182553
 </td>
 <td style="text-align:center;">
-2.21829
+2.218294
 </td>
 <td style="text-align:center;">
-8.75660
+8.756604
 </td>
 <td style="text-align:center;">
 2
@@ -2989,16 +2999,16 @@ Phae.long2.wav
 1
 </td>
 <td style="text-align:center;">
-0.159598
+0.1595983
 </td>
 <td style="text-align:center;">
-0.292169
+0.2921692
 </td>
 <td style="text-align:center;">
-2.31686
+2.316862
 </td>
 <td style="text-align:center;">
-8.82232
+8.822316
 </td>
 <td style="text-align:center;">
 1
@@ -3015,16 +3025,16 @@ Phae.long2.wav
 2
 </td>
 <td style="text-align:center;">
-1.457058
+1.4570585
 </td>
 <td style="text-align:center;">
-1.583209
+1.5832087
 </td>
 <td style="text-align:center;">
-2.28401
+2.284006
 </td>
 <td style="text-align:center;">
-8.88803
+8.888027
 </td>
 <td style="text-align:center;">
 2
@@ -3041,16 +3051,16 @@ Phae.long3.wav
 1
 </td>
 <td style="text-align:center;">
-0.626552
+0.6265520
 </td>
 <td style="text-align:center;">
-0.757771
+0.7577715
 </td>
 <td style="text-align:center;">
-3.00683
+3.006834
 </td>
 <td style="text-align:center;">
-8.82232
+8.822316
 </td>
 <td style="text-align:center;">
 1
@@ -3067,16 +3077,16 @@ Phae.long3.wav
 2
 </td>
 <td style="text-align:center;">
-1.974213
+1.9742132
 </td>
 <td style="text-align:center;">
-2.104392
+2.1043921
 </td>
 <td style="text-align:center;">
-2.77684
+2.776843
 </td>
 <td style="text-align:center;">
-8.88803
+8.888027
 </td>
 <td style="text-align:center;">
 1
@@ -3093,16 +3103,16 @@ Phae.long3.wav
 3
 </td>
 <td style="text-align:center;">
-0.123364
+0.1233643
 </td>
 <td style="text-align:center;">
-0.254581
+0.2545812
 </td>
 <td style="text-align:center;">
-2.31686
+2.316862
 </td>
 <td style="text-align:center;">
-9.31515
+9.315153
 </td>
 <td style="text-align:center;">
 2
@@ -3119,16 +3129,16 @@ Phae.long4.wav
 1
 </td>
 <td style="text-align:center;">
-1.516812
+1.5168116
 </td>
 <td style="text-align:center;">
-1.662236
+1.6622365
 </td>
 <td style="text-align:center;">
-2.51400
+2.513997
 </td>
 <td style="text-align:center;">
-9.21659
+9.216586
 </td>
 <td style="text-align:center;">
 1
@@ -3145,16 +3155,16 @@ Phae.long4.wav
 2
 </td>
 <td style="text-align:center;">
-2.932692
+2.9326920
 </td>
 <td style="text-align:center;">
-3.076878
+3.0768784
 </td>
 <td style="text-align:center;">
-2.57971
+2.579708
 </td>
 <td style="text-align:center;">
-10.23512
+10.235116
 </td>
 <td style="text-align:center;">
 2
@@ -3171,16 +3181,16 @@ Phae.long4.wav
 3
 </td>
 <td style="text-align:center;">
-0.145398
+0.1453977
 </td>
 <td style="text-align:center;">
-0.290497
+0.2904966
 </td>
 <td style="text-align:center;">
-2.57971
+2.579708
 </td>
 <td style="text-align:center;">
-9.74228
+9.742279
 </td>
 <td style="text-align:center;">
 2
@@ -3193,6 +3203,8 @@ Phae.long4.wav
 <p>Now we can create an extended selection table ‘by song’ using the column name ‘song’ as input for the argument <code>by.song</code>:</p>
 <pre class="r"><code>bs_ext_st &lt;- selection_table(X = lbh_selec_table, extended = TRUE,
                               confirm.extended = FALSE, by.song = &quot;song&quot;)</code></pre>
+<pre><code>checking selections (step 1 of 2):
+saving wave objects into extended selection table (step 2 of 2):</code></pre>
 <p>In this case, we should only have 8 ‘wave’ objects instead of 11 as when the object was created ‘by selection’:</p>
 <pre class="r"><code># by element
 length(attr(ext_st, &quot;wave.objects&quot;))</code></pre>
@@ -3248,22 +3260,22 @@ Phae.long1.wav-song_1
 1
 </td>
 <td style="text-align:center;">
-0.10000
+0.100000
 </td>
 <td style="text-align:center;">
-0.273033
+0.2730334
 </td>
 <td style="text-align:center;">
-2.22011
+2.220105
 </td>
 <td style="text-align:center;">
-8.60438
+8.604378
 </td>
 <td style="text-align:center;">
 1
 </td>
 <td style="text-align:center;">
-21.2716
+21.17229
 </td>
 </tr>
 <tr>
@@ -3277,22 +3289,22 @@ Phae.long1.wav-song_1
 2
 </td>
 <td style="text-align:center;">
-1.08905
+1.089054
 </td>
 <td style="text-align:center;">
-1.252102
+1.2521016
 </td>
 <td style="text-align:center;">
-2.16944
+2.169437
 </td>
 <td style="text-align:center;">
-8.80705
+8.807053
 </td>
 <td style="text-align:center;">
 1
 </td>
 <td style="text-align:center;">
-20.0787
+20.37064
 </td>
 </tr>
 <tr>
@@ -3306,22 +3318,22 @@ Phae.long1.wav-song_2
 1
 </td>
 <td style="text-align:center;">
-0.10000
+0.100000
 </td>
 <td style="text-align:center;">
-0.274919
+0.2749187
 </td>
 <td style="text-align:center;">
-2.21829
+2.218294
 </td>
 <td style="text-align:center;">
-8.75660
+8.756604
 </td>
 <td style="text-align:center;">
 2
 </td>
 <td style="text-align:center;">
-18.9644
+19.18211
 </td>
 </tr>
 <tr>
@@ -3335,22 +3347,22 @@ Phae.long2.wav-song_1
 1
 </td>
 <td style="text-align:center;">
-0.10000
+0.100000
 </td>
 <td style="text-align:center;">
-0.232571
+0.2325709
 </td>
 <td style="text-align:center;">
-2.31686
+2.316862
 </td>
 <td style="text-align:center;">
-8.82232
+8.822316
 </td>
 <td style="text-align:center;">
 1
 </td>
 <td style="text-align:center;">
-23.4963
+23.27961
 </td>
 </tr>
 <tr>
@@ -3364,22 +3376,22 @@ Phae.long2.wav-song_2
 1
 </td>
 <td style="text-align:center;">
-0.10000
+0.100000
 </td>
 <td style="text-align:center;">
-0.226150
+0.2261502
 </td>
 <td style="text-align:center;">
-2.28401
+2.284006
 </td>
 <td style="text-align:center;">
-8.88803
+8.888027
 </td>
 <td style="text-align:center;">
 2
 </td>
 <td style="text-align:center;">
-25.9055
+26.21774
 </td>
 </tr>
 <tr>
@@ -3393,22 +3405,22 @@ Phae.long3.wav-song_1
 1
 </td>
 <td style="text-align:center;">
-0.10000
+0.100000
 </td>
 <td style="text-align:center;">
-0.231220
+0.2312195
 </td>
 <td style="text-align:center;">
-3.00683
+3.006834
 </td>
 <td style="text-align:center;">
-8.82232
+8.822316
 </td>
 <td style="text-align:center;">
 1
 </td>
 <td style="text-align:center;">
-26.2175
+25.34264
 </td>
 </tr>
 <tr>
@@ -3422,22 +3434,22 @@ Phae.long3.wav-song_1
 2
 </td>
 <td style="text-align:center;">
-1.44766
+1.447661
 </td>
 <td style="text-align:center;">
-1.577840
+1.5778402
 </td>
 <td style="text-align:center;">
-2.77684
+2.776843
 </td>
 <td style="text-align:center;">
-8.88803
+8.888027
 </td>
 <td style="text-align:center;">
 1
 </td>
 <td style="text-align:center;">
-25.5727
+25.51089
 </td>
 </tr>
 <tr>
@@ -3451,22 +3463,22 @@ Phae.long3.wav-song_2
 1
 </td>
 <td style="text-align:center;">
-0.10000
+0.100000
 </td>
 <td style="text-align:center;">
-0.231217
+0.2312170
 </td>
 <td style="text-align:center;">
-2.31686
+2.316862
 </td>
 <td style="text-align:center;">
-9.31515
+9.315153
 </td>
 <td style="text-align:center;">
 2
 </td>
 <td style="text-align:center;">
-25.5538
+24.68619
 </td>
 </tr>
 <tr>
@@ -3480,22 +3492,22 @@ Phae.long4.wav-song_1
 1
 </td>
 <td style="text-align:center;">
-0.10000
+0.100000
 </td>
 <td style="text-align:center;">
-0.245425
+0.2454249
 </td>
 <td style="text-align:center;">
-2.51400
+2.513997
 </td>
 <td style="text-align:center;">
-9.21659
+9.216586
 </td>
 <td style="text-align:center;">
 1
 </td>
 <td style="text-align:center;">
-27.9043
+27.61899
 </td>
 </tr>
 <tr>
@@ -3509,22 +3521,22 @@ Phae.long4.wav-song_2
 1
 </td>
 <td style="text-align:center;">
-2.88729
+2.887294
 </td>
 <td style="text-align:center;">
-3.031481
+3.0314808
 </td>
 <td style="text-align:center;">
-2.57971
+2.579708
 </td>
 <td style="text-align:center;">
-10.23512
+10.235116
 </td>
 <td style="text-align:center;">
 2
 </td>
 <td style="text-align:center;">
-28.5995
+28.88520
 </td>
 </tr>
 <tr>
@@ -3538,22 +3550,22 @@ Phae.long4.wav-song_2
 2
 </td>
 <td style="text-align:center;">
-0.10000
+0.100000
 </td>
 <td style="text-align:center;">
-0.245099
+0.2450989
 </td>
 <td style="text-align:center;">
-2.57971
+2.579708
 </td>
 <td style="text-align:center;">
-9.74228
+9.742279
 </td>
 <td style="text-align:center;">
 2
 </td>
 <td style="text-align:center;">
-24.4342
+24.30149
 </td>
 </tr>
 </tbody>
@@ -3572,7 +3584,7 @@ Phae.long4.wav-song_2
 <div id="sharing-acoustic-data" class="section level3">
 <h3>Sharing acoustic data</h3>
 <p>This new object class allows to share complete data sets, including acoustic data. For example, the following code downloads a subset of the data used in <a href="https://marceloarayasalas.weebly.com/uploads/2/5/5/2/25524573/araya-salas_smith-vidaurre___webster_2017._table_s1._recording_metadata.xlsx">Araya-Salas <em>et al</em> (2017)</a> (can also be downloaded from <a href="https://marceloarayasalas.weebly.com/uploads/2/5/5/2/25524573/extended.selection.%20table.araya-salas.et.al.2017.bioacoustics.100.sels.rds">here</a>):</p>
-<pre class="r"><code>URL &lt;- &quot;https://github.com/maRce10/BOKU-Analysis-of-animal-acoustic-signals-in-R-2022/raw/master/data/extended.selection.table.araya-salas.et.al.2017.bioacoustics.100.sels.rds&quot;
+<pre class="r"><code>URL &lt;- &quot;https://github.com/maRce10/OTS_BIR_2022/raw/master/data/extended.selection.table.araya-salas.et.al.2017.bioacoustics.100.sels.rds&quot;
 
 dat &lt;- readRDS(gzcon(url(URL)))
 
@@ -3684,82 +3696,82 @@ Pyrrhura rupicola Macaulay Library 132 .wav_2
 1
 </td>
 <td style="text-align:center;">
-0.150476
+0.1504762
 </td>
 <td style="text-align:center;">
-4.66276
+4.662762
 </td>
 <td style="text-align:center;">
-1.76708
+1.767083
 </td>
 <td style="text-align:center;">
-4.27907
+4.279070
 </td>
 <td style="text-align:center;">
-3.43522
+3.435216
 </td>
 <td style="text-align:center;">
-5.64784
+5.647841
 </td>
 <td style="text-align:center;">
-2.21263
+2.212625
 </td>
 <td style="text-align:center;">
-0.067037
+0.0654244
 </td>
 <td style="text-align:center;">
-0.038510
+0.0392547
 </td>
 <td style="text-align:center;">
-0.104834
+0.1046791
 </td>
 <td style="text-align:center;">
-0.066324
+0.0654244
 </td>
 <td style="text-align:center;">
-2.61941
+2.619410
 </td>
 <td style="text-align:center;">
-12.03122
+12.031225
 </td>
 <td style="text-align:center;">
-0.923644
+0.9236435
 </td>
 <td style="text-align:center;">
-0.891818
+0.9508231
 </td>
 <td style="text-align:center;">
-0.823722
+0.8782216
 </td>
 <td style="text-align:center;">
-0.542376
+0.5423756
 </td>
 <td style="text-align:center;">
-3.76445
+3.753955
 </td>
 <td style="text-align:center;">
-2.1315
+2.024121
 </td>
 <td style="text-align:center;">
-6.8355
+6.847559
 </td>
 <td style="text-align:center;">
-4.704
+4.823437
 </td>
 <td style="text-align:center;">
-10.50000
+5.375000
 </td>
 <td style="text-align:center;">
-4.4835
+4.521973
 </td>
 <td style="text-align:center;">
-3.8955
+2.024121
 </td>
 <td style="text-align:center;">
--3.907594
+-16.599644
 </td>
 <td style="text-align:center;">
-4.0425
+4.020775
 </td>
 </tr>
 <tr>
@@ -3770,82 +3782,82 @@ Pyrrhura rupicola Macaulay Library 132 .wav_2
 1
 </td>
 <td style="text-align:center;">
-0.165564
+0.1655637
 </td>
 <td style="text-align:center;">
-6.25485
+6.254850
 </td>
 <td style="text-align:center;">
-1.64843
+1.648434
 </td>
 <td style="text-align:center;">
-6.35045
+6.350453
 </td>
 <td style="text-align:center;">
-5.60121
+5.601209
 </td>
 <td style="text-align:center;">
-7.20242
+7.202417
 </td>
 <td style="text-align:center;">
-1.60121
+1.601209
 </td>
 <td style="text-align:center;">
-0.081001
+0.0827778
 </td>
 <td style="text-align:center;">
-0.041922
+0.0382051
 </td>
 <td style="text-align:center;">
-0.118660
+0.1209829
 </td>
 <td style="text-align:center;">
-0.076738
+0.0827778
 </td>
 <td style="text-align:center;">
-2.38000
+2.380005
 </td>
 <td style="text-align:center;">
-10.14415
+10.144155
 </td>
 <td style="text-align:center;">
-0.939755
+0.9397550
 </td>
 <td style="text-align:center;">
-0.888542
+0.9410405
 </td>
 <td style="text-align:center;">
-0.835012
+0.8843475
 </td>
 <td style="text-align:center;">
-0.632790
+0.6327902
 </td>
 <td style="text-align:center;">
-6.58096
+6.585970
 </td>
 <td style="text-align:center;">
-3.6015
+3.574512
 </td>
 <td style="text-align:center;">
-8.4525
+8.225684
 </td>
 <td style="text-align:center;">
-4.851
+4.651172
 </td>
 <td style="text-align:center;">
-14.15151
+3.685185
 </td>
 <td style="text-align:center;">
-8.4525
+8.225684
 </td>
 <td style="text-align:center;">
-5.9535
+6.933691
 </td>
 <td style="text-align:center;">
--15.093886
+-7.803594
 </td>
 <td style="text-align:center;">
-6.1005
+6.096101
 </td>
 </tr>
 <tr>
@@ -3856,82 +3868,82 @@ Pyrrhura rupicola Macaulay Library 132 .wav_2
 1
 </td>
 <td style="text-align:center;">
-0.154251
+0.1542514
 </td>
 <td style="text-align:center;">
-6.09331
+6.093311
 </td>
 <td style="text-align:center;">
-1.64588
+1.645878
 </td>
 <td style="text-align:center;">
-5.84441
+5.844408
 </td>
 <td style="text-align:center;">
-4.90438
+4.904376
 </td>
 <td style="text-align:center;">
-7.39384
+7.393841
 </td>
 <td style="text-align:center;">
-2.48947
+2.489465
 </td>
 <td style="text-align:center;">
-0.081405
+0.0835469
 </td>
 <td style="text-align:center;">
-0.046415
+0.0449868
 </td>
 <td style="text-align:center;">
-0.114966
+0.1156803
 </td>
 <td style="text-align:center;">
-0.068551
+0.0706935
 </td>
 <td style="text-align:center;">
-1.97090
+1.970903
 </td>
 <td style="text-align:center;">
-7.26897
+7.268969
 </td>
 <td style="text-align:center;">
-0.939127
+0.9391274
 </td>
 <td style="text-align:center;">
-0.890309
+0.9432334
 </td>
 <td style="text-align:center;">
-0.836114
+0.8858163
 </td>
 <td style="text-align:center;">
-0.608413
+0.6084129
 </td>
 <td style="text-align:center;">
-6.25380
+6.234293
 </td>
 <td style="text-align:center;">
-3.0135
+3.316113
 </td>
 <td style="text-align:center;">
-8.3055
+8.139551
 </td>
 <td style="text-align:center;">
-5.292
+4.823437
 </td>
 <td style="text-align:center;">
-8.50000
+3.214286
 </td>
 <td style="text-align:center;">
-3.0135
+6.416894
 </td>
 <td style="text-align:center;">
-6.8355
+3.316113
 </td>
 <td style="text-align:center;">
-24.777737
+-20.102130
 </td>
 <td style="text-align:center;">
-7.1295
+7.047292
 </td>
 </tr>
 <tr>
@@ -3942,82 +3954,82 @@ Pyrrhura rupicola Macaulay Library 132 .wav_2
 1
 </td>
 <td style="text-align:center;">
-0.154955
+0.1549551
 </td>
 <td style="text-align:center;">
-5.41505
+5.415047
 </td>
 <td style="text-align:center;">
-1.46311
+1.463110
 </td>
 <td style="text-align:center;">
-5.16774
+5.167742
 </td>
 <td style="text-align:center;">
-4.41936
+4.419355
 </td>
 <td style="text-align:center;">
-6.42581
+6.425807
 </td>
 <td style="text-align:center;">
-2.00645
+2.006452
 </td>
 <td style="text-align:center;">
-0.064272
+0.0645692
 </td>
 <td style="text-align:center;">
-0.037135
+0.0387415
 </td>
 <td style="text-align:center;">
-0.098550
+0.1033107
 </td>
 <td style="text-align:center;">
-0.061415
+0.0645692
 </td>
 <td style="text-align:center;">
-2.10741
+2.107408
 </td>
 <td style="text-align:center;">
-8.05427
+8.054270
 </td>
 <td style="text-align:center;">
-0.922702
+0.9227024
 </td>
 <td style="text-align:center;">
-0.890356
+0.9447503
 </td>
 <td style="text-align:center;">
-0.821533
+0.8717234
 </td>
 <td style="text-align:center;">
-0.506008
+0.5060075
 </td>
 <td style="text-align:center;">
-5.17602
+5.028434
 </td>
 <td style="text-align:center;">
-2.4255
+2.368652
 </td>
 <td style="text-align:center;">
-8.0115
+7.795020
 </td>
 <td style="text-align:center;">
-5.586
+5.426367
 </td>
 <td style="text-align:center;">
-8.00000
+2.158730
 </td>
 <td style="text-align:center;">
-7.4235
+7.364356
 </td>
 <td style="text-align:center;">
-4.7775
+2.368652
 </td>
 <td style="text-align:center;">
--17.075914
+-32.239682
 </td>
 <td style="text-align:center;">
-4.4835
+4.366662
 </td>
 </tr>
 <tr>
@@ -4028,82 +4040,82 @@ Cyanoliseus patagonus Macaulay Library 79 .wav_5
 1
 </td>
 <td style="text-align:center;">
-0.159887
+0.1598866
 </td>
 <td style="text-align:center;">
-3.15383
+3.153826
 </td>
 <td style="text-align:center;">
-1.22568
+1.225681
 </td>
 <td style="text-align:center;">
-2.56920
+2.569195
 </td>
 <td style="text-align:center;">
-2.24394
+2.243941
 </td>
 <td style="text-align:center;">
-3.65129
+3.651290
 </td>
 <td style="text-align:center;">
-1.40735
+1.407350
 </td>
 <td style="text-align:center;">
-0.061112
+0.0639546
 </td>
 <td style="text-align:center;">
-0.037662
+0.0383728
 </td>
 <td style="text-align:center;">
-0.095221
+0.0959320
 </td>
 <td style="text-align:center;">
-0.057559
+0.0575592
 </td>
 <td style="text-align:center;">
-4.54729
+4.547286
 </td>
 <td style="text-align:center;">
-29.49141
+29.491407
 </td>
 <td style="text-align:center;">
-0.823071
+0.8230714
 </td>
 <td style="text-align:center;">
-0.888590
+0.9356593
 </td>
 <td style="text-align:center;">
-0.731373
+0.7701144
 </td>
 <td style="text-align:center;">
-0.126524
+0.1265239
 </td>
 <td style="text-align:center;">
-2.61348
+2.590610
 </td>
 <td style="text-align:center;">
-2.1315
+2.024121
 </td>
 <td style="text-align:center;">
-4.4835
+4.435840
 </td>
 <td style="text-align:center;">
-2.352
+2.411719
 </td>
 <td style="text-align:center;">
-4.43750
+3.071429
 </td>
 <td style="text-align:center;">
-2.2785
+2.454785
 </td>
 <td style="text-align:center;">
-2.4255
+2.282519
 </td>
 <td style="text-align:center;">
-0.919401
+-1.077424
 </td>
 <td style="text-align:center;">
-2.2785
+2.291336
 </td>
 </tr>
 <tr>
@@ -4114,82 +4126,82 @@ Cyanoliseus patagonus Macaulay Library 79 .wav_5
 1
 </td>
 <td style="text-align:center;">
-0.153799
+0.1537989
 </td>
 <td style="text-align:center;">
-6.02946
+6.029456
 </td>
 <td style="text-align:center;">
-1.75784
+1.757841
 </td>
 <td style="text-align:center;">
-6.41626
+6.416260
 </td>
 <td style="text-align:center;">
-4.92033
+4.920325
 </td>
 <td style="text-align:center;">
-7.18374
+7.183740
 </td>
 <td style="text-align:center;">
-2.26342
+2.263415
 </td>
 <td style="text-align:center;">
-0.075481
+0.0769048
 </td>
 <td style="text-align:center;">
-0.046285
+0.0448611
 </td>
 <td style="text-align:center;">
-0.107524
+0.1089484
 </td>
 <td style="text-align:center;">
-0.061239
+0.0640873
 </td>
 <td style="text-align:center;">
-4.16116
+4.161163
 </td>
 <td style="text-align:center;">
-27.90163
+27.901632
 </td>
 <td style="text-align:center;">
-0.928855
+0.9288549
 </td>
 <td style="text-align:center;">
-0.890734
+0.9459573
 </td>
 <td style="text-align:center;">
-0.827362
+0.8786571
 </td>
 <td style="text-align:center;">
-0.604357
+0.6043575
 </td>
 <td style="text-align:center;">
-6.34412
+6.254965
 </td>
 <td style="text-align:center;">
-2.1315
+4.952637
 </td>
 <td style="text-align:center;">
-9.1875
+8.570215
 </td>
 <td style="text-align:center;">
-7.056
+3.617578
 </td>
 <td style="text-align:center;">
-4.16667
+4.071429
 </td>
 <td style="text-align:center;">
-2.1315
+5.383301
 </td>
 <td style="text-align:center;">
-6.2475
+4.952637
 </td>
 <td style="text-align:center;">
-26.762226
+-2.800177
 </td>
 <td style="text-align:center;">
-5.0715
+4.971966
 </td>
 </tr>
 </tbody>
@@ -4895,7 +4907,7 @@ selection tables, ext. selection tables
 <p><font size="5">Exercise</font></p>
 <p> </p>
 <ul>
-<li>Compare the performance of <code>spectro_analysis()</code> on the example ‘lbh_selec_table’ with “the argument ‘fast = TRUE’ vs ‘fast = FALSE’. What does this argument do and which <code>seewave</code> function might be involved?</li>
+<li>Compare the performance of <code>spectro_analysis()</code> on the example ‘lbh_selec_table’ with "the argument ‘fast = TRUE’ vs ‘fast = FALSE’. What does this argument do and which <code>seewave</code> function might be involved?</li>
 </ul>
 </div>
 <p> </p>
@@ -5381,17 +5393,17 @@ define global parameters for warbleR functions
 <p> </p>
 <hr />
 <p><font size="4">Session information</font></p>
-<pre><code>R version 4.1.1 (2021-08-10)
+<pre><code>R version 4.1.0 (2021-05-18)
 Platform: x86_64-pc-linux-gnu (64-bit)
 Running under: Ubuntu 20.04.2 LTS
 
 Matrix products: default
-BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0
-LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0
+BLAS:   /usr/lib/x86_64-linux-gnu/atlas/libblas.so.3.10.3
+LAPACK: /usr/lib/x86_64-linux-gnu/atlas/liblapack.so.3.10.3
 
 locale:
- [1] LC_CTYPE=es_ES.UTF-8       LC_NUMERIC=C               LC_TIME=es_CR.UTF-8       
- [4] LC_COLLATE=es_ES.UTF-8     LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=es_ES.UTF-8   
+ [1] LC_CTYPE=pt_BR.UTF-8       LC_NUMERIC=C               LC_TIME=es_CR.UTF-8       
+ [4] LC_COLLATE=pt_BR.UTF-8     LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=pt_BR.UTF-8   
  [7] LC_PAPER=es_CR.UTF-8       LC_NAME=C                  LC_ADDRESS=C              
 [10] LC_TELEPHONE=C             LC_MEASUREMENT=es_CR.UTF-8 LC_IDENTIFICATION=C       
 
@@ -5399,36 +5411,23 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] ggplot2_3.3.5        microbenchmark_1.4-7 kableExtra_1.3.4     warbleR_1.1.27      
-[5] NatureSounds_1.0.4   knitr_1.37           seewave_2.2.0        tuneR_1.3.3.1       
+[1] ggplot2_3.3.5        microbenchmark_1.4-7 kableExtra_1.3.1     warbleR_1.1.27      
+[5] NatureSounds_1.0.4   knitr_1.38           seewave_2.1.8        tuneR_1.3.3.1       
 
 loaded via a namespace (and not attached):
-  [1] colorspace_2.0-3      rjson_0.2.21          deldir_1.0-6          ellipsis_0.3.2       
-  [5] ohun_0.1.0            rstudioapi_0.13       proxy_0.4-26          spatstat.data_2.1-2  
-  [9] farver_2.1.0          xaringan_0.22         Deriv_4.1.3           audio_0.1-10         
- [13] remotes_2.4.0         DT_0.19               fansi_1.0.2           xml2_1.3.2           
- [17] codetools_0.2-18      splines_4.1.1         baRulho_1.0.6         polyclip_1.10-0      
- [21] jsonlite_1.7.2        Rraven_1.0.13         cluster_2.1.2         png_0.1-7            
- [25] bioacoustics_0.2.8    shiny_1.6.0           spatstat.sparse_2.1-0 compiler_4.1.1       
- [29] httr_1.4.2            assertthat_0.2.1      Matrix_1.3-4          fastmap_1.1.0        
- [33] cli_3.2.0             later_1.3.0           formatR_1.11          htmltools_0.5.2      
- [37] tools_4.1.1           gtable_0.3.0          glue_1.6.2            PhenotypeSpace_0.1.0 
- [41] dplyr_1.0.7           Rcpp_1.0.8            jquerylib_0.1.4       raster_3.5-11        
- [45] vctrs_0.3.8           svglite_2.0.0         nlme_3.1-152          xfun_0.30            
- [49] stringr_1.4.0         phonTools_0.2-2.1     rvest_1.0.1           mime_0.11            
- [53] lifecycle_1.0.1       goftest_1.2-3         terra_1.5-12          zoo_1.8-9            
- [57] MASS_7.3-54           scales_1.1.1          spatstat.core_2.3-2   promises_1.2.0.1     
- [61] spatstat.utils_2.3-0  shinyBS_0.61          parallel_4.1.1        Sim.DiffProc_4.8     
- [65] yaml_2.3.5            pbapply_1.5-0         gridExtra_2.3         sass_0.4.0           
- [69] rpart_4.1-15          stringi_1.7.6         highr_0.9             permute_0.9-5        
- [73] soundgen_2.2.0        rlang_1.0.2           pkgconfig_2.0.3       systemfonts_1.0.2    
- [77] dtw_1.22-3            moments_0.14          bitops_1.0-7          evaluate_0.15        
- [81] lattice_0.20-44       purrr_0.3.4           tensor_1.5            htmlwidgets_1.5.3    
- [85] tidyselect_1.1.1      magrittr_2.0.2        xaringanthemer_0.4.1  R6_2.5.1             
- [89] fftw_1.0-6.1          generics_0.1.0        DBI_1.1.1             pillar_1.7.0         
- [93] whisker_0.4           withr_2.5.0           mgcv_1.8-36           abind_1.4-5          
- [97] RCurl_1.98-1.6        sp_1.4-6              tibble_3.1.6          crayon_1.5.0         
- [ reached getOption(&quot;max.print&quot;) -- omitted 15 entries ]</code></pre>
+ [1] tidyselect_1.1.1  xfun_0.30         bslib_0.2.5.1     purrr_0.3.4       pbapply_1.5-0    
+ [6] generics_0.1.0    vctrs_0.3.8       colorspace_2.0-2  htmltools_0.5.2   viridisLite_0.4.0
+[11] yaml_2.3.5        utf8_1.2.2        rlang_1.0.1       jquerylib_0.1.4   pillar_1.6.4     
+[16] withr_2.4.3       DBI_1.1.1         glue_1.6.2        lifecycle_1.0.1   stringr_1.4.0    
+[21] munsell_0.5.0     gtable_0.3.0      rvest_1.0.0       evaluate_0.15     fastmap_1.1.0    
+[26] fftw_1.0-6.1      parallel_4.1.0    fansi_1.0.0       highr_0.9         Rcpp_1.0.8.3     
+[31] scales_1.1.1      webshot_0.5.2     jsonlite_1.8.0    soundgen_2.1.0    farver_2.1.0     
+[36] rjson_0.2.21      digest_0.6.29     stringi_1.7.6     dplyr_1.0.7       dtw_1.22-3       
+[41] grid_4.1.0        cli_3.1.0         tools_4.1.0       bitops_1.0-7      magrittr_2.0.3   
+[46] sass_0.4.0        RCurl_1.98-1.6    proxy_0.4-26      tibble_3.1.6      pkgconfig_2.0.3  
+[51] crayon_1.5.0      MASS_7.3-54       ellipsis_0.3.2    xml2_1.3.2        shinyBS_0.61     
+[56] assertthat_0.2.1  rmarkdown_2.13    httr_1.4.2        rstudioapi_0.13   R6_2.5.1         
+[61] signal_0.7-7      compiler_4.1.0   </code></pre>
 </div>
 
 

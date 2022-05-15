@@ -11,8 +11,30 @@ editor_options:
   chunk_output_type: console
 ---
 
-
 <font size="4">
+
+---
+<div class="alert alert-success">
+
+### Before the course starts
+
+- Make sure you install all the software we will be using [as detailed in here]([as detailed in here])
+
+&nbsp; 
+
+**Refresh basic R concepts**
+<a href="https://marce10.github.io/OTS_BIR_2022/r_basics.html" class="btn btn-warning btn-xs" role="button">R basics</a>
+
+-   Object types in R
+-   Subsetting
+-   Style matters
+-   R documentation
+
+&nbsp; 
+
+</div>
+
+&nbsp;
 
 ## Day 1
 
@@ -21,11 +43,6 @@ editor_options:
 <div class="alert alert-warning">
 
 ### Readings 
-
-#### Reproducibility
-
-- Alston, J. M., & Rick, J. A. (2021). [A beginner’s guide to conducting reproducible research](http://jessicarick.com/s/Alston_ReproducibleResearch_BulletinESA_Rev1.pdf). Bulletin of the Ecological Society of America, 102(2), 1-14.
-- Culina, A., van den Berg, I., Evans, S., & Sánchez-Tójar, A. (2020). [Low availability of code in ecology: A call for urgent action](https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.3000763). PLoS Biology, 18(7), e3000763.
 
 #### Intro to basic bioacoustics concepts
 
@@ -37,6 +54,15 @@ editor_options:
 - [Introduction to digital audio](https://www.youtube.com/watch?v=24BnHsY6rQs)
 
 - Digital audio artifacts: ([Video 1](https://www.youtube.com/watch?v=GwYTtSd8bTU), [Video 2](https://www.youtube.com/watch?v=thw32YvLrYo))
+
+&nbsp; 
+
+### Optional readings
+
+#### Reproducibility
+
+- Alston, J. M., & Rick, J. A. (2021). [A beginner’s guide to conducting reproducible research](http://jessicarick.com/s/Alston_ReproducibleResearch_BulletinESA_Rev1.pdf). Bulletin of the Ecological Society of America, 102(2), 1-14.
+- Culina, A., van den Berg, I., Evans, S., & Sánchez-Tójar, A. (2020). [Low availability of code in ecology: A call for urgent action](https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.3000763). PLoS Biology, 18(7), e3000763.
 
 </div>
 
@@ -51,19 +77,31 @@ editor_options:
 -   Advantages of programming
 -   Course outline
 
-**Basic R concepts**
-<a href="https://marce10.github.io/OTS_BIR_2022/r_basics.html" class="btn btn-warning btn-xs" role="button">R basics</a>
+&nbsp; 
 
--   Object types in R
--   Subsetting
--   Style matters
--   R documentation
+**What is sound?**
+<a href="https://marce10.github.io/OTS_BIR_2022/sound.html" class="btn btn-warning btn-xs" role="button">Sound</a>
+
+<div class="alert alert-warning">
+
+- Create a Rstudio project for the course 
+
+- Download [this folder](https://www.dropbox.com/sh/87qx2ckr047dcru/AAAIIJZdoca3T4-3sUYmrB4xa?dl=0) into the course project directory
+
+</div>
+
+-   Sound as a time series
+-   Sound as a digital object
+-   Acoustic data in R
+-   ‘wave’ object structure
+-   ‘wave’ object manipulations
+-   additional formats
 
 &nbsp; 
 
 <div class="alert alert-info">
 
-### Project assignment
+### Homework
 
 1. Use the function `query_xc()` to check the availability of recordings for some bird species you have in mind for your project (do not download at this step) ([*check this brief tutorial on how to do that*](https://marce10.github.io/OTS_BIR_2022/get_xc_recordings.html))
 
@@ -94,28 +132,6 @@ editor_options:
 
 </div>
 
-&nbsp; 
-
-**What is sound?**
-<a href="https://marce10.github.io/OTS_BIR_2022/sound.html" class="btn btn-warning btn-xs" role="button">Sound</a>
-
-<div class="alert alert-warning">
-
-- Create a Rstudio project for the course 
-
-- Download [this folder](https://www.dropbox.com/sh/447h1afgdcldai6/AACqP5hCv-FfDEk9C1bWRNMva?dl=0) into the course project directory
-
-</div>
-
--   Sound as a time series
--   Sound as a digital object
--   Acoustic data in R
--   ‘wave’ object structure
--   ‘wave’ object manipulations
--   additional formats
-
-&nbsp; 
-
 **Building spectrograms**
 <a href="https://marce10.github.io/OTS_BIR_2022/spectrograms.html" class="btn btn-warning btn-xs" role="button">Building
 spectrograms</a>
@@ -138,7 +154,7 @@ spectrograms</a>
 
 <div class="alert alert-info">
 
-### Project assignment
+### Homework
 
 1. Annotate target signals using Raven Pro (a subset of the recordings if working on automatic detection)
 
@@ -194,7 +210,7 @@ to warbleR</a>
 
 <div class="alert alert-info">
 
-### Project assignment
+### Homework
 
 1. Double-check annotations using warbleR's dedicated functions
   - Create single spectrograms of each annotation
@@ -263,19 +279,11 @@ to warbleR</a>
 
 <div class="alert alert-info">
 
-### Project assignment
+### Homework
 
-#### Geographic variation
 1. Select best quality signals for analysis
 1. Measure acoustic parameters
 1. Summarize variation at higher hierachical levels (if necessary)
-
-#### Automatic detection
-
-1. Define templates
-1. Optimize detection using training data set
-1. Determine best performance parameters
-1. Double-check detection by exporting to Raven (Rraven)
 
 </div>
 
@@ -324,22 +332,3 @@ to warbleR</a>
 - Measuring acoustic degradation
 
 &nbsp; 
-
-<div class="alert alert-info">
-
-### Project assignment
-
-#### Geographic variation
-1. Plot acoustic spaces
-1. Measure similarity of geographic variants using PhenotypeSpace
-1. Write report
-
-#### Automatic detection
-
-1. Run detection over testing data
-1. Double-check detections on testing data
-1. Write report
-
-</div>
-
-&nbsp;

@@ -44,7 +44,7 @@ warbleR_options(wav.path = "./examples", flim = c(1, 10), wl = 220, ovlp = 90, p
 ```
 
 
-```{r, eval = FALSE}
+```{r , eval = FALSE}
 
 warbleR_options(wav.path = "./examples", ovlp = 90)
 
@@ -72,7 +72,7 @@ list.files(path = "./examples/mp3")
 
 We can also modify the sampling rate and/or dynamic range with `mp32wav()`:
 
-```{r, eval = FALSE}
+```{r , eval = FALSE}
 
 mp32wav(path = "./examples/mp3", samp.rate = 48, bit.depth = 24, overwrite = TRUE)
 
