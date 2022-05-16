@@ -325,4 +325,12 @@ to warbleR</a>
 - Quanitfying space size
 - Comparing sub-spaces
 
+**Quantifying acoustic signal degradation**
+<a href="https://marce10.github.io/OTS_BIR_2022/degradation.html" class="btn btn-warning btn-xs" role="button">Degradation</a>
+
+- Intro to baRulho 
+- Creating master sound files
+- Finding the position of re-recorded signals
+- Measuring acoustic degradation
+
 &nbsp; 
