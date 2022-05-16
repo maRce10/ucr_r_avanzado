@@ -510,14 +510,14 @@ div.tocify {
 <p> </p>
 <div id="sampling-frequency" class="section level2">
 <h2>Sampling frequency</h2>
-<p>Digitizing implies discretizing, which requires some sort of regular sampling. Sampling frequency refers to how many samples of the pressure level of the environment are taken per second. A 440 kHz sine wave recorded at 44100 Hz would have around 10 samples per cycle. This plot shows 2 cycles of a 440 kHz sine wave sampled (vertical dotted lines) at 44100 kHz:</p>
+<p>Digitizing implies discretizing, which requires some sort of regular sampling. Sampling frequency refers to how many samples of the pressure level of the environment are taken per second. A 440 Hz sine wave recorded at 44100 Hz would have around 10 samples per cycle. This plot shows 2 cycles of a 440 Hz sine wave sampled (vertical dotted lines) at 44100 kHz:</p>
 <p><img src="sound_files/figure-html/unnamed-chunk-3-1.png" width="100%" /></p>
 </div>
 <div id="nyquist-frequency" class="section level2">
 <h2>Nyquist frequency</h2>
-<p>Sampling should be good enough so the regularity of the sine wave can be reconstructed from the sampled data. Low sampling frequencies of a high frequency sine wave might not be able to provide enough information. For instance, the same 440 kHz sine wave sampled at 22050 Hz looks like this:</p>
+<p>Sampling should be good enough so the regularity of the sine wave can be reconstructed from the sampled data. Low sampling frequencies of a high frequency sine wave might not be able to provide enough information. For instance, the same 440 Hz sine wave sampled at 22050 Hz looks like this:</p>
 <p><img src="sound_files/figure-html/unnamed-chunk-4-1.png" width="100%" />  </p>
-<p>As you can see way less samples are taken per unit of time. The threshold at which samples cannot provide a reliable estimate of the regularity of a sine wave is called <strong>Nyquist frequency</strong> and corresponds to half of the frequency of the sine wave. This is how the 2 cycles of the 440 kHz would look like when sampled at its Nyquist frequency:</p>
+<p>As you can see way less samples are taken per unit of time. The threshold at which samples cannot provide a reliable estimate of the regularity of a sine wave is called <strong>Nyquist frequency</strong> and corresponds to half of the frequency of the sine wave. This is how the 2 cycles of the 440 Hz would look like when sampled at its Nyquist frequency:</p>
 <p><img src="sound_files/figure-html/unnamed-chunk-5-1.png" width="100%" /></p>
 <p> </p>
 </div>
@@ -601,7 +601,7 @@ div.tocify {
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>s4 <span class="ot">&lt;-</span> <span class="fu">ts</span>(<span class="at">data =</span> <span class="fu">runif</span>(<span class="dv">4000</span>, <span class="at">min =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">max =</span> <span class="dv">1</span>), <span class="at">start =</span> <span class="dv">0</span>, <span class="at">end =</span> <span class="fl">0.5</span>, <span class="at">frequency =</span> <span class="dv">8000</span>)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(s4)</span></code></pre></div>
-<pre><code>##  Time-Series [1:4001] from 0 to 0.5: 0.5984 0.4585 0.2736 -0.0122 -0.2308 ...</code></pre>
+<pre><code>##  Time-Series [1:4001] from 0 to 0.5: -0.312 0.609 -0.595 0.532 0.582 ...</code></pre>
 <p> </p>
 <p>The <code>frequency()</code> and <code>deltat()</code> functions return the sampling frequency (<span class="math inline">\(f\)</span>) and the time resolution (<span class="math inline">\(Delta t\)</span>) respectively:</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frequency</span>(s4)</span></code></pre></div>
