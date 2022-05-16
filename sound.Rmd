@@ -116,7 +116,7 @@ par(opar)
 &nbsp; 
 <div class="alert alert-success">
 
-#  <center><font size="6"><b>Digitizing sound</b></font></center>
+<center><font size="6"><b>Digitizing sound</b></font></center>
 
 &nbsp; 
 
@@ -172,11 +172,37 @@ points(y = sn.wv@left[seq(0, length(sn.wv), 10)], x = seq(0, duration(sn.wv), le
 
 As you can see way less samples are taken per unit of time. The threshold at which samples cannot provide a reliable estimate of the regularity of a sine wave is called **Nyquist frequency** and corresponds to half of the frequency of the sine wave. This is how the 2 cycles of the 440 kHz would look like when sampled at its Nyquist frequency:
 
+```{r, echo = FALSE, out.width="100%", fig.height= 3, warning=FALSE, message=FALSE}
+
+opar <- par()
+
+par(mar = c(4, 4, 1, 1), bg = "#dff0d8")
+# generate sine wave
+sn.wv <- tuneR::sine(freq = 400, duration = 200, xunit = "samples", samp.rate = 40000)
+sn.wv2 <- tuneR::sine(freq = 400, duration = 4, xunit = "samples", samp.rate = 800)
+
+plot(x = seq(0, duration(sn.wv), length.out = length(sn.wv)), y = sn.wv@left, type = "l", yaxt='n', ylim = c(-1, 1), lwd = lwd, col = col, xlab = "Time (s)", ylab = "Amplitude", xaxs='i')
+
+rect(xleft=0, xright= duration(sn.wv)/ 2, ybottom=-2, ytop=2, col = adjustcolor("gray", alpha.f = 0.3), border = NA)
+
+abline(h = 0, lty = 2)
+
+abline(v = seq(0, duration(sn.wv2), length.out = length(sn.wv2)), lwd = 0.5, lty = 2)
+
+sq <- seq(0, duration(sn.wv), length.out = length(sn.wv2))
+sq <- sq / max(sq)
+
+points(y = sn.wv@left[round(sq * length(sn.wv@left))+ 1], x = seq(0, duration(sn.wv2), length.out = length(sn.wv2)), col = "orange", pch = 20, cex = 2)
+
+
+
+```
+
 &nbsp; 
 
 ## Quantization
 
-Once we now at which point amplitude samples will be taken we just need to measure it. This process is called **quantization**. The range of amplitude values is discretized in a number equals to `2 ^ bits`. Hence, it involves some rounding of the actual amplitude values and some data loss. This is the same 440 Hz sine wave recorded at 44100 kHz quantized at 2 bits: 
+Once we now at which point amplitude samples will be taken we just need to measure it. This process is called **quantization**. The range of amplitude values is discretized in a number of intervals equals to `2 ^ bits`. Hence, it involves some rounding of the actual amplitude values and some data loss. This is the same 440 Hz sine wave recorded at 44100 kHz quantized at 2 bits: 
 
 ```{r, echo = FALSE, out.width="100%", fig.height= 3, warning=FALSE, message=FALSE}
 
@@ -210,7 +236,7 @@ points(y = quant[seq(0, length(sn.wv), 10)], x = seq(0, duration(sn.wv), length.
 
 &nbsp; 
 
-Rounding and data loss is more obvious if we remove the original sine wave and bind the sampled points with lines:
+Rounding and data loss is more obvious if we bind the sampled points with lines:
 
 ```{r, echo = FALSE, out.width="100%", fig.height= 3, warning=FALSE, message=FALSE}
 

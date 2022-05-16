@@ -103,11 +103,13 @@ editor_options:
 
 ### Homework
 
-1. Use the function `query_xc()` to check the availability of recordings for some bird species you have in mind for your project (do not download at this step) ([*check this brief tutorial on how to do that*](https://marce10.github.io/OTS_BIR_2022/get_xc_recordings.html))
+1. Use the function `query_xc()` to check the availability of recordings for any bird species (do not download at this step) ([*check this brief tutorial on how to do that*](https://marce10.github.io/OTS_BIR_2022/get_xc_recordings.html))
 
-1. Subset the data frame returned by the function to get the subspecies/populations and vocalization type you are interested in (using base R subsetting tools)
+1. Subset the data frame returned by the function to get a subset of subspecies/populations or recordings from a specific country and for certain vocalization type (using base R subsetting tools)
 
 1. Download the associated recordings using `query_xc()` again
+
+1. Explore the recordings with any spectrogram creating GUI program
 
 </div>
 
