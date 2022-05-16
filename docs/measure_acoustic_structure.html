@@ -13,8 +13,8 @@
 
 <title>measure_acoustic_structure.knit</title>
 
-<script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -65,6 +65,7 @@ if (window.hljs) {
 
 
 
+
 <style type = "text/css">
 .main-container {
   max-width: 940px;
@@ -85,6 +86,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -316,12 +320,12 @@ div.tocify {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">BOKU bioacoustics R 2022</a>
+      <a class="navbar-brand" href="index.html">OTS Bioacoustic Analysis in R 2022</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -329,7 +333,7 @@ div.tocify {
   <a href="program.html">Program</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Tutorials
      
     <span class="caret"></span>
@@ -368,6 +372,9 @@ div.tocify {
     <li>
       <a href="quality_checks.html">Quality checks</a>
     </li>
+    <li>
+      <a href="measure_structure_green_hermit.html">Measure structure on XC recordings</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -392,13 +399,13 @@ div.tocify {
 <font size="7"><b>Measures of acoustic structure</b></font>
 </center></h1>
 <h3 class="subtitle"><center>
-<font size="4"><b>Analysis of animal acoustic signals in R</b> <br> BOKU International Wildlife Lectures</font>
+<font size="4"><b>Bioacoustic Analysis in R</b> <br> Organization for Tropical Studies</font>
 </center></h3>
 <h4 class="author"><center>
 <font size="3"><a href="http://marceloarayasalas.weebly.com/">Marcelo Araya-Salas, PhD</a></font>
 </center></h4>
 <h4 class="date"><center>
-“2022-03-16”
+“2022-05-15”
 </center></h4>
 
 </div>
@@ -11040,7 +11047,7 @@ Phae.long3.wav
 </center>
 <p> </p>
 <p>An extended selection table with response calls can be read from github as follows:</p>
-<pre class="r"><code>download.file(url = &quot;https://github.com/maRce10/BOKU-Analysis-of-animal-acoustic-signals-in-R-2022/raw/master/examples/response_calls.RDS&quot;, 
+<pre class="r"><code>download.file(url = &quot;https://github.com/maRce10/OTS_BIR_2022/raw/master/examples/response_calls.RDS&quot;, 
  destfile = &quot;./examples/response_calls.RDS&quot;)
 
 response_calls &lt;- readRDS(&quot;./examples/response_calls.RDS&quot;)</code></pre>
@@ -11063,18 +11070,18 @@ response_calls &lt;- readRDS(&quot;./examples/response_calls.RDS&quot;)</code></
 <li><p>Salamon, J., Jacoby, C., &amp; Bello, J. P. (2014). A dataset and taxonomy for urban sound research. In Proceedings of the 22nd ACM international conference on Multimedi. 1041-1044.</p></li>
 </ol>
 <p><font size="4">Session information</font></p>
-<pre><code>## R version 4.1.1 (2021-08-10)
+<pre><code>## R version 4.1.0 (2021-05-18)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
 ## Running under: Ubuntu 20.04.2 LTS
 ## 
 ## Matrix products: default
-## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0
-## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0
+## BLAS:   /usr/lib/x86_64-linux-gnu/atlas/libblas.so.3.10.3
+## LAPACK: /usr/lib/x86_64-linux-gnu/atlas/liblapack.so.3.10.3
 ## 
 ## locale:
-##  [1] LC_CTYPE=es_ES.UTF-8       LC_NUMERIC=C              
-##  [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=es_ES.UTF-8    
-##  [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=es_ES.UTF-8   
+##  [1] LC_CTYPE=pt_BR.UTF-8       LC_NUMERIC=C              
+##  [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=pt_BR.UTF-8    
+##  [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=pt_BR.UTF-8   
 ##  [7] LC_PAPER=es_CR.UTF-8       LC_NAME=C                 
 ##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
 ## [11] LC_MEASUREMENT=es_CR.UTF-8 LC_IDENTIFICATION=C       
@@ -11083,22 +11090,22 @@ response_calls &lt;- readRDS(&quot;./examples/response_calls.RDS&quot;)</code></
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] kableExtra_1.3.4   warbleR_1.1.27     NatureSounds_1.0.4 knitr_1.37        
-## [5] seewave_2.2.0      tuneR_1.3.3.1     
+## [1] kableExtra_1.3.1   warbleR_1.1.27     NatureSounds_1.0.4 knitr_1.39        
+## [5] seewave_2.2.0      tuneR_1.4.0       
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] Rcpp_1.0.8        highr_0.9         bslib_0.2.5.1     compiler_4.1.1   
+##  [1] Rcpp_1.0.8.3      highr_0.9         bslib_0.2.5.1     compiler_4.1.0   
 ##  [5] jquerylib_0.1.4   Sim.DiffProc_4.8  shinyBS_0.61      bitops_1.0-7     
-##  [9] tools_4.1.1       digest_0.6.29     viridisLite_0.4.0 jsonlite_1.7.2   
-## [13] evaluate_0.15     lifecycle_1.0.1   fftw_1.0-6.1      rlang_1.0.2      
-## [17] cli_3.2.0         rstudioapi_0.13   yaml_2.3.5        parallel_4.1.1   
-## [21] xfun_0.30         fastmap_1.1.0     xml2_1.3.2        stringr_1.4.0    
-## [25] httr_1.4.2        systemfonts_1.0.2 sass_0.4.0        webshot_0.5.2    
-## [29] svglite_2.0.0     glue_1.6.2        R6_2.5.1          dtw_1.22-3       
-## [33] pbapply_1.5-0     soundgen_2.2.0    rmarkdown_2.10    magrittr_2.0.2   
-## [37] scales_1.1.1      htmltools_0.5.2   MASS_7.3-54       rvest_1.0.1      
-## [41] colorspace_2.0-3  Deriv_4.1.3       stringi_1.7.6     proxy_0.4-26     
-## [45] munsell_0.5.0     signal_0.7-7      RCurl_1.98-1.6    rjson_0.2.21</code></pre>
+##  [9] tools_4.1.0       digest_0.6.29     viridisLite_0.4.0 jsonlite_1.8.0   
+## [13] evaluate_0.15     lifecycle_1.0.1   fftw_1.0-7        rlang_1.0.2      
+## [17] cli_3.1.0         rstudioapi_0.13   yaml_2.3.5        parallel_4.1.0   
+## [21] xfun_0.31         fastmap_1.1.0     xml2_1.3.2        stringr_1.4.0    
+## [25] httr_1.4.2        sass_0.4.0        webshot_0.5.2     glue_1.6.2       
+## [29] R6_2.5.1          dtw_1.22-3        pbapply_1.5-0     soundgen_2.1.0   
+## [33] rmarkdown_2.13    magrittr_2.0.3    scales_1.1.1      htmltools_0.5.2  
+## [37] MASS_7.3-54       rvest_1.0.0       colorspace_2.0-2  Deriv_4.1.3      
+## [41] stringi_1.7.6     proxy_0.4-26      munsell_0.5.0     signal_0.7-7     
+## [45] RCurl_1.98-1.6    rjson_0.2.21</code></pre>
 </div>
 
 
