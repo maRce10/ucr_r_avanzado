@@ -486,7 +486,7 @@ div.tocify {
 <font size="3"><a href="http://marceloarayasalas.weebly.com/">Marcelo Araya-Salas, PhD</a></font>
 </center></h4>
 <h4 class="date"><center>
-“2022-05-15”
+“2022-05-16”
 </center></h4>
 
 </div>
@@ -502,7 +502,7 @@ div.tocify {
 <p> </p>
 <p>Sounds waves are typically quantified by their frequency (number of cycles per second, Hz) and amplitude (relative intensity).</p>
 <p><img src="sound_files/figure-html/unnamed-chunk-2-1.png" width="85%" /></p>
- 
+<p> </p>
 <div class="alert alert-success">
 <center>
 <font size="6"><b>Digitizing sound</b></font>
@@ -523,16 +523,18 @@ div.tocify {
 </div>
 <div id="quantization" class="section level2">
 <h2>Quantization</h2>
-<p>Once we now at which point amplitude samples will be taken we just need to measure it. This process is called <strong>quantization</strong>. The range of amplitude values is discretized in a number of intervals equals to <code>2 ^ bits</code>. Hence, it involves some rounding of the actual amplitude values and some data loss. This is the same 440 Hz sine wave recorded at 44100 kHz quantized at 2 bits:</p>
+<p>Once we know at which point amplitude samples will be taken we just need to measure it. This process is called <strong>quantization</strong>. The range of amplitude values is discretized in a number of intervals equals to <code>2 ^ bits</code>. Hence, it involves some rounding of the actual amplitude values and some data loss. This is the same 440 Hz sine wave recorded at 44100 kHz quantized at 2 bits (2^2 = 4 intervals):</p>
 <p><img src="sound_files/figure-html/unnamed-chunk-6-1.png" width="100%" /></p>
 <p> </p>
 <p>Rounding and data loss is more obvious if we bind the sampled points with lines:</p>
 <p><img src="sound_files/figure-html/unnamed-chunk-7-1.png" width="100%" />  </p>
-<p>This is the same signal quantized at 8 bits:</p>
+<p>This is the same signal quantized at 3 bits (2^3 = 8 intervals):</p>
 <p><img src="sound_files/figure-html/unnamed-chunk-8-1.png" width="100%" />  </p>
-<p>… and 16 bits:</p>
+<p>4 bits (2^4 = 16 intervals):</p>
 <p><img src="sound_files/figure-html/unnamed-chunk-9-1.png" width="100%" />  </p>
-<p>At this point quantization involves relatively small data loss.</p>
+<p>.. and 8 bits (2^8 = 256 intervals):</p>
+<p><img src="sound_files/figure-html/unnamed-chunk-10-1.png" width="100%" />  </p>
+<p>At this point quantization involves very little information loss. 16 bits is probably the most common dynamic range used nowadays. As you can imagine, the high number of intervals (2^16 = 65536) allows for great precision in the quantization of amplitude.</p>
 </div>
 </div>
 <p> </p>
@@ -562,7 +564,7 @@ div.tocify {
 <p> </p>
 <p>These sequences of values only make sense when specifying the sampling rate at which they were created:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">oscillo</span>(s1, <span class="at">f =</span> <span class="dv">8000</span>, <span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="fl">0.01</span>)</span></code></pre></div>
-<p><img src="sound_files/figure-html/unnamed-chunk-11-1.png" width="672" />  </p>
+<p><img src="sound_files/figure-html/unnamed-chunk-12-1.png" width="672" />  </p>
 </div>
 <div id="matrices" class="section level3">
 <h3>Matrices</h3>
@@ -574,7 +576,7 @@ div.tocify {
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(s2)</span></code></pre></div>
 <pre><code>## [1] 8000    1</code></pre>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">oscillo</span>(s2, <span class="at">f =</span> <span class="dv">8000</span>, <span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="fl">0.01</span>)</span></code></pre></div>
-<p><img src="sound_files/figure-html/unnamed-chunk-12-1.png" width="672" />  </p>
+<p><img src="sound_files/figure-html/unnamed-chunk-13-1.png" width="672" />  </p>
 <p>If the matrix has more than one column, only the first column will be considered:</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">8000</span>)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -585,7 +587,7 @@ div.tocify {
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(s3)</span></code></pre></div>
 <pre><code>## [1] 8000    2</code></pre>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">oscillo</span>(s3, <span class="at">f =</span> <span class="dv">8000</span>, <span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="fl">0.01</span>)</span></code></pre></div>
-<p><img src="sound_files/figure-html/unnamed-chunk-13-1.png" width="672" />  </p>
+<p><img src="sound_files/figure-html/unnamed-chunk-14-1.png" width="672" />  </p>
 </div>
 <div id="time-series" class="section level3">
 <h3>Time series</h3>
@@ -599,7 +601,7 @@ div.tocify {
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>s4 <span class="ot">&lt;-</span> <span class="fu">ts</span>(<span class="at">data =</span> <span class="fu">runif</span>(<span class="dv">4000</span>, <span class="at">min =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">max =</span> <span class="dv">1</span>), <span class="at">start =</span> <span class="dv">0</span>, <span class="at">end =</span> <span class="fl">0.5</span>, <span class="at">frequency =</span> <span class="dv">8000</span>)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(s4)</span></code></pre></div>
-<pre><code>##  Time-Series [1:4001] from 0 to 0.5: -0.8568 0.4143 -0.9964 0.0164 0.1355 ...</code></pre>
+<pre><code>##  Time-Series [1:4001] from 0 to 0.5: 0.5984 0.4585 0.2736 -0.0122 -0.2308 ...</code></pre>
 <p> </p>
 <p>The <code>frequency()</code> and <code>deltat()</code> functions return the sampling frequency (<span class="math inline">\(f\)</span>) and the time resolution (<span class="math inline">\(Delta t\)</span>) respectively:</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frequency</span>(s4)</span></code></pre></div>
@@ -609,14 +611,14 @@ div.tocify {
 <p> </p>
 <p>As the frequency is incorporated into the <code>ts</code> objects, it is not necessary to specify it when used within functions dedicated to audio:</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">oscillo</span>(s4, <span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="fl">0.01</span>)</span></code></pre></div>
-<p><img src="sound_files/figure-html/unnamed-chunk-17-1.png" width="672" />  </p>
+<p><img src="sound_files/figure-html/unnamed-chunk-18-1.png" width="672" />  </p>
 <p>In the case of multiple time series, <strong>seewave</strong> functions will consider only the first series:</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>s5 <span class="ot">&lt;-</span> <span class="fu">ts</span>(<span class="at">data =</span> s3, <span class="at">f =</span> <span class="dv">8000</span>)</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(s5)</span></code></pre></div>
 <pre><code>## [1] &quot;mts&quot;    &quot;ts&quot;     &quot;matrix&quot;</code></pre>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">oscillo</span>(s5, <span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="fl">0.01</span>)</span></code></pre></div>
-<p><img src="sound_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p><img src="sound_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 </div>
 </div>
 <div id="dedicated-r-classes-for-sound" class="section level2">
@@ -870,7 +872,7 @@ div.tocify {
 <span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb78-4"><a href="#cb78-4" aria-hidden="true" tabindex="-1"></a><span class="co"># plot</span></span>
 <span id="cb78-5"><a href="#cb78-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(wav<span class="sc">@</span>left)</span></code></pre></div>
-<p><img src="sound_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
+<p><img src="sound_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
 <p> </p>
 <ul>
 <li>Use the function <code>downsample()</code> to reduce the sampling rate of ‘wav’ (below 44100) and plot the output object. Decrease the sampling rate until you cannot recognize the wave pattern from the original wave object. Try several values so you get a sense at which sampling rate this happens.</li>
