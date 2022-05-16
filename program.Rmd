@@ -158,7 +158,7 @@ spectrograms</a>
 
 ### Homework
 
-1. Annotate target signals using Raven Pro (a subset of the recordings if working on automatic detection)
+1. Annotate target signals in the xeno-canto recordings using Raven Pro
 
 </div>
 
