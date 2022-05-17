@@ -107,15 +107,7 @@ oscillo(tico, from = 0, to = 1, colwave = "blue")
 
 ```
 
-
-Divide the graphic window into several panels:
-```{r}
-
-oscillo(tico, f = 22050, k = 2, j = 2, byrow = TRUE)
-
-```
-
-Many other components of the chart can be modified, for example:
+As with most **seewave** functions many other components of the chart can be modified, for example:
 ```{r}
 
 # grey background
@@ -252,6 +244,16 @@ tmr
 
 &nbsp; 
 
+The output is a list with the following elements:
+
+- **s**: duration of detected signals (in s)
+- **p**: duration of pauses (i.e. gaps) between signals
+- **r**: ratio of **s** to **r** 
+- **s.start**: start of signals
+- **end**: end of signals 
+
+&nbsp; 
+
 <div class="alert alert-info">
 
 <font size="5">Exercise</font> 
@@ -302,17 +304,6 @@ pks
 
 &nbsp; 
 
-.. or into the `localpeaks()` function to calculate amplitude peaks in different frequency bands:
-
-```{r, eval = TRUE, echo = TRUE, warning = FALSE}
-
-pks <- localpeaks(spc, bands = 6)
-
-pks
-
-```
-
-
 
 ## Wave manipulation
 
@@ -359,14 +350,6 @@ duration(tico5)
 
 ```
 
-
-Remove silence:
-
-```{r, eval = TRUE, echo = TRUE, warning = FALSE}
-
-tico6 <- zapsilw(tico5)
-
-```
 
 &nbsp; 
 
@@ -512,50 +495,6 @@ n2.spcp <- specprop(n2.sp, f = note2@samp.rate)
 as.data.frame(n2.spcp)
 
 ```
-
-&nbsp; 
-
-Measure the (auto)correlation between 2 amplitude envelopes (time):
-
-```{r, eval = TRUE, echo = TRUE, warning = FALSE}
-
-# get first note
-note1 <- cutw(tico, from=0.1, to=0.4, output="Wave")
-
-ce <- corenv(note1, note2, f = 22050)
-
-ce[-1]
-
-```
-
-&nbsp; 
-
-Measure the (auto)correlation between 2 frequency spectra:
-
-```{r, eval = TRUE, echo = TRUE, warning = FALSE}
-
-# get power spectra
-n1.sp <- spec(note1, plot = FALSE)
-n2.sp <- spec(note2, plot = FALSE)
-
-csp <- corspec(n1.sp, n2.sp, f = 22050)
-
-csp[-1]
-
-```
-
-&nbsp; 
-
-
-Measure spectrographic cross-correlation (auto-correlation between 2 spectrograms):
-
-```{r, eval = TRUE, echo = TRUE, warning = FALSE}
-
-cc <- covspectro(note1, note2, f = 22050, n = 11)
-
-cc
-```
-
 
 &nbsp; 
 

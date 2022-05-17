@@ -158,7 +158,7 @@ spectrograms</a>
 
 ### Homework
 
-1. Annotate target signals in the xeno-canto recordings using Raven Pro
+1. Use Raven Pro to annotate some of the signals found in the xeno-canto recordings you downloaded previously
 
 </div>
 
@@ -174,8 +174,7 @@ spectrograms</a>
 
 ### Readings 
 
-- Gibb, R., Browning, E., Glover‐Kapfer, P., & Jones, K. E. (2019). [Emerging opportunities and challenges for passive acoustics in ecological assessment and monitoring](https://besjournals.onlinelibrary.wiley.com/doi/pdfdirect/10.1111/2041-210X.13101). Methods in Ecology and Evolution, 10(2), 169-185.
-
+- Arasco, A. G., Manser, M., Watson, S. K., Kyabulima, S., Radford, A. N., Cant, M. A., & Garcia, M. (2022). [Testing the acoustic adaptation hypothesis with vocalizations from three mongoose species](https://www.sciencedirect.com/science/article/pii/S0003347222000574). Animal Behaviour, 187, 71-95.
 
 </div>
 
@@ -189,24 +188,18 @@ spectrograms</a>
 -   Filtering and re-sampling
 -   Acoustic measurements
 
-**Automatic detection**
-<a href="https://marce10.github.io/OTS_BIR_2022/ohun.html" class="btn btn-warning btn-xs" role="button">Automatic detection</a>
+**Quantifying acoustic signal structure**
+<a href="https://marce10.github.io/OTS_BIR_2022/measure_acoustic_structure.html" class="btn btn-warning btn-xs" role="button">Quantify structure</a>
 
--   ohun package for optimize acoustic signal detection
--   Detection using amplitude, frequency, and time filters
-    (`ohun::energy_detector()`)
--   Detection using cross-correlation (`ohun::template_detector()`)
--   Frequency range detection (`warbleR::freq_range()` and `warbleR::freq_range_detec()`)
-
-**Intro to warbleR**
-<a href="https://marce10.github.io/OTS_BIR_2022/intro_to_warbler.html" class="btn btn-warning btn-xs" role="button">Intro
-to warbleR</a>
-
--   Intro to warbleR
--   Selection tables
--   Extended selection tables
--   Selection table manipulation
--   warbleR functions and the bioacoustics analysis workflow
+-   Spectro-temporal measurements (`spectro_analysis()`)
+-   Parameter description
+-   Harmonic content
+-   Cepstral coefficients (`mfcc_stats()`)
+-   Cross-correlation (`cross_correlation()`)
+-   Dynamic time warping (`freq_DTW()`)
+-   Signal-to-noise ratio (`sig2noise()`)
+-   Inflections (`inflections()`)
+-   Parameters at other levels (`song_analysis()`)
 
 &nbsp; 
 
@@ -256,19 +249,6 @@ to warbleR</a>
 -   Double-checking selection tables (`check_sels()`, `spectrograms()`,
     `full_spectrograms()` & `catalog()`)
 -   Re-adjusting selections (`tailor_sels()`)
-
-**Quantifying acoustic signal structure**
-<a href="https://marce10.github.io/OTS_BIR_2022/measure_acoustic_structure.html" class="btn btn-warning btn-xs" role="button">Quantify structure</a>
-
--   Spectro-temporal measurements (`spectro_analysis()`)
--   Parameter description
--   Harmonic content
--   Cepstral coefficients (`mfcc_stats()`)
--   Cross-correlation (`cross_correlation()`)
--   Dynamic time warping (`freq_DTW()`)
--   Signal-to-noise ratio (`sig2noise()`)
--   Inflections (`inflections()`)
--   Parameters at other levels (`song_analysis()`)
 
 
 **Characterizing hierarchical levels in acoustic signals**
@@ -326,3 +306,29 @@ to warbleR</a>
 - Comparing sub-spaces
 
 &nbsp; 
+
+
+```{r, eval = FALSE, echo = FALSE}
+
+**Automatic detection**
+<a href="https://marce10.github.io/OTS_BIR_2022/ohun.html" class="btn btn-warning btn-xs" role="button">Automatic detection</a>
+
+-   ohun package for optimize acoustic signal detection
+-   Detection using amplitude, frequency, and time filters
+    (`ohun::energy_detector()`)
+-   Detection using cross-correlation (`ohun::template_detector()`)
+-   Frequency range detection (`warbleR::freq_range()` and `warbleR::freq_range_detec()`)
+
+**Package warbleR**
+<a href="https://marce10.github.io/OTS_BIR_2022/intro_to_warbler.html" class="btn btn-warning btn-xs" role="button">Intro
+to warbleR</a>
+
+-   Intro to warbleR
+-   Selection tables
+-   Extended selection tables
+-   Selection table manipulation
+-   warbleR functions and the bioacoustics analysis workflow
+
+- Gibb, R., Browning, E., Glover‐Kapfer, P., & Jones, K. E. (2019). [Emerging opportunities and challenges for passive acoustics in ecological assessment and monitoring](https://besjournals.onlinelibrary.wiley.com/doi/pdfdirect/10.1111/2041-210X.13101). Methods in Ecology and Evolution, 10(2), 169-185.´
+```
+

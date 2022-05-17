@@ -403,7 +403,7 @@ div.tocify {
 <font size="3"><a href="http://marceloarayasalas.weebly.com/">Marcelo Araya-Salas, PhD</a></font>
 </center></h4>
 <h4 class="date"><center>
-“2022-05-14”
+“2022-05-17”
 </center></h4>
 
 </div>
@@ -451,10 +451,7 @@ data(sheep)</code></pre>
 <p>The visualizations in <strong>seewave</strong> allow a high degree of customization. For example change the color:</p>
 <pre class="r"><code>oscillo(tico, from = 0, to = 1, colwave = &quot;blue&quot;)</code></pre>
 <p><img src="seewave_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<p>Divide the graphic window into several panels:</p>
-<pre class="r"><code>oscillo(tico, f = 22050, k = 2, j = 2, byrow = TRUE)</code></pre>
-<p><img src="seewave_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
-<p>Many other components of the chart can be modified, for example:</p>
+<p>As with most <strong>seewave</strong> functions many other components of the chart can be modified, for example:</p>
 <pre class="r"><code># grey background
 op &lt;- par(bg = &quot;grey&quot;)
 
@@ -466,18 +463,18 @@ oscillo(tico, f = 22050, k = 4 , j = 1,
         colline = &quot;white&quot;,
         colaxis = &quot;blue&quot;,
         coly0 = &quot;grey50&quot;)</code></pre>
-<p><img src="seewave_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="seewave_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p> </p>
 <p>We can also generate other representations of “amplitude vs. time”, such as “amplitude envelopes”:</p>
 <pre class="r"><code>env(tico, f = 22050, colwave = &quot;blue&quot;)</code></pre>
-<p><img src="seewave_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="seewave_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>We can superimpose it on the oscillogram to facilitate comparison:</p>
 <pre class="r"><code>oscillo(tico, f = 22050)
 
 par(new=TRUE)
 
 env(tico, f = 22050, colwave = &quot;blue&quot;)</code></pre>
-<p><img src="seewave_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><img src="seewave_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p> </p>
 <div class="alert alert-success">
 <center>
@@ -507,7 +504,7 @@ env(tico, f = 22050, colwave = &quot;blue&quot;)</code></pre>
 <p>We can use these amplitude “hills” to define segments in the “wave” object using the <code>timer()</code> function. The “ssmooth” argument allows us to use a sliding window:</p>
 <pre class="r"><code>tmr &lt;- timer(orni, f = 22050, threshold = 5, ssmooth = 40, 
              bty = &quot;l&quot;, colval = &quot;blue&quot;)</code></pre>
-<p><img src="seewave_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><img src="seewave_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <pre class="r"><code>tmr</code></pre>
 <pre><code>## $s
 ## [1] 6.013985e-02 5.918741e-02 5.134111e-02 4.535434e-05 5.728253e-02
@@ -531,6 +528,15 @@ env(tico, f = 22050, colwave = &quot;blue&quot;)</code></pre>
 ## $first
 ## [1] &quot;pause&quot;</code></pre>
 <p> </p>
+<p>The output is a list with the following elements:</p>
+<ul>
+<li><strong>s</strong>: duration of detected signals (in s)</li>
+<li><strong>p</strong>: duration of pauses (i.e. gaps) between signals</li>
+<li><strong>r</strong>: ratio of <strong>s</strong> to <strong>r</strong></li>
+<li><strong>s.start</strong>: start of signals</li>
+<li><strong>end</strong>: end of signals</li>
+</ul>
+<p> </p>
 <div class="alert alert-info">
 <p><font size="5">Exercise</font></p>
 <ul>
@@ -545,32 +551,21 @@ env(tico, f = 22050, colwave = &quot;blue&quot;)</code></pre>
 <pre class="r"><code>mspc &lt;- meanspec(orni, f = 22050, wl = 512, col = &quot;red&quot;)
 
 polygon(rbind(c(0, 0), mspc), col = &quot;red&quot;)</code></pre>
-<p><img src="seewave_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p><img src="seewave_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <pre class="r"><code>nrow(mspc)</code></pre>
 <pre><code>## [1] 256</code></pre>
 <p>The <code>spec()</code> function, on the other hand, calculates the spectrum for the entire signal:</p>
 <pre class="r"><code>spc &lt;- spec(orni, f=22050, wl=512, col = &quot;red&quot;)</code></pre>
-<p><img src="seewave_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p><img src="seewave_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <pre class="r"><code>nrow(spc)</code></pre>
 <pre><code>## [1] 7921</code></pre>
 <p>The result of <code>spec()</code> or <code>meanspec()</code> can be input into the <code>fpeaks()</code> function to calculate amplitude peaks:</p>
 <pre class="r"><code>pks &lt;- fpeaks(spc, nmax = 1)</code></pre>
-<p><img src="seewave_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><img src="seewave_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <pre class="r"><code>pks</code></pre>
 <pre><code>##          [,1] [,2]
 ## [1,] 4.860409    1</code></pre>
 <p> </p>
-<p>.. or into the <code>localpeaks()</code> function to calculate amplitude peaks in different frequency bands:</p>
-<pre class="r"><code>pks &lt;- localpeaks(spc, bands = 6)</code></pre>
-<p><img src="seewave_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
-<pre class="r"><code>pks</code></pre>
-<pre><code>##            freq        amp
-## [1,] 0.03618861 0.02763496
-## [2,] 2.39679965 0.24896255
-## [3,] 4.86040904 1.00000000
-## [4,] 5.61062681 0.32286909
-## [5,] 7.70121512 0.13873937
-## [6,] 9.22531246 0.01628412</code></pre>
 </div>
 <div id="wave-manipulation" class="section level2">
 <h2>Wave manipulation</h2>
@@ -578,17 +573,17 @@ polygon(rbind(c(0, 0), mspc), col = &quot;red&quot;)</code></pre>
 <pre class="r"><code>tico2 &lt;- cutw(tico, to = 1, output = &quot;Wave&quot;)
 
 oscillo(tico2)</code></pre>
-<p><img src="seewave_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p><img src="seewave_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <p>Add segments:</p>
 <pre class="r"><code>tico3 &lt;- pastew(tico, tico2, output = &quot;Wave&quot;)
 
 oscillo(tico3)</code></pre>
-<p><img src="seewave_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p><img src="seewave_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <p>Remove segments:</p>
 <pre class="r"><code>tico4 &lt;- deletew(tico3, output = &quot;Wave&quot;, from = duration(tico), to = duration(tico3))
 
 oscillo(tico4)</code></pre>
-<p><img src="seewave_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p><img src="seewave_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <p>Add segments of silence:</p>
 <pre class="r"><code>tico5 &lt;- addsilw(tico, at = &quot;end&quot;, d = 1, output = &quot;Wave&quot;)
 
@@ -596,9 +591,6 @@ duration(tico)</code></pre>
 <pre><code>## [1] 1.794921</code></pre>
 <pre class="r"><code>duration(tico5)</code></pre>
 <pre><code>## [1] 2.794921</code></pre>
-<p>Remove silence:</p>
-<pre class="r"><code>tico6 &lt;- zapsilw(tico5)</code></pre>
-<p><img src="seewave_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 <p> </p>
 <div class="alert alert-info">
 <p><font size="5">Exercise</font></p>
@@ -617,10 +609,10 @@ rev(v1)</code></pre>
 <p>Filter out frequency bands:</p>
 <pre class="r"><code># original
 spectro(tico, scale = FALSE, grid = FALSE, flim = c(2, 6))</code></pre>
-<p><img src="seewave_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p><img src="seewave_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <pre class="r"><code># filtered
 spectro(ffilter(tico, from = 4000, to = 6500, output = &quot;Wave&quot;), scale = FALSE, grid = FALSE, flim = c(2, 6))</code></pre>
-<p><img src="seewave_files/figure-html/unnamed-chunk-23-2.png" width="672" /></p>
+<p><img src="seewave_files/figure-html/unnamed-chunk-20-2.png" width="672" /></p>
 <p>Change frequency (pitch):</p>
 <pre class="r"><code># cut the first
 tico6 &lt;- cutw(tico, from = 0, to = 0.5, output = &quot;Wave&quot;)
@@ -642,7 +634,7 @@ spectro(tico6, scale = FALSE, grid = FALSE, flim = c(1, 8), main = &quot;origina
 spectro(tico.lfs, scale = FALSE, grid = FALSE, flim = c(1, 8), main = &quot;1 kHz up&quot;)
 
 spectro(tico.lfs.neg, scale = FALSE, grid = FALSE, flim = c(1, 8), main = &quot;1 kHz down&quot;)</code></pre>
-<p><img src="seewave_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p><img src="seewave_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 <pre class="r"><code>par(opar)</code></pre>
 </div>
 <div id="measurements" class="section level2">
@@ -654,7 +646,7 @@ spectro(tico.lfs.neg, scale = FALSE, grid = FALSE, flim = c(1, 8), main = &quot;
 par(new=TRUE)
 
 ff &lt;- fund(sheep, fmax = 300, ann = FALSE, threshold=6, col = &quot;green&quot;)</code></pre>
-<p><img src="seewave_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p><img src="seewave_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
 <pre class="r"><code>head(ff)</code></pre>
 <pre><code>##               x          y
 ## [1,] 0.00000000         NA
@@ -671,7 +663,7 @@ ff &lt;- fund(sheep, fmax = 300, ann = FALSE, threshold=6, col = &quot;green&quo
 df &lt;- dfreq(sheep, f = 8000, fmax = 300, type = &quot;p&quot;, pch = 24, ann = FALSE, threshold = 6, col = &quot;red&quot;)
 
 head(df)</code></pre>
-<p><img src="seewave_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<p><img src="seewave_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 <pre><code>##               x        y
 ## [1,] 0.00000000       NA
 ## [2,] 0.06677027       NA
@@ -685,7 +677,7 @@ head(df)</code></pre>
 note2 &lt;- cutw(tico, from=0.6, to=0.9, output=&quot;Wave&quot;)
 
 n2.as &lt;- acoustat(note2)</code></pre>
-<p><img src="seewave_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<p><img src="seewave_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
 <pre class="r"><code>as.data.frame(n2.as[3:8])</code></pre>
 <pre><code>##      time.P1    time.M   time.P2  time.IPR  freq.P1   freq.M
 ## 1 0.02727273 0.1090909 0.2181818 0.1909091 3.445312 4.263574</code></pre>
@@ -701,53 +693,6 @@ as.data.frame(n2.spcp)</code></pre>
 ## 1 4346.889 694.2615 4306.641 43.39134 4349.707 3789.844 4780.371 990.5273
 ##       cent skewness kurtosis      sfm        sh     prec
 ## 1 4346.889 2.224789 6.645413 0.023993 0.6968186 43.06641</code></pre>
-<p> </p>
-<p>Measure the (auto)correlation between 2 amplitude envelopes (time):</p>
-<pre class="r"><code># get first note
-note1 &lt;- cutw(tico, from=0.1, to=0.4, output=&quot;Wave&quot;)
-
-ce &lt;- corenv(note1, note2, f = 22050)</code></pre>
-<p><img src="seewave_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
-<pre class="r"><code>ce[-1]</code></pre>
-<pre><code>## $rmax
-## [1] 0.7632081
-## 
-## $p
-## [1] 0
-## 
-## $t
-## [1] -0.2101587</code></pre>
-<p> </p>
-<p>Measure the (auto)correlation between 2 frequency spectra:</p>
-<pre class="r"><code># get power spectra
-n1.sp &lt;- spec(note1, plot = FALSE)
-n2.sp &lt;- spec(note2, plot = FALSE)
-
-csp &lt;- corspec(n1.sp, n2.sp, f = 22050)</code></pre>
-<p><img src="seewave_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
-<pre class="r"><code>csp[-1]</code></pre>
-<pre><code>## $rmax
-## [1] 0.7218051
-## 
-## $p
-## [1] 0
-## 
-## $f
-## [1] -0.3467191</code></pre>
-<p> </p>
-<p>Measure spectrographic cross-correlation (auto-correlation between 2 spectrograms):</p>
-<pre class="r"><code>cc &lt;- covspectro(note1, note2, f = 22050, n = 11)</code></pre>
-<p><img src="seewave_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
-<pre class="r"><code>cc</code></pre>
-<pre><code>## $cov
-##  [1] 0.00000000 0.12210675 0.22253150 0.30101180 0.45911810 0.43581161
-##  [7] 0.30967577 0.17589212 0.08227063 0.01858066 0.00000000
-## 
-## $covmax
-## [1] 0.4591181
-## 
-## $t
-## [1] -0.05</code></pre>
 <p> </p>
 <div class="alert alert-info">
 <p><font size="5">Exercise</font></p>

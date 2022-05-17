@@ -569,6 +569,18 @@ spectro(tico2,  f = 22050, wl = 512, ovlp = 90,
 
 ```
 
+Use contours instead of colors:
+```{r}
+
+blanc <- colorRampPalette("white")
+
+spectro(tico2, contlevels=seq(-30, 0, 4),
+cont=TRUE, colcont=temp.colors(8),
+palette=blanc, scale=FALSE,  flim = c(2, 6))
+```
+
+
+
 &nbsp; 
 
 <div class="alert alert-info">
@@ -605,6 +617,142 @@ spectro(tico2,  f = 22050, wl = 512, ovlp = 90,
 
 &nbsp; 
 
+
+The `spectrogram()` function of the **soundgen** package produces spectrograms slightly different from those of other packages:
+
+```{r}
+
+library(soundgen)
+
+spectrogram(x = as.numeric(tico2@left), samplingRate = tico2@samp.rate, windowLength = 30, overlap = 90, ylim = c(2, 6))
+
+```
+&nbsp; 
+
+It also allows you to use spectral derivatives to produce spectrograms (similar to the program [*Sound Analysis Pro*](http://soundanalysispro.com/)): 
+
+```{r}
+
+spectrogram(x = as.numeric(tico2@left), 
+            samplingRate = tico2@samp.rate, windowLength = 30,
+            overlap = 90, method = "spectralDerivative", 
+            ylim = c(2, 6))
+
+
+```
+&nbsp; 
+
+It has a large number of arguments that allow modification of the color and "resolution". For instance, we can change the brightness:
+
+```{r}
+
+spectrogram(x = as.numeric(tico2@left), 
+            samplingRate = tico2@samp.rate, 
+            windowLength = 30, overlap = 90, 
+            ylim = c(2, 6), brightness = -0.1)
+
+```
+&nbsp; 
+
+Or apply smoothing in frequency and time ('smoothTime' and smoothFreq'):
+```{r}
+
+spectrogram(x = as.numeric(tico2@left), 
+            samplingRate = tico2@samp.rate, 
+            windowLength = 30, overlap = 90, ylim = c(2, 6), 
+            smoothFreq = 5,  smoothTime = 5)
+
+```
+&nbsp; 
+
+The **monitoR** package provides the `ViewSpec()` function to generate spectrograms:
+
+
+```{r, eval = TRUE, echo = FALSE, warning= FALSE, message=FALSE}
+
+
+monitoR::viewSpec(tico2, main = NA, frq.lim = c(2, 6), ovlp = 90)
+
+```
+
+```{r, eval = FALSE, warning= FALSE, message=FALSE}
+
+library(monitoR)
+
+viewSpec(tico2, main = NA, frq.lim = c(2, 6), ovlp = 90)
+
+```
+&nbsp; 
+
+The arguments are very similar to those of `spectro()` of **seewave** since `ViewSpec()` uses that function internally.
+
+Other options are `specgram()` of **signal**:
+
+```{r, warning= FALSE, message=FALSE}
+
+library(signal)
+
+specgram(tico2@left, n = 512, Fs = 8000, overlap = round(512 * 0.9))
+
+```
+&nbsp; 
+
+`spectrogram()` from **phonTools**:
+
+```{r, warning= FALSE, message=FALSE}
+
+library(phonTools)
+
+phonTools::spectrogram(tico2@left, fs = tico2@samp.rate, maxfreq = 6000, windowlength = round(length(tico2@left) / 512))
+
+```
+&nbsp;
+
+`powS()` of **tuneR** does not generate the display, it only calculates the spectrogram (i.e. the matrix of amplitude values in time and frequency). To visualize it, use the `image()` function and add the axes manually:
+```{r, warning= FALSE, message=FALSE}
+
+library(tuneR)
+
+# calcular espectrograma
+ps <- powspec(tico2@left, sr = tico2@samp.rate,
+wintime = 512 / f, steptime = 0.25 * 512 / tico2@samp.rate)
+
+# normalizar
+ps <- ps / max(ps)
+
+# pasar a dB
+ps <- 10*log10(ps)
+
+# graficar
+image(t(ps), col = gray((512:0) / 512),
+xlab = "Time (s)", ylab = "Frequency (Hz)", # axes labels
+axes=FALSE)
+
+# añadir ejes manualmente
+time <- round(seq(0, duration(tico2), length=5), 1)
+
+frequency <- round(seq(tico2@samp.rate/512, tico2@samp.rate/2, length=5))
+
+axis(side=1, at=seq(0, 1,length=5), labels = time)
+
+axis(side=2, at=seq(0, 1,length=5), labels = frequency)
+
+```
+
+&nbsp; 
+
+<div class="alert alert-info">
+
+<font size="5">Exercise</font> 
+
+- Pick up an example acoustic signal from your own research and make a spectrogram (or a recording from Xeno-Canto)
+
+- Improve the visualization by optimizing the parameters 'wl', 'collevels', 'palette' and 'overlap'
+
+</div>
+
+&nbsp; 
+
 ## Dynamic spectrograms
 
 
@@ -626,11 +774,26 @@ scrolling_spectro(wave = ngh_wren, wl = 600,
     file.name = "../nightingale_wren.mp4", colbg = "#2d2d86", lcol = "#FFFFFFE6")
 ```
 
-<center><iframe width="100%" height="297" src="images/nightingale_wren.mp4" allowtransparency="true" style="background: #FFFFFF;" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
+<center><iframe width="100%" height="297" src="images/nightingale_wren.mp4" allowtransparency="true" style="background: #000000;" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
 
 &nbsp; 
 
----
+<div class="alert alert-info">
+
+<font size="5">Exercise</font> 
+
+- Rerun the example code above but this time using a waveform in the bottom panel
+
+- Slow down the spectrogram (see the argument 'speed')
+
+- Use a `viridis` color palette
+
+- Pick up an example acoustic signal from your own data (or those downloaded from Xeno-Canto) and make a dynamic spectrogram
+
+
+</div>
+
+&nbsp; 
 
 ## References
   

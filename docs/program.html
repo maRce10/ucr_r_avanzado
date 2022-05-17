@@ -517,7 +517,7 @@ div.tocify {
 <div id="homework-1" class="section level3 alert alert-info">
 <h3>Homework</h3>
 <ol style="list-style-type: decimal">
-<li>Annotate target signals in the xeno-canto recordings using Raven Pro</li>
+<li>Use Raven Pro to annotate some of the signals found in the xeno-canto recordings you downloaded previously</li>
 </ol>
 </div>
 <hr />
@@ -529,7 +529,7 @@ div.tocify {
 <div id="readings-1" class="section level3 alert alert-warning">
 <h3>Readings</h3>
 <ul>
-<li>Gibb, R., Browning, E., Glover‐Kapfer, P., &amp; Jones, K. E. (2019). <a href="https://besjournals.onlinelibrary.wiley.com/doi/pdfdirect/10.1111/2041-210X.13101">Emerging opportunities and challenges for passive acoustics in ecological assessment and monitoring</a>. Methods in Ecology and Evolution, 10(2), 169-185.</li>
+<li>Arasco, A. G., Manser, M., Watson, S. K., Kyabulima, S., Radford, A. N., Cant, M. A., &amp; Garcia, M. (2022). <a href="https://www.sciencedirect.com/science/article/pii/S0003347222000574">Testing the acoustic adaptation hypothesis with vocalizations from three mongoose species</a>. Animal Behaviour, 187, 71-95.</li>
 </ul>
 </div>
 <p> </p>
@@ -540,20 +540,17 @@ div.tocify {
 <li>Filtering and re-sampling</li>
 <li>Acoustic measurements</li>
 </ul>
-<p><strong>Automatic detection</strong> <a href="https://marce10.github.io/OTS_BIR_2022/ohun.html" class="btn btn-warning btn-xs" role="button">Automatic detection</a></p>
+<p><strong>Quantifying acoustic signal structure</strong> <a href="https://marce10.github.io/OTS_BIR_2022/measure_acoustic_structure.html" class="btn btn-warning btn-xs" role="button">Quantify structure</a></p>
 <ul>
-<li>ohun package for optimize acoustic signal detection</li>
-<li>Detection using amplitude, frequency, and time filters (<code>ohun::energy_detector()</code>)</li>
-<li>Detection using cross-correlation (<code>ohun::template_detector()</code>)</li>
-<li>Frequency range detection (<code>warbleR::freq_range()</code> and <code>warbleR::freq_range_detec()</code>)</li>
-</ul>
-<p><strong>Intro to warbleR</strong> <a href="https://marce10.github.io/OTS_BIR_2022/intro_to_warbler.html" class="btn btn-warning btn-xs" role="button">Intro to warbleR</a></p>
-<ul>
-<li>Intro to warbleR</li>
-<li>Selection tables</li>
-<li>Extended selection tables</li>
-<li>Selection table manipulation</li>
-<li>warbleR functions and the bioacoustics analysis workflow</li>
+<li>Spectro-temporal measurements (<code>spectro_analysis()</code>)</li>
+<li>Parameter description</li>
+<li>Harmonic content</li>
+<li>Cepstral coefficients (<code>mfcc_stats()</code>)</li>
+<li>Cross-correlation (<code>cross_correlation()</code>)</li>
+<li>Dynamic time warping (<code>freq_DTW()</code>)</li>
+<li>Signal-to-noise ratio (<code>sig2noise()</code>)</li>
+<li>Inflections (<code>inflections()</code>)</li>
+<li>Parameters at other levels (<code>song_analysis()</code>)</li>
 </ul>
 <p> </p>
 <div id="homework-2" class="section level3 alert alert-info">
@@ -593,18 +590,6 @@ div.tocify {
 <li>Tuning spectrogram parameters (<code>tweak_spectro()</code>)</li>
 <li>Double-checking selection tables (<code>check_sels()</code>, <code>spectrograms()</code>, <code>full_spectrograms()</code> &amp; <code>catalog()</code>)</li>
 <li>Re-adjusting selections (<code>tailor_sels()</code>)</li>
-</ul>
-<p><strong>Quantifying acoustic signal structure</strong> <a href="https://marce10.github.io/OTS_BIR_2022/measure_acoustic_structure.html" class="btn btn-warning btn-xs" role="button">Quantify structure</a></p>
-<ul>
-<li>Spectro-temporal measurements (<code>spectro_analysis()</code>)</li>
-<li>Parameter description</li>
-<li>Harmonic content</li>
-<li>Cepstral coefficients (<code>mfcc_stats()</code>)</li>
-<li>Cross-correlation (<code>cross_correlation()</code>)</li>
-<li>Dynamic time warping (<code>freq_DTW()</code>)</li>
-<li>Signal-to-noise ratio (<code>sig2noise()</code>)</li>
-<li>Inflections (<code>inflections()</code>)</li>
-<li>Parameters at other levels (<code>song_analysis()</code>)</li>
 </ul>
 <p><strong>Characterizing hierarchical levels in acoustic signals</strong></p>
 <ul>

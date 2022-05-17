@@ -11,7 +11,7 @@
 
 
 
-<title>spectrograms.knit</title>
+<title>spectrograms_LONG.knit</title>
 
 <script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -486,7 +486,7 @@ div.tocify {
 <font size="3"><a href="http://marceloarayasalas.weebly.com/">Marcelo Araya-Salas, PhD</a></font>
 </center></h4>
 <h4 class="date"><center>
-“2022-05-17”
+“2022-05-16”
 </center></h4>
 
 </div>
@@ -519,22 +519,22 @@ div.tocify {
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>h1 <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="sc">*</span> <span class="fu">cos</span>(w0 <span class="sc">*</span> t)</span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(h1[<span class="dv">1</span><span class="sc">:</span><span class="dv">75</span>], <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Time (samples)&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Amplitude (no units)&quot;</span>)</span></code></pre></div>
-<p><img src="spectrograms_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="spectrograms_LONG_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># frec 2</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>h2 <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="sc">*</span> <span class="fu">cos</span>(<span class="dv">2</span> <span class="sc">*</span> w0 <span class="sc">*</span> t)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(h2[<span class="dv">1</span><span class="sc">:</span><span class="dv">75</span>], <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Time (samples)&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Amplitude (no units)&quot;</span>)</span></code></pre></div>
-<p><img src="spectrograms_files/figure-html/unnamed-chunk-3-2.png" width="672" /></p>
+<p><img src="spectrograms_LONG_files/figure-html/unnamed-chunk-3-2.png" width="672" /></p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># frec 3</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>h3 <span class="ot">&lt;-</span> <span class="dv">15</span> <span class="sc">*</span> <span class="fu">sin</span>(<span class="dv">3</span> <span class="sc">*</span> w0 <span class="sc">*</span> t)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(h3[<span class="dv">1</span><span class="sc">:</span><span class="dv">75</span>], <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Time (samples)&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Amplitude (no units)&quot;</span>)</span></code></pre></div>
-<p><img src="spectrograms_files/figure-html/unnamed-chunk-3-3.png" width="672" /></p>
+<p><img src="spectrograms_LONG_files/figure-html/unnamed-chunk-3-3.png" width="672" /></p>
 <p>This is what the union of the three frequencies looks like:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>H0 <span class="ot">&lt;-</span> <span class="fl">0.5</span> <span class="sc">+</span> h1 <span class="sc">+</span> h2 <span class="sc">+</span> h3</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(H0[<span class="dv">1</span><span class="sc">:</span><span class="dv">75</span>], <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Time (samples)&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Amplitude (no units)&quot;</span>)</span></code></pre></div>
-<p><img src="spectrograms_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="spectrograms_LONG_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>Now we can apply the Fourier transform to this time series and graph the frequencies detected using a periodogram:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>fspc <span class="ot">&lt;-</span> <span class="fu">Mod</span>(<span class="fu">fft</span>(H0))</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -543,21 +543,21 @@ div.tocify {
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> f<span class="sc">/</span><span class="dv">2</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="at">x =</span> (f<span class="sc">/</span><span class="dv">2</span>) <span class="sc">+</span> <span class="dv">1650</span>, <span class="at">y =</span> <span class="dv">8000</span>, <span class="st">&quot;Nyquist Frequency&quot;</span>)</span></code></pre></div>
-<p><img src="spectrograms_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="spectrograms_LONG_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>We can make zoom in to frequencies below the Nyquist frequency:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fspc[<span class="dv">1</span><span class="sc">:</span>(<span class="fu">length</span>(fspc)<span class="sc">/</span><span class="dv">2</span>)], <span class="at">type =</span> <span class="st">&quot;h&quot;</span>, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Frecuency (Hz)&quot;</span>,</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylab =</span> <span class="st">&quot;Amplitude (no units)&quot;</span>)</span></code></pre></div>
-<p><img src="spectrograms_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="spectrograms_LONG_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>This diagram (taken from Sueur 2018) summarizes the process we just simulated:</p>
 <p><img src="images/FFT_decomp.png" width="400px" style="display: block; margin: auto;" /> <font size="1"><b>Tomado de Sueur 2018</b></font></p>
 <p>The periodogram next to the spectrogram of these simulated sounds looks like this:</p>
-<p><img src="spectrograms_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="spectrograms_LONG_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p> </p>
 </div>
 <div id="from-the-fourier-transformation-to-the-spectrogram" class="section level2">
 <h2>From the Fourier transformation to the spectrogram</h2>
 <p>The spectrograms are constructed of the spectral decomposition of discrete time segments of amplitude values. Each segment (or window) of time is a column of spectral density values in a frequency range. Take for example this simple modulated sound, which goes up and down in frequency:</p>
-<p><img src="spectrograms_files/figure-html/unnamed-chunk-8-1.png" width="672" />  </p>
+<p><img src="spectrograms_LONG_files/figure-html/unnamed-chunk-8-1.png" width="672" />  </p>
 <p>If we divide the sound into 10 segments and make periodograms for each of them we can see this pattern in the frequencies:</p>
 <p><img src="images/periodogram_spectro.gif" alt="Spectrogram resolution"></p>
 <p>This animation shows in a very simple way the logic behind the spectrograms: if we calculate Fourier transforms for short segments of time through a sound (e.g. amplitude changes in time) and concatenate them, we can visualize the variation in frequencies over time.  </p>
@@ -565,20 +565,20 @@ div.tocify {
 <div id="overlap" class="section level2">
 <h2>Overlap</h2>
 <p>When frequency spectra are combined to produce a spectrogram, the frequency and amplitude modulations are not gradual:</p>
-<p><img src="spectrograms_files/figure-html/unnamed-chunk-11-1.png" width="672" />  </p>
+<p><img src="spectrograms_LONG_files/figure-html/unnamed-chunk-11-1.png" width="672" />  </p>
 <p>There are several “tricks” to smooth out the contours of signals with high modulation in a spectrogram, although the main and most common is window overlap. The overlap recycles a percentage of the amplitude samples of a window to calculate the next window. For example, the sound used as an example, with a window size of 512 points divides the sound into 15 segments:</p>
-<p><img src="spectrograms_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><img src="spectrograms_LONG_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>A 50% overlap generates windows that share 50% of the amplitude values with the adjacent windows. This has the visual effect of making modulations much more gradual:</p>
-<p><img src="spectrograms_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p><img src="spectrograms_LONG_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <p>Which increases (in some way artificially) the number of time windows, without changing the resolution in frequency. In this example, the number of time windows is doubled:</p>
-<p><img src="spectrograms_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p><img src="spectrograms_LONG_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <p>Therefore, the greater the overlap the greater the smoothing of the contours of the sounds:</p>
 <p><img src="images/spectro.overlap.gif" alt="Spectrogram overlap"></p>
 <p>This increases the number of windows as a function of the overlap for this particular sound:</p>
-<p><img src="spectrograms_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p><img src="spectrograms_LONG_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <p> </p>
 <p>This increase in spectrogram sharpness does not come without a cost. The longer the time windows, the greater the number of Fourier transformations to compute, and therefore, the greater the duration of the process. This graphic shows the increase in duration as a function of the number of windows on my computer:</p>
-<p><img src="spectrograms_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p><img src="spectrograms_LONG_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 <p> </p>
 <p>It is necessary to take this cost into account when producing spectrograms of long sound files (&gt; 1 min).</p>
 <p> </p>
@@ -589,7 +589,7 @@ div.tocify {
 <p><img src="images/spectro.precision.tradeoff2.gif" alt="Spectrogram resolution 2"></p>
 <p> </p>
 <p>This is the relationship between frequency resolution and time resolution for the example signal:</p>
-<p><img src="spectrograms_files/figure-html/unnamed-chunk-20-1.png" width="672" />  </p>
+<p><img src="spectrograms_LONG_files/figure-html/unnamed-chunk-20-1.png" width="672" />  </p>
 <p> </p>
 </div>
 <div id="creating-spectrograms-in-r" class="section level2">
@@ -601,7 +601,7 @@ div.tocify {
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">spectro</span>(tico2, <span class="at">f =</span> <span class="dv">22050</span>, <span class="at">wl =</span> <span class="dv">512</span>, <span class="at">ovlp =</span> <span class="dv">90</span>, <span class="at">collevels =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">40</span>, <span class="dv">0</span>, <span class="fl">0.5</span>), <span class="at">flim =</span> <span class="fu">c</span>(<span class="dv">2</span>,</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="dv">6</span>), <span class="at">scale =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<p><img src="spectrograms_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p><img src="spectrograms_LONG_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 <p> </p>
 <div class="alert alert-info">
 <p><font size="5">Exercise</font></p>
@@ -617,22 +617,22 @@ div.tocify {
 <p>Almost all components of a spectrogram in <strong>seewave</strong> can be modified. We can add scales:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">spectro</span>(tico2, <span class="at">f =</span> <span class="dv">22050</span>, <span class="at">wl =</span> <span class="dv">512</span>, <span class="at">ovlp =</span> <span class="dv">90</span>, <span class="at">collevels =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">40</span>, <span class="dv">0</span>, <span class="fl">0.5</span>), <span class="at">flim =</span> <span class="fu">c</span>(<span class="dv">2</span>,</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="dv">6</span>), <span class="at">scale =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<p><img src="spectrograms_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p><img src="spectrograms_LONG_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
 <p>Change the color palette:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">spectro</span>(tico2, <span class="at">f =</span> <span class="dv">22050</span>, <span class="at">wl =</span> <span class="dv">512</span>, <span class="at">ovlp =</span> <span class="dv">90</span>, <span class="at">collevels =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">40</span>, <span class="dv">0</span>, <span class="fl">0.5</span>), <span class="at">flim =</span> <span class="fu">c</span>(<span class="dv">2</span>,</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="dv">6</span>), <span class="at">scale =</span> <span class="cn">TRUE</span>, <span class="at">palette =</span> reverse.cm.colors)</span></code></pre></div>
-<p><img src="spectrograms_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p><img src="spectrograms_LONG_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">spectro</span>(tico2, <span class="at">f =</span> <span class="dv">22050</span>, <span class="at">wl =</span> <span class="dv">512</span>, <span class="at">ovlp =</span> <span class="dv">90</span>, <span class="at">collevels =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">40</span>, <span class="dv">0</span>, <span class="fl">0.5</span>), <span class="at">flim =</span> <span class="fu">c</span>(<span class="dv">2</span>,</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="dv">6</span>), <span class="at">scale =</span> <span class="cn">TRUE</span>, <span class="at">palette =</span> reverse.gray.colors<span class="fl">.1</span>)</span></code></pre></div>
-<p><img src="spectrograms_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p><img src="spectrograms_LONG_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 <p>Remove the vertical lines:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">spectro</span>(tico2, <span class="at">f =</span> <span class="dv">22050</span>, <span class="at">wl =</span> <span class="dv">512</span>, <span class="at">ovlp =</span> <span class="dv">90</span>, <span class="at">collevels =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">40</span>, <span class="dv">0</span>, <span class="fl">0.5</span>), <span class="at">flim =</span> <span class="fu">c</span>(<span class="dv">2</span>,</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="dv">6</span>), <span class="at">scale =</span> <span class="cn">TRUE</span>, <span class="at">palette =</span> reverse.gray.colors<span class="fl">.1</span>, <span class="at">grid =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<p><img src="spectrograms_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p><img src="spectrograms_LONG_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
 <p>Add oscillograms (waveforms):</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">spectro</span>(tico2, <span class="at">f =</span> <span class="dv">22050</span>, <span class="at">wl =</span> <span class="dv">512</span>, <span class="at">ovlp =</span> <span class="dv">90</span>, <span class="at">collevels =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">40</span>, <span class="dv">0</span>, <span class="fl">0.5</span>), <span class="at">flim =</span> <span class="fu">c</span>(<span class="dv">2</span>,</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="dv">6</span>), <span class="at">scale =</span> <span class="cn">TRUE</span>, <span class="at">palette =</span> reverse.gray.colors<span class="fl">.1</span>, <span class="at">grid =</span> <span class="cn">FALSE</span>, <span class="at">osc =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<p><img src="spectrograms_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p><img src="spectrograms_LONG_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
 <p> </p>
 <div class="alert alert-info">
 <p><font size="5">Exercise</font></p>
@@ -670,11 +670,20 @@ div.tocify {
 <span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">grid =</span> <span class="cn">FALSE</span>, <span class="at">flim =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">8</span>), <span class="at">width =</span> <span class="dv">700</span>, <span class="at">height =</span> <span class="dv">250</span>, <span class="at">res =</span> <span class="dv">100</span>, <span class="at">collevels =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">40</span>,</span>
 <span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>        <span class="dv">0</span>, <span class="dv">5</span>), <span class="at">file.name =</span> <span class="st">&quot;../nightingale_wren.mp4&quot;</span>, <span class="at">colbg =</span> <span class="st">&quot;#2d2d86&quot;</span>, <span class="at">lcol =</span> <span class="st">&quot;#FFFFFFE6&quot;</span>)</span></code></pre></div>
 <center>
-<iframe width="100%" height="297" src="images/nightingale_wren.mp4" allowtransparency="true" style="background: #FFFFFF;" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+<iframe width="100%" height="297" src="images/nightingale_wren.mp4" allowtransparency="true" style="background: #000000;" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
 </iframe>
 </center>
 <p> </p>
-<hr />
+<div class="alert alert-info">
+<p><font size="5">Exercise</font></p>
+<ul>
+<li><p>Rerun the example code above but this time using a waveform in the bottom panel</p></li>
+<li><p>Slow down the spectrogram (see the argument ‘speed’)</p></li>
+<li><p>Use a <code>viridis</code> color palette</p></li>
+<li><p>Pick up an example acoustic signal from your own data (or from those downloaded from Xeno-Canto) and make a dynamic spectrogram</p></li>
+</ul>
+</div>
+<p> </p>
 </div>
 <div id="references" class="section level2">
 <h2>References</h2>
