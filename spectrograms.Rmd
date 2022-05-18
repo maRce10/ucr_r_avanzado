@@ -590,7 +590,7 @@ spectro(tico2,  f = 22050, wl = 512, ovlp = 90,
 
 &nbsp; 
  
-- Change the relative height of the oscillogram so that it corresponds to 1/6 of the height of the spectrogram
+- Change the relative height of the oscillogram so that it corresponds to 1/3 of the height of the spectrogram
 
 - Change the relative width of the amplitude scale so that it corresponds to 1/8 of the spectrogram width
 
