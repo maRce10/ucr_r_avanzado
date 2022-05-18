@@ -71,8 +71,10 @@ https://ffmpeg.org/download.html
 https://www.audacityteam.org/download/
 
 
-12) Install SOX. It can be downloaded from here. (not critical but could be useful):
+12) Install SOX. It can be downloaded from here (not critical but could be useful):
 http://sox.sourceforge.net/
+
+13) Install FLAC. It can be downloaded from here (also not critical): https://xiph.org/flac/download.html
 
 &nbsp; 
 

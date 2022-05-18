@@ -593,11 +593,11 @@ The number of samples is given by the duration and the sampling rate.
 
 &nbsp; 
 
-An advantage of using `readWave()` is the ability to read specific segments of sound files, especially useful with long files. This is done using the `from` and` to` arguments and specifying the units of time with the `units` arguments. The units can be converted into "samples", "minutes" or "hours". For example, to read only the section that begins in 1s and ends in 5s of the file "Phae.long1.wav":
+An advantage of using `readWave()` is the ability to read specific segments of sound files, especially useful with long files. This is done using the `from` and` to` arguments and specifying the units of time with the `units` arguments. The units can be converted into "samples", "minutes" or "hours". For example, to read only the section that begins in 1s and ends in 2s of the file "Phae.long1.wav":
 
 ```{r, eval = TRUE}
 
-s7 <- readWave("./examples/Phae.long1.wav", from = 1, to = 5, units = "seconds")
+s7 <- readWave("./examples/Phae.long1.wav", from = 1, to = 2, units = "seconds")
 
 s7
 

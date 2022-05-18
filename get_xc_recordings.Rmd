@@ -39,7 +39,7 @@ map_xc(song_pl, leaflet.map = TRUE)
 Once you feel fine with the subset of data you can go ahead and download it as follows:
 ```{r, eval = FALSE, fig.width=10}
 
-query_xc(song_pl, download = TRUE, path = "DIRECTORY WHERE YOU WANT TO SAVE THE FILES")
+query_xc(X = song_pl, download = TRUE, path = "DIRECTORY WHERE YOU WANT TO SAVE THE FILES")
 
 ```
 &nbsp;

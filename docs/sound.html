@@ -486,7 +486,7 @@ div.tocify {
 <font size="3"><a href="http://marceloarayasalas.weebly.com/">Marcelo Araya-Salas, PhD</a></font>
 </center></h4>
 <h4 class="date"><center>
-“2022-05-16”
+“2022-05-17”
 </center></h4>
 
 </div>
@@ -601,7 +601,7 @@ div.tocify {
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>s4 <span class="ot">&lt;-</span> <span class="fu">ts</span>(<span class="at">data =</span> <span class="fu">runif</span>(<span class="dv">4000</span>, <span class="at">min =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">max =</span> <span class="dv">1</span>), <span class="at">start =</span> <span class="dv">0</span>, <span class="at">end =</span> <span class="fl">0.5</span>, <span class="at">frequency =</span> <span class="dv">8000</span>)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(s4)</span></code></pre></div>
-<pre><code>##  Time-Series [1:4001] from 0 to 0.5: -0.312 0.609 -0.595 0.532 0.582 ...</code></pre>
+<pre><code>##  Time-Series [1:4001] from 0 to 0.5: 0.278 -0.0733 -0.6711 0.749 -0.2918 ...</code></pre>
 <p> </p>
 <p>The <code>frequency()</code> and <code>deltat()</code> functions return the sampling frequency (<span class="math inline">\(f\)</span>) and the time resolution (<span class="math inline">\(Delta t\)</span>) respectively:</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frequency</span>(s4)</span></code></pre></div>
@@ -684,14 +684,14 @@ div.tocify {
 </ul>
 </div>
 <p> </p>
-<p>An advantage of using <code>readWave()</code> is the ability to read specific segments of sound files, especially useful with long files. This is done using the <code>from</code> and<code>to</code> arguments and specifying the units of time with the <code>units</code> arguments. The units can be converted into “samples”, “minutes” or “hours”. For example, to read only the section that begins in 1s and ends in 5s of the file “Phae.long1.wav”:</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>s7 <span class="ot">&lt;-</span> <span class="fu">readWave</span>(<span class="st">&quot;./examples/Phae.long1.wav&quot;</span>, <span class="at">from =</span> <span class="dv">1</span>, <span class="at">to =</span> <span class="dv">5</span>, <span class="at">units =</span> <span class="st">&quot;seconds&quot;</span>)</span>
+<p>An advantage of using <code>readWave()</code> is the ability to read specific segments of sound files, especially useful with long files. This is done using the <code>from</code> and<code>to</code> arguments and specifying the units of time with the <code>units</code> arguments. The units can be converted into “samples”, “minutes” or “hours”. For example, to read only the section that begins in 1s and ends in 2s of the file “Phae.long1.wav”:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>s7 <span class="ot">&lt;-</span> <span class="fu">readWave</span>(<span class="st">&quot;./examples/Phae.long1.wav&quot;</span>, <span class="at">from =</span> <span class="dv">1</span>, <span class="at">to =</span> <span class="dv">2</span>, <span class="at">units =</span> <span class="st">&quot;seconds&quot;</span>)</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>s7</span></code></pre></div>
 <pre><code>## 
 ## Wave Object
-##  Number of Samples:      33751
-##  Duration (seconds):     1.5
+##  Number of Samples:      22500
+##  Duration (seconds):     1
 ##  Samplingrate (Hertz):   22500
 ##  Channels (Mono/Stereo): Mono
 ##  PCM (integer format):   TRUE
