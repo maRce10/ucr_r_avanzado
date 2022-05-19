@@ -13,8 +13,8 @@
 
 <title>measure_acoustic_structure.knit</title>
 
-<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
-<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -65,7 +65,6 @@ if (window.hljs) {
 
 
 
-
 <style type = "text/css">
 .main-container {
   max-width: 940px;
@@ -86,9 +85,6 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
-}
-details > summary > p:only-child {
-  display: inline;
 }
 pre code {
   padding: 0;
@@ -320,7 +316,7 @@ div.tocify {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -333,7 +329,7 @@ div.tocify {
   <a href="program.html">Program</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Tutorials
      
     <span class="caret"></span>
@@ -405,7 +401,7 @@ div.tocify {
 <font size="3"><a href="http://marceloarayasalas.weebly.com/">Marcelo Araya-Salas, PhD</a></font>
 </center></h4>
 <h4 class="date"><center>
-“2022-05-15”
+“2022-05-19”
 </center></h4>
 
 </div>
@@ -428,8 +424,8 @@ div.tocify {
 <p>The <code>spectro_analysis()</code> function measures the following spectrographic parameters related to amplitude distributions in time and frequency, descriptors of the fundamental and dominant frequency contours and descriptors of harmonic content:</p>
 <p> </p>
 <div class="alert alert-success">
-<div id="time-and-frequency" class="section level4">
-<h4>Time and frequency</h4>
+<div id="time-and-frequency-measured-on-the-spectrogram" class="section level4">
+<h4>Time and frequency (measured on the spectrogram)</h4>
 <ul>
 <li><p>duration: signal length (in s)</p></li>
 <li><p>meanfreq: medium frequency. Weighted average frequency by amplitude (in kHz)</p></li>
@@ -437,8 +433,8 @@ div.tocify {
 </ul>
 <p> </p>
 </div>
-<div id="frequency-amplitude-distribution" class="section level4">
-<h4>Frequency amplitude distribution</h4>
+<div id="energy-distribution-across-frequencies-measured-on-the-power-spetrum" class="section level4">
+<h4>Energy distribution across frequencies (measured on the power spetrum)</h4>
 <ul>
 <li><p>freq.median: medium frequency. The frequency at which the signal is divided into two frequency intervals of equal energy (in kHz)</p></li>
 <li><p>freq.Q25: first frequency quartile. The frequency at which the signal is divided into two frequency ranges of 25% and 75% energy respectively (in kHz)</p></li>
@@ -450,8 +446,8 @@ div.tocify {
 </ul>
 <p> </p>
 </div>
-<div id="distribution-of-amplitude-in-time" class="section level4">
-<h4>Distribution of amplitude in time</h4>
+<div id="energy-distribution-across-time-measured-on-the-amplitude-envelope" class="section level4">
+<h4>Energy distribution across time (measured on the amplitude envelope)</h4>
 <ul>
 <li><p>time.median: average time. The time at which the signal is divided into two time intervals of equal energy (in s)</p></li>
 <li><p>time.Q25: first quartile. The time in which the signal is divided into two time intervals of 25% and 75% energy respectively (in s)</p></li>
@@ -465,8 +461,8 @@ div.tocify {
 </ul>
 <p> </p>
 </div>
-<div id="fundamental-frequency-contour-descriptors" class="section level4">
-<h4>Fundamental frequency contour descriptors</h4>
+<div id="fundamental-frequency-contour-descriptors-measured-on-the-spectrogram" class="section level4">
+<h4>Fundamental frequency contour descriptors (measured on the spectrogram)</h4>
 <ul>
 <li><p>meanfun: average of the fundamental frequency measured through the signal</p></li>
 <li><p>minfun: minimum fundamental frequency measured through the signal</p></li>
@@ -474,8 +470,8 @@ div.tocify {
 </ul>
 <p> </p>
 </div>
-<div id="dominant-frequency-contour-descriptors" class="section level4">
-<h4>Dominant frequency contour descriptors</h4>
+<div id="dominant-frequency-contour-descriptors-measured-on-the-spectrogram" class="section level4">
+<h4>Dominant frequency contour descriptors (measured on the spectrogram)</h4>
 <ul>
 <li><p>meandom: average of the dominant frequency measured through the signal</p></li>
 <li><p>mindom: minimum dominant frequency measured through the signal</p></li>
@@ -488,8 +484,8 @@ div.tocify {
 </ul>
 <p> </p>
 </div>
-<div id="harmonic-content-descriptors" class="section level4">
-<h4>Harmonic content descriptors</h4>
+<div id="harmonic-content-descriptors-measured-on-the-spectrogram" class="section level4">
+<h4>Harmonic content descriptors (measured on the spectrogram)</h4>
 <ul>
 <li><p>hn_freq: average frequency of the upper ‘n’ harmonics (kHz) The number of harmonics is defined with the argument ‘nharmonics’</p></li>
 <li><p>hn_width: average bandwidth of the upper ‘n’ harmonics (kHz) (see analysis). The number of harmonics is defined with the argument ‘nharmonics’</p></li>
@@ -11070,18 +11066,18 @@ response_calls &lt;- readRDS(&quot;./examples/response_calls.RDS&quot;)</code></
 <li><p>Salamon, J., Jacoby, C., &amp; Bello, J. P. (2014). A dataset and taxonomy for urban sound research. In Proceedings of the 22nd ACM international conference on Multimedi. 1041-1044.</p></li>
 </ol>
 <p><font size="4">Session information</font></p>
-<pre><code>## R version 4.1.0 (2021-05-18)
+<pre><code>## R version 4.1.1 (2021-08-10)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
 ## Running under: Ubuntu 20.04.2 LTS
 ## 
 ## Matrix products: default
-## BLAS:   /usr/lib/x86_64-linux-gnu/atlas/libblas.so.3.10.3
-## LAPACK: /usr/lib/x86_64-linux-gnu/atlas/liblapack.so.3.10.3
+## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0
+## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0
 ## 
 ## locale:
-##  [1] LC_CTYPE=pt_BR.UTF-8       LC_NUMERIC=C              
-##  [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=pt_BR.UTF-8    
-##  [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=pt_BR.UTF-8   
+##  [1] LC_CTYPE=es_ES.UTF-8       LC_NUMERIC=C              
+##  [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=es_ES.UTF-8    
+##  [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=es_ES.UTF-8   
 ##  [7] LC_PAPER=es_CR.UTF-8       LC_NAME=C                 
 ##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
 ## [11] LC_MEASUREMENT=es_CR.UTF-8 LC_IDENTIFICATION=C       
@@ -11090,22 +11086,22 @@ response_calls &lt;- readRDS(&quot;./examples/response_calls.RDS&quot;)</code></
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] kableExtra_1.3.1   warbleR_1.1.27     NatureSounds_1.0.4 knitr_1.39        
-## [5] seewave_2.2.0      tuneR_1.4.0       
+## [1] kableExtra_1.3.4   warbleR_1.1.27     NatureSounds_1.0.4 knitr_1.37        
+## [5] seewave_2.2.0      tuneR_1.3.3.1     
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] Rcpp_1.0.8.3      highr_0.9         bslib_0.2.5.1     compiler_4.1.0   
+##  [1] Rcpp_1.0.8        highr_0.9         bslib_0.2.5.1     compiler_4.1.1   
 ##  [5] jquerylib_0.1.4   Sim.DiffProc_4.8  shinyBS_0.61      bitops_1.0-7     
-##  [9] tools_4.1.0       digest_0.6.29     viridisLite_0.4.0 jsonlite_1.8.0   
-## [13] evaluate_0.15     lifecycle_1.0.1   fftw_1.0-7        rlang_1.0.2      
-## [17] cli_3.1.0         rstudioapi_0.13   yaml_2.3.5        parallel_4.1.0   
-## [21] xfun_0.31         fastmap_1.1.0     xml2_1.3.2        stringr_1.4.0    
-## [25] httr_1.4.2        sass_0.4.0        webshot_0.5.2     glue_1.6.2       
-## [29] R6_2.5.1          dtw_1.22-3        pbapply_1.5-0     soundgen_2.1.0   
-## [33] rmarkdown_2.13    magrittr_2.0.3    scales_1.1.1      htmltools_0.5.2  
-## [37] MASS_7.3-54       rvest_1.0.0       colorspace_2.0-2  Deriv_4.1.3      
-## [41] stringi_1.7.6     proxy_0.4-26      munsell_0.5.0     signal_0.7-7     
-## [45] RCurl_1.98-1.6    rjson_0.2.21</code></pre>
+##  [9] tools_4.1.1       digest_0.6.29     viridisLite_0.4.0 jsonlite_1.7.2   
+## [13] evaluate_0.15     lifecycle_1.0.1   fftw_1.0-6.1      rlang_1.0.2      
+## [17] cli_3.2.0         rstudioapi_0.13   yaml_2.3.5        parallel_4.1.1   
+## [21] xfun_0.30         fastmap_1.1.0     xml2_1.3.2        stringr_1.4.0    
+## [25] httr_1.4.2        systemfonts_1.0.2 sass_0.4.0        webshot_0.5.2    
+## [29] svglite_2.0.0     glue_1.6.2        R6_2.5.1          dtw_1.22-3       
+## [33] pbapply_1.5-0     soundgen_2.2.0    rmarkdown_2.10    magrittr_2.0.2   
+## [37] scales_1.1.1      htmltools_0.5.2   MASS_7.3-54       rvest_1.0.1      
+## [41] colorspace_2.0-3  Deriv_4.1.3       stringi_1.7.6     proxy_0.4-26     
+## [45] munsell_0.5.0     signal_0.7-7      RCurl_1.98-1.6    rjson_0.2.21</code></pre>
 </div>
 
 

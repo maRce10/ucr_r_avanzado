@@ -13,8 +13,8 @@
 
 <title>seewave.knit</title>
 
-<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
-<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -63,7 +63,6 @@ if (window.hljs) {
 
 
 
-
 <style type = "text/css">
 .main-container {
   max-width: 940px;
@@ -84,9 +83,6 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
-}
-details > summary > p:only-child {
-  display: inline;
 }
 pre code {
   padding: 0;
@@ -318,7 +314,7 @@ div.tocify {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -331,7 +327,7 @@ div.tocify {
   <a href="program.html">Program</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Tutorials
      
     <span class="caret"></span>
@@ -403,7 +399,7 @@ div.tocify {
 <font size="3"><a href="http://marceloarayasalas.weebly.com/">Marcelo Araya-Salas, PhD</a></font>
 </center></h4>
 <h4 class="date"><center>
-“2022-05-17”
+“2022-05-19”
 </center></h4>
 
 </div>
@@ -579,6 +575,7 @@ oscillo(tico2)</code></pre>
 
 oscillo(tico3)</code></pre>
 <p><img src="seewave_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<pre><code>## This took quite a lot of time to display this graphic, you may set &#39;fastdisp=TRUE&#39; for a faster, but less accurate, display</code></pre>
 <p>Remove segments:</p>
 <pre class="r"><code>tico4 &lt;- deletew(tico3, output = &quot;Wave&quot;, from = duration(tico), to = duration(tico3))
 
@@ -640,7 +637,7 @@ spectro(tico.lfs.neg, scale = FALSE, grid = FALSE, flim = c(1, 8), main = &quot;
 <div id="measurements" class="section level2">
 <h2>Measurements</h2>
 <p> </p>
-<p>Apart from the measurements of peak frequency (<code>fpeaks()</code>) and duration (<code>timer()</code>), we can measure many other aspects of the acoustic signals using <strong>seewave</strong>. For example, we can estimate the fundamental frequency with the <code>fund()</code> function:</p>
+<p>Apart from the measurements of peak frequency (<code>fpeaks()</code>) and duration (<code>timer()</code>), we can measure many other aspects of the acoustic signals using <strong>seewave</strong>. For example, we can estimate the fundamental frequency (which refers to the lowest frequency harmonic in the harmonic stack), with the <code>fund()</code> function:</p>
 <pre class="r"><code>spectro(sheep, scale = FALSE, grid = FALSE)
 
 par(new=TRUE)
@@ -657,7 +654,7 @@ ff &lt;- fund(sheep, fmax = 300, ann = FALSE, threshold=6, col = &quot;green&quo
 ## [6,] 0.33385135 0.07142857</code></pre>
 <p> </p>
 <p>This function uses cepstral transformation to detect the dominant frequency. The <code>autoc()</code> function also measures the fundamental frequency, only using autocorrelation.</p>
-<p>Similarly we can measure the dominant frequency:</p>
+<p>Similarly we can measure the dominant frequency (the harmonic with the highest energy):</p>
 <pre class="r"><code>par(new=TRUE)
 
 df &lt;- dfreq(sheep, f = 8000, fmax = 300, type = &quot;p&quot;, pch = 24, ann = FALSE, threshold = 6, col = &quot;red&quot;)
@@ -703,18 +700,18 @@ as.data.frame(n2.spcp)</code></pre>
 <p> </p>
 <hr />
 <p><font size="4">Session information</font></p>
-<pre><code>## R version 4.1.0 (2021-05-18)
+<pre><code>## R version 4.1.1 (2021-08-10)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
 ## Running under: Ubuntu 20.04.2 LTS
 ## 
 ## Matrix products: default
-## BLAS:   /usr/lib/x86_64-linux-gnu/atlas/libblas.so.3.10.3
-## LAPACK: /usr/lib/x86_64-linux-gnu/atlas/liblapack.so.3.10.3
+## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0
+## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0
 ## 
 ## locale:
-##  [1] LC_CTYPE=pt_BR.UTF-8       LC_NUMERIC=C              
-##  [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=pt_BR.UTF-8    
-##  [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=pt_BR.UTF-8   
+##  [1] LC_CTYPE=es_ES.UTF-8       LC_NUMERIC=C              
+##  [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=es_ES.UTF-8    
+##  [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=es_ES.UTF-8   
 ##  [7] LC_PAPER=es_CR.UTF-8       LC_NAME=C                 
 ##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
 ## [11] LC_MEASUREMENT=es_CR.UTF-8 LC_IDENTIFICATION=C       
@@ -726,12 +723,12 @@ as.data.frame(n2.spcp)</code></pre>
 ## [1] seewave_2.2.0
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] digest_0.6.29   MASS_7.3-54     R6_2.5.1        jsonlite_1.8.0 
-##  [5] signal_0.7-7    magrittr_2.0.3  evaluate_0.15   highr_0.9      
-##  [9] stringi_1.7.6   rlang_1.0.2     cli_3.1.0       rstudioapi_0.13
-## [13] jquerylib_0.1.4 bslib_0.2.5.1   rmarkdown_2.13  tools_4.1.0    
-## [17] tuneR_1.4.0     stringr_1.4.0   xfun_0.31       yaml_2.3.5     
-## [21] fastmap_1.1.0   compiler_4.1.0  htmltools_0.5.2 knitr_1.39     
+##  [1] digest_0.6.29   MASS_7.3-54     R6_2.5.1        jsonlite_1.7.2 
+##  [5] signal_0.7-7    magrittr_2.0.2  evaluate_0.15   highr_0.9      
+##  [9] stringi_1.7.6   rlang_1.0.2     cli_3.2.0       rstudioapi_0.13
+## [13] jquerylib_0.1.4 bslib_0.2.5.1   rmarkdown_2.10  tools_4.1.1    
+## [17] tuneR_1.3.3.1   stringr_1.4.0   xfun_0.30       yaml_2.3.5     
+## [21] fastmap_1.1.0   compiler_4.1.1  htmltools_0.5.2 knitr_1.37     
 ## [25] sass_0.4.0</code></pre>
 </div>
 

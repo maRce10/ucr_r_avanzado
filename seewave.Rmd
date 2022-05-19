@@ -421,7 +421,7 @@ par(opar)
 
 &nbsp; 
 
-Apart from the measurements of peak frequency (`fpeaks()`) and duration (`timer()`), we can measure many other aspects of the acoustic signals using **seewave**. For example, we can estimate the fundamental frequency with the `fund()` function:
+Apart from the measurements of peak frequency (`fpeaks()`) and duration (`timer()`), we can measure many other aspects of the acoustic signals using **seewave**. For example, we can estimate the fundamental frequency (which refers to the lowest frequency harmonic in the harmonic stack), with the `fund()` function:
 
 ```{r, eval = TRUE, echo = TRUE, warning = FALSE}
 
@@ -439,7 +439,7 @@ head(ff)
 
 This function uses cepstral transformation to detect the dominant frequency. The `autoc()` function also measures the fundamental frequency, only using autocorrelation.
 
-Similarly we can measure the dominant frequency:
+Similarly we can measure the dominant frequency (the harmonic with the highest energy):
 
 ```{r, eval = FALSE, echo = TRUE, warning = FALSE}
 

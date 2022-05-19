@@ -38,7 +38,7 @@ The `spectro_analysis()` function measures the following spectrographic paramete
 
 <div class = "alert alert-success">
 
-#### Time and frequency
+#### Time and frequency (measured on the spectrogram)
 
 - duration: signal length (in s)
 
@@ -48,7 +48,7 @@ The `spectro_analysis()` function measures the following spectrographic paramete
 
 &nbsp;
 
-#### Frequency amplitude distribution
+#### Energy distribution across frequencies (measured on the power spetrum)
 
 - freq.median: medium frequency. The frequency at which the signal is divided into two frequency intervals of equal energy (in kHz)
 
@@ -65,8 +65,8 @@ The `spectro_analysis()` function measures the following spectrographic paramete
 - meanpeakf: mean peak frequency. Frequency with the highest energy of the medium frequency spectrum (see `meanspec()`). Typically more consistent than `peakf()`
 
 &nbsp;
-
-#### Distribution of amplitude in time
+ 
+#### Energy distribution across time (measured on the amplitude envelope)
 
 - time.median: average time. The time at which the signal is divided into two time intervals of equal energy (in s)
 
@@ -88,7 +88,7 @@ The `spectro_analysis()` function measures the following spectrographic paramete
 
 &nbsp;
 
-#### Fundamental frequency contour descriptors
+#### Fundamental frequency contour descriptors (measured on the spectrogram)
 
 - meanfun: average of the fundamental frequency measured through the signal
 
@@ -98,7 +98,7 @@ The `spectro_analysis()` function measures the following spectrographic paramete
 
 &nbsp;
 
-#### Dominant frequency contour descriptors
+#### Dominant frequency contour descriptors (measured on the spectrogram)
 
 - meandom: average of the dominant frequency measured through the signal
 
@@ -118,7 +118,7 @@ The `spectro_analysis()` function measures the following spectrographic paramete
 
 &nbsp;
 
-#### Harmonic content descriptors
+#### Harmonic content descriptors (measured on the spectrogram)
 
 - hn_freq: average frequency of the upper 'n' harmonics (kHz) The number of harmonics is defined with the argument 'nharmonics'
 

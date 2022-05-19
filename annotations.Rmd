@@ -128,7 +128,7 @@ The selections with sound (sound selection table) are a special type of annotati
 
 &nbsp;
 
-<img src = "Raven.create.sst.gif" alt = "Raven" width = "820">
+<img src = "images/Raven.create.sst.gif" alt = "Raven" width = "820">
 
 &nbsp;
 
@@ -318,7 +318,6 @@ exp_raven(st1, file.name = "Phaethornis 1", khz.to.hz = TRUE, sound.file.path = 
 
 ```
 ![](images/exp_raven1.gif)
-<img src = "images/exp_raven1.gif" alt = "expraven1" width = "480">
 
 &nbsp; 
 
@@ -373,7 +372,7 @@ These types of tables can be opened as a multi-file display in Raven:
 These objects are created with the `selection_table()` function. The function takes data frames containing selection data (name of the sound file, selection, start, end ...), verifies if the information is consistent (see the function `check_sels()` for details) and saves the 'diagnostic' metadata as an attribute. The selection tables are basically data frames in which the information contained has been corroborated so it can be read by other **warbleR** functions. The selection tables must contain (at least) the following columns:
 
 1. sound files (sound.files)
-1. selection (select)
+1. selection (selec)
 1. start
 1. end
 
