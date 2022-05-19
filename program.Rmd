@@ -36,7 +36,7 @@ editor_options:
 
 &nbsp;
 
-## Day 1 [*(video)*](https://www.youtube.com/watch?v=tHEKaQr95jk)
+## Day 1 [(video)](https://www.youtube.com/watch?v=tHEKaQr95jk)
 
 --- 
 
@@ -117,7 +117,7 @@ editor_options:
 
 &nbsp; 
 
-## Day 2 [*(video)*](https://youtu.be/_IR0-oJEm_E)
+## Day 2 [(video)](https://youtu.be/_IR0-oJEm_E)
 
 ---
 
@@ -143,14 +143,13 @@ spectrograms</a>
 -   Characteristics and limitations
 -   Spectrograms in R
 
+**Package seewave**
+<a href="https://marce10.github.io/OTS_BIR_2022/seewave.html" class="btn btn-warning btn-xs" role="button">seewave</a>
 
-**Annotation software**
-<a href="https://marce10.github.io/OTS_BIR_2022/annotations.html" class="btn btn-warning btn-xs" role="button">annotations</a>
-
--   Raven / audacity
--   Open and explore recordings
--   Modify-optimize visualization parameters
--   Annotate signals
+-   Explore, modify and measure ‘wave’ objects
+-   Spectrograms and oscillograms
+-   Filtering and re-sampling
+-   Acoustic measurements
 
 &nbsp; 
 
@@ -180,13 +179,13 @@ spectrograms</a>
 
 &nbsp; 
 
-**Package seewave**
-<a href="https://marce10.github.io/OTS_BIR_2022/seewave.html" class="btn btn-warning btn-xs" role="button">seewave</a>
+**Annotation software**
+<a href="https://marce10.github.io/OTS_BIR_2022/annotations.html" class="btn btn-warning btn-xs" role="button">annotations</a>
 
--   Explore, modify and measure ‘wave’ objects
--   Spectrograms and oscillograms
--   Filtering and re-sampling
--   Acoustic measurements
+-   Raven / audacity
+-   Open and explore recordings
+-   Modify-optimize visualization parameters
+-   Annotate signals
 
 **Quantifying acoustic signal structure**
 <a href="https://marce10.github.io/OTS_BIR_2022/measure_acoustic_structure.html" class="btn btn-warning btn-xs" role="button">Quantify structure</a>

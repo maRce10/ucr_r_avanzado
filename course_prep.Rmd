@@ -61,9 +61,13 @@ http://rug.mnhn.fr/seewave/ (and then go to "installation" and scroll down)
 http://ravensoundsoftware.com/raven-pricing/
 
 
-10) Install ffmpeg (for dynaSpec package, not critical ):
+10) Install ffmpeg (only needed for dynaSpec package):
 
 https://ffmpeg.org/download.html
+
+take a look at this link if you have issues installing ffmpeg on windows:
+
+https://github.com/maRce10/dynaSpec/issues/3
 
 
 11) Install Audacity (not critical, you can use Adobe Audition instead):
