@@ -13,8 +13,8 @@
 
 <title>Quality checks for recordings and annotations</title>
 
-<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
-<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -65,7 +65,6 @@ if (window.hljs) {
 
 
 
-
 <style type = "text/css">
 .main-container {
   max-width: 940px;
@@ -86,9 +85,6 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
-}
-details > summary > p:only-child {
-  display: inline;
 }
 pre code {
   padding: 0;
@@ -320,7 +316,7 @@ div.tocify {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -333,7 +329,7 @@ div.tocify {
   <a href="program.html">Program</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Tutorials
      
     <span class="caret"></span>
@@ -403,7 +399,7 @@ div.tocify {
 <font size="3"><a href="http://marceloarayasalas.weebly.com/">Marcelo Araya-Salas, PhD</a></font>
 </center></h4>
 <h4 class="date"><center>
-“2022-05-14”
+“2022-05-20”
 </center></h4>
 
 </div>
@@ -942,8 +938,8 @@ tweak_spectro(X = lbh_selec_table,  wl = c(100, 1000),  wn = c(&quot;hanning&quo
 <p><img src="images/spec_param2.jpeg" alt="viewSpec" width="780"></p>
 <p> </p>
 </div>
-<div id="review-of-selections" class="section level2">
-<h2>Review of selections</h2>
+<div id="double-check-selections" class="section level2">
+<h2>Double-check selections</h2>
 <p>The main function to double-check selection tables is <code>check_sels()</code>. This function checks a large number of possible errors in the selection information:</p>
 <ul>
 <li>‘X’ is an object of the class ‘data.frame’ or ‘selection_table’ (see selection_table) and contains the columns required to be used in any warbleR function (‘sound.files’, ‘selec’, ‘start’ , ‘end’, if it does not return an error)</li>
@@ -1809,18 +1805,18 @@ tail.cntours &lt;-tailor_sels(X = lbh_selec_table[1:5, ], ts.df = cntours,
 <p> </p>
 <hr />
 <p><font size="4">Session information</font></p>
-<pre><code>## R version 4.1.0 (2021-05-18)
+<pre><code>## R version 4.1.1 (2021-08-10)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
 ## Running under: Ubuntu 20.04.2 LTS
 ## 
 ## Matrix products: default
-## BLAS:   /usr/lib/x86_64-linux-gnu/atlas/libblas.so.3.10.3
-## LAPACK: /usr/lib/x86_64-linux-gnu/atlas/liblapack.so.3.10.3
+## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0
+## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0
 ## 
 ## locale:
-##  [1] LC_CTYPE=pt_BR.UTF-8       LC_NUMERIC=C              
-##  [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=pt_BR.UTF-8    
-##  [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=pt_BR.UTF-8   
+##  [1] LC_CTYPE=es_ES.UTF-8       LC_NUMERIC=C              
+##  [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=es_ES.UTF-8    
+##  [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=es_ES.UTF-8   
 ##  [7] LC_PAPER=es_CR.UTF-8       LC_NAME=C                 
 ##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
 ## [11] LC_MEASUREMENT=es_CR.UTF-8 LC_IDENTIFICATION=C       
@@ -1829,21 +1825,22 @@ tail.cntours &lt;-tailor_sels(X = lbh_selec_table[1:5, ], ts.df = cntours,
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] kableExtra_1.3.1   warbleR_1.1.27     NatureSounds_1.0.4 knitr_1.39        
-## [5] seewave_2.2.0      tuneR_1.4.0       
+## [1] kableExtra_1.3.4   warbleR_1.1.27     NatureSounds_1.0.4 knitr_1.37        
+## [5] seewave_2.2.0      tuneR_1.3.3.1     
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] Rcpp_1.0.8.3       bslib_0.2.5.1      compiler_4.1.0     jquerylib_0.1.4   
-##  [5] moments_0.14.1     bitops_1.0-7       tools_4.1.0        digest_0.6.29     
-##  [9] viridisLite_0.4.0  jsonlite_1.8.0     evaluate_0.15      lifecycle_1.0.1   
-## [13] fftw_1.0-7         rlang_1.0.2        cli_3.1.0          rstudioapi_0.13   
-## [17] yaml_2.3.5         parallel_4.1.0     xfun_0.31          fastmap_1.1.0     
-## [21] xml2_1.3.2         stringr_1.4.0      httr_1.4.2         sass_0.4.0        
-## [25] webshot_0.5.2      glue_1.6.2         R6_2.5.1           dtw_1.22-3        
-## [29] pbapply_1.5-0      rmarkdown_2.13     magrittr_2.0.3     bioacoustics_0.2.8
-## [33] scales_1.1.1       htmltools_0.5.2    MASS_7.3-54        rvest_1.0.0       
-## [37] colorspace_2.0-2   stringi_1.7.6      proxy_0.4-26       munsell_0.5.0     
-## [41] signal_0.7-7       RCurl_1.98-1.6     rjson_0.2.21</code></pre>
+##  [1] Rcpp_1.0.8         bslib_0.2.5.1      compiler_4.1.1     jquerylib_0.1.4   
+##  [5] moments_0.14       bitops_1.0-7       tools_4.1.1        digest_0.6.29     
+##  [9] viridisLite_0.4.0  jsonlite_1.7.2     evaluate_0.15      lifecycle_1.0.1   
+## [13] fftw_1.0-6.1       rlang_1.0.2        cli_3.2.0          rstudioapi_0.13   
+## [17] yaml_2.3.5         parallel_4.1.1     xfun_0.30          fastmap_1.1.0     
+## [21] xml2_1.3.2         stringr_1.4.0      httr_1.4.2         systemfonts_1.0.2 
+## [25] sass_0.4.0         webshot_0.5.2      svglite_2.0.0      glue_1.6.2        
+## [29] R6_2.5.1           dtw_1.22-3         pbapply_1.5-0      rmarkdown_2.10    
+## [33] magrittr_2.0.2     bioacoustics_0.2.8 scales_1.1.1       htmltools_0.5.2   
+## [37] MASS_7.3-54        rvest_1.0.1        colorspace_2.0-3   stringi_1.7.6     
+## [41] proxy_0.4-26       munsell_0.5.0      signal_0.7-7       RCurl_1.98-1.6    
+## [45] rjson_0.2.21</code></pre>
 </div>
 
 

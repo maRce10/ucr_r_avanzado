@@ -268,7 +268,7 @@ tweak_spectro(X = lbh_selec_table,  wl = 220,  collev.min = c(-20, -100), pal = 
 
 &nbsp; 
 
-## Review of selections
+## Double-check selections
 
 The main function to double-check selection tables is `check_sels()`. This function checks a large number of possible errors in the selection information:
 
