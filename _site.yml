@@ -1,5 +1,8 @@
 name: "Stats Workshop OTS-TB-2022"
 output_dir: "docs"
+output:
+  html_document:
+    css: extra.css
 navbar:
   title: "Stats Workshop OTS-TB-2022"
   left:
@@ -17,4 +20,4 @@ navbar:
       href: course_prep.html
     - text: "Instructor"
       href: instructor.html
-
+    
