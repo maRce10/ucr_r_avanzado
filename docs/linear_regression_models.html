@@ -1,0 +1,2447 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>linear_regression_models.knit</title>
+
+<script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/clipboard-1.7.1/clipboard.min.js"></script>
+<link href="site_libs/primer-tooltips-1.4.0/build.css" rel="stylesheet" />
+<link href="site_libs/klippy-0.0.0.9500/css/klippy.min.css" rel="stylesheet" />
+<script src="site_libs/klippy-0.0.0.9500/js/klippy.min.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Stats Workshop OTS-TB-2022</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Tutorials
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="r_basics.html">R basics</a>
+    </li>
+    <li>
+      <a href="linear_regression_models.html">Linear regression models</a>
+    </li>
+    <li>
+      <a href="common_stats_as_lms.html">Common stats as linear models</a>
+    </li>
+    <li>
+      <a href="graphs_with_ggplot2.html">Graphs with ggplot2</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="course_prep.html">Course prep</a>
+</li>
+<li>
+  <a href="instructor.html">Instructor</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore"><center>
+<font size="7"><b>Linear regression models</b></font>
+</center></h1>
+<h3 class="subtitle"><center>
+<font size="4"><b>Tropical Biology 2022</b> <br> Organization for
+Tropical Studies</font>
+</center></h3>
+<h4 class="author"><center>
+<font size="3"><a href="http://marceloarayasalas.weebly.com/">Marcelo
+Araya-Salas, PhD</a></font>
+</center></h4>
+<h4 class="date"><center>
+“2022-06-14”
+</center></h4>
+
+</div>
+
+
+<style>
+body
+  { counter-reset: source-line 0; }
+pre.numberSource code
+  { counter-reset: none; }
+</style>
+<script>
+  addClassKlippyTo("pre.r, pre.markdown");
+  addKlippy('right', 'top', 'auto', '1', 'Copy code', 'Copied!');
+</script>
+<p> </p>
+<div id="linear-models-as-a-unifying-framework" class="section level1">
+<h1>linear models as a unifying framework</h1>
+<p>Traditionally, statistical models have been taught as disconnected
+tools with no clear relationship between them. Take a look at a classic
+biology stats book (Sokal &amp; Rolhf):</p>
+<p><img src="images/sokal_rohlf.png" width="100%" style="display: block; margin: auto;" />
+ </p>
+<p>However, most of those common statistical models are just special
+cases of linear models. Hence, learning them as such can largely
+simplify things. This approach has several advantages:</p>
+<ul>
+<li><p>First of all, <strong>it all comes down to
+<em>y=a⋅x+b</em></strong>, which largely simplify learning</p></li>
+<li><p>This also means that there is <strong>no need to learn about
+parameters, assumptions, and result interpretation for every single
+special case</strong></p></li>
+<li><p>Linear models have been extended to <strong>account for complex
+distributions and data structures</strong> (e.g. mixed models,
+generalized linear models, zero-inflated models, etc) providing a
+<strong>more flexible platform</strong>.</p></li>
+<li><p>Linear models are <strong>applied across statistical
+paradigms</strong> (e.g. frequentist, bayesian)</p></li>
+</ul>
+<p> </p>
+</div>
+<div id="purpose" class="section level1 alert alert-info">
+<h1>Purpose</h1>
+<p> </p>
+<ul>
+<li><p>Understand statistical inference through a single modelling tool
+(broad sense linear models)</p></li>
+<li><p>Get familiar with building linear models</p></li>
+<li><p>Extent linear models to different data structures</p></li>
+</ul>
+</div>
+<p> </p>
+<div id="workshop-overview" class="section level1 alert alert-warning">
+<h1>Workshop overview</h1>
+<ul>
+<li><p><a href="#how-to-simulate-data">How to simulate data</a></p></li>
+<li><p><a
+href="#how-to-use-simulated-data-to-understand-the-behavior-of-statistical-tools">How
+to use simulated data to understand the behavior of statistical
+tools</a></p></li>
+<li><p><a href="#linear-regression-in-r">Linear regression basic
+structure (in R)</a></p></li>
+<li><p><a href="#use-simulated-data-to-understand-linear-models">Use
+simulated data to understand linear models</a></p></li>
+<li><p><a
+href="#common-statistical-tests-as-special-cases-of-linear-regression">Common
+statistical tests as special cases of linear regression</a></p></li>
+<li><p><a
+href="#extending-the-linear-models-to-more-complex-data-structures">Extending
+the linear models to more complex data structures</a></p></li>
+<li><p><a href="#additional-resources">Additional resources</a></p></li>
+</ul>
+</div>
+<p> </p>
+<div id="a-few-tips" class="section level2">
+<h2>A few tips</h2>
+<ul>
+<li><p>Feel free to ask questions at any time</p></li>
+<li><p>Try to run the code yourself (if you don’t have much experience
+in R try to sit with someone that does)</p></li>
+<li><p>The line of the code blocks are numbered so we can refer to
+specific part of the code, and the code can be copied with the button on
+the upper right corner of the box:</p></li>
+</ul>
+<p><img src="images/chunk.png" width="100%" style="display: block; margin: auto;" />
+ </p>
+<hr />
+<p>Please install and load the following packages:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div>
+<hr />
+</div>
+<div id="how-to-simulate-data" class="section level1">
+<h1>How to simulate data</h1>
+<div id="generating-random-numbers-in-r" class="section level2">
+<h2>Generating random numbers in R</h2>
+<p>Statistics allow us to infer patterns in the data. We tend to use
+real data sets to teach stats. However, it might get circular to
+understand the inner working of an statistical tool by testing its
+ability to infer a pattern that we are not sure its found in the data
+(and have no idea on the mechanism producing that pattern).
+<strong>Simulations allow us to create controlled scenarios in which we
+know for sure the patterns</strong> present in the data and the
+underlying processes that generated them.</p>
+<p>R offers some basic functions for data simulation. The most used ones
+are the random number generating functions. The names of these functions
+all start with <em>r</em> (<code>r____()</code>). For instance
+<code>runif()</code>:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>unif_var <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">100</span>, <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">10</span>)</span></code></pre></div>
+<p> </p>
+<p>The output is a numeric vector of length 1 thousand
+(<code>n = 1000</code>):</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>unif_var</span></code></pre></div>
+<pre><code>##   [1] 9.88909298 3.97745453 1.15697779 0.69748679 2.43749391 7.92010426
+##   [7] 3.40062353 9.72062501 1.65855485 4.59103666 1.71748077 2.31477102
+##  [13] 7.72811946 0.96301542 4.53447770 0.84700713 5.60665867 0.08704600
+##  [19] 9.85737091 3.16584804 6.39448942 2.95223235 9.96703694 9.06021320
+##  [25] 9.88739144 0.65645739 6.27038758 4.90475041 9.71024413 3.62220848
+##  [31] 6.79993461 2.63719930 1.85714261 1.85143222 3.79296747 8.47024392
+##  [37] 4.98076133 7.90585574 8.38463872 4.56903865 7.99475815 3.81943061
+##  [43] 7.59701231 4.36775602 9.04217721 3.19534914 0.82569093 8.16289079
+##  [49] 8.98476221 9.66496398 5.73068883 7.20079497 7.74058624 6.27760801
+##  [55] 7.22989341 3.86831279 1.62790778 1.87228283 3.91249474 2.73901210
+##  [61] 1.91917748 5.04391806 7.63840357 6.93668871 5.44054188 6.59087226
+##  [67] 4.68728380 4.81805539 3.37063598 4.24526302 2.87015131 6.01191532
+##  [73] 8.40742326 6.20837048 1.34551619 5.67722430 4.43426331 4.37975423
+##  [79] 6.23617233 9.32653342 8.88492583 8.78540561 2.42176948 7.41453797
+##  [85] 3.87656313 0.78951739 0.94835550 7.62142731 3.47894026 4.16766709
+##  [91] 3.44016231 0.08410923 9.11574991 1.82205419 7.22803449 5.71963331
+##  [97] 5.40036414 3.54947415 8.24091838 1.86136761</code></pre>
+<p>We can explore the output by plotting a histogram:</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># create histogram</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(unif_var), <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> unif_var)) <span class="sc">+</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>    <span class="fu">geom_histogram</span>()</span></code></pre></div>
+<p><img src="linear_regression_models_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+ </p>
+<p>It shows a uniform distribution ranging from 0 to 10.</p>
+<p>We can also simulate random numbers coming from a normal distribution
+using <code>rnorm()</code>:</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># create random variable</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>norm_var <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">1000</span>, <span class="at">mean =</span> <span class="dv">2</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb6-3"><a href="#cb6-3"></a></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="co"># plot histogram</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(norm_var), <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> norm_var)) <span class="sc">+</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a>    <span class="fu">geom_histogram</span>()</span></code></pre></div>
+<p><img src="linear_regression_models_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p> </p>
+<p>Note that random number generating functions all have the argument
+‘n’, which sets the length of the output vector (i.e. number of random
+numbers), plus some additional arguments related to specific parameters
+of the distribution.</p>
+<p>Continuous variables (i.e. numeric vectors) can be converted to
+discrete variables (i.e. integer numbers) simply by rounding them:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>v1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">5</span>, <span class="at">mean =</span> <span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">3</span>)</span>
+<span id="cb7-2"><a href="#cb7-2"></a></span>
+<span id="cb7-3"><a href="#cb7-3"></a>v1</span></code></pre></div>
+<pre><code>## [1] 15.426886  8.544965 15.138700  8.920290  9.369333</code></pre>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">round</span>(<span class="at">x =</span> v1, <span class="at">digits =</span> <span class="dv">0</span>)</span></code></pre></div>
+<pre><code>## [1] 15  9 15  9  9</code></pre>
+<p> </p>
+<p> </p>
+<div class="alert alert-info">
+<p><font size="5">Exercise</font></p>
+<p> </p>
+<ul>
+<li><p>What do the functions <code>rbinom()</code> and
+<code>rexp()</code> do? (tip: run <code>?rexp</code>)</p></li>
+<li><p>Run them and make histograms of their output</p></li>
+<li><p>What do the arguments ‘mean’ and ‘sd’ in <code>rnorm()</code> do?
+Play with different values and check the histogram to get a sense of
+their effect in the simulation</p></li>
+</ul>
+</div>
+<p> </p>
+</div>
+<div id="generating-categorical-variables" class="section level2">
+<h2>Generating categorical variables</h2>
+<p>The easiest way to generate categorical variables is to use the
+‘letters’ (or ‘LETTERS’) example vector to assign category levels. We
+can do this using the function <code>rep()</code>. For instance, the
+following code creates a categorical (character) vector with two levels,
+each one with 4 observations:</p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">rep</span>(letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="at">each =</span> <span class="dv">4</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;a&quot; &quot;a&quot; &quot;a&quot; &quot;a&quot; &quot;b&quot; &quot;b&quot; &quot;b&quot; &quot;b&quot;</code></pre>
+<p> </p>
+<p>We can also replicate this pattern using the argument ‘times’. This
+code replicates the previous vector 2 times:</p>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">rep</span>(letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="at">each =</span> <span class="dv">4</span>, <span class="at">times =</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##  [1] &quot;a&quot; &quot;a&quot; &quot;a&quot; &quot;a&quot; &quot;b&quot; &quot;b&quot; &quot;b&quot; &quot;b&quot; &quot;a&quot; &quot;a&quot; &quot;a&quot; &quot;a&quot; &quot;b&quot; &quot;b&quot; &quot;b&quot; &quot;b&quot;</code></pre>
+<p> </p>
+<p>Another option is to simulate a variable from a binomial distribution
+and then convert it into a factor:</p>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># run rbinom</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>binom_var <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span>
+<span id="cb15-3"><a href="#cb15-3"></a></span>
+<span id="cb15-4"><a href="#cb15-4"></a>binom_var</span></code></pre></div>
+<pre><code>##  [1] 1 0 0 1 1 0 0 0 0 0 0 0 1 1 1 0 0 1 0 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0 0 1 0 0
+## [39] 1 1 0 0 0 0 0 1 0 1 1 1</code></pre>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>categ_var <span class="ot">&lt;-</span> <span class="fu">factor</span>(binom_var, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>))</span>
+<span id="cb17-2"><a href="#cb17-2"></a></span>
+<span id="cb17-3"><a href="#cb17-3"></a>categ_var</span></code></pre></div>
+<pre><code>##  [1] b a a b b a a a a a a a b b b a a b a b a a a a a a a b a b b b a a a b a a
+## [39] b b a a a a a b a b b b
+## Levels: a b</code></pre>
+<p> </p>
+</div>
+<div id="random-sampling" class="section level2">
+<h2>Random sampling</h2>
+<p>The other important R tool for playing with simulated data is
+<code>sample()</code>. This function allows you to take samples of
+specific sizes from vectors. For instance, take the example vector
+<code>letters</code>:</p>
+<div class="sourceCode" id="cb19"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>letters</span></code></pre></div>
+<pre><code>##  [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot; &quot;f&quot; &quot;g&quot; &quot;h&quot; &quot;i&quot; &quot;j&quot; &quot;k&quot; &quot;l&quot; &quot;m&quot; &quot;n&quot; &quot;o&quot; &quot;p&quot; &quot;q&quot; &quot;r&quot; &quot;s&quot;
+## [20] &quot;t&quot; &quot;u&quot; &quot;v&quot; &quot;w&quot; &quot;x&quot; &quot;y&quot; &quot;z&quot;</code></pre>
+<p> </p>
+<p>We can take a sample of this vector like is:</p>
+<div class="sourceCode" id="cb21"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">sample</span>(<span class="at">x =</span> letters, <span class="at">size =</span> <span class="dv">10</span>)</span></code></pre></div>
+<pre><code>##  [1] &quot;i&quot; &quot;r&quot; &quot;q&quot; &quot;a&quot; &quot;c&quot; &quot;m&quot; &quot;y&quot; &quot;z&quot; &quot;u&quot; &quot;v&quot;</code></pre>
+<p> </p>
+<p>The argument ‘size’ allow us to determine the size of the sample.
+Note that we get an error if the size is larger than the vector
+itself:</p>
+<div class="sourceCode" id="cb23"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">sample</span>(<span class="at">x =</span> letters, <span class="at">size =</span> <span class="dv">30</span>)</span></code></pre></div>
+<pre><code>## Error in sample.int(length(x), size, replace, prob): cannot take a sample larger than the population when &#39;replace = FALSE&#39;</code></pre>
+<p> </p>
+<p>This can only be done when sampling with replacement. Sampling with
+replacement can be applied by setting the argument
+<code>replace = TRUE</code>:</p>
+<div class="sourceCode" id="cb25"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">sample</span>(<span class="at">x =</span> letters, <span class="at">size =</span> <span class="dv">30</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>##  [1] &quot;j&quot; &quot;i&quot; &quot;h&quot; &quot;i&quot; &quot;k&quot; &quot;u&quot; &quot;n&quot; &quot;i&quot; &quot;w&quot; &quot;k&quot; &quot;c&quot; &quot;t&quot; &quot;m&quot; &quot;p&quot; &quot;i&quot; &quot;h&quot; &quot;d&quot; &quot;w&quot; &quot;c&quot;
+## [20] &quot;q&quot; &quot;j&quot; &quot;e&quot; &quot;e&quot; &quot;j&quot; &quot;k&quot; &quot;c&quot; &quot;l&quot; &quot;t&quot; &quot;r&quot; &quot;h&quot;</code></pre>
+<p> </p>
+</div>
+<div id="iterating-a-process" class="section level2">
+<h2>Iterating a process</h2>
+<p>Often simulations most be repeated several times to rule out spurious
+results due to chance or just to try different parameters. The functions
+for simulating data mentioned above can be run several times
+(e.g. iterated) using the function <code>replicate()</code>:</p>
+<div class="sourceCode" id="cb27"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>repl_rnorm <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="at">n =</span> <span class="dv">3</span>, <span class="at">expr =</span> <span class="fu">rnorm</span>(<span class="dv">2</span>), <span class="at">simplify =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb27-2"><a href="#cb27-2"></a></span>
+<span id="cb27-3"><a href="#cb27-3"></a><span class="fu">class</span>(repl_rnorm)</span></code></pre></div>
+<pre><code>## [1] &quot;list&quot;</code></pre>
+<div class="sourceCode" id="cb29"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>repl_rnorm</span></code></pre></div>
+<pre><code>## [[1]]
+## [1]  1.1918356 -0.3399238
+## 
+## [[2]]
+## [1]  0.7891082 -0.6321324
+## 
+## [[3]]
+## [1] -1.4931226 -0.1344123</code></pre>
+<p> </p>
+</div>
+<div id="making-simulations-reproducible" class="section level2">
+<h2>Making simulations reproducible</h2>
+<p>The last trick we need to run simulations in R is the ability to
+reproduce a simulation (i.e. get the exact same simulated data and
+results). This can be useful for allowing other researchers to run our
+analyses in the exact same way. This can be easily done with the
+function <code>set.seed()</code>. Try running the following code. You
+should get the same output:</p>
+<div class="sourceCode" id="cb31"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="fu">set.seed</span>(<span class="dv">10</span>)</span>
+<span id="cb31-2"><a href="#cb31-2"></a></span>
+<span id="cb31-3"><a href="#cb31-3"></a><span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 0.5074782 0.3067685</code></pre>
+<hr />
+</div>
+</div>
+<div id="creating-data-sets" class="section level1">
+<h1>Creating data sets</h1>
+<div id="datasets-with-numeric-and-categorical-data"
+class="section level2">
+<h2>Datasets with numeric and categorical data</h2>
+<p>Now that we know how to simulate continuous and categorical variable.
+We can put them together to create simulated data sets. This can be done
+using the function <code>data.frame()</code>:</p>
+<div class="sourceCode" id="cb33"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="co"># create categorical variable</span></span>
+<span id="cb33-2"><a href="#cb33-2"></a>group <span class="ot">&lt;-</span> <span class="fu">rep</span>(letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="at">each =</span> <span class="dv">3</span>)</span>
+<span id="cb33-3"><a href="#cb33-3"></a></span>
+<span id="cb33-4"><a href="#cb33-4"></a><span class="co"># create continous data</span></span>
+<span id="cb33-5"><a href="#cb33-5"></a>size <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">6</span>, <span class="at">mean =</span> <span class="dv">5</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb33-6"><a href="#cb33-6"></a></span>
+<span id="cb33-7"><a href="#cb33-7"></a><span class="co"># put them together in a data frame</span></span>
+<span id="cb33-8"><a href="#cb33-8"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(group, size)</span>
+<span id="cb33-9"><a href="#cb33-9"></a></span>
+<span id="cb33-10"><a href="#cb33-10"></a><span class="co"># print</span></span>
+<span id="cb33-11"><a href="#cb33-11"></a>df</span></code></pre></div>
+<table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+group
+</th>
+<th style="text-align:center;">
+size
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+a
+</td>
+<td style="text-align:center;">
+4.8157
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+a
+</td>
+<td style="text-align:center;">
+3.6287
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+a
+</td>
+<td style="text-align:center;">
+4.4008
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+b
+</td>
+<td style="text-align:center;">
+5.2945
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+b
+</td>
+<td style="text-align:center;">
+5.3898
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+b
+</td>
+<td style="text-align:center;">
+3.7919
+</td>
+</tr>
+</tbody>
+</table>
+<p>Of course, we could add more variables to this data frame:</p>
+<div class="sourceCode" id="cb34"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="co"># create categorical variable</span></span>
+<span id="cb34-2"><a href="#cb34-2"></a>group <span class="ot">&lt;-</span> <span class="fu">rep</span>(letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="at">each =</span> <span class="dv">3</span>)</span>
+<span id="cb34-3"><a href="#cb34-3"></a>individual <span class="ot">&lt;-</span> <span class="fu">rep</span>(LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>])</span>
+<span id="cb34-4"><a href="#cb34-4"></a></span>
+<span id="cb34-5"><a href="#cb34-5"></a><span class="co"># create continous data</span></span>
+<span id="cb34-6"><a href="#cb34-6"></a>size <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">6</span>, <span class="at">mean =</span> <span class="dv">5</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb34-7"><a href="#cb34-7"></a>weight <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">6</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">10</span>)</span>
+<span id="cb34-8"><a href="#cb34-8"></a></span>
+<span id="cb34-9"><a href="#cb34-9"></a></span>
+<span id="cb34-10"><a href="#cb34-10"></a><span class="co"># put them together in a data frame</span></span>
+<span id="cb34-11"><a href="#cb34-11"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(group, individual, size, weight)</span>
+<span id="cb34-12"><a href="#cb34-12"></a></span>
+<span id="cb34-13"><a href="#cb34-13"></a><span class="co"># print</span></span>
+<span id="cb34-14"><a href="#cb34-14"></a>df</span></code></pre></div>
+<table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+group
+</th>
+<th style="text-align:center;">
+individual
+</th>
+<th style="text-align:center;">
+size
+</th>
+<th style="text-align:center;">
+weight
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+a
+</td>
+<td style="text-align:center;">
+A
+</td>
+<td style="text-align:center;">
+4.6363
+</td>
+<td style="text-align:center;">
+109.8744
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+a
+</td>
+<td style="text-align:center;">
+B
+</td>
+<td style="text-align:center;">
+3.3733
+</td>
+<td style="text-align:center;">
+107.4139
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+a
+</td>
+<td style="text-align:center;">
+C
+</td>
+<td style="text-align:center;">
+4.7435
+</td>
+<td style="text-align:center;">
+100.8935
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+b
+</td>
+<td style="text-align:center;">
+D
+</td>
+<td style="text-align:center;">
+6.1018
+</td>
+<td style="text-align:center;">
+90.4506
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+b
+</td>
+<td style="text-align:center;">
+E
+</td>
+<td style="text-align:center;">
+5.7558
+</td>
+<td style="text-align:center;">
+98.0485
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+b
+</td>
+<td style="text-align:center;">
+F
+</td>
+<td style="text-align:center;">
+4.7618
+</td>
+<td style="text-align:center;">
+109.2552
+</td>
+</tr>
+</tbody>
+</table>
+<p>And that’s a simulated data set in its most basic form. That looks a
+lot like the kind of data we use to work with in the biological
+science.</p>
+<hr />
+</div>
+</div>
+<div
+id="how-to-use-simulated-data-to-understand-the-behavior-of-statistical-tools"
+class="section level1">
+<h1>How to use simulated data to understand the behavior of statistical
+tools</h1>
+<div id="a-proof-of-concept-the-central-limit-theorem"
+class="section level2">
+<h2>A proof of concept: <em>the Central Limit Theorem</em></h2>
+<p>The <a
+href="https://en.wikipedia.org/wiki/Central_limit_theorem">Central Limit
+Theorem</a> states that, if we take repeated random samples of a
+population, the means of those samples will conform to a normal
+distribution, even if the population is not normally distributed. In
+addition, the resulting normal distribution must have a mean close to
+the population’s mean. The theorem is a key concept for inferential
+statistics as it implies that statistical methods that work for normal
+distributions can be applicable to many problems involving other types
+of distributions. Nonetheless, the point here is only to showcase how
+simulations can be used to understand the behavior statistical
+methods.</p>
+<p>To check if those basic claims about the Central Limit Theorem hold
+true we can use simulated data in R. Let’s simulate a 1000 observation
+population with a uniform distribution:</p>
+<div class="sourceCode" id="cb35"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="co"># simulate uniform population</span></span>
+<span id="cb35-2"><a href="#cb35-2"></a>unif_pop <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1000</span>, <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">10</span>)</span>
+<span id="cb35-3"><a href="#cb35-3"></a></span>
+<span id="cb35-4"><a href="#cb35-4"></a><span class="co"># check distribution/ plot histogram</span></span>
+<span id="cb35-5"><a href="#cb35-5"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(unif_pop), <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> unif_pop)) <span class="sc">+</span></span>
+<span id="cb35-6"><a href="#cb35-6"></a>    <span class="fu">geom_histogram</span>()</span></code></pre></div>
+<p><img src="linear_regression_models_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p> </p>
+<p>We can take random samples using <code>sample()</code> like this:</p>
+<div class="sourceCode" id="cb36"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="fu">sample</span>(<span class="at">x =</span> unif_pop, <span class="at">size =</span> <span class="dv">30</span>)</span></code></pre></div>
+<pre><code>##  [1] 9.2841984 1.0262565 2.5751741 3.3248460 6.8998985 2.2940436 0.3373657
+##  [8] 8.2136568 3.3036362 8.0379320 2.5917392 7.8177006 5.6542576 0.6383126
+## [15] 2.8347032 4.2043442 4.7632983 4.4219338 6.9782974 7.9262477 0.6812050
+## [22] 3.5232307 6.5110308 5.3828892 7.9721010 1.8006177 4.2128214 3.3386579
+## [29] 8.9122284 4.7116278</code></pre>
+<p> </p>
+<p>This process can be replicated several times with
+<code>replicate()</code>:</p>
+<div class="sourceCode" id="cb38"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a>samples <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="at">n =</span> <span class="dv">100</span>, <span class="at">expr =</span> <span class="fu">mean</span>(<span class="fu">sample</span>(<span class="at">x =</span> unif_pop, <span class="at">size =</span> <span class="dv">30</span>)))</span></code></pre></div>
+<p> </p>
+<p>The code above takes 100 samples with 30 values each. We can now
+check the distribution of the samples:</p>
+<div class="sourceCode" id="cb39"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="co"># check distribution/ plot histogram</span></span>
+<span id="cb39-2"><a href="#cb39-2"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(samples), <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> samples)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code></pre></div>
+<p><img src="linear_regression_models_files/figure-html/unnamed-chunk-28-1.png" width="672" />
+ </p>
+<p>… as well as the mean:</p>
+<div class="sourceCode" id="cb40"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="fu">mean</span>(samples)</span></code></pre></div>
+<pre><code>## [1] 5.021219</code></pre>
+<p> </p>
+<p>As expected, the samples follows a normal distribution with a mean
+close to the mean of the population, which is:</p>
+<div class="sourceCode" id="cb42"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="fu">mean</span>(unif_pop)</span></code></pre></div>
+<pre><code>## [1] 5.052715</code></pre>
+<p> </p>
+<p>Let’s try with a more complex distribution. For instance, a bimodal
+distribution:</p>
+<div class="sourceCode" id="cb44"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="co"># set seed</span></span>
+<span id="cb44-2"><a href="#cb44-2"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb44-3"><a href="#cb44-3"></a></span>
+<span id="cb44-4"><a href="#cb44-4"></a><span class="co"># simulate variables</span></span>
+<span id="cb44-5"><a href="#cb44-5"></a>norm1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">1000</span>, <span class="at">mean =</span> <span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">3</span>)</span>
+<span id="cb44-6"><a href="#cb44-6"></a>norm2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">1000</span>, <span class="at">mean =</span> <span class="dv">20</span>, <span class="at">sd =</span> <span class="dv">3</span>)</span>
+<span id="cb44-7"><a href="#cb44-7"></a></span>
+<span id="cb44-8"><a href="#cb44-8"></a><span class="co"># add them in a single one</span></span>
+<span id="cb44-9"><a href="#cb44-9"></a>bimod_pop <span class="ot">&lt;-</span> <span class="fu">c</span>(norm1, norm2)</span>
+<span id="cb44-10"><a href="#cb44-10"></a></span>
+<span id="cb44-11"><a href="#cb44-11"></a><span class="co"># check distribution/ plot histogram</span></span>
+<span id="cb44-12"><a href="#cb44-12"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(bimod_pop), <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> bimod_pop)) <span class="sc">+</span></span>
+<span id="cb44-13"><a href="#cb44-13"></a>    <span class="fu">geom_histogram</span>()</span></code></pre></div>
+<p><img src="linear_regression_models_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+<div class="sourceCode" id="cb45"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a>samples <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">200</span>, <span class="fu">mean</span>(<span class="fu">sample</span>(bimod_pop, <span class="dv">10</span>)))</span>
+<span id="cb45-2"><a href="#cb45-2"></a></span>
+<span id="cb45-3"><a href="#cb45-3"></a><span class="co"># check distribution/ plot histogram</span></span>
+<span id="cb45-4"><a href="#cb45-4"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(bimod_pop), <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> bimod_pop)) <span class="sc">+</span></span>
+<span id="cb45-5"><a href="#cb45-5"></a>    <span class="fu">geom_histogram</span>()</span></code></pre></div>
+<p><img src="linear_regression_models_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
+<div class="sourceCode" id="cb46"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="fu">mean</span>(samples)</span></code></pre></div>
+<pre><code>## [1] 15.23058</code></pre>
+<div class="sourceCode" id="cb48"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a><span class="fu">mean</span>(bimod_pop)</span></code></pre></div>
+<pre><code>## [1] 15.08789</code></pre>
+<p> </p>
+<div class="alert alert-info">
+<p><font size="5">Exercise</font></p>
+<p> </p>
+<ul>
+<li><p>Try exploring the Central Limit Theorem as above but this time
+using:</p>
+<ol style="list-style-type: decimal">
+<li>An exponential distribution (<code>rexp()</code>)</li>
+<li>A binomial distribution (<code>rbinom()</code>)</li>
+</ol></li>
+</ul>
+<p> </p>
+<ul>
+<li>For each distribution: plot a histogram and compare the means of the
+population and the samples</li>
+</ul>
+</div>
+<p> </p>
+<hr />
+<div class="alert alert-warning">
+<font size = 6>
+<center>
+Simple linear regression
+</center>
+<p></font></p>
+<p>Linear regressions are based on the linear equation <em>a = mx +
+b</em> we learned in high school. The formal representation looks like
+this:</p>
+<center>
+<font size = 6><span class="math inline">\(\hat{Y} \sim \beta_{o} +
+\beta_{1} * x_{1}\)</span></font>
+</center>
+<p> </p>
+<ul>
+<li><p><span class="math inline">\(\hat{Y}\)</span>: response
+variable</p></li>
+<li><p><span class="math inline">\(\beta_{o}\)</span>: intercept (y
+value)</p></li>
+<li><p><span class="math inline">\(\beta_{1}\)</span>: estimate of the
+magnitude of the effect of <span class="math inline">\(x_{1}\)</span> on
+<span class="math inline">\(\hat{Y}\)</span> (a.k.a. effect size,
+coefficient or simply the ‘estimate’)</p></li>
+<li><p><span class="math inline">\(x_{1}\)</span>: predictor
+variable</p></li>
+</ul>
+<p> </p>
+<p>The most common goal of a linear regression is estimating the <span
+class="math inline">\(\beta_{*}\)</span> values. This is achieved by
+finding the best fitting straight line representing the association
+between a predictor and the response:</p>
+<p><img src="images/regression.jpg" width="100%" style="display: block; margin: auto;" />
+ </p>
+<p>Those <span class="math inline">\(\beta_{*}\)</span>s are the
+estimated effect size of the correspondent predictor (e.g. <span
+class="math inline">\(\beta_{1}\)</span> is the effect size <span
+class="math inline">\(x_{1}\)</span>). Their value represent the mean
+change in <span class="math inline">\(\hat{Y}\)</span> (in <span
+class="math inline">\(\hat{Y}\)</span> units) for a unit of change in
+<span class="math inline">\(\beta_{*}\)</span>. Hence the null
+hypothesis is that those <span class="math inline">\(\beta_{*}\)</span>s
+are not different from 0:</p>
+<center>
+<font size = 6><span class="math inline">\(\qquad \mathcal{H}_0: \hat{Y}
+= \beta_0 + 0 * x_{1}\)</span></font>
+</center>
+<p>which is equivalent to this:</p>
+<center>
+<font size = 6><span class="math inline">\(\qquad \mathcal{H}_0: \hat{Y}
+= \beta_0\)</span></font>
+</center>
+<p> </p>
+<p><img src="images/model_betas.png" width="100%" style="display: block; margin: auto;" />
+ </p>
+</div>
+<p> </p>
+<hr />
+</div>
+</div>
+<div id="linear-regression-in-r" class="section level1">
+<h1>Linear regression in R</h1>
+<p>To take full advantage of linear models we need to feel comfortable
+with them. We will do this by exploring R’s linear regression function
+<code>lm()</code>. In R most linear models and their extensions share
+common data input and output formats which makes easy to apply them once
+we understand their basics.</p>
+<p>We will use the data set ‘trees’ that comes by default with R.
+‘trees’ provides measurements of the <strong>diameter</strong> (labeled
+as ‘Girth’), <strong>height</strong> and <strong>volume</strong> of 31
+felled black cherry trees:</p>
+<div class="sourceCode" id="cb50"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a><span class="fu">head</span>(trees)</span></code></pre></div>
+<table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+Girth
+</th>
+<th style="text-align:center;">
+Height
+</th>
+<th style="text-align:center;">
+Volume
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+8.3
+</td>
+<td style="text-align:center;">
+70
+</td>
+<td style="text-align:center;">
+10.3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+8.6
+</td>
+<td style="text-align:center;">
+65
+</td>
+<td style="text-align:center;">
+10.3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+8.8
+</td>
+<td style="text-align:center;">
+63
+</td>
+<td style="text-align:center;">
+10.2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+10.5
+</td>
+<td style="text-align:center;">
+72
+</td>
+<td style="text-align:center;">
+16.4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+10.7
+</td>
+<td style="text-align:center;">
+81
+</td>
+<td style="text-align:center;">
+18.8
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+10.8
+</td>
+<td style="text-align:center;">
+83
+</td>
+<td style="text-align:center;">
+19.7
+</td>
+</tr>
+</tbody>
+</table>
+<p> </p>
+<p>The basic R function to build a linear model is <code>lm()</code>.
+Let’s look at the basic components of a regression model using
+<code>lm()</code>:</p>
+<p><img src="images/lm.png" width="100%" style="display: block; margin: auto;" />
+ </p>
+<p>We can fit this model to look at the output:</p>
+<div class="sourceCode" id="cb51"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a>reg_mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> Height <span class="sc">~</span> Girth, <span class="at">data =</span> trees)</span>
+<span id="cb51-2"><a href="#cb51-2"></a></span>
+<span id="cb51-3"><a href="#cb51-3"></a><span class="fu">summary</span>(reg_mod)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Height ~ Girth, data = trees)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -12.5816  -2.7686   0.3163   2.4728   9.9456 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  62.0313     4.3833  14.152 1.49e-14 ***
+## Girth         1.0544     0.3222   3.272  0.00276 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 5.538 on 29 degrees of freedom
+## Multiple R-squared:  0.2697, Adjusted R-squared:  0.2445 
+## F-statistic: 10.71 on 1 and 29 DF,  p-value: 0.002758</code></pre>
+<p> </p>
+<p>This is what the elements of the output mean:</p>
+<ul>
+<li><p><strong>Call</strong>: the function and parameters were used to
+create the model</p></li>
+<li><p><strong>Residuals</strong>: distribution of the residuals.
+Residuals are the difference between what the model predicted and the
+actual value of y. This is a graphic representation of the
+residuals:</p></li>
+</ul>
+<p><img src="linear_regression_models_files/figure-html/unnamed-chunk-42-1.png" width="672" />
+ </p>
+<ul>
+<li><p><strong>Coefficients</strong>: this one contains the effect sizes
+(‘Estimates’), a measure of their uncertainty (‘Std. Error’), the
+associated statistic (‘t value’) and p value (‘Pr(&gt;|t|)’). Estimates
+are given as the mean change in y for every increase in 1 unit in x. So
+for this example is 1.0544 <span class="math inline">\(ft^{3} /
+in\)</span>.</p></li>
+<li><p><strong>Residual standard error</strong>: self-explanatory. The
+standard error of the residuals</p></li>
+<li><p><strong>Multiple R-squared</strong>: the coefficient of
+determination, this is intended as a measurement of how well your model
+fits to the data</p></li>
+<li><p><strong>Adjusted R-Squared</strong>: similar to the ‘Multiple
+R-squared’ but penalized for the number of parameters</p></li>
+<li><p><strong>F-statistic</strong>: statistic for a global test that
+checks if at least one of your coefficients are non-zero</p></li>
+<li><p><strong>p-value</strong>: probability for a global test that
+checks if at least one of your coefficients are non-zero</p></li>
+</ul>
+<p> </p>
+<p>We will use <code>lm()</code> to showcase the flexibility of
+regression models. Regression components will be added gradually so we
+can take time of understand each of them as well as the correspondent
+changes in the regression output.</p>
+<hr />
+<div id="response-intercept-only-model" class="section level2">
+<h2>Response (intercept)-only model</h2>
+<p>Let’s first create a response numeric variable:</p>
+<div class="sourceCode" id="cb53"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a><span class="co"># set seed</span></span>
+<span id="cb53-2"><a href="#cb53-2"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb53-3"><a href="#cb53-3"></a></span>
+<span id="cb53-4"><a href="#cb53-4"></a><span class="co"># number of observations</span></span>
+<span id="cb53-5"><a href="#cb53-5"></a>n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb53-6"><a href="#cb53-6"></a></span>
+<span id="cb53-7"><a href="#cb53-7"></a><span class="co"># random variables</span></span>
+<span id="cb53-8"><a href="#cb53-8"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb53-9"><a href="#cb53-9"></a></span>
+<span id="cb53-10"><a href="#cb53-10"></a><span class="co"># put it in a data frame</span></span>
+<span id="cb53-11"><a href="#cb53-11"></a>y_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(y)</span></code></pre></div>
+<p> </p>
+<p>This single variable can be input in an <strong>intercept-only
+regression model</strong>. To do this we need to supply the model
+formula and the data to <code>lm()</code>:</p>
+<div class="sourceCode" id="cb54"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a><span class="co"># run model</span></span>
+<span id="cb54-2"><a href="#cb54-2"></a>y_mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> y <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> y_data)</span></code></pre></div>
+<p> </p>
+<p>Which is equivalent to:</p>
+<center>
+<font size = 6><span class="math inline">\(\hat{Y} \sim
+\beta_{o}\)</span></font>
+</center>
+<p> </p>
+<p>We can get the default summary of the model results by running
+<code>summary()</code> on the output object ‘y_mod’:</p>
+<div class="sourceCode" id="cb55"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a><span class="fu">summary</span>(y_mod)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = y ~ 1, data = y_data)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -2.0010 -0.5937 -0.1070  0.6638  2.1345 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)   0.0344     0.1309   0.263    0.794
+## 
+## Residual standard error: 0.9259 on 49 degrees of freedom</code></pre>
+<p> </p>
+<div class="alert alert-success">
+<p> </p>
+<center>
+<font size="5"><b>Model interpretation</b></font>
+</center>
+<p> </p>
+<p>For assessing the significance of the association we focus on the
+<strong>Coefficients</strong> table:</p>
+<pre><code>##               Estimate Std. Error   t value Pr(&gt;|t|)
+## (Intercept) 0.03440355  0.1309378 0.2627473 0.793847</code></pre>
+<ul>
+<li><p>In this example there are no predictors in the model so we only
+got an estimate for the intercept (<span
+class="math inline">\(\beta_0\)</span>)</p></li>
+<li><p>The model tell us that the intercept is estimated at 0.0344035
+and that this value is not significantly different from 0 (p-value =
+0.793847)</p></li>
+<li><p>In this case the intercept is simply the mean of the response
+variable</p></li>
+</ul>
+<div class="sourceCode" id="cb58"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1"></a><span class="fu">mean</span>(y_data<span class="sc">$</span>y)</span></code></pre></div>
+<pre><code>## [1] 0.03440355</code></pre>
+<ul>
+<li>We seldom have predictions about the intercept so we tend to ignore
+this estimate</li>
+</ul>
+</div>
+<p> </p>
+<div class="alert alert-info">
+<p><font size="5">Exercise</font></p>
+<p> </p>
+<ul>
+<li>Change the <code>mean</code> argument in the <code>rnorm()</code>
+function call (<a href="#cb51-5">line 78</a>) to a value other than 0
+and look how things change in the <strong>Coefficients</strong>
+table</li>
+</ul>
+</div>
+<p> </p>
+<hr />
+</div>
+<div id="adding-a-non-associated-response-variable"
+class="section level2">
+<h2>Adding a non-associated response variable</h2>
+<p>We can create 2 unrelated numeric variables like this:</p>
+<div class="sourceCode" id="cb60"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1"></a><span class="co"># set seed</span></span>
+<span id="cb60-2"><a href="#cb60-2"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb60-3"><a href="#cb60-3"></a></span>
+<span id="cb60-4"><a href="#cb60-4"></a><span class="co"># number of observations</span></span>
+<span id="cb60-5"><a href="#cb60-5"></a>n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb60-6"><a href="#cb60-6"></a></span>
+<span id="cb60-7"><a href="#cb60-7"></a><span class="co"># random variables</span></span>
+<span id="cb60-8"><a href="#cb60-8"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n)</span>
+<span id="cb60-9"><a href="#cb60-9"></a>x1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n)</span>
+<span id="cb60-10"><a href="#cb60-10"></a></span>
+<span id="cb60-11"><a href="#cb60-11"></a><span class="co"># create data frame</span></span>
+<span id="cb60-12"><a href="#cb60-12"></a>xy_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(x1, y)</span></code></pre></div>
+<p> </p>
+<p>These two variables can be input in a regression model to evaluate
+the association between them:</p>
+<div class="sourceCode" id="cb61"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a><span class="co"># build model</span></span>
+<span id="cb61-2"><a href="#cb61-2"></a>xy_mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> y <span class="sc">~</span> x1, <span class="at">data =</span> xy_data)</span>
+<span id="cb61-3"><a href="#cb61-3"></a></span>
+<span id="cb61-4"><a href="#cb61-4"></a><span class="co"># plot</span></span>
+<span id="cb61-5"><a href="#cb61-5"></a><span class="fu">ggplot</span>(xy_data, <span class="fu">aes</span>(<span class="at">x =</span> x1, <span class="at">y =</span> y)) <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb61-6"><a href="#cb61-6"></a>    <span class="fu">geom_point</span>()  <span class="co"># plot points</span></span></code></pre></div>
+<p><img src="linear_regression_models_files/figure-html/unnamed-chunk-49-1.png" width="672" />
+ </p>
+<p>Which is equivalent to:</p>
+<center>
+<font size = 6><span class="math inline">\(\hat{Y} \sim \beta_{o} +
+\beta_{1} * x_{1}\)</span></font>
+</center>
+<p> </p>
+<p>Let’s print the summary for this model:</p>
+<div class="sourceCode" id="cb62"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1"></a><span class="fu">summary</span>(xy_mod)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = y ~ x1, data = xy_data)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -2.0044 -0.6239 -0.1233  0.6868  2.1061 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)  0.03977    0.13396   0.297    0.768
+## x1          -0.03668    0.14750  -0.249    0.805
+## 
+## Residual standard error: 0.9349 on 48 degrees of freedom
+## Multiple R-squared:  0.001287,   Adjusted R-squared:  -0.01952 
+## F-statistic: 0.06184 on 1 and 48 DF,  p-value: 0.8047</code></pre>
+<p> </p>
+<div class="alert alert-success">
+<p> </p>
+<center>
+<font size="5"><b>Model interpretation</b></font>
+</center>
+<p> </p>
+<p><strong>Coefficients</strong> table:</p>
+<pre><code>##                Estimate Std. Error    t value  Pr(&gt;|t|)
+## (Intercept)  0.03977364  0.1339616  0.2969033 0.7678214
+## x1          -0.03667889  0.1474982 -0.2486735 0.8046743</code></pre>
+<ul>
+<li><p>In this example we added one predictor to the model so we got an
+additional estimate (and extra row, ‘x1’)</p></li>
+<li><p>The model tell us that the estimate of ‘x1’ is 0.0397736 and that
+it’s not significantly different from 0 (p-value = 0.8046743)</p></li>
+</ul>
+</div>
+<hr />
+</div>
+<div id="simulating-an-associated-predictor" class="section level2">
+<h2>Simulating an associated predictor</h2>
+<p>We can use the linear model formula above to simulate two associated
+continuous variables like this:</p>
+<div class="sourceCode" id="cb65"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1"></a><span class="co"># set seed</span></span>
+<span id="cb65-2"><a href="#cb65-2"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb65-3"><a href="#cb65-3"></a></span>
+<span id="cb65-4"><a href="#cb65-4"></a><span class="co"># number of observations</span></span>
+<span id="cb65-5"><a href="#cb65-5"></a>n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb65-6"><a href="#cb65-6"></a>b0 <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">4</span></span>
+<span id="cb65-7"><a href="#cb65-7"></a>b1 <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb65-8"><a href="#cb65-8"></a>error <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n, <span class="at">sd =</span> <span class="dv">2</span>)</span>
+<span id="cb65-9"><a href="#cb65-9"></a></span>
+<span id="cb65-10"><a href="#cb65-10"></a><span class="co"># random variables</span></span>
+<span id="cb65-11"><a href="#cb65-11"></a>x1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n)</span>
+<span id="cb65-12"><a href="#cb65-12"></a>y <span class="ot">&lt;-</span> b0 <span class="sc">+</span> b1 <span class="sc">*</span> x1 <span class="sc">+</span> error</span>
+<span id="cb65-13"><a href="#cb65-13"></a></span>
+<span id="cb65-14"><a href="#cb65-14"></a><span class="co"># create data frame</span></span>
+<span id="cb65-15"><a href="#cb65-15"></a>xy_data2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(x1, y)</span></code></pre></div>
+<p> </p>
+<p>Note that <strong>we also added an error term</strong>, so the
+association is not perfect. Let’s run the model and plot the association
+between the two variables:</p>
+<div class="sourceCode" id="cb66"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1"></a><span class="co"># build model</span></span>
+<span id="cb66-2"><a href="#cb66-2"></a>xy_mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> y <span class="sc">~</span> x1, <span class="at">data =</span> xy_data2)</span>
+<span id="cb66-3"><a href="#cb66-3"></a></span>
+<span id="cb66-4"><a href="#cb66-4"></a><span class="co"># plot</span></span>
+<span id="cb66-5"><a href="#cb66-5"></a><span class="fu">ggplot</span>(xy_data2, <span class="fu">aes</span>(<span class="at">x =</span> x1, <span class="at">y =</span> y)) <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>,</span>
+<span id="cb66-6"><a href="#cb66-6"></a>    <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> <span class="fu">geom_point</span>()  <span class="co"># plot points</span></span></code></pre></div>
+<p><img src="linear_regression_models_files/figure-html/unnamed-chunk-53-1.png" width="672" />
+ </p>
+<p>The formula is the same than the previous model:</p>
+<center>
+<font size = 6><span class="math inline">\(\hat{Y} \sim \beta_{o} +
+\beta_{1} * x_{1}\)</span></font>
+</center>
+<p> </p>
+<p>And this is the summary of the model:</p>
+<div class="sourceCode" id="cb67"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1"></a><span class="fu">summary</span>(xy_mod2)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = y ~ x1, data = xy_data2)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -4.0089 -1.2479 -0.2465  1.3736  4.2123 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  -3.9205     0.2679 -14.633  &lt; 2e-16 ***
+## x1            2.9266     0.2950   9.921 3.28e-13 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.87 on 48 degrees of freedom
+## Multiple R-squared:  0.6722, Adjusted R-squared:  0.6654 
+## F-statistic: 98.43 on 1 and 48 DF,  p-value: 3.282e-13</code></pre>
+<p> </p>
+<div class="alert alert-success">
+<p> </p>
+<center>
+<font size="5"><b>Model interpretation</b></font>
+</center>
+<p> </p>
+<p><strong>Coefficients</strong> table:</p>
+<pre><code>##              Estimate Std. Error    t value     Pr(&gt;|t|)
+## (Intercept) -3.920453  0.2679232 -14.632749 2.552377e-19
+## x1           2.926642  0.2949964   9.920943 3.282367e-13</code></pre>
+<ul>
+<li><p>The model tells us that <span
+class="math inline">\(\beta_1\)</span> (the effect size of ‘x1’) is
+2.9266422 and that it’s significantly different from 0 (p-value =
+3.2823668^{-13})</p></li>
+<li><p>The simulated values for the regression parameters can be
+compared to the summary of the <code>lm()</code> model to get a sense of
+the model precision:</p>
+<ul>
+<li><span class="math inline">\(\beta_1\)</span> (the effect size of
+‘x1’) was set to 3 (<a href="#cb65-4">line 107</a>) and was estimated as
+2.927 by the model</li>
+</ul></li>
+</ul>
+</div>
+<p> </p>
+<div class="alert alert-info">
+<p><font size="5">Exercise</font></p>
+<p> </p>
+<ul>
+<li><p>Increase the sample size (<code>n</code>) to 1000 or
+higher</p></li>
+<li><p>How did the effect size (<span
+class="math inline">\(\beta\)</span>) estimates change?</p></li>
+<li><p>How did the standard error of the effect size change?</p></li>
+<li><p>Now change <code>n</code> to 15 and check again the model
+estimates (this time check the p-value as well)</p></li>
+</ul>
+</div>
+<p> </p>
+<hr />
+</div>
+<div id="adding-more-than-1-predictor-multiple-regression"
+class="section level2">
+<h2>Adding more than 1 predictor: multiple regression</h2>
+<p>Multiple linear regression is an extension of the simple linear
+regression model that can take several predictors:</p>
+<center>
+<font size = 6><span class="math inline">\(\hat{Y} \sim \beta_{o} +
+\beta_{1} * x_{1} + \cdots + \beta_{n} * x_{n}\)</span></font>
+</center>
+<p> </p>
+<p>The formula looks a bit busy, but it only means that any additional
+parameter will have its own estimate (<span
+class="math inline">\(\beta\)</span>). The formula for a two-predictor
+linear regression looks like this:</p>
+<center>
+<font size = 6><span class="math inline">\(\hat{Y} \sim \beta_{o} +
+\beta_{1} * x_{1} + \beta_{2} * x_{2}\)</span></font>
+</center>
+<p> </p>
+<p>.. and it can be simulated like this:</p>
+<div class="sourceCode" id="cb70"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1"></a><span class="co"># set seed</span></span>
+<span id="cb70-2"><a href="#cb70-2"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb70-3"><a href="#cb70-3"></a></span>
+<span id="cb70-4"><a href="#cb70-4"></a><span class="co"># number of observations</span></span>
+<span id="cb70-5"><a href="#cb70-5"></a>n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb70-6"><a href="#cb70-6"></a>b0 <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">4</span></span>
+<span id="cb70-7"><a href="#cb70-7"></a>b1 <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb70-8"><a href="#cb70-8"></a>b2 <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">2</span></span>
+<span id="cb70-9"><a href="#cb70-9"></a>error <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb70-10"><a href="#cb70-10"></a></span>
+<span id="cb70-11"><a href="#cb70-11"></a><span class="co"># random variables</span></span>
+<span id="cb70-12"><a href="#cb70-12"></a>x1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n)</span>
+<span id="cb70-13"><a href="#cb70-13"></a>x2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n)</span>
+<span id="cb70-14"><a href="#cb70-14"></a>y <span class="ot">&lt;-</span> b0 <span class="sc">+</span> b1 <span class="sc">*</span> x1 <span class="sc">+</span> b2 <span class="sc">*</span> x2 <span class="sc">+</span> error</span>
+<span id="cb70-15"><a href="#cb70-15"></a></span>
+<span id="cb70-16"><a href="#cb70-16"></a><span class="co"># create data frame</span></span>
+<span id="cb70-17"><a href="#cb70-17"></a>xy_data_multp <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(x1, x2, y)</span>
+<span id="cb70-18"><a href="#cb70-18"></a></span>
+<span id="cb70-19"><a href="#cb70-19"></a><span class="co"># build model</span></span>
+<span id="cb70-20"><a href="#cb70-20"></a>xy_mod_multp <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> y <span class="sc">~</span> x1 <span class="sc">+</span> x2, <span class="at">data =</span> xy_data_multp)</span>
+<span id="cb70-21"><a href="#cb70-21"></a></span>
+<span id="cb70-22"><a href="#cb70-22"></a><span class="fu">summary</span>(xy_mod_multp)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = y ~ x1 + x2, data = xy_data_multp)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -1.9954 -0.6310 -0.1211  0.6672  2.1376 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  -3.9551     0.1390  -28.46   &lt;2e-16 ***
+## x1            2.9672     0.1509   19.67   &lt;2e-16 ***
+## x2           -1.9775     0.1381  -14.32   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.9445 on 47 degrees of freedom
+## Multiple R-squared:  0.9368, Adjusted R-squared:  0.9341 
+## F-statistic: 348.4 on 2 and 47 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p> </p>
+<div class="alert alert-success">
+<p> </p>
+<center>
+<font size="5"><b>Model interpretation</b></font>
+</center>
+<p> </p>
+<p><strong>Coefficients</strong> table:</p>
+<pre><code>##              Estimate Std. Error   t value     Pr(&gt;|t|)
+## (Intercept) -3.955064  0.1389831 -28.45716 2.797924e-31
+## x1           2.967166  0.1508655  19.66763 2.541219e-24
+## x2          -1.977451  0.1380735 -14.32173 9.188140e-19</code></pre>
+<ul>
+<li><p>The model found that <span class="math inline">\(\beta_1\)</span>
+(the effect size of ‘x1’) is 2.9671664 and that it’s significantly
+different from 0 (p-value = 2.5412192^{-24})</p></li>
+<li><p>It also found that the <span
+class="math inline">\(\beta_2\)</span> (the effect size of ‘x2’) is
+-1.9774509 and that it’s also significantly different from 0 (p-value =
+9.1881404^{-19})</p></li>
+<li><p>The simulated values for the regression parameters can be
+compared to the summary of the <code>lm()</code> model to get a sense of
+the model precision:</p>
+<ul>
+<li><p><span class="math inline">\(\beta_1\)</span> was set to 3 (<a
+href="#cb72-4">line 132</a>) and was estimated as 2.967</p></li>
+<li><p><span class="math inline">\(\beta_2\)</span> (the effect size of
+‘x2’) was set to -2 (<a href="#cb72-5">line 133</a>) and was estimated
+as -1.977</p></li>
+</ul></li>
+</ul>
+</div>
+<p> </p>
+<div class="alert alert-info">
+<p><font size="5">Exercise</font></p>
+<p> </p>
+<ul>
+<li><p>Set one of the effect sizes (<span
+class="math inline">\(\beta\)</span>) to 0 (or very close to 0) and run
+again the model and its summary</p></li>
+<li><p>How did the p-value change?</p></li>
+<li><p>Simulate a scenario with two predictors in which only one of them
+is associated with the response</p></li>
+</ul>
+</div>
+<p> </p>
+<p>There is an important point to stress here: <strong>Multiple
+regression estimate the effect of a predictor after accounting for the
+effect of the other predictors in the model</strong>. In other words,
+new predictors in the model will attempt to explain variation in the
+data that was not explained by the other predictors. So <strong>the
+result of the multiple regression is not equivalent to the results of
+simple linear regressions</strong> on the same predictors. This can be
+easily shown by running those regressions:</p>
+<div class="sourceCode" id="cb73"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1"></a><span class="co"># build models</span></span>
+<span id="cb73-2"><a href="#cb73-2"></a>x1y_mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> y <span class="sc">~</span> x1, <span class="at">data =</span> xy_data)</span>
+<span id="cb73-3"><a href="#cb73-3"></a>x2y_mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> y <span class="sc">~</span> x2, <span class="at">data =</span> xy_data)</span>
+<span id="cb73-4"><a href="#cb73-4"></a></span>
+<span id="cb73-5"><a href="#cb73-5"></a><span class="co"># shortcut to coefficients</span></span>
+<span id="cb73-6"><a href="#cb73-6"></a><span class="fu">coef</span>(xy_mod)</span></code></pre></div>
+<pre><code>## (Intercept)          x1 
+##  0.03977364 -0.03667889</code></pre>
+<div class="sourceCode" id="cb75"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1"></a><span class="fu">coef</span>(x1y_mod)</span></code></pre></div>
+<pre><code>## (Intercept)          x1 
+##  0.03977364 -0.03667889</code></pre>
+<div class="sourceCode" id="cb77"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1"></a><span class="fu">coef</span>(x2y_mod)</span></code></pre></div>
+<pre><code>## (Intercept)          x2 
+##  0.04131955  0.02723902</code></pre>
+<p> </p>
+<p>The estimates for the same variables vary considerably between the
+multiple regression and the single predictor regressions.</p>
+<p>This point is further demonstrated by the fact that, if one of the
+predictors has no influence at all on the response, the effect of the
+additional predictor will converge to its effect in a simple linear
+regression. To simulate this scenario we set b2 to 0:</p>
+<div class="sourceCode" id="cb79"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1"></a><span class="co"># set seed</span></span>
+<span id="cb79-2"><a href="#cb79-2"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb79-3"><a href="#cb79-3"></a></span>
+<span id="cb79-4"><a href="#cb79-4"></a><span class="co"># number of observations</span></span>
+<span id="cb79-5"><a href="#cb79-5"></a>n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb79-6"><a href="#cb79-6"></a>b0 <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">4</span></span>
+<span id="cb79-7"><a href="#cb79-7"></a>b1 <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb79-8"><a href="#cb79-8"></a>b2 <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb79-9"><a href="#cb79-9"></a>error <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb79-10"><a href="#cb79-10"></a></span>
+<span id="cb79-11"><a href="#cb79-11"></a><span class="co"># random variables</span></span>
+<span id="cb79-12"><a href="#cb79-12"></a>x1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n)</span>
+<span id="cb79-13"><a href="#cb79-13"></a>x2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n)</span>
+<span id="cb79-14"><a href="#cb79-14"></a>y <span class="ot">&lt;-</span> b0 <span class="sc">+</span> b1 <span class="sc">*</span> x1 <span class="sc">+</span> b2 <span class="sc">*</span> x2 <span class="sc">+</span> error</span>
+<span id="cb79-15"><a href="#cb79-15"></a></span>
+<span id="cb79-16"><a href="#cb79-16"></a><span class="co"># create data frame</span></span>
+<span id="cb79-17"><a href="#cb79-17"></a>xy_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(x1, x2, y)</span>
+<span id="cb79-18"><a href="#cb79-18"></a></span>
+<span id="cb79-19"><a href="#cb79-19"></a><span class="co"># build model</span></span>
+<span id="cb79-20"><a href="#cb79-20"></a>xy_mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> y <span class="sc">~</span> x1 <span class="sc">+</span> x2, <span class="at">data =</span> xy_data)</span>
+<span id="cb79-21"><a href="#cb79-21"></a>x1y_mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> y <span class="sc">~</span> x1, <span class="at">data =</span> xy_data)</span>
+<span id="cb79-22"><a href="#cb79-22"></a></span>
+<span id="cb79-23"><a href="#cb79-23"></a><span class="co"># shortcut to coefficients</span></span>
+<span id="cb79-24"><a href="#cb79-24"></a><span class="fu">coef</span>(xy_mod)</span></code></pre></div>
+<pre><code>## (Intercept)          x1          x2 
+## -3.95506411  2.96716643  0.02254914</code></pre>
+<div class="sourceCode" id="cb81"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1"></a><span class="fu">coef</span>(x1y_mod)</span></code></pre></div>
+<pre><code>## (Intercept)          x1 
+##   -3.960226    2.963321</code></pre>
+<p>The estimate for <span class="math inline">\(\beta_1\)</span> was
+almost the same in the multiple regression (2.9671664) and the single
+predictor regression (2.9633211)</p>
+<p>For convenience we used <code>coef()</code> to extract only the
+estimates from the regression, but the values are the same we get with
+<code>summary(model)</code>.</p>
+<hr />
+</div>
+<div id="having-a-categorical-predictor" class="section level2">
+<h2>Having a categorical predictor</h2>
+<p>For categorical predictors we can first create a binary (0, 1)
+variable and then add labels to each value. The binomial distribution
+(<code>rbinom()</code>) can be used to create the binary variable:</p>
+<div class="sourceCode" id="cb83"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1"></a><span class="co"># set seed</span></span>
+<span id="cb83-2"><a href="#cb83-2"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb83-3"><a href="#cb83-3"></a></span>
+<span id="cb83-4"><a href="#cb83-4"></a><span class="co"># number of observations</span></span>
+<span id="cb83-5"><a href="#cb83-5"></a>n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb83-6"><a href="#cb83-6"></a>b0 <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">4</span></span>
+<span id="cb83-7"><a href="#cb83-7"></a>b1 <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb83-8"><a href="#cb83-8"></a>error <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb83-9"><a href="#cb83-9"></a></span>
+<span id="cb83-10"><a href="#cb83-10"></a><span class="co"># random variables</span></span>
+<span id="cb83-11"><a href="#cb83-11"></a>x1_num <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="at">n =</span> n, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span>
+<span id="cb83-12"><a href="#cb83-12"></a>y <span class="ot">&lt;-</span> b0 <span class="sc">+</span> b1 <span class="sc">*</span> x1_num <span class="sc">+</span> error</span>
+<span id="cb83-13"><a href="#cb83-13"></a></span>
+<span id="cb83-14"><a href="#cb83-14"></a>x1 <span class="ot">&lt;-</span> <span class="fu">factor</span>(x1_num, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>))</span>
+<span id="cb83-15"><a href="#cb83-15"></a></span>
+<span id="cb83-16"><a href="#cb83-16"></a><span class="co"># create data frame</span></span>
+<span id="cb83-17"><a href="#cb83-17"></a>xy_data_cat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(x1, x1_num, y)</span>
+<span id="cb83-18"><a href="#cb83-18"></a></span>
+<span id="cb83-19"><a href="#cb83-19"></a><span class="fu">head</span>(xy_data_cat)</span></code></pre></div>
+<table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+x1
+</th>
+<th style="text-align:center;">
+x1_num
+</th>
+<th style="text-align:center;">
+y
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+b
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+-1.5605
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+a
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+-4.2302
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+a
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+-2.4413
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+b
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+-0.9295
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+a
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+-3.8707
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+b
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0.7151
+</td>
+</tr>
+</tbody>
+</table>
+<p> </p>
+<p>And this is how it is formally written:</p>
+<center>
+<font size = 6><span class="math inline">\(\hat{Y} \sim \beta_{o} +
+\beta_{1} * x_{1}\)</span></font>
+</center>
+<p> </p>
+<p>Same thing as with continuous predictors.</p>
+<p>We can explore the pattern in the data using a boxplot:</p>
+<div class="sourceCode" id="cb84"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1"></a><span class="co"># plot</span></span>
+<span id="cb84-2"><a href="#cb84-2"></a><span class="fu">ggplot</span>(xy_data_cat, <span class="fu">aes</span>(<span class="at">x =</span> x1, <span class="at">y =</span> y)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>()</span></code></pre></div>
+<p><img src="linear_regression_models_files/figure-html/unnamed-chunk-61-1.png" width="672" />
+ </p>
+<p>… and get the estimates of the model:</p>
+<div class="sourceCode" id="cb85"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1"></a><span class="co"># build model</span></span>
+<span id="cb85-2"><a href="#cb85-2"></a>xy_mod_cat <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> y <span class="sc">~</span> x1, <span class="at">data =</span> xy_data_cat)</span>
+<span id="cb85-3"><a href="#cb85-3"></a></span>
+<span id="cb85-4"><a href="#cb85-4"></a><span class="fu">summary</span>(xy_mod_cat)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = y ~ x1, data = xy_data_cat)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -2.1129 -0.5939 -0.1355  0.5519  2.2464 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  -4.0775     0.1857  -21.96   &lt;2e-16 ***
+## x1b           3.2238     0.2626   12.28   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.9285 on 48 degrees of freedom
+## Multiple R-squared:  0.7584, Adjusted R-squared:  0.7534 
+## F-statistic: 150.7 on 1 and 48 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p> </p>
+<div class="alert alert-success">
+<p> </p>
+<center>
+<font size="5"><b>Model interpretation</b></font>
+</center>
+<p> </p>
+<p><strong>Coefficients</strong> table:</p>
+<pre><code>##              Estimate Std. Error   t value     Pr(&gt;|t|)
+## (Intercept) -4.077484  0.1856937 -21.95811 1.103701e-26
+## x1b          3.223775  0.2626106  12.27588 2.039703e-16</code></pre>
+<ul>
+<li><p>The model found that <span class="math inline">\(\beta_1\)</span>
+(the effect size of ‘x1’) is 3.2237747 and that it’s significantly
+different from 0 (p-value = 2.039703^{-16})</p></li>
+<li><p>The simulated values for the regression parameters can be
+compared to the summary of the <code>lm()</code> model to get a sense of
+the model precision:</p>
+<ul>
+<li><span class="math inline">\(\beta_1\)</span> was set to 3 (<a
+href="#cb75-4">line 132</a>) and was estimated as 3.224</li>
+</ul></li>
+<li><p>Note that in this case the intercept refers to the estimate for
+the level ‘a’ in the categorical predictor, which was used as a
+baseline:</p></li>
+</ul>
+<div class="sourceCode" id="cb88"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1"></a><span class="co"># plot</span></span>
+<span id="cb88-2"><a href="#cb88-2"></a><span class="fu">ggplot</span>(xy_data_cat, <span class="fu">aes</span>(<span class="at">x =</span> x1, <span class="at">y =</span> y)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> xy_mod_cat<span class="sc">$</span>coefficients[<span class="dv">1</span>],</span>
+<span id="cb88-3"><a href="#cb88-3"></a>    <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
+<p><img src="linear_regression_models_files/figure-html/unnamed-chunk-65-1.png" width="672" /></p>
+<ul>
+<li>Hence the intercept is the same as the mean of y for the category
+‘a’:</li>
+</ul>
+<div class="sourceCode" id="cb89"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1"></a><span class="fu">mean</span>(xy_data_cat<span class="sc">$</span>y[xy_data_cat<span class="sc">$</span>x1 <span class="sc">==</span> <span class="st">&quot;a&quot;</span>])</span></code></pre></div>
+<pre><code>## [1] -4.077484</code></pre>
+<ul>
+<li>Note also that the estimate label is ‘x1b’, not ‘x1’ as in the
+continuous predictors. This is because in this case the estimate refers
+to the difference between the two levels of the categorical variable
+(‘a’ and ‘b’). More specifically, it tells us that in average
+observations from category ‘b’ are 3.224 higher than observations in
+category ‘a’.</li>
+</ul>
+</div>
+<p> </p>
+<div class="alert alert-warning">
+<font size = 6>
+<center>
+Dummy coding
+</center>
+<p></font></p>
+<p>In a regression model categorical predictors are also represented as
+numeric vectors. More precisely, categorical predictors are coded as 0s
+and 1s, in which 1 means ‘belongs to the same category’ and 0 ‘belongs
+to a different category’. We kept the original numeric vector (‘x1_num’)
+when simulating the data set with the categorical predictor:</p>
+<div class="sourceCode" id="cb91"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1"></a><span class="fu">head</span>(xy_data_cat)</span></code></pre></div>
+<table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+x1
+</th>
+<th style="text-align:center;">
+x1_num
+</th>
+<th style="text-align:center;">
+y
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+b
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+-1.5605
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+a
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+-4.2302
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+a
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+-2.4413
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+b
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+-0.9295
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+a
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+-3.8707
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+b
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0.7151
+</td>
+</tr>
+</tbody>
+</table>
+<p>Note that ‘b’s in the ’x1’ column are converted into 1 in the
+‘x1_num’ column and ’a’s converted into 0. This is called an indicator
+variable and the process is known as dummy coding.</p>
+<p>We can actually use the numeric vector in the regression model and
+get the exact same results:</p>
+<div class="sourceCode" id="cb92"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1"></a><span class="co"># summary model with categorical variable</span></span>
+<span id="cb92-2"><a href="#cb92-2"></a><span class="fu">summary</span>(xy_mod_cat)<span class="sc">$</span>coefficients</span></code></pre></div>
+<pre><code>##              Estimate Std. Error   t value     Pr(&gt;|t|)
+## (Intercept) -4.077484  0.1856937 -21.95811 1.103701e-26
+## x1b          3.223775  0.2626106  12.27588 2.039703e-16</code></pre>
+<div class="sourceCode" id="cb94"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1"></a><span class="co"># build model with dummy variable</span></span>
+<span id="cb94-2"><a href="#cb94-2"></a>xy_mod_num <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> y <span class="sc">~</span> x1_num, <span class="at">data =</span> xy_data_cat)</span>
+<span id="cb94-3"><a href="#cb94-3"></a></span>
+<span id="cb94-4"><a href="#cb94-4"></a><span class="co"># summary with dummy coding</span></span>
+<span id="cb94-5"><a href="#cb94-5"></a><span class="fu">summary</span>(xy_mod_num)<span class="sc">$</span>coefficients</span></code></pre></div>
+<pre><code>##              Estimate Std. Error   t value     Pr(&gt;|t|)
+## (Intercept) -4.077484  0.1856937 -21.95811 1.103701e-26
+## x1_num       3.223775  0.2626106  12.27588 2.039703e-16</code></pre>
+<p> </p>
+<p>Things get a bit more complicated when dummy coding a categorical
+predictor with more than two levels. But the logic is the same.</p>
+</div>
+<p> </p>
+<hr />
+</div>
+</div>
+<div id="interaction-terms" class="section level1">
+<h1>Interaction terms</h1>
+<p>A statistical interaction refers to an effect of a response variable
+that is mediated by a second variable.</p>
+<center>
+<font size = 6><span class="math inline">\(\hat{Y} \sim \beta_{o} +
+\beta_{1} * x_{1} + \beta_{2} * x_{2} + \beta_{3} * x_{1} *
+x_{2}\)</span></font>
+</center>
+<p> </p>
+<p>This is easier to understand by looking at the interaction of a
+continuous and a binary variable:</p>
+<div class="sourceCode" id="cb96"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1"></a><span class="co"># set seed</span></span>
+<span id="cb96-2"><a href="#cb96-2"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb96-3"><a href="#cb96-3"></a></span>
+<span id="cb96-4"><a href="#cb96-4"></a><span class="co"># number of observations</span></span>
+<span id="cb96-5"><a href="#cb96-5"></a>n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb96-6"><a href="#cb96-6"></a>b0 <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">4</span></span>
+<span id="cb96-7"><a href="#cb96-7"></a>b1 <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb96-8"><a href="#cb96-8"></a>b2 <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb96-9"><a href="#cb96-9"></a>b3 <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">3</span></span>
+<span id="cb96-10"><a href="#cb96-10"></a>error <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb96-11"><a href="#cb96-11"></a></span>
+<span id="cb96-12"><a href="#cb96-12"></a><span class="co"># random variables</span></span>
+<span id="cb96-13"><a href="#cb96-13"></a>x1 <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="at">n =</span> n, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span>
+<span id="cb96-14"><a href="#cb96-14"></a>x2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n)</span>
+<span id="cb96-15"><a href="#cb96-15"></a></span>
+<span id="cb96-16"><a href="#cb96-16"></a><span class="co"># interaction is added as the product of x1 and x2</span></span>
+<span id="cb96-17"><a href="#cb96-17"></a>y <span class="ot">&lt;-</span> b0 <span class="sc">+</span> b1 <span class="sc">*</span> x1 <span class="sc">+</span> b2 <span class="sc">*</span> x2 <span class="sc">+</span> b3 <span class="sc">*</span> x1 <span class="sc">*</span> x2 <span class="sc">+</span> error</span>
+<span id="cb96-18"><a href="#cb96-18"></a></span>
+<span id="cb96-19"><a href="#cb96-19"></a>x1 <span class="ot">&lt;-</span> <span class="fu">factor</span>(x1, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>))</span>
+<span id="cb96-20"><a href="#cb96-20"></a></span>
+<span id="cb96-21"><a href="#cb96-21"></a><span class="co"># create data frame</span></span>
+<span id="cb96-22"><a href="#cb96-22"></a>xy_data_intr <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(x1, x2, y)</span>
+<span id="cb96-23"><a href="#cb96-23"></a></span>
+<span id="cb96-24"><a href="#cb96-24"></a><span class="fu">head</span>(xy_data_intr)</span></code></pre></div>
+<table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+x1
+</th>
+<th style="text-align:center;">
+x2
+</th>
+<th style="text-align:center;">
+y
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+b
+</td>
+<td style="text-align:center;">
+1.0256
+</td>
+<td style="text-align:center;">
+-3.6116
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+a
+</td>
+<td style="text-align:center;">
+-0.2848
+</td>
+<td style="text-align:center;">
+-4.5150
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+a
+</td>
+<td style="text-align:center;">
+-1.2207
+</td>
+<td style="text-align:center;">
+-3.6620
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+b
+</td>
+<td style="text-align:center;">
+0.1813
+</td>
+<td style="text-align:center;">
+-1.2921
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+a
+</td>
+<td style="text-align:center;">
+-0.1389
+</td>
+<td style="text-align:center;">
+-4.0096
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+b
+</td>
+<td style="text-align:center;">
+0.0058
+</td>
+<td style="text-align:center;">
+0.7035
+</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb97"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1"></a><span class="co"># build model</span></span>
+<span id="cb97-2"><a href="#cb97-2"></a>xy_mod_intr <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> y <span class="sc">~</span> x1 <span class="sc">+</span> x2 <span class="sc">+</span> x1 <span class="sc">*</span> x2, <span class="at">data =</span> xy_data_intr)</span>
+<span id="cb97-3"><a href="#cb97-3"></a></span>
+<span id="cb97-4"><a href="#cb97-4"></a><span class="co"># save summary to make best fit lines</span></span>
+<span id="cb97-5"><a href="#cb97-5"></a>xy_summ_intr <span class="ot">&lt;-</span> <span class="fu">summary</span>(xy_mod_intr)</span>
+<span id="cb97-6"><a href="#cb97-6"></a></span>
+<span id="cb97-7"><a href="#cb97-7"></a>xy_summ_intr</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = y ~ x1 + x2 + x1 * x2, data = xy_data_intr)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -2.07399 -0.55463 -0.05251  0.55009  2.12775 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  -4.0643     0.1901 -21.383  &lt; 2e-16 ***
+## x1b           3.1991     0.2687  11.906 1.19e-15 ***
+## x2            0.8758     0.2272   3.855 0.000358 ***
+## x1b:x2       -2.9907     0.3208  -9.324 3.59e-12 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.9428 on 46 degrees of freedom
+## Multiple R-squared:  0.8482, Adjusted R-squared:  0.8383 
+## F-statistic: 85.65 on 3 and 46 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>The interaction is easier to understand by plotting the data (don’t
+worry too much about all the code):</p>
+<div class="sourceCode" id="cb99"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1"></a><span class="co"># plot</span></span>
+<span id="cb99-2"><a href="#cb99-2"></a><span class="fu">ggplot</span>(<span class="at">data =</span> xy_data_intr, <span class="fu">aes</span>(<span class="at">x =</span> x2, <span class="at">y =</span> y, <span class="at">color =</span> x1)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb99-3"><a href="#cb99-3"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p><img src="linear_regression_models_files/figure-html/unnamed-chunk-72-1.png" width="80%" />
+ </p>
+<div class="alert alert-success">
+<p> </p>
+<center>
+<font size="5"><b>Model interpretation</b></font>
+</center>
+<p> </p>
+<p><strong>Coefficients</strong> table:</p>
+<pre><code>##               Estimate Std. Error    t value     Pr(&gt;|t|)
+## (Intercept) -4.0643393  0.1900776 -21.382525 1.553322e-25
+## x1b          3.1991371  0.2686896  11.906441 1.193208e-15
+## x2           0.8757843  0.2272043   3.854611 3.579970e-04
+## x1b:x2      -2.9906536  0.3207551  -9.323792 3.594392e-12</code></pre>
+<ul>
+<li><p>The model found that <span class="math inline">\(\beta_1\)</span>
+(the effect size of ‘x1-b’ to ‘x1-a’) is 3.1991371 and that it’s
+significantly different from 0 (p-value = 1.1932078^{-15})</p></li>
+<li><p>The model found that <span class="math inline">\(\beta_2\)</span>
+(the effect size of ‘x2’) is 0.8757843 and that it’s significantly
+different from 0 (p-value = 3.5799701^{-4}). This is actually the slope
+of the relation between x2 and y when x1 = ‘a’</p></li>
+<li><p>The model found that <span class="math inline">\(\beta_3\)</span>
+(the effect size of the interaction term ‘x1 * x2’) is -2.9906536 and
+that it’s significantly different from 0 (p-value = 3.5943918^{-12}).
+This is the difference between the slopes of x2 <em>vs</em> y when x1 =
+‘a’ and x2 <em>vs</em> y when x1 = ‘b’.</p></li>
+<li><p>The simulated values for the regression parameters can be
+compared to the summary of the <code>lm()</code> model to get a sense of
+the model precision:</p>
+<ul>
+<li><p><span class="math inline">\(\beta_1\)</span> was set to 3 (<a
+href="#cb84-4">line 175</a>) and was estimated as 3.199</p></li>
+<li><p><span class="math inline">\(\beta_2\)</span> was set to 1 (<a
+href="#cb84-5">line 176</a>) and was estimated as 0.876</p></li>
+<li><p><span class="math inline">\(\beta_3\)</span> was set to -3 (<a
+href="#cb84-6">line 177</a>) and was estimated as -2.991</p></li>
+</ul></li>
+</ul>
+</div>
+<hr />
+<p> </p>
+<div class="alert alert-info">
+<p><font size="5">Additional practice</font></p>
+<p> </p>
+<ul>
+<li><p>Modified the <a href="#simulating-an-associated-predictor">code
+use to simulate a single associated predictor</a> by gradually
+increasing the error. This is done by increasing the ‘sd’ argument in
+<code>error &lt;- rnorm(n = n, sd = 2)</code></p></li>
+<li><p>Take a look at how larger errors affect inference (so you also
+need to run the models)</p></li>
+<li><p>Now replace the error term with
+<code>error &lt;- rexp(n = n, rate = 0.2)</code>. This is creating an
+error with an exponential distribution (so non-normal). This is supposed
+to be problematic for the inferential power of these models. Compare the
+estimates you got to the simulation values (‘b0’ and ‘b1’)</p></li>
+<li><p>Collinearity (the presence of correlated predictors) is supposed
+to affect the stability of multiple regression. The following code
+creates two highly collinear predictors (‘x1’ and ‘x2’). The last line
+of code shows the correlation between them.</p></li>
+</ul>
+<div class="sourceCode" id="cb101"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1"></a><span class="co"># set seed</span></span>
+<span id="cb101-2"><a href="#cb101-2"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb101-3"><a href="#cb101-3"></a></span>
+<span id="cb101-4"><a href="#cb101-4"></a><span class="co"># number of observations</span></span>
+<span id="cb101-5"><a href="#cb101-5"></a>n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb101-6"><a href="#cb101-6"></a>b0 <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">4</span></span>
+<span id="cb101-7"><a href="#cb101-7"></a>b1 <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb101-8"><a href="#cb101-8"></a>b2 <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">2</span></span>
+<span id="cb101-9"><a href="#cb101-9"></a>error <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb101-10"><a href="#cb101-10"></a></span>
+<span id="cb101-11"><a href="#cb101-11"></a><span class="co"># random variables</span></span>
+<span id="cb101-12"><a href="#cb101-12"></a>x1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n)</span>
+<span id="cb101-13"><a href="#cb101-13"></a></span>
+<span id="cb101-14"><a href="#cb101-14"></a><span class="co"># make x2 very similar to x2 (adding little variation)</span></span>
+<span id="cb101-15"><a href="#cb101-15"></a>x2 <span class="ot">&lt;-</span> x1 <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="fl">0.3</span>)</span>
+<span id="cb101-16"><a href="#cb101-16"></a></span>
+<span id="cb101-17"><a href="#cb101-17"></a><span class="fu">cor</span>(x1, x2)</span></code></pre></div>
+<pre><code>## [1] 0.9464161</code></pre>
+<ul>
+<li><p>Build a multiple regression model for this data (y ~ x1 + x2).
+You can use the same code as in <a
+href="#adding-more-than-1-predictor-multiple-regression">Adding more
+than 1 predictor: multiple regression</a>.</p></li>
+<li><p>How is inference affected by the presence of collinear
+predictors?</p></li>
+<li><p>Unbalanced data when having categories (i.e. some categories have
+way more observations than others) can be problematic for statistical
+inference. Modify the code in <a href="#cb76-1">this code block</a> to
+simulate a highly unbalanced data set and check the precision of the
+model (hint: modify the ‘prob’ argument in <a
+href="#cb76-11"><code>x1 &lt;- rbinom(n = n, size = 1, prob = 0.5)</code></a>)</p></li>
+</ul>
+<p> </p>
+</div>
+<hr />
+<div id="references" class="section level2">
+<h2>References</h2>
+<ul>
+<li><p><a
+href="https://github.com/rmcelreath/stat_rethinking_2022">Richard
+McElreath’s Statistical Rethinking book</a></p></li>
+<li><p><a
+href="https://www.programmingr.com/examples/neat-tricks/sample-r-function/r-rbinom/">R’s
+rbinom – Simulate Binomial or Bernoulli trials</a></p></li>
+<li><p><a
+href="https://www.programmingr.com/examples/neat-tricks/sample-r-function/r-rnorm/">R’s
+rnorm – selecting values from a normal distribution</a></p></li>
+<li><p><a
+href="https://www.programmingr.com/examples/neat-tricks/sample-r-function/rexp/">R’s
+exp – Simulating Exponential Distributions</a></p></li>
+<li><p><a
+href="https://aosmith.rbind.io/2018/08/29/getting-started-simulating-data/">Simulating
+data in R</a></p></li>
+</ul>
+<p> </p>
+<hr />
+<p> </p>
+<p><font size="4">Session information</font></p>
+<pre><code>## R version 4.1.1 (2021-08-10)
+## Platform: x86_64-pc-linux-gnu (64-bit)
+## Running under: Ubuntu 20.04.2 LTS
+## 
+## Matrix products: default
+## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0
+## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0
+## 
+## locale:
+##  [1] LC_CTYPE=es_ES.UTF-8       LC_NUMERIC=C              
+##  [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=es_ES.UTF-8    
+##  [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=es_ES.UTF-8   
+##  [7] LC_PAPER=es_CR.UTF-8       LC_NAME=C                 
+##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+## [11] LC_MEASUREMENT=es_CR.UTF-8 LC_IDENTIFICATION=C       
+## 
+## attached base packages:
+## [1] stats     graphics  grDevices utils     datasets  methods   base     
+## 
+## other attached packages:
+## [1] viridis_0.6.2     viridisLite_0.4.0 ggplot2_3.3.5     knitr_1.37       
+## [5] kableExtra_1.3.4 
+## 
+## loaded via a namespace (and not attached):
+##  [1] tidyselect_1.1.1  xfun_0.30         bslib_0.2.5.1     purrr_0.3.4      
+##  [5] lattice_0.20-44   splines_4.1.1     colorspace_2.0-3  vctrs_0.3.8      
+##  [9] generics_0.1.0    htmltools_0.5.2   mgcv_1.8-36       yaml_2.3.5       
+## [13] utf8_1.2.2        rlang_1.0.2       jquerylib_0.1.4   pillar_1.7.0     
+## [17] glue_1.6.2        withr_2.5.0       DBI_1.1.1         lifecycle_1.0.1  
+## [21] stringr_1.4.0     munsell_0.5.0     gtable_0.3.0      rvest_1.0.1      
+## [25] evaluate_0.15     labeling_0.4.2    fastmap_1.1.0     fansi_1.0.2      
+## [29] highr_0.9         scales_1.1.1      formatR_1.12      webshot_0.5.2    
+## [33] jsonlite_1.7.2    farver_2.1.0      systemfonts_1.0.2 gridExtra_2.3    
+## [37] digest_0.6.29     stringi_1.7.6     dplyr_1.0.7       grid_4.1.1       
+## [41] cli_3.2.0         tools_4.1.1       magrittr_2.0.2    sass_0.4.0       
+## [45] klippy_0.0.0.9500 tibble_3.1.6      crayon_1.5.0      pkgconfig_2.0.3  
+## [49] Matrix_1.3-4      ellipsis_0.3.2    xml2_1.3.2        assertthat_0.2.1 
+## [53] rmarkdown_2.10    svglite_2.0.0     httr_1.4.2        rstudioapi_0.13  
+## [57] R6_2.5.1          nlme_3.1-152      compiler_4.1.1</code></pre>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

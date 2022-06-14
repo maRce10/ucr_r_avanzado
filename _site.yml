@@ -7,6 +7,12 @@ navbar:
       menu:
       - text: "R basics"
         href: r_basics.html
+      - text: "Linear regression models"
+        href: linear_regression_models.html
+      - text: "Common stats as linear models"
+        href: common_stats_as_lms.html
+      - text: "Graphs with ggplot2"
+        href: graphs_with_ggplot2.html
     - text: "Course prep"
       href: course_prep.html
     - text: "Instructor"

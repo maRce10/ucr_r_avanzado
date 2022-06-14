@@ -1,0 +1,383 @@
+---
+title: <center><font size="7"><b>Common statistical tests as linear regressions</b></font></center>
+subtitle: <center><font size="4"><b>Tropical Biology 2022</b> <br> Organization for Tropical Studies</font></center>
+author: <center><font size="3"><a href="http://marceloarayasalas.weebly.com/">Marcelo Araya-Salas, PhD</a></font></center>
+date: <center>"`r Sys.Date()`"</center>
+output:
+  html_document:
+    df_print: tibble
+    highlight: pygments  
+    toc: yes
+    toc_depth: 3
+    toc_float:
+      collapsed: yes
+      smooth_scroll: yes
+fontsize: 12pt 
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, echo = FALSE, message=FALSE}
+
+library(kableExtra)
+library(knitr)
+library(ggplot2)
+library(viridis)
+
+tibble <- function(x, ...) { 
+  x <- kbl(x, digits=4, align= 'c', row.names = FALSE) 
+   x <- kable_styling(x, position ="center", full_width = FALSE,  bootstrap_options = c("striped", "hover", "condensed", "responsive")) 
+   asis_output(x)
+}
+
+registerS3method("knit_print", "data.frame", tibble)
+
+# ggplot settings
+geom_histogram <- function(...) ggplot2::geom_histogram(..., fill = viridis(10, alpha = 0.5)[8], show.legend = FALSE, bins = 20, color = "black")
+
+geom_smooth <- function(...) ggplot2::geom_smooth(..., color = viridis(10,  alpha = 0.5)[8])
+
+geom_boxplot <- function(...) ggplot2::geom_boxplot(..., fill = viridis(10, alpha = 0.5)[7])
+
+theme_set(theme_classic(base_size = 20))
+
+```
+
+
+<style>
+body
+  { counter-reset: source-line 0; }
+pre.numberSource code
+  { counter-reset: none; }
+</style>
+
+```{r setup, include = FALSE}
+
+
+knitr::opts_chunk$set(
+  class.source = "numberLines lineAnchors", # for code line numbers
+  tidy.opts = list(width.cutoff = 65), 
+  tidy = TRUE,
+  message = FALSE
+ )
+
+```
+
+```{r klippy, echo=FALSE, include=TRUE}
+
+# remotes::install_github("rlesur/klippy")
+
+# to add copy button
+klippy::klippy(position = c('top', 'right'))
+```
+
+Here we will walk through the most common statistical tests and show how they can be represented in the linear regression format. This section is based on [this post](https://lindeloev.github.io/tests-as-linear/). Check it out for a more in-depth description of the non-parametric alternatives. 
+
+---
+
+# One sample t-test
+
+The test evaluates if the mean of a continuous variable is different from 0. It is equivalent to a linear regression with no predictor, that tests if the intercept is different from 0:
+
+<center><font size = 6>$y = \beta_0 \qquad \mathcal{H}_0: \beta_0 = 0$</font></center>
+
+&nbsp; 
+
+```{r}
+
+# number of observations
+n <- 50
+
+# set seed
+set.seed(123)
+
+# create variable with mean 1
+y <- rnorm(n = n, mean = 1)
+
+# run t test
+(t <- t.test(y))
+
+# run equivalent linear regression
+(lm_t <- summary(lm(y ~ 1)))
+
+```
+&nbsp; 
+
+Let's put the results from both tests together to compare them more closely:
+
+```{r, echo = FALSE}
+
+df = data.frame(
+  model = c('t-test', 'lm'),
+  estimate = c(t$estimate, lm_t$coefficients[1]),
+  'p value' = c(t$p.value, lm_t$coefficients[4]),
+  t = c(t$statistic, lm_t$coefficients[3])
+)
+
+df
+```
+&nbsp; 
+
+Note that, as there are no predictor in the model, we used a '1' in the place for predictors in the model formula ('y ~ 1').
+
+---
+
+# Paired t-test
+
+A paired t-test evaluates if the mean difference between two numeric variables is 0:
+
+<center><font size = 6>$y1 - y2 = \beta_0 \qquad \mathcal{H}_0: \beta_0 = 0$</font></center>
+
+&nbsp; 
+
+The correspondent linear model is the same than that for the one-sample t-test, but the input variable is the difference between the two variables (y1 - y2):
+
+```{r}
+
+set.seed(123)
+
+# sample size
+n <- 50
+
+# variable with mean 1
+y1 <- rnorm(n = n, mean = 1)
+
+# variable with mean 3
+y2 <- rnorm(n = n, mean = 1.4)
+
+# run paired t test
+paired_t <- t.test(y1, y2, paired = TRUE)
+
+paired_t
+
+# difference between the 2 variables
+diff_y <- y1 - y2
+
+# run model
+lm_paired_t <- summary(lm(formula = diff_y ~ 1))
+
+lm_paired_t
+
+```
+
+```{r, echo = FALSE}
+
+df = data.frame(
+  model = c('paired t-test', 'lm'),
+  estimate = c(paired_t$estimate, lm_paired_t$coefficients[1]),
+  'p value' = c(paired_t$p.value, lm_paired_t$coefficients[4]),
+  t = c(paired_t$statistic, lm_paired_t$coefficients[3])
+)
+
+df
+```
+&nbsp; 
+
+
+---
+
+# Two means t-test
+
+Also called independent t-test. Evaluates if the means of the two variables are different. The null hypothesis is that the difference is 0:
+
+<center><font size = 6>$y = \beta_0 + \beta_1 * x1 \qquad \mathcal{H}_0: \beta_1 = 0$</font></center>
+
+```{r}
+
+# set seed
+set.seed(123)
+
+# number of observations
+n <- 50
+b0 <- -4
+b1 <- 3
+error <- rnorm(n = n, mean = 0, sd = 1)
+
+# random variables
+x1_num <- rbinom(n = n, size = 1, prob = 0.5)
+y <- b0 + b1 * x1_num + error
+
+x1 <- factor(x1_num, labels = c("a", "b"))
+
+# create data frame
+xy_data_cat <- data.frame(x1, x1_num, y)
+
+# run paired t test
+indep_t <- t.test(xy_data_cat$y[xy_data_cat$x1 == "a"], xy_data_cat$y[xy_data_cat$x1 == "b"])
+
+indep_t
+
+# run regression model
+lm_indep_t <- summary(lm(formula = y ~ x1, data = xy_data_cat))
+
+lm_indep_t
+
+```
+
+```{r, echo = FALSE}
+
+df = data.frame(
+  model = c('2 means t-test', 'lm'),
+  estimate = c(indep_t$estimate[2] - indep_t$estimate[1], lm_indep_t$coefficients[2, 1]),
+  'p value' = c(indep_t$p.value, lm_indep_t$coefficients[2, 4]),
+  t = c(indep_t$statistic, lm_indep_t$coefficients[2, 3])
+)
+
+df
+```
+&nbsp; 
+
+---
+
+# Three or more means: one-way ANOVA
+
+Very similar to the two means t-test but with three or more levels in the categorical variable:
+
+<center><font size = 6>$\hat{Y} \sim \beta_{o} + \beta_{1} * x_{1} + \beta_{2} * x_{2} + ... \qquad \mathcal{H}_0: y = \beta_0$</font></center>
+
+&nbsp; 
+
+So **it is a multiple regression model**. The categorical variable is dummy coded so it gets split into indicator predictors ($x_i$ is either $x=0$ or $x=1$). 
+
+A data set with a 3-level categorical variable can be simulated like this:
+
+```{r}
+
+# set seed
+set.seed(123)
+
+# number of observations
+n <- 50
+b0 <- -4
+b1 <- 3
+error <- rnorm(n = n, mean = 0, sd = 1)
+
+# random variables
+x1_num <- rbinom(n = n, size = 2, prob = c(0.33, 0.33))
+y <- b0 + b1 * x1_num + error
+
+x1 <- factor(x1_num, labels = c("a", "b", "c"))
+
+# create data frame
+xy_data_cat2 <- data.frame(x1, y)
+
+head(xy_data_cat2)
+
+```
+
+```{r, print_df = "default"}
+
+# ANOVA function
+anv_1w <- anova(aov(formula = y1 ~ x1, data = xy_data_cat2))  
+
+anv_1w
+
+# linear regression
+lm_anv_1w <- summary(lm(formula = y1 ~ x1, data = xy_data_cat2))
+
+lm_anv_1w
+
+```
+
+
+```{r, echo = FALSE}
+
+df = data.frame(
+  model = c('1 way anova', 'lm'),
+  'F statistic' = c(anv_1w$`F value`[1], lm_anv_1w$fstatistic[1]),
+  'p value' = c(anv_1w$`Pr(>F)`[1], 0.07552)
+)
+
+df
+
+```
+&nbsp; 
+
+---
+
+# Chi-square for contingency tables
+
+This test looks to find and association between two categorical variables based on the co-occurrence of the categories, measured as counts. This is what a contingency table is, counts for all combinations of categories between two variables. For instance deaths by age of passenger of the Titanic:
+
+```{r}
+
+# Contingency table
+# modified from https://lindeloev.github.io/tests-as-linear/
+mood_data <- matrix(data = c(100, 70, 30, 32, 110, 120), nrow = 2, 
+                    dimnames = list(handedness = c('left_handed', 'right_handed'), mood = c('happy', 'meh', 'sad')) 
+)
+
+mood_data
+```
+&nbsp;
+
+Although the coding is a bit more elaborated it can be narrow down to log-linear two-way ANOVA model:
+
+$log(y_i) = log(N) + log(\alpha_i) + log(\beta_j) + log(\alpha_i\beta_j)$
+
+&nbsp;
+
+The regression coefficients are $A_i$ and $B_i$. $\alpha_i$ and $\beta_j$ are the proportions of counts for the two levels of the binary categorical variable (one for each of the levels in the second categorical variable). Fortunately, there is an implementation of this model from the R package 'MASS' that simplifies coding:
+
+```{r}
+
+# Built-in chi-square. It requires matrix format.
+chi_mod <- chisq.test(mood_data)
+
+chi_mod
+
+# convert to long
+mood_data_long <- as.data.frame(as.table(mood_data))
+
+# log linear model from MASS package
+log_lm_mod <- MASS::loglm(Freq ~ handedness + mood, data = mood_data_long)
+
+log_lm_mod
+
+```
+
+
+```{r, echo = FALSE}
+
+summ_log_lm <- summary(log_lm_mod)
+
+df = data.frame(
+  model = c('chi-square', 'log lm'),
+`X squared` = c(chi_mod$statistic, summ_log_lm$tests[2, 1]),
+  'p value' = c(chi_mod$p.value, summ_log_lm$tests[2, 3])
+)
+
+df
+```
+&nbsp; 
+
+&nbsp;
+# 'Non-parametric' alternatives as linear regression models
+
+---
+
+
+# Extending the linear models to more complex data structures
+
+&nbsp; 
+
+---
+
+# References
+
+- [Common statistical tests are linear models](https://lindeloev.github.io/tests-as-linear/)
+
+
+&nbsp; 
+
+---
+
+&nbsp; 
+ 
+<font size="4">Session information</font>
+
+```{r session info, echo=F}
+
+sessionInfo()
+
+```
