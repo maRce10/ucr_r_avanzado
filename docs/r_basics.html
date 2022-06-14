@@ -775,12 +775,78 @@ c</code></pre>
 dim(m)</code></pre>
 <pre><code>## [1] 5 3</code></pre>
 <pre class="r"><code>m</code></pre>
-<pre><code>##   ID size observed
-## 1  a    1    FALSE
-## 2  b    2     TRUE
-## 3  c    3    FALSE
-## 4  d    4    FALSE
-## 5  e    5    FALSE</code></pre>
+<table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+ID
+</th>
+<th style="text-align:center;">
+size
+</th>
+<th style="text-align:center;">
+observed
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+a
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+FALSE
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+b
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+TRUE
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+c
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+FALSE
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+d
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+FALSE
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+e
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+FALSE
+</td>
+</tr>
+</tbody>
+</table>
 <pre class="r"><code>class(m)</code></pre>
 <pre><code>## [1] &quot;data.frame&quot;</code></pre>
 <pre class="r"><code>is.data.frame(m)</code></pre>
@@ -845,37 +911,240 @@ m[1, ]</code></pre>
     species = c(&quot;aestiva&quot;, &quot;philippii&quot;, &quot;ararauna&quot;))
 
 df</code></pre>
-<pre><code>##        family       genus   species
-## 1 Psittacidae     Amazona   aestiva
-## 2 Trochilidae Phaethornis philippii
-## 3 Psittacidae         Ara  ararauna</code></pre>
+<table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+family
+</th>
+<th style="text-align:center;">
+genus
+</th>
+<th style="text-align:center;">
+species
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Psittacidae
+</td>
+<td style="text-align:center;">
+Amazona
+</td>
+<td style="text-align:center;">
+aestiva
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Trochilidae
+</td>
+<td style="text-align:center;">
+Phaethornis
+</td>
+<td style="text-align:center;">
+philippii
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Psittacidae
+</td>
+<td style="text-align:center;">
+Ara
+</td>
+<td style="text-align:center;">
+ararauna
+</td>
+</tr>
+</tbody>
+</table>
 <pre class="r"><code>df[1, ]</code></pre>
-<pre><code>##        family   genus species
-## 1 Psittacidae Amazona aestiva</code></pre>
+<table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+family
+</th>
+<th style="text-align:center;">
+genus
+</th>
+<th style="text-align:center;">
+species
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Psittacidae
+</td>
+<td style="text-align:center;">
+Amazona
+</td>
+<td style="text-align:center;">
+aestiva
+</td>
+</tr>
+</tbody>
+</table>
 <pre class="r"><code>df[, 1]</code></pre>
 <pre><code>## [1] &quot;Psittacidae&quot; &quot;Trochilidae&quot; &quot;Psittacidae&quot;</code></pre>
 <pre class="r"><code>df[1, 1]</code></pre>
 <pre><code>## [1] &quot;Psittacidae&quot;</code></pre>
 <pre class="r"><code>df[-1, ]</code></pre>
-<pre><code>##        family       genus   species
-## 2 Trochilidae Phaethornis philippii
-## 3 Psittacidae         Ara  ararauna</code></pre>
+<table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+family
+</th>
+<th style="text-align:center;">
+genus
+</th>
+<th style="text-align:center;">
+species
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Trochilidae
+</td>
+<td style="text-align:center;">
+Phaethornis
+</td>
+<td style="text-align:center;">
+philippii
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Psittacidae
+</td>
+<td style="text-align:center;">
+Ara
+</td>
+<td style="text-align:center;">
+ararauna
+</td>
+</tr>
+</tbody>
+</table>
 <pre class="r"><code>df[, -1]</code></pre>
-<pre><code>##         genus   species
-## 1     Amazona   aestiva
-## 2 Phaethornis philippii
-## 3         Ara  ararauna</code></pre>
+<table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+genus
+</th>
+<th style="text-align:center;">
+species
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Amazona
+</td>
+<td style="text-align:center;">
+aestiva
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Phaethornis
+</td>
+<td style="text-align:center;">
+philippii
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ara
+</td>
+<td style="text-align:center;">
+ararauna
+</td>
+</tr>
+</tbody>
+</table>
 <pre class="r"><code>df[-1, -1]</code></pre>
-<pre><code>##         genus   species
-## 2 Phaethornis philippii
-## 3         Ara  ararauna</code></pre>
+<table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+genus
+</th>
+<th style="text-align:center;">
+species
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Phaethornis
+</td>
+<td style="text-align:center;">
+philippii
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ara
+</td>
+<td style="text-align:center;">
+ararauna
+</td>
+</tr>
+</tbody>
+</table>
 <pre class="r"><code>df[,&quot;family&quot;]</code></pre>
 <pre><code>## [1] &quot;Psittacidae&quot; &quot;Trochilidae&quot; &quot;Psittacidae&quot;</code></pre>
 <pre class="r"><code>df[,c(&quot;family&quot;, &quot;genus&quot;)]</code></pre>
-<pre><code>##        family       genus
-## 1 Psittacidae     Amazona
-## 2 Trochilidae Phaethornis
-## 3 Psittacidae         Ara</code></pre>
+<table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+family
+</th>
+<th style="text-align:center;">
+genus
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Psittacidae
+</td>
+<td style="text-align:center;">
+Amazona
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Trochilidae
+</td>
+<td style="text-align:center;">
+Phaethornis
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Psittacidae
+</td>
+<td style="text-align:center;">
+Ara
+</td>
+</tr>
+</tbody>
+</table>
 <p> </p>
 <p>Lists require 1 index within double square brackets
 <code>[[index]]</code>:</p>
@@ -908,15 +1177,107 @@ code:</p>
 <pre class="r"><code>ncol(df)</code></pre>
 <pre><code>## [1] 3</code></pre>
 <pre class="r"><code>head(df)</code></pre>
-<pre><code>##        family       genus   species
-## 1 Psittacidae     Amazona   aestiva
-## 2 Trochilidae Phaethornis philippii
-## 3 Psittacidae         Ara  ararauna</code></pre>
+<table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+family
+</th>
+<th style="text-align:center;">
+genus
+</th>
+<th style="text-align:center;">
+species
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Psittacidae
+</td>
+<td style="text-align:center;">
+Amazona
+</td>
+<td style="text-align:center;">
+aestiva
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Trochilidae
+</td>
+<td style="text-align:center;">
+Phaethornis
+</td>
+<td style="text-align:center;">
+philippii
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Psittacidae
+</td>
+<td style="text-align:center;">
+Ara
+</td>
+<td style="text-align:center;">
+ararauna
+</td>
+</tr>
+</tbody>
+</table>
 <pre class="r"><code>tail(df)</code></pre>
-<pre><code>##        family       genus   species
-## 1 Psittacidae     Amazona   aestiva
-## 2 Trochilidae Phaethornis philippii
-## 3 Psittacidae         Ara  ararauna</code></pre>
+<table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+family
+</th>
+<th style="text-align:center;">
+genus
+</th>
+<th style="text-align:center;">
+species
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Psittacidae
+</td>
+<td style="text-align:center;">
+Amazona
+</td>
+<td style="text-align:center;">
+aestiva
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Trochilidae
+</td>
+<td style="text-align:center;">
+Phaethornis
+</td>
+<td style="text-align:center;">
+philippii
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Psittacidae
+</td>
+<td style="text-align:center;">
+Ara
+</td>
+<td style="text-align:center;">
+ararauna
+</td>
+</tr>
+</tbody>
+</table>
 <pre class="r"><code>table(df$genus)</code></pre>
 <pre><code>## 
 ##     Amazona         Ara Phaethornis 
@@ -955,12 +1316,13 @@ tasks:</p>
 bi &lt;- builtins()
 
 length(bi)</code></pre>
-<pre><code>## [1] 1370</code></pre>
+<pre><code>## [1] 1371</code></pre>
 <pre class="r"><code>sample(bi, 10)</code></pre>
-<pre><code>##  [1] &quot;length&lt;-.POSIXlt&quot;    &quot;validEnc&quot;            &quot;print.POSIXct&quot;      
-##  [4] &quot;[.table&quot;             &quot;.mergeImportMethods&quot; &quot;packBits&quot;           
-##  [7] &quot;solve.qr&quot;            &quot;&amp;&quot;                   &quot;pmax.int&quot;           
-## [10] &quot;as.environment&quot;</code></pre>
+<pre><code>##  [1] &quot;[.POSIXct&quot;            &quot;inverse.rle&quot;         
+##  [3] &quot;[[.Date&quot;              &quot;.isMethodsDispatchOn&quot;
+##  [5] &quot;units.difftime&quot;       &quot;file.exists&quot;         
+##  [7] &quot;[[&lt;-.POSIXlt&quot;         &quot;[.factor&quot;            
+##  [9] &quot;numToBits&quot;            &quot;close.connection&quot;</code></pre>
 <p> </p>
 <p>Operators are functions:</p>
 <pre class="r"><code>1 + 1</code></pre>
@@ -1186,12 +1548,12 @@ match
 <p><font size="2">* Modified from <i>Grolemund &amp; Wickham
 2017</i></font></p>
 <p> </p>
-<pre><code>## Warning in 1:6 * 1:5: longitud de objeto mayor no es múltiplo de la longitud de
-## uno menor</code></pre>
+<pre><code>## Warning in 1:6 * 1:5: longitud de objeto mayor no es múltiplo de
+## la longitud de uno menor</code></pre>
 <pre><code>## [1]  1  4  9 16 25  6</code></pre>
 <pre class="r"><code>1:6 + 1:5</code></pre>
-<pre><code>## Warning in 1:6 + 1:5: longitud de objeto mayor no es múltiplo de la longitud de
-## uno menor</code></pre>
+<pre><code>## Warning in 1:6 + 1:5: longitud de objeto mayor no es múltiplo de
+## la longitud de uno menor</code></pre>
 <pre><code>## [1]  2  4  6  8 10  7</code></pre>
 <p> </p>
 <hr />
@@ -1344,9 +1706,12 @@ help(&quot;mean&quot;)</code></pre>
 <p> </p>
 <p>If you don’t recall the function name try <code>apropos()</code>:</p>
 <pre class="r"><code>apropos(&quot;mean&quot;)</code></pre>
-<pre><code>##  [1] &quot;.colMeans&quot;     &quot;.rowMeans&quot;     &quot;colMeans&quot;      &quot;kmeans&quot;       
-##  [5] &quot;mean&quot;          &quot;mean.Date&quot;     &quot;mean.default&quot;  &quot;mean.difftime&quot;
-##  [9] &quot;mean.POSIXct&quot;  &quot;mean.POSIXlt&quot;  &quot;rowMeans&quot;      &quot;weighted.mean&quot;</code></pre>
+<pre><code>##  [1] &quot;.colMeans&quot;      &quot;.rowMeans&quot;      &quot;colMeans&quot;      
+##  [4] &quot;kmeans&quot;         &quot;mean&quot;           &quot;mean_cl_boot&quot;  
+##  [7] &quot;mean_cl_normal&quot; &quot;mean_sdl&quot;       &quot;mean_se&quot;       
+## [10] &quot;mean.Date&quot;      &quot;mean.default&quot;   &quot;mean.difftime&quot; 
+## [13] &quot;mean.POSIXct&quot;   &quot;mean.POSIXlt&quot;   &quot;meandB&quot;        
+## [16] &quot;meanspec&quot;       &quot;rowMeans&quot;       &quot;weighted.mean&quot;</code></pre>
 <p> </p>
 <p><font size="5">Vignettes</font></p>
 <p>Vignettes are illustrative documents or study cases detailing the use

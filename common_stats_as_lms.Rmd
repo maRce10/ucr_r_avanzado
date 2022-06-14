@@ -351,8 +351,70 @@ df
 ```
 &nbsp; 
 
-&nbsp;
 # 'Non-parametric' alternatives as linear regression models
+
+We will only feature one example of a 'non-parametric' test. Nonetheless, this single example should be enough to demonstrate the logic behind 'non-parametric' procedures. Most 'non-parametric' rely on a simple data transformation trick: rank transforming responses. Rank transformations converts values to an index according to their position when sorted by magnitude:
+
+```{r}
+
+# simulate variable
+set.seed(123)
+y <- round(rnorm(n = 5), 2)
+
+y
+
+# convert to ranks
+rank_y <- rank(y)
+
+rank_y
+```
+&nbsp; 
+
+## Wilcoxon test for two means
+
+A.k.a Mann-Whitney test, is the non-parametric alternative to a two-mean t test: 
+
+```{r}
+
+# set seed
+set.seed(123)
+
+# number of observations
+n <- 50
+y <- rnorm(n = n, mean = 0.2, sd = 1)
+
+# create data frame
+y_data <- data.frame(y)
+
+
+y
+
+# Wilcoxon / Mann-Whitney U
+wilcx_mod <-  wilcox.test(y_data$y)
+
+wilcx_mod
+
+signed_rank = function(x) sign(x) * rank(abs(x))
+
+# As linear model with our dummy-coded group_y2:
+wicx_lm_mod <- lm(signed_rank(y) ~ 1, data = y_data)  # compare to 
+
+summary(wicx_lm_mod)
+
+```
+
+```{r, echo = FALSE}
+
+summ_wicx_lm_mod <- summary(wicx_lm_mod)
+
+df = data.frame(
+  model = c('1 mean wilcoxon', 'wilcoxon_lm'),
+  p.value = c(wilcx_mod$p.value, summ_wicx_lm_mod$coefficients[4])
+  )
+
+df
+```
+&nbsp; 
 
 ---
 
