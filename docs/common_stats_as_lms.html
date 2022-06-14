@@ -1184,19 +1184,16 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <span id="cb27-10"><a href="#cb27-10"></a></span>
 <span id="cb27-11"><a href="#cb27-11"></a></span>
 <span id="cb27-12"><a href="#cb27-12"></a>y</span></code></pre></div>
-<pre><code>##  [1] -0.360475647 -0.030177489  1.758708314  0.270508391
-##  [5]  0.329287735  1.915064987  0.660916206 -1.065061235
-##  [9] -0.486852852 -0.245661970  1.424081797  0.559813827
-## [13]  0.600771451  0.310682716 -0.355841135  1.986913137
-## [17]  0.697850478 -1.766617157  0.901355902 -0.272791408
-## [21] -0.867823706 -0.017974915 -0.826004448 -0.528891229
-## [25] -0.425039268 -1.486693311  1.037787044  0.353373118
-## [29] -0.938136937  1.453814921  0.626464221 -0.095071483
-## [33]  1.095125661  1.078133488  1.021581082  0.888640254
-## [37]  0.753917654  0.138088289 -0.105962664 -0.180471001
-## [41] -0.494706979 -0.007917278 -1.065396352  2.368955965
-## [45]  1.407961998 -0.923108583 -0.202884835 -0.266655354
-## [49]  0.979965118  0.116630934</code></pre>
+<pre><code>##  [1] -0.360475647 -0.030177489  1.758708314  0.270508391  0.329287735
+##  [6]  1.915064987  0.660916206 -1.065061235 -0.486852852 -0.245661970
+## [11]  1.424081797  0.559813827  0.600771451  0.310682716 -0.355841135
+## [16]  1.986913137  0.697850478 -1.766617157  0.901355902 -0.272791408
+## [21] -0.867823706 -0.017974915 -0.826004448 -0.528891229 -0.425039268
+## [26] -1.486693311  1.037787044  0.353373118 -0.938136937  1.453814921
+## [31]  0.626464221 -0.095071483  1.095125661  1.078133488  1.021581082
+## [36]  0.888640254  0.753917654  0.138088289 -0.105962664 -0.180471001
+## [41] -0.494706979 -0.007917278 -1.065396352  2.368955965  1.407961998
+## [46] -0.923108583 -0.202884835 -0.266655354  0.979965118  0.116630934</code></pre>
 <div class="sourceCode" id="cb29"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="co"># Wilcoxon / Mann-Whitney U</span></span>
 <span id="cb29-2"><a href="#cb29-2"></a>wilcx_mod <span class="ot">&lt;-</span> <span class="fu">wilcox.test</span>(y_data<span class="sc">$</span>y)</span>
@@ -1295,38 +1292,27 @@ statistical tests are linear models</a></li>
 ## [11] LC_MEASUREMENT=es_CR.UTF-8 LC_IDENTIFICATION=C       
 ## 
 ## attached base packages:
-## [1] stats     graphics  grDevices utils     datasets  methods  
-## [7] base     
+## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] viridis_0.6.2     viridisLite_0.4.0 ggplot2_3.3.5    
-## [4] knitr_1.37        kableExtra_1.3.4 
+## [1] viridis_0.6.2     viridisLite_0.4.0 ggplot2_3.3.5     knitr_1.37       
+## [5] kableExtra_1.3.4 
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] svglite_2.0.0     prettyunits_1.1.1 ps_1.6.0         
-##  [4] assertthat_0.2.1  rprojroot_2.0.2   digest_0.6.29    
-##  [7] utf8_1.2.2        R6_2.5.1          evaluate_0.15    
-## [10] highr_0.9         httr_1.4.2        pillar_1.7.0     
-## [13] rlang_1.0.2       rstudioapi_0.13   callr_3.7.0      
-## [16] jquerylib_0.1.4   klippy_0.0.0.9500 rmarkdown_2.10   
-## [19] desc_1.3.0        devtools_2.4.2    webshot_0.5.2    
-## [22] stringr_1.4.0     munsell_0.5.0     compiler_4.1.1   
-## [25] xfun_0.30         pkgconfig_2.0.3   systemfonts_1.0.2
-## [28] pkgbuild_1.2.0    htmltools_0.5.2   tidyselect_1.1.1 
-## [31] gridExtra_2.3     tibble_3.1.6      fansi_1.0.2      
-## [34] crayon_1.5.0      dplyr_1.0.7       withr_2.5.0      
-## [37] MASS_7.3-54       grid_4.1.1        DBI_1.1.1        
-## [40] jsonlite_1.7.2    gtable_0.3.0      lifecycle_1.0.1  
-## [43] formatR_1.12      magrittr_2.0.2    scales_1.1.1     
-## [46] cli_3.2.0         stringi_1.7.6     cachem_1.0.6     
-## [49] fs_1.5.0          remotes_2.4.0     testthat_3.0.4   
-## [52] xml2_1.3.2        bslib_0.2.5.1     ellipsis_0.3.2   
-## [55] vctrs_0.3.8       generics_0.1.0    tools_4.1.1      
-## [58] glue_1.6.2        markdown_1.1      purrr_0.3.4      
-## [61] rsconnect_0.8.24  processx_3.5.2    pkgload_1.2.1    
-## [64] fastmap_1.1.0     yaml_2.3.5        colorspace_2.0-3 
-## [67] sessioninfo_1.1.1 rvest_1.0.1       memoise_2.0.0    
-## [70] sass_0.4.0        usethis_2.0.1</code></pre>
+##  [1] tidyselect_1.1.1  xfun_0.30         bslib_0.2.5.1     purrr_0.3.4      
+##  [5] colorspace_2.0-3  vctrs_0.3.8       generics_0.1.0    htmltools_0.5.2  
+##  [9] yaml_2.3.5        utf8_1.2.2        rlang_1.0.2       jquerylib_0.1.4  
+## [13] pillar_1.7.0      glue_1.6.2        withr_2.5.0       DBI_1.1.1        
+## [17] lifecycle_1.0.1   stringr_1.4.0     munsell_0.5.0     gtable_0.3.0     
+## [21] rvest_1.0.1       evaluate_0.15     fastmap_1.1.0     fansi_1.0.2      
+## [25] highr_0.9         scales_1.1.1      formatR_1.12      webshot_0.5.2    
+## [29] jsonlite_1.7.2    systemfonts_1.0.2 gridExtra_2.3     digest_0.6.29    
+## [33] stringi_1.7.6     dplyr_1.0.7       grid_4.1.1        cli_3.2.0        
+## [37] tools_4.1.1       magrittr_2.0.2    sass_0.4.0        klippy_0.0.0.9500
+## [41] tibble_3.1.6      crayon_1.5.0      pkgconfig_2.0.3   MASS_7.3-54      
+## [45] ellipsis_0.3.2    xml2_1.3.2        assertthat_0.2.1  rmarkdown_2.10   
+## [49] svglite_2.0.0     httr_1.4.2        rstudioapi_0.13   R6_2.5.1         
+## [53] compiler_4.1.1</code></pre>
 </div>
 
 
