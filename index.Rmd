@@ -5,9 +5,12 @@
 <font size="6"><b>Stats Workshop</b></font>
 </center>
 
-<center><font size="5"><b><a href="https://tropicalstudies.org/">Organization for Tropical Studies</a><br></b></font></center>
+<center><font size="5"><b><a href="https://tropicalstudies.org/">Tropical Biology 2022</a><br></b></font></center>
 
-<i><center><font size="5"><b><a href="marceloarayasalas.weebly.com/">Marcelo Araya-Salas, PhD</a><br></b></font></center></i>
+<center><font size="4"><b><a 
+href="https://tropicalstudies.org/">Organization for Tropical Studies</a><br></b></font></center>
+
+<i><center><font size="4"><b><a href="marceloarayasalas.weebly.com/">Marcelo Araya-Salas, PhD</a><br></b></font></center></i>
 
 <center>
 <font size="4">Jun 14 - 15, 2022</font>
