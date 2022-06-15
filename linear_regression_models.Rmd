@@ -23,6 +23,7 @@ library(kableExtra)
 library(knitr)
 library(ggplot2)
 library(viridis)
+library(lmerTest)
 
 tibble <- function(x, ...) { 
   x <- kbl(x, digits=4, align= 'c', row.names = FALSE) 
@@ -73,7 +74,7 @@ klippy::klippy(position = c('top', 'right'))
 
 &nbsp; 
 
-# linear models as a unifying framework
+# Linear models as a unifying framework
 
 Traditionally, statistical models have been taught as disconnected tools with no clear relationship between them. Take a look at a classic biology stats book (Sokal & Rolhf):
 
@@ -229,9 +230,6 @@ v1
 round(x = v1, digits = 0)
 
 ```
-&nbsp; 
-
-
 &nbsp; 
 
 <div class="alert alert-info">
@@ -886,7 +884,7 @@ summ_xy_mod$coefficients
 
 - In this example we added one predictor to the model so we got an additional estimate (and extra row, 'x1')
 
-- The model tell us that the estimate of 'x1' is `r summ_xy_mod$coefficients[1, 1]` and that it's not significantly different from 0 (p-value = `r summ_xy_mod$coefficients[2, 4]`)
+- The model tell us that the estimate of 'x1' is `r summ_xy_mod$coefficients[1, 1]` and that it is not significantly different from 0 (p-value = `r summ_xy_mod$coefficients[2, 4]`)
 
 </div>
 
@@ -964,7 +962,7 @@ summ_xy_mod2 <- summary(xy_mod2)
 summ_xy_mod2$coefficients
 ```
 
-- The model tells us that $\beta_1$ (the effect size of 'x1') is `r summ_xy_mod2$coefficients[2, 1]` and that it's significantly different from 0 (p-value = `r summ_xy_mod2$coefficients[2, 4]`)
+- The model tells us that $\beta_1$ (the effect size of 'x1') is `r summ_xy_mod2$coefficients[2, 1]` and that it is significantly different from 0 (p-value = `r summ_xy_mod2$coefficients[2, 4]`)
 
 - The simulated values for the regression parameters can be compared to the summary of the `lm()` model to get a sense of the model precision:
 
@@ -1054,9 +1052,9 @@ summ_xy_mod_multp <- summary(xy_mod_multp)
 summ_xy_mod_multp$coefficients
 ```
 
-- The model found that $\beta_1$ (the effect size of 'x1') is `r summ_xy_mod_multp$coefficients[2, 1]` and that it's significantly different from 0 (p-value = `r summ_xy_mod_multp$coefficients[2, 4]`)
+- The model found that $\beta_1$ (the effect size of 'x1') is `r summ_xy_mod_multp$coefficients[2, 1]` and that it is significantly different from 0 (p-value = `r summ_xy_mod_multp$coefficients[2, 4]`)
 
-- It also found that the $\beta_2$ (the effect size of 'x2') is `r summ_xy_mod_multp$coefficients[3, 1]` and that it's also significantly different from 0 (p-value = `r summ_xy_mod_multp$coefficients[3, 4]`)
+- It also found that the $\beta_2$ (the effect size of 'x2') is `r summ_xy_mod_multp$coefficients[3, 1]` and that it is also significantly different from 0 (p-value = `r summ_xy_mod_multp$coefficients[3, 4]`)
 
 - The simulated values for the regression parameters can be compared to the summary of the `lm()` model to get a sense of the model precision:
 
@@ -1161,7 +1159,6 @@ x1_num <- rbinom(n = n, size = 1, prob = 0.5)
 y <- b0 + b1 * x1_num + error
 
 x1 <- factor(x1_num, labels = c("a", "b"))
-
 # create data frame
 xy_data_cat <- data.frame(x1, x1_num, y)
 
@@ -1218,7 +1215,7 @@ summ_xy_mod_cat <- summary(xy_mod_cat)
 summ_xy_mod_cat$coefficients
 ```
 
-- The model found that $\beta_1$ (the effect size of 'x1') is `r summ_xy_mod_cat$coefficients[2, 1]` and that it's significantly different from 0 (p-value = `r summ_xy_mod_cat$coefficients[2, 4]`)
+- The model found that $\beta_1$ (the effect size of 'x1') is `r summ_xy_mod_cat$coefficients[2, 1]` and that it is significantly different from 0 (p-value = `r summ_xy_mod_cat$coefficients[2, 4]`)
 
 - The simulated values for the regression parameters can be compared to the summary of the `lm()` model to get a sense of the model precision:
 
@@ -1416,11 +1413,11 @@ xy_summ_intr$coefficients
 
 ```
 
-- The model found that $\beta_1$ (the effect size of 'x1-b' to 'x1-a') is `r xy_summ_intr$coefficients[2, 1]` and that it's significantly different from 0 (p-value = `r xy_summ_intr$coefficients[2, 4]`) 
+- The model found that $\beta_1$ (the effect size of 'x1-b' to 'x1-a') is `r xy_summ_intr$coefficients[2, 1]` and that it is significantly different from 0 (p-value = `r xy_summ_intr$coefficients[2, 4]`) 
 
-- The model found that $\beta_2$ (the effect size of 'x2') is `r xy_summ_intr$coefficients[3, 1]` and that it's significantly different from 0 (p-value = `r xy_summ_intr$coefficients[3, 4]`). This is actually the slope of the relation between x2 and y when x1 = 'a' 
+- The model found that $\beta_2$ (the effect size of 'x2') is `r xy_summ_intr$coefficients[3, 1]` and that it is significantly different from 0 (p-value = `r xy_summ_intr$coefficients[3, 4]`). This is actually the slope of the relation between x2 and y when x1 = 'a' 
 
-- The model found that $\beta_3$ (the effect size of the interaction term 'x1 * x2') is `r xy_summ_intr$coefficients[4, 1]` and that it's significantly different from 0 (p-value = `r xy_summ_intr$coefficients[4, 4]`). This is the difference between the slopes of x2 *vs* y when x1 = 'a' and x2 *vs* y when x1 = 'b'.  
+- The model found that $\beta_3$ (the effect size of the interaction term 'x1 * x2') is `r xy_summ_intr$coefficients[4, 1]` and that it is significantly different from 0 (p-value = `r xy_summ_intr$coefficients[4, 4]`). This is the difference between the slopes of x2 *vs* y when x1 = 'a' and x2 *vs* y when x1 = 'b'.  
 
 - The simulated values for the regression parameters can be compared to the summary of the `lm()` model to get a sense of the model precision:
 
@@ -1469,7 +1466,7 @@ summary(lm(formula = y ~ x1, data = xy_data))
 
 ```
 
-- Now replace the error term with `error <- rexp(n = n, rate = 0.2)`. This is creating an error with an exponential distribution (so non-normal). This is supposed to be problematic for the inferential power of these models. Compare the estimates you got to the simulation values ('b0' and 'b1')
+- Now replace the error term with `error <- rexp(n = n, rate = 0.2)`. This is creating an error with an exponential distribution (so non-normal). This is supposed to be problematic for the inferential power of these models. Compare the estimates you got to the simulation values ('b0' and 'b1'). Explore the distribution of residuals (`plot(model_name)`) for both 'normal' and 'exponential' error models. 
 
 
 ```{r, eval = FALSE, echo = FALSE}
@@ -1553,15 +1550,131 @@ summary(xy_mod)
 
 </div>
 
-
 ---
 
 
 # Extending the linear models to more complex data structures
 
+&nbsp;
+
+## Generalized linear models
+
+GLM's allow us to model the association to response variables that do not fit to a normal distribution. Furthermore, they allow to model distributions that more closely resemble the process that generated the data. The following data set creates a data set with a response representing counts (so non-normal):
+
+```{r}
+
+x <- 
+# set seed
+set.seed(123)
+
+# number of observations
+n <- 100
+b0 <- -4
+b1 <- 3
+error <- rnorm(n = n, mean = 0, sd = 1)
+
+# random variables
+x1 <- rnorm(n = n)
+
+y <- x1
+
+y[x1 < 0] <- rpois(n = sum(x1 < 0), lambda = 2)
+y[x1 > 0] <- rpois(n = sum(x1 > 0), lambda = 3)
+
+# create data frame
+xy_data_pois <- data.frame(x1, y)
+
+head(xy_data_pois)
+
+
+```
+
+```{r}
+
+set.seed(1234)
+
+B0 <-  1.2                # intercept
+B1 <-  1.5                # slope for x1
+B2 <- -0.5                # slope for x2
+
+#sample size
+n <- 50
+
+#regression coefficients
+b0 <- 1.2
+b1 <- 1.5
+b2 <- -0.5
+
+
+#generate variables
+y <- rpois(100, 6.5)
+x2 <- seq(-0.5, 0.5, , length(y))
+x1 <- (log(y) - b0 - b2 * x2) / b1
+
+# create data frame
+xy_data_pois <- data.frame(x1, x2, y)
+
+head(xy_data_pois)
+
+```
+
+&nbsp;
+
+We can relaxed the normal distribution requirement with GLMs. `glm()` is a base R function that help us do the trick. For this example the most appropriate distribution is *Poisson*. This can be set in the 'family' argument like this:
+```{r}
+
+glm_pois  <- glm(formula = y ~ x1 + x2, data = xy_data_pois, family = poisson())
+
+```
+&nbsp;
+
+As you can see the only extra argument compared to `lm()` is 'family'. The rest is just the 'formula' and 'data' we are already familiar with. So again, we can build upon of our knowledge on linear models to extend them  to more complex data structures.
+
+We also need to run `summary()` to get model output:
+
+```{r}
+
+summary(glm_pois)
+
+```
+
+
+```{r}
+lm_pois  <- lm(formula = y ~ x1, data = xy_data_pois)
+
+summary(lm_pois)
+```
+&nbsp;
+
+<div class="alert alert-info">
+
+<font size="5">Exercise</font> 
+
+&nbsp;
+
+- Try fitting a `lm()` model (so with a gaussian distribution), compare the results and check the residuals (`plot(model_name)`)
+
+
+</div>
+
 &nbsp; 
 
+Many other distribution and link functions are available:
 
+```{r, out.width = "80%", echo = FALSE, fig.align= "center"}
+
+knitr::include_graphics("./images/link-functions.jpg")
+
+```
+&nbsp; 
+
+---
+
+## Mixed-effect models
+
+Sometimes our data sets include additional levels of structure. For instance, when we sample several individuals from different populations. In those cases variation at the higher structural level (populations) might preclude detecting patterns at the lower level (individuals).
+
+Let's simulate some data that resembles that scenario. We have two continuous predictor (x1) and a continuous response (y). Each sample comes from 1 of 8 different populations (pops):
 
 ```{r}
 # x<- 1
@@ -1572,41 +1685,77 @@ set.seed(28)
 n <- 300
 b0 <- 1
 b1 <- 1.3
-subpop <- sample(0:8, size = n, replace = TRUE)
+pops <- sample(0:8, size = n, replace = TRUE)
 error <- rnorm(n = n, sd = 2)
-
-
 
 # random variables
 x1 <- rnorm(n = n)
-y <- b0 + subpop * 2 + b1 * x1 + error
+y <- b0 + pops * 2 + b1 * x1 + error
 
-# create data frame
-xy_data_subpop <- data.frame(x1, y, subpop = as.factor(subpop))
+# add letters
+pops <- letters[pops + 1]
 
+# create data set
+xy_data_pops <- data.frame(x1, y, pops)
 
-ggplot(data = xy_data_subpop, aes(x = x1, y = y, color = subpop)) + 
-  geom_point() +
-  geom_smooth(method = "lm", se = FALSE) 
+head(xy_data_pops, 10)
+```
+&nbsp;
 
-summary(lm(y ~ x1, data = xy_data_subpop))
+We can explore the relation between y and x1 with a plot:
+```{r}
+
+ggplot(data = xy_data_pops, aes(x = x1, y = y)) + 
+  geom_point()
 
 ```
+&nbsp;
 
+can you clearly see the pattern of association between the two variables we used to simulate the data? We can further explore the data with a simple linear regression model:
 
 ```{r}
-ggplot(data = xy_data_subpop, aes(x = x1, y = y, color = subpop)) +
+
+summary(lm(y ~ x1, data = xy_data_pops))
+
+```
+&nbsp;
+
+Despite having simulated a non-zero $\beta_1$ we have no significant association according to this model and the estimated for $\beta_1$ is far from the simulated one. This poor inference is due to the fact that we are ignoring an important feature of our data, the grouping of samples in 'populations'.
+
+Mixed-effect models (a.k.a. multi-level models or varying effect models) can help us account for these additional features, significantly improving our inferential power. Let's color each of the populations to see how the variables co-vary for each data sub-group:  
+
+```{r}
+
+ggplot(data = xy_data_pops, aes(x = x1, y = y, color = pops)) + 
+  geom_point()
+
+```
+&nbsp;
+
+There seems to be a clear pattern of positive association between x1 and y. The pattern becomes a bit more obvious if we plot each population in its own panel:
+
+```{r, out.width= "100%"}
+
+ggplot(data = xy_data_pops, aes(x = x1, y = y, color = pops)) +
   geom_point() +
-  facet_wrap( ~ subpop) +
+  facet_wrap( ~ pops) +
   geom_smooth(method = "lm", se = FALSE) 
 
-mix_eff_mod <- lmer(formula = y ~ x1 + (1 | subpop))
+```
+&nbsp;
+
+Let's build a mixed-effect model using population as a varying intercept:
+
+```{r}
+
+mix_eff_mod <- lmer(formula = y ~ x1 + (1 | pops))
 
 summary(mix_eff_mod)
 
 ```
 &nbsp;
 
+The model correctly detected the simulated pattern and the estimate for $\beta_1$ (`r fixef(mix_eff_mod)[2]`) is very close to the simulated value.
 
 ---
 

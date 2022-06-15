@@ -225,68 +225,6 @@ str(l2)
 ```
 &nbsp;
 
-<font size="5">Attributes</font>  
-
-
-Objects can have attributes. Attributes allow to store metadata about the object. Attributes are kind of named lists. Attributes can be accessed individually with `attr()` or all at once (as a list) with `attributes()`:
-
-```{r}
-y <- 1:10
-
-mean(y)
-
-attr(y, "my_attribute") <- "This is an attribute"
-
-
-attr(y, "my_attribute")
-
-
-str(y)
-```
-&nbsp;
-
-`structure()` returns a new object with modified attributes:
-
-```{r}
-
-y <- structure(1:10, my_attribute = "This is an attribute")
-attributes(y)
-
-```
-&nbsp;
-
-Most attributes are lost when modifying a vector:
-
-
-```{r}
-
-attributes(y[1])
-
-```
-&nbsp;
-
-The only attributes not lost are the three most important:
-
-  - Names, a character vector giving each element a name, described in names
-  - Dimensions
-  - Class
-
----
-
-
-```{r}
-w <- structure(c(a =1, b = 2), my_attribute = "This is not an apple")
-
-attributes(w)
-
-attributes(w[1])
-
-class(w[1])
-
-```
-
-&nbsp;
-
 <font size="5">Names</font>  
 
 Vectors can be named in three ways:
@@ -1013,3 +951,16 @@ demo("nlm")
   - [Advanced R, H Wickham](http://adv-r.had.co.nz/Data-structures.html)
   - [Google's R Style Guide](https://google.github.io/styleguide/Rguide.xml)    
   - Hands-On Programming with R (Grolemund, 2014)
+
+
+---
+
+&nbsp; 
+ 
+<font size="4">Session information</font>
+
+```{r session info, echo=F}
+
+sessionInfo()
+
+```

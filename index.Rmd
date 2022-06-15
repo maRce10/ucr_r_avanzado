@@ -18,14 +18,11 @@ href="https://tropicalstudies.org/">Organization for Tropical Studies</a><br></b
 
 <!-- <center><img src="./images/3d_prob.jpeg" alt =3d probability plot"></center> -->
 
-&nbsp; 
-
 ```{r, out.width = "30%", echo = FALSE, fig.align= "center"}
 
 knitr::include_graphics("./images/3d_prob.jpeg")
 
 ```
-&nbsp;
 
 Traditionally, statistical models have been taught as disconnected tools with no clear relationship between them. However, most of those common statistical models are just special cases of linear models. Hence, learning them as such can largely simplify things. The course will focus on linear regression as the main tool for statistical inference. Students will be introduced to the basic elements of a linear regression model, its interpretation, as well as hands-on experience on building those models in R.
 

@@ -6,7 +6,7 @@ knitr::opts_chunk$set(eval = FALSE)
 
 ```
 
-1) Install R on the computer you will use during the course (https://cran.r-project.org/). I assume that you already have it installed, but try to update it if you have a R version < 4.0.0. You can find which R version you have by running this in the R console:
+1) Install R on the computer you will use during the course (https://cran.r-project.org/). I assume that you already have it installed, but try to update it if you have an R version < 4.0.0. You can find which R version you have by running this in the R console:
 
 ```{r}
 
@@ -38,15 +38,15 @@ install.packages("lmerTest")
 <div class="alert alert-warning">
 
 
-**A few tips to make sure you will take full advantage of the course**:
+**A few tips to ensure you will take full advantage of the course**:
 
 &nbsp; 
 
   - Set aside a physical space, hopefully as isolated as possible from external stimuli
-  - Use headphones/earphones to avoid any interference from echoes or external noises
-  - Make sure you have anything you need before the start of the class
+  - Use headphones/earphones to avoid distractions from echoes or external noises
+  - Make sure you have everything you need before the start of the class
   - Be ready a few minutes before the start of the class
-  - Try to focus as much as possible in the course, close other programs or unnecessary internet browser tabs (i.e. facebook, twitter, etc). This will also make the computer more efficient (less likely to get slow)
+  - Try to focus as much as possible on the course, close other programs or unnecessary internet browser tabs (i.e. facebook, twitter, etc). This will also make your computer more efficient (less likely to slow down)
   - Comment your code
 
 </div>

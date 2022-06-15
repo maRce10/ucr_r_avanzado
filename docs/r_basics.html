@@ -377,7 +377,7 @@ Tropical Studies</font>
 Araya-Salas, PhD</a></font>
 </center></h4>
 <h4 class="date"><center>
-“2022-06-14”
+“2022-06-15”
 </center></h4>
 
 </div>
@@ -627,57 +627,6 @@ str(l2)</code></pre>
 ##   .. ..$ ID      : chr [1:5] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...
 ##   .. ..$ size    : num [1:5] 1 2 3 4 5
 ##   .. ..$ observed: logi [1:5] FALSE TRUE FALSE FALSE FALSE</code></pre>
-<p> </p>
-<p><font size="5">Attributes</font></p>
-<p>Objects can have attributes. Attributes allow to store metadata about
-the object. Attributes are kind of named lists. Attributes can be
-accessed individually with <code>attr()</code> or all at once (as a
-list) with <code>attributes()</code>:</p>
-<pre class="r"><code>y &lt;- 1:10
-
-mean(y)</code></pre>
-<pre><code>## [1] 5.5</code></pre>
-<pre class="r"><code>attr(y, &quot;my_attribute&quot;) &lt;- &quot;This is an attribute&quot;
-
-
-attr(y, &quot;my_attribute&quot;)</code></pre>
-<pre><code>## [1] &quot;This is an attribute&quot;</code></pre>
-<pre class="r"><code>str(y)</code></pre>
-<pre><code>##  int [1:10] 1 2 3 4 5 6 7 8 9 10
-##  - attr(*, &quot;my_attribute&quot;)= chr &quot;This is an attribute&quot;</code></pre>
-<p> </p>
-<p><code>structure()</code> returns a new object with modified
-attributes:</p>
-<pre class="r"><code>y &lt;- structure(1:10, my_attribute = &quot;This is an attribute&quot;)
-attributes(y)</code></pre>
-<pre><code>## $my_attribute
-## [1] &quot;This is an attribute&quot;</code></pre>
-<p> </p>
-<p>Most attributes are lost when modifying a vector:</p>
-<pre class="r"><code>attributes(y[1])</code></pre>
-<pre><code>## NULL</code></pre>
-<p> </p>
-<p>The only attributes not lost are the three most important:</p>
-<ul>
-<li>Names, a character vector giving each element a name, described in
-names</li>
-<li>Dimensions</li>
-<li>Class</li>
-</ul>
-<hr />
-<pre class="r"><code>w &lt;- structure(c(a =1, b = 2), my_attribute = &quot;This is not an apple&quot;)
-
-attributes(w)</code></pre>
-<pre><code>## $names
-## [1] &quot;a&quot; &quot;b&quot;
-## 
-## $my_attribute
-## [1] &quot;This is not an apple&quot;</code></pre>
-<pre class="r"><code>attributes(w[1])</code></pre>
-<pre><code>## $names
-## [1] &quot;a&quot;</code></pre>
-<pre class="r"><code>class(w[1])</code></pre>
-<pre><code>## [1] &quot;numeric&quot;</code></pre>
 <p> </p>
 <p><font size="5">Names</font></p>
 <p>Vectors can be named in three ways:</p>
@@ -958,9 +907,10 @@ bi &lt;- builtins()
 length(bi)</code></pre>
 <pre><code>## [1] 1370</code></pre>
 <pre class="r"><code>sample(bi, 10)</code></pre>
-<pre><code>##  [1] &quot;cummax&quot;           &quot;unclass&quot;          &quot;readRDS&quot;          &quot;all.equal.POSIXt&quot;
-##  [5] &quot;icuSetCollate&quot;    &quot;mem.maxVSize&quot;     &quot;dyn.unload&quot;       &quot;structure&quot;       
-##  [9] &quot;ifelse&quot;           &quot;vapply&quot;</code></pre>
+<pre><code>##  [1] &quot;seek.connection&quot;   &quot;bindtextdomain&quot;    &quot;switch&quot;           
+##  [4] &quot;body&lt;-&quot;            &quot;.standard_regexps&quot; &quot;determinant&quot;      
+##  [7] &quot;browserText&quot;       &quot;as.table&quot;          &quot;oldClass&quot;         
+## [10] &quot;all&quot;</code></pre>
 <p> </p>
 <p>Operators are functions:</p>
 <pre class="r"><code>1 + 1</code></pre>
@@ -1389,6 +1339,40 @@ Style Guide</a><br />
 </li>
 <li>Hands-On Programming with R (Grolemund, 2014)</li>
 </ul>
+<hr />
+<p> </p>
+<p><font size="4">Session information</font></p>
+<pre><code>## R version 4.1.1 (2021-08-10)
+## Platform: x86_64-pc-linux-gnu (64-bit)
+## Running under: Ubuntu 20.04.2 LTS
+## 
+## Matrix products: default
+## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0
+## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0
+## 
+## locale:
+##  [1] LC_CTYPE=es_ES.UTF-8       LC_NUMERIC=C              
+##  [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=es_ES.UTF-8    
+##  [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=es_ES.UTF-8   
+##  [7] LC_PAPER=es_CR.UTF-8       LC_NAME=C                 
+##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+## [11] LC_MEASUREMENT=es_CR.UTF-8 LC_IDENTIFICATION=C       
+## 
+## attached base packages:
+## [1] stats     graphics  grDevices utils     datasets  methods   base     
+## 
+## other attached packages:
+## [1] kableExtra_1.3.4 knitr_1.37      
+## 
+## loaded via a namespace (and not attached):
+##  [1] rstudioapi_0.13   xml2_1.3.2        magrittr_2.0.2    rvest_1.0.1      
+##  [5] munsell_0.5.0     viridisLite_0.4.0 colorspace_2.0-3  R6_2.5.1         
+##  [9] rlang_1.0.2       fastmap_1.1.0     stringr_1.4.0     httr_1.4.2       
+## [13] tools_4.1.1       webshot_0.5.2     xfun_0.30         cli_3.2.0        
+## [17] jquerylib_0.1.4   systemfonts_1.0.2 htmltools_0.5.2   yaml_2.3.5       
+## [21] digest_0.6.29     lifecycle_1.0.1   sass_0.4.0        glue_1.6.2       
+## [25] evaluate_0.15     rmarkdown_2.10    stringi_1.7.6     compiler_4.1.1   
+## [29] bslib_0.2.5.1     scales_1.1.1      svglite_2.0.0     jsonlite_1.7.2</code></pre>
 </div>
 
 
