@@ -418,13 +418,6 @@ df
 
 ---
 
-
-# Extending the linear models to more complex data structures
-
-&nbsp; 
-
----
-
 # References
 
 - [Common statistical tests are linear models](https://lindeloev.github.io/tests-as-linear/)
