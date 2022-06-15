@@ -182,7 +182,7 @@ unif_var <- runif(n = 100, min = 0, max = 10)
 ```
 &nbsp; 
 
-The output is a numeric vector of length 1 thousand (`n = 1000`):
+The output is a numeric vector of length 1 thousand (`n = 100`):
 
 ```{r}
 
@@ -523,7 +523,7 @@ ggplot(data = data.frame(bimod_pop), mapping = aes(x = bimod_pop)) + geom_histog
 samples <- replicate(200, mean(sample(bimod_pop, 10)))
 
 # check distribution/ plot histogram
-ggplot(data = data.frame(bimod_pop), mapping = aes(x = bimod_pop)) + geom_histogram() 
+ggplot(data = data.frame(samples), mapping = aes(x = samples)) + geom_histogram() 
 
 ```
 
