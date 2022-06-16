@@ -26,10 +26,11 @@ version$version.string
 
 install.packages("ggplot2") 
 install.packages("lme4")
-install.packages("lme4")
 install.packages("MASS")
 install.packages("viridis")
 install.packages("lmerTest")
+install.packages("sjPlot")
+
 ```
 
 

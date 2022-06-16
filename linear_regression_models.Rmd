@@ -24,6 +24,7 @@ library(knitr)
 library(ggplot2)
 library(viridis)
 library(lmerTest)
+library(sjPlot)
 
 tibble <- function(x, ...) { 
   x <- kbl(x, digits=4, align= 'c', row.names = FALSE) 
@@ -39,6 +40,10 @@ geom_histogram <- function(...) ggplot2::geom_histogram(..., fill = viridis(10, 
 geom_smooth <- function(...) ggplot2::geom_smooth(..., color = viridis(10,  alpha = 0.5)[8])
 
 geom_boxplot <- function(...) ggplot2::geom_boxplot(..., fill = viridis(10, alpha = 0.5)[7])
+
+geom_pointrange <- function(...) ggplot2::geom_pointrange(..., show.legend = FALSE, color = viridis(10, alpha = 0.5)[7], size = 2) 
+
+plot_model <- function(...) sjPlot::plot_model(xy_mod, type = "diag", colors = viridis(10, alpha = 0.5)[7])
 
 theme_set(theme_classic(base_size = 20))
 
@@ -152,11 +157,13 @@ knitr::include_graphics("./images/chunk.png")
 
 --- 
 
-Please install and load the following packages:
+Please load the following packages:
 ```{r, eval = FALSE}
 
-install.packages("ggplot2")
 library(ggplot2)
+library(viridis)
+library(lmerTest)
+library(sjPlot)
 
 ```
 
@@ -235,8 +242,6 @@ round(x = v1, digits = 0)
 <div class="alert alert-info">
 
 <font size="5">Exercise</font> 
-
-&nbsp;
 
 - What do the functions `rbinom()` and `rexp()` do? (tip: run `?rexp`)
 
@@ -700,7 +705,7 @@ ggplot(trees, aes(x = Girth, y = Height)) +
 ```
 &nbsp; 
 
-- **Coefficients**: this one contains the effect sizes ('Estimates'), a measure of their uncertainty ('Std. Error'), the associated statistic ('t value') and p value ('Pr(>|t|)'). Estimates are given as the mean change in y for every increase in 1 unit in x. So for this example is 1.0544 $ft^{3} / in$.
+- **Coefficients**: this one contains the effect sizes ('Estimates'), a measure of their uncertainty ('Std. Error'), the associated statistic ('t value') and p value ('Pr(>|t|)'). Estimates are given as the mean change in y for every increase in 1 unit in x. So for this example is 1.0544 $in / in$. Despite the fact that the units will cancel out (`1.0544 $in / in$ = 1.0544) keeping them in mind is still biologically meaningful. They mean that, in average, and 1 inch increase in girth you will expect an increase of 1.0544 inches in height. 
 
 - **Residual standard error**: self-explanatory. The standard error of the residuals
 
@@ -763,6 +768,21 @@ summary(y_mod)
 ```
 &nbsp; 
 
+It can be quite informative to plot the effect sizes (although in this case we just have one):
+```{r}
+
+ci_df <- data.frame(param = names(y_mod$coefficients), 
+                    est = y_mod$coefficients, confint(y_mod))
+
+ggplot(ci_df, aes(x=param, y=est)) + 
+  geom_hline(yintercept = 0, color="red", lty = 2) +
+  geom_pointrange(aes(ymin = X2.5.., ymax = X97.5..)) + 
+  labs(x = "Parameter", y = "Effect size") + 
+  coord_flip()
+
+```
+&nbsp;
+
 <div class="alert alert-success">
 
 &nbsp; 
@@ -771,7 +791,7 @@ summary(y_mod)
 
 &nbsp; 
 
-For assessing the significance of the association we focus on the **Coefficients** table:
+For assessing the significance of the association we focus on the coefficients table:
 
 ```{r, echo= FALSE}
 
@@ -791,8 +811,9 @@ summ_y_mod$coefficients
 mean(y_data$y)
 
 ```
+&nbsp; 
 
-- We seldom have predictions about the intercept so we tend to ignore this estimate
+- We seldom have predictions about the intercept so we tend to ignore this estimate.
 
 </div>
 
@@ -804,7 +825,9 @@ mean(y_data$y)
 
 &nbsp;
 
-- Change the `mean` argument in the `rnorm()` function call ([line 78](#cb51-5)) to a value other than 0 and look how things change in the **Coefficients** table 
+- Change the `mean` argument in the `rnorm()` function call ([line 105](#cb53-8)) to a value other than 0 and look at how things change in the coefficients table 
+
+- Change the `sd` argument in the `rnorm()` function call ([line 105](#cb53-8)) to a higher value and look at how things change in the coefficients table 
 
 </div>
 
@@ -865,6 +888,30 @@ summary(xy_mod)
 ```
 &nbsp; 
 
+... and plot the effect sizes:
+```{r}
+
+ci_df <- data.frame(param = names(xy_mod$coefficients), 
+                    est = xy_mod$coefficients, confint(xy_mod))
+
+ggplot(ci_df, aes(x=param, y=est)) + 
+  geom_hline(yintercept = 0, color="red", lty = 2) +
+  geom_pointrange(aes(ymin = X2.5.., ymax = X97.5..)) + 
+  labs(x = "Parameter", y = "Effect size") + 
+  coord_flip()
+
+```
+&nbsp;
+
+We should 'diagnose' the adequacy of the model by inspecting more closely the distribution of residuals.The function `plot_model()` from the package 'sjPlot' does a good job for creating diagnostic plots for linear models:
+
+```{r, out.width= "80%", fig.height=4}
+
+plot_model(xy_mod, type = "diag")
+
+```
+&nbsp;
+
 <div class="alert alert-success">
 
 &nbsp; 
@@ -873,7 +920,7 @@ summary(xy_mod)
 
 &nbsp; 
 
-**Coefficients** table:
+Coefficients table:
 
 ```{r, echo= FALSE}
 
@@ -881,6 +928,7 @@ summ_xy_mod <- summary(xy_mod)
 
 summ_xy_mod$coefficients
 ```
+&nbsp; 
 
 - In this example we added one predictor to the model so we got an additional estimate (and extra row, 'x1')
 
@@ -889,6 +937,8 @@ summ_xy_mod$coefficients
 </div>
 
 ---
+
+&nbsp; 
 
 ## Simulating an associated predictor
 
@@ -903,7 +953,7 @@ set.seed(123)
 n <- 50
 b0 <- -4
 b1 <- 3
-error <- rnorm(n = n, sd = 2)
+error <- rnorm(n = n, sd = 3)
 
 # random variables
 x1 <- rnorm(n = n)
@@ -927,7 +977,6 @@ ggplot(xy_data2, aes(x = x1, y = y)) +
   geom_smooth(method = "lm", se = FALSE) +  
   geom_point() # plot points
 
-
 ```
 &nbsp;
 
@@ -937,13 +986,38 @@ The formula is the same than the previous model:
 
 &nbsp; 
 
-And this is the summary of the model:
+This is the summary of the model:
 ```{r}
 
 summary(xy_mod2)
 
 ```
 &nbsp;
+
+
+.. the effect size plot:
+```{r}
+
+ci_df <- data.frame(param = names(xy_mod2$coefficients), 
+                    est = xy_mod2$coefficients, confint(xy_mod2))
+
+ggplot(ci_df, aes(x=param, y=est)) + 
+  geom_hline(yintercept = 0, color="red", lty = 2) +
+  geom_pointrange(aes(ymin = X2.5.., ymax = X97.5..)) + 
+  labs(x = "Parameter", y = "Effect size") + 
+  coord_flip()
+
+```
+&nbsp;
+
+... and the model diagnostic plots:
+```{r, out.width= "80%", fig.height=4}
+
+plot_model(xy_mod2, type = "diag")
+
+```
+&nbsp;
+
 
 <div class="alert alert-success">
 
@@ -953,7 +1027,7 @@ summary(xy_mod2)
 
 &nbsp; 
 
-**Coefficients** table:
+Coefficients table:
 
 ```{r, echo= FALSE}
 
@@ -966,7 +1040,7 @@ summ_xy_mod2$coefficients
 
 - The simulated values for the regression parameters can be compared to the summary of the `lm()` model to get a sense of the model precision:
 
-    - $\beta_1$ (the effect size of 'x1') was set to `r b1` ([line 107](#cb65-4)) and was estimated as `r round(summ_xy_mod2$coefficients[2, 1], 3)` by the model  
+    - $\beta_1$ (the effect size of 'x1') was set to `r b1` and was estimated as `r round(summ_xy_mod2$coefficients[2, 1], 3)` by the model  
 
 </div>
 
@@ -1017,7 +1091,7 @@ n <- 50
 b0 <- -4
 b1 <- 3
 b2 <- -2
-error <- rnorm(n = n, mean = 0, sd = 1)
+error <- rnorm(n = n, mean = 0, sd = 3)
 
 # random variables
 x1 <- rnorm(n = n)
@@ -1035,6 +1109,29 @@ summary(xy_mod_multp)
 ```
 &nbsp;
 
+... plot the effect sizes:
+```{r}
+
+ci_df <- data.frame(param = names(xy_mod_multp$coefficients), 
+                    est = xy_mod_multp$coefficients, confint(xy_mod_multp))
+
+ggplot(ci_df, aes(x=param, y=est)) + 
+  geom_hline(yintercept = 0, color="red", lty = 2) +
+  geom_pointrange(aes(ymin = X2.5.., ymax = X97.5..)) + 
+  labs(x = "Parameter", y = "Effect size") + 
+  coord_flip()
+
+```
+&nbsp;
+
+... and the model diagnostic plots:
+```{r, out.width= "80%", fig.height=4}
+
+plot_model(xy_mod_multp, type = "diag")
+
+```
+&nbsp;
+
 <div class="alert alert-success">
 
 &nbsp; 
@@ -1043,7 +1140,7 @@ summary(xy_mod_multp)
 
 &nbsp; 
 
-**Coefficients** table:
+Coefficients table:
 
 ```{r, echo= FALSE}
 
@@ -1058,9 +1155,9 @@ summ_xy_mod_multp$coefficients
 
 - The simulated values for the regression parameters can be compared to the summary of the `lm()` model to get a sense of the model precision:
 
-    - $\beta_1$ was set to `r b1` ([line 132](#cb72-4)) and was estimated as `r round(summ_xy_mod_multp$coefficients[2, 1], 3)`
+    - $\beta_1$ was set to `r b1` and was estimated as `r round(summ_xy_mod_multp$coefficients[2, 1], 3)`
 
-    - $\beta_2$ (the effect size of 'x2') was set to `r b2` ([line 133](#cb72-5)) and was estimated as `r round(summ_xy_mod_multp$coefficients[3, 1], 3)`
+    - $\beta_2$ (the effect size of 'x2') was set to `r b2` and was estimated as `r round(summ_xy_mod_multp$coefficients[3, 1], 3)`
 
 </div>
 
@@ -1141,24 +1238,25 @@ For convenience we used `coef()` to extract only the estimates from the regressi
 
 ## Having a categorical predictor
 
-For categorical predictors we can first create a binary (0, 1) variable and then add labels to each value. The binomial distribution (`rbinom()`) can be used to create the binary variable:
+For categorical predictors we can first create a binary (0, 1) variable and then add labels to each value:
 
 ```{r}
 
 # set seed
-set.seed(123)
+set.seed(13)
 
 # number of observations
 n <- 50
-b0 <- -4
-b1 <- 3
-error <- rnorm(n = n, mean = 0, sd = 1)
+b0 <- -3
+b1 <- 2
+error <- rnorm(n = n, mean = 0, sd = 3)
 
 # random variables
-x1_num <- rbinom(n = n, size = 1, prob = 0.5)
+x1_num <- sample(0:1, size = n, replace = TRUE)
 y <- b0 + b1 * x1_num + error
 
 x1 <- factor(x1_num, labels = c("a", "b"))
+
 # create data frame
 xy_data_cat <- data.frame(x1, x1_num, y)
 
@@ -1183,7 +1281,6 @@ We can explore the pattern in the data using a boxplot:
 ggplot(xy_data_cat, aes(x = x1, y = y)) + 
   geom_boxplot()
 
-
 ```
 &nbsp;
 
@@ -1195,7 +1292,29 @@ xy_mod_cat <- lm(formula = y ~ x1, data = xy_data_cat)
 
 summary(xy_mod_cat)
 ```
+&nbsp;
 
+... plot the effect sizes:
+```{r}
+
+ci_df <- data.frame(param = names(xy_mod_cat$coefficients), 
+                    est = xy_mod_cat$coefficients, confint(xy_mod_cat))
+
+ggplot(ci_df, aes(x=param, y=est)) + 
+  geom_hline(yintercept = 0, color="red", lty = 2) +
+  geom_pointrange(aes(ymin = X2.5.., ymax = X97.5..)) + 
+  labs(x = "Parameter", y = "Effect size") + 
+  coord_flip()
+
+```
+&nbsp;
+
+... and the model diagnostic plots:
+```{r, out.width= "80%", fig.height=4}
+
+plot_model(xy_mod_cat, type = "diag")[[2]]
+
+```
 &nbsp;
 
 <div class="alert alert-success">
@@ -1206,7 +1325,7 @@ summary(xy_mod_cat)
 
 &nbsp; 
 
-**Coefficients** table:
+Coefficients table:
 
 ```{r, echo= FALSE}
 
@@ -1219,7 +1338,7 @@ summ_xy_mod_cat$coefficients
 
 - The simulated values for the regression parameters can be compared to the summary of the `lm()` model to get a sense of the model precision:
 
-    - $\beta_1$ was set to `r b1` ([line 132](#cb75-4)) and was estimated as `r round(summ_xy_mod_cat$coefficients[2, 1], 3)`
+    - $\beta_1$ was set to `r b1` and was estimated as `r round(summ_xy_mod_cat$coefficients[2, 1], 3)`
 
 - Note that in this case the intercept refers to the estimate for the level 'a' in the categorical predictor, which was used as a baseline:
 
@@ -1253,6 +1372,18 @@ mean(xy_data_cat$y[xy_data_cat$x1 == "a"])
 </div>
 
 &nbsp;
+
+<div class="alert alert-info">
+
+<font size="5">Exercise</font> 
+
+&nbsp;
+
+- Unbalanced data when having categories (i.e. some categories have way more observations than others) can be problematic for statistical inference. Modify the code [above](#cb99-1) to simulate a highly unbalanced data set and check the precision of the model.
+
+</div>
+
+---
 
 <div class="alert alert-warning">
 
@@ -1348,9 +1479,9 @@ set.seed(123)
 n <- 50
 b0 <- -4
 b1 <- 3
-b2 <- 1
+b2 <- 1.7
 b3 <- -3
-error <- rnorm(n = n, mean = 0, sd = 1)
+error <- rnorm(n = n, mean = 0, sd = 3)
 
 # random variables
 x1 <- rbinom(n = n, size = 1, prob = 0.5)
@@ -1376,7 +1507,7 @@ xy_summ_intr
 
 ```
 
-The interaction is easier to understand by plotting the data (don't worry too much about all the code):
+It also helps to plot the data (don't worry too much about all the code):
 
 ```{r, eval = FALSE}
 
@@ -1397,6 +1528,29 @@ ggplot(data = xy_data_intr, aes(x = x2, y = y, color = x1)) +
 ```
 &nbsp;
 
+... and the effect sizes:
+```{r}
+
+ci_df <- data.frame(param = names(xy_mod_intr$coefficients), 
+                    est = xy_mod_intr$coefficients, confint(xy_mod_intr))
+
+ggplot(ci_df, aes(x=param, y=est)) + 
+  geom_hline(yintercept = 0, color="red", lty = 2) +
+  geom_pointrange(aes(ymin = X2.5.., ymax = X97.5..)) + 
+  labs(x = "Parameter", y = "Effect size") + 
+  coord_flip()
+
+```
+&nbsp;
+
+We should also check the diagnostic plots:
+```{r, out.width= "80%", fig.height=4}
+
+plot_model(xy_mod_intr, type = "diag")
+
+```
+&nbsp;
+
 <div class="alert alert-success">
 
 &nbsp; 
@@ -1405,7 +1559,7 @@ ggplot(data = xy_data_intr, aes(x = x2, y = y, color = x1)) +
 
 &nbsp; 
 
-**Coefficients** table:
+Coefficients table:
 
 ```{r, echo= FALSE}
 
@@ -1421,11 +1575,11 @@ xy_summ_intr$coefficients
 
 - The simulated values for the regression parameters can be compared to the summary of the `lm()` model to get a sense of the model precision:
 
-    - $\beta_1$ was set to `r b1` ([line 175](#cb84-4)) and was estimated as `r round(xy_summ_intr$coefficients[2, 1], 3)`
+    - $\beta_1$ was set to `r b1` and was estimated as `r round(xy_summ_intr$coefficients[2, 1], 3)`
 
-    - $\beta_2$ was set to `r b2` ([line 176](#cb84-5)) and was estimated as `r round(xy_summ_intr$coefficients[3, 1], 3)`
+    - $\beta_2$ was set to `r b2` and was estimated as `r round(xy_summ_intr$coefficients[3, 1], 3)`
 
-    - $\beta_3$ was set to `r b3` ([line 177](#cb84-6)) and was estimated as `r round(xy_summ_intr$coefficients[4, 1], 3)`
+    - $\beta_3$ was set to `r b3` and was estimated as `r round(xy_summ_intr$coefficients[4, 1], 3)`
 
 </div>
 
@@ -1435,7 +1589,7 @@ xy_summ_intr$coefficients
 
 <div class="alert alert-info">
 
-<font size="5">Additional practice</font> 
+<font size="5">Exercise</font> 
 
 &nbsp;
 
@@ -1539,12 +1693,11 @@ summary(xy_mod)
 
 ```
 
+- Build a multiple regression model for this data (y ~ x1 + x2). You can use the same code as in the section [Adding more than 1 predictor: multiple regression](#adding-more-than-1-predictor-multiple-regression).
 
-- Build a multiple regression model for this data (y ~ x1 + x2). You can use the same code as in [Adding more than 1 predictor: multiple regression](#adding-more-than-1-predictor-multiple-regression).
+- How is the inference affected by the presence of collinear predictors? Make the diagnostic plots for this model (`plot(model_name)`).
 
-- How is inference affected by the presence of collinear predictors?
-
-- Unbalanced data when having categories (i.e. some categories have way more observations than others) can be problematic for statistical inference. Modify the code in [this code block](#cb76-1) to simulate a highly unbalanced data set and check the precision of the model (hint: modify the 'prob' argument in [`x1 <- rbinom(n = n, size = 1, prob = 0.5)`](#cb76-11))
+- Simulate a data set with three predictors in which only two of them are highly collinear. Fit a multiple regression model (y ~ x1 + x2 + x3) for that data and look at how collinearity affects the estimate for the non-collinear predictor.
 
 &nbsp;
 
@@ -1563,47 +1716,15 @@ GLM's allow us to model the association to response variables that do not fit to
 
 ```{r}
 
-x <- 
-# set seed
-set.seed(123)
-
-# number of observations
-n <- 100
-b0 <- -4
-b1 <- 3
-error <- rnorm(n = n, mean = 0, sd = 1)
-
-# random variables
-x1 <- rnorm(n = n)
-
-y <- x1
-
-y[x1 < 0] <- rpois(n = sum(x1 < 0), lambda = 2)
-y[x1 > 0] <- rpois(n = sum(x1 > 0), lambda = 3)
-
-# create data frame
-xy_data_pois <- data.frame(x1, y)
-
-head(xy_data_pois)
-
-
-```
-
-```{r}
-
 set.seed(1234)
-
-B0 <-  1.2                # intercept
-B1 <-  1.5                # slope for x1
-B2 <- -0.5                # slope for x2
 
 #sample size
 n <- 50
 
 #regression coefficients
 b0 <- 1.2
-b1 <- 1.5
-b2 <- -0.5
+b1 <- 1.3
+b2 <- 0.5
 
 
 #generate variables
@@ -1617,8 +1738,19 @@ xy_data_pois <- data.frame(x1, x2, y)
 head(xy_data_pois)
 
 ```
-
 &nbsp;
+
+Let also plot 'x1' *vs* 'y':
+```{r}
+
+# plot
+ggplot(xy_data_pois, aes(x = x1, y = y)) + 
+  geom_point() # plot points
+
+```
+&nbsp;
+
+The relation does not seem very linear nor the variance seems to be constant across 'x1'.
 
 We can relaxed the normal distribution requirement with GLMs. `glm()` is a base R function that help us do the trick. For this example the most appropriate distribution is *Poisson*. This can be set in the 'family' argument like this:
 ```{r}
@@ -1637,14 +1769,37 @@ We also need to run `summary()` to get model output:
 summary(glm_pois)
 
 ```
-
-
-```{r}
-lm_pois  <- lm(formula = y ~ x1, data = xy_data_pois)
-
-summary(lm_pois)
-```
 &nbsp;
+
+
+&nbsp;
+
+<div class="alert alert-success">
+
+&nbsp; 
+
+<center><font size="5"><b>Model interpretation</b></font></center>
+
+&nbsp; 
+
+Coefficients table:
+
+```{r, echo= FALSE}
+
+summ_glm_pois <- summary(glm_pois)
+
+summ_glm_pois$coefficients
+```
+
+- The model tells us that $\beta_1$ (the effect size of 'x1') is `r summ_glm_pois$coefficients[2, 1]` and that it is significantly different from 0 (p-value = `r summ_glm_pois$coefficients[2, 4]`). This is actually interpreted as an increase in 1 unit of 'x1' results in 'y' (rate) by a factor of exp(`r summ_glm_pois$coefficients[2, 1]`) = `r exp(summ_glm_pois$coefficients[2, 1])`. 
+
+- The model also tells us that $\beta_2$ (the effect size of 'x2') is `r summ_glm_pois$coefficients[3, 1]` and that it is significantly different from 0 (p-value = `r summ_glm_pois$coefficients[3, 4]`). This is means that an increase in 1 unit of 'x2' results in 'y' (rate) by a factor of exp(`r summ_glm_pois$coefficients[3, 1]`) = `r exp(summ_glm_pois$coefficients[3, 1])`. 
+
+
+</div>
+
+&nbsp;
+
 
 <div class="alert alert-info">
 
@@ -1652,7 +1807,7 @@ summary(lm_pois)
 
 &nbsp;
 
-- Try fitting a `lm()` model (so with a gaussian distribution), compare the results and check the residuals (`plot(model_name)`)
+- Try fitting a `lm()` model (so with a gaussian distribution), compare the results and check the residuals (`plot_model(model_name, type = "diag")`)
 
 
 </div>

@@ -18,6 +18,8 @@ navbar:
         href: graphs_with_ggplot2.html
     - text: "Course prep"
       href: course_prep.html
+    - text: "In-class code sharing"
+      href: https://codefile.io/f/kkWCiv5Zp76wqhw1OM7m
     - text: "Instructor"
       href: instructor.html
     

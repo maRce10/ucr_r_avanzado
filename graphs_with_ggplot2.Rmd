@@ -88,7 +88,7 @@ hylaeformis_data <- read.csv("https://raw.githubusercontent.com/maRce10/Stats-Wo
 
 ## ggplot2
 
-  - An **R** package specifically designed to produce graphics
+  - An R package specifically designed to produce graphics
 
   - Unlike other packages, ggplot2 has its own grammar
 
@@ -184,7 +184,7 @@ ggplot(data = iris, mapping = aes(x = Sepal.Length, y = Petal.Length)) + geom_po
 &nbsp; 
 
 
-We can also include a fixed aesthetic value:
+We can also include a fixed value:
 
 ```{r}
 
@@ -286,12 +286,18 @@ The scale can be fixed or free for the x and y axis, and the number of columns a
 ggplot(iris, aes(Sepal.Length, Petal.Length)) + 
   geom_point() + 
   facet_wrap(~Species, scales = "free_x")
+```
 
+
+```{r, fig.height=8}
 # free x and 3 rows
 ggplot(iris, aes(Sepal.Length, Petal.Length)) + 
   geom_point() + 
   facet_wrap(~Species, scales = "free_y", nrow = 3)
+```
 
+
+```{r, fig.height=6}
 # both free and 2 rows
 ggplot(iris, aes(Sepal.Length, Petal.Length)) + 
   geom_point() + 
@@ -302,7 +308,7 @@ ggplot(iris, aes(Sepal.Length, Petal.Length)) +
 
 Note that we can also saved the basic component as an **R** object and add other components later in the code:
 
-```{r}
+```{r, fig.height=8}
 
 p <- ggplot(iris, aes(Sepal.Length, Petal.Length)) + 
   geom_point() 
@@ -326,7 +332,7 @@ p + facet_wrap(~Species, scales = "free_x", nrow = 3)
 
 Best fit regression lines can be added with `geom_smooth()`:
 
-```{r}
+```{r, fig.height=8}
 
 # smoother and CI
 ggplot(iris, aes(Sepal.Length, Petal.Length)) + 
@@ -343,29 +349,6 @@ ggplot(iris, aes(Sepal.Length, Petal.Length)) +
 
 ```
 &nbsp; 
-
-If the relation between X and Y is noisy, a smoothed line can help to detect patterns:
-
-
-```{r}
-
-# smoother and CI
-ggplot(iris, aes(Sepal.Length, Petal.Length)) + 
-  geom_point() + 
-  geom_smooth() +
-  facet_wrap(~Species, scales = "free", nrow = 3)
-
-# without CI
-ggplot(iris, aes(Sepal.Length, Petal.Length)) + 
-  geom_point() + 
-  geom_smooth(se = FALSE) +
-  facet_wrap(~Species, scales = "free", nrow = 3)
-
-
-```
-
-
-</br>
 
 <div class="alert alert-info">
 
