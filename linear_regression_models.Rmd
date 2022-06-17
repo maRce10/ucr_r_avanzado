@@ -1460,7 +1460,7 @@ summary(xy_mod)
 
 ---
 
-# Interaction terms
+## Interaction terms
 
 A statistical interaction refers to an effect of a response variable that is mediated by a second variable. 
 
@@ -1654,9 +1654,7 @@ resd_mod <- resid(mod)
 # check distribution/ plot histogram
 ggplot(data = data.frame(resd_mod), mapping = aes(x = resd_mod)) + geom_histogram() 
 
-
 ```
-
 
 - Collinearity (the presence of correlated predictors) is supposed to affect the stability of multiple regression. The following code creates two highly collinear predictors ('x1' and 'x2'). The last line of code shows the correlation between them.
 
