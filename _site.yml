@@ -1,13 +1,15 @@
-name: "Stats Workshop OTS-TB-2022"
+name: "R avanzado"
 output_dir: "docs"
 output:
   html_document:
     css: extra.css
 navbar:
-  title: "Stats Workshop OTS-TB-2022"
+  title: "R avanzado"
   left:
-    - text: "Tutorials"
+    - text: "Manuales"
       menu:
+      - text: "Rmarkdown"
+        href: RMarkdown.html
       - text: "R basics"
         href: r_basics.html
       - text: "Linear regression models"
@@ -16,10 +18,10 @@ navbar:
         href: common_stats_as_lms.html
       - text: "Graphs with ggplot2"
         href: graphs_with_ggplot2.html
-    - text: "Course prep"
+    - text: "Preparación para el curso"
       href: course_prep.html
-    - text: "In-class code sharing"
-      href: https://codefile.io/f/kkWCiv5Zp76wqhw1OM7m
+    - text: "Compartir código"
+      href: https://codefile.io/f/XOIzH23KfULuZKyZ1TYT
     - text: "Instructor"
       href: instructor.html
     

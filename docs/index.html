@@ -13,8 +13,8 @@
 
 <title>index.knit</title>
 
-<script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -57,6 +57,7 @@ if (window.hljs) {
 
 
 
+
 <link rel="stylesheet" href="extra.css" type="text/css" />
 
 
@@ -81,6 +82,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -233,22 +237,25 @@ $(document).ready(function () {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">Stats Workshop OTS-TB-2022</a>
+      <a class="navbar-brand" href="index.html">R avanzado</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Tutorials
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Manuales
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="RMarkdown.html">Rmarkdown</a>
+    </li>
     <li>
       <a href="r_basics.html">R basics</a>
     </li>
@@ -264,10 +271,10 @@ $(document).ready(function () {
   </ul>
 </li>
 <li>
-  <a href="course_prep.html">Course prep</a>
+  <a href="course_prep.html">Preparación para el curso</a>
 </li>
 <li>
-  <a href="https://codefile.io/f/kkWCiv5Zp76wqhw1OM7m">In-class code sharing</a>
+  <a href="https://codefile.io/f/XOIzH23KfULuZKyZ1TYT">Compartir código</a>
 </li>
 <li>
   <a href="instructor.html">Instructor</a>
@@ -290,16 +297,12 @@ $(document).ready(function () {
 
 <p><br></p>
 <center>
-<font size="6"><b>Stats Workshop</b></font>
+<font size="6"><b>Programación y métodos estadísticos avanzados en
+R</b></font>
 </center>
 <center>
-<font size="5"><b><a href="https://tropicalstudies.org/">Tropical
-Biology 2022</a><br></b></font>
-</center>
-<center>
-<font size="4"><b><a 
-href="https://tropicalstudies.org/">Organization for Tropical
-Studies</a><br></b></font>
+<font size="5"><b><a href="https://www.ucr.ac.cr/">Universidad de Costa
+Rica</a><br></b></font>
 </center>
 <i>
 <center>
@@ -307,28 +310,33 @@ Studies</a><br></b></font>
 Araya-Salas, PhD</a><br></b></font>
 </center>
 <p></i></p>
-<center>
-<font size="4">Jun 14 - 15, 2022</font>
-</center>
 <!-- <center><img src="images/3d_prob.jpeg" alt =3d probability plot"></center> -->
 <p><img src="images/3d_prob.jpeg" width="30%" style="display: block; margin: auto;" /></p>
-<p>Traditionally, statistical models have been taught as disconnected
-tools with no clear relationship between them. However, most of those
-common statistical models are just special cases of linear models.
-Hence, learning them as such can simplify things substantially. The
-course will focus on linear regression as the main tool for statistical
-inference. Students will be introduced to the basic elements of a linear
-regression model, its interpretation, as well as hands-on experience on
-building those models in R.</p>
+<p>  Este curso pretende profundizar en los elementos de programación
+computacional, manipulación de bases de datos, diseño experimental,
+graficación personalizada, y el uso de técnicas y modelaje estadístico
+avanzadas utilizando R como plataforma. El curso está dirigido a
+estudiantes avanzados de carrera, de licenciatura o postgrado. En el
+curso se pretende cubrir las bases de los principales análisis y
+técnicas de modelaje estadístico, así como análisis emergentes. Todas
+las semanas se realizarán prácticas de laboratorio en donde se aplicarán
+los conceptos desarrollados durante las clases de teoría. Además,
+durante el curso cada estudiante presentará un paquete o extensión
+(conjunto de herramientas aplicables a análisis específicos) de R, en
+donde profundizará sobre sus aplicaciones en el campo de la biología
+demostrando en clase en que consiste el análisis.</p>
 <p> </p>
-<div id="objetives" class="section level3 alert alert-info">
-<h3>Objetives</h3>
+<div id="objetivos" class="section level3 alert alert-info">
+<h3>Objetivos</h3>
 <p> </p>
 <ul>
-<li><p>Understand statistical inference through a single modelling tool
-(broad sense linear models)</p></li>
-<li><p>Get familiar with building linear models</p></li>
-<li><p>Extend linear models to different data structures</p></li>
+<li>Familiarizar al estudiante con la programación en R</li>
+<li>Brindar herramientas para la manipulación de bases de datos</li>
+<li>Emplear métodos de visualización de datos</li>
+<li>Cubrir algunos de los análisis estadísticos tradicionales</li>
+<li>Proveer a los estudiantes con experiencia en la aplicación de las
+herramientas brindadas por medio de prácticas y proyectos de
+investigación</li>
 </ul>
 </div>
 <p> </p>

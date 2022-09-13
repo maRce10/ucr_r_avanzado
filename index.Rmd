@@ -2,19 +2,12 @@
 <br>
 
 <center>
-<font size="6"><b>Stats Workshop</b></font>
+<font size="6"><b>Programación y métodos estadísticos avanzados en R</b></font>
 </center>
 
-<center><font size="5"><b><a href="https://tropicalstudies.org/">Tropical Biology 2022</a><br></b></font></center>
-
-<center><font size="4"><b><a 
-href="https://tropicalstudies.org/">Organization for Tropical Studies</a><br></b></font></center>
+<center><font size="5"><b><a href="https://www.ucr.ac.cr/">Universidad de Costa Rica</a><br></b></font></center>
 
 <i><center><font size="4"><b><a href="marceloarayasalas.weebly.com/">Marcelo Araya-Salas, PhD</a><br></b></font></center></i>
-
-<center>
-<font size="4">Jun 14 - 15, 2022</font>
-</center>
 
 <!-- <center><img src="./images/3d_prob.jpeg" alt =3d probability plot"></center> -->
 
@@ -24,21 +17,26 @@ knitr::include_graphics("./images/3d_prob.jpeg")
 
 ```
 
-Traditionally, statistical models have been taught as disconnected tools with no clear relationship between them. However, most of those common statistical models are just special cases of linear models. Hence, learning them as such can simplify things substantially. The course will focus on linear regression as the main tool for statistical inference. Students will be introduced to the basic elements of a linear regression model, its interpretation, as well as hands-on experience on building those models in R.
+&nbsp; 
+Este curso pretende profundizar en los elementos de programación computacional,
+manipulación de bases de datos, diseño experimental, graficación personalizada, y el uso de
+técnicas y modelaje estadístico avanzadas utilizando R como plataforma. El curso está dirigido a estudiantes avanzados de carrera, de licenciatura o postgrado. En el curso se pretende cubrir las bases de los principales análisis y técnicas de modelaje estadístico, así como análisis emergentes. Todas las semanas se realizarán prácticas de laboratorio en donde se aplicarán los conceptos desarrollados durante las clases de teoría. Además, durante el curso cada estudiante presentará un paquete o extensión (conjunto de herramientas aplicables a análisis específicos) de R, en donde profundizará sobre sus aplicaciones en el campo de la biología demostrando en clase en que consiste el análisis.
+
 
 &nbsp;
 
 <div class="alert alert-info">
 
-### Objetives
+### Objetivos
 
 &nbsp;
 
-- Understand statistical inference through a single modelling tool (broad sense linear models)
-
-- Get familiar with building linear models
- 
-- Extend linear models to different data structures
+- Familiarizar al estudiante con la programación en R
+- Brindar herramientas para la manipulación de bases de datos
+- Emplear métodos de visualización de datos
+- Cubrir algunos de los análisis estadísticos tradicionales
+- Proveer a los estudiantes con experiencia en la aplicación de las herramientas
+brindadas por medio de prácticas y proyectos de investigación
 
 </div>
 
