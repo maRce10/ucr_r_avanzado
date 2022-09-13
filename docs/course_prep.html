@@ -297,36 +297,37 @@ $(document).ready(function () {
 
 <p> </p>
 <ol style="list-style-type: decimal">
-<li>Install R on the computer you will use during the course (<a
+<li>Instala R en la computadora que utilizarás durante el curso (<a
 href="https://cran.r-project.org/"
-class="uri">https://cran.r-project.org/</a>). I assume that you already
-have it installed, but try to update it if you have an R version &lt;
-4.0.0. You can find which R version you have by running this in the R
-console:</li>
+class="uri">https://cran.r-project.org/</a>). Asumo que ya lo tienes
+instalado, pero intenta actualizarlo si tienes una versión de R &lt;
+4.0.0. Puedes encontrar qué versión de R tienes ejecutando esto en la
+consola de R:</li>
 </ol>
 <pre class="r"><code>version$version.string</code></pre>
 <ol start="2" style="list-style-type: decimal">
-<li><p>Install the RStudio interface (<a
+<li><p>Instale la interfaz de RStudio (<a
 href="https://www.rstudio.com/products/rstudio/download/"
 class="uri">https://www.rstudio.com/products/rstudio/download/</a>,
-choose the free version). Optional but advised.</p></li>
-<li><p>Open RStudio and select the tab “Tools” then “Global Options”
-(last option). Select the “Code” option, then select the box for
-“Soft-wrap R source files”.</p></li>
-<li><p>Also in Rstudio: Select the “Pane Layout” option and move
-“Source” to the top left pane and “Console” to the top right pane. For
-those of you unfamiliar with RStudio, the source is your script, where
-you save code in a physical file (usually .R script) and the console
-prints the output of the code you run from the source. You can write
-code in the console, but it will not be saved in a physical file. This
-layout allocates more screen space to the most useful panes. Hit “Apply”
-and “Ok”.</p></li>
-<li><p>Now in the R console in Rstudio: Run the following code to
-install the latest developmental versions (from github) of warbleR,
-Rraven, PhenotypeSpace, ohun, baRulho and dynaSpec (remove the packages
-first if you have them installed already).</p></li>
+elija la versión gratuita). Es opcional pero se aconseja.</p></li>
+<li><p>Abra RStudio y seleccione la pestaña “Herramientas” y luego
+“Opciones globales” (última opción). Seleccione la opción “Código”,
+luego seleccione la casilla de “Envolver suavemente los archivos fuente
+de R”.</p></li>
+<li><p>También en Rstudio: Seleccione la opción “Pane Layout” y mueva
+“Source” al panel superior izquierdo y “Console” al panel superior
+derecho. Para aquellos que no estén familiarizados con RStudio, la
+fuente es tu script, donde guardas el código en un archivo físico
+(normalmente .R script) y la consola imprime la salida del código que
+ejecutas desde la fuente. Puedes escribir código en la consola, pero no
+se guardará en un archivo físico. Esta disposición asigna más espacio en
+la pantalla a los paneles más útiles. Pulsa “Aplicar” y “Ok”.</p></li>
+<li><p>Ahora en la consola de R en Rstudio ejecuta el siguiente código
+para instalar los paquetes que estaremos usando durante el
+curso:</p></li>
 </ol>
-<pre class="r"><code>install.packages(&quot;ggplot2&quot;) 
+<pre class="r"><code>install.packages(&quot;Rmarkdown&quot;) 
+install.packages(&quot;ggplot2&quot;) 
 install.packages(&quot;lme4&quot;)
 install.packages(&quot;MASS&quot;)
 install.packages(&quot;viridis&quot;)
@@ -334,27 +335,22 @@ install.packages(&quot;lmerTest&quot;)
 install.packages(&quot;sjPlot&quot;)</code></pre>
 <p> </p>
 <div class="alert alert-warning">
-<p><strong>A few tips to ensure you will take full advantage of the
-course</strong>:</p>
+<p><strong>Algunos consejos para garantizar el máximo aprovechamiento
+del curso</strong>:</p>
 <p> </p>
 <ul>
-<li>Set aside a physical space, hopefully as isolated as possible from
-external stimuli</li>
-<li>Use headphones/earphones to avoid distractions from echoes or
-external noises</li>
-<li>Make sure you have everything you need before the start of the
-class</li>
-<li>Be ready a few minutes before the start of the class</li>
-<li>Try to focus as much as possible on the course, close other programs
-or unnecessary internet browser tabs (i.e. facebook, twitter, etc). This
-will also make your computer more efficient (less likely to slow
-down)</li>
-<li>Comment your code</li>
+<li>Asegúrate de tener todo lo que necesitas antes del comienzo de la
+clase</li>
+<li>Esté preparado unos minutos antes del comienzo de la clase</li>
+<li>Intenta concentrarte al máximo en el curso, cierra otros programas o
+pestañas innecesarias del navegador de internet (por ejemplo, instagram,
+twitter, etc)</li>
+<li>Comentá el código</li>
 </ul>
 </div>
 <p> </p>
-<p>Take a look at the <a href="">R basics tutorial</a> ahead of the
-workshop (if possible!)</p>
+<p>Repasá al <a href="">tutorial de fundamentos de R</a> antes del
+taller (si es posible)</p>
 
 
 
