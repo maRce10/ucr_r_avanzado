@@ -10,7 +10,7 @@ navbar:
       menu:
       - text: "Rmarkdown"
         href: RMarkdown.html
-      - text: "R basics"
+      - text: "Fundamentos de R"
         href: r_basics.html
       - text: "Linear regression models"
         href: linear_regression_models.html

@@ -6,7 +6,7 @@ knitr::opts_chunk$set(eval = FALSE)
 
 ```
 
-1) Instala R en la computadora que utilizarás durante el curso (https://cran.r-project.org/). Asumo que ya lo tienes instalado, pero intenta actualizarlo si tienes una versión de R < 4.0.0. Puedes encontrar qué versión de R tienes ejecutando esto en la consola de R:
+1) Instalá R en la computadora que utilizarás durante el curso (https://cran.r-project.org/). Probablemente ya lo tenés instalado, pero intentá actualizarlo si tenés una versión de R < 4.0.0. Podés encontrar qué versión de R tenés ejecutando esto en la consola de R:
 
 ```{r}
 
@@ -14,13 +14,13 @@ version$version.string
 
 ```
 
-2) Instale la interfaz de RStudio (https://www.rstudio.com/products/rstudio/download/, elija la versión gratuita). Es opcional pero se aconseja.
+2) Instalá la interfaz de RStudio (https://www.rstudio.com/products/rstudio/download/, elejí la versión gratuita). Es opcional pero se aconseja.
 
-3) Abra RStudio y seleccione la pestaña "Herramientas" y luego "Opciones globales" (última opción). Seleccione la opción "Código", luego seleccione la casilla de "Envolver suavemente los archivos fuente de R".
+3) Abrí RStudio y seleccioná la pestaña "Tools" y luego "Global options" (última opción). Seleccioná la opción "Code", luego seleccioná la casilla de "Soft wrap".
 
-4) También en Rstudio: Seleccione la opción "Pane Layout" y mueva "Source" al panel superior izquierdo y "Console" al panel superior derecho. Para aquellos que no estén familiarizados con RStudio, la fuente es tu script, donde guardas el código en un archivo físico (normalmente .R script) y la consola imprime la salida del código que ejecutas desde la fuente. Puedes escribir código en la consola, pero no se guardará en un archivo físico. Esta disposición asigna más espacio en la pantalla a los paneles más útiles. Pulsa "Aplicar" y "Ok".
+4) También en Rstudio: Seleccioná la opción "Pane Layout" y mové "Source" al panel superior izquierdo y "Console" al panel superior derecho. Para aquellos que no estén familiarizados con RStudio, la fuente es tu script, donde guardas el código en un archivo físico (normalmente .R script) y la consola imprime la salida del código que ejecutás desde la fuente. Podés escribir código en la consola, pero no se guardará en un archivo físico. Esta disposición asigna más espacio en la pantalla a los paneles más útiles. Dalé "Apply" y "Ok".
 
-5) Ahora en la consola de R en Rstudio ejecuta el siguiente código para instalar los paquetes que estaremos usando durante el curso:
+5) Ahora en la consola de R en Rstudio ejecutá el siguiente código para instalar los paquetes que estaremos usando durante el curso:
 
 ```{r}
 
@@ -44,12 +44,10 @@ install.packages("sjPlot")
 
 &nbsp; 
 
-  - Asegúrate de tener todo lo que necesitas antes del comienzo de la clase
-  - Esté preparado unos minutos antes del comienzo de la clase
+  - Aseguráte de tener todo lo que necesitas antes del comienzo de la clase
+  - Tratá de estar preparado unos minutos antes del comienzo de la clase
   - Intenta concentrarte al máximo en el curso, cierra otros programas o pestañas innecesarias del navegador de internet (por ejemplo, instagram, twitter, etc)
   - Comentá el código
-
-
 
 
 </div>
