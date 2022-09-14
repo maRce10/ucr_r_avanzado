@@ -12,15 +12,15 @@ navbar:
         href: RMarkdown.html
       - text: "Fundamentos de R"
         href: r_basics.html
-      - text: "Linear regression models"
+      - text: "Modelos de regresión lineal"
         href: linear_regression_models.html
-      - text: "Common stats as linear models"
+      - text: "Modelos comunes como regresiones"
         href: common_stats_as_lms.html
-      - text: "Graphs with ggplot2"
+      - text: "Gráficos con ggplot2"
         href: graphs_with_ggplot2.html
     - text: "Preparación para el curso"
       href: course_prep.html
-    - text: "Compartir código"
+    - text: "   Compartir código"
       href: https://codefile.io/f/XOIzH23KfULuZKyZ1TYT
     - text: "Instructor"
       href: instructor.html
