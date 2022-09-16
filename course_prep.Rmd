@@ -40,7 +40,7 @@ install.packages("sjPlot")
 <div class="alert alert-warning">
 
 
-**Algunos consejos para garantizar el máximo aprovechamiento del curso**:
+**Consejos para garantizar el máximo aprovechamiento del curso**:
 
 &nbsp; 
 

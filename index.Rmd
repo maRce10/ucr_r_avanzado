@@ -11,9 +11,10 @@
 
 <!-- <center><img src="./images/3d_prob.jpeg" alt =3d probability plot"></center> -->
 
-```{r, out.width = "30%", echo = FALSE, fig.align= "center"}
+```{r, out.width = "70%", echo = FALSE, fig.align= "center"}
 
-knitr::include_graphics("./images/3d_prob.jpeg")
+# knitr::include_graphics("./images/3d_prob.jpeg")
+# knitr::include_graphics("./images/contour_plot.png")
 
 ```
 
@@ -27,7 +28,7 @@ técnicas y modelaje estadístico avanzadas utilizando R como plataforma. El cur
 
 <div class="alert alert-info">
 
-### Objetivos
+### **Objetivos**
 
 &nbsp;
 
@@ -41,3 +42,18 @@ brindadas por medio de prácticas y proyectos de investigación
 </div>
 
 &nbsp;    
+
+<div class="alert alert-warning">
+
+
+**Consejos para garantizar el máximo aprovechamiento del curso**
+
+&nbsp; 
+
+  - Aseguráte de tener todo lo que necesitas antes del comienzo de la clase
+  - Tratá de estar preparado unos minutos antes del comienzo de la clase
+  - Intenta concentrarte al máximo en el curso, cierra otros programas o pestañas innecesarias del navegador de internet (por ejemplo, instagram, twitter, etc)
+  - Comentá el código
+
+
+</div>
