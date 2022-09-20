@@ -13,7 +13,7 @@
 
 <title>RMarkdown.knit</title>
 
-<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -416,16 +416,16 @@ div.tocify {
       <a href="RMarkdown.html">Rmarkdown</a>
     </li>
     <li>
-      <a href="r_basics.html">R basics</a>
+      <a href="r_basics.html">Fundamentos de R</a>
     </li>
     <li>
-      <a href="linear_regression_models.html">Linear regression models</a>
+      <a href="linear_regression_models.html">Modelos de regresión lineal</a>
     </li>
     <li>
-      <a href="common_stats_as_lms.html">Common stats as linear models</a>
+      <a href="common_stats_as_lms.html">Modelos comunes como regresiones</a>
     </li>
     <li>
-      <a href="graphs_with_ggplot2.html">Graphs with ggplot2</a>
+      <a href="graphs_with_ggplot2.html">Gráficos con ggplot2</a>
     </li>
   </ul>
 </li>
@@ -433,7 +433,10 @@ div.tocify {
   <a href="course_prep.html">Preparación para el curso</a>
 </li>
 <li>
-  <a href="https://codefile.io/f/XOIzH23KfULuZKyZ1TYT">Compartir código</a>
+  <a href="https://codefile.io/f/XOIzH23KfULuZKyZ1TYT">   Compartir código</a>
+</li>
+<li>
+  <a href="https://github.com/maRce10/ucr_r_avanzado/raw/master/additional_files/2022-08-05_Probl%20Esp%20Ecol_Estadistica%20Avanzada%20en%20R.pdf">Programa del curso</a>
 </li>
 <li>
   <a href="instructor.html">Instructor</a>
@@ -462,7 +465,7 @@ div.tocify {
 Araya-Salas, PhD</a></font>
 </center></h4>
 <h4 class="date"><center>
-“2022-09-12”
+“2022-09-19”
 </center></h4>
 
 </div>
@@ -591,7 +594,7 @@ usted puede modificar.</p>
 ##  $ site    : chr  &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...
 ##  $ visit   : num  1 1 1 1 1 1 1 1 1 1 ...
 ##  $ habitat : chr  &quot;ocean&quot; &quot;ocean&quot; &quot;ocean&quot; &quot;ocean&quot; ...
-##  $ richness: num  5 6 8 1 10 1 9 2 6 7 ...</code></pre>
+##  $ richness: num  4 8 3 7 7 3 2 8 1 14 ...</code></pre>
 <p>Cuando su documento se renderiza, el bloque de código se muestra en
 un cuadro gris, y los resultados de ese código se muestran en un cuadro
 blanco. ¿Y si sólo quieres que se muestre el resultado de tu código? ¿O
@@ -606,7 +609,7 @@ opciones:</p>
 ##  $ site    : chr  &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...
 ##  $ visit   : num  1 1 1 1 1 1 1 1 1 1 ...
 ##  $ habitat : chr  &quot;ocean&quot; &quot;ocean&quot; &quot;ocean&quot; &quot;ocean&quot; ...
-##  $ richness: num  0 7 0 6 7 4 2 2 4 9 ...</code></pre>
+##  $ richness: num  8 5 6 4 5 3 4 2 2 0 ...</code></pre>
 <p>Puedes ver que el código está oculto pero se muestran los
 resultados.</p>
 <hr />
@@ -672,7 +675,7 @@ utilizar código incrustado y evaluado en línea, como este:</p>
 <hr />
 <p>####Input: <img src="images/image15.PNG" width="784" /></p>
 <p>####Salida: La riqueza media de especies encontrada en el sitio b fue
-4.5.</p>
+5.5.</p>
 <p>(Recuerde que los valores de riqueza se generan aleatoriamente cuando
 se crea el conjunto de datos, por lo que su valor puede ser diferente a
 éste).</p>
@@ -688,18 +691,18 @@ Definitive Guide</a></li>
 <hr />
 <p> </p>
 <p><font size="4">Session information</font></p>
-<pre><code>## R version 4.1.0 (2021-05-18)
+<pre><code>## R version 4.1.1 (2021-08-10)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
 ## Running under: Ubuntu 20.04.2 LTS
 ## 
 ## Matrix products: default
-## BLAS:   /usr/lib/x86_64-linux-gnu/atlas/libblas.so.3.10.3
-## LAPACK: /usr/lib/x86_64-linux-gnu/atlas/liblapack.so.3.10.3
+## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0
+## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0
 ## 
 ## locale:
-##  [1] LC_CTYPE=pt_BR.UTF-8       LC_NUMERIC=C              
-##  [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=pt_BR.UTF-8    
-##  [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=pt_BR.UTF-8   
+##  [1] LC_CTYPE=es_ES.UTF-8       LC_NUMERIC=C              
+##  [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=es_ES.UTF-8    
+##  [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=es_ES.UTF-8   
 ##  [7] LC_PAPER=es_CR.UTF-8       LC_NAME=C                 
 ##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
 ## [11] LC_MEASUREMENT=es_CR.UTF-8 LC_IDENTIFICATION=C       
@@ -709,22 +712,22 @@ Definitive Guide</a></li>
 ## 
 ## other attached packages:
 ## [1] viridis_0.6.2     viridisLite_0.4.0 ggplot2_3.3.6     knitr_1.39       
-## [5] kableExtra_1.3.1 
+## [5] kableExtra_1.3.4 
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] highr_0.9        pillar_1.8.0     bslib_0.2.5.1    compiler_4.1.0  
-##  [5] jquerylib_0.1.4  tools_4.1.0      digest_0.6.29    gtable_0.3.0    
-##  [9] jsonlite_1.8.0   evaluate_0.15    lifecycle_1.0.1  tibble_3.1.8    
-## [13] png_0.1-7        pkgconfig_2.0.3  rlang_1.0.4      DBI_1.1.1       
-## [17] cli_3.3.0        rstudioapi_0.13  yaml_2.3.5       xfun_0.31       
-## [21] fastmap_1.1.0    gridExtra_2.3    withr_2.5.0      dplyr_1.0.7     
-## [25] stringr_1.4.0    httr_1.4.2       xml2_1.3.2       generics_0.1.0  
-## [29] vctrs_0.4.1      sass_0.4.0       tidyselect_1.1.1 webshot_0.5.2   
-## [33] grid_4.1.0       glue_1.6.2       R6_2.5.1         fansi_1.0.3     
-## [37] rmarkdown_2.13   farver_2.1.1     purrr_0.3.4      magrittr_2.0.3  
-## [41] scales_1.2.0     htmltools_0.5.3  assertthat_0.2.1 rvest_1.0.0     
-## [45] colorspace_2.0-3 labeling_0.4.2   utf8_1.2.2       stringi_1.7.8   
-## [49] munsell_0.5.0</code></pre>
+##  [1] tidyselect_1.1.2  xfun_0.31         bslib_0.3.1       purrr_0.3.4      
+##  [5] colorspace_2.0-3  vctrs_0.4.1       generics_0.1.2    htmltools_0.5.3  
+##  [9] yaml_2.3.5        utf8_1.2.2        rlang_1.0.4       jquerylib_0.1.4  
+## [13] pillar_1.8.0      glue_1.6.2        withr_2.5.0       DBI_1.1.3        
+## [17] lifecycle_1.0.1   stringr_1.4.0     munsell_0.5.0     gtable_0.3.0     
+## [21] rvest_1.0.2       evaluate_0.15     labeling_0.4.2    fastmap_1.1.0    
+## [25] fansi_1.0.3       highr_0.9         scales_1.2.0      webshot_0.5.3    
+## [29] jsonlite_1.8.0    farver_2.1.1      systemfonts_1.0.4 gridExtra_2.3    
+## [33] png_0.1-7         digest_0.6.29     stringi_1.7.8     dplyr_1.0.9      
+## [37] grid_4.1.1        cli_3.3.0         tools_4.1.1       magrittr_2.0.3   
+## [41] sass_0.4.1        tibble_3.1.8      pkgconfig_2.0.3   xml2_1.3.3       
+## [45] assertthat_0.2.1  rmarkdown_2.14    svglite_2.1.0     httr_1.4.3       
+## [49] rstudioapi_0.13   R6_2.5.1          compiler_4.1.1</code></pre>
 </div>
 
 

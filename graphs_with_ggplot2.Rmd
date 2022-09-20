@@ -1,6 +1,6 @@
 ---
-title: <center><font size="7"><b>Elegant graphs with ggplot2</b></font></center>
-subtitle: <center><font size="4"><b>Tropical Biology 2022</b> <br> Organization for Tropical Studies</font></center>
+title: <center><font size="7"><b>Gráficos elegantes con ggplot2</b></font></center>
+subtitle: <center><font size="4"><b>Programación y métodos estadísticos avanzados en R</b> <br>Universidad de Costa</font></center>
 author: <center><font size="3"><a href="http://marceloarayasalas.weebly.com/">Marcelo Araya-Salas, PhD</a></font></center>
 date: <center>"`r Sys.Date()`"</center>
 output:
@@ -78,7 +78,7 @@ klippy::klippy(position = c('top', 'right'))
 
 ```{r functions and data, eval=T, echo=F}
 
-hylaeformis_data <- read.csv("https://raw.githubusercontent.com/maRce10/Stats-Workshop-OTS_TB_2022-3/master/data/hylaeformis_data.csv", stringsAsFactors = FALSE)
+hylaeformis_data <- read.csv("https://raw.githubusercontent.com/maRce10/OTS_TB_2022/master/data/hylaeformis_data.csv", stringsAsFactors = FALSE)
 
 ```
 

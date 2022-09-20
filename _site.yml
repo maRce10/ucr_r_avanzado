@@ -8,8 +8,8 @@ navbar:
   left:
     - text: "Manuales"
       menu:
-      - text: "Rmarkdown"
-        href: RMarkdown.html
+      - text: "Reportes dinámicos con Rmarkdown"
+        href: reportes_dinamicos_con_rmarkdown.html
       - text: "Fundamentos de R"
         href: r_basics.html
       - text: "Modelos de regresión lineal"
@@ -20,7 +20,7 @@ navbar:
         href: graphs_with_ggplot2.html
     - text: "Preparación para el curso"
       href: course_prep.html
-    - text: "   Compartir código"
+    - text: "Compartir código"
       href: https://codefile.io/f/XOIzH23KfULuZKyZ1TYT
     - text: "Programa del curso"
       href: https://github.com/maRce10/ucr_r_avanzado/raw/master/additional_files/2022-08-05_Probl%20Esp%20Ecol_Estadistica%20Avanzada%20en%20R.pdf

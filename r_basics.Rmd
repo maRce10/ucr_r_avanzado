@@ -1,15 +1,17 @@
 ---
 title: <center><font size="7"><b>R basics</b></font></center>
-subtitle: <center><font size="4"><b>Tropical Biology 2022</b><br> Organization for Tropical Studies</font></center>
+subtitle: <center><font size="4"><b>Programación y métodos estadísticos avanzados en R</b> <br>Universidad de Costa</font></center>
 author: <center><font size="3"><a href="http://marceloarayasalas.weebly.com/">Marcelo Araya-Salas, PhD</a></font></center>
 date: <center>"`r Sys.Date()`"</center>
 output:
   html_document:
+    df_print: tibble
+    highlight: pygments  
     toc: yes
     toc_depth: 3
     toc_float:
-      collapsed: no
-      smooth_scroll: no
+      collapsed: yes
+      smooth_scroll: yes
 fontsize: 12pt 
 editor_options: 
   chunk_output_type: console
