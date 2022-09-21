@@ -13,7 +13,7 @@
 
 <title>reportes_dinamicos_con_rmarkdown.knit</title>
 
-<script src="site_libs/header-attrs-2.16/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -39,14 +39,14 @@
 <script>window.xaringanExtraClipboard(null, {"button":"<i class=\"fa fa-clipboard\"><\/i>","success":"<i class=\"fa fa-check\" style=\"color: #90BE6D\"><\/i>","error":"<i class=\"fa fa-times-circle\" style=\"color: #F94144\"><\/i>"})</script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
-<script src="site_libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="site_libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
 <link href="site_libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
 <script src="site_libs/leaflet-1.3.1/leaflet.js"></script>
 <link href="site_libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
 <script src="site_libs/proj4-2.6.2/proj4.min.js"></script>
 <script src="site_libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
 <link href="site_libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="site_libs/leaflet-binding-2.1.1/leaflet.js"></script>
+<script src="site_libs/leaflet-binding-2.0.4.1/leaflet.js"></script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -140,20 +140,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   for (var i = 0; i < sheets.length; i++) {
     if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
     try { var rules = sheets[i].cssRules; } catch (e) { continue; }
-    var j = 0;
-    while (j < rules.length) {
+    for (var j = 0; j < rules.length; j++) {
       var rule = rules[j];
       // check if there is a div.sourceCode rule
-      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
-        j++;
-        continue;
-      }
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
       var style = rule.style.cssText;
       // check if color or background-color is set
-      if (rule.style.color === '' && rule.style.backgroundColor === '') {
-        j++;
-        continue;
-      }
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
       // replace div.sourceCode by a pre.sourceCode rule
       sheets[i].deleteRule(j);
       sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
@@ -249,15 +242,11 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark the anchor link active (and if it's in a dropdown, also mark that active)
-  var dropdown = menuAnchor.closest('li.dropdown');
-  if (window.bootstrap) { // Bootstrap 4+
-    menuAnchor.addClass('active');
-    dropdown.find('> .dropdown-toggle').addClass('active');
-  } else { // Bootstrap 3
-    menuAnchor.parent().addClass('active');
-    dropdown.addClass('active');
-  }
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -483,7 +472,7 @@ div.tocify {
 </center></h1>
 <h3 class="subtitle"><center>
 <font size="5"><b>Programación y métodos estadísticos avanzados en
-R</b></b> <br>Universidad de Costa</font>
+R</b></b></font>
 </center></h3>
 <h4 class="author"><center>
 <font size="5"><a href="http://marceloarayasalas.weebly.com/">Marcelo
@@ -503,10 +492,28 @@ pre.numberSource code
   { counter-reset: none; }
 </style>
 <p> </p>
+<div id="dinámica-de-las-clases" class="section level2">
+<h2>Dinámica de las clases</h2>
+<ul>
+<li><p>Pueden hacer preguntas en calquier momento</p></li>
+<li><p>Sientanse libres de responder preguntas de compañeros</p></li>
+<li><p>Traten siempre de correr el código y de tratar de entender todos
+sus elementos</p></li>
+<li><p>Las líneas de código estan numeradas. Podemos usar esos números
+par referirnos a códigos específicos en los manuales. Los bloques de
+código también incluyen un botón que permite copiar el código:</p></li>
+</ul>
+<p><img src="images/chunk.png" width="100%" style="display: block; margin: auto;" />
+ </p>
+<ul>
+<li>También usaremos el enlace “Compartir código” en el menú principal
+del sitio del curso para pasar códigos que se hagan en clase</li>
+</ul>
 <p> </p>
 <!-- skyblue box -->
-<div id="objetivos" class="section level1 alert alert-info">
-<h1>Objetivos</h1>
+</div>
+<div id="objetivo-del-manual" class="section level1 alert alert-info">
+<h1>Objetivo del manual</h1>
 <ul>
 <li><p>Familiarizarse con el formato para reportes dinámicos
 Rmarkdown</p></li>
@@ -549,6 +556,7 @@ incrustados entre líneas de texto. Cuando se procesa el documento, estos
 bloques se evalúan (si el usuario así lo desea) y los resultados se
 anidan en el documento de acuerdo con ciertas convenciones
 especificadas.</p>
+<p> </p>
 <div id="ventajas-de-los-reportes-dinámicos-con-rmarkdown"
 class="section level3">
 <h3>Ventajas de los reportes dinámicos con Rmarkdown:</h3>
@@ -572,10 +580,11 @@ publicarlos en línea</strong></p></li>
 reproducibilidad</strong> (entender los análisis es mucho mas fácil
 cuando hay texto explicativo, código de R, los resultados del código y
 los gráficos en un mismo archivo)</p></li>
-<li><p><strong>Se actualiza fácilmente</strong> tanto para incluir
-nuevos análisis y/o integrar nuevos datos</p></li>
+<li><p><strong>Se actualizan fácilmente</strong> para incluir nuevos
+análisis y/o integrar nuevos datos</p></li>
 </ul>
 <p> </p>
+<hr />
 </div>
 </div>
 <div id="crear-documentos-r-markdown" class="section level1">
@@ -584,8 +593,7 @@ nuevos análisis y/o integrar nuevos datos</p></li>
 R Markdown. Empiece por seleccionar “R Markdown …” en el menú
 desplegable que aparece cuando crea un nuevo archivo:</p>
 <p><img src="images/image1.PNG" width="70%" style="display: block; margin: auto;" /></p>
-<p> </p>
-<p><font size="2"> <i>Nota: es posible que se le solicite aquí que
+<p><font size="3"> <i>Nota: es posible que se le solicite aquí que
 instale varios paquetes necesarios para que R Markdown
 funcione.</i></font></p>
 <p> </p>
@@ -619,13 +627,9 @@ de dominar:</p>
 <hr />
 <div id="crear-encabezados-de-varios-tamaños" class="section level2">
 <h2>Crear encabezados de varios tamaños</h2>
-<div id="código" class="section level4">
-<h4>Código:</h4>
+<p>Código:</p>
 <p><img src="images/image5.PNG" width="50%" style="display: block; margin: auto;" /></p>
-</div>
-<div id="resultado" class="section level4">
-<h4>Resultado:</h4>
-</div>
+<p>Resultado:</p>
 </div>
 </div>
 <div id="encabezado-1" class="section level1">
@@ -712,12 +716,12 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <pre><code>## # A tibble: 6 × 6
 ##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species random.var
 ##          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;        &lt;dbl&gt;
-## 1          5.1         3.5          1.4         0.2 setosa      -1.08 
-## 2          4.9         3            1.4         0.2 setosa       2.37 
-## 3          4.7         3.2          1.3         0.2 setosa       1.67 
-## 4          4.6         3.1          1.5         0.2 setosa       0.153
-## 5          5           3.6          1.4         0.2 setosa       0.322
-## 6          5.4         3.9          1.7         0.4 setosa      -1.92</code></pre>
+## 1          5.1         3.5          1.4         0.2 setosa     -0.390 
+## 2          4.9         3            1.4         0.2 setosa     -0.0975
+## 3          4.7         3.2          1.3         0.2 setosa     -0.511 
+## 4          4.6         3.1          1.5         0.2 setosa     -0.286 
+## 5          5           3.6          1.4         0.2 setosa      1.72  
+## 6          5.4         3.9          1.7         0.4 setosa      1.36</code></pre>
 <p> </p>
 <p>Cuando se procesa su documento, el segmento de código se muestra en
 un cuadro gris y los resultados de ese código se muestran en un cuadro
@@ -726,36 +730,35 @@ blanco. ¿Qué pasa si solo desea que se muestre la salida de su código?
 que puede agregar a cada uno de sus bloques para especificar estas y
 otras opciones:</p>
 <hr />
-<p>Añadir el argumento <code>echo=FALSE</code></p>
-<div id="código-1" class="section level4">
-<h4>Código:</h4>
-<p><img src="images/image11.PNG" width="90%" style="display: block; margin: auto;" /></p>
 </div>
-<div id="resultado-1" class="section level4">
-<h4>Resultado:</h4>
+<div id="ocultar-código" class="section level2">
+<h2>Ocultar código</h2>
+<p>Añadir el argumento <code>echo=FALSE</code></p>
+<p>Código:</p>
+<p><img src="images/image11.PNG" width="90%" style="display: block; margin: auto;" /></p>
+<p>Resultado:</p>
 <pre><code>## # A tibble: 6 × 6
 ##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species random.var
 ##          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;        &lt;dbl&gt;
-## 1          5.1         3.5          1.4         0.2 setosa      -0.516
-## 2          4.9         3            1.4         0.2 setosa       1.18 
-## 3          4.7         3.2          1.3         0.2 setosa      -2.43 
-## 4          4.6         3.1          1.5         0.2 setosa       0.841
-## 5          5           3.6          1.4         0.2 setosa      -1.41 
-## 6          5.4         3.9          1.7         0.4 setosa      -0.793</code></pre>
+## 1          5.1         3.5          1.4         0.2 setosa     -0.0538
+## 2          4.9         3            1.4         0.2 setosa     -1.74  
+## 3          4.7         3.2          1.3         0.2 setosa      0.460 
+## 4          4.6         3.1          1.5         0.2 setosa     -1.95  
+## 5          5           3.6          1.4         0.2 setosa     -0.307 
+## 6          5.4         3.9          1.7         0.4 setosa     -1.79</code></pre>
 <p> </p>
 <p>Puede ver que el código está oculto pero se muestran los
 resultados.</p>
 <p><a
 href="https://rstudio.com/wp-content/uploads/2015/03/rmarkdown-spanish.pdf">Esta
-guia</a> sobre las opciones de los bloques de código puede ser muy
+guía</a> sobre las opciones de los bloques de código puede ser muy
 útil:</p>
 <p><img src="images/image12.PNG" width="100%" style="display: block; margin: auto;" /></p>
 <p> </p>
 <p><a href="https://yihui.org/knitr/options/">En este enlace</a> se
-detallan todas los argumentos disponibles para personalizar los bloques
+detallan todos los argumentos disponibles para personalizar los bloques
 de código.</p>
 <p> </p>
-</div>
 </div>
 <div id="ejercicio-3" class="section level2 alert alert-info">
 <h2>Ejercicio 3</h2>
@@ -775,14 +778,14 @@ segmento cuando corra cree un gráfico. ¿Cómo afecta esta vez?</p>
 <p>Los gráficos se pueden incrustar en documentos Rmarkdown simplemente
 usando funciones de graficación como lo haría en un script de R
 normal.</p>
-<div id="código-2" class="section level4">
+<div id="código" class="section level4">
 <h4>Código:</h4>
 <p><img src="images/image13.PNG" width="80%" style="display: block; margin: auto;" /></p>
 <p> </p>
 </div>
-<div id="resultado-2" class="section level4">
+<div id="resultado" class="section level4">
 <h4>Resultado:</h4>
-<p><img src="reportes_dinamicos_con_rmarkdown_files/figure-html/unnamed-chunk-22-1.png" width="672" />
+<p><img src="reportes_dinamicos_con_rmarkdown_files/figure-html/unnamed-chunk-23-1.png" width="672" />
  </p>
 <p>También puede utilizar los argumentos:</p>
 <ul>
@@ -807,12 +810,12 @@ class="section level4">
 <h4>1.Dar un texto con la apariencia de un segmento de código:</h4>
 <hr />
 </div>
-<div id="código-3" class="section level4">
+<div id="código-1" class="section level4">
 <h4>Código:</h4>
 <p><img src="images/image14.png" width="80%" style="display: block; margin: auto;" /></p>
 <p> </p>
 </div>
-<div id="resultado-3" class="section level4">
+<div id="resultado-1" class="section level4">
 <h4>Resultado:</h4>
 <p>El promedio del largo del sépalo es
 <code>mean(iris$Sepal.Length)</code></p>
@@ -821,11 +824,11 @@ class="section level4">
 <div id="evaluar-el-código-en-el-texto" class="section level4">
 <h4>2. Evaluar el código en el texto</h4>
 </div>
-<div id="código-4" class="section level4">
+<div id="código-2" class="section level4">
 <h4>Código:</h4>
 <p><img src="images/image15.png" width="70%" style="display: block; margin: auto;" /></p>
 </div>
-<div id="resultado-4" class="section level4">
+<div id="resultado-2" class="section level4">
 <h4>Resultado:</h4>
 <p>El promedio del largo de sépalo para <strong>setosa</strong> es
 5.006.</p>
@@ -923,7 +926,7 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <td align="right">1.4</td>
 <td align="right">0.2</td>
 <td align="left">setosa</td>
-<td align="right">-0.5161805</td>
+<td align="right">-0.0538335</td>
 </tr>
 <tr class="even">
 <td align="right">4.9</td>
@@ -931,7 +934,7 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <td align="right">1.4</td>
 <td align="right">0.2</td>
 <td align="left">setosa</td>
-<td align="right">1.1759729</td>
+<td align="right">-1.7440880</td>
 </tr>
 <tr class="odd">
 <td align="right">4.7</td>
@@ -939,7 +942,7 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <td align="right">1.3</td>
 <td align="right">0.2</td>
 <td align="left">setosa</td>
-<td align="right">-2.4321402</td>
+<td align="right">0.4597834</td>
 </tr>
 <tr class="even">
 <td align="right">4.6</td>
@@ -947,7 +950,7 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <td align="right">1.5</td>
 <td align="right">0.2</td>
 <td align="left">setosa</td>
-<td align="right">0.8405496</td>
+<td align="right">-1.9547191</td>
 </tr>
 <tr class="odd">
 <td align="right">5.0</td>
@@ -955,7 +958,7 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <td align="right">1.4</td>
 <td align="right">0.2</td>
 <td align="left">setosa</td>
-<td align="right">-1.4055426</td>
+<td align="right">-0.3068415</td>
 </tr>
 <tr class="even">
 <td align="right">5.4</td>
@@ -963,7 +966,7 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <td align="right">1.7</td>
 <td align="right">0.4</td>
 <td align="left">setosa</td>
-<td align="right">-0.7931188</td>
+<td align="right">-1.7865058</td>
 </tr>
 <tr class="odd">
 <td align="right">4.6</td>
@@ -971,7 +974,7 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <td align="right">1.4</td>
 <td align="right">0.3</td>
 <td align="left">setosa</td>
-<td align="right">-2.4162476</td>
+<td align="right">0.2108397</td>
 </tr>
 <tr class="even">
 <td align="right">5.0</td>
@@ -979,7 +982,7 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <td align="right">1.5</td>
 <td align="right">0.2</td>
 <td align="left">setosa</td>
-<td align="right">0.4422985</td>
+<td align="right">-1.0631660</td>
 </tr>
 <tr class="odd">
 <td align="right">4.4</td>
@@ -987,7 +990,7 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <td align="right">1.4</td>
 <td align="right">0.2</td>
 <td align="left">setosa</td>
-<td align="right">-0.5269278</td>
+<td align="right">-0.8083859</td>
 </tr>
 <tr class="even">
 <td align="right">4.9</td>
@@ -995,7 +998,7 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <td align="right">1.5</td>
 <td align="right">0.1</td>
 <td align="left">setosa</td>
-<td align="right">0.0397401</td>
+<td align="right">-2.1810194</td>
 </tr>
 </tbody>
 </table>
@@ -1080,8 +1083,8 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <span id="cb10-9"><a href="#cb10-9"></a>    <span class="at">zoom =</span> <span class="dv">13</span>)</span>
 <span id="cb10-10"><a href="#cb10-10"></a></span>
 <span id="cb10-11"><a href="#cb10-11"></a><span class="fu">addPopups</span>(<span class="at">map =</span> ll_map, <span class="at">lat =</span> <span class="fl">5.527448</span>, <span class="at">lng =</span> <span class="sc">-</span><span class="fl">87.057245</span>, <span class="at">popup =</span> <span class="st">&quot;Isla del Coco&quot;</span>)</span></code></pre></div>
-<div id="htmlwidget-8aa7dd74e1f462049262" style="width:100%;height:480px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-8aa7dd74e1f462049262">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addPopups","args":[5.527448,-87.057245,"Isla del Coco",null,null,{"maxWidth":300,"minWidth":50,"autoPan":true,"keepInView":false,"closeButton":true,"className":""}]}],"setView":[[5.527448,-87.057245],13,[]],"limits":{"lat":[5.527448,5.527448],"lng":[-87.057245,-87.057245]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-765de7593ae2d5c92eb5" style="width:100%;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-765de7593ae2d5c92eb5">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addPopups","args":[5.527448,-87.057245,"Isla del Coco",null,null,{"maxWidth":300,"minWidth":50,"autoPan":true,"keepInView":false,"closeButton":true,"className":""}]}],"setView":[[5.527448,-87.057245],13,[]],"limits":{"lat":[5.527448,5.527448],"lng":[-87.057245,-87.057245]}},"evals":[],"jsHooks":[]}</script>
 <p> </p>
 <p>Este es el bloque de código que generó el mapa:</p>
 <p><img src="images/leaflet.png" width="90%" style="display: block; margin: auto;" /></p>
@@ -1177,7 +1180,8 @@ organizar los archivos usados y generados en un análisis de datos de un
 proyecto de investigación. El paquete <a
 href="https://marce10.github.io/sketchy/">sketchy</a> genera estos
 compendios, permitiendo al usuario seleccionar entre una gama de
-compendios comunes en la comunidad científica y</p>
+compendios comunes en la comunidad científica. Este ejemplo crea el
+compendio básico (uno de los 12 que vienen con el paquete):</p>
 <div class="sourceCode" id="cb13"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># instalar de github remotes::install_github(&#39;maRce10/sketchy&#39;)</span></span>
 <span id="cb13-2"><a href="#cb13-2"></a></span>
@@ -1187,7 +1191,7 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <span id="cb13-6"><a href="#cb13-6"></a>path <span class="ot">&lt;-</span> <span class="fu">tempdir</span>()</span>
 <span id="cb13-7"><a href="#cb13-7"></a></span>
 <span id="cb13-8"><a href="#cb13-8"></a><span class="fu">make_compendium</span>(<span class="at">name =</span> <span class="st">&quot;proyecto_x&quot;</span>, <span class="at">path =</span> path, <span class="at">format =</span> <span class="st">&quot;basic&quot;</span>,</span>
-<span id="cb13-9"><a href="#cb13-9"></a>    )</span></code></pre></div>
+<span id="cb13-9"><a href="#cb13-9"></a>    <span class="at">Rproj =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## Creating directories ...
 ## proyecto_x
 ## │   
@@ -1201,7 +1205,7 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <p>El paquete crea archivos Rmarkdown con plantillas para el análisis de
 datos (carpeta “scripts”) y escritura de manuscritos (carpeta
 “manuscript”). Corra <code>path</code> en la consola de R para ver la
-dirección de la carpeta donde se creo el compendio</p>
+dirección de la carpeta donde se creo el compendio.</p>
 <p> </p>
 <div id="ejercicio-4" class="section level2 alert alert-info">
 <h2>Ejercicio 4</h2>
@@ -1259,18 +1263,18 @@ class="uri">https://github.com/ramnathv/htmlwidgets</a>.</li>
 <hr />
 <hr />
 <p><font size="4">Información de la sesión</font></p>
-<pre><code>## R version 4.2.0 (2022-04-22)
+<pre><code>## R version 4.1.0 (2021-05-18)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
-## Running under: Ubuntu 22.04.1 LTS
+## Running under: Ubuntu 20.04.2 LTS
 ## 
 ## Matrix products: default
-## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0
-## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0
+## BLAS:   /usr/lib/x86_64-linux-gnu/atlas/libblas.so.3.10.3
+## LAPACK: /usr/lib/x86_64-linux-gnu/atlas/liblapack.so.3.10.3
 ## 
 ## locale:
-##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
-##  [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=en_US.UTF-8    
-##  [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=en_US.UTF-8   
+##  [1] LC_CTYPE=pt_BR.UTF-8       LC_NUMERIC=C              
+##  [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=pt_BR.UTF-8    
+##  [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=pt_BR.UTF-8   
 ##  [7] LC_PAPER=es_CR.UTF-8       LC_NAME=C                 
 ##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
 ## [11] LC_MEASUREMENT=es_CR.UTF-8 LC_IDENTIFICATION=C       
@@ -1279,20 +1283,20 @@ class="uri">https://github.com/ramnathv/htmlwidgets</a>.</li>
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] sketchy_1.0.2       leaflet_2.1.1       knitr_1.40         
+## [1] sketchy_1.0.2       leaflet_2.0.4.1     knitr_1.39         
 ## [4] xaringanExtra_0.7.0 emo_0.0.0.9000     
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] pillar_1.8.0      bslib_0.3.1       compiler_4.2.0    formatR_1.12     
-##  [5] jquerylib_0.1.4   highr_0.9         tools_4.2.0       packrat_0.8.1    
-##  [9] digest_0.6.29     uuid_1.1-0        jsonlite_1.8.0    lubridate_1.8.0  
-## [13] evaluate_0.16     lifecycle_1.0.1   tibble_3.1.8      pkgconfig_2.0.3  
-## [17] rlang_1.0.4       cli_3.3.0         rstudioapi_0.13   crosstalk_1.2.0  
-## [21] yaml_2.3.5        xfun_0.33         fastmap_1.1.0     stringr_1.4.0    
-## [25] htmlwidgets_1.5.4 generics_0.1.2    vctrs_0.4.1       sass_0.4.1       
-## [29] glue_1.6.2        R6_2.5.1          fansi_1.0.3       rmarkdown_2.16   
-## [33] purrr_0.3.4       magrittr_2.0.3    htmltools_0.5.3   assertthat_0.2.1 
-## [37] utf8_1.2.2        stringi_1.7.8     crayon_1.5.1</code></pre>
+##  [1] Rcpp_1.0.9        pillar_1.8.0      bslib_0.2.5.1     compiler_4.1.0   
+##  [5] formatR_1.11      jquerylib_0.1.4   highr_0.9         tools_4.1.0      
+##  [9] packrat_0.7.0     digest_0.6.29     uuid_0.1-4        jsonlite_1.8.0   
+## [13] lubridate_1.7.10  evaluate_0.15     lifecycle_1.0.1   tibble_3.1.8     
+## [17] pkgconfig_2.0.3   rlang_1.0.5       cli_3.3.0         rstudioapi_0.13  
+## [21] crosstalk_1.1.1   yaml_2.3.5        xfun_0.31         fastmap_1.1.0    
+## [25] stringr_1.4.0     htmlwidgets_1.5.3 generics_0.1.0    vctrs_0.4.1      
+## [29] sass_0.4.0        glue_1.6.2        R6_2.5.1          fansi_1.0.3      
+## [33] rmarkdown_2.13    purrr_0.3.4       magrittr_2.0.3    htmltools_0.5.3  
+## [37] assertthat_0.2.1  utf8_1.2.2        stringi_1.7.8     crayon_1.5.1</code></pre>
 </div>
 </div>
 

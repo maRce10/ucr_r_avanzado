@@ -7,7 +7,7 @@
 
 <center><font size="5"><b><a href="https://www.ucr.ac.cr/">Universidad de Costa Rica</a><br></b></font></center>
 
-<i><center><font size="4.5"><b><a href="marceloarayasalas.weebly.com/">Marcelo Araya-Salas PhD</a> y Mario Espinoza PhD<br></b></font></center></i>
+<i><center><font size="4.5"><b><a href="marceloarayasalas.weebly.com/">Marcelo Araya-Salas PhD</a> y <a href="https://scholar.google.com/citations?user=hTu_SnkAAAAJ&hl=es&oi=ao"> Mario Espinoza PhD</a><br></b></font></center></i>
 
 <!-- <center><img src="./images/3d_prob.jpeg" alt =3d probability plot"></center> -->
 

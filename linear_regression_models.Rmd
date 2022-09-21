@@ -1,6 +1,6 @@
 ---
 title: <center><font size="7"><b>Modelos de regresión lineal</b></font></center>
-subtitle: <center><font size="4"><b>Programación y métodos estadísticos avanzados en R</b> <br>Universidad de Costa</font></center>
+subtitle: <center><font size="4"><b>Programación y métodos estadísticos avanzados en R</b> </font></center>
 author: <center><font size="5"><a href="http://marceloarayasalas.weebly.com/">Marcelo Araya-Salas, PhD</a></font></center>
 date: <center>"`r Sys.Date()`"</center>
 output:
@@ -138,20 +138,7 @@ However, most of those common statistical models are just special cases of linea
 
 &nbsp;
 
-## A few tips
 
-- Feel free to ask questions at any time
-
-- Try to run the code yourself (if you don't have much experience in R try to sit with someone that does)
-
-- The line of the code blocks are numbered so we can refer to specific part of the code, and the code can be copied with the button on the upper right corner of the box:
-
-```{r, out.width = "100%", echo = FALSE, fig.align= "center"}
-
-knitr::include_graphics("./images/chunk.png")
-
-```
-&nbsp; 
 
 --- 
 

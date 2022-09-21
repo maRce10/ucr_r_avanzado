@@ -1,6 +1,6 @@
 ---
 title: <center><font size="7"><b>Reportes dinámicos con Rmarkdown</b></font></center>
-subtitle: <center><font size="5"><b>Programación y métodos estadísticos avanzados en R</b></b> <br>Universidad de Costa</font></center>
+subtitle: <center><font size="5"><b>Programación y métodos estadísticos avanzados en R</b></b></font></center>
 author: <center><font size="5"><a href="http://marceloarayasalas.weebly.com/">Marcelo Araya-Salas, PhD</a></font></center>
 date: <center>"`r Sys.Date()`"</center>
 output:
@@ -53,13 +53,32 @@ htmltools::tagList(
 
 ```
 
+## Dinámica de las clases
+
+- Pueden hacer preguntas en calquier momento
+
+- Sientanse libres de responder preguntas de compañeros
+
+- Traten siempre de correr el código y de tratar de entender todos sus elementos
+
+- Las líneas de código estan numeradas. Podemos usar esos números par referirnos a códigos específicos en los manuales. Los bloques de código también incluyen un botón que permite copiar el código:
+
+```{r, out.width = "100%", echo = FALSE, fig.align= "center"}
+
+knitr::include_graphics("./images/chunk.png")
+
+```
+&nbsp; 
+
+- También usaremos el enlace "Compartir código" en el menú principal del sitio del curso para pasar códigos que se hagan en clase
+
 &nbsp; 
 
 <!-- skyblue box -->
 
 <div class="alert alert-info">
 
-# Objetivos
+# Objetivo del manual
 
 - Familiarizarse con el formato para reportes dinámicos Rmarkdown
 
@@ -68,7 +87,6 @@ htmltools::tagList(
 </div>
 
 &nbsp; 
-
 
 ## Crisis de reproducibilidad en la ciencia
 
@@ -98,6 +116,8 @@ Las herramientas programáticas como R tienden naturalmente a facilitar la repro
 
 En R la herramienta mas popular para la generación de reportes dinámicos es Rmarkdown. Rmarkdown [se puede describir](http://rmarkdown.rstudio.com) como "*un formato eléctronico de documentación que facilita la creación de documentos, presentaciones e informes dinámicos desde R*". R Markdown puede generar documentos con bloques ("chunks") de código de R incrustados entre líneas de texto. Cuando se procesa el documento, estos bloques se evalúan (si el usuario así lo desea) y los resultados se anidan en el documento de acuerdo con ciertas convenciones especificadas.
 
+&nbsp;
+
 ### Ventajas de los reportes dinámicos con Rmarkdown:
 
 - El **código R se puede incrustar en el informe**, por lo que no es necesario mantener el informe y el código de R por separado
@@ -112,9 +132,11 @@ En R la herramienta mas popular para la generación de reportes dinámicos es Rm
 
 - Estos informes **facilitan la colaboración y mejoran la reproducibilidad** (entender los análisis es mucho mas fácil cuando hay texto explicativo, código de R, los resultados del código y los gráficos en un mismo archivo)
 
-- **Se actualiza fácilmente** tanto para incluir nuevos análisis y/o integrar nuevos datos 
+- **Se actualizan fácilmente** para incluir nuevos análisis y/o integrar nuevos datos 
 
 &nbsp;
+
+---
 
 # Crear documentos R Markdown
 
@@ -127,9 +149,7 @@ knitr::include_graphics("./images/image1.PNG")
 
 ```
 
-&nbsp;
-
-<font size="2"> <i>Nota: es posible que se le solicite aquí que instale varios paquetes necesarios para que R Markdown funcione.</i></font> 
+<font size="3"> <i>Nota: es posible que se le solicite aquí que instale varios paquetes necesarios para que R Markdown funcione.</i></font> 
 
 &nbsp; 
 
@@ -181,7 +201,7 @@ _____
 
 ## Crear encabezados de varios tamaños 
 
-#### Código:
+Código:
 
 ```{r, echo=FALSE,out.width="50%", fig.align='center'}
 
@@ -189,7 +209,7 @@ knitr::include_graphics("./images/image5.PNG")
 
 ```
 
-#### Resultado:
+Resultado:
 
 # Encabezado 1 
 ## Encabezado 2  
@@ -338,9 +358,11 @@ Cuando se procesa su documento, el segmento de código se muestra en un cuadro g
 
 _____
 
+## Ocultar código
+
 Añadir el argumento `echo=FALSE`
 
-#### Código:
+Código:
 
 ```{r, echo=FALSE,out.width="90%", fig.align='center'}
 
@@ -348,7 +370,7 @@ knitr::include_graphics("./images/image11.PNG")
 
 ```
 
-#### Resultado:
+Resultado:
 
 ```{r, echo = FALSE}
 
@@ -364,7 +386,7 @@ head(iris)
 
 Puede ver que el código está oculto pero se muestran los resultados.
 
-[Esta guia](https://rstudio.com/wp-content/uploads/2015/03/rmarkdown-spanish.pdf) sobre las opciones de los bloques de código puede ser muy útil:
+[Esta guía](https://rstudio.com/wp-content/uploads/2015/03/rmarkdown-spanish.pdf) sobre las opciones de los bloques de código puede ser muy útil:
 
 ```{r, echo=FALSE,out.width="100%", fig.align='center'}
 
@@ -374,7 +396,7 @@ knitr::include_graphics("./images/image12.PNG")
 
 &nbsp;
 
-[En este enlace](https://yihui.org/knitr/options/) se detallan todas los argumentos disponibles para personalizar los bloques de código. 
+[En este enlace](https://yihui.org/knitr/options/) se detallan todos los argumentos disponibles para personalizar los bloques de código. 
 
 &nbsp;
 
@@ -730,7 +752,7 @@ knitr::include_graphics("./images/rpubs.PNG")
 
 # Mas allá de los reportes dinámicos: compendios de investigación
 
-Los compendios de investigación son estructuras de carpetas pre-definidas que permiten seguir un orden lógico e intuitivo para organizar los archivos usados y generados en un análisis de datos de un proyecto de investigación. El paquete [sketchy](https://marce10.github.io/sketchy/) genera estos compendios, permitiendo al usuario seleccionar entre una gama de compendios comunes en la comunidad científica y 
+Los compendios de investigación son estructuras de carpetas pre-definidas que permiten seguir un orden lógico e intuitivo para organizar los archivos usados y generados en un análisis de datos de un proyecto de investigación. El paquete [sketchy](https://marce10.github.io/sketchy/) genera estos compendios, permitiendo al usuario seleccionar entre una gama de compendios comunes en la comunidad científica. Este ejemplo crea el compendio básico (uno de los 12 que vienen con el paquete):
 
 
 ```{r}
@@ -743,11 +765,11 @@ library(sketchy)
 
 path <- tempdir()
 
-make_compendium(name = "proyecto_x", path = path, format = "basic", )
+make_compendium(name = "proyecto_x", path = path, format = "basic", Rproj = TRUE)
 
 ```
 
-El paquete crea archivos Rmarkdown con plantillas para el análisis de datos (carpeta "scripts") y escritura de manuscritos (carpeta "manuscript"). Corra `path` en la consola de R para ver la dirección de la carpeta donde se creo el compendio
+El paquete crea archivos Rmarkdown con plantillas para el análisis de datos (carpeta "scripts") y escritura de manuscritos (carpeta "manuscript"). Corra `path` en la consola de R para ver la dirección de la carpeta donde se creo el compendio.
 
 
 &nbsp;
