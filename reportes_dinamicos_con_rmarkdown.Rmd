@@ -53,27 +53,6 @@ htmltools::tagList(
 
 ```
 
-## Dinámica de las clases
-
-- Pueden hacer preguntas en calquier momento
-
-- Sientanse libres de responder preguntas de compañeros
-
-- Traten siempre de correr el código y de tratar de entender todos sus elementos
-
-- Las líneas de código estan numeradas. Podemos usar esos números par referirnos a códigos específicos en los manuales. Los bloques de código también incluyen un botón que permite copiar el código:
-
-```{r, out.width = "100%", echo = FALSE, fig.align= "center"}
-
-knitr::include_graphics("./images/chunk.png")
-
-```
-&nbsp; 
-
-- También usaremos el enlace "Compartir código" en el menú principal del sitio del curso para pasar códigos que se hagan en clase
-
-&nbsp; 
-
 <!-- skyblue box -->
 
 <div class="alert alert-info">
@@ -737,7 +716,7 @@ En el sitio [https://shiny.rstudio.com/gallery](https://shiny.rstudio.com/galler
 # Publicar reportes en linea con Rpubs
 
 
-La plataforma en linea [Rpubs](rpubs.com/) permite publicar los reportes en formato HTML. Esta opción simplifica mucho el compartir códigos, análisis y resultados con otros co-investigadores ya que solamente necesitamos enviar el la dirección URL. Aún mas, podemos seguir actualizando los reportes y la misma dirección URL seguirá conteniendo las versiones actualizadas de los reportes.
+La plataforma en linea [Rpubs](rpubs.com/) permite publicar los reportes en formato HTML. Esta opción simplifica mucho el compartir códigos, análisis y resultados ya que solamente necesitamos enviar el la dirección URL. Aún mas, podemos seguir actualizando los reportes y la misma dirección URL seguirá conteniendo las versiones actualizadas de los reportes.
 
 Para enviar nuestros reportes HTML a [Rpubs](rpubs.com/) debemos primero hacer una cuenta en el sitio. Luego de esto simplemente tenemos que usar el enlace "publish" en la esquina superior derecha de los reportes:
 

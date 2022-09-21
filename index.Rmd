@@ -43,6 +43,25 @@ brindadas por medio de prácticas y proyectos de investigación
 
 &nbsp;    
 
+
+### **Dinámica de las clases**
+
+- Pueden hacer preguntas en cualquier momento
+- Sientanse libres de responder preguntas de compañeros
+- Traten siempre de correr el código y de tratar de entender todos sus elementos
+- Las líneas de código estan numeradas. Podemos usar esos números para referirnos a códigos específicos en los manuales. Los bloques de código también incluyen un botón que permite copiar el código:
+
+```{r, out.width = "100%", echo = FALSE, fig.align= "center"}
+
+knitr::include_graphics("./images/chunk.png")
+
+```
+&nbsp; 
+
+- También usaremos el enlace ["Compartir código"](https://codefile.io/f/XOIzH23KfULuZKyZ1TYT) en el menú principal del este sitio (arriba) para pasar códigos que se desarrollen en clase
+
+&nbsp; 
+
 <div class="alert alert-warning">
 
 
@@ -57,3 +76,16 @@ brindadas por medio de prácticas y proyectos de investigación
 
 
 </div>
+
+&nbsp; 
+
+```{r, out.width = "90%", echo = FALSE, fig.align= "center"}
+knitr::include_graphics("./images/discrim.png")
+```
+
+&nbsp; 
+
+```{r, out.width = "90%", echo = FALSE, fig.align= "center"}
+knitr::include_graphics("./images/hostig.png")
+
+```

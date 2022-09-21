@@ -18,7 +18,7 @@ version$version.string
 
 3) Abrí RStudio y seleccioná la pestaña "Tools" y luego "Global options" (última opción). Seleccioná la opción "Code", luego seleccioná la casilla de "Soft wrap".
 
-4) También en Rstudio: Seleccioná la opción "Pane Layout" y mové "Source" al panel superior izquierdo y "Console" al panel superior derecho. Para aquellos que no estén familiarizados con RStudio, la fuente es tu script, donde guardas el código en un archivo físico (normalmente .R script) y la consola imprime la salida del código que ejecutás desde la fuente. Podés escribir código en la consola, pero no se guardará en un archivo físico. Esta disposición asigna más espacio en la pantalla a los paneles más útiles. Dalé "Apply" y "Ok".
+4) También en Rstudio: Seleccioná la opción "Pane Layout" y mové "Source" al panel superior izquierdo y "Console" al panel superior derecho. Esta disposición asigna más espacio en la pantalla a los paneles más útiles. Dalé "Apply" y "Ok". Para aquellos que no estén familiarizados con RStudio, "Source" es un editor de texto donde se escribe el código y donde guardas el código en un archivo físico (normalmente en formato .R) y la consola evalúa el código que se envia desde el "Source" e imprime los resultados (si los hay). Podés escribir código en la consola, pero no se guardará en un archivo físico.
 
 5) Ahora en la consola de R en Rstudio ejecutá el siguiente código para instalar los paquetes que estaremos usando durante el curso:
 
@@ -49,24 +49,5 @@ remotes::install_github("maRce10/sketchy")
 
 &nbsp; 
 
-<div class="alert alert-warning">
-
-
-**Consejos para garantizar el máximo aprovechamiento del curso**:
-
-&nbsp; 
-
-  - Aseguráte de tener todo lo que necesitas antes del comienzo de la clase
-  - Tratá de estar preparado unos minutos antes del comienzo de la clase
-  - Intenta concentrarte al máximo en el curso, cierra otros programas o pestañas innecesarias del navegador de internet (por ejemplo, instagram, twitter, etc)
-  - Comentá el código
-
-
-</div>
-
-
-&nbsp; 
-
-Repasá al [tutorial de fundamentos de R]() antes del curso o si crees que hay aspectos básicos de R que no te han quedado claro
 
 
