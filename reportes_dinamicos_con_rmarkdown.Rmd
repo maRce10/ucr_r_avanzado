@@ -51,6 +51,15 @@ htmltools::tagList(
   rmarkdown::html_dependency_font_awesome()
 )
 
+# this is a customized printing style data frames 
+# screws up tibble function
+tibble <- function(x, ...) { 
+  x <- kbl(x, digits=4, align= 'c', row.names = FALSE) 
+   x <- kable_styling(x, position ="center", full_width = FALSE,  bootstrap_options = c("striped", "hover", "condensed", "responsive")) 
+   asis_output(x)
+}
+
+registerS3method("knit_print", "data.frame", tibble)
 ```
 
 <!-- skyblue box -->
@@ -64,6 +73,44 @@ htmltools::tagList(
 - Ser capaz de documentar el manejo y análisis de datos en R usando Rmarkdown
 
 </div>
+
+&nbsp; 
+
+Paquetes a utilizar en este manual:
+
+```{r, background="gray"}
+
+# install.packages("remotes")
+library("remotes")
+
+# remotes::install_github("hadley/emo")
+library("emo")
+
+# remotes::install_github("maRce10/sketchy")
+library("sketchy")
+
+# install.packages("rmarkdown") 
+library("knitr")
+
+# install.packages("rmarkdown") 
+library("rmarkdown")
+
+# install.packages("kableExtra")
+library("kableExtra")
+
+# install.packages("rmdformats")
+library("rmdformats")
+
+# install.packages("revealjs")
+library("revealjs")
+
+# install.packages("rticles")
+library("rticles")
+
+# install.packages("tufte")
+library("tufte")
+
+```
 
 &nbsp; 
 
@@ -523,7 +570,7 @@ ji("costa_rica")
 ```
 
 
-Tambien se puede incrustar en el texto como lo vimos en [mas arriba](#incrustar-código-de-r-en-el-texto) `r ji("up_arrow")` (`ji("up_arrow")`)
+Tambien se puede incrustar en el texto `r ji("costa_rica")`, como lo vimos [mas arriba](#incrustar-código-de-r-en-el-texto) `r ji("up_arrow")` (`ji("up_arrow")`)
 
 &nbsp;
 
@@ -532,15 +579,21 @@ Tambien se puede incrustar en el texto como lo vimos en [mas arriba](#incrustar-
 
 El paquete `knitr` también provee una función para mostrar datos tabulares de forma ordenada y 'limpia' en los reportes dínamicos:
 
-```{r}
+```{r, eval = FALSE, echo=TRUE}
 
 knitr::kable(iris[1:10, ])
 
 ```
 
+```{r, echo = FALSE}
+iris[1:10, ]
+
+
+```
+
 &nbsp;
 
-El paquete 'kableExtra' complementa esta función con muchas herramientas para personalisar el formato de las tablas en reportes dinámicos en R.
+El paquete [`kableExtra`](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html) complementa esta función con muchas herramientas para personalizar el formato de las tablas en reportes dinámicos en R.
 
 &nbsp;
 
@@ -728,19 +781,35 @@ knitr::include_graphics("./images/rpubs.PNG")
 
 &nbsp;
 
+# Herramientas adicionales para organizar análisis de datos
 
-# Mas allá de los reportes dinámicos: compendios de investigación
+## Proyectos de Rstudio
 
-Los compendios de investigación son estructuras de carpetas pre-definidas que permiten seguir un orden lógico e intuitivo para organizar los archivos usados y generados en un análisis de datos de un proyecto de investigación. El paquete [sketchy](https://marce10.github.io/sketchy/) genera estos compendios, permitiendo al usuario seleccionar entre una gama de compendios comunes en la comunidad científica. Este ejemplo crea el compendio básico (uno de los 12 que vienen con el paquete):
+Los proyectos de Rstudio crean carpetas donde se guardan los archivos relacionados a un análisis específico (código y datos) y hacen de esta carpeta el directorio de trabajo por defecto cuando se abre el proyecto. Se pueden crear de esta forma:
+
+```{r, echo=FALSE,out.width="40%", fig.align='center'}
+
+knitr::include_graphics("./images/rproj1.png")
+
+```
+
+
+Luego aparecera una seria de ventanas donde pueden escoger que tipo de proyecto y el nombre de este:
+```{r, echo=FALSE,out.width="100%", fig.align='center'}
+
+knitr::include_graphics("./images/rproj2.png")
+
+```
+
+&nbsp;
+
+
+## Compendios de investigación
+
+Los compendios de investigación son estructuras de carpetas pre-definidas que permiten seguir un orden lógico e intuitivo para organizar los archivos usados y generados en un análisis de datos de un proyecto de investigación. El paquete [sketchy](https://marce10.github.io/sketchy/) genera estos compendios, permitiendo al usuario seleccionar entre una gama de compendios comunes en la comunidad científica. Este ejemplo crea el compendio básico (uno de los 14 que vienen con el paquete):
 
 
 ```{r}
-
-# instalar de github
-# remotes::install_github("maRce10/sketchy")
-
-# load package
-library(sketchy)
 
 path <- tempdir()
 
@@ -779,6 +848,12 @@ El paquete crea archivos Rmarkdown con plantillas para el análisis de datos (ca
 - Genere un reporte dinámico en format PDF
 
 &nbsp;
+
+- Cree un proyecto de Rstudio para organizar los contenidos del curso 
+
+&nbsp;
+
+- Cree un compendio de investigación con sketchy
 
 </div>
 

@@ -13,7 +13,7 @@
 
 <title>reportes_dinamicos_con_rmarkdown.knit</title>
 
-<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.16/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -39,14 +39,14 @@
 <script>window.xaringanExtraClipboard(null, {"button":"<i class=\"fa fa-clipboard\"><\/i>","success":"<i class=\"fa fa-check\" style=\"color: #90BE6D\"><\/i>","error":"<i class=\"fa fa-times-circle\" style=\"color: #F94144\"><\/i>"})</script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
-<script src="site_libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="site_libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
 <link href="site_libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
 <script src="site_libs/leaflet-1.3.1/leaflet.js"></script>
 <link href="site_libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
 <script src="site_libs/proj4-2.6.2/proj4.min.js"></script>
 <script src="site_libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
 <link href="site_libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="site_libs/leaflet-binding-2.0.4.1/leaflet.js"></script>
+<script src="site_libs/leaflet-binding-2.1.1/leaflet.js"></script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -140,13 +140,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   for (var i = 0; i < sheets.length; i++) {
     if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
     try { var rules = sheets[i].cssRules; } catch (e) { continue; }
-    for (var j = 0; j < rules.length; j++) {
+    var j = 0;
+    while (j < rules.length) {
       var rule = rules[j];
       // check if there is a div.sourceCode rule
-      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
       var style = rule.style.cssText;
       // check if color or background-color is set
-      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
       // replace div.sourceCode by a pre.sourceCode rule
       sheets[i].deleteRule(j);
       sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
@@ -242,11 +249,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -503,6 +514,38 @@ Rmarkdown</p></li>
 </ul>
 </div>
 <p> </p>
+<p>Paquetes a utilizar en este manual:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># install.packages(&#39;remotes&#39;)</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(<span class="st">&quot;remotes&quot;</span>)</span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="co"># remotes::install_github(&#39;hadley/emo&#39;)</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">library</span>(<span class="st">&quot;emo&quot;</span>)</span>
+<span id="cb1-6"><a href="#cb1-6"></a></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="co"># remotes::install_github(&#39;maRce10/sketchy&#39;)</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="fu">library</span>(<span class="st">&quot;sketchy&quot;</span>)</span>
+<span id="cb1-9"><a href="#cb1-9"></a></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="co"># install.packages(&#39;rmarkdown&#39;)</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="fu">library</span>(<span class="st">&quot;knitr&quot;</span>)</span>
+<span id="cb1-12"><a href="#cb1-12"></a></span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="co"># install.packages(&#39;rmarkdown&#39;)</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a><span class="fu">library</span>(<span class="st">&quot;rmarkdown&quot;</span>)</span>
+<span id="cb1-15"><a href="#cb1-15"></a></span>
+<span id="cb1-16"><a href="#cb1-16"></a><span class="co"># install.packages(&#39;kableExtra&#39;)</span></span>
+<span id="cb1-17"><a href="#cb1-17"></a><span class="fu">library</span>(<span class="st">&quot;kableExtra&quot;</span>)</span>
+<span id="cb1-18"><a href="#cb1-18"></a></span>
+<span id="cb1-19"><a href="#cb1-19"></a><span class="co"># install.packages(&#39;rmdformats&#39;)</span></span>
+<span id="cb1-20"><a href="#cb1-20"></a><span class="fu">library</span>(<span class="st">&quot;rmdformats&quot;</span>)</span>
+<span id="cb1-21"><a href="#cb1-21"></a></span>
+<span id="cb1-22"><a href="#cb1-22"></a><span class="co"># install.packages(&#39;revealjs&#39;)</span></span>
+<span id="cb1-23"><a href="#cb1-23"></a><span class="fu">library</span>(<span class="st">&quot;revealjs&quot;</span>)</span>
+<span id="cb1-24"><a href="#cb1-24"></a></span>
+<span id="cb1-25"><a href="#cb1-25"></a><span class="co"># install.packages(&#39;rticles&#39;)</span></span>
+<span id="cb1-26"><a href="#cb1-26"></a><span class="fu">library</span>(<span class="st">&quot;rticles&quot;</span>)</span>
+<span id="cb1-27"><a href="#cb1-27"></a></span>
+<span id="cb1-28"><a href="#cb1-28"></a><span class="co"># install.packages(&#39;tufte&#39;)</span></span>
+<span id="cb1-29"><a href="#cb1-29"></a><span class="fu">library</span>(<span class="st">&quot;tufte&quot;</span>)</span></code></pre></div>
+<p> </p>
 <div id="crisis-de-reproducibilidad-en-la-ciencia"
 class="section level2">
 <h2>Crisis de reproducibilidad en la ciencia</h2>
@@ -641,8 +684,8 @@ de dominar:</p>
 <p>También podemos añadir una imagen con la función
 <code>include_graphics()</code> del paquete knitr.</p>
 <p>Código:</p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">include_graphics</span>(<span class="st">&quot;./images/rmarkdown_icon.png&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">include_graphics</span>(<span class="st">&quot;./images/rmarkdown_icon.png&quot;</span>)</span></code></pre></div>
 <p>Resultado:</p>
 <p><img src="images/rmarkdown_icon.png" width="40%" style="display: block; margin: auto;" /></p>
 <p>Note que esta opción nos permite hacer uso de los argumentos del
@@ -688,21 +731,158 @@ modificar.</p>
 de ejemplo de iris:</p>
 <p><img src="images/image10.PNG" width="70%" style="display: block; margin: auto;" /></p>
 <p>Resultado:</p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">data</span>(iris)</span>
-<span id="cb2-2"><a href="#cb2-2"></a></span>
-<span id="cb2-3"><a href="#cb2-3"></a>iris<span class="sc">$</span>random.var <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="fu">nrow</span>(iris))</span>
-<span id="cb2-4"><a href="#cb2-4"></a></span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="fu">head</span>(iris)</span></code></pre></div>
-<pre><code>## # A tibble: 6 × 6
-##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species random.var
-##          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;        &lt;dbl&gt;
-## 1          5.1         3.5          1.4         0.2 setosa      -0.545
-## 2          4.9         3            1.4         0.2 setosa       0.109
-## 3          4.7         3.2          1.3         0.2 setosa       0.704
-## 4          4.6         3.1          1.5         0.2 setosa      -1.67 
-## 5          5           3.6          1.4         0.2 setosa       0.342
-## 6          5.4         3.9          1.7         0.4 setosa      -0.179</code></pre>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">data</span>(iris)</span>
+<span id="cb3-2"><a href="#cb3-2"></a></span>
+<span id="cb3-3"><a href="#cb3-3"></a>iris<span class="sc">$</span>random.var <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="fu">nrow</span>(iris))</span>
+<span id="cb3-4"><a href="#cb3-4"></a></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="fu">head</span>(iris)</span></code></pre></div>
+<table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+Sepal.Length
+</th>
+<th style="text-align:center;">
+Sepal.Width
+</th>
+<th style="text-align:center;">
+Petal.Length
+</th>
+<th style="text-align:center;">
+Petal.Width
+</th>
+<th style="text-align:center;">
+Species
+</th>
+<th style="text-align:center;">
+random.var
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+5.1
+</td>
+<td style="text-align:center;">
+3.5
+</td>
+<td style="text-align:center;">
+1.4
+</td>
+<td style="text-align:center;">
+0.2
+</td>
+<td style="text-align:center;">
+setosa
+</td>
+<td style="text-align:center;">
+-0.7188
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4.9
+</td>
+<td style="text-align:center;">
+3.0
+</td>
+<td style="text-align:center;">
+1.4
+</td>
+<td style="text-align:center;">
+0.2
+</td>
+<td style="text-align:center;">
+setosa
+</td>
+<td style="text-align:center;">
+0.6188
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4.7
+</td>
+<td style="text-align:center;">
+3.2
+</td>
+<td style="text-align:center;">
+1.3
+</td>
+<td style="text-align:center;">
+0.2
+</td>
+<td style="text-align:center;">
+setosa
+</td>
+<td style="text-align:center;">
+-1.6217
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4.6
+</td>
+<td style="text-align:center;">
+3.1
+</td>
+<td style="text-align:center;">
+1.5
+</td>
+<td style="text-align:center;">
+0.2
+</td>
+<td style="text-align:center;">
+setosa
+</td>
+<td style="text-align:center;">
+0.7373
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+5.0
+</td>
+<td style="text-align:center;">
+3.6
+</td>
+<td style="text-align:center;">
+1.4
+</td>
+<td style="text-align:center;">
+0.2
+</td>
+<td style="text-align:center;">
+setosa
+</td>
+<td style="text-align:center;">
+0.7586
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+5.4
+</td>
+<td style="text-align:center;">
+3.9
+</td>
+<td style="text-align:center;">
+1.7
+</td>
+<td style="text-align:center;">
+0.4
+</td>
+<td style="text-align:center;">
+setosa
+</td>
+<td style="text-align:center;">
+1.7376
+</td>
+</tr>
+</tbody>
+</table>
 <p> </p>
 <p>Cuando se procesa su documento, el segmento de código se muestra en
 un cuadro gris y los resultados de ese código se muestran en un cuadro
@@ -718,15 +898,152 @@ otras opciones:</p>
 <p>Código:</p>
 <p><img src="images/image11.PNG" width="90%" style="display: block; margin: auto;" /></p>
 <p>Resultado:</p>
-<pre><code>## # A tibble: 6 × 6
-##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species random.var
-##          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;        &lt;dbl&gt;
-## 1          5.1         3.5          1.4         0.2 setosa       0.370
-## 2          4.9         3            1.4         0.2 setosa       0.202
-## 3          4.7         3.2          1.3         0.2 setosa       0.284
-## 4          4.6         3.1          1.5         0.2 setosa       0.403
-## 5          5           3.6          1.4         0.2 setosa      -0.101
-## 6          5.4         3.9          1.7         0.4 setosa       0.856</code></pre>
+<table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+Sepal.Length
+</th>
+<th style="text-align:center;">
+Sepal.Width
+</th>
+<th style="text-align:center;">
+Petal.Length
+</th>
+<th style="text-align:center;">
+Petal.Width
+</th>
+<th style="text-align:center;">
+Species
+</th>
+<th style="text-align:center;">
+random.var
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+5.1
+</td>
+<td style="text-align:center;">
+3.5
+</td>
+<td style="text-align:center;">
+1.4
+</td>
+<td style="text-align:center;">
+0.2
+</td>
+<td style="text-align:center;">
+setosa
+</td>
+<td style="text-align:center;">
+0.2033
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4.9
+</td>
+<td style="text-align:center;">
+3.0
+</td>
+<td style="text-align:center;">
+1.4
+</td>
+<td style="text-align:center;">
+0.2
+</td>
+<td style="text-align:center;">
+setosa
+</td>
+<td style="text-align:center;">
+1.3165
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4.7
+</td>
+<td style="text-align:center;">
+3.2
+</td>
+<td style="text-align:center;">
+1.3
+</td>
+<td style="text-align:center;">
+0.2
+</td>
+<td style="text-align:center;">
+setosa
+</td>
+<td style="text-align:center;">
+1.1702
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4.6
+</td>
+<td style="text-align:center;">
+3.1
+</td>
+<td style="text-align:center;">
+1.5
+</td>
+<td style="text-align:center;">
+0.2
+</td>
+<td style="text-align:center;">
+setosa
+</td>
+<td style="text-align:center;">
+-1.6504
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+5.0
+</td>
+<td style="text-align:center;">
+3.6
+</td>
+<td style="text-align:center;">
+1.4
+</td>
+<td style="text-align:center;">
+0.2
+</td>
+<td style="text-align:center;">
+setosa
+</td>
+<td style="text-align:center;">
+1.7009
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+5.4
+</td>
+<td style="text-align:center;">
+3.9
+</td>
+<td style="text-align:center;">
+1.7
+</td>
+<td style="text-align:center;">
+0.4
+</td>
+<td style="text-align:center;">
+setosa
+</td>
+<td style="text-align:center;">
+1.2419
+</td>
+</tr>
+</tbody>
+</table>
 <p> </p>
 <p>Puede ver que el código está oculto pero se muestran los
 resultados.</p>
@@ -766,7 +1083,7 @@ normal.</p>
 </div>
 <div id="resultado" class="section level4">
 <h4>Resultado:</h4>
-<p><img src="reportes_dinamicos_con_rmarkdown_files/figure-html/unnamed-chunk-22-1.png" width="672" />
+<p><img src="reportes_dinamicos_con_rmarkdown_files/figure-html/unnamed-chunk-23-1.png" width="672" />
  </p>
 <p>También puede utilizar los argumentos:</p>
 <ul>
@@ -833,23 +1150,23 @@ sangría es importante en YAML, así que debe añadirla a los subcampos
 (con respecto a un campo superior).</p>
 <p>Este encabezado muestra las opciones mas comúnmente usadas en los
 metadatos YAML:</p>
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="sc">---</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>title<span class="sc">:</span> <span class="st">&quot;Un titulo descriptivo y sin faltas ortograficas&quot;</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a>author<span class="sc">:</span> <span class="st">&quot;Marcelo Araya&quot;</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a>date<span class="sc">:</span> <span class="st">&quot;`r Sys.Date()`&quot;</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a>output<span class="sc">:</span> <span class="co"># Varios outputs mostrados solo para el ejemplo</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a>  pdf_document<span class="sc">:</span></span>
-<span id="cb5-7"><a href="#cb5-7"></a>    toc<span class="sc">:</span> yes</span>
-<span id="cb5-8"><a href="#cb5-8"></a>    fig_caption<span class="sc">:</span> yes</span>
-<span id="cb5-9"><a href="#cb5-9"></a>    df_print<span class="sc">:</span> kable</span>
-<span id="cb5-10"><a href="#cb5-10"></a>  html_document<span class="sc">:</span></span>
-<span id="cb5-11"><a href="#cb5-11"></a>    fig_caption<span class="sc">:</span> yes</span>
-<span id="cb5-12"><a href="#cb5-12"></a>    number_sections<span class="sc">:</span> yes</span>
-<span id="cb5-13"><a href="#cb5-13"></a>    toc<span class="sc">:</span> yes</span>
-<span id="cb5-14"><a href="#cb5-14"></a>    toc_float<span class="sc">:</span> yes</span>
-<span id="cb5-15"><a href="#cb5-15"></a>    df_print<span class="sc">:</span> paged</span>
-<span id="cb5-16"><a href="#cb5-16"></a><span class="sc">---</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="sc">---</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>title<span class="sc">:</span> <span class="st">&quot;Un titulo descriptivo y sin faltas ortograficas&quot;</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>author<span class="sc">:</span> <span class="st">&quot;Marcelo Araya&quot;</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>date<span class="sc">:</span> <span class="st">&quot;`r Sys.Date()`&quot;</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a>output<span class="sc">:</span> <span class="co"># Varios outputs mostrados solo para el ejemplo</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a>  pdf_document<span class="sc">:</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a>    toc<span class="sc">:</span> yes</span>
+<span id="cb4-8"><a href="#cb4-8"></a>    fig_caption<span class="sc">:</span> yes</span>
+<span id="cb4-9"><a href="#cb4-9"></a>    df_print<span class="sc">:</span> kable</span>
+<span id="cb4-10"><a href="#cb4-10"></a>  html_document<span class="sc">:</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a>    fig_caption<span class="sc">:</span> yes</span>
+<span id="cb4-12"><a href="#cb4-12"></a>    number_sections<span class="sc">:</span> yes</span>
+<span id="cb4-13"><a href="#cb4-13"></a>    toc<span class="sc">:</span> yes</span>
+<span id="cb4-14"><a href="#cb4-14"></a>    toc_float<span class="sc">:</span> yes</span>
+<span id="cb4-15"><a href="#cb4-15"></a>    df_print<span class="sc">:</span> paged</span>
+<span id="cb4-16"><a href="#cb4-16"></a><span class="sc">---</span></span></code></pre></div>
 <p><a href="https://bookdown.org/yihui/rmarkdown/html-document.html">En
 este enlace</a> se explican en detalle las opciones disponibles en el
 encabezado YAML de archivos Rmarkdown.</p>
@@ -859,17 +1176,17 @@ encabezado YAML de archivos Rmarkdown.</p>
 <h2>Emojis</h2>
 <p>El paquete <a href="https://github.com/hadley/emo">emo</a> permite
 añadir emojis al evaluar un código:</p>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># instale estos paquetes primero</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a></span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="co"># install.packages(&#39;remotes&#39;)</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="co"># remotes::install_github(&#39;hadley/emo&#39;)</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a></span>
-<span id="cb6-6"><a href="#cb6-6"></a><span class="fu">library</span>(<span class="st">&quot;emo&quot;</span>)</span>
-<span id="cb6-7"><a href="#cb6-7"></a></span>
-<span id="cb6-8"><a href="#cb6-8"></a><span class="fu">ji</span>(<span class="st">&quot;costa_rica&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># instale estos paquetes primero</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="co"># install.packages(&#39;remotes&#39;)</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="co"># remotes::install_github(&#39;hadley/emo&#39;)</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="fu">library</span>(<span class="st">&quot;emo&quot;</span>)</span>
+<span id="cb5-7"><a href="#cb5-7"></a></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="fu">ji</span>(<span class="st">&quot;costa_rica&quot;</span>)</span></code></pre></div>
 <p>🇨🇷</p>
-<p>Tambien se puede incrustar en el texto como lo vimos en <a
+<p>Tambien se puede incrustar en el texto 🇨🇷, como lo vimos <a
 href="#incrustar-código-de-r-en-el-texto">mas arriba</a> ⬆️
 (<code>ji("up_arrow")</code>)</p>
 <p> </p>
@@ -879,114 +1196,239 @@ href="#incrustar-código-de-r-en-el-texto">mas arriba</a> ⬆️
 <p>El paquete <code>knitr</code> también provee una función para mostrar
 datos tabulares de forma ordenada y ‘limpia’ en los reportes
 dínamicos:</p>
-<div class="sourceCode" id="cb7"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(iris[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, ])</span></code></pre></div>
-<table>
-<colgroup>
-<col width="18%" />
-<col width="17%" />
-<col width="18%" />
-<col width="17%" />
-<col width="11%" />
-<col width="15%" />
-</colgroup>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(iris[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, ])</span></code></pre></div>
+<table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
-<tr class="header">
-<th align="right">Sepal.Length</th>
-<th align="right">Sepal.Width</th>
-<th align="right">Petal.Length</th>
-<th align="right">Petal.Width</th>
-<th align="left">Species</th>
-<th align="right">random.var</th>
+<tr>
+<th style="text-align:center;">
+Sepal.Length
+</th>
+<th style="text-align:center;">
+Sepal.Width
+</th>
+<th style="text-align:center;">
+Petal.Length
+</th>
+<th style="text-align:center;">
+Petal.Width
+</th>
+<th style="text-align:center;">
+Species
+</th>
+<th style="text-align:center;">
+random.var
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="right">5.1</td>
-<td align="right">3.5</td>
-<td align="right">1.4</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-<td align="right">0.3703014</td>
+<tr>
+<td style="text-align:center;">
+5.1
+</td>
+<td style="text-align:center;">
+3.5
+</td>
+<td style="text-align:center;">
+1.4
+</td>
+<td style="text-align:center;">
+0.2
+</td>
+<td style="text-align:center;">
+setosa
+</td>
+<td style="text-align:center;">
+0.2033
+</td>
 </tr>
-<tr class="even">
-<td align="right">4.9</td>
-<td align="right">3.0</td>
-<td align="right">1.4</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-<td align="right">0.2015112</td>
+<tr>
+<td style="text-align:center;">
+4.9
+</td>
+<td style="text-align:center;">
+3.0
+</td>
+<td style="text-align:center;">
+1.4
+</td>
+<td style="text-align:center;">
+0.2
+</td>
+<td style="text-align:center;">
+setosa
+</td>
+<td style="text-align:center;">
+1.3165
+</td>
 </tr>
-<tr class="odd">
-<td align="right">4.7</td>
-<td align="right">3.2</td>
-<td align="right">1.3</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-<td align="right">0.2837224</td>
+<tr>
+<td style="text-align:center;">
+4.7
+</td>
+<td style="text-align:center;">
+3.2
+</td>
+<td style="text-align:center;">
+1.3
+</td>
+<td style="text-align:center;">
+0.2
+</td>
+<td style="text-align:center;">
+setosa
+</td>
+<td style="text-align:center;">
+1.1702
+</td>
 </tr>
-<tr class="even">
-<td align="right">4.6</td>
-<td align="right">3.1</td>
-<td align="right">1.5</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-<td align="right">0.4032382</td>
+<tr>
+<td style="text-align:center;">
+4.6
+</td>
+<td style="text-align:center;">
+3.1
+</td>
+<td style="text-align:center;">
+1.5
+</td>
+<td style="text-align:center;">
+0.2
+</td>
+<td style="text-align:center;">
+setosa
+</td>
+<td style="text-align:center;">
+-1.6504
+</td>
 </tr>
-<tr class="odd">
-<td align="right">5.0</td>
-<td align="right">3.6</td>
-<td align="right">1.4</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-<td align="right">-0.1012654</td>
+<tr>
+<td style="text-align:center;">
+5.0
+</td>
+<td style="text-align:center;">
+3.6
+</td>
+<td style="text-align:center;">
+1.4
+</td>
+<td style="text-align:center;">
+0.2
+</td>
+<td style="text-align:center;">
+setosa
+</td>
+<td style="text-align:center;">
+1.7009
+</td>
 </tr>
-<tr class="even">
-<td align="right">5.4</td>
-<td align="right">3.9</td>
-<td align="right">1.7</td>
-<td align="right">0.4</td>
-<td align="left">setosa</td>
-<td align="right">0.8558361</td>
+<tr>
+<td style="text-align:center;">
+5.4
+</td>
+<td style="text-align:center;">
+3.9
+</td>
+<td style="text-align:center;">
+1.7
+</td>
+<td style="text-align:center;">
+0.4
+</td>
+<td style="text-align:center;">
+setosa
+</td>
+<td style="text-align:center;">
+1.2419
+</td>
 </tr>
-<tr class="odd">
-<td align="right">4.6</td>
-<td align="right">3.4</td>
-<td align="right">1.4</td>
-<td align="right">0.3</td>
-<td align="left">setosa</td>
-<td align="right">1.3851718</td>
+<tr>
+<td style="text-align:center;">
+4.6
+</td>
+<td style="text-align:center;">
+3.4
+</td>
+<td style="text-align:center;">
+1.4
+</td>
+<td style="text-align:center;">
+0.3
+</td>
+<td style="text-align:center;">
+setosa
+</td>
+<td style="text-align:center;">
+0.5019
+</td>
 </tr>
-<tr class="even">
-<td align="right">5.0</td>
-<td align="right">3.4</td>
-<td align="right">1.5</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-<td align="right">-0.6864600</td>
+<tr>
+<td style="text-align:center;">
+5.0
+</td>
+<td style="text-align:center;">
+3.4
+</td>
+<td style="text-align:center;">
+1.5
+</td>
+<td style="text-align:center;">
+0.2
+</td>
+<td style="text-align:center;">
+setosa
+</td>
+<td style="text-align:center;">
+0.0214
+</td>
 </tr>
-<tr class="odd">
-<td align="right">4.4</td>
-<td align="right">2.9</td>
-<td align="right">1.4</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-<td align="right">1.0922126</td>
+<tr>
+<td style="text-align:center;">
+4.4
+</td>
+<td style="text-align:center;">
+2.9
+</td>
+<td style="text-align:center;">
+1.4
+</td>
+<td style="text-align:center;">
+0.2
+</td>
+<td style="text-align:center;">
+setosa
+</td>
+<td style="text-align:center;">
+0.4938
+</td>
 </tr>
-<tr class="even">
-<td align="right">4.9</td>
-<td align="right">3.1</td>
-<td align="right">1.5</td>
-<td align="right">0.1</td>
-<td align="left">setosa</td>
-<td align="right">-0.4225526</td>
+<tr>
+<td style="text-align:center;">
+4.9
+</td>
+<td style="text-align:center;">
+3.1
+</td>
+<td style="text-align:center;">
+1.5
+</td>
+<td style="text-align:center;">
+0.1
+</td>
+<td style="text-align:center;">
+setosa
+</td>
+<td style="text-align:center;">
+0.6422
+</td>
 </tr>
 </tbody>
 </table>
 <p> </p>
-<p>El paquete ‘kableExtra’ complementa esta función con muchas
-herramientas para personalisar el formato de las tablas en reportes
-dinámicos en R.</p>
+<p>El paquete <a
+href="https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html"><code>kableExtra</code></a>
+complementa esta función con muchas herramientas para personalizar el
+formato de las tablas en reportes dinámicos en R.</p>
 <p> </p>
 </div>
 <div id="opciones-adicionales-en-knitr" class="section level2">
@@ -994,8 +1436,8 @@ dinámicos en R.</p>
 <p>El argumento <code>opts_knit</code> de <code>knitr</code> permite
 definir opciones globales (aplicables a todos los bloques a menos que se
 re-definan):</p>
-<div class="sourceCode" id="cb8"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">root.dir =</span> <span class="st">&quot;..&quot;</span>, <span class="at">eval =</span> <span class="cn">TRUE</span>, <span class="at">echo =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">root.dir =</span> <span class="st">&quot;..&quot;</span>, <span class="at">eval =</span> <span class="cn">TRUE</span>, <span class="at">echo =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <p> </p>
 </div>
 <div id="presentaciones-y-otros-opciones-de-formato"
@@ -1022,11 +1464,11 @@ paquetes de R. Algunos de esos paquetes son:</p>
 <li>tufte</li>
 </ul>
 <p>Se pueden instalar de la siguiente manera:</p>
-<div class="sourceCode" id="cb9"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;rmdformats&quot;</span>)</span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="fu">install.packages</span>(<span class="st">&quot;revealjs&quot;</span>)</span>
-<span id="cb9-3"><a href="#cb9-3"></a><span class="fu">install.packages</span>(<span class="st">&quot;rticles&quot;</span>)</span>
-<span id="cb9-4"><a href="#cb9-4"></a><span class="fu">install.packages</span>(<span class="st">&quot;tufte&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;rmdformats&quot;</span>)</span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="fu">install.packages</span>(<span class="st">&quot;revealjs&quot;</span>)</span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="fu">install.packages</span>(<span class="st">&quot;rticles&quot;</span>)</span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="fu">install.packages</span>(<span class="st">&quot;tufte&quot;</span>)</span></code></pre></div>
 <p>Una vez instalados, los nuevos formatos estarán disponibles a través
 del nuevo cuadro de diálogo Rmarkdown:</p>
 <p><img src="images/templates.png" width="70%" style="display: block; margin: auto;" />
@@ -1052,20 +1494,20 @@ desarrollado varios paquetes que emplean HTML widgets como
 disponibles así como instrucciones de como desarrollarlos.</p>
 <p>El siguiente código utiliza el paquete <code>leaflet</code> para
 generar un mapa interactivo:</p>
-<div class="sourceCode" id="cb10"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># install.packages(&#39;leaflet&#39;)</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a><span class="fu">library</span>(leaflet)</span>
-<span id="cb10-3"><a href="#cb10-3"></a></span>
-<span id="cb10-4"><a href="#cb10-4"></a>ll_map <span class="ot">&lt;-</span> <span class="fu">leaflet</span>()</span>
-<span id="cb10-5"><a href="#cb10-5"></a></span>
-<span id="cb10-6"><a href="#cb10-6"></a>ll_map <span class="ot">&lt;-</span> <span class="fu">addTiles</span>(<span class="at">map =</span> ll_map)</span>
-<span id="cb10-7"><a href="#cb10-7"></a></span>
-<span id="cb10-8"><a href="#cb10-8"></a>ll_map <span class="ot">&lt;-</span> <span class="fu">setView</span>(<span class="at">map =</span> ll_map, <span class="at">lat =</span> <span class="fl">5.527448</span>, <span class="at">lng =</span> <span class="sc">-</span><span class="fl">87.057245</span>,</span>
-<span id="cb10-9"><a href="#cb10-9"></a>    <span class="at">zoom =</span> <span class="dv">13</span>)</span>
-<span id="cb10-10"><a href="#cb10-10"></a></span>
-<span id="cb10-11"><a href="#cb10-11"></a><span class="fu">addPopups</span>(<span class="at">map =</span> ll_map, <span class="at">lat =</span> <span class="fl">5.527448</span>, <span class="at">lng =</span> <span class="sc">-</span><span class="fl">87.057245</span>, <span class="at">popup =</span> <span class="st">&quot;Isla del Coco&quot;</span>)</span></code></pre></div>
-<div id="htmlwidget-6826cfa20d4c5cc98583" style="width:100%;height:480px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-6826cfa20d4c5cc98583">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addPopups","args":[5.527448,-87.057245,"Isla del Coco",null,null,{"maxWidth":300,"minWidth":50,"autoPan":true,"keepInView":false,"closeButton":true,"className":""}]}],"setView":[[5.527448,-87.057245],13,[]],"limits":{"lat":[5.527448,5.527448],"lng":[-87.057245,-87.057245]}},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># install.packages(&#39;leaflet&#39;)</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="fu">library</span>(leaflet)</span>
+<span id="cb9-3"><a href="#cb9-3"></a></span>
+<span id="cb9-4"><a href="#cb9-4"></a>ll_map <span class="ot">&lt;-</span> <span class="fu">leaflet</span>()</span>
+<span id="cb9-5"><a href="#cb9-5"></a></span>
+<span id="cb9-6"><a href="#cb9-6"></a>ll_map <span class="ot">&lt;-</span> <span class="fu">addTiles</span>(<span class="at">map =</span> ll_map)</span>
+<span id="cb9-7"><a href="#cb9-7"></a></span>
+<span id="cb9-8"><a href="#cb9-8"></a>ll_map <span class="ot">&lt;-</span> <span class="fu">setView</span>(<span class="at">map =</span> ll_map, <span class="at">lat =</span> <span class="fl">5.527448</span>, <span class="at">lng =</span> <span class="sc">-</span><span class="fl">87.057245</span>,</span>
+<span id="cb9-9"><a href="#cb9-9"></a>    <span class="at">zoom =</span> <span class="dv">13</span>)</span>
+<span id="cb9-10"><a href="#cb9-10"></a></span>
+<span id="cb9-11"><a href="#cb9-11"></a><span class="fu">addPopups</span>(<span class="at">map =</span> ll_map, <span class="at">lat =</span> <span class="fl">5.527448</span>, <span class="at">lng =</span> <span class="sc">-</span><span class="fl">87.057245</span>, <span class="at">popup =</span> <span class="st">&quot;Isla del Coco&quot;</span>)</span></code></pre></div>
+<div id="htmlwidget-337b0058ca020f8894d1" style="width:100%;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-337b0058ca020f8894d1">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addPopups","args":[5.527448,-87.057245,"Isla del Coco",null,null,{"maxWidth":300,"minWidth":50,"autoPan":true,"keepInView":false,"closeButton":true,"className":""}]}],"setView":[[5.527448,-87.057245],13,[]],"limits":{"lat":[5.527448,5.527448],"lng":[-87.057245,-87.057245]}},"evals":[],"jsHooks":[]}</script>
 <p> </p>
 <p>Este es el bloque de código que generó el mapa:</p>
 <p><img src="images/leaflet.png" width="90%" style="display: block; margin: auto;" /></p>
@@ -1080,53 +1522,53 @@ opciones del bloque de código.</p>
 R. Para llamar al código <code>shiny</code> desde un documento R
 Markdown, agregue ‘runtime’: shiny a los metadatos YAML, como en este
 ejemplo:</p>
-<div class="sourceCode" id="cb11"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="sc">---</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a>title<span class="sc">:</span> <span class="st">&quot;Documento Shiny&quot;</span></span>
-<span id="cb11-3"><a href="#cb11-3"></a>output<span class="sc">:</span> html_document</span>
-<span id="cb11-4"><a href="#cb11-4"></a>runtime<span class="sc">:</span> shiny</span>
-<span id="cb11-5"><a href="#cb11-5"></a><span class="sc">---</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="sc">---</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>title<span class="sc">:</span> <span class="st">&quot;Documento Shiny&quot;</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>output<span class="sc">:</span> html_document</span>
+<span id="cb10-4"><a href="#cb10-4"></a>runtime<span class="sc">:</span> shiny</span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="sc">---</span></span></code></pre></div>
 <p> </p>
 <p>El siguiente código generaría una aplicación shiny dentro del
 documento Rmarkdown, aunque este no puede ser incluida en el HTML:</p>
-<div class="sourceCode" id="cb12"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># install.packages(&quot;shiny&quot;)</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="fu">library</span>(shiny)</span>
-<span id="cb12-3"><a href="#cb12-3"></a></span>
-<span id="cb12-4"><a href="#cb12-4"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
-<span id="cb12-5"><a href="#cb12-5"></a>  </span>
-<span id="cb12-6"><a href="#cb12-6"></a>  <span class="fu">titlePanel</span>(<span class="st">&quot;Ejemplo&quot;</span>),</span>
-<span id="cb12-7"><a href="#cb12-7"></a>  </span>
-<span id="cb12-8"><a href="#cb12-8"></a>  <span class="fu">sidebarLayout</span>(</span>
-<span id="cb12-9"><a href="#cb12-9"></a>    <span class="fu">sidebarPanel</span>(</span>
-<span id="cb12-10"><a href="#cb12-10"></a>      <span class="fu">sliderInput</span>(<span class="at">inputId =</span> <span class="st">&quot;bins&quot;</span>,</span>
-<span id="cb12-11"><a href="#cb12-11"></a>                  <span class="at">label =</span> <span class="st">&quot;Numero de barras:&quot;</span>,</span>
-<span id="cb12-12"><a href="#cb12-12"></a>                  <span class="at">min =</span> <span class="dv">1</span>,</span>
-<span id="cb12-13"><a href="#cb12-13"></a>                  <span class="at">max =</span> <span class="dv">50</span>,</span>
-<span id="cb12-14"><a href="#cb12-14"></a>                  <span class="at">value =</span> <span class="dv">30</span>)</span>
-<span id="cb12-15"><a href="#cb12-15"></a>      </span>
-<span id="cb12-16"><a href="#cb12-16"></a>    ),</span>
-<span id="cb12-17"><a href="#cb12-17"></a>    <span class="fu">mainPanel</span>(</span>
-<span id="cb12-18"><a href="#cb12-18"></a>      <span class="fu">plotOutput</span>(<span class="at">outputId =</span> <span class="st">&quot;distPlot&quot;</span>)</span>
-<span id="cb12-19"><a href="#cb12-19"></a>    )</span>
-<span id="cb12-20"><a href="#cb12-20"></a>  )</span>
-<span id="cb12-21"><a href="#cb12-21"></a>)</span>
-<span id="cb12-22"><a href="#cb12-22"></a></span>
-<span id="cb12-23"><a href="#cb12-23"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {</span>
-<span id="cb12-24"><a href="#cb12-24"></a> </span>
-<span id="cb12-25"><a href="#cb12-25"></a>  output<span class="sc">$</span>distPlot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
-<span id="cb12-26"><a href="#cb12-26"></a>    </span>
-<span id="cb12-27"><a href="#cb12-27"></a>    x    <span class="ot">&lt;-</span> faithful<span class="sc">$</span>waiting</span>
-<span id="cb12-28"><a href="#cb12-28"></a>    bins <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">min</span>(x), <span class="fu">max</span>(x), <span class="at">length.out =</span> input<span class="sc">$</span>bins <span class="sc">+</span> <span class="dv">1</span>)</span>
-<span id="cb12-29"><a href="#cb12-29"></a>    </span>
-<span id="cb12-30"><a href="#cb12-30"></a>    <span class="fu">hist</span>(x, <span class="at">breaks =</span> bins, <span class="at">col =</span> <span class="st">&quot;#3E4A89FF&quot;</span>, <span class="at">border =</span> <span class="st">&quot;white&quot;</span>,</span>
-<span id="cb12-31"><a href="#cb12-31"></a>         <span class="at">xlab =</span> <span class="st">&quot;Tiempo de espera para la siguiente erupcion&quot;</span>,</span>
-<span id="cb12-32"><a href="#cb12-32"></a>         <span class="at">main =</span> <span class="st">&quot;Histograma del tiempo de espera&quot;</span>)</span>
-<span id="cb12-33"><a href="#cb12-33"></a>  })</span>
-<span id="cb12-34"><a href="#cb12-34"></a>}</span>
-<span id="cb12-35"><a href="#cb12-35"></a></span>
-<span id="cb12-36"><a href="#cb12-36"></a><span class="co"># Crear Shiny app</span></span>
-<span id="cb12-37"><a href="#cb12-37"></a><span class="fu">shinyApp</span>(<span class="at">ui =</span> ui, <span class="at">server =</span> server)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># install.packages(&quot;shiny&quot;)</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb11-3"><a href="#cb11-3"></a></span>
+<span id="cb11-4"><a href="#cb11-4"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb11-5"><a href="#cb11-5"></a>  </span>
+<span id="cb11-6"><a href="#cb11-6"></a>  <span class="fu">titlePanel</span>(<span class="st">&quot;Ejemplo&quot;</span>),</span>
+<span id="cb11-7"><a href="#cb11-7"></a>  </span>
+<span id="cb11-8"><a href="#cb11-8"></a>  <span class="fu">sidebarLayout</span>(</span>
+<span id="cb11-9"><a href="#cb11-9"></a>    <span class="fu">sidebarPanel</span>(</span>
+<span id="cb11-10"><a href="#cb11-10"></a>      <span class="fu">sliderInput</span>(<span class="at">inputId =</span> <span class="st">&quot;bins&quot;</span>,</span>
+<span id="cb11-11"><a href="#cb11-11"></a>                  <span class="at">label =</span> <span class="st">&quot;Numero de barras:&quot;</span>,</span>
+<span id="cb11-12"><a href="#cb11-12"></a>                  <span class="at">min =</span> <span class="dv">1</span>,</span>
+<span id="cb11-13"><a href="#cb11-13"></a>                  <span class="at">max =</span> <span class="dv">50</span>,</span>
+<span id="cb11-14"><a href="#cb11-14"></a>                  <span class="at">value =</span> <span class="dv">30</span>)</span>
+<span id="cb11-15"><a href="#cb11-15"></a>      </span>
+<span id="cb11-16"><a href="#cb11-16"></a>    ),</span>
+<span id="cb11-17"><a href="#cb11-17"></a>    <span class="fu">mainPanel</span>(</span>
+<span id="cb11-18"><a href="#cb11-18"></a>      <span class="fu">plotOutput</span>(<span class="at">outputId =</span> <span class="st">&quot;distPlot&quot;</span>)</span>
+<span id="cb11-19"><a href="#cb11-19"></a>    )</span>
+<span id="cb11-20"><a href="#cb11-20"></a>  )</span>
+<span id="cb11-21"><a href="#cb11-21"></a>)</span>
+<span id="cb11-22"><a href="#cb11-22"></a></span>
+<span id="cb11-23"><a href="#cb11-23"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {</span>
+<span id="cb11-24"><a href="#cb11-24"></a> </span>
+<span id="cb11-25"><a href="#cb11-25"></a>  output<span class="sc">$</span>distPlot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb11-26"><a href="#cb11-26"></a>    </span>
+<span id="cb11-27"><a href="#cb11-27"></a>    x    <span class="ot">&lt;-</span> faithful<span class="sc">$</span>waiting</span>
+<span id="cb11-28"><a href="#cb11-28"></a>    bins <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">min</span>(x), <span class="fu">max</span>(x), <span class="at">length.out =</span> input<span class="sc">$</span>bins <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb11-29"><a href="#cb11-29"></a>    </span>
+<span id="cb11-30"><a href="#cb11-30"></a>    <span class="fu">hist</span>(x, <span class="at">breaks =</span> bins, <span class="at">col =</span> <span class="st">&quot;#3E4A89FF&quot;</span>, <span class="at">border =</span> <span class="st">&quot;white&quot;</span>,</span>
+<span id="cb11-31"><a href="#cb11-31"></a>         <span class="at">xlab =</span> <span class="st">&quot;Tiempo de espera para la siguiente erupcion&quot;</span>,</span>
+<span id="cb11-32"><a href="#cb11-32"></a>         <span class="at">main =</span> <span class="st">&quot;Histograma del tiempo de espera&quot;</span>)</span>
+<span id="cb11-33"><a href="#cb11-33"></a>  })</span>
+<span id="cb11-34"><a href="#cb11-34"></a>}</span>
+<span id="cb11-35"><a href="#cb11-35"></a></span>
+<span id="cb11-36"><a href="#cb11-36"></a><span class="co"># Crear Shiny app</span></span>
+<span id="cb11-37"><a href="#cb11-37"></a><span class="fu">shinyApp</span>(<span class="at">ui =</span> ui, <span class="at">server =</span> server)</span></code></pre></div>
 <p> </p>
 <p>En el sitio <a
 href="https://shiny.rstudio.com/gallery/#demos">https://shiny.rstudio.com/gallery</a>
@@ -1152,9 +1594,23 @@ los reportes:</p>
 <p><img src="images/rpubs.PNG" width="90%" style="display: block; margin: auto;" /></p>
 <p> </p>
 </div>
-<div id="mas-allá-de-los-reportes-dinámicos-compendios-de-investigación"
+<div id="herramientas-adicionales-para-organizar-análisis-de-datos"
 class="section level1">
-<h1>Mas allá de los reportes dinámicos: compendios de investigación</h1>
+<h1>Herramientas adicionales para organizar análisis de datos</h1>
+<div id="proyectos-de-rstudio" class="section level2">
+<h2>Proyectos de Rstudio</h2>
+<p>Los proyectos de Rstudio crean carpetas donde se guardan los archivos
+relacionados a un análisis específico (código y datos) y hacen de esta
+carpeta el directorio de trabajo por defecto cuando se abre el proyecto.
+Se pueden crear de esta forma:</p>
+<p><img src="images/rproj1.png" width="40%" style="display: block; margin: auto;" /></p>
+<p>Luego aparecera una seria de ventanas donde pueden escoger que tipo
+de proyecto y el nombre de este:
+<img src="images/rproj2.png" width="100%" style="display: block; margin: auto;" /></p>
+<p> </p>
+</div>
+<div id="compendios-de-investigación" class="section level2">
+<h2>Compendios de investigación</h2>
 <p>Los compendios de investigación son estructuras de carpetas
 pre-definidas que permiten seguir un orden lógico e intuitivo para
 organizar los archivos usados y generados en un análisis de datos de un
@@ -1162,17 +1618,12 @@ proyecto de investigación. El paquete <a
 href="https://marce10.github.io/sketchy/">sketchy</a> genera estos
 compendios, permitiendo al usuario seleccionar entre una gama de
 compendios comunes en la comunidad científica. Este ejemplo crea el
-compendio básico (uno de los 12 que vienen con el paquete):</p>
-<div class="sourceCode" id="cb13"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># instalar de github remotes::install_github(&#39;maRce10/sketchy&#39;)</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a></span>
-<span id="cb13-3"><a href="#cb13-3"></a><span class="co"># load package</span></span>
-<span id="cb13-4"><a href="#cb13-4"></a><span class="fu">library</span>(sketchy)</span>
-<span id="cb13-5"><a href="#cb13-5"></a></span>
-<span id="cb13-6"><a href="#cb13-6"></a>path <span class="ot">&lt;-</span> <span class="fu">tempdir</span>()</span>
-<span id="cb13-7"><a href="#cb13-7"></a></span>
-<span id="cb13-8"><a href="#cb13-8"></a><span class="fu">make_compendium</span>(<span class="at">name =</span> <span class="st">&quot;proyecto_x&quot;</span>, <span class="at">path =</span> path, <span class="at">format =</span> <span class="st">&quot;basic&quot;</span>,</span>
-<span id="cb13-9"><a href="#cb13-9"></a>    <span class="at">Rproj =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+compendio básico (uno de los 14 que vienen con el paquete):</p>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>path <span class="ot">&lt;-</span> <span class="fu">tempdir</span>()</span>
+<span id="cb12-2"><a href="#cb12-2"></a></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="fu">make_compendium</span>(<span class="at">name =</span> <span class="st">&quot;proyecto_x&quot;</span>, <span class="at">path =</span> path, <span class="at">format =</span> <span class="st">&quot;basic&quot;</span>,</span>
+<span id="cb12-4"><a href="#cb12-4"></a>    <span class="at">Rproj =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## Creating directories ...
 ## proyecto_x
 ## │   
@@ -1188,6 +1639,7 @@ datos (carpeta “scripts”) y escritura de manuscritos (carpeta
 “manuscript”). Corra <code>path</code> en la consola de R para ver la
 dirección de la carpeta donde se creo el compendio.</p>
 <p> </p>
+</div>
 <div id="ejercicio-4" class="section level2 alert alert-info">
 <h2>Ejercicio 4</h2>
 <p> </p>
@@ -1218,6 +1670,14 @@ en la ventana de creación</li>
 <li>Genere un reporte dinámico en format PDF</li>
 </ul>
 <p> </p>
+<ul>
+<li>Cree un proyecto de Rstudio para organizar los contenidos del
+curso</li>
+</ul>
+<p> </p>
+<ul>
+<li>Cree un compendio de investigación con sketchy</li>
+</ul>
 </div>
 <p> </p>
 <hr />
@@ -1244,18 +1704,18 @@ class="uri">https://github.com/ramnathv/htmlwidgets</a>.</li>
 <hr />
 <hr />
 <p><font size="4">Información de la sesión</font></p>
-<pre><code>## R version 4.1.0 (2021-05-18)
+<pre><code>## R version 4.2.0 (2022-04-22)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
-## Running under: Ubuntu 20.04.2 LTS
+## Running under: Ubuntu 22.04.1 LTS
 ## 
 ## Matrix products: default
-## BLAS:   /usr/lib/x86_64-linux-gnu/atlas/libblas.so.3.10.3
-## LAPACK: /usr/lib/x86_64-linux-gnu/atlas/liblapack.so.3.10.3
+## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0
+## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0
 ## 
 ## locale:
-##  [1] LC_CTYPE=pt_BR.UTF-8       LC_NUMERIC=C              
-##  [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=pt_BR.UTF-8    
-##  [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=pt_BR.UTF-8   
+##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+##  [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=en_US.UTF-8    
+##  [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=en_US.UTF-8   
 ##  [7] LC_PAPER=es_CR.UTF-8       LC_NAME=C                 
 ##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
 ## [11] LC_MEASUREMENT=es_CR.UTF-8 LC_IDENTIFICATION=C       
@@ -1264,20 +1724,25 @@ class="uri">https://github.com/ramnathv/htmlwidgets</a>.</li>
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] sketchy_1.0.2       leaflet_2.0.4.1     knitr_1.39         
-## [4] xaringanExtra_0.7.0 emo_0.0.0.9000     
+##  [1] leaflet_2.1.1       tufte_0.12          rticles_0.24       
+##  [4] revealjs_0.9        rmdformats_1.0.4    kableExtra_1.3.4   
+##  [7] rmarkdown_2.16      sketchy_1.0.2       remotes_2.4.2      
+## [10] knitr_1.40          xaringanExtra_0.7.0 emo_0.0.0.9000     
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] Rcpp_1.0.9        pillar_1.8.0      bslib_0.2.5.1     compiler_4.1.0   
-##  [5] formatR_1.11      jquerylib_0.1.4   highr_0.9         tools_4.1.0      
-##  [9] packrat_0.7.0     digest_0.6.29     uuid_0.1-4        jsonlite_1.8.0   
-## [13] lubridate_1.7.10  evaluate_0.15     lifecycle_1.0.1   tibble_3.1.8     
-## [17] pkgconfig_2.0.3   rlang_1.0.5       cli_3.3.0         rstudioapi_0.13  
-## [21] crosstalk_1.1.1   yaml_2.3.5        xfun_0.31         fastmap_1.1.0    
-## [25] stringr_1.4.0     htmlwidgets_1.5.3 generics_0.1.0    vctrs_0.4.1      
-## [29] sass_0.4.0        glue_1.6.2        R6_2.5.1          fansi_1.0.3      
-## [33] rmarkdown_2.13    purrr_0.3.4       magrittr_2.0.3    htmltools_0.5.3  
-## [37] assertthat_0.2.1  utf8_1.2.2        stringi_1.7.8     crayon_1.5.1</code></pre>
+##  [1] xfun_0.33         bslib_0.3.1       purrr_0.3.4       colorspace_2.0-3 
+##  [5] vctrs_0.4.1       generics_0.1.2    htmltools_0.5.3   viridisLite_0.4.0
+##  [9] yaml_2.3.5        utf8_1.2.2        rlang_1.0.4       jquerylib_0.1.4  
+## [13] pillar_1.8.0      glue_1.6.2        uuid_1.1-0        lifecycle_1.0.1  
+## [17] stringr_1.4.0     munsell_0.5.0     rvest_1.0.2       htmlwidgets_1.5.4
+## [21] evaluate_0.16     fastmap_1.1.0     crosstalk_1.2.0   fansi_1.0.3      
+## [25] highr_0.9         scales_1.2.0      formatR_1.12      webshot_0.5.3    
+## [29] jsonlite_1.8.0    systemfonts_1.0.4 digest_0.6.29     packrat_0.8.1    
+## [33] stringi_1.7.8     bookdown_0.29     cli_3.3.0         tools_4.2.0      
+## [37] magrittr_2.0.3    sass_0.4.1        tibble_3.1.8      crayon_1.5.1     
+## [41] pkgconfig_2.0.3   xml2_1.3.3        lubridate_1.8.0   assertthat_0.2.1 
+## [45] svglite_2.1.0     httr_1.4.4        rstudioapi_0.13   R6_2.5.1         
+## [49] compiler_4.2.0</code></pre>
 </div>
 </div>
 

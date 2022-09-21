@@ -24,23 +24,22 @@ version$version.string
 
 ```{r}
 
-install.packages("Rmarkdown") 
+
+install.packages("remotes")
+install.packages("rmarkdown") 
+install.packages("knitr")
+install.packages("kableExtra")
+install.packages("RColorBrewer")
+install.packages("rmdformats")
+install.packages("revealjs")
+install.packages("rticles")
+install.packages("tufte")
 install.packages("ggplot2") 
 install.packages("lme4")
 install.packages("MASS")
 install.packages("viridis")
 install.packages("lmerTest")
 install.packages("sjPlot")
-install.packages("knitr")
-install.packages("kable")
-install.packages("kableExtra")
-install.packages("emo")
-install.packages("RColorBrewer")
-install.packages("rmdformats")
-install.packages("revealjs")
-install.packages("rticles")
-install.packages("tufte")
-install.packages("remotes")
 remotes::install_github("hadley/emo")
 remotes::install_github("maRce10/sketchy")
 
