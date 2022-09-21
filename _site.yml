@@ -11,15 +11,15 @@ navbar:
       - text: "Reportes dinámicos con Rmarkdown"
         href: reportes_dinamicos_con_rmarkdown.html
       - text: "Fundamentos de R"
-        href: r_basics.html
+        href: fundamentos_de_r.html
       - text: "Modelos de regresión lineal"
         href: linear_regression_models.html
       - text: "Modelos comunes como regresiones"
-        href: common_stats_as_lms.html
+        href: stadistica_tradicional_en_regresiones.html
       - text: "Gráficos con ggplot2"
-        href: graphs_with_ggplot2.html
+        href: graficos_con_ggplot2.html
     - text: "Preparación para el curso"
-      href: course_prep.html
+      href: preparacion_curso.html
     - text: "Compartir código"
       href: https://codefile.io/f/XOIzH23KfULuZKyZ1TYT
     - text: "Programa del curso"

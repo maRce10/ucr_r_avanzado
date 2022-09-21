@@ -80,6 +80,9 @@ Paquetes a utilizar en este manual:
 
 ```{r, background="gray"}
 
+# install.packages("leaflet")
+library(leaflet)
+
 # install.packages("remotes")
 library("remotes")
 
@@ -113,6 +116,8 @@ library("tufte")
 ```
 
 &nbsp; 
+
+---
 
 ## Crisis de reproducibilidad en la ciencia
 
@@ -426,21 +431,6 @@ knitr::include_graphics("./images/image12.PNG")
 
 &nbsp;
 
-<div class="alert alert-info">
-
-## Ejercicio 3
-
-&nbsp;
-
-3.1 Utilice los argumentos `eval`, `echo`, `include`, `collapse` con diferentes valores (TRUE o FALSE) en un segmento donde corre `head(iris)`. ¿Cómo afectan el resultado?
-
-&nbsp;
-
-3.2 Haga lo mismo con los argumentos `fig.width`,` dpi` y `fig.height` en un segmento cuando corra cree un gráfico. ¿Cómo afecta esta vez?
-
-</div>
-
-&nbsp; 
 
 ## Incrustar gráficos
 
@@ -449,7 +439,7 @@ Los gráficos se pueden incrustar en documentos Rmarkdown simplemente usando fun
 
 #### Código:
 
-```{r, echo=FALSE,out.width="80%", fig.align='center'}
+```{r, echo=FALSE,out.width="90%", fig.align='center'}
 
 knitr::include_graphics("./images/image13.PNG")
 
@@ -465,16 +455,24 @@ boxplot(iris$Sepal.Length ~ iris$Species, col = "#EE000080",
         ylab = "Sepal length (mm)", xlab = "Species")
 
 ```
-&nbsp; 
-
-También puede utilizar los argumentos:
-
-- `dpi`: define puntos por pulgada
-- `fig.align`: alineación de la figura en el documento html, puede ser `left`, `right` o `center`
-- `fig.height` y `fig.width`: define el tamaño de la figura
 
 &nbsp; 
 
+<div class="alert alert-info">
+
+## Ejercicio 3
+
+&nbsp;
+
+3.1 Utilice los argumentos `eval`, `collapse` con diferentes valores (TRUE o FALSE) en un segmento donde corre `head(iris)`. ¿Cómo afectan el resultado?
+
+&nbsp;
+
+3.2 Haga lo mismo con los argumentos `out.width`, `fig.width`,` dpi` y `fig.height` en un segmento cuando corra cree un gráfico. ¿Cómo afecta esta vez?
+
+</div>
+
+&nbsp; 
 ## Incrustar código de R en el texto
 
 Es posible que haya notado a lo largo de este tutorial que tengo pequeños fragmentos de texto que parecen "bloques de código". Esto se conoce como incrustación de código en texto.
@@ -670,9 +668,6 @@ El siguiente código utiliza el paquete `leaflet` para generar un mapa interacti
 
 ```{r out.width = '100%', echo = TRUE, as.is = TRUE}
 
-# install.packages("leaflet")
-library(leaflet)
-
 ll_map <- leaflet()
 
 ll_map <- addTiles(map = ll_map)
@@ -781,13 +776,15 @@ knitr::include_graphics("./images/rpubs.PNG")
 
 &nbsp;
 
+---
+
 # Herramientas adicionales para organizar análisis de datos
 
 ## Proyectos de Rstudio
 
 Los proyectos de Rstudio crean carpetas donde se guardan los archivos relacionados a un análisis específico (código y datos) y hacen de esta carpeta el directorio de trabajo por defecto cuando se abre el proyecto. Se pueden crear de esta forma:
 
-```{r, echo=FALSE,out.width="40%", fig.align='center'}
+```{r, echo=FALSE,out.width="50%", fig.align='center'}
 
 knitr::include_graphics("./images/rproj1.png")
 

@@ -11,9 +11,9 @@
 
 
 
-<title>graphs_with_ggplot2.knit</title>
+<title>graficos_con_ggplot2.knit</title>
 
-<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.16/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -132,13 +132,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   for (var i = 0; i < sheets.length; i++) {
     if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
     try { var rules = sheets[i].cssRules; } catch (e) { continue; }
-    for (var j = 0; j < rules.length; j++) {
+    var j = 0;
+    while (j < rules.length) {
       var rule = rules[j];
       // check if there is a div.sourceCode rule
-      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
       var style = rule.style.cssText;
       // check if color or background-color is set
-      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
       // replace div.sourceCode by a pre.sourceCode rule
       sheets[i].deleteRule(j);
       sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
@@ -234,11 +241,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -422,21 +433,21 @@ div.tocify {
       <a href="reportes_dinamicos_con_rmarkdown.html">Reportes dinámicos con Rmarkdown</a>
     </li>
     <li>
-      <a href="r_basics.html">Fundamentos de R</a>
+      <a href="fundamentos_de_r.html">Fundamentos de R</a>
     </li>
     <li>
       <a href="linear_regression_models.html">Modelos de regresión lineal</a>
     </li>
     <li>
-      <a href="common_stats_as_lms.html">Modelos comunes como regresiones</a>
+      <a href="stadistica_tradicional_en_regresiones.html">Modelos comunes como regresiones</a>
     </li>
     <li>
-      <a href="graphs_with_ggplot2.html">Gráficos con ggplot2</a>
+      <a href="graficos_con_ggplot2.html">Gráficos con ggplot2</a>
     </li>
   </ul>
 </li>
 <li>
-  <a href="course_prep.html">Preparación para el curso</a>
+  <a href="preparacion_curso.html">Preparación para el curso</a>
 </li>
 <li>
   <a href="https://codefile.io/f/XOIzH23KfULuZKyZ1TYT">Compartir código</a>
@@ -471,7 +482,7 @@ div.tocify {
 Araya-Salas, PhD</a></font>
 </center></h4>
 <h4 class="date"><center>
-“2022-09-20”
+“2022-09-21”
 </center></h4>
 
 </div>
@@ -543,7 +554,7 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <div class="sourceCode" id="cb2"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> iris, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length, <span class="at">y =</span> Petal.Length)) <span class="sc">+</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a>    <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="graphs_with_ggplot2_files/figure-html/unnamed-chunk-3-1.png" width="672" />
+<p><img src="graficos_con_ggplot2_files/figure-html/unnamed-chunk-3-1.png" width="672" />
  </p>
 <p>This plot is defined by 3 components: 1. “data”- iris 1. “aes” -
 Sepal.length vs Petal.length 1. “layer” - Points (geom)</p>
@@ -557,25 +568,25 @@ size. This attributes can be included within <code>aes()</code>:</p>
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># color by species</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="fu">ggplot</span>(<span class="at">data =</span> iris, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length, <span class="at">y =</span> Petal.Length,</span>
 <span id="cb3-3"><a href="#cb3-3"></a>    <span class="at">color =</span> Species)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="graphs_with_ggplot2_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="graficos_con_ggplot2_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <div class="sourceCode" id="cb4"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># color and shape by species</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="fu">ggplot</span>(<span class="at">data =</span> iris, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length, <span class="at">y =</span> Petal.Length,</span>
 <span id="cb4-3"><a href="#cb4-3"></a>    <span class="at">color =</span> Species, <span class="at">shape =</span> Species)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="graphs_with_ggplot2_files/figure-html/unnamed-chunk-4-2.png" width="672" />
+<p><img src="graficos_con_ggplot2_files/figure-html/unnamed-chunk-4-2.png" width="672" />
  </p>
 <p>Note that the aesthetic arguments can also be included in the “geom”
 layer:</p>
 <div class="sourceCode" id="cb5"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> iris, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length, <span class="at">y =</span> Petal.Length)) <span class="sc">+</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> Species, <span class="at">shape =</span> Species))</span></code></pre></div>
-<p><img src="graphs_with_ggplot2_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+<p><img src="graficos_con_ggplot2_files/figure-html/unnamed-chunk-5-1.png" width="672" />
  </p>
 <p>We can also include a fixed value:</p>
 <div class="sourceCode" id="cb6"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> iris, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length, <span class="at">y =</span> Petal.Length)) <span class="sc">+</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a>    <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">&quot;red2&quot;</span>)</span></code></pre></div>
-<p><img src="graphs_with_ggplot2_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+<p><img src="graficos_con_ggplot2_files/figure-html/unnamed-chunk-6-1.png" width="672" />
  </p>
 <p>Some attributes work better with some data types:</p>
 <ul>
@@ -619,12 +630,12 @@ variable</li>
 </ul>
 <div class="sourceCode" id="cb8"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(Sepal.Length, Petal.Length)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>Species)</span></code></pre></div>
-<p><img src="graphs_with_ggplot2_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><img src="graficos_con_ggplot2_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <div class="sourceCode" id="cb9"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># or</span></span>
 <span id="cb9-2"><a href="#cb9-2"></a></span>
 <span id="cb9-3"><a href="#cb9-3"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(Sepal.Length, Petal.Length)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">facet_grid</span>(<span class="sc">~</span>Species)</span></code></pre></div>
-<p><img src="graphs_with_ggplot2_files/figure-html/unnamed-chunk-11-2.png" width="672" />
+<p><img src="graficos_con_ggplot2_files/figure-html/unnamed-chunk-11-2.png" width="672" />
  </p>
 <p>The scale can be fixed or free for the x and y axis, and the number
 of columns and rows can be modified:</p>
@@ -632,17 +643,17 @@ of columns and rows can be modified:</p>
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># free x</span></span>
 <span id="cb10-2"><a href="#cb10-2"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(Sepal.Length, Petal.Length)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>Species,</span>
 <span id="cb10-3"><a href="#cb10-3"></a>    <span class="at">scales =</span> <span class="st">&quot;free_x&quot;</span>)</span></code></pre></div>
-<p><img src="graphs_with_ggplot2_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><img src="graficos_con_ggplot2_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <div class="sourceCode" id="cb11"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># free x and 3 rows</span></span>
 <span id="cb11-2"><a href="#cb11-2"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(Sepal.Length, Petal.Length)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>Species,</span>
 <span id="cb11-3"><a href="#cb11-3"></a>    <span class="at">scales =</span> <span class="st">&quot;free_y&quot;</span>, <span class="at">nrow =</span> <span class="dv">3</span>)</span></code></pre></div>
-<p><img src="graphs_with_ggplot2_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p><img src="graficos_con_ggplot2_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <div class="sourceCode" id="cb12"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># both free and 2 rows</span></span>
 <span id="cb12-2"><a href="#cb12-2"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(Sepal.Length, Petal.Length)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>Species,</span>
 <span id="cb12-3"><a href="#cb12-3"></a>    <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>, <span class="at">nrow =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="graphs_with_ggplot2_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+<p><img src="graficos_con_ggplot2_files/figure-html/unnamed-chunk-14-1.png" width="672" />
  </p>
 <p>Note that we can also saved the basic component as an
 <strong>R</strong> object and add other components later in the
@@ -651,7 +662,7 @@ code:</p>
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(Sepal.Length, Petal.Length)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span>
 <span id="cb13-2"><a href="#cb13-2"></a></span>
 <span id="cb13-3"><a href="#cb13-3"></a>p <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>Species, <span class="at">scales =</span> <span class="st">&quot;free_x&quot;</span>, <span class="at">nrow =</span> <span class="dv">3</span>)</span></code></pre></div>
-<p><img src="graphs_with_ggplot2_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><img src="graficos_con_ggplot2_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 </div>
 <div id="additional-geoms" class="section level2">
 <h2>Additional “geoms”</h2>
@@ -674,12 +685,12 @@ to scatter plots</li>
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># smoother and CI</span></span>
 <span id="cb14-2"><a href="#cb14-2"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(Sepal.Length, Petal.Length)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>) <span class="sc">+</span></span>
 <span id="cb14-3"><a href="#cb14-3"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>Species, <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>, <span class="at">nrow =</span> <span class="dv">3</span>)</span></code></pre></div>
-<p><img src="graphs_with_ggplot2_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p><img src="graficos_con_ggplot2_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <div class="sourceCode" id="cb15"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># without CI</span></span>
 <span id="cb15-2"><a href="#cb15-2"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(Sepal.Length, Petal.Length)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>,</span>
 <span id="cb15-3"><a href="#cb15-3"></a>    <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>Species, <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>, <span class="at">nrow =</span> <span class="dv">3</span>)</span></code></pre></div>
-<p><img src="graphs_with_ggplot2_files/figure-html/unnamed-chunk-16-2.png" width="672" />
+<p><img src="graficos_con_ggplot2_files/figure-html/unnamed-chunk-16-2.png" width="672" />
  </p>
 <div class="alert alert-info">
 <p><font size="5">Exercise 2</font></p>
@@ -705,11 +716,11 @@ make a plot similar to 2.3</p>
 <p>Again, it only takes a new “geom” component to create a boxplot:</p>
 <div class="sourceCode" id="cb16"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(Species, Petal.Length)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>()</span></code></pre></div>
-<p><img src="graphs_with_ggplot2_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p><img src="graficos_con_ggplot2_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
 <p>An interesting alternative are the violin plots:</p>
 <div class="sourceCode" id="cb17"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(Species, Petal.Length)) <span class="sc">+</span> <span class="fu">geom_violin</span>()</span></code></pre></div>
-<p><img src="graphs_with_ggplot2_files/figure-html/unnamed-chunk-23-1.png" width="672" />
+<p><img src="graficos_con_ggplot2_files/figure-html/unnamed-chunk-23-1.png" width="672" />
  </p>
 </div>
 <div id="histograms" class="section level3">
@@ -717,26 +728,26 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <p>Same thing with histrograms and frequency plots:</p>
 <div class="sourceCode" id="cb18"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(Petal.Length)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code></pre></div>
-<p><img src="graphs_with_ggplot2_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p><img src="graficos_con_ggplot2_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 <div class="sourceCode" id="cb19"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(Petal.Length)) <span class="sc">+</span> <span class="fu">geom_freqpoly</span>()</span></code></pre></div>
-<p><img src="graphs_with_ggplot2_files/figure-html/unnamed-chunk-24-2.png" width="672" /></p>
+<p><img src="graficos_con_ggplot2_files/figure-html/unnamed-chunk-24-2.png" width="672" /></p>
 <div class="sourceCode" id="cb20"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(Petal.Length)) <span class="sc">+</span> <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">geom_freqpoly</span>()</span></code></pre></div>
-<p><img src="graphs_with_ggplot2_files/figure-html/unnamed-chunk-24-3.png" width="672" />
+<p><img src="graficos_con_ggplot2_files/figure-html/unnamed-chunk-24-3.png" width="672" />
  </p>
 <p>We can control the width of the bars:</p>
 <div class="sourceCode" id="cb21"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(Petal.Length)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">fill =</span> <span class="fu">adjustcolor</span>(<span class="st">&quot;red2&quot;</span>,</span>
 <span id="cb21-2"><a href="#cb21-2"></a>    <span class="at">alpha.f =</span> <span class="fl">0.3</span>))</span></code></pre></div>
 <pre><code>## Warning: Duplicated aesthetics after name standardisation: fill</code></pre>
-<p><img src="graphs_with_ggplot2_files/figure-html/unnamed-chunk-25-1.png" width="672" />
+<p><img src="graficos_con_ggplot2_files/figure-html/unnamed-chunk-25-1.png" width="672" />
  </p>
 <p>And compare the distribution of different groups within the same
 histogram:</p>
 <div class="sourceCode" id="cb23"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(Petal.Length, <span class="at">fill =</span> Species)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.4</span>)</span></code></pre></div>
-<p><img src="graphs_with_ggplot2_files/figure-html/unnamed-chunk-26-1.png" width="672" />
+<p><img src="graficos_con_ggplot2_files/figure-html/unnamed-chunk-26-1.png" width="672" />
  </p>
 </div>
 <div id="bar-plots" class="section level3">
@@ -749,7 +760,7 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <span id="cb24-4"><a href="#cb24-4"></a>    <span class="dv">3</span>]]))</span>
 <span id="cb24-5"><a href="#cb24-5"></a></span>
 <span id="cb24-6"><a href="#cb24-6"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(Var1, Freq)) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>)</span></code></pre></div>
-<p><img src="graphs_with_ggplot2_files/figure-html/unnamed-chunk-27-1.png" width="672" />
+<p><img src="graficos_con_ggplot2_files/figure-html/unnamed-chunk-27-1.png" width="672" />
  </p>
 </div>
 </div>
@@ -768,13 +779,13 @@ modified the look of our plots:</p>
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(Sepal.Length, Petal.Length)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span>
 <span id="cb25-2"><a href="#cb25-2"></a></span>
 <span id="cb25-3"><a href="#cb25-3"></a>p <span class="sc">+</span> <span class="fu">theme_classic</span>()</span></code></pre></div>
-<p><img src="graphs_with_ggplot2_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+<p><img src="graficos_con_ggplot2_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
 <div class="sourceCode" id="cb26"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>p <span class="sc">+</span> <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="graphs_with_ggplot2_files/figure-html/unnamed-chunk-29-2.png" width="672" /></p>
+<p><img src="graficos_con_ggplot2_files/figure-html/unnamed-chunk-29-2.png" width="672" /></p>
 <div class="sourceCode" id="cb27"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>p <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="graphs_with_ggplot2_files/figure-html/unnamed-chunk-29-3.png" width="672" />
+<p><img src="graficos_con_ggplot2_files/figure-html/unnamed-chunk-29-3.png" width="672" />
  </p>
 <p>Most themes differ in the use of grids, border lines and axis
 labeling patterns.</p>
@@ -786,23 +797,23 @@ labeling patterns.</p>
 <div class="sourceCode" id="cb28"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(Sepal.Length, Petal.Length)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">xlim</span>(<span class="fu">c</span>(<span class="dv">0</span>,</span>
 <span id="cb28-2"><a href="#cb28-2"></a>    <span class="dv">10</span>))</span></code></pre></div>
-<p><img src="graphs_with_ggplot2_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+<p><img src="graficos_con_ggplot2_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
 <div class="sourceCode" id="cb29"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(Sepal.Length, Petal.Length, <span class="at">col =</span> Species)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb29-2"><a href="#cb29-2"></a>    <span class="fu">xlim</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>)) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">9</span>))</span></code></pre></div>
-<p><img src="graphs_with_ggplot2_files/figure-html/unnamed-chunk-30-2.png" width="672" />
+<p><img src="graficos_con_ggplot2_files/figure-html/unnamed-chunk-30-2.png" width="672" />
  </p>
 <p>Axis can also be transformed:</p>
 <div class="sourceCode" id="cb30"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(Sepal.Length, Petal.Length, <span class="at">col =</span> Species)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb30-2"><a href="#cb30-2"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">trans =</span> <span class="st">&quot;log&quot;</span>) <span class="sc">+</span> <span class="fu">scale_y_continuous</span>(<span class="at">trans =</span> <span class="st">&quot;log2&quot;</span>)</span></code></pre></div>
-<p><img src="graphs_with_ggplot2_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<p><img src="graficos_con_ggplot2_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
 <p> </p>
 <p>or reversed:</p>
 <div class="sourceCode" id="cb31"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(Sepal.Length, Petal.Length, <span class="at">col =</span> Species)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb31-2"><a href="#cb31-2"></a>    <span class="fu">scale_y_reverse</span>()</span></code></pre></div>
-<p><img src="graphs_with_ggplot2_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+<p><img src="graficos_con_ggplot2_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
 </div>
 <div id="saving-ggplots" class="section level3">
 <h3>Saving ggplots</h3>
@@ -812,7 +823,7 @@ function:</p>
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> msleep[msleep<span class="sc">$</span>order <span class="sc">%in%</span> <span class="fu">names</span>(tab)[tab <span class="sc">&gt;</span> <span class="dv">5</span>], ], <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> bodywt,</span>
 <span id="cb32-2"><a href="#cb32-2"></a>    <span class="at">y =</span> brainwt)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>order, <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>)</span></code></pre></div>
 <pre><code>## Warning: Removed 21 rows containing missing values (geom_point).</code></pre>
-<p><img src="graphs_with_ggplot2_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
+<p><img src="graficos_con_ggplot2_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
 <div class="sourceCode" id="cb34"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="co"># Export</span></span>
 <span id="cb34-2"><a href="#cb34-2"></a><span class="fu">ggsave</span>(<span class="st">&quot;plot.png&quot;</span>, <span class="at">width =</span> <span class="dv">5</span>, <span class="at">height =</span> <span class="dv">5</span>)</span></code></pre></div>
@@ -827,24 +838,24 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <span id="cb36-2"><a href="#cb36-2"></a><span class="fu">require</span>(scales)</span>
 <span id="cb36-3"><a href="#cb36-3"></a></span>
 <span id="cb36-4"><a href="#cb36-4"></a>p <span class="sc">+</span> <span class="fu">scale_y_continuous</span>(<span class="at">trans =</span> <span class="fu">log2_trans</span>())</span></code></pre></div>
-<p><img src="graphs_with_ggplot2_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
+<p><img src="graficos_con_ggplot2_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
 <div class="sourceCode" id="cb37"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="co"># show exponents</span></span>
 <span id="cb37-2"><a href="#cb37-2"></a>p <span class="sc">+</span> <span class="fu">scale_y_continuous</span>(<span class="at">trans =</span> <span class="fu">log2_trans</span>(), <span class="at">breaks =</span> <span class="fu">trans_breaks</span>(<span class="st">&quot;log2&quot;</span>,</span>
 <span id="cb37-3"><a href="#cb37-3"></a>    <span class="cf">function</span>(x) <span class="dv">2</span><span class="sc">^</span>x), <span class="at">labels =</span> <span class="fu">trans_format</span>(<span class="st">&quot;log2&quot;</span>, <span class="fu">math_format</span>(<span class="dv">2</span><span class="sc">^</span>.x)))</span></code></pre></div>
-<p><img src="graphs_with_ggplot2_files/figure-html/unnamed-chunk-34-2.png" width="672" /></p>
+<p><img src="graficos_con_ggplot2_files/figure-html/unnamed-chunk-34-2.png" width="672" /></p>
 <div class="sourceCode" id="cb38"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="co"># Percent</span></span>
 <span id="cb38-2"><a href="#cb38-2"></a>p <span class="sc">+</span> <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> percent)</span></code></pre></div>
-<p><img src="graphs_with_ggplot2_files/figure-html/unnamed-chunk-34-3.png" width="672" /></p>
+<p><img src="graficos_con_ggplot2_files/figure-html/unnamed-chunk-34-3.png" width="672" /></p>
 <div class="sourceCode" id="cb39"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="co"># dollar</span></span>
 <span id="cb39-2"><a href="#cb39-2"></a>p <span class="sc">+</span> <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> dollar)</span></code></pre></div>
-<p><img src="graphs_with_ggplot2_files/figure-html/unnamed-chunk-34-4.png" width="672" /></p>
+<p><img src="graficos_con_ggplot2_files/figure-html/unnamed-chunk-34-4.png" width="672" /></p>
 <div class="sourceCode" id="cb40"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="co"># scientific</span></span>
 <span id="cb40-2"><a href="#cb40-2"></a>p <span class="sc">+</span> <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scientific)</span></code></pre></div>
-<p><img src="graphs_with_ggplot2_files/figure-html/unnamed-chunk-34-5.png" width="672" /></p>
+<p><img src="graficos_con_ggplot2_files/figure-html/unnamed-chunk-34-5.png" width="672" /></p>
 <div class="sourceCode" id="cb41"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="do">### Agregar &#39;tick marks&#39; </span><span class="al">###</span></span>
 <span id="cb41-2"><a href="#cb41-2"></a></span>
@@ -862,19 +873,19 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <span id="cb41-14"><a href="#cb41-14"></a></span>
 <span id="cb41-15"><a href="#cb41-15"></a><span class="co"># log-log plot without log tick marks</span></span>
 <span id="cb41-16"><a href="#cb41-16"></a>p2</span></code></pre></div>
-<p><img src="graphs_with_ggplot2_files/figure-html/unnamed-chunk-34-6.png" width="672" /></p>
+<p><img src="graficos_con_ggplot2_files/figure-html/unnamed-chunk-34-6.png" width="672" /></p>
 <div class="sourceCode" id="cb42"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="co"># Show log tick marks</span></span>
 <span id="cb42-2"><a href="#cb42-2"></a>p2 <span class="sc">+</span> <span class="fu">annotation_logticks</span>()</span></code></pre></div>
-<p><img src="graphs_with_ggplot2_files/figure-html/unnamed-chunk-34-7.png" width="672" /></p>
+<p><img src="graficos_con_ggplot2_files/figure-html/unnamed-chunk-34-7.png" width="672" /></p>
 <div class="sourceCode" id="cb43"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a><span class="co"># # Log ticks on left and right</span></span>
 <span id="cb43-2"><a href="#cb43-2"></a>p2 <span class="sc">+</span> <span class="fu">annotation_logticks</span>(<span class="at">sides =</span> <span class="st">&quot;lr&quot;</span>)</span></code></pre></div>
-<p><img src="graphs_with_ggplot2_files/figure-html/unnamed-chunk-34-8.png" width="672" /></p>
+<p><img src="graficos_con_ggplot2_files/figure-html/unnamed-chunk-34-8.png" width="672" /></p>
 <div class="sourceCode" id="cb44"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="co"># All sides</span></span>
 <span id="cb44-2"><a href="#cb44-2"></a>p2 <span class="sc">+</span> <span class="fu">annotation_logticks</span>(<span class="at">sides =</span> <span class="st">&quot;trbl&quot;</span>)</span></code></pre></div>
-<p><img src="graphs_with_ggplot2_files/figure-html/unnamed-chunk-34-9.png" width="672" /></p>
+<p><img src="graficos_con_ggplot2_files/figure-html/unnamed-chunk-34-9.png" width="672" /></p>
 <p> </p>
 </div>
 <div id="other-graphs" class="section level3">
@@ -948,10 +959,10 @@ waiting
 <div class="sourceCode" id="cb46"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="fu">ggplot</span>(faithfuld, <span class="fu">aes</span>(eruptions, waiting)) <span class="sc">+</span> <span class="fu">geom_contour</span>(<span class="fu">aes</span>(<span class="at">z =</span> density,</span>
 <span id="cb46-2"><a href="#cb46-2"></a>    <span class="at">colour =</span> ..level..))</span></code></pre></div>
-<p><img src="graphs_with_ggplot2_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+<p><img src="graficos_con_ggplot2_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
 <div class="sourceCode" id="cb47"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a><span class="fu">ggplot</span>(faithfuld, <span class="fu">aes</span>(eruptions, waiting)) <span class="sc">+</span> <span class="fu">geom_raster</span>(<span class="fu">aes</span>(<span class="at">fill =</span> density))</span></code></pre></div>
-<p><img src="graphs_with_ggplot2_files/figure-html/unnamed-chunk-35-2.png" width="672" />
+<p><img src="graficos_con_ggplot2_files/figure-html/unnamed-chunk-35-2.png" width="672" />
  </p>
 </div>
 </div>
@@ -988,18 +999,18 @@ computing, 2nd edn. Springer, New York</li>
 <hr />
 <hr />
 <p><font size="4">Session information</font></p>
-<pre><code>## R version 4.1.0 (2021-05-18)
+<pre><code>## R version 4.2.0 (2022-04-22)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
-## Running under: Ubuntu 20.04.2 LTS
+## Running under: Ubuntu 22.04.1 LTS
 ## 
 ## Matrix products: default
-## BLAS:   /usr/lib/x86_64-linux-gnu/atlas/libblas.so.3.10.3
-## LAPACK: /usr/lib/x86_64-linux-gnu/atlas/liblapack.so.3.10.3
+## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0
+## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0
 ## 
 ## locale:
-##  [1] LC_CTYPE=pt_BR.UTF-8       LC_NUMERIC=C              
-##  [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=pt_BR.UTF-8    
-##  [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=pt_BR.UTF-8   
+##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+##  [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=en_US.UTF-8    
+##  [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=en_US.UTF-8   
 ##  [7] LC_PAPER=es_CR.UTF-8       LC_NAME=C                 
 ##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
 ## [11] LC_MEASUREMENT=es_CR.UTF-8 LC_IDENTIFICATION=C       
@@ -1008,30 +1019,30 @@ computing, 2nd edn. Springer, New York</li>
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] scales_1.2.0       viridis_0.6.2      viridisLite_0.4.0  MASS_7.3-54       
-## [5] RColorBrewer_1.1-3 ggplot2_3.3.6      knitr_1.39         kableExtra_1.3.1  
+## [1] scales_1.2.0       viridis_0.6.2      viridisLite_0.4.0  MASS_7.3-57       
+## [5] RColorBrewer_1.1-3 ggplot2_3.3.6      knitr_1.40         kableExtra_1.3.4  
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] tidyselect_1.1.1    xfun_0.31           bslib_0.2.5.1      
-##  [4] purrr_0.3.4         lattice_0.20-44     splines_4.1.0      
-##  [7] colorspace_2.0-3    vctrs_0.4.1         generics_0.1.0     
-## [10] htmltools_0.5.3     mgcv_1.8-36         yaml_2.3.5         
-## [13] utf8_1.2.2          rlang_1.0.5         isoband_0.2.5      
-## [16] jquerylib_0.1.4     pillar_1.8.0        glue_1.6.2         
-## [19] withr_2.5.0         DBI_1.1.1           uuid_0.1-4         
-## [22] lifecycle_1.0.1     stringr_1.4.0       munsell_0.5.0      
-## [25] gtable_0.3.0        ragg_1.1.3          rvest_1.0.0        
-## [28] evaluate_0.15       labeling_0.4.2      fastmap_1.1.0      
-## [31] fansi_1.0.3         highr_0.9           xaringanExtra_0.7.0
-## [34] formatR_1.11        webshot_0.5.2       jsonlite_1.8.0     
-## [37] systemfonts_1.0.2   farver_2.1.1        textshaping_0.3.5  
-## [40] gridExtra_2.3       digest_0.6.29       stringi_1.7.8      
-## [43] dplyr_1.0.7         grid_4.1.0          cli_3.3.0          
-## [46] tools_4.1.0         magrittr_2.0.3      sass_0.4.0         
-## [49] tibble_3.1.8        pkgconfig_2.0.3     Matrix_1.3-4       
-## [52] xml2_1.3.2          assertthat_0.2.1    rmarkdown_2.13     
-## [55] httr_1.4.2          rstudioapi_0.13     R6_2.5.1           
-## [58] nlme_3.1-152        compiler_4.1.0</code></pre>
+##  [1] svglite_2.1.0       lattice_0.20-45     assertthat_0.2.1   
+##  [4] digest_0.6.29       utf8_1.2.2          R6_2.5.1           
+##  [7] evaluate_0.16       httr_1.4.4          highr_0.9          
+## [10] pillar_1.8.0        rlang_1.0.4         uuid_1.1-0         
+## [13] rstudioapi_0.13     jquerylib_0.1.4     Matrix_1.4-1       
+## [16] rmarkdown_2.16      textshaping_0.3.6   labeling_0.4.2     
+## [19] splines_4.2.0       webshot_0.5.3       xaringanExtra_0.7.0
+## [22] stringr_1.4.0       munsell_0.5.0       compiler_4.2.0     
+## [25] xfun_0.33           pkgconfig_2.0.3     systemfonts_1.0.4  
+## [28] mgcv_1.8-40         htmltools_0.5.3     tidyselect_1.1.2   
+## [31] tibble_3.1.8        gridExtra_2.3       fansi_1.0.3        
+## [34] dplyr_1.0.9         withr_2.5.0         grid_4.2.0         
+## [37] nlme_3.1-157        jsonlite_1.8.0      gtable_0.3.0       
+## [40] lifecycle_1.0.1     DBI_1.1.2           magrittr_2.0.3     
+## [43] formatR_1.12        cli_3.3.0           stringi_1.7.8      
+## [46] farver_2.1.1        xml2_1.3.3          bslib_0.3.1        
+## [49] ragg_1.2.2          generics_0.1.2      vctrs_0.4.1        
+## [52] tools_4.2.0         glue_1.6.2          purrr_0.3.4        
+## [55] fastmap_1.1.0       yaml_2.3.5          colorspace_2.0-3   
+## [58] rvest_1.0.2         isoband_0.2.5       sass_0.4.1</code></pre>
 </div>
 
 

@@ -24,7 +24,7 @@ version$version.string
 
 ```{r}
 
-
+install.packages("leaflet")
 install.packages("remotes")
 install.packages("rmarkdown") 
 install.packages("knitr")
