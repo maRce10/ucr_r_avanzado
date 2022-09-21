@@ -1,10 +1,11 @@
 ---
 title: <center><font size="7"><b>Bucles (loops)</b></font></center>
-subtitle: <center><font size="4"><b>Programación y métodos estadísticos avanzados en R</b> <br>Universidad de Costa</font></center>
-author: <center><font size="3"><a href="http://marceloarayasalas.weebly.com/">Marcelo Araya-Salas, PhD</a></font></center>
+subtitle: <center><font size="5"><b>Programación y métodos estadísticos avanzados en R</b></b> <br>\n Universidad de Costa</font></center>
+author: <center><font size="5"><a href="http://marceloarayasalas.weebly.com/">Marcelo Araya-Salas, PhD</a></font></center>
 date: <center>"`r Sys.Date()`"</center>
 output:
   html_document:
+    css: extra.css    
     df_print: tibble
     highlight: pygments  
     toc: yes
@@ -16,6 +17,14 @@ fontsize: 12pt
 editor_options: 
   chunk_output_type: console
 ---
+
+<style>
+body
+  { counter-reset: source-line 0; }
+pre.numberSource code
+  { counter-reset: none; }
+</style>
+
 
 ```{r setting functions and parameters, echo=FALSE, message=FALSE}
 
@@ -35,7 +44,7 @@ library(kableExtra)
 
 options(knitr.table.format = "html") 
 
-x <- c("RColorBrewer", "ggplot2")
+x <- c("RColorBrewer", "ggplot2", "xaringanExtra")
 
 aa <- lapply(x, function(y) {
   if(!y %in% installed.packages()[,"Package"])  {if(y != "warbleR") install.packages(y) else devtools::install_github("maRce10/warbleR")
@@ -48,6 +57,22 @@ theme_set(theme_classic(base_size = 50))
 
 cols <- brewer.pal(10,"Spectral")
 
+# options to customize chunk outputs
+knitr::opts_chunk$set(
+  class.source = "numberLines lineAnchors", # for code line numbers
+  tidy.opts = list(width.cutoff = 65), 
+  tidy = TRUE,
+  message = FALSE
+ )
+
+htmltools::tagList(
+  xaringanExtra::use_clipboard(
+    button_text = "<i class=\"fa fa-clipboard\"></i>",
+    success_text = "<i class=\"fa fa-check\" style=\"color: #90BE6D\"></i>",
+    error_text = "<i class=\"fa fa-times-circle\" style=\"color: #F94144\"></i>"
+  ),
+  rmarkdown::html_dependency_font_awesome()
+)
 ```
  
 ## Bucles (loops) 
@@ -206,7 +231,6 @@ cc <- data.frame(y = cc_vector, x = 1:length(cc_vector))
 ggplot(data = cc, aes(x, y)) +
   geom_hline(yintercept = 0.5, col = cols[4], lwd = 3) +
   geom_line(col = cols[8], lwd = 4) + 
-  # ylim(c(min(cc$y)- 0.1, max(cc$y) + 0.1)) +
   labs(x = "Iteraciones", y = "Correlación de pearson (r)") + 
   theme_classic(base_size = 25)
 
@@ -291,7 +315,6 @@ cc <- cc[(nrow(cc) -50):nrow(cc),]
   ggplot(data = cc, aes(x, y)) +
   geom_hline(yintercept = c(-0.5, 0.5), col = cols[4], lwd = 3) +
   geom_line(col = cols[8], lwd = 4) + 
-  # ylim(c(min(cc$y)- 0.1, max(cc$y) + 0.1)) +
   labs(x = "Iteraciones", y = "Correlación de pearson (r)") + 
   theme_classic(base_size = 25)
 
@@ -440,7 +463,6 @@ cc <- data.frame(y = cc_vector, x = 1:length(cc_vector))
 ggplot(data = cc, aes(x, y)) +
   geom_hline(yintercept = c(-0.5, 0.5), col = cols[4], lwd = 3) +
   geom_line(col = cols[8], lwd = 4) + 
-  # ylim(c(min(cc$y)- 0.1, max(cc$y) + 0.1)) +
   labs(x = "Iteraciones", y = "Correlación de pearson (r)") + 
   theme_classic(base_size = 25)
 

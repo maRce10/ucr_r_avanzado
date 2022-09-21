@@ -5,6 +5,7 @@ author: <center><font size="3"><a href="http://marceloarayasalas.weebly.com/">Ma
 date: <center>"`r Sys.Date()`"</center>
 output:
   html_document:
+    css: extra.css 
     df_print: tibble
     highlight: pygments  
     toc: yes
@@ -16,6 +17,14 @@ fontsize: 12pt
 editor_options: 
   chunk_output_type: console
 ---
+
+<style>
+body
+  { counter-reset: source-line 0; }
+pre.numberSource code
+  { counter-reset: none; }
+</style>
+
 
 ```{r, echo = FALSE, message=FALSE}
 
@@ -41,19 +50,7 @@ geom_boxplot <- function(...) ggplot2::geom_boxplot(..., fill = viridis(10, alph
 
 theme_set(theme_classic(base_size = 20))
 
-```
-
-
-<style>
-body
-  { counter-reset: source-line 0; }
-pre.numberSource code
-  { counter-reset: none; }
-</style>
-
-```{r setup, include = FALSE}
-
-
+# options to customize chunk outputs
 knitr::opts_chunk$set(
   class.source = "numberLines lineAnchors", # for code line numbers
   tidy.opts = list(width.cutoff = 65), 
@@ -61,14 +58,15 @@ knitr::opts_chunk$set(
   message = FALSE
  )
 
-```
+htmltools::tagList(
+  xaringanExtra::use_clipboard(
+    button_text = "<i class=\"fa fa-clipboard\"></i>",
+    success_text = "<i class=\"fa fa-check\" style=\"color: #90BE6D\"></i>",
+    error_text = "<i class=\"fa fa-times-circle\" style=\"color: #F94144\"></i>"
+  ),
+  rmarkdown::html_dependency_font_awesome()
+)
 
-```{r klippy, echo=FALSE, include=TRUE}
-
-# remotes::install_github("rlesur/klippy")
-
-# to add copy button
-klippy::klippy(position = c('top', 'right'))
 ```
 
 Here we will walk through the most common statistical tests and show how they can be represented in the linear regression format. This section is based on [this post](https://lindeloev.github.io/tests-as-linear/). Check it out for a more in-depth description of the non-parametric alternatives. 

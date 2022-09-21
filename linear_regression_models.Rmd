@@ -1,10 +1,11 @@
 ---
 title: <center><font size="7"><b>Modelos de regresión lineal</b></font></center>
 subtitle: <center><font size="4"><b>Programación y métodos estadísticos avanzados en R</b> <br>Universidad de Costa</font></center>
-author: <center><font size="3"><a href="http://marceloarayasalas.weebly.com/">Marcelo Araya-Salas, PhD</a></font></center>
+author: <center><font size="5"><a href="http://marceloarayasalas.weebly.com/">Marcelo Araya-Salas, PhD</a></font></center>
 date: <center>"`r Sys.Date()`"</center>
 output:
   html_document:
+    css: extra.css    
     df_print: tibble
     highlight: pygments  
     toc: yes
@@ -16,6 +17,7 @@ fontsize: 12pt
 editor_options: 
   chunk_output_type: console
 ---
+
 ```{r, echo = FALSE, message=FALSE}
 
 library(kableExtra)
@@ -46,6 +48,23 @@ plot_model <- function(...) sjPlot::plot_model(xy_mod, type = "diag", colors = v
 
 theme_set(theme_classic(base_size = 20))
 
+# options to customize chunk outputs
+knitr::opts_chunk$set(
+  class.source = "numberLines lineAnchors", # for code line numbers
+  tidy.opts = list(width.cutoff = 65), 
+  tidy = TRUE,
+  message = FALSE
+ )
+
+htmltools::tagList(
+  xaringanExtra::use_clipboard(
+    button_text = "<i class=\"fa fa-clipboard\"></i>",
+    success_text = "<i class=\"fa fa-check\" style=\"color: #90BE6D\"></i>",
+    error_text = "<i class=\"fa fa-times-circle\" style=\"color: #F94144\"></i>"
+  ),
+  rmarkdown::html_dependency_font_awesome()
+)
+
 ```
 
 
@@ -55,26 +74,6 @@ body
 pre.numberSource code
   { counter-reset: none; }
 </style>
-
-```{r setup, include = FALSE}
-
-
-knitr::opts_chunk$set(
-  class.source = "numberLines lineAnchors", # for code line numbers
-  tidy.opts = list(width.cutoff = 65), 
-  tidy = TRUE,
-  message = FALSE
- )
-
-```
-
-```{r klippy, echo=FALSE, include=TRUE}
-
-# remotes::install_github("rlesur/klippy")
-
-# to add copy button
-klippy::klippy(position = c('top', 'right'))
-```
 
 &nbsp; 
 

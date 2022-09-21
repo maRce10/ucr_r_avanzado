@@ -7,7 +7,7 @@
 
 <center><font size="5"><b><a href="https://www.ucr.ac.cr/">Universidad de Costa Rica</a><br></b></font></center>
 
-<i><center><font size="4"><b><a href="marceloarayasalas.weebly.com/">Marcelo Araya-Salas, PhD</a><br></b></font></center></i>
+<i><center><font size="4.5"><b><a href="marceloarayasalas.weebly.com/">Marcelo Araya-Salas PhD</a> y Mario Espinoza PhD<br></b></font></center></i>
 
 <!-- <center><img src="./images/3d_prob.jpeg" alt =3d probability plot"></center> -->
 
@@ -19,10 +19,10 @@
 ```
 
 &nbsp; 
+
 Este curso pretende profundizar en los elementos de programación computacional,
 manipulación de bases de datos, diseño experimental, graficación personalizada, y el uso de
 técnicas y modelaje estadístico avanzadas utilizando R como plataforma. El curso está dirigido a estudiantes avanzados de carrera, de licenciatura o postgrado. En el curso se pretende cubrir las bases de los principales análisis y técnicas de modelaje estadístico, así como análisis emergentes. Todas las semanas se realizarán prácticas de laboratorio en donde se aplicarán los conceptos desarrollados durante las clases de teoría. Además, durante el curso cada estudiante presentará un paquete o extensión (conjunto de herramientas aplicables a análisis específicos) de R, en donde profundizará sobre sus aplicaciones en el campo de la biología demostrando en clase en que consiste el análisis.
-
 
 &nbsp;
 

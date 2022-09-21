@@ -13,7 +13,7 @@
 
 <title>linear_regression_models.knit</title>
 
-<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -33,10 +33,12 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<script src="site_libs/clipboard-1.7.1/clipboard.min.js"></script>
-<link href="site_libs/primer-tooltips-1.4.0/build.css" rel="stylesheet" />
-<link href="site_libs/klippy-0.0.0.9500/css/klippy.min.css" rel="stylesheet" />
-<script src="site_libs/klippy-0.0.0.9500/js/klippy.min.js"></script>
+<script src="site_libs/clipboard-2.0.6/clipboard.min.js"></script>
+<link href="site_libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css" rel="stylesheet" />
+<script src="site_libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
+<script>window.xaringanExtraClipboard(null, {"button":"<i class=\"fa fa-clipboard\"><\/i>","success":"<i class=\"fa fa-check\" style=\"color: #90BE6D\"><\/i>","error":"<i class=\"fa fa-times-circle\" style=\"color: #F94144\"><\/i>"})</script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -465,11 +467,11 @@ div.tocify {
 <br>Universidad de Costa</font>
 </center></h3>
 <h4 class="author"><center>
-<font size="3"><a href="http://marceloarayasalas.weebly.com/">Marcelo
+<font size="5"><a href="http://marceloarayasalas.weebly.com/">Marcelo
 Araya-Salas, PhD</a></font>
 </center></h4>
 <h4 class="date"><center>
-“2022-09-19”
+“2022-09-20”
 </center></h4>
 
 </div>
@@ -481,10 +483,6 @@ body
 pre.numberSource code
   { counter-reset: none; }
 </style>
-<script>
-  addClassKlippyTo("pre.r, pre.markdown");
-  addKlippy('right', 'top', 'auto', '1', 'Copy code', 'Copied!');
-</script>
 <p> </p>
 <div id="linear-models-as-a-unifying-framework" class="section level1">
 <h1>Linear models as a unifying framework</h1>
@@ -708,7 +706,7 @@ Note that we get an error if the size is larger than the vector
 itself:</p>
 <div class="sourceCode" id="cb23"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">sample</span>(<span class="at">x =</span> letters, <span class="at">size =</span> <span class="dv">30</span>)</span></code></pre></div>
-<pre><code>## Error in sample.int(length(x), size, replace, prob): cannot take a sample larger than the population when &#39;replace = FALSE&#39;</code></pre>
+<pre><code>## Error in sample.int(length(x), size, replace, prob): impossível tomar uma amostra maior que a população quando &#39;replace = FALSE&#39;</code></pre>
 <p> </p>
 <p>This can only be done when sampling with replacement. Sampling with
 replacement can be applied by setting the argument
@@ -2567,15 +2565,15 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 ## [1]  0  0  0
 ## 
 ## Coefficients:
-##              Estimate Std. Error z value Pr(&gt;|z|)
-## (Intercept) 1.200e+00  1.046e+00   1.147    0.251
-## x1          1.300e+00  2.281e+00   0.570    0.569
-## x2          1.187e-16  1.069e+00   0.000    1.000
+##             Estimate Std. Error z value Pr(&gt;|z|)
+## (Intercept)    1.200      1.046   1.147    0.251
+## x1             1.300      2.281   0.570    0.569
+## x2             0.000      1.069   0.000    1.000
 ## 
 ## (Dispersion parameter for poisson family taken to be 1)
 ## 
 ##     Null deviance: 1.0725e+00  on 2  degrees of freedom
-## Residual deviance: 2.6645e-15  on 0  degrees of freedom
+## Residual deviance: 4.4409e-16  on 0  degrees of freedom
 ## AIC: 16.881
 ## 
 ## Number of Fisher Scoring iterations: 3</code></pre>
@@ -2588,10 +2586,10 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 </center>
 <p> </p>
 <p>Coefficients table:</p>
-<pre><code>##                 Estimate Std. Error      z value  Pr(&gt;|z|)
-## (Intercept) 1.200000e+00   1.046119 1.147097e+00 0.2513416
-## x1          1.300000e+00   2.281163 5.698848e-01 0.5687558
-## x2          1.186878e-16   1.069045 1.110223e-16 1.0000000</code></pre>
+<pre><code>##             Estimate Std. Error   z value  Pr(&gt;|z|)
+## (Intercept)      1.2   1.046119 1.1470968 0.2513416
+## x1               1.3   2.281163 0.5698848 0.5687558
+## x2               0.0   1.069045 0.0000000 1.0000000</code></pre>
 <ul>
 <li><p>The model tells us that <span
 class="math inline">\(\beta_1\)</span> (the effect size of ‘x1’) is 1.3
@@ -2599,10 +2597,10 @@ and that it is significantly different from 0 (p-value = 0.5687558).
 This is actually interpreted as an increase in 1 unit of ‘x1’ results in
 ‘y’ (rate) by a factor of exp(1.3) = 3.6692967.</p></li>
 <li><p>The model also tells us that <span
-class="math inline">\(\beta_2\)</span> (the effect size of ‘x2’) is
-1.1868783^{-16} and that it is significantly different from 0 (p-value =
-1). This is means that an increase in 1 unit of ‘x2’ results in ‘y’
-(rate) by a factor of exp(1.1868783^{-16}) = 1.</p></li>
+class="math inline">\(\beta_2\)</span> (the effect size of ‘x2’) is 0
+and that it is significantly different from 0 (p-value = 1). This is
+means that an increase in 1 unit of ‘x2’ results in ‘y’ (rate) by a
+factor of exp(0) = 1.</p></li>
 </ul>
 </div>
 <p> </p>
@@ -2892,18 +2890,18 @@ data in R</a></p></li>
 <hr />
 <p> </p>
 <p><font size="4">Session information</font></p>
-<pre><code>## R version 4.1.1 (2021-08-10)
+<pre><code>## R version 4.1.0 (2021-05-18)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
 ## Running under: Ubuntu 20.04.2 LTS
 ## 
 ## Matrix products: default
-## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0
-## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0
+## BLAS:   /usr/lib/x86_64-linux-gnu/atlas/libblas.so.3.10.3
+## LAPACK: /usr/lib/x86_64-linux-gnu/atlas/liblapack.so.3.10.3
 ## 
 ## locale:
-##  [1] LC_CTYPE=es_ES.UTF-8       LC_NUMERIC=C              
-##  [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=es_ES.UTF-8    
-##  [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=es_ES.UTF-8   
+##  [1] LC_CTYPE=pt_BR.UTF-8       LC_NUMERIC=C              
+##  [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=pt_BR.UTF-8    
+##  [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=pt_BR.UTF-8   
 ##  [7] LC_PAPER=es_CR.UTF-8       LC_NAME=C                 
 ##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
 ## [11] LC_MEASUREMENT=es_CR.UTF-8 LC_IDENTIFICATION=C       
@@ -2912,39 +2910,45 @@ data in R</a></p></li>
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] sjPlot_2.8.10     lmerTest_3.1-3    lme4_1.1-29       Matrix_1.3-4     
+## [1] sjPlot_2.8.11     lmerTest_3.1-3    lme4_1.1-27.1     Matrix_1.3-4     
 ## [5] viridis_0.6.2     viridisLite_0.4.0 ggplot2_3.3.6     knitr_1.39       
-## [9] kableExtra_1.3.4 
+## [9] kableExtra_1.3.1 
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] httr_1.4.3          sass_0.4.1          tidyr_1.2.0        
-##  [4] jsonlite_1.8.0      splines_4.1.1       carData_3.0-5      
-##  [7] modelr_0.1.8        bslib_0.3.1         datawizard_0.4.1   
-## [10] assertthat_0.2.1    highr_0.9           yaml_2.3.5         
-## [13] bayestestR_0.12.1   numDeriv_2016.8-1.1 pillar_1.8.0       
-## [16] backports_1.4.1     lattice_0.20-44     glue_1.6.2         
-## [19] digest_0.6.29       rvest_1.0.2         minqa_1.2.4        
-## [22] colorspace_2.0-3    htmltools_0.5.3     pkgconfig_2.0.3    
-## [25] broom_0.8.0         purrr_0.3.4         xtable_1.8-4       
-## [28] mvtnorm_1.1-3       scales_1.2.0        webshot_0.5.3      
-## [31] svglite_2.1.0       emmeans_1.7.4-1     tibble_3.1.8       
-## [34] mgcv_1.8-36         car_3.1-0           farver_2.1.1       
-## [37] generics_0.1.2      sjlabelled_1.2.0    withr_2.5.0        
-## [40] klippy_0.0.0.9500   cli_3.3.0           magrittr_2.0.3     
-## [43] effectsize_0.7.0    estimability_1.3    evaluate_0.15      
-## [46] fansi_1.0.3         nlme_3.1-152        MASS_7.3-54        
-## [49] xml2_1.3.3          tools_4.1.1         formatR_1.12       
-## [52] lifecycle_1.0.1     stringr_1.4.0       munsell_0.5.0      
-## [55] ggeffects_1.1.2     compiler_4.1.1      jquerylib_0.1.4    
-## [58] systemfonts_1.0.4   rlang_1.0.4         grid_4.1.1         
-## [61] nloptr_2.0.3        parameters_0.18.1   rstudioapi_0.13    
-## [64] labeling_0.4.2      rmarkdown_2.14      boot_1.3-28        
-## [67] gtable_0.3.0        abind_1.4-5         sjstats_0.18.1     
-## [70] DBI_1.1.3           sjmisc_2.8.9        R6_2.5.1           
-## [73] gridExtra_2.3       dplyr_1.0.9         performance_0.9.0  
-## [76] fastmap_1.1.0       utf8_1.2.2          insight_0.17.1     
-## [79] stringi_1.7.8       Rcpp_1.0.9          vctrs_0.4.1        
-## [82] tidyselect_1.1.2    xfun_0.31           coda_0.19-4</code></pre>
+##   [1] nlme_3.1-152        insight_0.18.4      webshot_0.5.2      
+##   [4] httr_1.4.2          numDeriv_2016.8-1.1 tools_4.1.0        
+##   [7] backports_1.3.0     bslib_0.2.5.1       utf8_1.2.2         
+##  [10] R6_2.5.1            sjlabelled_1.2.0    DBI_1.1.1          
+##  [13] mgcv_1.8-36         colorspace_2.0-3    withr_2.5.0        
+##  [16] tidyselect_1.1.1    gridExtra_2.3       emmeans_1.8.1-1    
+##  [19] curl_4.3.2          compiler_4.1.0      performance_0.9.2  
+##  [22] cli_3.3.0           rvest_1.0.0         formatR_1.11       
+##  [25] xml2_1.3.2          sandwich_3.0-1      labeling_0.4.2     
+##  [28] bayestestR_0.13.0   sass_0.4.0          scales_1.2.0       
+##  [31] mvtnorm_1.1-2       stringr_1.4.0       digest_0.6.29      
+##  [34] foreign_0.8-81      minqa_1.2.4         rmarkdown_2.13     
+##  [37] rio_0.5.27          pkgconfig_2.0.3     htmltools_0.5.3    
+##  [40] fastmap_1.1.0       highr_0.9           readxl_1.3.1       
+##  [43] rlang_1.0.4         rstudioapi_0.13     jquerylib_0.1.4    
+##  [46] generics_0.1.0      farver_2.1.1        zoo_1.8-9          
+##  [49] jsonlite_1.8.0      zip_2.2.0           dplyr_1.0.7        
+##  [52] car_3.0-11          magrittr_2.0.3      parameters_0.18.2  
+##  [55] Rcpp_1.0.9          munsell_0.5.0       fansi_1.0.3        
+##  [58] abind_1.4-5         lifecycle_1.0.1     stringi_1.7.8      
+##  [61] multcomp_1.4-17     yaml_2.3.5          carData_3.0-4      
+##  [64] MASS_7.3-54         grid_4.1.0          forcats_0.5.1      
+##  [67] sjmisc_2.8.9        lattice_0.20-44     ggeffects_1.1.3    
+##  [70] haven_2.4.1         splines_4.1.0       hms_1.1.0          
+##  [73] sjstats_0.18.1      pillar_1.8.0        uuid_0.1-4         
+##  [76] boot_1.3-28         estimability_1.4.1  effectsize_0.7.0.5 
+##  [79] codetools_0.2-18    glue_1.6.2          evaluate_0.15      
+##  [82] data.table_1.14.0   modelr_0.1.8        vctrs_0.4.1        
+##  [85] nloptr_1.2.2.2      cellranger_1.1.0    gtable_0.3.0       
+##  [88] purrr_0.3.4         tidyr_1.1.3         assertthat_0.2.1   
+##  [91] datawizard_0.6.0    openxlsx_4.2.4      xfun_0.31          
+##  [94] xtable_1.8-4        broom_0.7.8         coda_0.19-4        
+##  [97] survival_3.2-11     tibble_3.1.8        ellipsis_0.3.2     
+## [100] TH.data_1.1-0       xaringanExtra_0.7.0</code></pre>
 </div>
 </div>
 

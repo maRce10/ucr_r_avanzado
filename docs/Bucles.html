@@ -33,6 +33,12 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/clipboard-2.0.6/clipboard.min.js"></script>
+<link href="site_libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css" rel="stylesheet" />
+<script src="site_libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
+<script>window.xaringanExtraClipboard(null, {"button":"<i class=\"fa fa-clipboard\"><\/i>","success":"<i class=\"fa fa-check\" style=\"color: #90BE6D\"><\/i>","error":"<i class=\"fa fa-times-circle\" style=\"color: #F94144\"><\/i>"})</script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
@@ -415,7 +421,7 @@ div.tocify {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="RMarkdown.html">Rmarkdown</a>
+      <a href="reportes_dinamicos_con_rmarkdown.html">Reportes dinámicos con Rmarkdown</a>
     </li>
     <li>
       <a href="r_basics.html">Fundamentos de R</a>
@@ -435,7 +441,10 @@ div.tocify {
   <a href="course_prep.html">Preparación para el curso</a>
 </li>
 <li>
-  <a href="https://codefile.io/f/XOIzH23KfULuZKyZ1TYT">   Compartir código</a>
+  <a href="https://codefile.io/f/XOIzH23KfULuZKyZ1TYT">Compartir código</a>
+</li>
+<li>
+  <a href="https://github.com/maRce10/ucr_r_avanzado/raw/master/additional_files/2022-08-05_Probl%20Esp%20Ecol_Estadistica%20Avanzada%20en%20R.pdf">Programa del curso</a>
 </li>
 <li>
   <a href="instructor.html">Instructor</a>
@@ -456,20 +465,26 @@ div.tocify {
 <font size="7"><b>Bucles (loops)</b></font>
 </center></h1>
 <h3 class="subtitle"><center>
-<font size="4"><b>Programación y métodos estadísticos avanzados en R</b>
-<br>Universidad de Costa</font>
+<font size="5"><b>Programación y métodos estadísticos avanzados en
+R</b></b> <br>Universidad de Costa</font>
 </center></h3>
 <h4 class="author"><center>
-<font size="3"><a href="http://marceloarayasalas.weebly.com/">Marcelo
+<font size="5"><a href="http://marceloarayasalas.weebly.com/">Marcelo
 Araya-Salas, PhD</a></font>
 </center></h4>
 <h4 class="date"><center>
-“2022-09-13”
+“2022-09-20”
 </center></h4>
 
 </div>
 
 
+<style>
+body
+  { counter-reset: source-line 0; }
+pre.numberSource code
+  { counter-reset: none; }
+</style>
 <div id="bucles-loops" class="section level2">
 <h2>Bucles (loops)</h2>
 <ul>
@@ -517,26 +532,27 @@ externa:</p>
 <p>El siguiente ciclo <code>while</code> se ejecuta hasta que la
 correlación de las variables continuas generadas al azar es mayor que un
 umbral:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># definir valor inicial</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>corr_coef <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># iniciar bucle</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span>(corr_coef <span class="sc">&lt;</span> <span class="fl">0.5</span>) {</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># generar la variable 1</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  v1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">20</span>)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># generar la variable 2</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  v2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">20</span>)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># corrrer  la correlacion</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  corr_coef <span class="ot">&lt;-</span> <span class="fu">cor</span>(v1, v2)</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># imprimir</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(corr_coef)</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>corr_coef</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># definir valor inicial</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>corr_coef <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="co"># iniciar bucle</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="cf">while</span> (corr_coef <span class="sc">&lt;</span> <span class="fl">0.5</span>) {</span>
+<span id="cb1-6"><a href="#cb1-6"></a></span>
+<span id="cb1-7"><a href="#cb1-7"></a>    <span class="co"># generar la variable 1</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>    v1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">20</span>)</span>
+<span id="cb1-9"><a href="#cb1-9"></a></span>
+<span id="cb1-10"><a href="#cb1-10"></a>    <span class="co"># generar la variable 2</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a>    v2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">20</span>)</span>
+<span id="cb1-12"><a href="#cb1-12"></a></span>
+<span id="cb1-13"><a href="#cb1-13"></a>    <span class="co"># corrrer la correlacion</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a>    corr_coef <span class="ot">&lt;-</span> <span class="fu">cor</span>(v1, v2)</span>
+<span id="cb1-15"><a href="#cb1-15"></a></span>
+<span id="cb1-16"><a href="#cb1-16"></a>    <span class="co"># imprimir</span></span>
+<span id="cb1-17"><a href="#cb1-17"></a>    <span class="fu">print</span>(corr_coef)</span>
+<span id="cb1-18"><a href="#cb1-18"></a>}</span>
+<span id="cb1-19"><a href="#cb1-19"></a></span>
+<span id="cb1-20"><a href="#cb1-20"></a>corr_coef</span></code></pre></div>
 <pre><code>##  [1]  0.0872575  0.3865472  0.1199017 -0.2902941  0.2413406 -0.1667497
 ##  [7]  0.1272541  0.0011283 -0.1344395 -0.0184824  0.5966901</code></pre>
 <p> </p>
@@ -546,67 +562,67 @@ umbral:</p>
 <li>Agregar nuevos elementos a un vector usando indexación</li>
 </ul>
 <p>Usando <code>append</code>:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># definir valor inicial</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>corr_coef <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># crear vector vacio</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>cc_vector <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span>(corr_coef <span class="sc">&lt;</span> <span class="fl">0.5</span>) {</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># generar la variable 1</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  v1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">20</span>)</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># generar la variable 2</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  v2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">20</span>)</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># correr la correlacion</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  corr_coef <span class="ot">&lt;-</span> <span class="fu">cor</span>(v1, v2)</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># guardar resultado  usando append</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  cc_vector <span class="ot">&lt;-</span> <span class="fu">append</span>(cc_vector, corr_coef)</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(cc_vector)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># definir valor inicial</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>corr_coef <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="co"># crear vector vacio</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a>cc_vector <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="cf">while</span> (corr_coef <span class="sc">&lt;</span> <span class="fl">0.5</span>) {</span>
+<span id="cb3-8"><a href="#cb3-8"></a></span>
+<span id="cb3-9"><a href="#cb3-9"></a>    <span class="co"># generar la variable 1</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a>    v1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">20</span>)</span>
+<span id="cb3-11"><a href="#cb3-11"></a></span>
+<span id="cb3-12"><a href="#cb3-12"></a>    <span class="co"># generar la variable 2</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a>    v2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">20</span>)</span>
+<span id="cb3-14"><a href="#cb3-14"></a></span>
+<span id="cb3-15"><a href="#cb3-15"></a>    <span class="co"># correr la correlacion</span></span>
+<span id="cb3-16"><a href="#cb3-16"></a>    corr_coef <span class="ot">&lt;-</span> <span class="fu">cor</span>(v1, v2)</span>
+<span id="cb3-17"><a href="#cb3-17"></a></span>
+<span id="cb3-18"><a href="#cb3-18"></a>    <span class="co"># guardar resultado usando append</span></span>
+<span id="cb3-19"><a href="#cb3-19"></a>    cc_vector <span class="ot">&lt;-</span> <span class="fu">append</span>(cc_vector, corr_coef)</span>
+<span id="cb3-20"><a href="#cb3-20"></a></span>
+<span id="cb3-21"><a href="#cb3-21"></a>}</span>
+<span id="cb3-22"><a href="#cb3-22"></a></span>
+<span id="cb3-23"><a href="#cb3-23"></a><span class="fu">head</span>(cc_vector)</span></code></pre></div>
 <pre><code>## [1] -0.047693  0.232015  0.133767 -0.089900  0.364152  0.203306</code></pre>
 <p> </p>
 <p>Podemos graficar el resultado como el gráfico anterior así:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>cc <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">y =</span> cc_vector, <span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(cc_vector))</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> cc, <span class="fu">aes</span>(x, y)) <span class="sc">+</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.5</span>, <span class="at">col =</span> cols[<span class="dv">4</span>], <span class="at">lwd =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">col =</span> cols[<span class="dv">8</span>], <span class="at">lwd =</span> <span class="dv">4</span>) <span class="sc">+</span> </span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># ylim(c(min(cc$y)- 0.1, max(cc$y) + 0.1)) +</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Iteraciones&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Correlación de pearson (r)&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size =</span> <span class="dv">25</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb5-2"><a href="#cb5-2"></a></span>
+<span id="cb5-3"><a href="#cb5-3"></a>cc <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">y =</span> cc_vector, <span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(cc_vector))</span>
+<span id="cb5-4"><a href="#cb5-4"></a></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="fu">ggplot</span>(<span class="at">data =</span> cc, <span class="fu">aes</span>(x, y)) <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.5</span>, <span class="at">col =</span> cols[<span class="dv">4</span>],</span>
+<span id="cb5-6"><a href="#cb5-6"></a>    <span class="at">lwd =</span> <span class="dv">3</span>) <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="at">col =</span> cols[<span class="dv">8</span>], <span class="at">lwd =</span> <span class="dv">4</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Iteraciones&quot;</span>,</span>
+<span id="cb5-7"><a href="#cb5-7"></a>    <span class="at">y =</span> <span class="st">&quot;Correlación de pearson (r)&quot;</span>) <span class="sc">+</span> <span class="fu">theme_classic</span>(<span class="at">base_size =</span> <span class="dv">25</span>)</span></code></pre></div>
 <p><img src="Bucles_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>Usando indexación:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># definir valor inicial</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>corr_coef <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># crear vector vacio</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>cc_vector <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span>(corr_coef <span class="sc">&lt;</span> <span class="fl">0.5</span>) {</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># generar la variable 1</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  v1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">20</span>)</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># generar la variable 2</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  v2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">20</span>)</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># correr correlacion</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  corr_coef <span class="ot">&lt;-</span> <span class="fu">cor</span>(v1, v2)</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># guardar vector</span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  cc_vector[<span class="fu">length</span>(cc_vector) <span class="sc">+</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> corr_coef</span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(cc_vector)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># definir valor inicial</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>corr_coef <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="co"># crear vector vacio</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>cc_vector <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="cf">while</span> (corr_coef <span class="sc">&lt;</span> <span class="fl">0.5</span>) {</span>
+<span id="cb6-8"><a href="#cb6-8"></a></span>
+<span id="cb6-9"><a href="#cb6-9"></a>    <span class="co"># generar la variable 1</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a>    v1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">20</span>)</span>
+<span id="cb6-11"><a href="#cb6-11"></a></span>
+<span id="cb6-12"><a href="#cb6-12"></a>    <span class="co"># generar la variable 2</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a>    v2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">20</span>)</span>
+<span id="cb6-14"><a href="#cb6-14"></a></span>
+<span id="cb6-15"><a href="#cb6-15"></a>    <span class="co"># correr correlacion</span></span>
+<span id="cb6-16"><a href="#cb6-16"></a>    corr_coef <span class="ot">&lt;-</span> <span class="fu">cor</span>(v1, v2)</span>
+<span id="cb6-17"><a href="#cb6-17"></a></span>
+<span id="cb6-18"><a href="#cb6-18"></a>    <span class="co"># guardar vector</span></span>
+<span id="cb6-19"><a href="#cb6-19"></a>    cc_vector[<span class="fu">length</span>(cc_vector) <span class="sc">+</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> corr_coef</span>
+<span id="cb6-20"><a href="#cb6-20"></a></span>
+<span id="cb6-21"><a href="#cb6-21"></a>}</span>
+<span id="cb6-22"><a href="#cb6-22"></a></span>
+<span id="cb6-23"><a href="#cb6-23"></a><span class="fu">head</span>(cc_vector)</span></code></pre></div>
 <pre><code>## [1]  0.239060  0.212589  0.392069  0.132913 -0.093418 -0.320691</code></pre>
 <p> </p>
 <p>Pero tenga en cuenta que <code>append</code> puede ser muy lento (no
@@ -615,29 +631,30 @@ recomendado)</p>
 <p>Con un pequeño ajuste, un bucle <code>while</code> también puede
 evaluar varias condiciones a la vez. Por ejemplo, también podemos
 incluir altos valores de correlación negativa:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># definir valor inicial</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>corr_coef <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># crear vector vacio</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>cc_vector <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span>(corr_coef <span class="sc">&lt;</span> <span class="fl">0.5</span> <span class="sc">&amp;</span> corr_coef <span class="sc">&gt;</span> <span class="sc">-</span><span class="fl">0.5</span>) {</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># generar la variable 1</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  v1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">20</span>)</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># generar la variable 2</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  v2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">20</span>)</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># correr correlacion</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  corr_coef <span class="ot">&lt;-</span> <span class="fu">cor</span>(v1, v2)</span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># guardar resultados</span></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  cc_vector[<span class="fu">length</span>(cc_vector) <span class="sc">+</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> corr_coef</span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(cc_vector)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># definir valor inicial</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>corr_coef <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="co"># crear vector vacio</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a>cc_vector <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="cf">while</span> (corr_coef <span class="sc">&lt;</span> <span class="fl">0.5</span> <span class="sc">&amp;</span> corr_coef <span class="sc">&gt;</span> <span class="sc">-</span><span class="fl">0.5</span>) {</span>
+<span id="cb8-8"><a href="#cb8-8"></a></span>
+<span id="cb8-9"><a href="#cb8-9"></a>    <span class="co"># generar la variable 1</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a>    v1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">20</span>)</span>
+<span id="cb8-11"><a href="#cb8-11"></a></span>
+<span id="cb8-12"><a href="#cb8-12"></a>    <span class="co"># generar la variable 2</span></span>
+<span id="cb8-13"><a href="#cb8-13"></a>    v2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">20</span>)</span>
+<span id="cb8-14"><a href="#cb8-14"></a></span>
+<span id="cb8-15"><a href="#cb8-15"></a>    <span class="co"># correr correlacion</span></span>
+<span id="cb8-16"><a href="#cb8-16"></a>    corr_coef <span class="ot">&lt;-</span> <span class="fu">cor</span>(v1, v2)</span>
+<span id="cb8-17"><a href="#cb8-17"></a></span>
+<span id="cb8-18"><a href="#cb8-18"></a>    <span class="co"># guardar resultados</span></span>
+<span id="cb8-19"><a href="#cb8-19"></a>    cc_vector[<span class="fu">length</span>(cc_vector) <span class="sc">+</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> corr_coef</span>
+<span id="cb8-20"><a href="#cb8-20"></a></span>
+<span id="cb8-21"><a href="#cb8-21"></a>}</span>
+<span id="cb8-22"><a href="#cb8-22"></a></span>
+<span id="cb8-23"><a href="#cb8-23"></a><span class="fu">head</span>(cc_vector)</span></code></pre></div>
 <pre><code>## [1]  0.323266 -0.153637 -0.049445  0.154694  0.191022 -0.168300</code></pre>
 <p> </p>
 <p><img src="Bucles_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
@@ -666,29 +683,30 @@ independientemente de la evaluación de la condición</p>
 <p> </p>
 <p>El siguiente bucle <code>repeat</code> hace lo mismo que el
 bucle<code>while</code> anterior:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># crear vector vacio</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>cc_vector <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="cf">repeat</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># generar la variable 1</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  v1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">20</span>)</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># generar la variable 2</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  v2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">20</span>)</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># correr la correlacion</span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  corr_coef <span class="ot">&lt;-</span> <span class="fu">cor</span>(v1, v2)</span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># guardar resultados </span></span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>  cc_vector[<span class="fu">length</span>(cc_vector) <span class="sc">+</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> corr_coef</span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># parar si se cumple la condicion</span></span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (corr_coef <span class="sc">&gt;</span> <span class="fl">0.5</span>)   <span class="cf">break</span></span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(cc_vector)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># crear vector vacio</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>cc_vector <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="cf">repeat</span> {</span>
+<span id="cb10-5"><a href="#cb10-5"></a>    <span class="co"># generar la variable 1</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a>    v1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">20</span>)</span>
+<span id="cb10-7"><a href="#cb10-7"></a></span>
+<span id="cb10-8"><a href="#cb10-8"></a>    <span class="co"># generar la variable 2</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a>    v2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">20</span>)</span>
+<span id="cb10-10"><a href="#cb10-10"></a></span>
+<span id="cb10-11"><a href="#cb10-11"></a>    <span class="co"># correr la correlacion</span></span>
+<span id="cb10-12"><a href="#cb10-12"></a>    corr_coef <span class="ot">&lt;-</span> <span class="fu">cor</span>(v1, v2)</span>
+<span id="cb10-13"><a href="#cb10-13"></a></span>
+<span id="cb10-14"><a href="#cb10-14"></a>    <span class="co"># guardar resultados</span></span>
+<span id="cb10-15"><a href="#cb10-15"></a>    cc_vector[<span class="fu">length</span>(cc_vector) <span class="sc">+</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> corr_coef</span>
+<span id="cb10-16"><a href="#cb10-16"></a></span>
+<span id="cb10-17"><a href="#cb10-17"></a>    <span class="co"># parar si se cumple la condicion</span></span>
+<span id="cb10-18"><a href="#cb10-18"></a>    <span class="cf">if</span> (corr_coef <span class="sc">&gt;</span> <span class="fl">0.5</span>)</span>
+<span id="cb10-19"><a href="#cb10-19"></a>        <span class="cf">break</span></span>
+<span id="cb10-20"><a href="#cb10-20"></a></span>
+<span id="cb10-21"><a href="#cb10-21"></a>}</span>
+<span id="cb10-22"><a href="#cb10-22"></a></span>
+<span id="cb10-23"><a href="#cb10-23"></a><span class="fu">head</span>(cc_vector)</span></code></pre></div>
 <pre><code>## [1]  0.2327630  0.2225129  0.3036371 -0.0098055  0.0495164 -0.1844224</code></pre>
 <p>  Tenga en cuenta que en este caso la condición determina si el ciclo
 debe detenerse. En el ciclo <code>while</code> la condición determina si
@@ -711,28 +729,28 @@ iteraciones se puede determinar de antemano:</p>
 <p> </p>
 <p>Nuevamente, creamos un bucle que calcula las correlaciones entre
 variables aleatorias, en este caso usando un bucle <code>for</code>:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># crear un vector vacio</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>cc_vector <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># determinar numero de Iteraciones</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>reps <span class="ot">&lt;-</span> <span class="dv">30</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># iniciar bucle</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>reps)</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># generar la variable 1</span></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  v1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">20</span>)</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># generar la variable 2</span></span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  v2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">20</span>)</span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># correr la correlacion</span></span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  corr_coef <span class="ot">&lt;-</span> <span class="fu">cor</span>(v1, v2)</span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># guardar resultados</span></span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>  cc_vector[<span class="fu">length</span>(cc_vector) <span class="sc">+</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> corr_coef</span>
-<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>  }</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># crear un vector vacio</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>cc_vector <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a></span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="co"># determinar numero de Iteraciones</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a>reps <span class="ot">&lt;-</span> <span class="dv">30</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a></span>
+<span id="cb12-7"><a href="#cb12-7"></a><span class="co"># iniciar bucle</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>reps) {</span>
+<span id="cb12-9"><a href="#cb12-9"></a>    <span class="co"># generar la variable 1</span></span>
+<span id="cb12-10"><a href="#cb12-10"></a>    v1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">20</span>)</span>
+<span id="cb12-11"><a href="#cb12-11"></a></span>
+<span id="cb12-12"><a href="#cb12-12"></a>    <span class="co"># generar la variable 2</span></span>
+<span id="cb12-13"><a href="#cb12-13"></a>    v2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">20</span>)</span>
+<span id="cb12-14"><a href="#cb12-14"></a></span>
+<span id="cb12-15"><a href="#cb12-15"></a>    <span class="co"># correr la correlacion</span></span>
+<span id="cb12-16"><a href="#cb12-16"></a>    corr_coef <span class="ot">&lt;-</span> <span class="fu">cor</span>(v1, v2)</span>
+<span id="cb12-17"><a href="#cb12-17"></a></span>
+<span id="cb12-18"><a href="#cb12-18"></a>    <span class="co"># guardar resultados</span></span>
+<span id="cb12-19"><a href="#cb12-19"></a>    cc_vector[<span class="fu">length</span>(cc_vector) <span class="sc">+</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> corr_coef</span>
+<span id="cb12-20"><a href="#cb12-20"></a></span>
+<span id="cb12-21"><a href="#cb12-21"></a>}</span></code></pre></div>
 <p><img src="Bucles_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <p>Una característica importante de los bucles
 <code>while</code>,<code>repeat</code> y <code>for</code> es que pueden
@@ -744,8 +762,10 @@ se guardan en el entorno actual (a diferencia de los bucles
 entiende mejor cuando se aplica a conjuntos de datos. En este ejemplo
 examinamos algunos juegos de datos de ejemplo en <code>R</code>. El
 siguiente código crea una lista con 4 juegos de datos de ejemplo:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># lista con bases de datos</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>lista_datos <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">BOD =</span> BOD, <span class="at">CO2 =</span> CO2, <span class="at">ChickWeight =</span> ChickWeight, <span class="at">DNase =</span> DNase)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># lista con bases de datos</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>lista_datos <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">BOD =</span> BOD, <span class="at">CO2 =</span> CO2, <span class="at">ChickWeight =</span> ChickWeight,</span>
+<span id="cb13-3"><a href="#cb13-3"></a>    <span class="at">DNase =</span> DNase)</span></code></pre></div>
 <p> </p>
 <p>La utilidad del bucle <code>for</code> es mas obvia y su lógica mas
 fácil de entender si lo comparamos con cálculos equivalentes fuera de un
@@ -753,46 +773,47 @@ bucle. Por ejemplo, si quisiéramos un vector con el número de columnas
 en cada uno de los elementos de <code>lista_datos</code>. Para hacer
 esto sin un bucle necesitamos hacer el cálculo independientemente para
 cada elemento:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># primer elemento</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>elm_1 <span class="ot">&lt;-</span> lista_datos[[<span class="dv">1</span>]]</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>columnas_1 <span class="ot">&lt;-</span> <span class="fu">ncol</span>(elm_1)</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># segundo elemento</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>elm_2 <span class="ot">&lt;-</span> lista_datos[[<span class="dv">2</span>]]</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>columnas_2 <span class="ot">&lt;-</span> <span class="fu">ncol</span>(elm_2)</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co"># tercer elemento</span></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>elm_3 <span class="ot">&lt;-</span> lista_datos[[<span class="dv">3</span>]]</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>columnas_3 <span class="ot">&lt;-</span> <span class="fu">ncol</span>(elm_3)</span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co"># cuarto elemento</span></span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>elm_4 <span class="ot">&lt;-</span> lista_datos[[<span class="dv">4</span>]]</span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>columnas_4 <span class="ot">&lt;-</span> <span class="fu">ncol</span>(elm_4)</span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="co"># poner valores en vector</span></span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>columnas <span class="ot">&lt;-</span> <span class="fu">c</span>(columnas_1, columnas_2, columnas_3, columnas_4)</span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="co"># ver resultado</span></span>
-<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>columnas</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># primer elemento</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>elm_1 <span class="ot">&lt;-</span> lista_datos[[<span class="dv">1</span>]]</span>
+<span id="cb14-3"><a href="#cb14-3"></a>columnas_1 <span class="ot">&lt;-</span> <span class="fu">ncol</span>(elm_1)</span>
+<span id="cb14-4"><a href="#cb14-4"></a></span>
+<span id="cb14-5"><a href="#cb14-5"></a><span class="co"># segundo elemento</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a>elm_2 <span class="ot">&lt;-</span> lista_datos[[<span class="dv">2</span>]]</span>
+<span id="cb14-7"><a href="#cb14-7"></a>columnas_2 <span class="ot">&lt;-</span> <span class="fu">ncol</span>(elm_2)</span>
+<span id="cb14-8"><a href="#cb14-8"></a></span>
+<span id="cb14-9"><a href="#cb14-9"></a><span class="co"># tercer elemento</span></span>
+<span id="cb14-10"><a href="#cb14-10"></a>elm_3 <span class="ot">&lt;-</span> lista_datos[[<span class="dv">3</span>]]</span>
+<span id="cb14-11"><a href="#cb14-11"></a>columnas_3 <span class="ot">&lt;-</span> <span class="fu">ncol</span>(elm_3)</span>
+<span id="cb14-12"><a href="#cb14-12"></a></span>
+<span id="cb14-13"><a href="#cb14-13"></a><span class="co"># cuarto elemento</span></span>
+<span id="cb14-14"><a href="#cb14-14"></a>elm_4 <span class="ot">&lt;-</span> lista_datos[[<span class="dv">4</span>]]</span>
+<span id="cb14-15"><a href="#cb14-15"></a>columnas_4 <span class="ot">&lt;-</span> <span class="fu">ncol</span>(elm_4)</span>
+<span id="cb14-16"><a href="#cb14-16"></a></span>
+<span id="cb14-17"><a href="#cb14-17"></a><span class="co"># poner valores en vector</span></span>
+<span id="cb14-18"><a href="#cb14-18"></a>columnas <span class="ot">&lt;-</span> <span class="fu">c</span>(columnas_1, columnas_2, columnas_3, columnas_4)</span>
+<span id="cb14-19"><a href="#cb14-19"></a></span>
+<span id="cb14-20"><a href="#cb14-20"></a><span class="co"># ver resultado</span></span>
+<span id="cb14-21"><a href="#cb14-21"></a>columnas</span></code></pre></div>
 <pre><code>## [1] 2 5 4 3</code></pre>
 <p>Esta repetición de tareas se puede simplificar con un bucle
 <code>for</code> de la siguiente forma:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># crear vector vació para guardar resultados</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>columnas <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># correr bucle</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(lista_datos)){</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># sacar datos</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  elm_i <span class="ot">&lt;-</span> lista_datos[[i]]</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># calcular numero de columnas</span></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  columnas_i <span class="ot">&lt;-</span> <span class="fu">ncol</span>(elm_i)</span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># guardar valores</span></span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>  columnas <span class="ot">&lt;-</span> <span class="fu">append</span>(columnas, columnas_i) </span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>    }</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># crear vector vació para guardar resultados</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a>columnas <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a></span>
+<span id="cb16-4"><a href="#cb16-4"></a><span class="co"># correr bucle</span></span>
+<span id="cb16-5"><a href="#cb16-5"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(lista_datos)) {</span>
+<span id="cb16-6"><a href="#cb16-6"></a></span>
+<span id="cb16-7"><a href="#cb16-7"></a>    <span class="co"># sacar datos</span></span>
+<span id="cb16-8"><a href="#cb16-8"></a>    elm_i <span class="ot">&lt;-</span> lista_datos[[i]]</span>
+<span id="cb16-9"><a href="#cb16-9"></a></span>
+<span id="cb16-10"><a href="#cb16-10"></a>    <span class="co"># calcular numero de columnas</span></span>
+<span id="cb16-11"><a href="#cb16-11"></a>    columnas_i <span class="ot">&lt;-</span> <span class="fu">ncol</span>(elm_i)</span>
+<span id="cb16-12"><a href="#cb16-12"></a></span>
+<span id="cb16-13"><a href="#cb16-13"></a>    <span class="co"># guardar valores</span></span>
+<span id="cb16-14"><a href="#cb16-14"></a>    columnas <span class="ot">&lt;-</span> <span class="fu">append</span>(columnas, columnas_i)</span>
+<span id="cb16-15"><a href="#cb16-15"></a>}</span></code></pre></div>
 <p>Note que los valores del vector <code>1:length(lista_datos)</code> en
 el llamado de <code>for</code> son tomados, uno a la vez, para hacer los
 cálculos en el cuerpo del bucle.</p>
@@ -807,11 +828,12 @@ columnas para cada juego de datos de ejemplo</p>
 <p></br></p>
 <p>3.3 El juego de datos de ejemplo “ChickWeight” describe el “peso
 versus la edad de los pollitos en diferentes dietas”:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># convertir a un data.frame  </span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>ChickWeight <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(ChickWeight, <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ver las primeras filas</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ChickWeight) </span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># convertir a un data.frame</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>ChickWeight <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(ChickWeight, <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb17-3"><a href="#cb17-3"></a></span>
+<span id="cb17-4"><a href="#cb17-4"></a><span class="co"># ver las primeras filas</span></span>
+<span id="cb17-5"><a href="#cb17-5"></a><span class="fu">head</span>(ChickWeight)</span></code></pre></div>
 <table class="table table-striped table-hover table-condensed table-responsive" style="font-size: 18px; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -916,8 +938,9 @@ Diet
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ver estructura</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(ChickWeight)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># ver estructura</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="fu">str</span>(ChickWeight)</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    578 obs. of  4 variables:
 ##  $ weight: num  42 51 59 64 76 93 106 125 149 171 ...
 ##  $ Time  : num  0 2 4 6 8 10 12 14 16 18 ...
@@ -938,7 +961,8 @@ cuerpo del bucle)</p>
 función como entrada y la aplican a una secuencia de objetos (vectores
 <em>sensu lato</em>). Bucles creados con <code>(X)apply</code>. Hay
 varias funciones <code>(X)apply</code> en R:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apropos</span>(<span class="st">&quot;apply$&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">apropos</span>(<span class="st">&quot;apply$&quot;</span>)</span></code></pre></div>
 <pre><code>##  [1] &quot;apply&quot;      &quot;dendrapply&quot; &quot;eapply&quot;     &quot;kernapply&quot;  &quot;lapply&quot;    
 ##  [6] &quot;mapply&quot;     &quot;rapply&quot;     &quot;sapply&quot;     &quot;tapply&quot;     &quot;vapply&quot;</code></pre>
 <p> </p>
@@ -951,7 +975,8 @@ y<code>tapply</code>. Todos siguen la misma lógica:</p>
 <p> </p>
 <p><code>lapply</code> toma un vector (atómico o de lista), aplica una
 función a cada elemento y devuelve una lista:</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(<span class="at">X =</span> lista_datos, <span class="at">FUN =</span> nrow)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">lapply</span>(<span class="at">X =</span> lista_datos, <span class="at">FUN =</span> nrow)</span></code></pre></div>
 <pre><code>## $BOD
 ## [1] 6
 ## 
@@ -967,13 +992,15 @@ función a cada elemento y devuelve una lista:</p>
 <p><code>sapply</code> también toma un vector (atómico o de lista) y
 aplica la función a cada elemento, sin embargo, el resultado es un
 vector atómico (si puede empaquetarse como un vector):</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(<span class="at">X =</span> lista_datos, <span class="at">FUN =</span> nrow)</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">sapply</span>(<span class="at">X =</span> lista_datos, <span class="at">FUN =</span> nrow)</span></code></pre></div>
 <pre><code>##         BOD         CO2 ChickWeight       DNase 
 ##           6          84         578         176</code></pre>
 <p> </p>
 <p><code>apply</code> aplica una función a cada una de las filas o
 columnas de un objeto bidimensional:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(iris, <span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">head</span>(iris, <span class="dv">4</span>)</span></code></pre></div>
 <table class="table table-striped table-hover table-condensed table-responsive" style="font-size: 18px; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -1065,13 +1092,16 @@ setosa
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(<span class="at">X =</span> iris[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="sc">-</span><span class="dv">5</span>],<span class="at">MARGIN =</span>  <span class="dv">1</span>, <span class="at">FUN =</span>  sum)</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">apply</span>(<span class="at">X =</span> iris[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="sc">-</span><span class="dv">5</span>], <span class="at">MARGIN =</span> <span class="dv">1</span>, <span class="at">FUN =</span> sum)</span></code></pre></div>
 <pre><code>##    1    2    3    4    5    6    7    8    9   10 
 ## 10.2  9.5  9.4  9.4 10.2 11.4  9.7 10.1  8.9  9.6</code></pre>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(<span class="at">X =</span> iris[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="sc">-</span><span class="dv">5</span>], <span class="at">MARGIN =</span>  <span class="dv">1</span>, <span class="at">FUN =</span> mean)</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">apply</span>(<span class="at">X =</span> iris[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="sc">-</span><span class="dv">5</span>], <span class="at">MARGIN =</span> <span class="dv">1</span>, <span class="at">FUN =</span> mean)</span></code></pre></div>
 <pre><code>##     1     2     3     4     5     6     7     8     9    10 
 ## 2.550 2.375 2.350 2.350 2.550 2.850 2.425 2.525 2.225 2.400</code></pre>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(<span class="at">X =</span> iris, <span class="at">MARGIN =</span> <span class="dv">2</span>, <span class="at">FUN =</span> class)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="fu">apply</span>(<span class="at">X =</span> iris, <span class="at">MARGIN =</span> <span class="dv">2</span>, <span class="at">FUN =</span> class)</span></code></pre></div>
 <pre><code>## Sepal.Length  Sepal.Width Petal.Length  Petal.Width      Species 
 ##  &quot;character&quot;  &quot;character&quot;  &quot;character&quot;  &quot;character&quot;  &quot;character&quot;</code></pre>
 <p> </p>
@@ -1079,21 +1109,23 @@ setosa
 subconjunto de datos definido por un vector categórico adicional. Por
 ejemplo, podemos calcular la longitud promedio de pétalo para cada
 especie en el juego de datos ‘iris’ de la siguiente manera:</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tapply</span>(<span class="at">X =</span> iris<span class="sc">$</span>Petal.Length, <span class="at">INDEX =</span> iris<span class="sc">$</span>Species, <span class="at">FUN =</span> mean)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="fu">tapply</span>(<span class="at">X =</span> iris<span class="sc">$</span>Petal.Length, <span class="at">INDEX =</span> iris<span class="sc">$</span>Species, <span class="at">FUN =</span> mean)</span></code></pre></div>
 <pre><code>##     setosa versicolor  virginica 
 ##      1.462      4.260      5.552</code></pre>
 <p> </p>
 <p>Los bucles <code>(X) apply</code> pueden modificarse para realizar
 “acciones” personalizadas creando nuevas funciones (ya sea dentro o
 fuera del bucle):</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># funcion desde fuera del bucle</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>dims <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">c</span>(<span class="fu">nrow</span>(x), <span class="fu">ncol</span>(x))</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="co"># correr buble</span></span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>df_dims <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="at">X =</span> lista_datos, <span class="at">FUN =</span> dims)</span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ver resultados</span></span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_dims, <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="co"># funcion desde fuera del bucle</span></span>
+<span id="cb35-2"><a href="#cb35-2"></a>dims <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">c</span>(<span class="fu">nrow</span>(x), <span class="fu">ncol</span>(x))</span>
+<span id="cb35-3"><a href="#cb35-3"></a></span>
+<span id="cb35-4"><a href="#cb35-4"></a><span class="co"># correr buble</span></span>
+<span id="cb35-5"><a href="#cb35-5"></a>df_dims <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="at">X =</span> lista_datos, <span class="at">FUN =</span> dims)</span>
+<span id="cb35-6"><a href="#cb35-6"></a></span>
+<span id="cb35-7"><a href="#cb35-7"></a><span class="co"># ver resultados</span></span>
+<span id="cb35-8"><a href="#cb35-8"></a><span class="fu">head</span>(df_dims, <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## $BOD
 ## [1] 6 2
 ## 
@@ -1102,11 +1134,12 @@ fuera del bucle):</p>
 ## 
 ## $ChickWeight
 ## [1] 578   4</code></pre>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># # funcion dentro del bucle</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>df_dims <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="at">X =</span> lista_datos, <span class="at">FUN =</span> <span class="cf">function</span>(x) <span class="fu">c</span>(<span class="fu">nrow</span>(x), <span class="fu">ncol</span>(x)))</span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ver resultados</span></span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_dims, <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="co"># # funcion dentro del bucle</span></span>
+<span id="cb37-2"><a href="#cb37-2"></a>df_dims <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="at">X =</span> lista_datos, <span class="at">FUN =</span> <span class="cf">function</span>(x) <span class="fu">c</span>(<span class="fu">nrow</span>(x), <span class="fu">ncol</span>(x)))</span>
+<span id="cb37-3"><a href="#cb37-3"></a></span>
+<span id="cb37-4"><a href="#cb37-4"></a><span class="co"># ver resultados</span></span>
+<span id="cb37-5"><a href="#cb37-5"></a><span class="fu">head</span>(df_dims, <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## $BOD
 ## [1] 6 2
 ## 
@@ -1188,21 +1221,23 @@ Tutorial on Loops in R - Usage and Alternatives, DataCamp</a></li>
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] ggplot2_3.3.6      RColorBrewer_1.1-3 kableExtra_1.3.1   knitr_1.39        
+## [1] xaringanExtra_0.7.0 ggplot2_3.3.6       RColorBrewer_1.1-3 
+## [4] kableExtra_1.3.1    knitr_1.39         
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] highr_0.9         pillar_1.8.0      bslib_0.2.5.1     compiler_4.1.0   
-##  [5] jquerylib_0.1.4   tools_4.1.0       digest_0.6.29     gtable_0.3.0     
-##  [9] jsonlite_1.8.0    evaluate_0.15     lifecycle_1.0.1   tibble_3.1.8     
-## [13] viridisLite_0.4.0 pkgconfig_2.0.3   rlang_1.0.4       DBI_1.1.1        
-## [17] cli_3.3.0         rstudioapi_0.13   yaml_2.3.5        xfun_0.31        
-## [21] fastmap_1.1.0     withr_2.5.0       dplyr_1.0.7       stringr_1.4.0    
-## [25] httr_1.4.2        xml2_1.3.2        generics_0.1.0    vctrs_0.4.1      
-## [29] sass_0.4.0        tidyselect_1.1.1  grid_4.1.0        webshot_0.5.2    
-## [33] glue_1.6.2        R6_2.5.1          fansi_1.0.3       rmarkdown_2.13   
-## [37] farver_2.1.1      purrr_0.3.4       magrittr_2.0.3    scales_1.2.0     
-## [41] htmltools_0.5.3   assertthat_0.2.1  rvest_1.0.0       colorspace_2.0-3 
-## [45] labeling_0.4.2    utf8_1.2.2        stringi_1.7.8     munsell_0.5.0</code></pre>
+##  [1] formatR_1.11      highr_0.9         pillar_1.8.0      bslib_0.2.5.1    
+##  [5] compiler_4.1.0    jquerylib_0.1.4   tools_4.1.0       uuid_0.1-4       
+##  [9] digest_0.6.29     gtable_0.3.0      jsonlite_1.8.0    evaluate_0.15    
+## [13] lifecycle_1.0.1   tibble_3.1.8      viridisLite_0.4.0 pkgconfig_2.0.3  
+## [17] rlang_1.0.4       DBI_1.1.1         cli_3.3.0         rstudioapi_0.13  
+## [21] yaml_2.3.5        xfun_0.31         fastmap_1.1.0     withr_2.5.0      
+## [25] dplyr_1.0.7       stringr_1.4.0     httr_1.4.2        xml2_1.3.2       
+## [29] generics_0.1.0    vctrs_0.4.1       sass_0.4.0        tidyselect_1.1.1 
+## [33] grid_4.1.0        webshot_0.5.2     glue_1.6.2        R6_2.5.1         
+## [37] fansi_1.0.3       rmarkdown_2.13    farver_2.1.1      purrr_0.3.4      
+## [41] magrittr_2.0.3    scales_1.2.0      htmltools_0.5.3   assertthat_0.2.1 
+## [45] rvest_1.0.0       colorspace_2.0-3  labeling_0.4.2    utf8_1.2.2       
+## [49] stringi_1.7.8     munsell_0.5.0</code></pre>
 </div>
 
 
