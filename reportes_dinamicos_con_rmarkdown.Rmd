@@ -82,7 +82,7 @@ knitr::include_graphics("./images/chunk.png")
 
 - Familiarizarse con el formato para reportes dinámicos Rmarkdown
 
-- Ser capaz de documentar manejo/análisis de datos en R usando Rmarkdown
+- Ser capaz de documentar el manejo y análisis de datos en R usando Rmarkdown
 
 </div>
 
