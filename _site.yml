@@ -13,7 +13,7 @@ navbar:
       - text: "Fundamentos de R"
         href: fundamentos_de_r.html
       - text: "Modelos de regresión lineal"
-        href: linear_regression_models.html
+        href: modelos_de_regresion_lineal.html
       - text: "Modelos comunes como regresiones"
         href: stadistica_tradicional_en_regresiones.html
       - text: "Gráficos con ggplot2"
@@ -22,6 +22,12 @@ navbar:
       href: preparacion_curso.html
     - text: "Compartir código"
       href: https://codefile.io/f/XOIzH23KfULuZKyZ1TYT
+    - text: "Tareas"
+      menu:
+      - text: "Tarea 4"
+        href: 
+      - text: "Tarea 5"
+        href: 
     - text: "Programa del curso"
       href: https://github.com/maRce10/ucr_r_avanzado/raw/master/additional_files/2022-08-05_Probl%20Esp%20Ecol_Estadistica%20Avanzada%20en%20R.pdf
     - text: "Instructor"

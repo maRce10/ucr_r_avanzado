@@ -11,9 +11,9 @@
 
 
 
-<title>course_prep.knit</title>
+<title>preparacion_curso.knit</title>
 
-<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -257,24 +257,35 @@ $(document).ready(function () {
       <a href="reportes_dinamicos_con_rmarkdown.html">Reportes dinámicos con Rmarkdown</a>
     </li>
     <li>
-      <a href="r_basics.html">Fundamentos de R</a>
+      <a href="fundamentos_de_r.html">Fundamentos de R</a>
     </li>
     <li>
       <a href="linear_regression_models.html">Modelos de regresión lineal</a>
     </li>
     <li>
-      <a href="common_stats_as_lms.html">Modelos comunes como regresiones</a>
+      <a href="stadistica_tradicional_en_regresiones.html">Modelos comunes como regresiones</a>
     </li>
     <li>
-      <a href="graphs_with_ggplot2.html">Gráficos con ggplot2</a>
+      <a href="graficos_con_ggplot2.html">Gráficos con ggplot2</a>
     </li>
   </ul>
 </li>
 <li>
-  <a href="course_prep.html">Preparación para el curso</a>
+  <a href="preparacion_curso.html">Preparación para el curso</a>
 </li>
 <li>
   <a href="https://codefile.io/f/XOIzH23KfULuZKyZ1TYT">Compartir código</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Tareas
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Tarea 4</li>
+    <li class="dropdown-header">Tarea 5</li>
+  </ul>
 </li>
 <li>
   <a href="https://github.com/maRce10/ucr_r_avanzado/raw/master/additional_files/2022-08-05_Probl%20Esp%20Ecol_Estadistica%20Avanzada%20en%20R.pdf">Programa del curso</a>
@@ -318,33 +329,33 @@ options” (última opción). Seleccioná la opción “Code”, luego seleccion
 la casilla de “Soft wrap”.</p></li>
 <li><p>También en Rstudio: Seleccioná la opción “Pane Layout” y mové
 “Source” al panel superior izquierdo y “Console” al panel superior
-derecho. Para aquellos que no estén familiarizados con RStudio, la
-fuente es tu script, donde guardas el código en un archivo físico
-(normalmente .R script) y la consola imprime la salida del código que
-ejecutás desde la fuente. Podés escribir código en la consola, pero no
-se guardará en un archivo físico. Esta disposición asigna más espacio en
-la pantalla a los paneles más útiles. Dalé “Apply” y “Ok”.</p></li>
+derecho. Esta disposición asigna más espacio en la pantalla a los
+paneles más útiles. Dalé “Apply” y “Ok”. Para aquellos que no estén
+familiarizados con RStudio, “Source” es un editor de texto donde se
+escribe el código y donde guardas el código en un archivo físico
+(normalmente en formato .R) y la consola evalúa el código que se envia
+desde el “Source” e imprime los resultados (si los hay). Podés escribir
+código en la consola, pero no se guardará en un archivo físico.</p></li>
 <li><p>Ahora en la consola de R en Rstudio ejecutá el siguiente código
 para instalar los paquetes que estaremos usando durante el
 curso:</p></li>
 </ol>
-<pre class="r"><code>install.packages(&quot;Rmarkdown&quot;) 
+<pre class="r"><code>install.packages(&quot;leaflet&quot;)
+install.packages(&quot;remotes&quot;)
+install.packages(&quot;rmarkdown&quot;) 
+install.packages(&quot;knitr&quot;)
+install.packages(&quot;kableExtra&quot;)
+install.packages(&quot;RColorBrewer&quot;)
+install.packages(&quot;rmdformats&quot;)
+install.packages(&quot;revealjs&quot;)
+install.packages(&quot;rticles&quot;)
+install.packages(&quot;tufte&quot;)
 install.packages(&quot;ggplot2&quot;) 
 install.packages(&quot;lme4&quot;)
 install.packages(&quot;MASS&quot;)
 install.packages(&quot;viridis&quot;)
 install.packages(&quot;lmerTest&quot;)
 install.packages(&quot;sjPlot&quot;)
-install.packages(&quot;knitr&quot;)
-install.packages(&quot;kable&quot;)
-install.packages(&quot;kableExtra&quot;)
-install.packages(&quot;emo&quot;)
-install.packages(&quot;RColorBrewer&quot;)
-install.packages(&quot;rmdformats&quot;)
-install.packages(&quot;revealjs&quot;)
-install.packages(&quot;rticles&quot;)
-install.packages(&quot;tufte&quot;)
-install.packages(&quot;remotes&quot;)
 remotes::install_github(&quot;hadley/emo&quot;)
 remotes::install_github(&quot;maRce10/sketchy&quot;)</code></pre>
 <p> </p>

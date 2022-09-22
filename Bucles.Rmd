@@ -387,6 +387,7 @@ head(cc_vector)
 
 ```
 &nbsp;
+
 Tenga en cuenta que en este caso la condición determina si el ciclo debe detenerse. En el ciclo `while` la condición determina si el ciclo debe continuar.
 
 &nbsp;
