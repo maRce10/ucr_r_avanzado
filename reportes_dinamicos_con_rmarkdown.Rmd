@@ -452,7 +452,7 @@ boxplot(iris$Sepal.Length ~ iris$Species, col = "#EE000080",
 
 &nbsp;
 
-3.2 Haga lo mismo con los argumentos `out.width`, `fig.width`,` dpi` y `fig.height` en un segmento cuando corra cree un gráfico. ¿Cómo afecta esta vez?
+3.2 Haga lo mismo con los argumentos `out.width`, `fig.width`,` dpi` y `fig.height` en un segmento que cree un gráfico. ¿Cómo afecta esta vez?
 
 </div>
 
