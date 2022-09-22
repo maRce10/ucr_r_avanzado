@@ -457,6 +457,7 @@ boxplot(iris$Sepal.Length ~ iris$Species, col = "#EE000080",
 </div>
 
 &nbsp; 
+
 ## Incrustar código de R en el texto
 
 Es posible que haya notado a lo largo de este tutorial que tengo pequeños fragmentos de texto que parecen "bloques de código". Esto se conoce como incrustación de código en texto.
