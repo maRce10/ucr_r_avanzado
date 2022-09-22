@@ -1,6 +1,4 @@
 
-<br>
-
 <center>
 <font size="6"><b>Programación y métodos estadísticos avanzados en R</b></font>
 </center>
