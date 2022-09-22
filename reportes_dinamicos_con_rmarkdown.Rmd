@@ -78,40 +78,24 @@ registerS3method("knit_print", "data.frame", tibble)
 
 Paquetes a utilizar en este manual:
 
-```{r, background="gray"}
+```{r}
 
-# install.packages("leaflet")
-library(leaflet)
+# vector con paquetes
+ptqs <- c("leaflet", "remotes", "hadley/emo", "maRce10/sketchy", "knitr", "rmarkdown", "kableExtra", "rmdformats", "revealjs", "rticles", "tufte")
 
-# install.packages("remotes")
-library("remotes")
+# bucle para instalar/cargar paquetes
+instalado <- sapply(ptqs, function(y) {
+  
+  ptq <- strsplit(y, "/")[[1]]
+  ptq <- ptq[length(ptq)]
+  
+  if (!ptq %in% installed.packages()[,"Package"])  {
+      if (grepl("/", y))  remotes::install_github(y, force = TRUE) else install.packages(y) 
+  }
+  
+  try(require(ptq, character.only = TRUE), silent = TRUE)
+})
 
-# remotes::install_github("hadley/emo")
-library("emo")
-
-# remotes::install_github("maRce10/sketchy")
-library("sketchy")
-
-# install.packages("rmarkdown") 
-library("knitr")
-
-# install.packages("rmarkdown") 
-library("rmarkdown")
-
-# install.packages("kableExtra")
-library("kableExtra")
-
-# install.packages("rmdformats")
-library("rmdformats")
-
-# install.packages("revealjs")
-library("revealjs")
-
-# install.packages("rticles")
-library("rticles")
-
-# install.packages("tufte")
-library("tufte")
 
 ```
 

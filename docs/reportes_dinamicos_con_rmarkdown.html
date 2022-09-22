@@ -13,7 +13,7 @@
 
 <title>reportes_dinamicos_con_rmarkdown.knit</title>
 
-<script src="site_libs/header-attrs-2.16/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -140,20 +140,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   for (var i = 0; i < sheets.length; i++) {
     if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
     try { var rules = sheets[i].cssRules; } catch (e) { continue; }
-    var j = 0;
-    while (j < rules.length) {
+    for (var j = 0; j < rules.length; j++) {
       var rule = rules[j];
       // check if there is a div.sourceCode rule
-      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
-        j++;
-        continue;
-      }
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
       var style = rule.style.cssText;
       // check if color or background-color is set
-      if (rule.style.color === '' && rule.style.backgroundColor === '') {
-        j++;
-        continue;
-      }
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
       // replace div.sourceCode by a pre.sourceCode rule
       sheets[i].deleteRule(j);
       sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
@@ -249,15 +242,11 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark the anchor link active (and if it's in a dropdown, also mark that active)
-  var dropdown = menuAnchor.closest('li.dropdown');
-  if (window.bootstrap) { // Bootstrap 4+
-    menuAnchor.addClass('active');
-    dropdown.find('> .dropdown-toggle').addClass('active');
-  } else { // Bootstrap 3
-    menuAnchor.parent().addClass('active');
-    dropdown.addClass('active');
-  }
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -447,15 +436,15 @@ div.tocify {
       <a href="linear_regression_models.html">Modelos de regresión lineal</a>
     </li>
     <li>
-      <a href="common_stats_as_lms.html">Modelos comunes como regresiones</a>
+      <a href="stadistica_tradicional_en_regresiones.html">Modelos comunes como regresiones</a>
     </li>
     <li>
-      <a href="graphs_with_ggplot2.html">Gráficos con ggplot2</a>
+      <a href="graficos_con_ggplot2.html">Gráficos con ggplot2</a>
     </li>
   </ul>
 </li>
 <li>
-  <a href="course_prep.html">Preparación para el curso</a>
+  <a href="preparacion_curso.html">Preparación para el curso</a>
 </li>
 <li>
   <a href="https://codefile.io/f/XOIzH23KfULuZKyZ1TYT">Compartir código</a>
@@ -516,38 +505,24 @@ Rmarkdown</p></li>
 <p> </p>
 <p>Paquetes a utilizar en este manual:</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># install.packages(&#39;leaflet&#39;)</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(leaflet)</span>
-<span id="cb1-3"><a href="#cb1-3"></a></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="co"># install.packages(&#39;remotes&#39;)</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">library</span>(<span class="st">&quot;remotes&quot;</span>)</span>
-<span id="cb1-6"><a href="#cb1-6"></a></span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="co"># remotes::install_github(&#39;hadley/emo&#39;)</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="fu">library</span>(<span class="st">&quot;emo&quot;</span>)</span>
-<span id="cb1-9"><a href="#cb1-9"></a></span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="co"># remotes::install_github(&#39;maRce10/sketchy&#39;)</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a><span class="fu">library</span>(<span class="st">&quot;sketchy&quot;</span>)</span>
-<span id="cb1-12"><a href="#cb1-12"></a></span>
-<span id="cb1-13"><a href="#cb1-13"></a><span class="co"># install.packages(&#39;rmarkdown&#39;)</span></span>
-<span id="cb1-14"><a href="#cb1-14"></a><span class="fu">library</span>(<span class="st">&quot;knitr&quot;</span>)</span>
-<span id="cb1-15"><a href="#cb1-15"></a></span>
-<span id="cb1-16"><a href="#cb1-16"></a><span class="co"># install.packages(&#39;rmarkdown&#39;)</span></span>
-<span id="cb1-17"><a href="#cb1-17"></a><span class="fu">library</span>(<span class="st">&quot;rmarkdown&quot;</span>)</span>
-<span id="cb1-18"><a href="#cb1-18"></a></span>
-<span id="cb1-19"><a href="#cb1-19"></a><span class="co"># install.packages(&#39;kableExtra&#39;)</span></span>
-<span id="cb1-20"><a href="#cb1-20"></a><span class="fu">library</span>(<span class="st">&quot;kableExtra&quot;</span>)</span>
-<span id="cb1-21"><a href="#cb1-21"></a></span>
-<span id="cb1-22"><a href="#cb1-22"></a><span class="co"># install.packages(&#39;rmdformats&#39;)</span></span>
-<span id="cb1-23"><a href="#cb1-23"></a><span class="fu">library</span>(<span class="st">&quot;rmdformats&quot;</span>)</span>
-<span id="cb1-24"><a href="#cb1-24"></a></span>
-<span id="cb1-25"><a href="#cb1-25"></a><span class="co"># install.packages(&#39;revealjs&#39;)</span></span>
-<span id="cb1-26"><a href="#cb1-26"></a><span class="fu">library</span>(<span class="st">&quot;revealjs&quot;</span>)</span>
-<span id="cb1-27"><a href="#cb1-27"></a></span>
-<span id="cb1-28"><a href="#cb1-28"></a><span class="co"># install.packages(&#39;rticles&#39;)</span></span>
-<span id="cb1-29"><a href="#cb1-29"></a><span class="fu">library</span>(<span class="st">&quot;rticles&quot;</span>)</span>
-<span id="cb1-30"><a href="#cb1-30"></a></span>
-<span id="cb1-31"><a href="#cb1-31"></a><span class="co"># install.packages(&#39;tufte&#39;)</span></span>
-<span id="cb1-32"><a href="#cb1-32"></a><span class="fu">library</span>(<span class="st">&quot;tufte&quot;</span>)</span></code></pre></div>
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># vector con paquetes</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>ptqs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;leaflet&quot;</span>, <span class="st">&quot;remotes&quot;</span>, <span class="st">&quot;hadley/emo&quot;</span>, <span class="st">&quot;maRce10/sketchy&quot;</span>, <span class="st">&quot;knitr&quot;</span>,</span>
+<span id="cb1-3"><a href="#cb1-3"></a>    <span class="st">&quot;rmarkdown&quot;</span>, <span class="st">&quot;kableExtra&quot;</span>, <span class="st">&quot;rmdformats&quot;</span>, <span class="st">&quot;revealjs&quot;</span>, <span class="st">&quot;rticles&quot;</span>,</span>
+<span id="cb1-4"><a href="#cb1-4"></a>    <span class="st">&quot;tufte&quot;</span>)</span>
+<span id="cb1-5"><a href="#cb1-5"></a></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="co"># bucle para instalar/cargar paquetes</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>instalado <span class="ot">&lt;-</span> <span class="fu">sapply</span>(ptqs, <span class="cf">function</span>(y) {</span>
+<span id="cb1-8"><a href="#cb1-8"></a></span>
+<span id="cb1-9"><a href="#cb1-9"></a>    ptq <span class="ot">&lt;-</span> <span class="fu">strsplit</span>(y, <span class="st">&quot;/&quot;</span>)[[<span class="dv">1</span>]]</span>
+<span id="cb1-10"><a href="#cb1-10"></a>    ptq <span class="ot">&lt;-</span> ptq[<span class="fu">length</span>(ptq)]</span>
+<span id="cb1-11"><a href="#cb1-11"></a></span>
+<span id="cb1-12"><a href="#cb1-12"></a>    <span class="cf">if</span> (<span class="sc">!</span>ptq <span class="sc">%in%</span> <span class="fu">installed.packages</span>()[, <span class="st">&quot;Package&quot;</span>]) {</span>
+<span id="cb1-13"><a href="#cb1-13"></a>        <span class="cf">if</span> (<span class="fu">grepl</span>(<span class="st">&quot;/&quot;</span>, y))</span>
+<span id="cb1-14"><a href="#cb1-14"></a>            remotes<span class="sc">::</span><span class="fu">install_github</span>(y, <span class="at">force =</span> <span class="cn">TRUE</span>) <span class="cf">else</span> <span class="fu">install.packages</span>(y)</span>
+<span id="cb1-15"><a href="#cb1-15"></a>    }</span>
+<span id="cb1-16"><a href="#cb1-16"></a></span>
+<span id="cb1-17"><a href="#cb1-17"></a>    <span class="fu">try</span>(<span class="fu">require</span>(ptq, <span class="at">character.only =</span> <span class="cn">TRUE</span>), <span class="at">silent =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-18"><a href="#cb1-18"></a>})</span></code></pre></div>
 <p> </p>
 <hr />
 <div id="crisis-de-reproducibilidad-en-la-ciencia"
@@ -782,7 +757,7 @@ random.var
 setosa
 </td>
 <td style="text-align:center;">
--0.1514
+-0.7911
 </td>
 </tr>
 <tr>
@@ -802,7 +777,7 @@ setosa
 setosa
 </td>
 <td style="text-align:center;">
-0.8521
+-1.7386
 </td>
 </tr>
 <tr>
@@ -822,7 +797,7 @@ setosa
 setosa
 </td>
 <td style="text-align:center;">
-0.2993
+-1.0211
 </td>
 </tr>
 <tr>
@@ -842,7 +817,7 @@ setosa
 setosa
 </td>
 <td style="text-align:center;">
--1.4914
+1.2517
 </td>
 </tr>
 <tr>
@@ -862,7 +837,7 @@ setosa
 setosa
 </td>
 <td style="text-align:center;">
-0.4593
+-0.3891
 </td>
 </tr>
 <tr>
@@ -882,7 +857,7 @@ setosa
 setosa
 </td>
 <td style="text-align:center;">
-1.4347
+0.9408
 </td>
 </tr>
 </tbody>
@@ -943,7 +918,7 @@ random.var
 setosa
 </td>
 <td style="text-align:center;">
--1.9231
+-0.8467
 </td>
 </tr>
 <tr>
@@ -963,7 +938,7 @@ setosa
 setosa
 </td>
 <td style="text-align:center;">
-1.6514
+-0.4120
 </td>
 </tr>
 <tr>
@@ -983,7 +958,7 @@ setosa
 setosa
 </td>
 <td style="text-align:center;">
--1.9488
+0.5090
 </td>
 </tr>
 <tr>
@@ -1003,7 +978,7 @@ setosa
 setosa
 </td>
 <td style="text-align:center;">
--0.7194
+-0.8363
 </td>
 </tr>
 <tr>
@@ -1023,7 +998,7 @@ setosa
 setosa
 </td>
 <td style="text-align:center;">
--0.3872
+-0.5666
 </td>
 </tr>
 <tr>
@@ -1043,7 +1018,7 @@ setosa
 setosa
 </td>
 <td style="text-align:center;">
--0.3493
+1.4198
 </td>
 </tr>
 </tbody>
@@ -1229,7 +1204,7 @@ random.var
 setosa
 </td>
 <td style="text-align:center;">
--1.9231
+-0.8467
 </td>
 </tr>
 <tr>
@@ -1249,7 +1224,7 @@ setosa
 setosa
 </td>
 <td style="text-align:center;">
-1.6514
+-0.4120
 </td>
 </tr>
 <tr>
@@ -1269,7 +1244,7 @@ setosa
 setosa
 </td>
 <td style="text-align:center;">
--1.9488
+0.5090
 </td>
 </tr>
 <tr>
@@ -1289,7 +1264,7 @@ setosa
 setosa
 </td>
 <td style="text-align:center;">
--0.7194
+-0.8363
 </td>
 </tr>
 <tr>
@@ -1309,7 +1284,7 @@ setosa
 setosa
 </td>
 <td style="text-align:center;">
--0.3872
+-0.5666
 </td>
 </tr>
 <tr>
@@ -1329,7 +1304,7 @@ setosa
 setosa
 </td>
 <td style="text-align:center;">
--0.3493
+1.4198
 </td>
 </tr>
 <tr>
@@ -1349,7 +1324,7 @@ setosa
 setosa
 </td>
 <td style="text-align:center;">
-0.9052
+0.5571
 </td>
 </tr>
 <tr>
@@ -1369,7 +1344,7 @@ setosa
 setosa
 </td>
 <td style="text-align:center;">
--0.2852
+1.1876
 </td>
 </tr>
 <tr>
@@ -1389,7 +1364,7 @@ setosa
 setosa
 </td>
 <td style="text-align:center;">
-0.5602
+1.3780
 </td>
 </tr>
 <tr>
@@ -1409,7 +1384,7 @@ setosa
 setosa
 </td>
 <td style="text-align:center;">
-1.5398
+1.4166
 </td>
 </tr>
 </tbody>
@@ -1493,8 +1468,8 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <span id="cb9-6"><a href="#cb9-6"></a>    <span class="at">zoom =</span> <span class="dv">13</span>)</span>
 <span id="cb9-7"><a href="#cb9-7"></a></span>
 <span id="cb9-8"><a href="#cb9-8"></a><span class="fu">addPopups</span>(<span class="at">map =</span> ll_map, <span class="at">lat =</span> <span class="fl">5.527448</span>, <span class="at">lng =</span> <span class="sc">-</span><span class="fl">87.057245</span>, <span class="at">popup =</span> <span class="st">&quot;Isla del Coco&quot;</span>)</span></code></pre></div>
-<div id="htmlwidget-c71410f1f6819cacf1a3" style="width:100%;height:480px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-c71410f1f6819cacf1a3">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addPopups","args":[5.527448,-87.057245,"Isla del Coco",null,null,{"maxWidth":300,"minWidth":50,"autoPan":true,"keepInView":false,"closeButton":true,"className":""}]}],"setView":[[5.527448,-87.057245],13,[]],"limits":{"lat":[5.527448,5.527448],"lng":[-87.057245,-87.057245]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-3894dc68abe780184b05" style="width:100%;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3894dc68abe780184b05">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addPopups","args":[5.527448,-87.057245,"Isla del Coco",null,null,{"maxWidth":300,"minWidth":50,"autoPan":true,"keepInView":false,"closeButton":true,"className":""}]}],"setView":[[5.527448,-87.057245],13,[]],"limits":{"lat":[5.527448,5.527448],"lng":[-87.057245,-87.057245]}},"evals":[],"jsHooks":[]}</script>
 <p> </p>
 <p>Este es el bloque de código que generó el mapa:</p>
 <p><img src="images/leaflet.png" width="90%" style="display: block; margin: auto;" /></p>
@@ -1692,18 +1667,18 @@ class="uri">https://github.com/ramnathv/htmlwidgets</a>.</li>
 <hr />
 <hr />
 <p><font size="4">Información de la sesión</font></p>
-<pre><code>## R version 4.2.0 (2022-04-22)
+<pre><code>## R version 4.1.1 (2021-08-10)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
-## Running under: Ubuntu 22.04.1 LTS
+## Running under: Ubuntu 20.04.2 LTS
 ## 
 ## Matrix products: default
-## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0
-## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0
+## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0
+## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0
 ## 
 ## locale:
-##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
-##  [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=en_US.UTF-8    
-##  [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=en_US.UTF-8   
+##  [1] LC_CTYPE=es_ES.UTF-8       LC_NUMERIC=C              
+##  [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=es_ES.UTF-8    
+##  [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=es_ES.UTF-8   
 ##  [7] LC_PAPER=es_CR.UTF-8       LC_NAME=C                 
 ##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
 ## [11] LC_MEASUREMENT=es_CR.UTF-8 LC_IDENTIFICATION=C       
@@ -1713,24 +1688,24 @@ class="uri">https://github.com/ramnathv/htmlwidgets</a>.</li>
 ## 
 ## other attached packages:
 ##  [1] tufte_0.12          rticles_0.24        revealjs_0.9       
-##  [4] rmdformats_1.0.4    kableExtra_1.3.4    rmarkdown_2.16     
+##  [4] rmdformats_1.0.4    kableExtra_1.3.4    rmarkdown_2.14     
 ##  [7] sketchy_1.0.2       remotes_2.4.2       leaflet_2.1.1      
-## [10] knitr_1.40          xaringanExtra_0.7.0 emo_0.0.0.9000     
+## [10] knitr_1.39          xaringanExtra_0.7.0 emo_0.0.0.9000     
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] xfun_0.33         bslib_0.3.1       purrr_0.3.4       colorspace_2.0-3 
+##  [1] xfun_0.31         bslib_0.3.1       purrr_0.3.4       colorspace_2.0-3 
 ##  [5] vctrs_0.4.1       generics_0.1.2    htmltools_0.5.3   viridisLite_0.4.0
 ##  [9] yaml_2.3.5        utf8_1.2.2        rlang_1.0.4       jquerylib_0.1.4  
 ## [13] pillar_1.8.0      glue_1.6.2        uuid_1.1-0        lifecycle_1.0.1  
 ## [17] stringr_1.4.0     munsell_0.5.0     rvest_1.0.2       htmlwidgets_1.5.4
-## [21] evaluate_0.16     fastmap_1.1.0     crosstalk_1.2.0   fansi_1.0.3      
+## [21] evaluate_0.15     fastmap_1.1.0     crosstalk_1.2.0   fansi_1.0.3      
 ## [25] highr_0.9         scales_1.2.0      formatR_1.12      webshot_0.5.3    
-## [29] jsonlite_1.8.0    systemfonts_1.0.4 digest_0.6.29     packrat_0.8.1    
-## [33] stringi_1.7.8     bookdown_0.29     cli_3.3.0         tools_4.2.0      
+## [29] jsonlite_1.8.0    systemfonts_1.0.4 digest_0.6.29     packrat_0.8.0    
+## [33] stringi_1.7.8     bookdown_0.27     cli_3.3.0         tools_4.1.1      
 ## [37] magrittr_2.0.3    sass_0.4.1        tibble_3.1.8      crayon_1.5.1     
 ## [41] pkgconfig_2.0.3   xml2_1.3.3        lubridate_1.8.0   assertthat_0.2.1 
-## [45] svglite_2.1.0     httr_1.4.4        rstudioapi_0.13   R6_2.5.1         
-## [49] compiler_4.2.0</code></pre>
+## [45] svglite_2.1.0     httr_1.4.3        rstudioapi_0.13   R6_2.5.1         
+## [49] compiler_4.1.1</code></pre>
 </div>
 </div>
 

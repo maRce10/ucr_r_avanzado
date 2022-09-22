@@ -75,6 +75,18 @@ htmltools::tagList(
 )
 ```
  
+<!-- skyblue box -->
+
+<div class="alert alert-info">
+
+# Objetivo del manual
+
+- Aprender a procesar de forma serial operaciones que deben repetirse sobre diferentes objetos
+
+</div>
+
+&nbsp; 
+ 
 ## Bucles (loops) 
 
 - Proceso automatizado de varios pasos organizado como secuencias de acciones (p. Ej., procesos 'por lotes')

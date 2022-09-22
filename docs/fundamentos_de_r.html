@@ -13,7 +13,7 @@
 
 <title>fundamentos_de_r.knit</title>
 
-<script src="site_libs/header-attrs-2.16/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -134,20 +134,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   for (var i = 0; i < sheets.length; i++) {
     if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
     try { var rules = sheets[i].cssRules; } catch (e) { continue; }
-    var j = 0;
-    while (j < rules.length) {
+    for (var j = 0; j < rules.length; j++) {
       var rule = rules[j];
       // check if there is a div.sourceCode rule
-      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
-        j++;
-        continue;
-      }
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
       var style = rule.style.cssText;
       // check if color or background-color is set
-      if (rule.style.color === '' && rule.style.backgroundColor === '') {
-        j++;
-        continue;
-      }
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
       // replace div.sourceCode by a pre.sourceCode rule
       sheets[i].deleteRule(j);
       sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
@@ -243,15 +236,11 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark the anchor link active (and if it's in a dropdown, also mark that active)
-  var dropdown = menuAnchor.closest('li.dropdown');
-  if (window.bootstrap) { // Bootstrap 4+
-    menuAnchor.addClass('active');
-    dropdown.find('> .dropdown-toggle').addClass('active');
-  } else { // Bootstrap 3
-    menuAnchor.parent().addClass('active');
-    dropdown.addClass('active');
-  }
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -441,15 +430,15 @@ div.tocify {
       <a href="linear_regression_models.html">Modelos de regresión lineal</a>
     </li>
     <li>
-      <a href="common_stats_as_lms.html">Modelos comunes como regresiones</a>
+      <a href="stadistica_tradicional_en_regresiones.html">Modelos comunes como regresiones</a>
     </li>
     <li>
-      <a href="graphs_with_ggplot2.html">Gráficos con ggplot2</a>
+      <a href="graficos_con_ggplot2.html">Gráficos con ggplot2</a>
     </li>
   </ul>
 </li>
 <li>
-  <a href="course_prep.html">Preparación para el curso</a>
+  <a href="preparacion_curso.html">Preparación para el curso</a>
 </li>
 <li>
   <a href="https://codefile.io/f/XOIzH23KfULuZKyZ1TYT">Compartir código</a>
@@ -490,6 +479,18 @@ Araya-Salas, PhD</a></font>
 </div>
 
 
+<!-- skyblue box -->
+<div id="objetivo-del-manual" class="section level1 alert alert-info">
+<h1>Objetivo del manual</h1>
+<ul>
+<li><p>Familiarizarse con los bloques básicos usados en la programación
+en R</p></li>
+<li><p>Conocer las fuentes principales de documentación estandarizada en
+R</p></li>
+</ul>
+</div>
+<hr />
+<p> </p>
 <div id="qué-es-r" class="section level1">
 <h1>¿Qué es R?</h1>
 <ul>
@@ -1130,13 +1131,14 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <span id="cb129-2"><a href="#cb129-2"></a>bi <span class="ot">&lt;-</span> <span class="fu">builtins</span>()</span>
 <span id="cb129-3"><a href="#cb129-3"></a></span>
 <span id="cb129-4"><a href="#cb129-4"></a><span class="fu">length</span>(bi)</span></code></pre></div>
-<pre><code>## [1] 1376</code></pre>
+<pre><code>## [1] 1370</code></pre>
 <div class="sourceCode" id="cb131"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb131-1"><a href="#cb131-1"></a><span class="fu">sample</span>(bi, <span class="dv">10</span>)</span></code></pre></div>
-<pre><code>##  [1] &quot;getNamespace&quot;           &quot;.F_dtrco&quot;               &quot;unique&quot;                
-##  [4] &quot;.expand_R_libs_env_var&quot; &quot;units&lt;-.difftime&quot;       &quot;[[&quot;                    
-##  [7] &quot;is.matrix&quot;              &quot;as.list.function&quot;       &quot;seek.connection&quot;       
-## [10] &quot;.Platform&quot;</code></pre>
+<pre><code>##  [1] &quot;qr.default&quot;              &quot;.noGenerics&quot;            
+##  [3] &quot;+.POSIXt&quot;                &quot;[.warnings&quot;             
+##  [5] &quot;.F_dchdc&quot;                &quot;.C_R_removeTaskCallback&quot;
+##  [7] &quot;gc&quot;                      &quot;rownames&quot;               
+##  [9] &quot;repeat&quot;                  &quot;as.array.default&quot;</code></pre>
 <p> </p>
 <p>Los operadores son funciones:</p>
 <div class="sourceCode" id="cb133"><pre
@@ -1241,6 +1243,7 @@ Descrición
 <tbody>
 <tr>
 <td style="text-align:left;">
+&lt;
 </td>
 <td style="text-align:left;">
 menor que
@@ -1248,6 +1251,7 @@ menor que
 </tr>
 <tr>
 <td style="text-align:left;">
+&lt;=
 </td>
 <td style="text-align:left;">
 menor o igual que
@@ -1363,13 +1367,13 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <p><font size="2">* Modified from <i>Grolemund &amp; Wickham
 2017</i></font></p>
 <p> </p>
-<pre><code>## Warning in 1:6 * 1:5: longer object length is not a multiple of shorter object
-## length</code></pre>
+<pre><code>## Warning in 1:6 * 1:5: longitud de objeto mayor no es múltiplo de la longitud de
+## uno menor</code></pre>
 <pre><code>## [1]  1  4  9 16 25  6</code></pre>
 <div class="sourceCode" id="cb174"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb174-1"><a href="#cb174-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">6</span> <span class="sc">+</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span></code></pre></div>
-<pre><code>## Warning in 1:6 + 1:5: longer object length is not a multiple of shorter object
-## length</code></pre>
+<pre><code>## Warning in 1:6 + 1:5: longitud de objeto mayor no es múltiplo de la longitud de
+## uno menor</code></pre>
 <pre><code>## [1]  2  4  6  8 10  7</code></pre>
 <p> </p>
 <hr />
@@ -1609,18 +1613,18 @@ Style Guide</a><br />
 <hr />
 <p> </p>
 <p><font size="5">Session information</font></p>
-<pre><code>## R version 4.2.0 (2022-04-22)
+<pre><code>## R version 4.1.1 (2021-08-10)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
-## Running under: Ubuntu 22.04.1 LTS
+## Running under: Ubuntu 20.04.2 LTS
 ## 
 ## Matrix products: default
-## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0
-## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0
+## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0
+## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0
 ## 
 ## locale:
-##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
-##  [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=en_US.UTF-8    
-##  [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=en_US.UTF-8   
+##  [1] LC_CTYPE=es_ES.UTF-8       LC_NUMERIC=C              
+##  [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=es_ES.UTF-8    
+##  [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=es_ES.UTF-8   
 ##  [7] LC_PAPER=es_CR.UTF-8       LC_NAME=C                 
 ##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
 ## [11] LC_MEASUREMENT=es_CR.UTF-8 LC_IDENTIFICATION=C       
@@ -1629,20 +1633,20 @@ Style Guide</a><br />
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] kableExtra_1.3.4 knitr_1.40      
+## [1] kableExtra_1.3.4 knitr_1.39      
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] xaringanExtra_0.7.0 formatR_1.12        pillar_1.8.0       
-##  [4] bslib_0.3.1         compiler_4.2.0      jquerylib_0.1.4    
-##  [7] tools_4.2.0         uuid_1.1-0          digest_0.6.29      
-## [10] jsonlite_1.8.0      evaluate_0.16       lifecycle_1.0.1    
+##  [4] bslib_0.3.1         compiler_4.1.1      jquerylib_0.1.4    
+##  [7] tools_4.1.1         uuid_1.1-0          digest_0.6.29      
+## [10] jsonlite_1.8.0      evaluate_0.15       lifecycle_1.0.1    
 ## [13] tibble_3.1.8        viridisLite_0.4.0   pkgconfig_2.0.3    
 ## [16] rlang_1.0.4         cli_3.3.0           rstudioapi_0.13    
-## [19] yaml_2.3.5          xfun_0.33           fastmap_1.1.0      
-## [22] stringr_1.4.0       httr_1.4.4          xml2_1.3.3         
+## [19] yaml_2.3.5          xfun_0.31           fastmap_1.1.0      
+## [22] stringr_1.4.0       httr_1.4.3          xml2_1.3.3         
 ## [25] vctrs_0.4.1         sass_0.4.1          systemfonts_1.0.4  
 ## [28] webshot_0.5.3       svglite_2.1.0       glue_1.6.2         
-## [31] R6_2.5.1            fansi_1.0.3         rmarkdown_2.16     
+## [31] R6_2.5.1            fansi_1.0.3         rmarkdown_2.14     
 ## [34] magrittr_2.0.3      scales_1.2.0        htmltools_0.5.3    
 ## [37] rvest_1.0.2         colorspace_2.0-3    utf8_1.2.2         
 ## [40] stringi_1.7.8       munsell_0.5.0</code></pre>

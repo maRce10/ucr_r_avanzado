@@ -43,6 +43,22 @@ htmltools::tagList(
 )
 ```
  
+<!-- skyblue box -->
+
+<div class="alert alert-info">
+
+# Objetivo del manual
+
+- Familiarizarse con los bloques básicos usados en la programación en R
+
+- Conocer las fuentes principales de documentación estandarizada en R
+
+</div>
+
+---
+
+&nbsp;  
+
 # ¿Qué es R?
  
 - Un [Lenguaje de Dominio Específico (DSL)](https://en.wikipedia.org/wiki/Domain-specific_language) libre para la estadística y el análisis de datos
