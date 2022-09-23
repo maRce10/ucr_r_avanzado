@@ -695,7 +695,7 @@ runtime: shiny
 ```
 &nbsp;
 
-El siguiente código generaría una aplicación shiny dentro del documento Rmarkdown, aunque este no puede ser incluida en el HTML:
+El siguiente código crea una aplicación shiny dentro del documento Rmarkdown:
 
 ```{r, eval = FALSE}
 
@@ -741,7 +741,7 @@ shinyApp(ui = ui, server = server)
 
 &nbsp;
 
-En el sitio [https://shiny.rstudio.com/gallery](https://shiny.rstudio.com/gallery/#demos) pueden encontrar muchos ejemplos de aplicaciones shiny. Estas aplicaciones son complejas de incluir en archivos auto-contenidos y por ello no son tan amigables para reportes dinámicos como los que podemos generar con R markdown. 
+Note que esta aplicación no funciona en documentos estáticos de Rmarkdown. En el sitio [https://shiny.rstudio.com/gallery](https://shiny.rstudio.com/gallery/#demos) pueden encontrar muchos ejemplos de aplicaciones shiny. Estas aplicaciones son complejas de incluir en archivos auto-contenidos y por ello no son tan amigables para reportes dinámicos como los que podemos generar con R markdown. 
 
 &nbsp;
 
