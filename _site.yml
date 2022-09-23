@@ -8,10 +8,10 @@ navbar:
   left:
     - text: "Manuales"
       menu:
-      - text: "Reportes dinámicos con Rmarkdown"
-        href: reportes_dinamicos_con_rmarkdown.html
       - text: "Fundamentos de R"
         href: fundamentos_de_r.html
+      - text: "Reportes dinámicos con Rmarkdown"
+        href: reportes_dinamicos_con_rmarkdown.html
       - text: "Modelos de regresión lineal"
         href: modelos_de_regresion_lineal.html
       - text: "Modelos comunes como regresiones"
