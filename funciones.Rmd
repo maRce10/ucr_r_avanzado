@@ -104,7 +104,7 @@ knitr::include_graphics("./images/funcion.png")
 
 ```
 
-<font size="2">* Modificado de <i>Grolemund 2014</i></font>
+<font size="2">* Modificado de <i>Wickham et al. 2016</i></font>
 
 &nbsp;
 
@@ -588,7 +588,7 @@ if (a > 0)
 
 La parte dentro de los paréntesis justo después de `if` es la evaluación lógica.
 
-Estos operadores son utilizados en el cuerpo de la función cuando esta lleva un argumento lógico. Por ejemplo, la siguiente función utiliza un argumento lógico para decidir si la operación algebráica a realizar es una suma o un promedio:
+Estos operadores son utilizados en el cuerpo de la función cuando esta lleva un argumento lógico. Por ejemplo, la siguiente función utiliza un argumento lógico para decidir si la operación algebraica a realizar es una suma o un promedio:
 
 ```{r}
 mean_sum <- function(x, y, prom = FALSE){
@@ -711,7 +711,7 @@ fnctn_X(sq_mt = cbind(c(1, 2), c(3, 4)), vctr = c(2, 3))
 ```
 &nbsp;  
 
-Guárde el codigo anterior en un archivo `R` llamado 'function_X.R'. Ahora la función se puede cargar usando `source()`:
+Guarde el código anterior en un archivo `R` llamado 'function_X.R'. Ahora la función se puede cargar usando `source()`:
 ```{r, eval = F}
 
 # removamosla del ambiente
@@ -752,7 +752,7 @@ exists("fnctn_X")
 
 ## Se aplica fácilmente a nuevos objetos
 
-Esto ya deberia ser obvio a este punto.
+Esto ya debería ser obvio a este punto.
 
 
 ## Otros consejos
@@ -780,7 +780,7 @@ Esto ya deberia ser obvio a este punto.
 
 </br>
 
-4.1 Cree una funcion que calcule el promedio, la desviación estandar y el error estandar de un vector numérico. Estos valores deben ser devueltos como una lista con nombres.
+4.1 Cree una funcion que calcule el promedio, la desviación estándar y el error estándar de un vector numérico. Estos valores deben ser devueltos como una lista con nombres.
 
 </br>
 
@@ -788,7 +788,7 @@ Esto ya deberia ser obvio a este punto.
 
 </br>
 
-4.3 Haga que la función además produzca un histograma del vector númerico proporcionado por el usuario
+4.3 Haga que la función además produzca un histograma del vector numérico proporcionado por el usuario
 
 </br>
 
@@ -796,19 +796,23 @@ Esto ya deberia ser obvio a este punto.
 
 </br>
 
-4.5 Añada un argumento a la función que permita el usuario calcular la sumatoria (`sum()`) junto con el resto de las descriptores estadísticos
+4.5 Añada un argumento a la función que permita el usuario, si lo desea, calcular la sumatoria (`sum()`) junto con el resto de los descriptores estadísticos
 
 </br>
 
-4.6 Agregue el promedio y la desviación estandar al título del histograma (pista: use `paste()`)
+4.6 Agregue el promedio y la desviación estándar al título del histograma (pista: use `paste()`)
 
 </br>
 
-4.7 Modifique la función para que tambien cree una linea vertical indicando el promedio del vector numérico proporcionado por el usuario
+4.7 Modifique la función para que también cree una linea vertical indicando el promedio del vector numérico proporcionado por el usuario
 
 </br>
 
-4.8 Modifique la función para que añada un polígono transparente sobre el area que cubre el promedio +/- la desviación estandar
+4.8 Modifique la función para que añada un polígono transparente sobre el área que cubre el promedio +/- la desviación estándar
+
+</br>
+
+4.9 Modifique la función con un argumento lógico que permita al usuario controlar si se crea un gráfico o no
 
 </div>
 

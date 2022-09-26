@@ -485,7 +485,7 @@ R</b></b></font>
 Araya-Salas, PhD</a></font>
 </center></h4>
 <h4 class="date"><center>
-“2022-09-25”
+“2022-09-26”
 </center></h4>
 
 </div>
@@ -533,7 +533,7 @@ sobrescribir</p></li>
 <p>Todas las funciones son creadas iguales … mediante la función
 <code>function()</code> y siguen la misma estructura:</p>
 <p><img src="images/funcion.png" width="100%" style="display: block; margin: auto;" /></p>
-<p><font size="2">* Modificado de <i>Grolemund 2014</i></font></p>
+<p><font size="2">* Modificado de <i>Wickham et al. 2016</i></font></p>
 <p> </p>
 <p>Podemos observar la estructura de funciones ya cargadas en nuestro
 entorno de <code>R</code>. Para ver el código simplemente corra al
@@ -545,7 +545,7 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <pre><code>## function (x, na.rm = FALSE) 
 ## sqrt(var(if (is.vector(x) || is.factor(x)) x else as.double(x), 
 ##     na.rm = na.rm))
-## &lt;bytecode: 0x5571bf1ceda8&gt;
+## &lt;bytecode: 0x55f41433e3f8&gt;
 ## &lt;environment: namespace:stats&gt;</code></pre>
 <p> </p>
 <p>En <code>Rstudio</code>, el código también se puede mostrar usando
@@ -705,7 +705,7 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <code>Sys.time()</code>:</p>
 <div class="sourceCode" id="cb44"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="fu">Sys.time</span>()</span></code></pre></div>
-<pre><code>## [1] &quot;2022-09-25 21:37:50 CST&quot;</code></pre>
+<pre><code>## [1] &quot;2022-09-26 06:34:55 CST&quot;</code></pre>
 <p> </p>
 <p>Los argumentos pueden especificarse implícitamente por posición o por
 nombres incompletos:</p>
@@ -996,7 +996,7 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 la evaluación lógica.</p>
 <p>Estos operadores son utilizados en el cuerpo de la función cuando
 esta lleva un argumento lógico. Por ejemplo, la siguiente función
-utiliza un argumento lógico para decidir si la operación algebráica a
+utiliza un argumento lógico para decidir si la operación algebraica a
 realizar es una suma o un promedio:</p>
 <div class="sourceCode" id="cb90"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1"></a>mean_sum <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y, <span class="at">prom =</span> <span class="cn">FALSE</span>) {</span>
@@ -1098,7 +1098,7 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 ## [[2]]
 ## [1] 4 9</code></pre>
 <p> </p>
-<p>Guárde el codigo anterior en un archivo <code>R</code> llamado
+<p>Guarde el código anterior en un archivo <code>R</code> llamado
 ‘function_X.R’. Ahora la función se puede cargar usando
 <code>source()</code>:</p>
 <div class="sourceCode" id="cb105"><pre
@@ -1139,7 +1139,7 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 </div>
 <div id="se-aplica-fácilmente-a-nuevos-objetos" class="section level2">
 <h2>Se aplica fácilmente a nuevos objetos</h2>
-<p>Esto ya deberia ser obvio a este punto.</p>
+<p>Esto ya debería ser obvio a este punto.</p>
 </div>
 <div id="otros-consejos" class="section level2">
 <h2>Otros consejos</h2>
@@ -1162,8 +1162,8 @@ funciones</li>
 <div id="ejercicio-4" class="section level2 alert alert-info">
 <h2>Ejercicio 4</h2>
 <p></br></p>
-<p>4.1 Cree una funcion que calcule el promedio, la desviación estandar
-y el error estandar de un vector numérico. Estos valores deben ser
+<p>4.1 Cree una funcion que calcule el promedio, la desviación estándar
+y el error estándar de un vector numérico. Estos valores deben ser
 devueltos como una lista con nombres.</p>
 <p></br></p>
 <p>4.2 Permita a los usuarios ignorar los <code>NAs</code> (similar al
@@ -1171,25 +1171,28 @@ argumento <code>na.rm</code> en <code>mean()</code>, pista: añada un
 argumento lógico)</p>
 <p></br></p>
 <p>4.3 Haga que la función además produzca un histograma del vector
-númerico proporcionado por el usuario</p>
+numérico proporcionado por el usuario</p>
 <p></br></p>
 <p>4.4 Haga que la función escoja un color al azar para las barras del
 histograma cada vez que se corre (pista:
 <code>sample(vector.de.colores)</code>)</p>
 <p></br></p>
-<p>4.5 Añada un argumento a la función que permita el usuario calcular
-la sumatoria (<code>sum()</code>) junto con el resto de las descriptores
-estadísticos</p>
+<p>4.5 Añada un argumento a la función que permita el usuario, si lo
+desea, calcular la sumatoria (<code>sum()</code>) junto con el resto de
+los descriptores estadísticos</p>
 <p></br></p>
-<p>4.6 Agregue el promedio y la desviación estandar al título del
+<p>4.6 Agregue el promedio y la desviación estándar al título del
 histograma (pista: use <code>paste()</code>)</p>
 <p></br></p>
-<p>4.7 Modifique la función para que tambien cree una linea vertical
+<p>4.7 Modifique la función para que también cree una linea vertical
 indicando el promedio del vector numérico proporcionado por el
 usuario</p>
 <p></br></p>
 <p>4.8 Modifique la función para que añada un polígono transparente
-sobre el area que cubre el promedio +/- la desviación estandar</p>
+sobre el área que cubre el promedio +/- la desviación estándar</p>
+<p></br></p>
+<p>4.9 Modifique la función con un argumento lógico que permita al
+usuario controlar si se crea un gráfico o no</p>
 </div>
 <p> </p>
 <hr />
