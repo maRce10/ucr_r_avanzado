@@ -79,22 +79,6 @@ registerS3method("knit_print", "data.frame", tibble)
 
 &nbsp; 
 
-Paquetes a utilizar en este manual:
-
-```{r}
-
-library(viridis)
-library(ggplot2)
-
-```
-
-
-```{r}
-ee <- function(x) sd(x) / sqrt(length(x))
-```
-
-&nbsp; 
-
 # Funciones en R
 
 - Todo lo que sucede en `R` es una llamada de una función (i.e. las manipulaciones y cálculos de objetos en `R` se realizan a través de una función)
