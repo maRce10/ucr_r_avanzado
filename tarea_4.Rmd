@@ -85,7 +85,7 @@ registerS3method("knit_print", "data.frame", tibble)
 
 <div class="alert alert-info">
 
-1. Cree un mapa interactivo con leaflet que muestre el Parque Nacional Corcovado, el Parque Nacional Piedras Blancas y la Reserva Forestal Golfo Dulce (pista: pueden encontrar las coordenadas usando [google maps](https://www.google.com/maps). Para cada sitio añada un marcador usando la función de leaftlet `addAwesomeMarkers`. El mapa debe ser similar a este:
+1. Cree un mapa interactivo con leaflet que muestre el Parque Nacional Corcovado, el Parque Nacional Piedras Blancas y la Reserva Forestal Golfo Dulce (*pista: pueden encontrar las coordenadas usando [google maps](https://www.google.com/maps)*). Para cada sitio añada un marcador usando la función de leaftlet `addAwesomeMarkers`. El mapa debe ser similar a este:
 
 &nbsp;
 ```{r out.width = '100%', echo = TRUE, as.is = TRUE, echo = FALSE, fig.align='center'}
@@ -106,7 +106,7 @@ leaflet::addAwesomeMarkers(map = ll_map, lat = c(8.534785, 8.737077, 8.699383), 
 
 &nbsp;
 
-2. Utilice el paquete [DT](https://rstudio.github.io/DT/) para generar un cuadro (tabla) de los datos `iris`. Debe instalar y cargar el paquete primero. Tambien recuerdo usar la opción `results = "as.is"` en el encabezado del bloque de código. La tabla debe verse igual a esta:
+2. Utilice el paquete [DT](https://rstudio.github.io/DT/) para generar un cuadro (tabla) de los datos `iris`. Debe instalar y cargar el paquete primero. También recuerde usar la opción `results = "as.is"` en el encabezado del bloque de código. La tabla debe verse igual a esta:
 
 
 ```{r, eval = TRUE, echo = FALSE, results='asis'}
