@@ -987,9 +987,7 @@ demo("nlm")
 
 ---
 
-&nbsp; 
- 
-<font size="5">Session information</font>
+<font size="4">Información de la sesión</font>
 
 ```{r session info, echo=F}
 

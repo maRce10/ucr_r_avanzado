@@ -26,6 +26,7 @@ library(ggplot2)
 library(viridis)
 library(lmerTest)
 library(sjPlot)
+library(car)
 
 tibble <- function(x, ...) { 
   x <- kbl(x, digits=4, align= 'c', row.names = FALSE) 

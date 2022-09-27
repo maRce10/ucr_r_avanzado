@@ -890,11 +890,10 @@ T, Maechler M, Magnusson A, Moeller S, Schwartz M, Venables B (2015) gplots: var
 
 ---
 
-<font size="4">Session information</font>
+<font size="4">Información de la sesión</font>
 
 ```{r session info, echo=F}
 
 sessionInfo()
 
 ```
-

@@ -66,7 +66,7 @@ registerS3method("knit_print", "data.frame", tibble)
 
 <div class="alert alert-info">
 
-# Objetivo del manual
+# Objetivos del manual
 
 - Familiarizarse con el formato para reportes dinámicos Rmarkdown
 
@@ -516,10 +516,6 @@ title: "Un titulo descriptivo y sin faltas ortograficas"
 author: "Marcelo Araya"
 date: "`r Sys.Date()`"
 output: # Varios outputs mostrados solo para el ejemplo
-  pdf_document:
-    toc: yes
-    fig_caption: yes
-    df_print: kable
   html_document:
     fig_caption: yes
     number_sections: yes
@@ -541,14 +537,7 @@ El paquete [emo](https://github.com/hadley/emo) permite añadir emojis al evalua
 
 ```{r, results='asis'}
 
-# instale estos paquetes primero
-
-# install.packages("remotes")
-# remotes::install_github("hadley/emo")
-
-library("emo")
-
-ji("costa_rica")
+emo::ji("costa_rica")
 
 ```
 
@@ -616,19 +605,8 @@ El paquete Rmarkdown puede generar resultados en HTML, PDF, MS Word, viñetas de
    - artículos
    - tufte
 
-  Se pueden instalar de la siguiente manera:
 
-
-```{r, eval= F}
-
-install.packages("rmdformats")
-install.packages("revealjs")
-install.packages("rticles")
-install.packages("tufte")
-
-```
-
-Una vez instalados, los nuevos formatos estarán disponibles a través del nuevo cuadro de diálogo Rmarkdown:
+Una vez estos paquetes han sido instalados, los nuevos formatos estarán disponibles a través del nuevo cuadro de diálogo Rmarkdown:
 
 ```{r, echo=FALSE,out.width="70%", fig.align='center'}
 
@@ -698,9 +676,6 @@ runtime: shiny
 El siguiente código crea una aplicación shiny dentro del documento Rmarkdown:
 
 ```{r, eval = FALSE}
-
-# install.packages("shiny")
-library(shiny)
 
 ui <- fluidPage(
   
@@ -815,7 +790,7 @@ El paquete crea archivos Rmarkdown con plantillas para el análisis de datos (ca
 
 &nbsp;
 
--  Reproduzca alguno de los ejemplos disponibles en el sitio del paquete dynagraphs ([https://rstudio.github.io/dygraphs/](https://rstudio.github.io/dygraphs/)) e incrustelo en su reporte dinámico  
+-  Reproduzca alguno de los ejemplos disponibles en el sitio del paquete dygraphs ([https://rstudio.github.io/dygraphs/](https://rstudio.github.io/dygraphs/)) e incrústelo en su reporte dinámico  
 
 &nbsp;
 
@@ -827,7 +802,7 @@ El paquete crea archivos Rmarkdown con plantillas para el análisis de datos (ca
 
 &nbsp;
 
-- Genere un reporte dinámico en format PDF
+- Genere un reporte dinámico en formato PDF
 
 &nbsp;
 

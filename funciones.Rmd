@@ -67,7 +67,7 @@ registerS3method("knit_print", "data.frame", tibble)
 
 <div class="alert alert-info">
 
-# Objetivo del manual
+# Objetivos del manual
 
 - Identificar los elementos básicos que componen una función
 
