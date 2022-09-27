@@ -28,22 +28,18 @@ pre.numberSource code
 
 &nbsp; 
 
-
-&nbsp; 
-
 <div class="alert alert-warning">
-
 
 **Instrucciones**
 
-&nbsp; 
-
-  - Debe entregar un archivo HTML generado con Rmarkdown
-  - Todos los bloques de código deben mostrarse en el HTML (i.e. todos deben usar el argumento echo = TRUE)
-  - Los espacios de texto (fuera de bloques de código) deben usarse para indicar a cuál pregunta corresponde el bloque de código siguiente
-  - Comente el código dentro de los bloques usando ´#´
-  - La fecha de entrega es el 4 de noviembre a las 12 pm
-  - Deben subir el archivo HTML a mediación virtual
+  * La fecha de entrega es el 4 de octubre a las 11:59:59 pm
+  * La tarea debe ser escrita en el formato para reportes dinámicos Rmarkdown
+  * Debe entregar el archivo html generado del Rmarkdown por medio de mediación virtual (hay un enlace para someter la tarea). No envíe el archivo Rmd.
+  * El archivo Rmarkdown debe utilizar secciones de código ("chunks") separados para cada ejercicio y subtítulos para cada uno así como comentarios en texto
+  * El código dentro de los bloques de código debe estar documentado con comentarios (usando #)
+  * Los espacios de texto (fuera de bloques de código) deben usarse para indicar a cuál pregunta corresponde el bloque de código siguiente
+  * Debe usar R básico para la manipulación de datos
+  * Cada item tiene un valor de 5 puntos
 
 </div>
 
@@ -134,7 +130,7 @@ cor(iris$Petal.Length, iris$Petal.Width)
 
 3. Incruste el resultado de la correlación en una línea de texto (fuera de un bloque de código). Debe verse así (recuerde redondear):
 
-  - *La correlación entre largo de pétalo y ancho de pétalo es de `r round(cor(iris$Petal.Length, iris$Petal.Width), 2)`*
+  - *El coeficiente de correlación de Pearson entre largo de pétalo y ancho de pétalo es de `r round(cor(iris$Petal.Length, iris$Petal.Width), 2)`*
 
 &nbsp;
 
