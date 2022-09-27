@@ -37,7 +37,6 @@ pre.numberSource code
   * Debe entregar el archivo html generado del Rmarkdown por medio de mediación virtual (hay un enlace para someter la tarea). No envíe el archivo Rmd.
   * El archivo Rmarkdown debe utilizar secciones de código ("chunks") separados para cada ejercicio y subtítulos para cada uno así como comentarios en texto
   * El código dentro de los bloques de código debe estar documentado con comentarios (usando #)
-  * Los espacios de texto (fuera de bloques de código) deben usarse para indicar a cuál pregunta corresponde el bloque de código siguiente
   * Debe usar R básico para la manipulación de datos
   * Cada item tiene un valor de 5 puntos
 
