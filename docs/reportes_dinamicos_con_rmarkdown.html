@@ -13,7 +13,7 @@
 
 <title>reportes_dinamicos_con_rmarkdown.knit</title>
 
-<script src="site_libs/header-attrs-2.16/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -140,20 +140,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   for (var i = 0; i < sheets.length; i++) {
     if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
     try { var rules = sheets[i].cssRules; } catch (e) { continue; }
-    var j = 0;
-    while (j < rules.length) {
+    for (var j = 0; j < rules.length; j++) {
       var rule = rules[j];
       // check if there is a div.sourceCode rule
-      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
-        j++;
-        continue;
-      }
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
       var style = rule.style.cssText;
       // check if color or background-color is set
-      if (rule.style.color === '' && rule.style.backgroundColor === '') {
-        j++;
-        continue;
-      }
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
       // replace div.sourceCode by a pre.sourceCode rule
       sheets[i].deleteRule(j);
       sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
@@ -249,15 +242,11 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark the anchor link active (and if it's in a dropdown, also mark that active)
-  var dropdown = menuAnchor.closest('li.dropdown');
-  if (window.bootstrap) { // Bootstrap 4+
-    menuAnchor.addClass('active');
-    dropdown.find('> .dropdown-toggle').addClass('active');
-  } else { // Bootstrap 3
-    menuAnchor.parent().addClass('active');
-    dropdown.addClass('active');
-  }
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -506,7 +495,7 @@ R</b></b></font>
 Araya-Salas, PhD</a></font>
 </center></h4>
 <h4 class="date"><center>
-“2022-09-27”
+“2022-09-28”
 </center></h4>
 
 </div>
@@ -562,15 +551,15 @@ estudios científicos no se pueden replicar</p>
 Nature</em></a></p>
 <p>El compartir datos y análisis de forma transparente y detalladamente
 documentada, en formatos que puedan ser reproducidos por otros
-investigadores, ha sido sugerido como una de las principales
-herramientas para lidear con este problema.</p>
+investigadores es una de las principales herramientas para lidiar con
+este problema.</p>
 <p><img src="images/soluciones_reproducible.png" width="100%" style="display: block; margin: auto;" /></p>
 <p><em>Gallagher et al. 2020. Nature Eco &amp; Evo</em></p>
 <p>Las herramientas programáticas como R tienden naturalmente a
 facilitar la reproducibilidad ya que el código de un análisis se puede
-registar y compartir fácilmente. Muchos lenguajes de programación
+registrar y compartir fácilmente. Muchos lenguajes de programación
 permiten la generación de reportes dinámicos, los cuales resultan
-fundamentales para llevar hacer manejo de datos y análisis estadísticos
+fundamentales para hacer manejo de datos y análisis estadísticos
 reproducibles. Los reportes dinámicos suelen contener toda la
 información necesaria para que otros investigadores puedan replicar
 todos los pasos de análisis que generaron los resultados de artículos
@@ -581,11 +570,10 @@ dinámicos es Rmarkdown. Rmarkdown <a
 href="http://rmarkdown.rstudio.com">se puede describir</a> como “<em>un
 formato eléctronico de documentación que facilita la creación de
 documentos, presentaciones e informes dinámicos desde R</em>”. R
-Markdown puede generar documentos con bloques (“chunks”) de código de R
+Markdown puede generar documentos con bloques de código de R (“chunks”)
 incrustados entre líneas de texto. Cuando se procesa el documento, estos
 bloques se evalúan (si el usuario así lo desea) y los resultados se
-anidan en el documento de acuerdo con ciertas convenciones
-especificadas.</p>
+“imprimen” en el documento de acuerdo con ciertas convenciones.</p>
 <p> </p>
 <div id="ventajas-de-los-reportes-dinámicos-con-rmarkdown"
 class="section level3">
@@ -599,7 +587,7 @@ separado</p></li>
 análisis</p></li>
 <li><p>El texto del informe está <strong>escrito como texto
 normal</strong>, por lo que no se requieren conocimientos de
-programación (i.e. R o HTML)</p></li>
+programación (i.e. R o HTML) para comprenderlos</p></li>
 <li><p><strong>El resultado es un archivo HTML</strong> que incluye
 imágenes, bloques de código con los comandos de R, los resultados de
 estos códigos y texto. No se necesitan archivos adicionales, todo está
@@ -627,7 +615,7 @@ desplegable que aparece cuando crea un nuevo archivo:</p>
 instale varios paquetes necesarios para que R Markdown
 funcione.</i></font></p>
 <p> </p>
-<p>Aparecerá una ventana que le pedirá un titulo y autor para el nuevo
+<p>Aparecerá una ventana que le pedirá un título y autor para el nuevo
 documento (esto no es tan relevante en este punto y puedo ser modificado
 fácilmente luego), así como el formato. Seleccione ‘HTML’ ya que nos
 interesa convertirlo a un formato de visualización universal. Puede
@@ -784,7 +772,7 @@ random.var
 setosa
 </td>
 <td style="text-align:center;">
-0.3073
+-0.1596
 </td>
 </tr>
 <tr>
@@ -804,7 +792,7 @@ setosa
 setosa
 </td>
 <td style="text-align:center;">
-0.1272
+1.7296
 </td>
 </tr>
 <tr>
@@ -824,7 +812,7 @@ setosa
 setosa
 </td>
 <td style="text-align:center;">
--1.5043
+0.7781
 </td>
 </tr>
 <tr>
@@ -844,7 +832,7 @@ setosa
 setosa
 </td>
 <td style="text-align:center;">
-0.1874
+0.2255
 </td>
 </tr>
 <tr>
@@ -864,7 +852,7 @@ setosa
 setosa
 </td>
 <td style="text-align:center;">
-0.4921
+-0.4594
 </td>
 </tr>
 <tr>
@@ -884,7 +872,7 @@ setosa
 setosa
 </td>
 <td style="text-align:center;">
-0.7992
+1.3733
 </td>
 </tr>
 </tbody>
@@ -945,7 +933,7 @@ random.var
 setosa
 </td>
 <td style="text-align:center;">
--0.9832
+0.7455
 </td>
 </tr>
 <tr>
@@ -965,7 +953,7 @@ setosa
 setosa
 </td>
 <td style="text-align:center;">
-0.0838
+-1.3536
 </td>
 </tr>
 <tr>
@@ -985,7 +973,7 @@ setosa
 setosa
 </td>
 <td style="text-align:center;">
--0.1940
+-0.8304
 </td>
 </tr>
 <tr>
@@ -1005,7 +993,7 @@ setosa
 setosa
 </td>
 <td style="text-align:center;">
--2.3837
+1.3879
 </td>
 </tr>
 <tr>
@@ -1025,7 +1013,7 @@ setosa
 setosa
 </td>
 <td style="text-align:center;">
-0.1267
+-0.4050
 </td>
 </tr>
 <tr>
@@ -1045,7 +1033,7 @@ setosa
 setosa
 </td>
 <td style="text-align:center;">
-0.5429
+0.2416
 </td>
 </tr>
 </tbody>
@@ -1223,7 +1211,7 @@ random.var
 setosa
 </td>
 <td style="text-align:center;">
--0.9832
+0.7455
 </td>
 </tr>
 <tr>
@@ -1243,7 +1231,7 @@ setosa
 setosa
 </td>
 <td style="text-align:center;">
-0.0838
+-1.3536
 </td>
 </tr>
 <tr>
@@ -1263,7 +1251,7 @@ setosa
 setosa
 </td>
 <td style="text-align:center;">
--0.1940
+-0.8304
 </td>
 </tr>
 <tr>
@@ -1283,7 +1271,7 @@ setosa
 setosa
 </td>
 <td style="text-align:center;">
--2.3837
+1.3879
 </td>
 </tr>
 <tr>
@@ -1303,7 +1291,7 @@ setosa
 setosa
 </td>
 <td style="text-align:center;">
-0.1267
+-0.4050
 </td>
 </tr>
 <tr>
@@ -1323,7 +1311,7 @@ setosa
 setosa
 </td>
 <td style="text-align:center;">
-0.5429
+0.2416
 </td>
 </tr>
 <tr>
@@ -1343,7 +1331,7 @@ setosa
 setosa
 </td>
 <td style="text-align:center;">
--1.2388
+-1.5058
 </td>
 </tr>
 <tr>
@@ -1363,7 +1351,7 @@ setosa
 setosa
 </td>
 <td style="text-align:center;">
-1.1989
+-2.4131
 </td>
 </tr>
 <tr>
@@ -1383,7 +1371,7 @@ setosa
 setosa
 </td>
 <td style="text-align:center;">
--0.8582
+-0.8405
 </td>
 </tr>
 <tr>
@@ -1403,7 +1391,7 @@ setosa
 setosa
 </td>
 <td style="text-align:center;">
-0.1999
+0.9223
 </td>
 </tr>
 </tbody>
@@ -1481,8 +1469,8 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <span id="cb8-6"><a href="#cb8-6"></a>    <span class="at">zoom =</span> <span class="dv">13</span>)</span>
 <span id="cb8-7"><a href="#cb8-7"></a></span>
 <span id="cb8-8"><a href="#cb8-8"></a><span class="fu">addPopups</span>(<span class="at">map =</span> ll_map, <span class="at">lat =</span> <span class="fl">5.527448</span>, <span class="at">lng =</span> <span class="sc">-</span><span class="fl">87.057245</span>, <span class="at">popup =</span> <span class="st">&quot;Isla del Coco&quot;</span>)</span></code></pre></div>
-<div id="htmlwidget-8dc845030f1a80af5640" style="width:100%;height:480px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-8dc845030f1a80af5640">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addPopups","args":[5.527448,-87.057245,"Isla del Coco",null,null,{"maxWidth":300,"minWidth":50,"autoPan":true,"keepInView":false,"closeButton":true,"className":""}]}],"setView":[[5.527448,-87.057245],13,[]],"limits":{"lat":[5.527448,5.527448],"lng":[-87.057245,-87.057245]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-e2907329681764438a4a" style="width:100%;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e2907329681764438a4a">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addPopups","args":[5.527448,-87.057245,"Isla del Coco",null,null,{"maxWidth":300,"minWidth":50,"autoPan":true,"keepInView":false,"closeButton":true,"className":""}]}],"setView":[[5.527448,-87.057245],13,[]],"limits":{"lat":[5.527448,5.527448],"lng":[-87.057245,-87.057245]}},"evals":[],"jsHooks":[]}</script>
 <p> </p>
 <p>Este es el bloque de código que generó el mapa:</p>
 <p><img src="images/leaflet.png" width="90%" style="display: block; margin: auto;" /></p>
@@ -1678,18 +1666,18 @@ class="uri">https://github.com/ramnathv/htmlwidgets</a>.</li>
 <hr />
 <hr />
 <p><font size="4">Información de la sesión</font></p>
-<pre><code>## R version 4.2.0 (2022-04-22)
+<pre><code>## R version 4.1.1 (2021-08-10)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
-## Running under: Ubuntu 22.04.1 LTS
+## Running under: Ubuntu 20.04.2 LTS
 ## 
 ## Matrix products: default
-## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0
-## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0
+## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0
+## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0
 ## 
 ## locale:
-##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
-##  [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=en_US.UTF-8    
-##  [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=en_US.UTF-8   
+##  [1] LC_CTYPE=es_ES.UTF-8       LC_NUMERIC=C              
+##  [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=es_ES.UTF-8    
+##  [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=es_ES.UTF-8   
 ##  [7] LC_PAPER=es_CR.UTF-8       LC_NAME=C                 
 ##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
 ## [11] LC_MEASUREMENT=es_CR.UTF-8 LC_IDENTIFICATION=C       
@@ -1699,24 +1687,24 @@ class="uri">https://github.com/ramnathv/htmlwidgets</a>.</li>
 ## 
 ## other attached packages:
 ##  [1] tufte_0.12          rticles_0.24        revealjs_0.9       
-##  [4] rmdformats_1.0.4    kableExtra_1.3.4    rmarkdown_2.16     
+##  [4] rmdformats_1.0.4    kableExtra_1.3.4    rmarkdown_2.14     
 ##  [7] sketchy_1.0.2       remotes_2.4.2       leaflet_2.1.1      
-## [10] knitr_1.40          xaringanExtra_0.7.0 emo_0.0.0.9000     
+## [10] knitr_1.39          xaringanExtra_0.7.0 emo_0.0.0.9000     
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] xfun_0.33         bslib_0.3.1       purrr_0.3.4       colorspace_2.0-3 
+##  [1] xfun_0.31         bslib_0.3.1       purrr_0.3.4       colorspace_2.0-3 
 ##  [5] vctrs_0.4.1       generics_0.1.2    htmltools_0.5.3   viridisLite_0.4.0
 ##  [9] yaml_2.3.5        utf8_1.2.2        rlang_1.0.4       jquerylib_0.1.4  
 ## [13] pillar_1.8.0      glue_1.6.2        uuid_1.1-0        lifecycle_1.0.1  
 ## [17] stringr_1.4.0     munsell_0.5.0     rvest_1.0.2       htmlwidgets_1.5.4
-## [21] evaluate_0.16     fastmap_1.1.0     crosstalk_1.2.0   fansi_1.0.3      
+## [21] evaluate_0.15     fastmap_1.1.0     crosstalk_1.2.0   fansi_1.0.3      
 ## [25] highr_0.9         scales_1.2.0      formatR_1.12      webshot_0.5.3    
-## [29] jsonlite_1.8.0    systemfonts_1.0.4 digest_0.6.29     packrat_0.8.1    
-## [33] stringi_1.7.8     bookdown_0.29     cli_3.3.0         tools_4.2.0      
+## [29] jsonlite_1.8.0    systemfonts_1.0.4 digest_0.6.29     packrat_0.8.0    
+## [33] stringi_1.7.8     bookdown_0.27     cli_3.3.0         tools_4.1.1      
 ## [37] magrittr_2.0.3    sass_0.4.1        tibble_3.1.8      crayon_1.5.1     
 ## [41] pkgconfig_2.0.3   xml2_1.3.3        lubridate_1.8.0   assertthat_0.2.1 
-## [45] svglite_2.1.0     httr_1.4.4        rstudioapi_0.13   R6_2.5.1         
-## [49] compiler_4.2.0</code></pre>
+## [45] svglite_2.1.0     httr_1.4.3        rstudioapi_0.13   R6_2.5.1         
+## [49] compiler_4.1.1</code></pre>
 </div>
 </div>
 
