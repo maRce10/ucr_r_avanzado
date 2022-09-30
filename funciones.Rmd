@@ -260,7 +260,7 @@ f1(1)
 &nbsp;  
 
 Por supuesto, se pueden modificar:
-```{r eval = F}
+```{r eval = T}
 
 f1(3, 4)
 

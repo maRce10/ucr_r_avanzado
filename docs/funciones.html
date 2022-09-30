@@ -498,7 +498,7 @@ R</b></b></font>
 Araya-Salas, PhD</a></font>
 </center></h4>
 <h4 class="date"><center>
-“2022-09-27”
+“2022-09-30”
 </center></h4>
 
 </div>
@@ -558,7 +558,7 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <pre><code>## function (x, na.rm = FALSE) 
 ## sqrt(var(if (is.vector(x) || is.factor(x)) x else as.double(x), 
 ##     na.rm = na.rm))
-## &lt;bytecode: 0x55f806a6c170&gt;
+## &lt;bytecode: 0x5576d93d0680&gt;
 ## &lt;environment: namespace:stats&gt;</code></pre>
 <p> </p>
 <p>En <code>Rstudio</code>, el código también se puede mostrar usando
@@ -700,69 +700,70 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <p>Por supuesto, se pueden modificar:</p>
 <div class="sourceCode" id="cb39"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="fu">f1</span>(<span class="dv">3</span>, <span class="dv">4</span>)</span></code></pre></div>
+<pre><code>## [1] 7</code></pre>
 <p> </p>
 <p>Los argumentos sin valor predeterminado deben ser proporcionados:</p>
-<div class="sourceCode" id="cb40"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="fu">f1</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="fu">f1</span>()</span></code></pre></div>
 <pre><code>## Error in f1(): argument &quot;x&quot; is missing, with no default</code></pre>
 <p> </p>
 <p>Si todos los argumentos tienen un valor predeterminado, se puede
 invocar la función sin proporcionar ningún argumento:</p>
-<div class="sourceCode" id="cb42"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a>f1 <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">x =</span> <span class="sc">-</span><span class="dv">2</span>, <span class="at">y =</span> <span class="dv">2</span>) x <span class="sc">+</span> y</span>
-<span id="cb42-2"><a href="#cb42-2"></a></span>
-<span id="cb42-3"><a href="#cb42-3"></a><span class="fu">f1</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a>f1 <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">x =</span> <span class="sc">-</span><span class="dv">2</span>, <span class="at">y =</span> <span class="dv">2</span>) x <span class="sc">+</span> y</span>
+<span id="cb43-2"><a href="#cb43-2"></a></span>
+<span id="cb43-3"><a href="#cb43-3"></a><span class="fu">f1</span>()</span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
 <p> </p>
 <p>Ese es el caso de <code>dev.off()</code> y
 <code>Sys.time()</code>:</p>
-<div class="sourceCode" id="cb44"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="fu">Sys.time</span>()</span></code></pre></div>
-<pre><code>## [1] &quot;2022-09-27 13:39:19 CST&quot;</code></pre>
+<div class="sourceCode" id="cb45"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="fu">Sys.time</span>()</span></code></pre></div>
+<pre><code>## [1] &quot;2022-09-30 10:06:27 CST&quot;</code></pre>
 <p> </p>
 <p>Los argumentos pueden especificarse implícitamente por posición o por
 nombres incompletos:</p>
-<div class="sourceCode" id="cb46"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a>f2 <span class="ot">&lt;-</span> <span class="cf">function</span>(a1, b1, b2) {</span>
-<span id="cb46-2"><a href="#cb46-2"></a>    <span class="fu">list</span>(<span class="at">a1 =</span> a1, <span class="at">b1 =</span> b1, <span class="at">b2 =</span> b2)</span>
-<span id="cb46-3"><a href="#cb46-3"></a>}</span>
-<span id="cb46-4"><a href="#cb46-4"></a></span>
-<span id="cb46-5"><a href="#cb46-5"></a><span class="co"># por posicion</span></span>
-<span id="cb46-6"><a href="#cb46-6"></a><span class="fu">str</span>(<span class="fu">f2</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a>f2 <span class="ot">&lt;-</span> <span class="cf">function</span>(a1, b1, b2) {</span>
+<span id="cb47-2"><a href="#cb47-2"></a>    <span class="fu">list</span>(<span class="at">a1 =</span> a1, <span class="at">b1 =</span> b1, <span class="at">b2 =</span> b2)</span>
+<span id="cb47-3"><a href="#cb47-3"></a>}</span>
+<span id="cb47-4"><a href="#cb47-4"></a></span>
+<span id="cb47-5"><a href="#cb47-5"></a><span class="co"># por posicion</span></span>
+<span id="cb47-6"><a href="#cb47-6"></a><span class="fu">str</span>(<span class="fu">f2</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>))</span></code></pre></div>
 <pre><code>## List of 3
 ##  $ a1: num 1
 ##  $ b1: num 2
 ##  $ b2: num 3</code></pre>
-<div class="sourceCode" id="cb48"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a><span class="co"># por posicion y nombre</span></span>
-<span id="cb48-2"><a href="#cb48-2"></a><span class="fu">str</span>(<span class="fu">f2</span>(<span class="at">a =</span> <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a><span class="co"># por posicion y nombre</span></span>
+<span id="cb49-2"><a href="#cb49-2"></a><span class="fu">str</span>(<span class="fu">f2</span>(<span class="at">a =</span> <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>))</span></code></pre></div>
 <pre><code>## List of 3
 ##  $ a1: num 1
 ##  $ b1: num 2
 ##  $ b2: num 3</code></pre>
-<div class="sourceCode" id="cb50"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a><span class="fu">str</span>(<span class="fu">f2</span>(<span class="dv">1</span>, <span class="at">a =</span> <span class="dv">2</span>, <span class="dv">3</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a><span class="fu">str</span>(<span class="fu">f2</span>(<span class="dv">1</span>, <span class="at">a =</span> <span class="dv">2</span>, <span class="dv">3</span>))</span></code></pre></div>
 <pre><code>## List of 3
 ##  $ a1: num 2
 ##  $ b1: num 1
 ##  $ b2: num 3</code></pre>
-<div class="sourceCode" id="cb52"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a><span class="fu">str</span>(<span class="fu">f2</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="at">a =</span> <span class="dv">3</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a><span class="fu">str</span>(<span class="fu">f2</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="at">a =</span> <span class="dv">3</span>))</span></code></pre></div>
 <pre><code>## List of 3
 ##  $ a1: num 3
 ##  $ b1: num 1
 ##  $ b2: num 2</code></pre>
-<div class="sourceCode" id="cb54"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a><span class="co"># por posicion y nombre parcial</span></span>
-<span id="cb54-2"><a href="#cb54-2"></a><span class="fu">str</span>(<span class="fu">f2</span>(<span class="dv">1</span>, <span class="at">a =</span> <span class="dv">2</span>, <span class="at">b1 =</span> <span class="dv">3</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a><span class="co"># por posicion y nombre parcial</span></span>
+<span id="cb55-2"><a href="#cb55-2"></a><span class="fu">str</span>(<span class="fu">f2</span>(<span class="dv">1</span>, <span class="at">a =</span> <span class="dv">2</span>, <span class="at">b1 =</span> <span class="dv">3</span>))</span></code></pre></div>
 <pre><code>## List of 3
 ##  $ a1: num 2
 ##  $ b1: num 3
 ##  $ b2: num 1</code></pre>
 <p> </p>
 <p>Sin embargo, esto no funciona si los nombres son ambiguos:</p>
-<div class="sourceCode" id="cb56"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a><span class="fu">f2</span>(<span class="at">b =</span> <span class="dv">1</span>, <span class="dv">2</span>, <span class="at">a =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a><span class="fu">f2</span>(<span class="at">b =</span> <span class="dv">1</span>, <span class="dv">2</span>, <span class="at">a =</span> <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## Error in f2(b = 1, 2, a = 3): argument 1 matches multiple formal arguments</code></pre>
 <p> </p>
 <p>Es más seguro (y, por lo tanto, una mejor práctica) usar los nombres
@@ -772,15 +773,15 @@ completos de los argumentos.</p>
 útiles para modificar el comportamiento de la función para que coincida
 con diferentes escenarios. Por ejemplo, <code>mean()</code> permite a
 los usuarios ignorar los <em>NA</em>:</p>
-<div class="sourceCode" id="cb58"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1"></a>v1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="cn">NA</span>)</span>
-<span id="cb58-2"><a href="#cb58-2"></a></span>
-<span id="cb58-3"><a href="#cb58-3"></a><span class="co"># sin ignorar NAs</span></span>
-<span id="cb58-4"><a href="#cb58-4"></a><span class="fu">mean</span>(v1, <span class="at">na.rm =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1"></a>v1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="cn">NA</span>)</span>
+<span id="cb59-2"><a href="#cb59-2"></a></span>
+<span id="cb59-3"><a href="#cb59-3"></a><span class="co"># sin ignorar NAs</span></span>
+<span id="cb59-4"><a href="#cb59-4"></a><span class="fu">mean</span>(v1, <span class="at">na.rm =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## [1] NA</code></pre>
-<div class="sourceCode" id="cb60"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1"></a><span class="co"># ignorando NAs</span></span>
-<span id="cb60-2"><a href="#cb60-2"></a><span class="fu">mean</span>(v1, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a><span class="co"># ignorando NAs</span></span>
+<span id="cb61-2"><a href="#cb61-2"></a><span class="fu">mean</span>(v1, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## [1] 2</code></pre>
 <p> </p>
 </div>
@@ -829,65 +830,65 @@ no estarán disponibles en el entorno.</p>
 <em>declaración de retorno</em> (return statement), que define
 explícitamente la salida de la función. Esto se hace usando la función
 <code>return()</code>:</p>
-<div class="sourceCode" id="cb62"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1"></a><span class="co"># sin &#39;return statement&#39;</span></span>
-<span id="cb62-2"><a href="#cb62-2"></a>f1 <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) {</span>
-<span id="cb62-3"><a href="#cb62-3"></a></span>
-<span id="cb62-4"><a href="#cb62-4"></a>    z1 <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> x <span class="sc">+</span> y</span>
-<span id="cb62-5"><a href="#cb62-5"></a>    z2 <span class="ot">&lt;-</span> x <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> y</span>
-<span id="cb62-6"><a href="#cb62-6"></a>    z3 <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> y</span>
-<span id="cb62-7"><a href="#cb62-7"></a>    z4 <span class="ot">&lt;-</span> x<span class="sc">/</span>y</span>
-<span id="cb62-8"><a href="#cb62-8"></a>}</span>
-<span id="cb62-9"><a href="#cb62-9"></a></span>
-<span id="cb62-10"><a href="#cb62-10"></a><span class="fu">f1</span>(<span class="dv">5</span>, <span class="dv">3</span>)</span>
-<span id="cb62-11"><a href="#cb62-11"></a></span>
-<span id="cb62-12"><a href="#cb62-12"></a>f1_out <span class="ot">&lt;-</span> <span class="fu">f1</span>(<span class="dv">5</span>, <span class="dv">3</span>)</span>
-<span id="cb62-13"><a href="#cb62-13"></a></span>
-<span id="cb62-14"><a href="#cb62-14"></a>f1_out</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1"></a><span class="co"># sin &#39;return statement&#39;</span></span>
+<span id="cb63-2"><a href="#cb63-2"></a>f1 <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb63-3"><a href="#cb63-3"></a></span>
+<span id="cb63-4"><a href="#cb63-4"></a>    z1 <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> x <span class="sc">+</span> y</span>
+<span id="cb63-5"><a href="#cb63-5"></a>    z2 <span class="ot">&lt;-</span> x <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> y</span>
+<span id="cb63-6"><a href="#cb63-6"></a>    z3 <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> y</span>
+<span id="cb63-7"><a href="#cb63-7"></a>    z4 <span class="ot">&lt;-</span> x<span class="sc">/</span>y</span>
+<span id="cb63-8"><a href="#cb63-8"></a>}</span>
+<span id="cb63-9"><a href="#cb63-9"></a></span>
+<span id="cb63-10"><a href="#cb63-10"></a><span class="fu">f1</span>(<span class="dv">5</span>, <span class="dv">3</span>)</span>
+<span id="cb63-11"><a href="#cb63-11"></a></span>
+<span id="cb63-12"><a href="#cb63-12"></a>f1_out <span class="ot">&lt;-</span> <span class="fu">f1</span>(<span class="dv">5</span>, <span class="dv">3</span>)</span>
+<span id="cb63-13"><a href="#cb63-13"></a></span>
+<span id="cb63-14"><a href="#cb63-14"></a>f1_out</span></code></pre></div>
 <pre><code>## [1] 1.666667</code></pre>
-<div class="sourceCode" id="cb64"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1"></a><span class="co"># con &#39;return statement&#39;</span></span>
-<span id="cb64-2"><a href="#cb64-2"></a>f2 <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) {</span>
-<span id="cb64-3"><a href="#cb64-3"></a></span>
-<span id="cb64-4"><a href="#cb64-4"></a>    z1 <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> x <span class="sc">+</span> y</span>
-<span id="cb64-5"><a href="#cb64-5"></a>    z2 <span class="ot">&lt;-</span> x <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> y</span>
-<span id="cb64-6"><a href="#cb64-6"></a>    z3 <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> y</span>
-<span id="cb64-7"><a href="#cb64-7"></a>    z4 <span class="ot">&lt;-</span> x<span class="sc">/</span>y</span>
-<span id="cb64-8"><a href="#cb64-8"></a></span>
-<span id="cb64-9"><a href="#cb64-9"></a>    <span class="fu">return</span>(<span class="fu">c</span>(z1, z2, z3, z4))</span>
-<span id="cb64-10"><a href="#cb64-10"></a></span>
-<span id="cb64-11"><a href="#cb64-11"></a>}</span>
-<span id="cb64-12"><a href="#cb64-12"></a></span>
-<span id="cb64-13"><a href="#cb64-13"></a><span class="fu">f2</span>(<span class="dv">5</span>, <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1"></a><span class="co"># con &#39;return statement&#39;</span></span>
+<span id="cb65-2"><a href="#cb65-2"></a>f2 <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb65-3"><a href="#cb65-3"></a></span>
+<span id="cb65-4"><a href="#cb65-4"></a>    z1 <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> x <span class="sc">+</span> y</span>
+<span id="cb65-5"><a href="#cb65-5"></a>    z2 <span class="ot">&lt;-</span> x <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> y</span>
+<span id="cb65-6"><a href="#cb65-6"></a>    z3 <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> y</span>
+<span id="cb65-7"><a href="#cb65-7"></a>    z4 <span class="ot">&lt;-</span> x<span class="sc">/</span>y</span>
+<span id="cb65-8"><a href="#cb65-8"></a></span>
+<span id="cb65-9"><a href="#cb65-9"></a>    <span class="fu">return</span>(<span class="fu">c</span>(z1, z2, z3, z4))</span>
+<span id="cb65-10"><a href="#cb65-10"></a></span>
+<span id="cb65-11"><a href="#cb65-11"></a>}</span>
+<span id="cb65-12"><a href="#cb65-12"></a></span>
+<span id="cb65-13"><a href="#cb65-13"></a><span class="fu">f2</span>(<span class="dv">5</span>, <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## [1] 13.000000 11.000000 16.000000  1.666667</code></pre>
-<div class="sourceCode" id="cb66"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1"></a>f2_out <span class="ot">&lt;-</span> <span class="fu">f2</span>(<span class="dv">5</span>, <span class="dv">3</span>)</span>
-<span id="cb66-2"><a href="#cb66-2"></a></span>
-<span id="cb66-3"><a href="#cb66-3"></a>f2_out</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1"></a>f2_out <span class="ot">&lt;-</span> <span class="fu">f2</span>(<span class="dv">5</span>, <span class="dv">3</span>)</span>
+<span id="cb67-2"><a href="#cb67-2"></a></span>
+<span id="cb67-3"><a href="#cb67-3"></a>f2_out</span></code></pre></div>
 <pre><code>## [1] 13.000000 11.000000 16.000000  1.666667</code></pre>
 <p> </p>
 <p>Por lo tanto, cuando no se proporciona una <em>declaración de
 retorno</em>, la función devolverá el último objeto que se creó en el
 cuerpo de la función:</p>
-<div class="sourceCode" id="cb68"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1"></a><span class="co"># sin &#39;return statement&#39;</span></span>
-<span id="cb68-2"><a href="#cb68-2"></a>f3 <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) {</span>
-<span id="cb68-3"><a href="#cb68-3"></a></span>
-<span id="cb68-4"><a href="#cb68-4"></a>    z1 <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> x <span class="sc">+</span> y</span>
-<span id="cb68-5"><a href="#cb68-5"></a>    z2 <span class="ot">&lt;-</span> x <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> y</span>
-<span id="cb68-6"><a href="#cb68-6"></a>    z3 <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> y</span>
-<span id="cb68-7"><a href="#cb68-7"></a>    z4 <span class="ot">&lt;-</span> x<span class="sc">/</span>y</span>
-<span id="cb68-8"><a href="#cb68-8"></a></span>
-<span id="cb68-9"><a href="#cb68-9"></a>    <span class="fu">c</span>(z1, z2, z3, z4)</span>
-<span id="cb68-10"><a href="#cb68-10"></a></span>
-<span id="cb68-11"><a href="#cb68-11"></a>}</span>
-<span id="cb68-12"><a href="#cb68-12"></a></span>
-<span id="cb68-13"><a href="#cb68-13"></a><span class="fu">f3</span>(<span class="dv">5</span>, <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1"></a><span class="co"># sin &#39;return statement&#39;</span></span>
+<span id="cb69-2"><a href="#cb69-2"></a>f3 <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb69-3"><a href="#cb69-3"></a></span>
+<span id="cb69-4"><a href="#cb69-4"></a>    z1 <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> x <span class="sc">+</span> y</span>
+<span id="cb69-5"><a href="#cb69-5"></a>    z2 <span class="ot">&lt;-</span> x <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> y</span>
+<span id="cb69-6"><a href="#cb69-6"></a>    z3 <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> y</span>
+<span id="cb69-7"><a href="#cb69-7"></a>    z4 <span class="ot">&lt;-</span> x<span class="sc">/</span>y</span>
+<span id="cb69-8"><a href="#cb69-8"></a></span>
+<span id="cb69-9"><a href="#cb69-9"></a>    <span class="fu">c</span>(z1, z2, z3, z4)</span>
+<span id="cb69-10"><a href="#cb69-10"></a></span>
+<span id="cb69-11"><a href="#cb69-11"></a>}</span>
+<span id="cb69-12"><a href="#cb69-12"></a></span>
+<span id="cb69-13"><a href="#cb69-13"></a><span class="fu">f3</span>(<span class="dv">5</span>, <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## [1] 13.000000 11.000000 16.000000  1.666667</code></pre>
-<div class="sourceCode" id="cb70"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1"></a>f3_out <span class="ot">&lt;-</span> <span class="fu">f3</span>(<span class="dv">5</span>, <span class="dv">3</span>)</span>
-<span id="cb70-2"><a href="#cb70-2"></a></span>
-<span id="cb70-3"><a href="#cb70-3"></a>f3_out</span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1"></a>f3_out <span class="ot">&lt;-</span> <span class="fu">f3</span>(<span class="dv">5</span>, <span class="dv">3</span>)</span>
+<span id="cb71-2"><a href="#cb71-2"></a></span>
+<span id="cb71-3"><a href="#cb71-3"></a>f3_out</span></code></pre></div>
 <pre><code>## [1] 13.000000 11.000000 16.000000  1.666667</code></pre>
 <p> </p>
 <p>Es más seguro usar <code>return()</code>.</p>
@@ -896,24 +897,24 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 juntar los diferentes objetos. Esto es particularmente útil cuando se
 generan objetos de diferentes clases (por ejemplo, vectores y
 listas):</p>
-<div class="sourceCode" id="cb72"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1"></a>f4 <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) {</span>
-<span id="cb72-2"><a href="#cb72-2"></a></span>
-<span id="cb72-3"><a href="#cb72-3"></a>    <span class="co"># 1 elemento</span></span>
-<span id="cb72-4"><a href="#cb72-4"></a>    z1 <span class="ot">&lt;-</span> x <span class="sc">+</span> y</span>
-<span id="cb72-5"><a href="#cb72-5"></a></span>
-<span id="cb72-6"><a href="#cb72-6"></a>    <span class="co"># 2 elementos</span></span>
-<span id="cb72-7"><a href="#cb72-7"></a>    z2 <span class="ot">&lt;-</span> <span class="fu">c</span>(x, y<span class="sc">/</span><span class="dv">3</span>)</span>
-<span id="cb72-8"><a href="#cb72-8"></a></span>
-<span id="cb72-9"><a href="#cb72-9"></a>    <span class="co"># vector logico</span></span>
-<span id="cb72-10"><a href="#cb72-10"></a>    z3 <span class="ot">&lt;-</span> z2 <span class="sc">&lt;</span> <span class="dv">10</span></span>
-<span id="cb72-11"><a href="#cb72-11"></a></span>
-<span id="cb72-12"><a href="#cb72-12"></a>    l <span class="ot">&lt;-</span> <span class="fu">list</span>(z1, z2, z3)</span>
-<span id="cb72-13"><a href="#cb72-13"></a></span>
-<span id="cb72-14"><a href="#cb72-14"></a>    <span class="fu">return</span>(l)</span>
-<span id="cb72-15"><a href="#cb72-15"></a>}</span>
-<span id="cb72-16"><a href="#cb72-16"></a></span>
-<span id="cb72-17"><a href="#cb72-17"></a><span class="fu">f4</span>(<span class="dv">10</span>, <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1"></a>f4 <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb73-2"><a href="#cb73-2"></a></span>
+<span id="cb73-3"><a href="#cb73-3"></a>    <span class="co"># 1 elemento</span></span>
+<span id="cb73-4"><a href="#cb73-4"></a>    z1 <span class="ot">&lt;-</span> x <span class="sc">+</span> y</span>
+<span id="cb73-5"><a href="#cb73-5"></a></span>
+<span id="cb73-6"><a href="#cb73-6"></a>    <span class="co"># 2 elementos</span></span>
+<span id="cb73-7"><a href="#cb73-7"></a>    z2 <span class="ot">&lt;-</span> <span class="fu">c</span>(x, y<span class="sc">/</span><span class="dv">3</span>)</span>
+<span id="cb73-8"><a href="#cb73-8"></a></span>
+<span id="cb73-9"><a href="#cb73-9"></a>    <span class="co"># vector logico</span></span>
+<span id="cb73-10"><a href="#cb73-10"></a>    z3 <span class="ot">&lt;-</span> z2 <span class="sc">&lt;</span> <span class="dv">10</span></span>
+<span id="cb73-11"><a href="#cb73-11"></a></span>
+<span id="cb73-12"><a href="#cb73-12"></a>    l <span class="ot">&lt;-</span> <span class="fu">list</span>(z1, z2, z3)</span>
+<span id="cb73-13"><a href="#cb73-13"></a></span>
+<span id="cb73-14"><a href="#cb73-14"></a>    <span class="fu">return</span>(l)</span>
+<span id="cb73-15"><a href="#cb73-15"></a>}</span>
+<span id="cb73-16"><a href="#cb73-16"></a></span>
+<span id="cb73-17"><a href="#cb73-17"></a><span class="fu">f4</span>(<span class="dv">10</span>, <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## [[1]]
 ## [1] 15
 ## 
@@ -925,31 +926,31 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <p> </p>
 <p>Podemos acceder a elementos específicos de la salida de una función
 mediante indexación:</p>
-<div class="sourceCode" id="cb74"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1"></a><span class="co"># elemento 1</span></span>
-<span id="cb74-2"><a href="#cb74-2"></a><span class="fu">f4</span>(<span class="dv">10</span>, <span class="dv">5</span>)[[<span class="dv">1</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1"></a><span class="co"># elemento 1</span></span>
+<span id="cb75-2"><a href="#cb75-2"></a><span class="fu">f4</span>(<span class="dv">10</span>, <span class="dv">5</span>)[[<span class="dv">1</span>]]</span></code></pre></div>
 <pre><code>## [1] 15</code></pre>
-<div class="sourceCode" id="cb76"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1"></a><span class="co"># elemento 2</span></span>
-<span id="cb76-2"><a href="#cb76-2"></a><span class="fu">f4</span>(<span class="dv">10</span>, <span class="dv">5</span>)[[<span class="dv">2</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb77"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1"></a><span class="co"># elemento 2</span></span>
+<span id="cb77-2"><a href="#cb77-2"></a><span class="fu">f4</span>(<span class="dv">10</span>, <span class="dv">5</span>)[[<span class="dv">2</span>]]</span></code></pre></div>
 <pre><code>## [1] 10.000000  1.666667</code></pre>
-<div class="sourceCode" id="cb78"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1"></a><span class="co"># elemento 3</span></span>
-<span id="cb78-2"><a href="#cb78-2"></a><span class="fu">f4</span>(<span class="dv">10</span>, <span class="dv">5</span>)[[<span class="dv">3</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1"></a><span class="co"># elemento 3</span></span>
+<span id="cb79-2"><a href="#cb79-2"></a><span class="fu">f4</span>(<span class="dv">10</span>, <span class="dv">5</span>)[[<span class="dv">3</span>]]</span></code></pre></div>
 <pre><code>## [1] FALSE  TRUE</code></pre>
 <p> </p>
 <p>Por supuesto, también podemos guardar el resultado como un objeto y
 acceder a cada elemento mediante la indexación:</p>
-<div class="sourceCode" id="cb80"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1"></a><span class="co"># elemento 1</span></span>
-<span id="cb80-2"><a href="#cb80-2"></a>out <span class="ot">&lt;-</span> <span class="fu">f4</span>(<span class="dv">10</span>, <span class="dv">5</span>)</span>
-<span id="cb80-3"><a href="#cb80-3"></a></span>
-<span id="cb80-4"><a href="#cb80-4"></a><span class="co"># elemento 1</span></span>
-<span id="cb80-5"><a href="#cb80-5"></a>out[[<span class="dv">1</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1"></a><span class="co"># elemento 1</span></span>
+<span id="cb81-2"><a href="#cb81-2"></a>out <span class="ot">&lt;-</span> <span class="fu">f4</span>(<span class="dv">10</span>, <span class="dv">5</span>)</span>
+<span id="cb81-3"><a href="#cb81-3"></a></span>
+<span id="cb81-4"><a href="#cb81-4"></a><span class="co"># elemento 1</span></span>
+<span id="cb81-5"><a href="#cb81-5"></a>out[[<span class="dv">1</span>]]</span></code></pre></div>
 <pre><code>## [1] 15</code></pre>
-<div class="sourceCode" id="cb82"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1"></a><span class="co"># elemento 2</span></span>
-<span id="cb82-2"><a href="#cb82-2"></a>out[[<span class="dv">2</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb83"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1"></a><span class="co"># elemento 2</span></span>
+<span id="cb83-2"><a href="#cb83-2"></a>out[[<span class="dv">2</span>]]</span></code></pre></div>
 <pre><code>## [1] 10.000000  1.666667</code></pre>
 <p> </p>
 </div>
@@ -987,22 +988,22 @@ implican el uso del operador <code>if</code>, algunas veces incluyendo
 su contra-parte <code>else</code>. Estos operadores son parte
 fundamental de la programación y se usan para definir que acción
 ejecutar con base en una evaluación lógica:</p>
-<div class="sourceCode" id="cb84"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1"></a><span class="co"># creemos el objeto a con valor 2</span></span>
-<span id="cb84-2"><a href="#cb84-2"></a>a <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb84-3"><a href="#cb84-3"></a></span>
-<span id="cb84-4"><a href="#cb84-4"></a><span class="co"># elevemos a la 2 si a es mayor q 0</span></span>
-<span id="cb84-5"><a href="#cb84-5"></a><span class="cf">if</span> (a <span class="sc">&gt;</span> <span class="dv">0</span>) a<span class="sc">^</span><span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb85"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1"></a><span class="co"># creemos el objeto a con valor 2</span></span>
+<span id="cb85-2"><a href="#cb85-2"></a>a <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb85-3"><a href="#cb85-3"></a></span>
+<span id="cb85-4"><a href="#cb85-4"></a><span class="co"># elevemos a la 2 si a es mayor q 0</span></span>
+<span id="cb85-5"><a href="#cb85-5"></a><span class="cf">if</span> (a <span class="sc">&gt;</span> <span class="dv">0</span>) a<span class="sc">^</span><span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] 4</code></pre>
-<div class="sourceCode" id="cb86"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1"></a><span class="co"># elevemos a la 2 si a es mayor q 0 de lo contrario elevemoslo a</span></span>
-<span id="cb86-2"><a href="#cb86-2"></a><span class="co"># la 100</span></span>
-<span id="cb86-3"><a href="#cb86-3"></a><span class="cf">if</span> (a <span class="sc">&gt;</span> <span class="dv">0</span>) a<span class="sc">^</span><span class="dv">2</span> <span class="cf">else</span> a<span class="sc">^</span><span class="dv">100</span></span></code></pre></div>
+<div class="sourceCode" id="cb87"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1"></a><span class="co"># elevemos a la 2 si a es mayor q 0 de lo contrario elevemoslo a</span></span>
+<span id="cb87-2"><a href="#cb87-2"></a><span class="co"># la 100</span></span>
+<span id="cb87-3"><a href="#cb87-3"></a><span class="cf">if</span> (a <span class="sc">&gt;</span> <span class="dv">0</span>) a<span class="sc">^</span><span class="dv">2</span> <span class="cf">else</span> a<span class="sc">^</span><span class="dv">100</span></span></code></pre></div>
 <pre><code>## [1] 4</code></pre>
-<div class="sourceCode" id="cb88"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1"></a><span class="co"># con a negativo</span></span>
-<span id="cb88-2"><a href="#cb88-2"></a>a <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">3</span></span>
-<span id="cb88-3"><a href="#cb88-3"></a><span class="cf">if</span> (a <span class="sc">&gt;</span> <span class="dv">0</span>) a<span class="sc">^</span><span class="dv">2</span> <span class="cf">else</span> a<span class="sc">^</span><span class="dv">3</span></span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1"></a><span class="co"># con a negativo</span></span>
+<span id="cb89-2"><a href="#cb89-2"></a>a <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">3</span></span>
+<span id="cb89-3"><a href="#cb89-3"></a><span class="cf">if</span> (a <span class="sc">&gt;</span> <span class="dv">0</span>) a<span class="sc">^</span><span class="dv">2</span> <span class="cf">else</span> a<span class="sc">^</span><span class="dv">3</span></span></code></pre></div>
 <pre><code>## [1] -27</code></pre>
 <p> </p>
 <p>La parte dentro de los paréntesis justo después de <code>if</code> es
@@ -1011,19 +1012,19 @@ la evaluación lógica.</p>
 esta lleva un argumento lógico. Por ejemplo, la siguiente función
 utiliza un argumento lógico para decidir si la operación algebraica a
 realizar es una suma o un promedio:</p>
-<div class="sourceCode" id="cb90"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1"></a>mean_sum <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y, <span class="at">prom =</span> <span class="cn">FALSE</span>) {</span>
-<span id="cb90-2"><a href="#cb90-2"></a></span>
-<span id="cb90-3"><a href="#cb90-3"></a>    <span class="cf">if</span> (prom)</span>
-<span id="cb90-4"><a href="#cb90-4"></a>        b <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">c</span>(x, y)) <span class="cf">else</span> b <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">c</span>(x, y))</span>
-<span id="cb90-5"><a href="#cb90-5"></a></span>
-<span id="cb90-6"><a href="#cb90-6"></a>    <span class="fu">return</span>(b)</span>
-<span id="cb90-7"><a href="#cb90-7"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1"></a>mean_sum <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y, <span class="at">prom =</span> <span class="cn">FALSE</span>) {</span>
+<span id="cb91-2"><a href="#cb91-2"></a></span>
+<span id="cb91-3"><a href="#cb91-3"></a>    <span class="cf">if</span> (prom)</span>
+<span id="cb91-4"><a href="#cb91-4"></a>        b <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">c</span>(x, y)) <span class="cf">else</span> b <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">c</span>(x, y))</span>
+<span id="cb91-5"><a href="#cb91-5"></a></span>
+<span id="cb91-6"><a href="#cb91-6"></a>    <span class="fu">return</span>(b)</span>
+<span id="cb91-7"><a href="#cb91-7"></a>}</span></code></pre></div>
 <p> </p>
 <p>Note que este tipo de argumentos deben tener un valor predeterminado.
 Podemos probar la función de la siguiente forma:</p>
-<div class="sourceCode" id="cb91"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1"></a><span class="fu">mean_sum</span>(<span class="at">x =</span> <span class="dv">2</span>, <span class="at">y =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1"></a><span class="fu">mean_sum</span>(<span class="at">x =</span> <span class="dv">2</span>, <span class="at">y =</span> <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## [1] 5</code></pre>
 <p> </p>
 <div id="ejercicio-3" class="section level2 alert alert-info">
@@ -1052,35 +1053,35 @@ para que la función haga los cálculos con y sin valores absolutos.</p>
 <h2>Código mas limpio</h2>
 <p>Los objetos creados dentro del cuerpo no están disponibles en el
 entorno actual:</p>
-<div class="sourceCode" id="cb93"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1"></a><span class="co"># primero remover todo los objetos</span></span>
-<span id="cb93-2"><a href="#cb93-2"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span>
-<span id="cb93-3"><a href="#cb93-3"></a></span>
-<span id="cb93-4"><a href="#cb93-4"></a>f5 <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb93-5"><a href="#cb93-5"></a>    sqr <span class="ot">&lt;-</span> x <span class="sc">*</span> x</span>
-<span id="cb93-6"><a href="#cb93-6"></a>    lg_sqr <span class="ot">&lt;-</span> <span class="fu">log</span>(x)</span>
-<span id="cb93-7"><a href="#cb93-7"></a>    <span class="fu">return</span>(lg_sqr)</span>
-<span id="cb93-8"><a href="#cb93-8"></a>}</span>
-<span id="cb93-9"><a href="#cb93-9"></a></span>
-<span id="cb93-10"><a href="#cb93-10"></a><span class="fu">f5</span>(<span class="dv">7</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1"></a><span class="co"># primero remover todo los objetos</span></span>
+<span id="cb94-2"><a href="#cb94-2"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span>
+<span id="cb94-3"><a href="#cb94-3"></a></span>
+<span id="cb94-4"><a href="#cb94-4"></a>f5 <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb94-5"><a href="#cb94-5"></a>    sqr <span class="ot">&lt;-</span> x <span class="sc">*</span> x</span>
+<span id="cb94-6"><a href="#cb94-6"></a>    lg_sqr <span class="ot">&lt;-</span> <span class="fu">log</span>(x)</span>
+<span id="cb94-7"><a href="#cb94-7"></a>    <span class="fu">return</span>(lg_sqr)</span>
+<span id="cb94-8"><a href="#cb94-8"></a>}</span>
+<span id="cb94-9"><a href="#cb94-9"></a></span>
+<span id="cb94-10"><a href="#cb94-10"></a><span class="fu">f5</span>(<span class="dv">7</span>)</span></code></pre></div>
 <pre><code>## [1] 1.94591</code></pre>
-<div class="sourceCode" id="cb95"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1"></a><span class="fu">exists</span>(<span class="st">&quot;sqr&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1"></a><span class="fu">exists</span>(<span class="st">&quot;sqr&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
-<div class="sourceCode" id="cb97"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1"></a><span class="fu">exists</span>(<span class="st">&quot;lg_sqr&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1"></a><span class="fu">exists</span>(<span class="st">&quot;lg_sqr&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
 <p> </p>
-<div class="sourceCode" id="cb99"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1"></a>x <span class="ot">&lt;-</span> <span class="dv">7</span></span>
-<span id="cb99-2"><a href="#cb99-2"></a>sqr <span class="ot">&lt;-</span> x <span class="sc">*</span> x</span>
-<span id="cb99-3"><a href="#cb99-3"></a>lg_sqr <span class="ot">&lt;-</span> <span class="fu">log</span>(x)</span>
-<span id="cb99-4"><a href="#cb99-4"></a></span>
-<span id="cb99-5"><a href="#cb99-5"></a></span>
-<span id="cb99-6"><a href="#cb99-6"></a><span class="fu">exists</span>(<span class="st">&quot;sqr&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1"></a>x <span class="ot">&lt;-</span> <span class="dv">7</span></span>
+<span id="cb100-2"><a href="#cb100-2"></a>sqr <span class="ot">&lt;-</span> x <span class="sc">*</span> x</span>
+<span id="cb100-3"><a href="#cb100-3"></a>lg_sqr <span class="ot">&lt;-</span> <span class="fu">log</span>(x)</span>
+<span id="cb100-4"><a href="#cb100-4"></a></span>
+<span id="cb100-5"><a href="#cb100-5"></a></span>
+<span id="cb100-6"><a href="#cb100-6"></a><span class="fu">exists</span>(<span class="st">&quot;sqr&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb101"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1"></a><span class="fu">exists</span>(<span class="st">&quot;lg_sqr&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1"></a><span class="fu">exists</span>(<span class="st">&quot;lg_sqr&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p> </p>
 </div>
@@ -1090,19 +1091,19 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 sin estar definidas en el código actual con la función
 <code>source()</code>. En este ejemplo creamos la función
 <code>fnctn_X</code>:</p>
-<div class="sourceCode" id="cb103"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1"></a>fnctn_X <span class="ot">&lt;-</span> <span class="cf">function</span>(sq_mt, vctr) {</span>
-<span id="cb103-2"><a href="#cb103-2"></a></span>
-<span id="cb103-3"><a href="#cb103-3"></a>    <span class="co"># trasponer matriz y calcular est dev</span></span>
-<span id="cb103-4"><a href="#cb103-4"></a>    stp1 <span class="ot">&lt;-</span> <span class="fu">t</span>(sq_mt)</span>
-<span id="cb103-5"><a href="#cb103-5"></a>    stp2 <span class="ot">&lt;-</span> vctr <span class="sc">*</span> vctr</span>
-<span id="cb103-6"><a href="#cb103-6"></a></span>
-<span id="cb103-7"><a href="#cb103-7"></a>    <span class="co"># guardar en lista</span></span>
-<span id="cb103-8"><a href="#cb103-8"></a>    rslt <span class="ot">&lt;-</span> <span class="fu">list</span>(stp1, stp2)</span>
-<span id="cb103-9"><a href="#cb103-9"></a>    <span class="fu">return</span>(rslt)</span>
-<span id="cb103-10"><a href="#cb103-10"></a>}</span>
-<span id="cb103-11"><a href="#cb103-11"></a></span>
-<span id="cb103-12"><a href="#cb103-12"></a><span class="fu">fnctn_X</span>(<span class="at">sq_mt =</span> <span class="fu">cbind</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">4</span>)), <span class="at">vctr =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1"></a>fnctn_X <span class="ot">&lt;-</span> <span class="cf">function</span>(sq_mt, vctr) {</span>
+<span id="cb104-2"><a href="#cb104-2"></a></span>
+<span id="cb104-3"><a href="#cb104-3"></a>    <span class="co"># trasponer matriz y calcular est dev</span></span>
+<span id="cb104-4"><a href="#cb104-4"></a>    stp1 <span class="ot">&lt;-</span> <span class="fu">t</span>(sq_mt)</span>
+<span id="cb104-5"><a href="#cb104-5"></a>    stp2 <span class="ot">&lt;-</span> vctr <span class="sc">*</span> vctr</span>
+<span id="cb104-6"><a href="#cb104-6"></a></span>
+<span id="cb104-7"><a href="#cb104-7"></a>    <span class="co"># guardar en lista</span></span>
+<span id="cb104-8"><a href="#cb104-8"></a>    rslt <span class="ot">&lt;-</span> <span class="fu">list</span>(stp1, stp2)</span>
+<span id="cb104-9"><a href="#cb104-9"></a>    <span class="fu">return</span>(rslt)</span>
+<span id="cb104-10"><a href="#cb104-10"></a>}</span>
+<span id="cb104-11"><a href="#cb104-11"></a></span>
+<span id="cb104-12"><a href="#cb104-12"></a><span class="fu">fnctn_X</span>(<span class="at">sq_mt =</span> <span class="fu">cbind</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">4</span>)), <span class="at">vctr =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>))</span></code></pre></div>
 <pre><code>## [[1]]
 ##      [,1] [,2]
 ## [1,]    1    2
@@ -1114,15 +1115,15 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <p>Guarde el código anterior en un archivo <code>R</code> llamado
 ‘function_X.R’. Ahora la función se puede cargar usando
 <code>source()</code>:</p>
-<div class="sourceCode" id="cb105"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1"></a><span class="co"># removamosla del ambiente</span></span>
-<span id="cb105-2"><a href="#cb105-2"></a><span class="fu">rm</span>(fnctn_X)</span>
-<span id="cb105-3"><a href="#cb105-3"></a></span>
-<span id="cb105-4"><a href="#cb105-4"></a><span class="co"># cargar funcion</span></span>
-<span id="cb105-5"><a href="#cb105-5"></a><span class="fu">source</span>(<span class="st">&quot;function_X.R&quot;</span>)</span>
-<span id="cb105-6"><a href="#cb105-6"></a></span>
-<span id="cb105-7"><a href="#cb105-7"></a><span class="co"># run it</span></span>
-<span id="cb105-8"><a href="#cb105-8"></a><span class="fu">fnctn_X</span>(<span class="at">sq_mt =</span> <span class="fu">cbind</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">4</span>)), <span class="at">vctr =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1"></a><span class="co"># removamosla del ambiente</span></span>
+<span id="cb106-2"><a href="#cb106-2"></a><span class="fu">rm</span>(fnctn_X)</span>
+<span id="cb106-3"><a href="#cb106-3"></a></span>
+<span id="cb106-4"><a href="#cb106-4"></a><span class="co"># cargar funcion</span></span>
+<span id="cb106-5"><a href="#cb106-5"></a><span class="fu">source</span>(<span class="st">&quot;function_X.R&quot;</span>)</span>
+<span id="cb106-6"><a href="#cb106-6"></a></span>
+<span id="cb106-7"><a href="#cb106-7"></a><span class="co"># run it</span></span>
+<span id="cb106-8"><a href="#cb106-8"></a><span class="fu">fnctn_X</span>(<span class="at">sq_mt =</span> <span class="fu">cbind</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">4</span>)), <span class="at">vctr =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>))</span></code></pre></div>
 <pre><code>## [[1]]
 ##      [,1] [,2]
 ## [1,]    1    2
@@ -1134,19 +1135,19 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <p>Además, este código se puede compartir fácilmente. Se puede enviar
 por correo electrónico o publicar en línea. Incluso se puede cargar
 desde repositorios en línea:</p>
-<div class="sourceCode" id="cb107"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1"></a><span class="co"># remover objetos</span></span>
-<span id="cb107-2"><a href="#cb107-2"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span>
-<span id="cb107-3"><a href="#cb107-3"></a></span>
-<span id="cb107-4"><a href="#cb107-4"></a><span class="co"># revisar si existe en ambiente actual</span></span>
-<span id="cb107-5"><a href="#cb107-5"></a><span class="fu">exists</span>(<span class="st">&quot;fnctn_X&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1"></a><span class="co"># remover objetos</span></span>
+<span id="cb108-2"><a href="#cb108-2"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span>
+<span id="cb108-3"><a href="#cb108-3"></a></span>
+<span id="cb108-4"><a href="#cb108-4"></a><span class="co"># revisar si existe en ambiente actual</span></span>
+<span id="cb108-5"><a href="#cb108-5"></a><span class="fu">exists</span>(<span class="st">&quot;fnctn_X&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
-<div class="sourceCode" id="cb109"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1"></a><span class="co"># cargar desde el internet</span></span>
-<span id="cb109-2"><a href="#cb109-2"></a><span class="fu">source</span>(<span class="st">&quot;https://raw.githubusercontent.com/maRce10/ucr_r_avanzado/master/images/function_x.r&quot;</span>)</span>
-<span id="cb109-3"><a href="#cb109-3"></a></span>
-<span id="cb109-4"><a href="#cb109-4"></a><span class="co"># revisar si existe en ambiente actual</span></span>
-<span id="cb109-5"><a href="#cb109-5"></a><span class="fu">exists</span>(<span class="st">&quot;fnctn_X&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1"></a><span class="co"># cargar desde el internet</span></span>
+<span id="cb110-2"><a href="#cb110-2"></a><span class="fu">source</span>(<span class="st">&quot;https://raw.githubusercontent.com/maRce10/ucr_r_avanzado/master/images/function_x.r&quot;</span>)</span>
+<span id="cb110-3"><a href="#cb110-3"></a></span>
+<span id="cb110-4"><a href="#cb110-4"></a><span class="co"># revisar si existe en ambiente actual</span></span>
+<span id="cb110-5"><a href="#cb110-5"></a><span class="fu">exists</span>(<span class="st">&quot;fnctn_X&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p> </p>
 </div>
@@ -1258,14 +1259,15 @@ href="http://r4ds.had.co.nz">website</a></li>
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] rstudioapi_0.13  magrittr_2.0.3   uuid_1.1-0       R6_2.5.1        
-##  [5] rlang_1.0.4      fastmap_1.1.0    fansi_1.0.3      highr_0.9       
-##  [9] stringr_1.4.0    tools_4.2.0      xfun_0.33        utf8_1.2.2      
-## [13] cli_3.3.0        jquerylib_0.1.4  htmltools_0.5.3  assertthat_0.2.1
-## [17] yaml_2.3.5       digest_0.6.29    tibble_3.1.8     lifecycle_1.0.1 
-## [21] crayon_1.5.1     formatR_1.12     purrr_0.3.4      sass_0.4.1      
-## [25] vctrs_0.4.1      glue_1.6.2       evaluate_0.16    rmarkdown_2.16  
-## [29] stringi_1.7.8    compiler_4.2.0   bslib_0.3.1      pillar_1.8.0    
-## [33] generics_0.1.2   lubridate_1.8.0  jsonlite_1.8.0   pkgconfig_2.0.3</code></pre>
+##  [5] rlang_1.0.6      fastmap_1.1.0    fansi_1.0.3      highr_0.9       
+##  [9] stringr_1.4.1    tools_4.2.0      xfun_0.33        utf8_1.2.2      
+## [13] cli_3.4.1        jquerylib_0.1.4  htmltools_0.5.3  assertthat_0.2.1
+## [17] yaml_2.3.5       digest_0.6.29    tibble_3.1.8     lifecycle_1.0.2 
+## [21] crayon_1.5.1     formatR_1.12     purrr_0.3.4      sass_0.4.2      
+## [25] vctrs_0.4.1      glue_1.6.2       cachem_1.0.6     evaluate_0.16   
+## [29] rmarkdown_2.16   stringi_1.7.8    compiler_4.2.0   bslib_0.4.0     
+## [33] pillar_1.8.1     generics_0.1.2   lubridate_1.8.0  jsonlite_1.8.0  
+## [37] pkgconfig_2.0.3</code></pre>
 </div>
 </div>
 
