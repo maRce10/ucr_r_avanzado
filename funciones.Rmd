@@ -792,7 +792,7 @@ Esto ya debería ser obvio a este punto.
 
 </br>
 
-4.4 Haga que la función escoja un color al azar para las barras del histograma cada vez que se corre (pista: `sample(vector.de.colores)`)
+4.4 Haga que la función escoja un color al azar para las barras del histograma cada vez que se corre (pista: `sample(vector.de.colores, 1)`)
 
 </br>
 

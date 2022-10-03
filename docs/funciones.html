@@ -13,7 +13,7 @@
 
 <title>funciones.knit</title>
 
-<script src="site_libs/header-attrs-2.16/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -132,20 +132,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   for (var i = 0; i < sheets.length; i++) {
     if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
     try { var rules = sheets[i].cssRules; } catch (e) { continue; }
-    var j = 0;
-    while (j < rules.length) {
+    for (var j = 0; j < rules.length; j++) {
       var rule = rules[j];
       // check if there is a div.sourceCode rule
-      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
-        j++;
-        continue;
-      }
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
       var style = rule.style.cssText;
       // check if color or background-color is set
-      if (rule.style.color === '' && rule.style.backgroundColor === '') {
-        j++;
-        continue;
-      }
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
       // replace div.sourceCode by a pre.sourceCode rule
       sheets[i].deleteRule(j);
       sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
@@ -241,15 +234,11 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark the anchor link active (and if it's in a dropdown, also mark that active)
-  var dropdown = menuAnchor.closest('li.dropdown');
-  if (window.bootstrap) { // Bootstrap 4+
-    menuAnchor.addClass('active');
-    dropdown.find('> .dropdown-toggle').addClass('active');
-  } else { // Bootstrap 3
-    menuAnchor.parent().addClass('active');
-    dropdown.addClass('active');
-  }
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -498,7 +487,7 @@ R</b></b></font>
 Araya-Salas, PhD</a></font>
 </center></h4>
 <h4 class="date"><center>
-“2022-09-30”
+“2022-10-03”
 </center></h4>
 
 </div>
@@ -558,7 +547,7 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <pre><code>## function (x, na.rm = FALSE) 
 ## sqrt(var(if (is.vector(x) || is.factor(x)) x else as.double(x), 
 ##     na.rm = na.rm))
-## &lt;bytecode: 0x5576d93d0680&gt;
+## &lt;bytecode: 0x558bbc4df728&gt;
 ## &lt;environment: namespace:stats&gt;</code></pre>
 <p> </p>
 <p>En <code>Rstudio</code>, el código también se puede mostrar usando
@@ -705,7 +694,7 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <p>Los argumentos sin valor predeterminado deben ser proporcionados:</p>
 <div class="sourceCode" id="cb41"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="fu">f1</span>()</span></code></pre></div>
-<pre><code>## Error in f1(): argument &quot;x&quot; is missing, with no default</code></pre>
+<pre><code>## Error in f1(): el argumento &quot;x&quot; está ausente, sin valor por omisión</code></pre>
 <p> </p>
 <p>Si todos los argumentos tienen un valor predeterminado, se puede
 invocar la función sin proporcionar ningún argumento:</p>
@@ -719,7 +708,7 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <code>Sys.time()</code>:</p>
 <div class="sourceCode" id="cb45"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="fu">Sys.time</span>()</span></code></pre></div>
-<pre><code>## [1] &quot;2022-09-30 10:06:27 CST&quot;</code></pre>
+<pre><code>## [1] &quot;2022-10-03 11:13:00 CST&quot;</code></pre>
 <p> </p>
 <p>Los argumentos pueden especificarse implícitamente por posición o por
 nombres incompletos:</p>
@@ -764,7 +753,7 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <p>Sin embargo, esto no funciona si los nombres son ambiguos:</p>
 <div class="sourceCode" id="cb57"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a><span class="fu">f2</span>(<span class="at">b =</span> <span class="dv">1</span>, <span class="dv">2</span>, <span class="at">a =</span> <span class="dv">3</span>)</span></code></pre></div>
-<pre><code>## Error in f2(b = 1, 2, a = 3): argument 1 matches multiple formal arguments</code></pre>
+<pre><code>## Error in f2(b = 1, 2, a = 3): el argumento 1 concuerda con multiples argumentos formales</code></pre>
 <p> </p>
 <p>Es más seguro (y, por lo tanto, una mejor práctica) usar los nombres
 completos de los argumentos.</p>
@@ -1189,7 +1178,7 @@ numérico proporcionado por el usuario</p>
 <p></br></p>
 <p>4.4 Haga que la función escoja un color al azar para las barras del
 histograma cada vez que se corre (pista:
-<code>sample(vector.de.colores)</code>)</p>
+<code>sample(vector.de.colores, 1)</code>)</p>
 <p></br></p>
 <p>4.5 Añada un argumento a la función que permita el usuario, si lo
 desea, calcular la sumatoria (<code>sum()</code>) junto con el resto de
@@ -1235,18 +1224,18 @@ href="http://r4ds.had.co.nz">website</a></li>
 </ul>
 <hr />
 <p><font size="4">Información de la sesión</font></p>
-<pre><code>## R version 4.2.0 (2022-04-22)
+<pre><code>## R version 4.1.1 (2021-08-10)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
-## Running under: Ubuntu 22.04.1 LTS
+## Running under: Ubuntu 20.04.2 LTS
 ## 
 ## Matrix products: default
-## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0
-## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0
+## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0
+## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0
 ## 
 ## locale:
-##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
-##  [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=en_US.UTF-8    
-##  [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=en_US.UTF-8   
+##  [1] LC_CTYPE=es_ES.UTF-8       LC_NUMERIC=C              
+##  [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=es_ES.UTF-8    
+##  [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=es_ES.UTF-8   
 ##  [7] LC_PAPER=es_CR.UTF-8       LC_NAME=C                 
 ##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
 ## [11] LC_MEASUREMENT=es_CR.UTF-8 LC_IDENTIFICATION=C       
@@ -1255,19 +1244,18 @@ href="http://r4ds.had.co.nz">website</a></li>
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] knitr_1.40          xaringanExtra_0.7.0 emo_0.0.0.9000     
+## [1] knitr_1.39          xaringanExtra_0.7.0 emo_0.0.0.9000     
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] rstudioapi_0.13  magrittr_2.0.3   uuid_1.1-0       R6_2.5.1        
-##  [5] rlang_1.0.6      fastmap_1.1.0    fansi_1.0.3      highr_0.9       
-##  [9] stringr_1.4.1    tools_4.2.0      xfun_0.33        utf8_1.2.2      
-## [13] cli_3.4.1        jquerylib_0.1.4  htmltools_0.5.3  assertthat_0.2.1
-## [17] yaml_2.3.5       digest_0.6.29    tibble_3.1.8     lifecycle_1.0.2 
-## [21] crayon_1.5.1     formatR_1.12     purrr_0.3.4      sass_0.4.2      
-## [25] vctrs_0.4.1      glue_1.6.2       cachem_1.0.6     evaluate_0.16   
-## [29] rmarkdown_2.16   stringi_1.7.8    compiler_4.2.0   bslib_0.4.0     
-## [33] pillar_1.8.1     generics_0.1.2   lubridate_1.8.0  jsonlite_1.8.0  
-## [37] pkgconfig_2.0.3</code></pre>
+##  [5] rlang_1.0.4      fastmap_1.1.0    fansi_1.0.3      highr_0.9       
+##  [9] stringr_1.4.0    tools_4.1.1      xfun_0.31        utf8_1.2.2      
+## [13] cli_3.3.0        jquerylib_0.1.4  htmltools_0.5.3  assertthat_0.2.1
+## [17] yaml_2.3.5       digest_0.6.29    tibble_3.1.8     lifecycle_1.0.1 
+## [21] crayon_1.5.1     formatR_1.12     purrr_0.3.4      sass_0.4.1      
+## [25] vctrs_0.4.1      glue_1.6.2       evaluate_0.15    rmarkdown_2.14  
+## [29] stringi_1.7.8    compiler_4.1.1   bslib_0.3.1      pillar_1.8.0    
+## [33] generics_0.1.2   lubridate_1.8.0  jsonlite_1.8.0   pkgconfig_2.0.3</code></pre>
 </div>
 </div>
 
