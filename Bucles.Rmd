@@ -87,7 +87,7 @@ htmltools::tagList(
 
 &nbsp; 
  
-## Bucles (loops) 
+# Bucles (loops) 
 
 - Proceso automatizado de varios pasos organizado como secuencias de acciones (p. Ej., procesos 'por lotes')
 - Se usa para acelerar los procedimientos en los que se aplica la misma acción a muchos objetos (similares)
@@ -96,12 +96,13 @@ htmltools::tagList(
 
 2 tipos básicos:
 
-   1) Ejecutar hasta que se cumpla una condición predefinida (bucles `while` y` repeat`)
+   1) Ejecutar para un número predefinido de iteraciones (es decir, tiempos). 2 tipos:
+       a) Los resultados pueden ingresarse nuevamente en la siguiente iteración (bucles `for`)
+       b) Los resultados de una interacción no pueden afectar a otras iteraciones (`(X)apply`) 
 
+```{r, echo=FALSE,out.width="70%", fig.align="center"}
 
-```{r, echo=FALSE,out.width="60%", fig.align="center"}
-
-knitr::include_graphics("./images/loops1.png")
+knitr::include_graphics("./images/loops2.png")
 
 ```
 &nbsp;
@@ -109,28 +110,341 @@ knitr::include_graphics("./images/loops1.png")
 <font size = "2"> * Modificado de <i> Tutorial de bucles Datacamp </i> </font>
 &nbsp;
 
-  2) Ejecutar para un número predefinido de iteraciones (es decir, tiempos). 2 tipos:
-       a) Los resultados pueden ingresarse nuevamente en la siguiente iteración (bucles `for`)
-       b) Los resultados de una interacción no pueden afectar a otras iteraciones (`(X) aplica`) 
+*(Nota: cuando el resultado de una iteración es completamente independiente de otras iteraciones, la tarea podría ejecutarse en paralelo. Hablaremos sobre computación paralela durante la clase de "codigo eficiente")*
 
-```{r, echo=FALSE,out.width="40%"}
+  2) Ejecutar hasta que se cumpla una condición predefinida (bucles `while` y` repeat`)
 
-knitr::include_graphics("./images/loops2.png")
+```{r, echo=FALSE,out.width="70%", fig.align="center"}
+
+knitr::include_graphics("./images/loops1.png")
 
 ```
 
 &nbsp;
 
-*Nota: cuando el resultado de una iteración es completamente independiente de otras iteraciones, la tarea podría ejecutarse en paralelo. Hablaremos sobre computación paralela durante la clase de "codigo eficiente"*
+##  Bucles 'for'
+
+
+Por mucho, `for` es el bucle más popular. El número de iteraciones se puede determinar de antemano:
+
+```{r, echo=FALSE,out.width="50%", fig.align="center"}
+
+knitr::include_graphics("./images/for.png")
+
+```
+&nbsp;
+
+Creemos un bucle que calcula las correlaciones entre variables aleatorias usando un bucle `for`:
+
+```{r, eval=F, echo=T}
+
+# crear un vector vacio
+cc_vector <- NULL
+
+# determinar numero de Iteraciones
+reps <- 30
+
+# iniciar bucle
+for(i in 1:reps)
+{
+  # generar la variable 1
+  v1 <- rnorm(n = 20, mean = 100, sd = 20)
+
+  # generar la variable 2
+  v2 <- rnorm(n = 20, mean = 100, sd = 20)
+  
+  # correr la correlacion
+  corr_coef <- cor(v1, v2)
+
+  # guardar resultados
+  cc_vector[length(cc_vector) + 1] <- corr_coef
+ 
+  }
+
+```
+
+
+
+```{r, eval=T, echo=F}
+
+# create empty vector 
+cc_vector <- NULL
+
+# set number of Iteraciones
+reps <- 30
+
+# initiate loop
+for(i in 1:reps)
+{
+  
+  set.seed(i)
+  # generate variable 1
+  v1 <- rnorm(n = 20, mean = 100, sd = 20)
+
+  set.seed(i + 50)
+
+  # generate variable 2
+  v2 <- rnorm(n = 20, mean = 100, sd = 20)
+  
+  # run correlation
+  corr_coef <- cor(v1, v2)
+
+  # store results using append
+  cc_vector[length(cc_vector) + 1] <- corr_coef
+ 
+  }
+
+cc <- data.frame(y = cc_vector, x = 1:length(cc_vector))
+
+ggplot(data = cc, aes(x, y)) +
+  geom_hline(yintercept = c(-0.5, 0.5), col = cols[4], lwd = 3) +
+  geom_line(col = cols[8], lwd = 4) + 
+  labs(x = "Iteraciones", y = "Correlación de pearson (r)") + 
+  theme_classic(base_size = 25)
+
+```
+
+
+La utilidad de los bucles `for` para el manejo de datos se entiende mejor cuando se aplica a conjuntos de datos. En este ejemplo examinamos algunos juegos de datos de ejemplo en `R`. El siguiente código crea una lista con 4 juegos de datos de ejemplo:
+
+
+```{r}
+
+# lista con bases de datos
+lista_datos <- list(BOD = BOD, CO2 = CO2, ChickWeight = ChickWeight, DNase = DNase)
+
+```
+&nbsp;
+
+
+La utilidad del bucle `for` es mas obvia y su lógica mas fácil de entender si lo comparamos con cálculos equivalentes fuera de un bucle. Por ejemplo, si quisiéramos un vector con el número de columnas en cada uno de los elementos de `lista_datos`. Para hacer esto sin un bucle necesitamos hacer el cálculo independientemente para cada elemento:
+
+```{r}
+
+# primer elemento
+elm_1 <- lista_datos[[1]]
+columnas_1 <- ncol(elm_1)
+
+# segundo elemento
+elm_2 <- lista_datos[[2]]
+columnas_2 <- ncol(elm_2)
+
+# tercer elemento
+elm_3 <- lista_datos[[3]]
+columnas_3 <- ncol(elm_3)
+
+# cuarto elemento
+elm_4 <- lista_datos[[4]]
+columnas_4 <- ncol(elm_4)
+
+# poner valores en vector
+columnas <- c(columnas_1, columnas_2, columnas_3, columnas_4)
+
+# ver resultado
+columnas
+```
+
+Esta repetición de tareas se puede simplificar con un bucle `for` de la siguiente forma:
+
+```{r}
+
+# crear vector vació para guardar resultados
+columnas <- NULL
+
+# correr bucle
+for (i in 1:length(lista_datos)){
+  
+  # sacar datos
+  elm_i <- lista_datos[[i]]
+  
+  
+  # calcular numero de columnas
+  columnas_i <- ncol(elm_i)
+  
+  # guardar valores
+  columnas <- append(columnas, columnas_i) 
+    }
+
+```
+
+Note que los valores del vector `1:length(lista_datos)` en el llamado de `for` son tomados, uno a la vez, para hacer los cálculos en el cuerpo del bucle.
+
+
+<div class = "alert alert-info">
+
+<font size = "5"> Ejercicio 1 </font>
+
 
 &nbsp;
+
+1.1 Haga un bucle `for` que devuelva el número de filas para cada juego de datos de ejemplo
+
+&nbsp;
+
+1.2 Haga un bucle `for` que devuelva el número de filas y columnas para cada juego de datos de ejemplo
+
+&nbsp;
+
+1.3 El juego de datos de ejemplo "ChickWeight" describe el "peso versus la edad de los pollitos en diferentes dietas":
+```{r, eval=F, echo=T}
+
+# convertir a un data.frame  
+ChickWeight <- data.frame(ChickWeight, stringsAsFactors = FALSE)
+
+# ver las primeras filas
+head(ChickWeight) 
+```
+
+```{r, eval = T, echo=F}
+
+# Convert to a regular data frame  
+ChickWeight <- data.frame(ChickWeight, stringsAsFactors = FALSE)
+
+knitr::kable(ChickWeight[1:6, ], row.names = F, escape = FALSE) %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = FALSE, font_size = 18)
+```
+  
+```{r}
+# ver estructura
+str(ChickWeight)
+
+```
+&nbsp;
+
+Usando los datos de ChickWeight, calcule la correlación entre el peso y la edad de cada pollito (consejo: (1) use `unique (ChickWeight $ Chick)` dentro del inicio del bucle `for` y (2) cree subconjuntos usando indexación dentro del cuerpo del bucle)
+
+</div>
+
+&nbsp;
+
+## Bucles (X)apply 
+
+`(X) apply` son funciones de nivel superior que toman una función como entrada y la aplican a una secuencia de objetos (vectores *sensu lato*). Bucles creados con `(X)apply`. Hay varias funciones `(X)apply` en R:
+```{r}
+apropos("apply$")
+```
+&nbsp;
+
+Sin embargo, los más utilizados son `apply`,` sapply`, `lapply` y` tapply`. Todos siguen la misma lógica:
+
+
+```{r, echo=FALSE,out.width="50%", fig.align="center"}
+
+knitr::include_graphics("./images/xapply.png")
+
+```
+
+`lapply` toma un vector (atómico o de lista), aplica una función a cada elemento y devuelve una lista:
+
+```{r}
+
+lapply(X = lista_datos, FUN = nrow)
+
+
+```
+&nbsp;
+
+`sapply` también toma un vector (atómico o de lista) y aplica la función a cada elemento, sin embargo, el resultado es un vector atómico (si puede empaquetarse como un vector):
+
+```{r}
+
+sapply(X = lista_datos, FUN = nrow)
+
+
+```
+&nbsp;
+
+
+`apply` aplica una función a cada una de las filas o columnas de un objeto bidimensional:
+
+```{r, eval=F, echo=T}
+
+head(iris, 4)
+
+```
+
+
+```{r, eval=T, echo=F}
+
+knitr::kable(iris[1:4, ], row.names = F, escape = FALSE) %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = FALSE, font_size = 18)
+
+```
+
+```{r}
+apply(X = iris[1:10, -5],MARGIN =  1, FUN =  sum)
+
+apply(X = iris[1:10, -5], MARGIN =  1, FUN = mean)
+
+apply(X = iris, MARGIN = 2, FUN = class)
+
+```
+
+&nbsp;
+
+`tapply` es más específico ya que aplica una función a un subconjunto de datos definido por un vector categórico adicional. Por ejemplo, podemos calcular la longitud promedio de pétalo para cada especie en el juego de datos 'iris' de la siguiente manera:
+
+```{r, eval=T, echo=T}
+
+tapply(X = iris$Petal.Length, INDEX = iris$Species, FUN = mean)
+
+```
+
+
+&nbsp;
+
+Los bucles `(X) apply` pueden modificarse para realizar "acciones" personalizadas creando nuevas funciones (ya sea dentro o fuera del bucle):
+
+```{r}
+
+# funcion desde fuera del bucle
+dims <- function(x) c(nrow(x), ncol(x))
+
+# correr buble
+df_dims <- lapply(X = lista_datos, FUN = dims)
+
+# ver resultados
+head(df_dims, 3)
+
+# # funcion dentro del bucle
+df_dims <- lapply(X = lista_datos, FUN = function(x) c(nrow(x), ncol(x)))
+
+# ver resultados
+head(df_dims, 3)
+
+```
+&nbsp;
+
+Tenga en cuenta que:
+
+1) en este tipo de bucles no hay retroalimentación de las iteraciones anteriores (es decir, los resultados de una iteración no se pueden ingresar en las iteraciones posteriores)
+
+2) `(X)apply` es más limpio que otros bucles porque los objetos creados dentro de ellos no están disponibles en el entorno de trabajo actual.
+
+
+<div class = "alert alert-info">
+
+<font size = "5"> Ejercicio 2</font>
+
+&nbsp;
+
+2.1 Haga un bucle `lapply` equivalente al bucle `for` en el ejercicio 1.4 (*utilizando los datos 'ChickWeight' calcule la correlación entre peso y tiempo para cada Chick*)
+
+&nbsp;
+
+2.2  Haga un bucle `sapply` para calcular el mayor peso registrado para cada tipo de dieta (pista: `unique(ChickWeight$Diet)`, deberia devolver un valor por tipo de dieta). Nombre el vector resultante para que contenga el identificador de cada dieta.
+
+&nbsp;
+
+2.3 Haga un bucle `apply` para calcular la media de cada variable numérica en el juego de datos 'iris'.
+
+</div>
 
 
 ## Bucles 'While'
 
 Los bucles `while` aplican una acción (1 o más funciones) en una secuencia de elementos hasta que se cumpla una condición. La condición puede evaluar un resultado del propio ciclo o una entrada externa:
-
-```{r, echo=FALSE,out.width="70%"}
+```{r, echo=FALSE,out.width="50%", fig.align="center"}
 
 knitr::include_graphics("./images/while.png")
 
@@ -337,14 +651,14 @@ cc <- cc[(nrow(cc) -50):nrow(cc),]
 
 <div class="alert alert-info">
 
-<font size="5">Ejercicio 1</font> 
+<font size="5">Ejercicio 3</font> 
 
-</br>
-1.1 Haga un bucle `while` que se detenga solo si la correlación es mayor que 0.5 pero menor que 0.55
+&nbsp;
+3.1 Haga un bucle `while` que se detenga solo si la correlación es mayor que 0.5 pero menor que 0.55
 
-</br>
+&nbsp;
 
-   1.2 Haga un bucle `while` que se detenga si la correlación es superior a 0.8 o si el bucle ha estado ejecutándose durante más de 10 segundos (consejo: use la función` difftime` y / o `as.numeric`)
+3.2 Haga un bucle `while` que se detenga si la correlación es superior a 0.8 o si el bucle ha estado ejecutándose durante más de 10 segundos (consejo: use la función` difftime` y / o `as.numeric`)
   
 </div>
 
@@ -390,350 +704,40 @@ head(cc_vector)
 
 Tenga en cuenta que en este caso la condición determina si el ciclo debe detenerse. En el ciclo `while` la condición determina si el ciclo debe continuar.
 
-&nbsp;
-
-
-<div class = "alert alert-info">
-
-<font size = "5"> Ejercicio 2 </font>
-
-</br>
-
-2.1 Convierta en un bucle `repeat` el bucle `while` del ejercicio 1.2
-
-</div>
-
-##  Bucles 'for'
-
-
-Por mucho, `for` es el bucle más popular. El número de iteraciones se puede determinar de antemano:
-
-<p style = "text-align: center;"> <img src = "for.png" alt = "for loop" height = "600" width = "300"> </p>
-&nbsp;
-
-Nuevamente, creamos un bucle que calcula las correlaciones entre variables aleatorias, en este caso usando un bucle `for`:
-
-```{r, eval=F, echo=T}
-
-# crear un vector vacio
-cc_vector <- NULL
-
-# determinar numero de Iteraciones
-reps <- 30
-
-# iniciar bucle
-for(i in 1:reps)
-{
-  # generar la variable 1
-  v1 <- rnorm(n = 20, mean = 100, sd = 20)
-
-  # generar la variable 2
-  v2 <- rnorm(n = 20, mean = 100, sd = 20)
-  
-  # correr la correlacion
-  corr_coef <- cor(v1, v2)
-
-  # guardar resultados
-  cc_vector[length(cc_vector) + 1] <- corr_coef
- 
-  }
-
-```
-
-
-
-```{r, eval=T, echo=F}
-
-# create empty vector 
-cc_vector <- NULL
-
-# set number of Iteraciones
-reps <- 30
-
-# initiate loop
-for(i in 1:reps)
-{
-  
-  set.seed(i)
-  # generate variable 1
-  v1 <- rnorm(n = 20, mean = 100, sd = 20)
-
-  set.seed(i + 50)
-
-  # generate variable 2
-  v2 <- rnorm(n = 20, mean = 100, sd = 20)
-  
-  # run correlation
-  corr_coef <- cor(v1, v2)
-
-  # store results using append
-  cc_vector[length(cc_vector) + 1] <- corr_coef
- 
-  }
-
-cc <- data.frame(y = cc_vector, x = 1:length(cc_vector))
-
-ggplot(data = cc, aes(x, y)) +
-  geom_hline(yintercept = c(-0.5, 0.5), col = cols[4], lwd = 3) +
-  geom_line(col = cols[8], lwd = 4) + 
-  labs(x = "Iteraciones", y = "Correlación de pearson (r)") + 
-  theme_classic(base_size = 25)
-
-```
-
 Una característica importante de los bucles `while`,` repeat` y `for` es que pueden tomar resultados de iteraciones anteriores como entrada en iteraciones posteriores. Esto se debe a que los objetos creados dentro de la función se guardan en el entorno actual (a diferencia de los bucles `Xapply`).
 
-
-La utilidad de los bucles `for` para el manejo de datos se entiende mejor cuando se aplica a conjuntos de datos. En este ejemplo examinamos algunos juegos de datos de ejemplo en `R`. El siguiente código crea una lista con 4 juegos de datos de ejemplo:
-
-
-```{r}
-
-# lista con bases de datos
-lista_datos <- list(BOD = BOD, CO2 = CO2, ChickWeight = ChickWeight, DNase = DNase)
-
-```
 &nbsp;
-
-
-La utilidad del bucle `for` es mas obvia y su lógica mas fácil de entender si lo comparamos con cálculos equivalentes fuera de un bucle. Por ejemplo, si quisiéramos un vector con el número de columnas en cada uno de los elementos de `lista_datos`. Para hacer esto sin un bucle necesitamos hacer el cálculo independientemente para cada elemento:
-
-```{r}
-
-# primer elemento
-elm_1 <- lista_datos[[1]]
-columnas_1 <- ncol(elm_1)
-
-# segundo elemento
-elm_2 <- lista_datos[[2]]
-columnas_2 <- ncol(elm_2)
-
-# tercer elemento
-elm_3 <- lista_datos[[3]]
-columnas_3 <- ncol(elm_3)
-
-# cuarto elemento
-elm_4 <- lista_datos[[4]]
-columnas_4 <- ncol(elm_4)
-
-# poner valores en vector
-columnas <- c(columnas_1, columnas_2, columnas_3, columnas_4)
-
-# ver resultado
-columnas
-```
-
-Esta repetición de tareas se puede simplificar con un bucle `for` de la siguiente forma:
-
-```{r}
-
-# crear vector vació para guardar resultados
-columnas <- NULL
-
-# correr bucle
-for (i in 1:length(lista_datos)){
-  
-  # sacar datos
-  elm_i <- lista_datos[[i]]
-  
-  
-  # calcular numero de columnas
-  columnas_i <- ncol(elm_i)
-  
-  # guardar valores
-  columnas <- append(columnas, columnas_i) 
-    }
-
-```
-
-Note que los valores del vector `1:length(lista_datos)` en el llamado de `for` son tomados, uno a la vez, para hacer los cálculos en el cuerpo del bucle.
-
 
 <div class = "alert alert-info">
 
-<font size = "5"> Ejercicio 3 </font>
+<font size = "5"> Ejercicio 4</font>
 
+&nbsp;
 
-</br>
-
-3.1 Haga un bucle `for` que devuelva el número de filas para cada juego de datos de ejemplo
-
-</br>
-
-3.2 Haga un bucle `for` que devuelva el número de filas y columnas para cada juego de datos de ejemplo
-
-</br>
-
-3.3 El juego de datos de ejemplo "ChickWeight" describe el "peso versus la edad de los pollitos en diferentes dietas":
-```{r, eval=F, echo=T}
-
-# convertir a un data.frame  
-ChickWeight <- data.frame(ChickWeight, stringsAsFactors = FALSE)
-
-# ver las primeras filas
-head(ChickWeight) 
-```
-
-```{r, eval = T, echo=F}
-
-# Convert to a regular data frame  
-ChickWeight <- data.frame(ChickWeight, stringsAsFactors = FALSE)
-
-knitr::kable(ChickWeight[1:6, ], row.names = F, escape = FALSE) %>%
-  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = FALSE, font_size = 18)
-```
-  
-```{r}
-# ver estructura
-str(ChickWeight)
-
-```
-</br>
-
-Usando los datos de ChickWeight, calcule la correlación entre el peso y la edad de cada pollito (consejo: (1) use `unique (ChickWeight $ Chick)` dentro del inicio del bucle `for` y (2) cree subconjuntos usando indexación dentro del cuerpo del bucle)
+4.1 Convierta en un bucle `repeat` el bucle `while` del ejercicio 1.2
 
 </div>
 
-&nbsp;
-
-## Bucles (X)apply 
-
-`(X) apply` son funciones de nivel superior que toman una función como entrada y la aplican a una secuencia de objetos (vectores *sensu lato*). Bucles creados con `(X)apply`. Hay varias funciones `(X)apply` en R:
-```{r}
-apropos("apply$")
-```
-&nbsp;
-
-Sin embargo, los más utilizados son `apply`,` sapply`, `lapply` y` tapply`. Todos siguen la misma lógica:
-
-<p style = "text-align:center;"> <img src = "xapply.png" alt = "apply repeat" height = "500" width = "300"> </p>
-&nbsp;
-
-`lapply` toma un vector (atómico o de lista), aplica una función a cada elemento y devuelve una lista:
-
-```{r}
-
-lapply(X = lista_datos, FUN = nrow)
-
-
-```
-&nbsp;
-
-`sapply` también toma un vector (atómico o de lista) y aplica la función a cada elemento, sin embargo, el resultado es un vector atómico (si puede empaquetarse como un vector):
-
-```{r}
-
-sapply(X = lista_datos, FUN = nrow)
-
-
-```
-&nbsp;
-
-
-`apply` aplica una función a cada una de las filas o columnas de un objeto bidimensional:
-
-```{r, eval=F, echo=T}
-
-head(iris, 4)
-
-```
-
-
-```{r, eval=T, echo=F}
-
-knitr::kable(iris[1:4, ], row.names = F, escape = FALSE) %>%
-  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = FALSE, font_size = 18)
-
-```
-
-```{r}
-apply(X = iris[1:10, -5],MARGIN =  1, FUN =  sum)
-
-apply(X = iris[1:10, -5], MARGIN =  1, FUN = mean)
-
-apply(X = iris, MARGIN = 2, FUN = class)
-
-```
-
-&nbsp;
-
-`tapply` es más específico ya que aplica una función a un subconjunto de datos definido por un vector categórico adicional. Por ejemplo, podemos calcular la longitud promedio de pétalo para cada especie en el juego de datos 'iris' de la siguiente manera:
-
-```{r, eval=T, echo=T}
-
-tapply(X = iris$Petal.Length, INDEX = iris$Species, FUN = mean)
-
-```
-
-
-&nbsp;
-
-Los bucles `(X) apply` pueden modificarse para realizar "acciones" personalizadas creando nuevas funciones (ya sea dentro o fuera del bucle):
-
-```{r}
-
-# funcion desde fuera del bucle
-dims <- function(x) c(nrow(x), ncol(x))
-
-# correr buble
-df_dims <- lapply(X = lista_datos, FUN = dims)
-
-# ver resultados
-head(df_dims, 3)
-
-# # funcion dentro del bucle
-df_dims <- lapply(X = lista_datos, FUN = function(x) c(nrow(x), ncol(x)))
-
-# ver resultados
-head(df_dims, 3)
-
-```
-&nbsp;
-
-Tenga en cuenta que:
-
-1) en este tipo de bucles no hay retroalimentación de las iteraciones anteriores (es decir, los resultados de una iteración no se pueden ingresar en las iteraciones posteriores)
-
-2) `(X)apply` es más limpio que otros bucles porque los objetos creados dentro de ellos no están disponibles en el entorno de trabajo actual.
-
-
-<div class = "alert alert-info">
-
-<font size = "5"> Ejercicio 4 </font>
-
-</br>
-
-4.1 Haga un bucle `lapply` equivalente al bucle `for` en el ejercicio 3.4 (*utilizando los datos 'ChickWeight' calcule la correlación entre peso y tiempo para cada Chick*)
-
-</br>
-
-4.2  Haga un bucle `sapply` para calcular el mayor peso registrado para cada tipo de dieta (pista: `unique(ChickWeight$Diet)`, deberia devolver un valor por tipo de dieta). Nombre el vector resultante para que contenga el identificador de cada dieta.
-
-</br>
-
-4.3 Haga un bucle `apply` para calcular la media de cada variable numérica en el juego de datos 'iris'.
-
-</div>
+---
 
 <div class = "alert alert-info">
 
 <font size = "5"> Ejercicios extra </font>
 
-</br>
+&nbsp;
 
-E.1 Reúna los resultados del ejercicio 3.4 en un nuevo juego de datos con columnas para 'chick' y 'correlation' usando un bucle `for` (consejo: use `rbind`)
+E.1 Reúna los resultados del ejercicio 1.4 en un nuevo juego de datos con columnas para 'chick' y 'correlation' usando un bucle `for` (consejo: use `rbind`)
 
-</br>
+&nbsp;
 
 E.2 ¿Cuántos de los juego de datos de ejemplo en `lista_datos` contienen una columna que es un factor?
 
-</br>
+&nbsp;
 
 E.3 Calcule el coeficiente de variación de cada variable numérica por especie en el juego de datos 'iris' usando 'tapply'.
 
 </div>
 
----
 
 ## Referencias
 

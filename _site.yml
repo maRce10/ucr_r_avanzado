@@ -14,6 +14,8 @@ navbar:
         href: reportes_dinamicos_con_rmarkdown.html
       - text: "Funciones"
         href: funciones.html
+      - text: "Bucles"
+        href: Bucles.html
       - text: "Modelos de regresión lineal"
         href: modelos_de_regresion_lineal.html
       - text: "Modelos comunes como regresiones"
