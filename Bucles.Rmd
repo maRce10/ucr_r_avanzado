@@ -82,6 +82,8 @@ htmltools::tagList(
 # Objetivo del manual
 
 - Aprender a procesar de forma serial operaciones que deben repetirse sobre diferentes objetos
+- Familiarizarse con el uso de bucles en la plataforma R
+- Tener una noción general de los opciones disponibles en R para construir bucles
 
 </div>
 
@@ -96,13 +98,13 @@ htmltools::tagList(
 
 2 tipos básicos:
 
-   1) Ejecutar para un número predefinido de iteraciones (es decir, tiempos). 2 tipos:
-       a) Los resultados pueden ingresarse nuevamente en la siguiente iteración (bucles `for`)
-       b) Los resultados de una interacción no pueden afectar a otras iteraciones (`(X)apply`) 
+   1) Ejecutar para un número predefinido de iteraciones (es decir, tiempos). Estos se subdividen en dos clases:
+       a. Los resultados pueden ingresarse nuevamente en la siguiente iteración (bucles `for`)
+       a. Los resultados de una interacción no pueden afectar a otras iteraciones (`(X)apply`) 
 
 ```{r, echo=FALSE,out.width="70%", fig.align="center"}
 
-knitr::include_graphics("./images/loops2.png")
+knitr::include_graphics("./images/loops2_esp.png")
 
 ```
 &nbsp;
@@ -116,11 +118,13 @@ knitr::include_graphics("./images/loops2.png")
 
 ```{r, echo=FALSE,out.width="70%", fig.align="center"}
 
-knitr::include_graphics("./images/loops1.png")
+knitr::include_graphics("./images/loops1_esp.png")
 
 ```
 
 &nbsp;
+
+---
 
 ##  Bucles 'for'
 
@@ -129,7 +133,7 @@ Por mucho, `for` es el bucle más popular. El número de iteraciones se puede de
 
 ```{r, echo=FALSE,out.width="50%", fig.align="center"}
 
-knitr::include_graphics("./images/for.png")
+knitr::include_graphics("./images/for_esp.png")
 
 ```
 &nbsp;
@@ -317,6 +321,9 @@ Usando los datos de ChickWeight, calcule la correlación entre el peso y la edad
 
 &nbsp;
 
+
+---
+
 ## Bucles (X)apply 
 
 `(X) apply` son funciones de nivel superior que toman una función como entrada y la aplican a una secuencia de objetos (vectores *sensu lato*). Bucles creados con `(X)apply`. Hay varias funciones `(X)apply` en R:
@@ -330,7 +337,7 @@ Sin embargo, los más utilizados son `apply`,` sapply`, `lapply` y` tapply`. Tod
 
 ```{r, echo=FALSE,out.width="50%", fig.align="center"}
 
-knitr::include_graphics("./images/xapply.png")
+knitr::include_graphics("./images/xapply_esp.png")
 
 ```
 
@@ -441,12 +448,15 @@ Tenga en cuenta que:
 </div>
 
 
+
+---
+
 ## Bucles 'While'
 
 Los bucles `while` aplican una acción (1 o más funciones) en una secuencia de elementos hasta que se cumpla una condición. La condición puede evaluar un resultado del propio ciclo o una entrada externa:
 ```{r, echo=FALSE,out.width="50%", fig.align="center"}
 
-knitr::include_graphics("./images/while.png")
+knitr::include_graphics("./images/while_esp.png")
 
 ```
 
@@ -668,8 +678,12 @@ cc <- cc[(nrow(cc) -50):nrow(cc),]
 
 Los bucles `repeat` también deben cumplir una condición para detenerse. Muy parecido a los bucles `while`. Sin embargo, se realiza para que la acción se ejecute al menos una vez, independientemente de la evaluación de la condición
 
-<p style = "text-align: center;"> <img src = "repeat.png" alt = "loop repeat" height = "600" width = "300"> </p>
-&nbsp;
+
+```{r, echo=FALSE,out.width="50%", fig.align="center"}
+
+knitr::include_graphics("./images/repeat_esp.png")
+
+```
 
 
 El siguiente bucle `repeat` hace lo mismo que el bucle` while` anterior:
@@ -714,7 +728,7 @@ Una característica importante de los bucles `while`,` repeat` y `for` es que pu
 
 &nbsp;
 
-4.1 Convierta en un bucle `repeat` el bucle `while` del ejercicio 1.2
+4.1 Convierta en un bucle `repeat` el bucle `while` del ejercicio 3.2
 
 </div>
 
@@ -738,6 +752,10 @@ E.3 Calcule el coeficiente de variación de cada variable numérica por especie 
 
 </div>
 
+
+&nbsp;
+
+---
 
 ## Referencias
 
