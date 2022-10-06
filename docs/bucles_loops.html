@@ -13,7 +13,7 @@
 
 <title>bucles_loops.knit</title>
 
-<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.16/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -132,13 +132,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   for (var i = 0; i < sheets.length; i++) {
     if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
     try { var rules = sheets[i].cssRules; } catch (e) { continue; }
-    for (var j = 0; j < rules.length; j++) {
+    var j = 0;
+    while (j < rules.length) {
       var rule = rules[j];
       // check if there is a div.sourceCode rule
-      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
       var style = rule.style.cssText;
       // check if color or background-color is set
-      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
       // replace div.sourceCode by a pre.sourceCode rule
       sheets[i].deleteRule(j);
       sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
@@ -234,11 +241,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -533,6 +544,10 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <span id="cb1-12"><a href="#cb1-12"></a><span class="co"># hacer vector con nombre y direccion de archivos</span></span>
 <span id="cb1-13"><a href="#cb1-13"></a>archivos_txt <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">path =</span> directorio, <span class="at">full.names =</span> <span class="cn">TRUE</span>, <span class="at">pattern =</span> <span class="st">&quot;TXT$&quot;</span>)</span></code></pre></div>
 <p> </p>
+<p>También pueden bajar el archivo directamente de <a
+href="https://github.com/maRce10/ucr_r_avanzado/raw/master/additional_files/datos_camara_submarina.zip">este
+enlance</a>. Recuerde extraer los archivos y hacer el vector con los
+nombres de los archivos (correr lineas de la 9 a la 13).</p>
 <p>Si todo salió bien el vector “archivos_txt” deberia tener 19
 elementos:</p>
 <div class="sourceCode" id="cb2"><pre
@@ -599,6 +614,28 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 usa el operador <code>in</code>. Este denota el nombre de objeto que se
 usará en el cuerpo del bucle para asignar los velores del vector. El
 bucle devuelve 3 valores, uno para cada valor en <code>vctr</code>.</p>
+<p>Una forma mas clara de demostrar como el bucle repite la acción de
+forma serial sobre cada elemento del vector es añadiendo pausas entre
+iteraciones. La función <code>Sys.sleep()</code> pausa el código de R
+por el número de segundos que se le defina:</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>vctr <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>  <span class="co"># vector sobre el cual iterar el bucle</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="cf">for</span> (i <span class="cf">in</span> vctr) {</span>
+<span id="cb6-4"><a href="#cb6-4"></a>    <span class="co"># inicio del bucle</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>    <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;# corriendo iteración&quot;</span>, i))</span>
+<span id="cb6-6"><a href="#cb6-6"></a>    <span class="fu">Sys.sleep</span>(<span class="dv">2</span>)  <span class="co"># pausar 2 segundos</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a>    <span class="fu">print</span>(i<span class="sc">^</span><span class="dv">2</span>)  <span class="co"># cuerpo del bucle  </span></span>
+<span id="cb6-8"><a href="#cb6-8"></a>}</span></code></pre></div>
+<pre><code>## [1] &quot;# corriendo iteración 1&quot;
+## [1] 1
+## [1] &quot;# corriendo iteración 2&quot;
+## [1] 4
+## [1] &quot;# corriendo iteración 3&quot;
+## [1] 9</code></pre>
+<p> </p>
+<p>En este caso vemos como el bucle toma una pausa entre cada iteración
+y luego hace el calculo.</p>
 <p>Si deseamos guardar el resultado de las operaciones debemos añadirlo
 a un vector vacío. Para hacer esto hay 2 opciones:</p>
 <ul>
@@ -607,23 +644,6 @@ a un vector vacío. Para hacer esto hay 2 opciones:</p>
 </ul>
 <p>El siguiente código guarda los resultados usando
 <code>append()</code>:</p>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>vctr <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>  <span class="co"># vector sobre el cual iterar el bucle</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a>resultados <span class="ot">&lt;-</span> <span class="fu">vector</span>()  <span class="co"># vector vacio</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a></span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="cf">for</span> (i <span class="cf">in</span> vctr) {</span>
-<span id="cb6-5"><a href="#cb6-5"></a>    <span class="co"># inicio del bucle</span></span>
-<span id="cb6-6"><a href="#cb6-6"></a></span>
-<span id="cb6-7"><a href="#cb6-7"></a>    i2 <span class="ot">&lt;-</span> i<span class="sc">^</span><span class="dv">2</span>  <span class="co"># cuerpo del bucle</span></span>
-<span id="cb6-8"><a href="#cb6-8"></a></span>
-<span id="cb6-9"><a href="#cb6-9"></a>    resultados <span class="ot">&lt;-</span> <span class="fu">append</span>(resultados, i2)  <span class="co"># guardar resultados en vector vacio</span></span>
-<span id="cb6-10"><a href="#cb6-10"></a>}</span>
-<span id="cb6-11"><a href="#cb6-11"></a></span>
-<span id="cb6-12"><a href="#cb6-12"></a>resultados</span></code></pre></div>
-<pre><code>## [1] 1 4 9</code></pre>
-<p>Note que <code>append()</code> se usa dentro del cuerpo del bucle
-luego de hacer los cálculos.</p>
-<p>Así podemos guardar los resultados usando indexación:</p>
 <div class="sourceCode" id="cb8"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>vctr <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>  <span class="co"># vector sobre el cual iterar el bucle</span></span>
 <span id="cb8-2"><a href="#cb8-2"></a>resultados <span class="ot">&lt;-</span> <span class="fu">vector</span>()  <span class="co"># vector vacio</span></span>
@@ -633,29 +653,46 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <span id="cb8-6"><a href="#cb8-6"></a></span>
 <span id="cb8-7"><a href="#cb8-7"></a>    i2 <span class="ot">&lt;-</span> i<span class="sc">^</span><span class="dv">2</span>  <span class="co"># cuerpo del bucle</span></span>
 <span id="cb8-8"><a href="#cb8-8"></a></span>
-<span id="cb8-9"><a href="#cb8-9"></a>    resultados[<span class="fu">length</span>(resultados) <span class="sc">+</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> i2  <span class="co"># guardar resultados en vector vacio</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a>    resultados <span class="ot">&lt;-</span> <span class="fu">append</span>(resultados, i2)  <span class="co"># guardar resultados en vector vacio</span></span>
 <span id="cb8-10"><a href="#cb8-10"></a>}</span>
 <span id="cb8-11"><a href="#cb8-11"></a></span>
 <span id="cb8-12"><a href="#cb8-12"></a>resultados</span></code></pre></div>
 <pre><code>## [1] 1 4 9</code></pre>
-<p>Estos bucles se pueden correr sobre cualquier vector. Por ejemplo
-podemos evaluar para el juego de datos <code>iris</code> el promedio del
-largo del sépalo para cada especie de esta forma:</p>
+<p>Note que <code>append()</code> se usa dentro del cuerpo del bucle
+luego de hacer los cálculos.</p>
+<p>Así podemos guardar los resultados usando indexación:</p>
 <div class="sourceCode" id="cb10"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>vctr <span class="ot">&lt;-</span> <span class="fu">unique</span>(iris<span class="sc">$</span>Species)  <span class="co"># vector sobre el cual iterar el bucle</span></span>
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>vctr <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>  <span class="co"># vector sobre el cual iterar el bucle</span></span>
 <span id="cb10-2"><a href="#cb10-2"></a>resultados <span class="ot">&lt;-</span> <span class="fu">vector</span>()  <span class="co"># vector vacio</span></span>
 <span id="cb10-3"><a href="#cb10-3"></a></span>
 <span id="cb10-4"><a href="#cb10-4"></a><span class="cf">for</span> (i <span class="cf">in</span> vctr) {</span>
 <span id="cb10-5"><a href="#cb10-5"></a>    <span class="co"># inicio del bucle</span></span>
 <span id="cb10-6"><a href="#cb10-6"></a></span>
-<span id="cb10-7"><a href="#cb10-7"></a>    i2 <span class="ot">&lt;-</span> <span class="fu">max</span>(iris<span class="sc">$</span>Sepal.Length[iris<span class="sc">$</span>Species <span class="sc">==</span> i])  <span class="co"># cuerpo del bucle</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a>    i2 <span class="ot">&lt;-</span> i<span class="sc">^</span><span class="dv">2</span>  <span class="co"># cuerpo del bucle</span></span>
 <span id="cb10-8"><a href="#cb10-8"></a></span>
-<span id="cb10-9"><a href="#cb10-9"></a>    resultados <span class="ot">&lt;-</span> <span class="fu">append</span>(resultados, i2)  <span class="co"># guardar resultados en vector vacio</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a>    resultados[<span class="fu">length</span>(resultados) <span class="sc">+</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> i2  <span class="co"># guardar resultados en vector vacio</span></span>
 <span id="cb10-10"><a href="#cb10-10"></a>}</span>
 <span id="cb10-11"><a href="#cb10-11"></a></span>
-<span id="cb10-12"><a href="#cb10-12"></a><span class="fu">names</span>(resultados) <span class="ot">&lt;-</span> vctr  <span class="co"># añadir nombre de especies</span></span>
-<span id="cb10-13"><a href="#cb10-13"></a></span>
-<span id="cb10-14"><a href="#cb10-14"></a>resultados</span></code></pre></div>
+<span id="cb10-12"><a href="#cb10-12"></a>resultados</span></code></pre></div>
+<pre><code>## [1] 1 4 9</code></pre>
+<p>Estos bucles se pueden correr sobre cualquier vector. Por ejemplo
+podemos evaluar para el juego de datos <code>iris</code> el promedio del
+largo del sépalo para cada especie de esta forma:</p>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>vctr <span class="ot">&lt;-</span> <span class="fu">unique</span>(iris<span class="sc">$</span>Species)  <span class="co"># vector sobre el cual iterar el bucle</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>resultados <span class="ot">&lt;-</span> <span class="fu">vector</span>()  <span class="co"># vector vacio</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a></span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="cf">for</span> (i <span class="cf">in</span> vctr) {</span>
+<span id="cb12-5"><a href="#cb12-5"></a>    <span class="co"># inicio del bucle</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a></span>
+<span id="cb12-7"><a href="#cb12-7"></a>    i2 <span class="ot">&lt;-</span> <span class="fu">max</span>(iris<span class="sc">$</span>Sepal.Length[iris<span class="sc">$</span>Species <span class="sc">==</span> i])  <span class="co"># cuerpo del bucle</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a></span>
+<span id="cb12-9"><a href="#cb12-9"></a>    resultados <span class="ot">&lt;-</span> <span class="fu">append</span>(resultados, i2)  <span class="co"># guardar resultados en vector vacio</span></span>
+<span id="cb12-10"><a href="#cb12-10"></a>}</span>
+<span id="cb12-11"><a href="#cb12-11"></a></span>
+<span id="cb12-12"><a href="#cb12-12"></a><span class="fu">names</span>(resultados) <span class="ot">&lt;-</span> vctr  <span class="co"># añadir nombre de especies</span></span>
+<span id="cb12-13"><a href="#cb12-13"></a></span>
+<span id="cb12-14"><a href="#cb12-14"></a>resultados</span></code></pre></div>
 <pre><code>##     setosa versicolor  virginica 
 ##        5.8        7.0        7.9</code></pre>
 <p> </p>
@@ -674,11 +711,11 @@ asociados a la detección. Los datos se ven así:</p>
 vector llamado <code>archivos_txt</code>. Podemos leer el primer archivo
 (i.e. el primer elemento en <code>archivos_txt</code>) de la siguiente
 forma:</p>
-<div class="sourceCode" id="cb12"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>archivo1 <span class="ot">&lt;-</span> <span class="fu">read.table</span>(archivos_txt[<span class="dv">1</span>], <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">skip =</span> <span class="dv">4</span>, <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>)</span>
-<span id="cb12-2"><a href="#cb12-2"></a></span>
-<span id="cb12-3"><a href="#cb12-3"></a><span class="co"># ver pirmeras 4 filas y 8 columnas</span></span>
-<span id="cb12-4"><a href="#cb12-4"></a><span class="fu">head</span>(archivo1[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>archivo1 <span class="ot">&lt;-</span> <span class="fu">read.table</span>(archivos_txt[<span class="dv">1</span>], <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">skip =</span> <span class="dv">4</span>, <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>)</span>
+<span id="cb14-2"><a href="#cb14-2"></a></span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="co"># ver pirmeras 4 filas y 8 columnas</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a><span class="fu">head</span>(archivo1[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>])</span></code></pre></div>
 <table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -818,8 +855,8 @@ Andres
 <p> </p>
 <p>Podemos saber cuantas especies se observaron en ese muestreo
 simplemente calculado el número de filas en <code>archivo</code>:</p>
-<div class="sourceCode" id="cb13"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">nrow</span>(archivo1)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">nrow</span>(archivo1)</span></code></pre></div>
 <pre><code>## [1] 39</code></pre>
 <p> </p>
 <p>Ahora, para hacer esto con todos los archivos <strong>no es eficiente
@@ -831,30 +868,30 @@ el código de lectura del archivo y del cálculo del número de filas en el
 cuerpo del bucle, usando el nombre de los archivos
 (<code>archivos_txt</code>) como el vector sobre el cual iterar el
 bucle:</p>
-<div class="sourceCode" id="cb15"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>resultados <span class="ot">&lt;-</span> <span class="fu">vector</span>()  <span class="co"># vector vacio</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a></span>
-<span id="cb15-3"><a href="#cb15-3"></a><span class="cf">for</span> (i <span class="cf">in</span> archivos_txt) {</span>
-<span id="cb15-4"><a href="#cb15-4"></a>    <span class="co"># inicio del bucle</span></span>
-<span id="cb15-5"><a href="#cb15-5"></a></span>
-<span id="cb15-6"><a href="#cb15-6"></a>    txt <span class="ot">&lt;-</span> <span class="fu">read.table</span>(i, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">skip =</span> <span class="dv">4</span>, <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>)  <span class="co"># leer archivo</span></span>
-<span id="cb15-7"><a href="#cb15-7"></a>    nrw <span class="ot">&lt;-</span> <span class="fu">nrow</span>(txt)  <span class="co"># calcular numero de filas</span></span>
-<span id="cb15-8"><a href="#cb15-8"></a></span>
-<span id="cb15-9"><a href="#cb15-9"></a>    resultados <span class="ot">&lt;-</span> <span class="fu">append</span>(resultados, nrw)  <span class="co"># guardar resultados en vector vacio</span></span>
-<span id="cb15-10"><a href="#cb15-10"></a>}</span>
-<span id="cb15-11"><a href="#cb15-11"></a></span>
-<span id="cb15-12"><a href="#cb15-12"></a>resultados</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>resultados <span class="ot">&lt;-</span> <span class="fu">vector</span>()  <span class="co"># vector vacio</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a></span>
+<span id="cb17-3"><a href="#cb17-3"></a><span class="cf">for</span> (i <span class="cf">in</span> archivos_txt) {</span>
+<span id="cb17-4"><a href="#cb17-4"></a>    <span class="co"># inicio del bucle</span></span>
+<span id="cb17-5"><a href="#cb17-5"></a></span>
+<span id="cb17-6"><a href="#cb17-6"></a>    txt <span class="ot">&lt;-</span> <span class="fu">read.table</span>(i, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">skip =</span> <span class="dv">4</span>, <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>)  <span class="co"># leer archivo</span></span>
+<span id="cb17-7"><a href="#cb17-7"></a>    nrw <span class="ot">&lt;-</span> <span class="fu">nrow</span>(txt)  <span class="co"># calcular numero de filas</span></span>
+<span id="cb17-8"><a href="#cb17-8"></a></span>
+<span id="cb17-9"><a href="#cb17-9"></a>    resultados <span class="ot">&lt;-</span> <span class="fu">append</span>(resultados, nrw)  <span class="co"># guardar resultados en vector vacio</span></span>
+<span id="cb17-10"><a href="#cb17-10"></a>}</span>
+<span id="cb17-11"><a href="#cb17-11"></a></span>
+<span id="cb17-12"><a href="#cb17-12"></a>resultados</span></code></pre></div>
 <pre><code>##  [1] 39  1  2 12 14  9 12  8 32 36 21 12 22 27 29 19  8 12 26</code></pre>
 <p> </p>
 <p>Podemos ordenar estos resultados fácilmente haciendo un cuadro de
 datos (data.frame). Para esto creamos una columna con el nombre del
 archivo y otra con el resultado del número de filas:</p>
-<div class="sourceCode" id="cb17"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># organizar en data frame</span></span>
-<span id="cb17-2"><a href="#cb17-2"></a>n_filas_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">archivo =</span> <span class="fu">basename</span>(archivos_txt), <span class="at">filas =</span> resultados)</span>
-<span id="cb17-3"><a href="#cb17-3"></a></span>
-<span id="cb17-4"><a href="#cb17-4"></a><span class="co"># ver primeras 6 filas</span></span>
-<span id="cb17-5"><a href="#cb17-5"></a><span class="fu">head</span>(n_filas_df)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="co"># organizar en data frame</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a>n_filas_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">archivo =</span> <span class="fu">basename</span>(archivos_txt), <span class="at">filas =</span> resultados)</span>
+<span id="cb19-3"><a href="#cb19-3"></a></span>
+<span id="cb19-4"><a href="#cb19-4"></a><span class="co"># ver primeras 6 filas</span></span>
+<span id="cb19-5"><a href="#cb19-5"></a><span class="fu">head</span>(n_filas_df)</span></code></pre></div>
 <table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -922,8 +959,8 @@ filas
 <p> </p>
 <p>Podemos calcular el número de familias observadas para el primer
 archivo que leímos (<code>archivo1</code>) de esta forma:</p>
-<div class="sourceCode" id="cb18"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(archivo1<span class="sc">$</span>Family))</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(archivo1<span class="sc">$</span>Family))</span></code></pre></div>
 <pre><code>## [1] 19</code></pre>
 <p>1.1 Haga un bucle <code>for</code> que devuelva el número de familias
 para cada archivo</p>
@@ -944,8 +981,8 @@ de los archivos.</p>
 <p> </p>
 <p>Puede usar el siguiente código para convertir profundidad a un vector
 numérico:</p>
-<div class="sourceCode" id="cb20"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>n_filas_df<span class="sc">$</span>profundidad <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot; m&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="fu">gsub</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">,&quot;</span>, <span class="st">&quot;.&quot;</span>, n_filas_df<span class="sc">$</span>profundidad))</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>n_filas_df<span class="sc">$</span>profundidad <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot; m&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="fu">gsub</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">,&quot;</span>, <span class="st">&quot;.&quot;</span>, n_filas_df<span class="sc">$</span>profundidad))</span></code></pre></div>
 <p>1.5 ¿Cuál es la correlación entre el número de especies observadas
 (que es igual al número de filas) y la profundidad? (pista:
 <code>cor.test()</code>)</p>
@@ -958,18 +995,18 @@ profundidad?</p>
 los datos de los archivos de texto en un solo cuadro de datos. Esto lo
 podemos hacer “rellenando” un cuadro de datos vacío, de forma análoga a
 como rellenamos un vector vació anteriormente:</p>
-<div class="sourceCode" id="cb21"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>df_resultados <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()  <span class="co"># vector vacio</span></span>
-<span id="cb21-2"><a href="#cb21-2"></a></span>
-<span id="cb21-3"><a href="#cb21-3"></a><span class="cf">for</span> (i <span class="cf">in</span> archivos_txt) {</span>
-<span id="cb21-4"><a href="#cb21-4"></a>    <span class="co"># inicio del bucle</span></span>
-<span id="cb21-5"><a href="#cb21-5"></a></span>
-<span id="cb21-6"><a href="#cb21-6"></a>    txt <span class="ot">&lt;-</span> <span class="fu">read.table</span>(i, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">skip =</span> <span class="dv">4</span>, <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>)  <span class="co"># leer archivo</span></span>
-<span id="cb21-7"><a href="#cb21-7"></a></span>
-<span id="cb21-8"><a href="#cb21-8"></a>    df_resultados <span class="ot">&lt;-</span> <span class="fu">rbind</span>(df_resultados, txt)  <span class="co"># guardar resultados en vector vacio</span></span>
-<span id="cb21-9"><a href="#cb21-9"></a>}</span>
-<span id="cb21-10"><a href="#cb21-10"></a></span>
-<span id="cb21-11"><a href="#cb21-11"></a><span class="fu">nrow</span>(df_resultados) <span class="sc">==</span> <span class="fu">sum</span>(n_filas_df<span class="sc">$</span>filas)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>df_resultados <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()  <span class="co"># vector vacio</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a></span>
+<span id="cb23-3"><a href="#cb23-3"></a><span class="cf">for</span> (i <span class="cf">in</span> archivos_txt) {</span>
+<span id="cb23-4"><a href="#cb23-4"></a>    <span class="co"># inicio del bucle</span></span>
+<span id="cb23-5"><a href="#cb23-5"></a></span>
+<span id="cb23-6"><a href="#cb23-6"></a>    txt <span class="ot">&lt;-</span> <span class="fu">read.table</span>(i, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">skip =</span> <span class="dv">4</span>, <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>)  <span class="co"># leer archivo</span></span>
+<span id="cb23-7"><a href="#cb23-7"></a></span>
+<span id="cb23-8"><a href="#cb23-8"></a>    df_resultados <span class="ot">&lt;-</span> <span class="fu">rbind</span>(df_resultados, txt)  <span class="co"># guardar resultados en vector vacio</span></span>
+<span id="cb23-9"><a href="#cb23-9"></a>}</span>
+<span id="cb23-10"><a href="#cb23-10"></a></span>
+<span id="cb23-11"><a href="#cb23-11"></a><span class="fu">nrow</span>(df_resultados) <span class="sc">==</span> <span class="fu">sum</span>(n_filas_df<span class="sc">$</span>filas)</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <hr />
 </div>
@@ -980,8 +1017,8 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 funciones que toman una función como entrada y la aplican a una
 secuencia de objetos (vectores <em>sensu lato</em>). Por lo tanto hay
 varias funciones <code>(X)apply</code> en R:</p>
-<div class="sourceCode" id="cb23"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">apropos</span>(<span class="st">&quot;apply$&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">apropos</span>(<span class="st">&quot;apply$&quot;</span>)</span></code></pre></div>
 <pre><code>##  [1] &quot;apply&quot;      &quot;dendrapply&quot; &quot;eapply&quot;     &quot;kernapply&quot;  &quot;lapply&quot;    
 ##  [6] &quot;mapply&quot;     &quot;rapply&quot;     &quot;sapply&quot;     &quot;tapply&quot;     &quot;vapply&quot;</code></pre>
 <p> </p>
@@ -991,22 +1028,22 @@ y<code>tapply</code>. Todos siguen la misma lógica:</p>
 <p><img src="images/xapply_esp.png" width="40%" style="display: block; margin: auto;" /></p>
 <p><code>lapply</code> toma un vector (atómico o de lista), aplica una
 función a cada elemento y devuelve una lista:</p>
-<div class="sourceCode" id="cb25"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">lapply</span>(<span class="at">X =</span> lista_datos, <span class="at">FUN =</span> nrow)</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">lapply</span>(<span class="at">X =</span> lista_datos, <span class="at">FUN =</span> nrow)</span></code></pre></div>
 <p> </p>
 <p><code>sapply</code> también toma un vector (atómico o de lista) y
 aplica la función a cada elemento, sin embargo, el resultado es un
 vector atómico (si es que se puede empaquetar como un vector):</p>
-<div class="sourceCode" id="cb26"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">sapply</span>(<span class="at">X =</span> lista_datos, <span class="at">FUN =</span> nrow)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">sapply</span>(<span class="at">X =</span> lista_datos, <span class="at">FUN =</span> nrow)</span></code></pre></div>
 <p> </p>
 <p><code>apply</code> aplica una función a cada una de las filas o
 columnas de un objeto bidimensional. Por ejemplo, el siguiente código
 calcula el promedio para largo y ancho de sépalo en el juego de datos
 <code>iris</code>:</p>
-<div class="sourceCode" id="cb27"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="co"># promedio de largo y ancho de setalo</span></span>
-<span id="cb27-2"><a href="#cb27-2"></a><span class="fu">apply</span>(<span class="at">X =</span> iris[, <span class="fu">c</span>(<span class="st">&quot;Sepal.Length&quot;</span>, <span class="st">&quot;Sepal.Width&quot;</span>)], <span class="at">MARGIN =</span> <span class="dv">2</span>, <span class="at">FUN =</span> mean)</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="co"># promedio de largo y ancho de setalo</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a><span class="fu">apply</span>(<span class="at">X =</span> iris[, <span class="fu">c</span>(<span class="st">&quot;Sepal.Length&quot;</span>, <span class="st">&quot;Sepal.Width&quot;</span>)], <span class="at">MARGIN =</span> <span class="dv">2</span>, <span class="at">FUN =</span> mean)</span></code></pre></div>
 <pre><code>## Sepal.Length  Sepal.Width 
 ##       5.8433       3.0573</code></pre>
 <p> </p>
@@ -1017,27 +1054,27 @@ nivel de filas (<code>MARGIN = 1</code>) o columnas
 subconjunto de datos definido por un vector categórico adicional. Por
 ejemplo, podemos calcular la longitud promedio de pétalo para cada
 especie en el juego de datos ‘iris’ de la siguiente manera:</p>
-<div class="sourceCode" id="cb29"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">tapply</span>(<span class="at">X =</span> iris<span class="sc">$</span>Petal.Length, <span class="at">INDEX =</span> iris<span class="sc">$</span>Species, <span class="at">FUN =</span> mean)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="fu">tapply</span>(<span class="at">X =</span> iris<span class="sc">$</span>Petal.Length, <span class="at">INDEX =</span> iris<span class="sc">$</span>Species, <span class="at">FUN =</span> mean)</span></code></pre></div>
 <pre><code>##     setosa versicolor  virginica 
 ##      1.462      4.260      5.552</code></pre>
 <p> </p>
 <p>Los bucles <code>(X)apply</code> pueden modificarse para realizar
 acciones personalizadas creando nuevas funciones (ya sea dentro o fuera
 del bucle):</p>
-<div class="sourceCode" id="cb31"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="co"># funcion desde fuera del bucle</span></span>
-<span id="cb31-2"><a href="#cb31-2"></a>n_filas <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb31-3"><a href="#cb31-3"></a>    txt <span class="ot">&lt;-</span> <span class="fu">read.table</span>(x, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">skip =</span> <span class="dv">4</span>, <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>)  <span class="co"># leer archivo</span></span>
-<span id="cb31-4"><a href="#cb31-4"></a>    nrw <span class="ot">&lt;-</span> <span class="fu">nrow</span>(txt)  <span class="co"># calcular numero de filas</span></span>
-<span id="cb31-5"><a href="#cb31-5"></a>    <span class="fu">return</span>(nrw)</span>
-<span id="cb31-6"><a href="#cb31-6"></a>}</span>
-<span id="cb31-7"><a href="#cb31-7"></a></span>
-<span id="cb31-8"><a href="#cb31-8"></a><span class="co"># correr bucle</span></span>
-<span id="cb31-9"><a href="#cb31-9"></a>filas <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="at">X =</span> archivos_txt, <span class="at">FUN =</span> n_filas)</span>
-<span id="cb31-10"><a href="#cb31-10"></a></span>
-<span id="cb31-11"><a href="#cb31-11"></a><span class="co"># ver resultados</span></span>
-<span id="cb31-12"><a href="#cb31-12"></a><span class="fu">head</span>(filas)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="co"># funcion desde fuera del bucle</span></span>
+<span id="cb33-2"><a href="#cb33-2"></a>n_filas <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb33-3"><a href="#cb33-3"></a>    txt <span class="ot">&lt;-</span> <span class="fu">read.table</span>(x, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">skip =</span> <span class="dv">4</span>, <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>)  <span class="co"># leer archivo</span></span>
+<span id="cb33-4"><a href="#cb33-4"></a>    nrw <span class="ot">&lt;-</span> <span class="fu">nrow</span>(txt)  <span class="co"># calcular numero de filas</span></span>
+<span id="cb33-5"><a href="#cb33-5"></a>    <span class="fu">return</span>(nrw)</span>
+<span id="cb33-6"><a href="#cb33-6"></a>}</span>
+<span id="cb33-7"><a href="#cb33-7"></a></span>
+<span id="cb33-8"><a href="#cb33-8"></a><span class="co"># correr bucle</span></span>
+<span id="cb33-9"><a href="#cb33-9"></a>filas <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="at">X =</span> archivos_txt, <span class="at">FUN =</span> n_filas)</span>
+<span id="cb33-10"><a href="#cb33-10"></a></span>
+<span id="cb33-11"><a href="#cb33-11"></a><span class="co"># ver resultados</span></span>
+<span id="cb33-12"><a href="#cb33-12"></a><span class="fu">head</span>(filas)</span></code></pre></div>
 <pre><code>## [[1]]
 ## [1] 39
 ## 
@@ -1058,12 +1095,12 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <p> </p>
 <p>Note que el resultado es una lista. Si deseamos generar un vector
 podemos usar el bucle <code>sapply</code>:</p>
-<div class="sourceCode" id="cb33"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="co"># correr bucle</span></span>
-<span id="cb33-2"><a href="#cb33-2"></a>filas <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="at">X =</span> archivos_txt, <span class="at">FUN =</span> n_filas)</span>
-<span id="cb33-3"><a href="#cb33-3"></a></span>
-<span id="cb33-4"><a href="#cb33-4"></a><span class="co"># ver resultados</span></span>
-<span id="cb33-5"><a href="#cb33-5"></a><span class="fu">head</span>(filas)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="co"># correr bucle</span></span>
+<span id="cb35-2"><a href="#cb35-2"></a>filas <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="at">X =</span> archivos_txt, <span class="at">FUN =</span> n_filas)</span>
+<span id="cb35-3"><a href="#cb35-3"></a></span>
+<span id="cb35-4"><a href="#cb35-4"></a><span class="co"># ver resultados</span></span>
+<span id="cb35-5"><a href="#cb35-5"></a><span class="fu">head</span>(filas)</span></code></pre></div>
 <pre><code>##        ../2022-09-02_R3-LcamT3-RcamN4_Pel1_2021-09-24_MaxN.TXT 
 ##                                                             39 
 ## ../2022-09-03_S6-LB13-RB12_PuntaMariaOeste_2022-03-24_MaxN.TXT 
@@ -1079,13 +1116,13 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <p> </p>
 <p>Podemos usar funciones anónimas (i.e. funciones que se crean dentro
 del llamado del bucle) así:</p>
-<div class="sourceCode" id="cb35"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="co"># correr bucle</span></span>
-<span id="cb35-2"><a href="#cb35-2"></a>filas <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="at">X =</span> archivos_txt, <span class="at">FUN =</span> <span class="cf">function</span>(x) <span class="fu">nrow</span>(<span class="fu">read.table</span>(x,</span>
-<span id="cb35-3"><a href="#cb35-3"></a>    <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">skip =</span> <span class="dv">4</span>, <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>)))</span>
-<span id="cb35-4"><a href="#cb35-4"></a></span>
-<span id="cb35-5"><a href="#cb35-5"></a><span class="co"># ver resultados</span></span>
-<span id="cb35-6"><a href="#cb35-6"></a><span class="fu">head</span>(filas)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="co"># correr bucle</span></span>
+<span id="cb37-2"><a href="#cb37-2"></a>filas <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="at">X =</span> archivos_txt, <span class="at">FUN =</span> <span class="cf">function</span>(x) <span class="fu">nrow</span>(<span class="fu">read.table</span>(x,</span>
+<span id="cb37-3"><a href="#cb37-3"></a>    <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">skip =</span> <span class="dv">4</span>, <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>)))</span>
+<span id="cb37-4"><a href="#cb37-4"></a></span>
+<span id="cb37-5"><a href="#cb37-5"></a><span class="co"># ver resultados</span></span>
+<span id="cb37-6"><a href="#cb37-6"></a><span class="fu">head</span>(filas)</span></code></pre></div>
 <pre><code>##        ../2022-09-02_R3-LcamT3-RcamN4_Pel1_2021-09-24_MaxN.TXT 
 ##                                                             39 
 ## ../2022-09-03_S6-LB13-RB12_PuntaMariaOeste_2022-03-24_MaxN.TXT 
@@ -1117,19 +1154,19 @@ la replica. Sin embargo solo replica una acción (generalmente aleatoria)
 y el usuario no tiene control sobre el insumo a la función. El argumento
 ‘n’ define cuantas veces se replica la acción y ‘expr’ define la acción
 a realizar:</p>
-<div class="sourceCode" id="cb37"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="fu">replicate</span>(<span class="at">n =</span> <span class="dv">3</span>, <span class="at">expr =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>))</span></code></pre></div>
-<pre><code>##            [,1]      [,2]     [,3]
-##  [1,] -1.834208 -1.409215 -1.64309
-##  [2,]  0.631061 -0.292518  0.45885
-##  [3,]  0.819352 -1.252398  0.73946
-##  [4,]  1.560938  0.025473 -0.63085
-##  [5,] -0.085904 -1.376017  1.04342
-##  [6,]  0.245576  0.358337  0.41443
-##  [7,]  0.211755 -0.332801 -1.07307
-##  [8,]  0.141935  0.878744 -0.58708
-##  [9,] -0.689059 -1.381931 -0.12845
-## [10,]  0.702053  0.536120  0.12560</code></pre>
+<div class="sourceCode" id="cb39"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="fu">replicate</span>(<span class="at">n =</span> <span class="dv">3</span>, <span class="at">expr =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>))</span></code></pre></div>
+<pre><code>##            [,1]     [,2]     [,3]
+##  [1,] -1.046072  1.64207 -1.30266
+##  [2,] -0.413161  1.99836 -0.96624
+##  [3,] -1.439793 -0.41290 -1.26555
+##  [4,] -0.071297  0.19305  0.88523
+##  [5,]  0.350159 -0.49585  0.32296
+##  [6,]  0.152862  0.79738 -0.17431
+##  [7,]  1.583663  2.28739 -0.53428
+##  [8,] -0.016774  0.45022 -2.18527
+##  [9,]  0.830608  0.46937  0.80685
+## [10,] -1.190307  0.31870  0.86590</code></pre>
 <p> </p>
 <p>Note que los resultados son agrupados en una matrix. ‘expr’ también
 puede replicar código que no ha sido “empaquetado en una función”.</p>
@@ -1164,40 +1201,40 @@ independientemente de la evaluación de la condición:</p>
 <p>El siguiente bucle <code>repeat</code> se ejecuta hasta que la
 correlación de las variables continuas generadas al azar es mayor que un
 umbral:</p>
-<div class="sourceCode" id="cb39"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="co"># crear vector vacio</span></span>
-<span id="cb39-2"><a href="#cb39-2"></a>cc_vector <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb39-3"><a href="#cb39-3"></a></span>
-<span id="cb39-4"><a href="#cb39-4"></a><span class="cf">repeat</span> {</span>
-<span id="cb39-5"><a href="#cb39-5"></a>    <span class="co"># generar la variable 1</span></span>
-<span id="cb39-6"><a href="#cb39-6"></a>    v1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">20</span>)</span>
-<span id="cb39-7"><a href="#cb39-7"></a></span>
-<span id="cb39-8"><a href="#cb39-8"></a>    <span class="co"># generar la variable 2</span></span>
-<span id="cb39-9"><a href="#cb39-9"></a>    v2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">20</span>)</span>
-<span id="cb39-10"><a href="#cb39-10"></a></span>
-<span id="cb39-11"><a href="#cb39-11"></a>    <span class="co"># correr la correlacion</span></span>
-<span id="cb39-12"><a href="#cb39-12"></a>    corr_coef <span class="ot">&lt;-</span> <span class="fu">cor</span>(v1, v2)</span>
-<span id="cb39-13"><a href="#cb39-13"></a></span>
-<span id="cb39-14"><a href="#cb39-14"></a>    <span class="co"># guardar resultados</span></span>
-<span id="cb39-15"><a href="#cb39-15"></a>    cc_vector[<span class="fu">length</span>(cc_vector) <span class="sc">+</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> corr_coef</span>
-<span id="cb39-16"><a href="#cb39-16"></a></span>
-<span id="cb39-17"><a href="#cb39-17"></a>    <span class="co"># parar si se cumple la condicion</span></span>
-<span id="cb39-18"><a href="#cb39-18"></a>    <span class="cf">if</span> (corr_coef <span class="sc">&gt;</span> <span class="fl">0.5</span>)</span>
-<span id="cb39-19"><a href="#cb39-19"></a>        <span class="cf">break</span></span>
-<span id="cb39-20"><a href="#cb39-20"></a></span>
-<span id="cb39-21"><a href="#cb39-21"></a>}</span>
-<span id="cb39-22"><a href="#cb39-22"></a></span>
-<span id="cb39-23"><a href="#cb39-23"></a><span class="fu">head</span>(cc_vector)</span></code></pre></div>
-<pre><code>## [1] -0.216263 -0.279111 -0.375114 -0.021205 -0.460309  0.156848</code></pre>
+<div class="sourceCode" id="cb41"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="co"># crear vector vacio</span></span>
+<span id="cb41-2"><a href="#cb41-2"></a>cc_vector <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb41-3"><a href="#cb41-3"></a></span>
+<span id="cb41-4"><a href="#cb41-4"></a><span class="cf">repeat</span> {</span>
+<span id="cb41-5"><a href="#cb41-5"></a>    <span class="co"># generar la variable 1</span></span>
+<span id="cb41-6"><a href="#cb41-6"></a>    v1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">20</span>)</span>
+<span id="cb41-7"><a href="#cb41-7"></a></span>
+<span id="cb41-8"><a href="#cb41-8"></a>    <span class="co"># generar la variable 2</span></span>
+<span id="cb41-9"><a href="#cb41-9"></a>    v2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">20</span>)</span>
+<span id="cb41-10"><a href="#cb41-10"></a></span>
+<span id="cb41-11"><a href="#cb41-11"></a>    <span class="co"># correr la correlacion</span></span>
+<span id="cb41-12"><a href="#cb41-12"></a>    corr_coef <span class="ot">&lt;-</span> <span class="fu">cor</span>(v1, v2)</span>
+<span id="cb41-13"><a href="#cb41-13"></a></span>
+<span id="cb41-14"><a href="#cb41-14"></a>    <span class="co"># guardar resultados</span></span>
+<span id="cb41-15"><a href="#cb41-15"></a>    cc_vector[<span class="fu">length</span>(cc_vector) <span class="sc">+</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> corr_coef</span>
+<span id="cb41-16"><a href="#cb41-16"></a></span>
+<span id="cb41-17"><a href="#cb41-17"></a>    <span class="co"># parar si se cumple la condicion</span></span>
+<span id="cb41-18"><a href="#cb41-18"></a>    <span class="cf">if</span> (corr_coef <span class="sc">&gt;</span> <span class="fl">0.5</span>)</span>
+<span id="cb41-19"><a href="#cb41-19"></a>        <span class="cf">break</span></span>
+<span id="cb41-20"><a href="#cb41-20"></a></span>
+<span id="cb41-21"><a href="#cb41-21"></a>}</span>
+<span id="cb41-22"><a href="#cb41-22"></a></span>
+<span id="cb41-23"><a href="#cb41-23"></a><span class="fu">head</span>(cc_vector)</span></code></pre></div>
+<pre><code>## [1] -0.239366  0.169577 -0.179985  0.109787  0.171429  0.034256</code></pre>
 <p> </p>
 <p>Podemos graficarlo el resultado asi así:</p>
-<div class="sourceCode" id="cb41"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a>cc <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">y =</span> cc_vector, <span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(cc_vector))</span>
-<span id="cb41-2"><a href="#cb41-2"></a></span>
-<span id="cb41-3"><a href="#cb41-3"></a><span class="fu">ggplot</span>(<span class="at">data =</span> cc, <span class="fu">aes</span>(x, y)) <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.5</span>, <span class="at">col =</span> cols[<span class="dv">4</span>],</span>
-<span id="cb41-4"><a href="#cb41-4"></a>    <span class="at">lwd =</span> <span class="dv">3</span>) <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="at">col =</span> cols[<span class="dv">8</span>], <span class="at">lwd =</span> <span class="dv">4</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Iteraciones&quot;</span>,</span>
-<span id="cb41-5"><a href="#cb41-5"></a>    <span class="at">y =</span> <span class="st">&quot;Correlación de pearson (r)&quot;</span>) <span class="sc">+</span> <span class="fu">theme_classic</span>(<span class="at">base_size =</span> <span class="dv">25</span>)</span></code></pre></div>
-<p><img src="bucles_loops_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
+<div class="sourceCode" id="cb43"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a>cc <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">y =</span> cc_vector, <span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(cc_vector))</span>
+<span id="cb43-2"><a href="#cb43-2"></a></span>
+<span id="cb43-3"><a href="#cb43-3"></a><span class="fu">ggplot</span>(<span class="at">data =</span> cc, <span class="fu">aes</span>(x, y)) <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.5</span>, <span class="at">col =</span> cols[<span class="dv">4</span>],</span>
+<span id="cb43-4"><a href="#cb43-4"></a>    <span class="at">lwd =</span> <span class="dv">3</span>) <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="at">col =</span> cols[<span class="dv">8</span>], <span class="at">lwd =</span> <span class="dv">4</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Iteraciones&quot;</span>,</span>
+<span id="cb43-5"><a href="#cb43-5"></a>    <span class="at">y =</span> <span class="st">&quot;Correlación de pearson (r)&quot;</span>) <span class="sc">+</span> <span class="fu">theme_classic</span>(<span class="at">base_size =</span> <span class="dv">25</span>)</span></code></pre></div>
+<p><img src="bucles_loops_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
 <p>La condición determina si el ciclo debe detenerse.</p>
 <p>Una característica importante de los bucles
 <code>while</code>,<code>repeat</code> y <code>for</code> es que pueden
@@ -1215,60 +1252,60 @@ elementos hasta que se cumpla una condición. Son muy parecidos a los
 bucles <code>repeat</code>. La condición puede evaluar un resultado del
 propio bucle o una entrada externa:</p>
 <p><img src="images/while_esp.png" width="40%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb42"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="co"># definir valor inicial</span></span>
-<span id="cb42-2"><a href="#cb42-2"></a>corr_coef <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb42-3"><a href="#cb42-3"></a></span>
-<span id="cb42-4"><a href="#cb42-4"></a><span class="co"># iniciar bucle</span></span>
-<span id="cb42-5"><a href="#cb42-5"></a><span class="cf">while</span> (corr_coef <span class="sc">&lt;</span> <span class="fl">0.5</span>) {</span>
-<span id="cb42-6"><a href="#cb42-6"></a></span>
-<span id="cb42-7"><a href="#cb42-7"></a>    <span class="co"># generar la variable 1</span></span>
-<span id="cb42-8"><a href="#cb42-8"></a>    v1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">20</span>)</span>
-<span id="cb42-9"><a href="#cb42-9"></a></span>
-<span id="cb42-10"><a href="#cb42-10"></a>    <span class="co"># generar la variable 2</span></span>
-<span id="cb42-11"><a href="#cb42-11"></a>    v2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">20</span>)</span>
-<span id="cb42-12"><a href="#cb42-12"></a></span>
-<span id="cb42-13"><a href="#cb42-13"></a>    <span class="co"># corrrer la correlacion</span></span>
-<span id="cb42-14"><a href="#cb42-14"></a>    corr_coef <span class="ot">&lt;-</span> <span class="fu">cor</span>(v1, v2)</span>
-<span id="cb42-15"><a href="#cb42-15"></a></span>
-<span id="cb42-16"><a href="#cb42-16"></a>    <span class="co"># imprimir</span></span>
-<span id="cb42-17"><a href="#cb42-17"></a>    <span class="fu">print</span>(corr_coef)</span>
-<span id="cb42-18"><a href="#cb42-18"></a>}</span>
-<span id="cb42-19"><a href="#cb42-19"></a></span>
-<span id="cb42-20"><a href="#cb42-20"></a>corr_coef</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="co"># definir valor inicial</span></span>
+<span id="cb44-2"><a href="#cb44-2"></a>corr_coef <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb44-3"><a href="#cb44-3"></a></span>
+<span id="cb44-4"><a href="#cb44-4"></a><span class="co"># iniciar bucle</span></span>
+<span id="cb44-5"><a href="#cb44-5"></a><span class="cf">while</span> (corr_coef <span class="sc">&lt;</span> <span class="fl">0.5</span>) {</span>
+<span id="cb44-6"><a href="#cb44-6"></a></span>
+<span id="cb44-7"><a href="#cb44-7"></a>    <span class="co"># generar la variable 1</span></span>
+<span id="cb44-8"><a href="#cb44-8"></a>    v1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">20</span>)</span>
+<span id="cb44-9"><a href="#cb44-9"></a></span>
+<span id="cb44-10"><a href="#cb44-10"></a>    <span class="co"># generar la variable 2</span></span>
+<span id="cb44-11"><a href="#cb44-11"></a>    v2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">20</span>)</span>
+<span id="cb44-12"><a href="#cb44-12"></a></span>
+<span id="cb44-13"><a href="#cb44-13"></a>    <span class="co"># corrrer la correlacion</span></span>
+<span id="cb44-14"><a href="#cb44-14"></a>    corr_coef <span class="ot">&lt;-</span> <span class="fu">cor</span>(v1, v2)</span>
+<span id="cb44-15"><a href="#cb44-15"></a></span>
+<span id="cb44-16"><a href="#cb44-16"></a>    <span class="co"># imprimir</span></span>
+<span id="cb44-17"><a href="#cb44-17"></a>    <span class="fu">print</span>(corr_coef)</span>
+<span id="cb44-18"><a href="#cb44-18"></a>}</span>
+<span id="cb44-19"><a href="#cb44-19"></a></span>
+<span id="cb44-20"><a href="#cb44-20"></a>corr_coef</span></code></pre></div>
 <pre><code>##  [1]  0.0872575  0.3865472  0.1199017 -0.2902941  0.2413406 -0.1667497
 ##  [7]  0.1272541  0.0011283 -0.1344395 -0.0184824  0.5966901</code></pre>
 <p> </p>
 <p>Con un pequeño ajuste, un bucle <code>while</code> también puede
 evaluar varias condiciones a la vez. Por ejemplo, también podemos
 incluir altos valores de correlación negativa:</p>
-<div class="sourceCode" id="cb44"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="co"># definir valor inicial</span></span>
-<span id="cb44-2"><a href="#cb44-2"></a>corr_coef <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb44-3"><a href="#cb44-3"></a></span>
-<span id="cb44-4"><a href="#cb44-4"></a><span class="co"># crear vector vacio</span></span>
-<span id="cb44-5"><a href="#cb44-5"></a>cc_vector <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb44-6"><a href="#cb44-6"></a></span>
-<span id="cb44-7"><a href="#cb44-7"></a><span class="cf">while</span> (corr_coef <span class="sc">&lt;</span> <span class="fl">0.5</span> <span class="sc">&amp;</span> corr_coef <span class="sc">&gt;</span> <span class="sc">-</span><span class="fl">0.5</span>) {</span>
-<span id="cb44-8"><a href="#cb44-8"></a></span>
-<span id="cb44-9"><a href="#cb44-9"></a>    <span class="co"># generar la variable 1</span></span>
-<span id="cb44-10"><a href="#cb44-10"></a>    v1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">20</span>)</span>
-<span id="cb44-11"><a href="#cb44-11"></a></span>
-<span id="cb44-12"><a href="#cb44-12"></a>    <span class="co"># generar la variable 2</span></span>
-<span id="cb44-13"><a href="#cb44-13"></a>    v2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">20</span>)</span>
-<span id="cb44-14"><a href="#cb44-14"></a></span>
-<span id="cb44-15"><a href="#cb44-15"></a>    <span class="co"># correr correlacion</span></span>
-<span id="cb44-16"><a href="#cb44-16"></a>    corr_coef <span class="ot">&lt;-</span> <span class="fu">cor</span>(v1, v2)</span>
-<span id="cb44-17"><a href="#cb44-17"></a></span>
-<span id="cb44-18"><a href="#cb44-18"></a>    <span class="co"># guardar resultados</span></span>
-<span id="cb44-19"><a href="#cb44-19"></a>    cc_vector[<span class="fu">length</span>(cc_vector) <span class="sc">+</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> corr_coef</span>
-<span id="cb44-20"><a href="#cb44-20"></a></span>
-<span id="cb44-21"><a href="#cb44-21"></a>}</span>
-<span id="cb44-22"><a href="#cb44-22"></a></span>
-<span id="cb44-23"><a href="#cb44-23"></a><span class="fu">head</span>(cc_vector)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="co"># definir valor inicial</span></span>
+<span id="cb46-2"><a href="#cb46-2"></a>corr_coef <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb46-3"><a href="#cb46-3"></a></span>
+<span id="cb46-4"><a href="#cb46-4"></a><span class="co"># crear vector vacio</span></span>
+<span id="cb46-5"><a href="#cb46-5"></a>cc_vector <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb46-6"><a href="#cb46-6"></a></span>
+<span id="cb46-7"><a href="#cb46-7"></a><span class="cf">while</span> (corr_coef <span class="sc">&lt;</span> <span class="fl">0.5</span> <span class="sc">&amp;</span> corr_coef <span class="sc">&gt;</span> <span class="sc">-</span><span class="fl">0.5</span>) {</span>
+<span id="cb46-8"><a href="#cb46-8"></a></span>
+<span id="cb46-9"><a href="#cb46-9"></a>    <span class="co"># generar la variable 1</span></span>
+<span id="cb46-10"><a href="#cb46-10"></a>    v1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">20</span>)</span>
+<span id="cb46-11"><a href="#cb46-11"></a></span>
+<span id="cb46-12"><a href="#cb46-12"></a>    <span class="co"># generar la variable 2</span></span>
+<span id="cb46-13"><a href="#cb46-13"></a>    v2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">20</span>)</span>
+<span id="cb46-14"><a href="#cb46-14"></a></span>
+<span id="cb46-15"><a href="#cb46-15"></a>    <span class="co"># correr correlacion</span></span>
+<span id="cb46-16"><a href="#cb46-16"></a>    corr_coef <span class="ot">&lt;-</span> <span class="fu">cor</span>(v1, v2)</span>
+<span id="cb46-17"><a href="#cb46-17"></a></span>
+<span id="cb46-18"><a href="#cb46-18"></a>    <span class="co"># guardar resultados</span></span>
+<span id="cb46-19"><a href="#cb46-19"></a>    cc_vector[<span class="fu">length</span>(cc_vector) <span class="sc">+</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> corr_coef</span>
+<span id="cb46-20"><a href="#cb46-20"></a></span>
+<span id="cb46-21"><a href="#cb46-21"></a>}</span>
+<span id="cb46-22"><a href="#cb46-22"></a></span>
+<span id="cb46-23"><a href="#cb46-23"></a><span class="fu">head</span>(cc_vector)</span></code></pre></div>
 <pre><code>## [1] -0.047693  0.232015  0.133767 -0.089900  0.364152  0.203306</code></pre>
 <p> </p>
-<p><img src="bucles_loops_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
+<p><img src="bucles_loops_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
 <hr />
 <div class="alert alert-info">
 <p><font size="5">Ejercicio 4</font></p>
@@ -1295,18 +1332,18 @@ Tutorial on Loops in R - Usage and Alternatives, DataCamp</a></li>
 </ul>
 <hr />
 <p><font size="5">Session information</font></p>
-<pre><code>## R version 4.1.1 (2021-08-10)
+<pre><code>## R version 4.2.0 (2022-04-22)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
-## Running under: Ubuntu 20.04.2 LTS
+## Running under: Ubuntu 22.04.1 LTS
 ## 
 ## Matrix products: default
-## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0
-## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0
+## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0
+## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0
 ## 
 ## locale:
-##  [1] LC_CTYPE=es_ES.UTF-8       LC_NUMERIC=C              
-##  [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=es_ES.UTF-8    
-##  [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=es_ES.UTF-8   
+##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+##  [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=en_US.UTF-8    
+##  [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=en_US.UTF-8   
 ##  [7] LC_PAPER=es_CR.UTF-8       LC_NAME=C                 
 ##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
 ## [11] LC_MEASUREMENT=es_CR.UTF-8 LC_IDENTIFICATION=C       
@@ -1316,22 +1353,23 @@ Tutorial on Loops in R - Usage and Alternatives, DataCamp</a></li>
 ## 
 ## other attached packages:
 ## [1] xaringanExtra_0.7.0 ggplot2_3.3.6       RColorBrewer_1.1-3 
-## [4] kableExtra_1.3.4    knitr_1.39         
+## [4] kableExtra_1.3.4    knitr_1.40         
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] tidyselect_1.1.2  xfun_0.31         bslib_0.3.1       purrr_0.3.4      
+##  [1] tidyselect_1.1.2  xfun_0.33         bslib_0.4.0       purrr_0.3.4      
 ##  [5] colorspace_2.0-3  vctrs_0.4.1       generics_0.1.2    htmltools_0.5.3  
-##  [9] viridisLite_0.4.0 yaml_2.3.5        utf8_1.2.2        rlang_1.0.4      
-## [13] jquerylib_0.1.4   pillar_1.8.0      glue_1.6.2        withr_2.5.0      
-## [17] DBI_1.1.3         uuid_1.1-0        lifecycle_1.0.1   stringr_1.4.0    
-## [21] munsell_0.5.0     gtable_0.3.0      rvest_1.0.2       evaluate_0.15    
+##  [9] viridisLite_0.4.1 yaml_2.3.5        utf8_1.2.2        rlang_1.0.6      
+## [13] jquerylib_0.1.4   pillar_1.8.1      glue_1.6.2        withr_2.5.0      
+## [17] DBI_1.1.2         uuid_1.1-0        lifecycle_1.0.2   stringr_1.4.1    
+## [21] munsell_0.5.0     gtable_0.3.1      rvest_1.0.2       evaluate_0.16    
 ## [25] labeling_0.4.2    fastmap_1.1.0     fansi_1.0.3       highr_0.9        
-## [29] scales_1.2.0      formatR_1.12      webshot_0.5.3     jsonlite_1.8.0   
-## [33] farver_2.1.1      systemfonts_1.0.4 digest_0.6.29     stringi_1.7.8    
-## [37] dplyr_1.0.9       grid_4.1.1        cli_3.3.0         tools_4.1.1      
-## [41] magrittr_2.0.3    sass_0.4.1        tibble_3.1.8      pkgconfig_2.0.3  
-## [45] xml2_1.3.3        assertthat_0.2.1  rmarkdown_2.14    svglite_2.1.0    
-## [49] httr_1.4.3        rstudioapi_0.13   R6_2.5.1          compiler_4.1.1</code></pre>
+## [29] scales_1.2.1      formatR_1.12      cachem_1.0.6      webshot_0.5.3    
+## [33] jsonlite_1.8.0    farver_2.1.1      systemfonts_1.0.4 digest_0.6.29    
+## [37] stringi_1.7.8     dplyr_1.0.9       grid_4.2.0        cli_3.4.1        
+## [41] tools_4.2.0       magrittr_2.0.3    sass_0.4.2        tibble_3.1.8     
+## [45] pkgconfig_2.0.3   xml2_1.3.3        assertthat_0.2.1  rmarkdown_2.16   
+## [49] svglite_2.1.0     httr_1.4.4        rstudioapi_0.13   R6_2.5.1         
+## [53] compiler_4.2.0</code></pre>
 </div>
 </div>
 
