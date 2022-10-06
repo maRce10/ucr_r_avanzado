@@ -105,7 +105,7 @@ leaflet::addAwesomeMarkers(map = ll_map, lat = c(8.534785, 8.737077, 8.699383), 
 
 &nbsp;
 
-2. Utilice el paquete [DT](https://rstudio.github.io/DT/) para generar un cuadro (tabla) de los datos `iris`. Debe instalar y cargar el paquete primero. También recuerde usar la opción `results = "as.is"` en el encabezado del bloque de código. La tabla debe verse igual a esta:
+2. Utilice el paquete [DT](https://rstudio.github.io/DT/) para generar un cuadro (tabla) de los datos `iris`. La tabla debe verse igual a esta:
 
 
 ```{r, eval = TRUE, echo = FALSE, results='asis'}

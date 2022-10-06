@@ -143,7 +143,7 @@ Recordemos que los nombres de los archivos .TXT están guardados en un vector ll
 <div class="alert alert-info">
 
 
-1 Haga un bucle `for` que devuelva el número de especies para cada archivo (y si, es lo mismo que hicimos en clase)
+1. Haga un bucle `for` que devuelva el número de especies para cada archivo (y si, es lo mismo que hicimos en clase)
 
 ```{r}
 
@@ -163,7 +163,7 @@ resultados
 &nbsp;
 
 
-2 Haga un bucle `for` que devuelva el número de familias para cada archivo
+1. Haga un bucle `for` que devuelva el número de familias para cada archivo
 
 ```{r, eval = FALSE, echo = FALSE}
 
