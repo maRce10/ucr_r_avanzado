@@ -108,7 +108,7 @@ Primero debemos preparar los archivos de ejemplo:
 directorio <- "DIRECCION_DONDE_DESEA_GUARDAR_LOS ARCHIVOS_DE_EJEMPLO"
 
 # guardar archivos
-download.file(url = "shorturl.at/OSWX1", destfile = file.path(directorio, "datos_camara_submarina.zip"))
+download.file(url = "https://github.com/maRce10/ucr_r_avanzado/raw/master/additional_files/datos_camara_submarina.zip", destfile = file.path(directorio, "datos_camara_submarina.zip"))
 
 # extraerlos del zip
 unzip(zipfile = file.path(directorio, "datos_camara_submarina.zip"), exdir = directorio)
@@ -124,7 +124,7 @@ archivos_txt <- list.files(path = directorio, full.names = TRUE, pattern = "TXT$
 directorio <- ".."
 
 # guardar archivos
-download.file(url = "shorturl.at/OSWX1", destfile = file.path(directorio, "datos_camara_submarina.zip"))
+download.file(url = "https://github.com/maRce10/ucr_r_avanzado/raw/master/additional_files/datos_camara_submarina.zip", destfile = file.path(directorio, "datos_camara_submarina.zip"))
 
 # extraerlos del zip
 unzip(zipfile = file.path(directorio, "datos_camara_submarina.zip"), exdir = directorio)
