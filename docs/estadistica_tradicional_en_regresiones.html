@@ -439,6 +439,9 @@ div.tocify {
       <a href="funciones.html">Funciones</a>
     </li>
     <li>
+      <a href="bucles_loops.html">Bucles</a>
+    </li>
+    <li>
       <a href="modelos_de_regresion_lineal.html">Modelos de regresión lineal</a>
     </li>
     <li>
@@ -464,6 +467,9 @@ div.tocify {
   <ul class="dropdown-menu" role="menu">
     <li>
       <a href="tarea_4.html">Tarea 4</a>
+    </li>
+    <li>
+      <a href="respuestas_tarea_4.html">Solución: tarea 4</a>
     </li>
     <li class="dropdown-header">Tarea 5</li>
   </ul>
@@ -499,7 +505,7 @@ regresiones</b></font>
 Araya-Salas, PhD</a></font>
 </center></h4>
 <h4 class="date"><center>
-“2022-09-27”
+“2022-10-06”
 </center></h4>
 
 </div>
@@ -544,13 +550,13 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 ##  One Sample t-test
 ## 
 ## data:  y
-## t = 7.9, df = 49, p-value = 2.718e-10
+## t = 7.9, df = 49, p-value = 2.7e-10
 ## alternative hypothesis: true mean is not equal to 0
 ## 95 percent confidence interval:
-##  0.7712742 1.2975329
+##  0.77127 1.29753
 ## sample estimates:
 ## mean of x 
-##  1.034404</code></pre>
+##    1.0344</code></pre>
 <div class="sourceCode" id="cb3"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># run equivalent linear regression</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a>(lm_t <span class="ot">&lt;-</span> <span class="fu">summary</span>(<span class="fu">lm</span>(y <span class="sc">~</span> <span class="dv">1</span>)))</span></code></pre></div>
@@ -559,16 +565,16 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 ## lm(formula = y ~ 1)
 ## 
 ## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -2.0010 -0.5937 -0.1070  0.6638  2.1345 
+##    Min     1Q Median     3Q    Max 
+## -2.001 -0.594 -0.107  0.664  2.135 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)   1.0344     0.1309     7.9 2.72e-10 ***
+## (Intercept)    1.034      0.131     7.9  2.7e-10 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 0.9259 on 49 degrees of freedom</code></pre>
+## Residual standard error: 0.926 on 49 degrees of freedom</code></pre>
 <p> </p>
 <p>Let’s put the results from both tests together to compare them more
 closely:</p>
@@ -657,13 +663,13 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 ##  Paired t-test
 ## 
 ## data:  y1 and y2
-## t = -2.7468, df = 49, p-value = 0.008395
-## alternative hypothesis: true mean difference is not equal to 0
+## t = -2.75, df = 49, p-value = 0.0084
+## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -0.8865856 -0.1374239
+##  -0.88659 -0.13742
 ## sample estimates:
-## mean difference 
-##      -0.5120047</code></pre>
+## mean of the differences 
+##                  -0.512</code></pre>
 <div class="sourceCode" id="cb7"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># difference between the 2 variables</span></span>
 <span id="cb7-2"><a href="#cb7-2"></a>diff_y <span class="ot">&lt;-</span> y1 <span class="sc">-</span> y2</span>
@@ -677,16 +683,16 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 ## lm(formula = diff_y ~ 1)
 ## 
 ## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -2.6003 -0.7010  0.1121  1.0348  2.9089 
+##    Min     1Q Median     3Q    Max 
+## -2.600 -0.701  0.112  1.035  2.909 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(&gt;|t|)   
-## (Intercept)  -0.5120     0.1864  -2.747  0.00839 **
+## (Intercept)   -0.512      0.186   -2.75   0.0084 **
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 1.318 on 49 degrees of freedom</code></pre>
+## Residual standard error: 1.32 on 49 degrees of freedom</code></pre>
 <table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -775,13 +781,13 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 ##  Welch Two Sample t-test
 ## 
 ## data:  xy_data_cat$y[xy_data_cat$x1 == &quot;a&quot;] and xy_data_cat$y[xy_data_cat$x1 == &quot;b&quot;]
-## t = -12.276, df = 47.946, p-value &lt; 2.2e-16
+## t = -12.3, df = 47.9, p-value &lt;2e-16
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -3.751804 -2.695745
+##  -3.7518 -2.6957
 ## sample estimates:
-##  mean of x  mean of y 
-## -4.0774838 -0.8537091</code></pre>
+## mean of x mean of y 
+##  -4.07748  -0.85371</code></pre>
 <div class="sourceCode" id="cb11"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># run regression model</span></span>
 <span id="cb11-2"><a href="#cb11-2"></a>lm_indep_t <span class="ot">&lt;-</span> <span class="fu">summary</span>(<span class="fu">lm</span>(<span class="at">formula =</span> y <span class="sc">~</span> x1, <span class="at">data =</span> xy_data_cat))</span>
@@ -792,19 +798,19 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 ## lm(formula = y ~ x1, data = xy_data_cat)
 ## 
 ## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -2.1129 -0.5939 -0.1355  0.5519  2.2464 
+##    Min     1Q Median     3Q    Max 
+## -2.113 -0.594 -0.136  0.552  2.246 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  -4.0775     0.1857  -21.96   &lt;2e-16 ***
-## x1b           3.2238     0.2626   12.28   &lt;2e-16 ***
+## (Intercept)   -4.077      0.186   -22.0   &lt;2e-16 ***
+## x1b            3.224      0.263    12.3   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 0.9285 on 48 degrees of freedom
-## Multiple R-squared:  0.7584, Adjusted R-squared:  0.7534 
-## F-statistic: 150.7 on 1 and 48 DF,  p-value: &lt; 2.2e-16</code></pre>
+## Residual standard error: 0.928 on 48 degrees of freedom
+## Multiple R-squared:  0.758,  Adjusted R-squared:  0.753 
+## F-statistic:  151 on 1 and 48 DF,  p-value: &lt;2e-16</code></pre>
 <table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -834,7 +840,7 @@ t
 0
 </td>
 <td style="text-align:center;">
--12.2759
+-12.276
 </td>
 </tr>
 <tr>
@@ -848,7 +854,7 @@ lm
 0
 </td>
 <td style="text-align:center;">
-12.2759
+12.276
 </td>
 </tr>
 </tbody>
@@ -1027,20 +1033,20 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 ## lm(formula = y1 ~ x1, data = xy_data_cat2)
 ## 
 ## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -1.67208 -0.51953 -0.02887  0.48386  2.32657 
+##     Min      1Q  Median      3Q     Max 
+## -1.6721 -0.5195 -0.0289  0.4839  2.3266 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)   0.8424     0.1866   4.515 4.24e-05 ***
-## x1b           0.5646     0.2774   2.035   0.0475 *  
-## x1c          -0.1409     0.3673  -0.384   0.7030    
+## (Intercept)    0.842      0.187    4.51  4.2e-05 ***
+## x1b            0.565      0.277    2.04    0.047 *  
+## x1c           -0.141      0.367   -0.38    0.703    
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 0.8948 on 47 degrees of freedom
-## Multiple R-squared:  0.1041, Adjusted R-squared:  0.06598 
-## F-statistic: 2.731 on 2 and 47 DF,  p-value: 0.07552</code></pre>
+## Residual standard error: 0.895 on 47 degrees of freedom
+## Multiple R-squared:  0.104,  Adjusted R-squared:  0.066 
+## F-statistic: 2.73 on 2 and 47 DF,  p-value: 0.0755</code></pre>
 <table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -1126,7 +1132,7 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 ##  Pearson&#39;s Chi-squared test
 ## 
 ## data:  mood_data
-## X-squared = 5.0999, df = 2, p-value = 0.07809</code></pre>
+## X-squared = 5.1, df = 2, p-value = 0.078</code></pre>
 <div class="sourceCode" id="cb21"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># convert to long</span></span>
 <span id="cb21-2"><a href="#cb21-2"></a>mood_data_long <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">as.table</span>(mood_data))</span>
@@ -1139,9 +1145,9 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 ## MASS::loglm(formula = Freq ~ handedness + mood, data = mood_data_long)
 ## 
 ## Statistics:
-##                       X^2 df   P(&gt; X^2)
-## Likelihood Ratio 5.119915  2 0.07730804
-## Pearson          5.099859  2 0.07808717</code></pre>
+##                     X^2 df P(&gt; X^2)
+## Likelihood Ratio 5.1199  2 0.077308
+## Pearson          5.0999  2 0.078087</code></pre>
 <table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -1223,16 +1229,16 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <span id="cb27-10"><a href="#cb27-10"></a></span>
 <span id="cb27-11"><a href="#cb27-11"></a></span>
 <span id="cb27-12"><a href="#cb27-12"></a>y</span></code></pre></div>
-<pre><code>##  [1] -0.360475647 -0.030177489  1.758708314  0.270508391  0.329287735
-##  [6]  1.915064987  0.660916206 -1.065061235 -0.486852852 -0.245661970
-## [11]  1.424081797  0.559813827  0.600771451  0.310682716 -0.355841135
-## [16]  1.986913137  0.697850478 -1.766617157  0.901355902 -0.272791408
-## [21] -0.867823706 -0.017974915 -0.826004448 -0.528891229 -0.425039268
-## [26] -1.486693311  1.037787044  0.353373118 -0.938136937  1.453814921
-## [31]  0.626464221 -0.095071483  1.095125661  1.078133488  1.021581082
-## [36]  0.888640254  0.753917654  0.138088289 -0.105962664 -0.180471001
-## [41] -0.494706979 -0.007917278 -1.065396352  2.368955965  1.407961998
-## [46] -0.923108583 -0.202884835 -0.266655354  0.979965118  0.116630934</code></pre>
+<pre><code>##  [1] -0.3604756 -0.0301775  1.7587083  0.2705084  0.3292877
+##  [6]  1.9150650  0.6609162 -1.0650612 -0.4868529 -0.2456620
+## [11]  1.4240818  0.5598138  0.6007715  0.3106827 -0.3558411
+## [16]  1.9869131  0.6978505 -1.7666172  0.9013559 -0.2727914
+## [21] -0.8678237 -0.0179749 -0.8260044 -0.5288912 -0.4250393
+## [26] -1.4866933  1.0377870  0.3533731 -0.9381369  1.4538149
+## [31]  0.6264642 -0.0950715  1.0951257  1.0781335  1.0215811
+## [36]  0.8886403  0.7539177  0.1380883 -0.1059627 -0.1804710
+## [41] -0.4947070 -0.0079173 -1.0653964  2.3689560  1.4079620
+## [46] -0.9231086 -0.2028848 -0.2666554  0.9799651  0.1166309</code></pre>
 <div class="sourceCode" id="cb29"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="co"># Wilcoxon / Mann-Whitney U</span></span>
 <span id="cb29-2"><a href="#cb29-2"></a>wilcx_mod <span class="ot">&lt;-</span> <span class="fu">wilcox.test</span>(y_data<span class="sc">$</span>y)</span>
@@ -1242,7 +1248,7 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 ##  Wilcoxon signed rank test with continuity correction
 ## 
 ## data:  y_data$y
-## V = 797, p-value = 0.1248
+## V = 797, p-value = 0.12
 ## alternative hypothesis: true location is not equal to 0</code></pre>
 <div class="sourceCode" id="cb31"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>signed_rank <span class="ot">=</span> <span class="cf">function</span>(x) <span class="fu">sign</span>(x) <span class="sc">*</span> <span class="fu">rank</span>(<span class="fu">abs</span>(x))</span>
@@ -1261,9 +1267,9 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(&gt;|t|)
-## (Intercept)    6.380      4.085   1.562    0.125
+## (Intercept)     6.38       4.09    1.56     0.12
 ## 
-## Residual standard error: 28.89 on 49 degrees of freedom</code></pre>
+## Residual standard error: 28.9 on 49 degrees of freedom</code></pre>
 <table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -1308,48 +1314,51 @@ statistical tests are linear models</a></li>
 <hr />
 <p> </p>
 <p><font size="4">Session information</font></p>
-<pre><code>## R version 4.2.0 (2022-04-22)
+<pre><code>## R version 4.1.0 (2021-05-18)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
-## Running under: Ubuntu 22.04.1 LTS
+## Running under: Ubuntu 20.04.2 LTS
 ## 
 ## Matrix products: default
-## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0
-## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0
+## BLAS:   /usr/lib/x86_64-linux-gnu/atlas/libblas.so.3.10.3
+## LAPACK: /usr/lib/x86_64-linux-gnu/atlas/liblapack.so.3.10.3
 ## 
 ## locale:
-##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
-##  [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=en_US.UTF-8    
-##  [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=en_US.UTF-8   
+##  [1] LC_CTYPE=pt_BR.UTF-8       LC_NUMERIC=C              
+##  [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=pt_BR.UTF-8    
+##  [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=pt_BR.UTF-8   
 ##  [7] LC_PAPER=es_CR.UTF-8       LC_NAME=C                 
 ##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
 ## [11] LC_MEASUREMENT=es_CR.UTF-8 LC_IDENTIFICATION=C       
 ## 
 ## attached base packages:
-## [1] stats     graphics  grDevices utils     datasets  methods   base     
+## [1] stats     graphics  grDevices utils     datasets  methods  
+## [7] base     
 ## 
 ## other attached packages:
-## [1] viridis_0.6.2     viridisLite_0.4.0 ggplot2_3.3.6     knitr_1.40       
-## [5] kableExtra_1.3.4 
+## [1] viridis_0.6.2       viridisLite_0.4.0   xaringanExtra_0.7.0
+## [4] ggplot2_3.3.6       RColorBrewer_1.1-3  kableExtra_1.3.1   
+## [7] knitr_1.39         
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] tidyselect_1.1.2    xfun_0.33           bslib_0.3.1        
-##  [4] purrr_0.3.4         colorspace_2.0-3    vctrs_0.4.1        
-##  [7] generics_0.1.2      htmltools_0.5.3     yaml_2.3.5         
-## [10] utf8_1.2.2          rlang_1.0.4         jquerylib_0.1.4    
-## [13] pillar_1.8.0        glue_1.6.2          withr_2.5.0        
-## [16] DBI_1.1.2           uuid_1.1-0          lifecycle_1.0.1    
-## [19] stringr_1.4.0       munsell_0.5.0       gtable_0.3.0       
-## [22] rvest_1.0.2         evaluate_0.16       fastmap_1.1.0      
-## [25] fansi_1.0.3         highr_0.9           xaringanExtra_0.7.0
-## [28] scales_1.2.0        formatR_1.12        webshot_0.5.3      
-## [31] jsonlite_1.8.0      systemfonts_1.0.4   gridExtra_2.3      
-## [34] digest_0.6.29       stringi_1.7.8       dplyr_1.0.9        
-## [37] grid_4.2.0          cli_3.3.0           tools_4.2.0        
-## [40] magrittr_2.0.3      sass_0.4.1          tibble_3.1.8       
-## [43] pkgconfig_2.0.3     MASS_7.3-57         xml2_1.3.3         
-## [46] assertthat_0.2.1    rmarkdown_2.16      svglite_2.1.0      
-## [49] httr_1.4.4          rstudioapi_0.13     R6_2.5.1           
-## [52] compiler_4.2.0</code></pre>
+##  [1] tidyselect_1.1.1  xfun_0.31         bslib_0.2.5.1    
+##  [4] purrr_0.3.4       colorspace_2.0-3  vctrs_0.4.1      
+##  [7] generics_0.1.0    htmltools_0.5.3   yaml_2.3.5       
+## [10] utf8_1.2.2        rlang_1.0.5       jquerylib_0.1.4  
+## [13] pillar_1.8.0      glue_1.6.2        withr_2.5.0      
+## [16] DBI_1.1.1         uuid_0.1-4        lifecycle_1.0.1  
+## [19] stringr_1.4.0     munsell_0.5.0     gtable_0.3.0     
+## [22] rvest_1.0.0       htmlwidgets_1.5.3 evaluate_0.15    
+## [25] labeling_0.4.2    fastmap_1.1.0     crosstalk_1.1.1  
+## [28] fansi_1.0.3       highr_0.9         scales_1.2.0     
+## [31] formatR_1.11      leaflet_2.0.4.1   webshot_0.5.2    
+## [34] jsonlite_1.8.0    farver_2.1.1      gridExtra_2.3    
+## [37] digest_0.6.29     stringi_1.7.8     bookdown_0.29    
+## [40] dplyr_1.0.7       grid_4.1.0        cli_3.3.0        
+## [43] tools_4.1.0       magrittr_2.0.3    sass_0.4.0       
+## [46] tibble_3.1.8      pkgconfig_2.0.3   MASS_7.3-54      
+## [49] xml2_1.3.2        assertthat_0.2.1  rmarkdown_2.16   
+## [52] httr_1.4.2        rstudioapi_0.13   R6_2.5.1         
+## [55] compiler_4.1.0</code></pre>
 </div>
 
 
