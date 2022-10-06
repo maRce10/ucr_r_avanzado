@@ -1,0 +1,261 @@
+---
+title: <center><font size="7"><b>Tarea 5</b></font></center>
+subtitle: <center><font size="5"><b>Programación y métodos estadísticos avanzados en R</b></b></font></center>
+author: <center><font size="5"><a href="http://marceloarayasalas.weebly.com/">Marcelo Araya-Salas, PhD</a></font></center>
+date: <center>"`r Sys.Date()`"</center>
+output:
+  html_document:
+    css: extra.css
+    df_print: tibble
+    highlight: pygments
+    toc: false
+    toc_depth: 3
+    toc_float:
+      collapsed: yes
+      smooth_scroll: yes
+fontsize: 12pt 
+editor_options: 
+  chunk_output_type: console
+---
+
+
+<style>
+body
+  { counter-reset: source-line 0; }
+pre.numberSource code
+  { counter-reset: none; }
+</style>
+
+&nbsp; 
+
+<div class="alert alert-warning">
+
+**Instrucciones**
+
+  * La fecha de entrega es el 13 de octubre a las 11:59 pm
+  * La tarea debe ser escrita en el formato para reportes dinámicos Rmarkdown
+  * Debe entregar el archivo html generado del Rmarkdown por medio de mediación virtual (hay un enlace para someter la tarea). No envíe el archivo Rmd.
+  * El archivo Rmarkdown debe utilizar secciones de código ("chunks") separados para cada ejercicio y subtítulos para cada uno así como comentarios en texto
+  * El código dentro de los bloques de código debe estar documentado con comentarios usando '#'. En otras palabras: comente su código.
+  * Debe usar R básico para la manipulación de datos
+  * Cada item tiene un valor de 5 puntos
+
+</div>
+
+&nbsp; 
+
+```{r, echo = FALSE}
+
+# devtools::install_github("hadley/emo")
+library("xaringanExtra")
+library("knitr")
+library("kableExtra")
+# options to customize chunk outputs
+knitr::opts_chunk$set(
+  class.source = "numberLines lineAnchors", # for code line numbers
+  tidy.opts = list(width.cutoff = 65), 
+  tidy = TRUE,
+  message = FALSE
+ )
+
+htmltools::tagList(
+  xaringanExtra::use_clipboard(
+    button_text = "<i class=\"fa fa-clipboard\"></i>",
+    success_text = "<i class=\"fa fa-check\" style=\"color: #90BE6D\"></i>",
+    error_text = "<i class=\"fa fa-times-circle\" style=\"color: #F94144\"></i>"
+  ),
+  rmarkdown::html_dependency_font_awesome()
+)
+
+# this is a customized printing style data frames 
+# screws up tibble function
+tibble <- function(x, ...) { 
+  x <- kbl(x, digits=4, align= 'c', row.names = FALSE) 
+   x <- kable_styling(x, position ="center", full_width = FALSE,  bootstrap_options = c("striped", "hover", "condensed", "responsive")) 
+   asis_output(x)
+}
+
+registerS3method("knit_print", "data.frame", tibble)
+```
+
+Primero debemos preparar los archivos de ejemplo:
+
+```{r, eval = FALSE}
+
+# definir directorio a donde guardar los archivos
+directorio <- "DIRECCION_DONDE_DESEA_GUARDAR_LOS ARCHIVOS_DE_EJEMPLO"
+
+# guardar archivos
+download.file(url = "https://github.com/maRce10/ucr_r_avanzado/raw/master/additional_files/datos_camara_submarina.zip", destfile = file.path(directorio, "datos_camara_submarina.zip"))
+
+# extraerlos del zip
+unzip(zipfile = file.path(directorio, "datos_camara_submarina.zip"), exdir = directorio)
+
+# hacer vector con nombre y direccion de archivos
+archivos_txt <- list.files(path = directorio, full.names = TRUE, pattern = "TXT$")
+
+```
+
+```{r, echo = FALSE}
+
+# definir directorio a donde guardar los archivos
+directorio <- ".."
+
+# guardar archivos
+download.file(url = "https://github.com/maRce10/ucr_r_avanzado/raw/master/additional_files/datos_camara_submarina.zip", destfile = file.path(directorio, "datos_camara_submarina.zip"))
+
+# extraerlos del zip
+unzip(zipfile = file.path(directorio, "datos_camara_submarina.zip"), exdir = directorio)
+
+# hacer vector con nombre y direccion de archivos
+archivos_txt <- list.files(path = directorio, full.names = TRUE, pattern = "TXT$")
+
+```
+
+&nbsp; 
+
+También pueden bajar el archivo directamente de [este enlance](https://github.com/maRce10/ucr_r_avanzado/raw/master/additional_files/datos_camara_submarina.zip). Recuerde extraer los archivos y hacer el vector con los nombres de los archivos (correr líneas  de la 9 a la 13).
+
+Si todo salió bien el vector "archivos_txt" debería tener `r length(archivos_txt)` elementos:
+
+```{r}
+
+length(archivos_txt)
+
+```
+&nbsp; 
+
+Estos datos muestran la salida de un programa de identificación automática de especies marinas en videos pasivos tomados en la columna de agua. Para cada video analizado el programa genera un archivo de texto (.TXT) con una fila para cada especie detectada mas una serie de metadatos asociados a la detección. Los datos se ven así:
+
+```{r, echo=FALSE,out.width="100%", fig.align="center"}
+
+knitr::include_graphics("./images/datos.png")
+
+```
+&nbsp;
+
+Recordemos que los nombres de los archivos .TXT están guardados en un vector llamado `archivos_txt`.
+
+ ---
+
+<!-- skyblue box -->
+
+<div class="alert alert-info">
+
+
+1 Haga un bucle `for` que devuelva el número de especies para cada archivo (y si, es lo mismo que hicimos en clase)
+
+```{r}
+
+resultados <- vector() # vector vacio
+
+for(i in archivos_txt){ # inicio del bucle
+
+    txt <- read.table(i, header = TRUE, skip = 4, sep = "\t")  # leer archivo
+    nrw <- nrow(txt) # calcular numero de filas
+    
+  resultados <- append(resultados, nrw) # guardar resultados en vector vacio
+  }
+
+resultados
+
+```
+&nbsp;
+
+
+2 Haga un bucle `for` que devuelva el número de familias para cada archivo
+
+```{r, eval = FALSE, echo = FALSE}
+
+resultados <- vector() # vector vacio
+
+for(i in archivos_txt){ # inicio del bucle
+
+    txt <- read.table(i, header = TRUE, skip = 4, sep = "\t")  # leer archivo
+    nfam <- length(unique(txt$Family)) # calcular numero de familias
+    
+  resultados <- append(resultados, nfam) # guardar resultados en vector vacio
+  }
+
+n_filas_df$familias <- resultados
+
+```
+&nbsp;
+
+3 Cree un cuadro de datos (data frame) que contenga tres columnas, una para el nombre del archivo, otra para el número de especies y otra para el número de familias
+
+&nbsp;
+
+4 Añada una columna al cuadro de datos creado en el ejercicio anterior indicando la fecha de creación del video (esta información se encuentra en la columna 'Date' de cada archivo de texto). Note que cada archivo contiene solamente una fecha. Debe usar un bucle `for` para extraer esta información de los archivos.
+
+```{r, eval = FALSE, echo = FALSE}
+
+resultados <- vector() # vector vacio
+
+for(i in archivos_txt){ # inicio del bucle
+
+    txt <- read.table(i, header = TRUE, skip = 4, sep = "\t")  # leer archivo
+    fecha <- txt$Date[1] # calcular numero de familias
+    
+  resultados <- append(resultados, fecha) # guardar resultados en vector vacio
+  }
+
+n_filas_df$fecha <- resultados
+
+```
+
+&nbsp;
+
+5 Añada una columna al cuadro de datos creado en el ejercicio 3 (y modificado en 4) indicando la profundidad a la que se grabó el video. Debe usar un bucle `for` para extraer esta información de los archivos.
+
+```{r, eval = FALSE, echo = FALSE}
+
+resultados <- vector() # vector vacio
+
+for(i in archivos_txt){ # inicio del bucle
+
+    txt <- read.table(i, header = TRUE, skip = 4, sep = "\t")  # leer archivo
+    prof <- txt$Depth[1] # calcular numero de familias
+    
+  resultados <- append(resultados, prof) # guardar resultados en vector vacio
+  }
+
+resultados <- gsub(" m", "", resultados)
+resultados <- gsub("\\,", ".", resultados)
+n_filas_df$profundidad <- as.numeric(resultados)
+
+```
+&nbsp;
+
+Note que la columna de profundidad no es numérica. Puede usar el siguiente código para convertir profundidad a un vector numérico (se necesita para el siguiente punto):
+```{r, eval=FALSE}
+
+n_filas_df$profundidad <- gsub(" m", "", gsub("\\,", ".", n_filas_df$profundidad))
+
+```
+
+
+5 Calcule es la correlación entre el número de especies observadas y la profundidad (pista: `cor.test()`) 
+
+&nbsp;
+
+6 Calcule la correlación entre el número de familias y la profundidad
+
+&nbsp;
+
+
+</div>
+
+&nbsp; 
+
+
+
+---
+
+<font size="4">Información de la sesión</font>
+
+```{r session info, echo=F}
+
+sessionInfo()
+
+```
