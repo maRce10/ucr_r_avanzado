@@ -15,7 +15,7 @@ navbar:
       - text: "Funciones"
         href: funciones.html
       - text: "Bucles"
-        href: Bucles.html
+        href: bucles_loops.html
       - text: "Modelos de regresión lineal"
         href: modelos_de_regresion_lineal.html
       - text: "Modelos comunes como regresiones"
@@ -30,6 +30,8 @@ navbar:
       menu:
       - text: "Tarea 4"
         href:  tarea_4.html
+      - text: "Solución: tarea 4"
+        href:  respuestas_tarea_4.html
       - text: "Tarea 5"
         href: 
     - text: "Programa del curso"
