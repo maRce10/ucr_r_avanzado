@@ -33,12 +33,12 @@ pre.numberSource code
 **Instrucciones**
 
   * La fecha de entrega es el 13 de octubre a las 11:59 pm
-  * La tarea debe ser escrita en el formato para reportes dinámicos Rmarkdown
-  * Debe entregar el archivo html generado del Rmarkdown por medio de mediación virtual (hay un enlace para someter la tarea). No envíe el archivo Rmd.
-  * El archivo Rmarkdown debe utilizar secciones de código ("chunks") separados para cada ejercicio y subtítulos para cada uno así como comentarios en texto
-  * El código dentro de los bloques de código debe estar documentado con comentarios usando '#'. En otras palabras: comente su código.
-  * Debe usar R básico para la manipulación de datos
-  * Cada item tiene un valor de 5 puntos
+  * La tarea debe ser escrita en el formato para reportes dinámicos Rmarkdown (5 pts)
+  * Debe entregar el archivo html generado del Rmarkdown por medio de mediación virtual (hay un enlace para someter la tarea). No envíe el archivo Rmd salvo que no pueda generar el html.
+  * El archivo Rmarkdown debe utilizar secciones de código ("chunks") separados para cada ejercicio y subtítulos para cada uno así como comentarios en texto (2.5 pts)
+  * El código dentro de los bloques de código debe estar documentado con comentarios usando '#'. En otras palabras: comente su código (2.5 pts)
+  * Debe usar R básico para la manipulación de datos (5 pts)
+  * Cada ejercicio tiene un valor de 5 puntos
 
 </div>
 
@@ -163,30 +163,35 @@ resultados
 &nbsp;
 
 
-1. Haga un bucle `for` que devuelva el número de familias para cada archivo
+2. Haga un bucle `for` que devuelva el número de familias para cada archivo
 
 ```{r, eval = FALSE, echo = FALSE}
 
-resultados <- vector() # vector vacio
+resultados_fam <- vector() # vector vacio
 
 for(i in archivos_txt){ # inicio del bucle
 
     txt <- read.table(i, header = TRUE, skip = 4, sep = "\t")  # leer archivo
     nfam <- length(unique(txt$Family)) # calcular numero de familias
     
-  resultados <- append(resultados, nfam) # guardar resultados en vector vacio
+  resultados_fam <- append(resultados_fam, nfam) # guardar resultados en vector vacio
   }
-
-n_filas_df$familias <- resultados
 
 ```
 &nbsp;
 
-3 Cree un cuadro de datos (data frame) que contenga tres columnas, una para el nombre del archivo, otra para el número de especies y otra para el número de familias
+3. Cree un cuadro de datos (data frame) que contenga tres columnas, una para el nombre del archivo, otra para el número de especies y otra para el número de familias
+
+```{r, eval = FALSE, echo = FALSE}
+
+n_filas_df <- data.frame(archivo = basename(archivos_txt), especies = resultados, familias = resultados_fam)
+
+```
+
 
 &nbsp;
 
-4 Añada una columna al cuadro de datos creado en el ejercicio anterior indicando la fecha de creación del video (esta información se encuentra en la columna 'Date' de cada archivo de texto). Note que cada archivo contiene solamente una fecha. Debe usar un bucle `for` para extraer esta información de los archivos.
+4. Añada una columna al cuadro de datos creado en el ejercicio anterior indicando la fecha de creación del video (esta información se encuentra en la columna 'Date' de cada archivo de texto). Note que cada archivo contiene solamente una fecha. Debe usar un bucle `for` para extraer esta información de los archivos.
 
 ```{r, eval = FALSE, echo = FALSE}
 
@@ -206,7 +211,7 @@ n_filas_df$fecha <- resultados
 
 &nbsp;
 
-5 Añada una columna al cuadro de datos creado en el ejercicio 3 (y modificado en 4) indicando la profundidad a la que se grabó el video. Debe usar un bucle `for` para extraer esta información de los archivos.
+5. Añada una columna al cuadro de datos creado en el ejercicio 3 (y modificado en 4) indicando la profundidad a la que se grabó el video. Debe usar un bucle `for` para extraer esta información de los archivos.
 
 ```{r, eval = FALSE, echo = FALSE}
 
@@ -235,11 +240,11 @@ n_filas_df$profundidad <- gsub(" m", "", gsub("\\,", ".", n_filas_df$profundidad
 ```
 
 
-5 Calcule es la correlación entre el número de especies observadas y la profundidad (pista: `cor.test()`) 
+6. Calcule es la correlación entre el número de especies observadas y la profundidad (pista: `cor.test()`) 
 
 &nbsp;
 
-6 Calcule la correlación entre el número de familias y la profundidad
+7. Calcule la correlación entre el número de familias y la profundidad
 
 &nbsp;
 

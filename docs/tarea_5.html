@@ -13,7 +13,7 @@
 
 <title>tarea_5.knit</title>
 
-<script src="site_libs/header-attrs-2.16/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -129,20 +129,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   for (var i = 0; i < sheets.length; i++) {
     if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
     try { var rules = sheets[i].cssRules; } catch (e) { continue; }
-    var j = 0;
-    while (j < rules.length) {
+    for (var j = 0; j < rules.length; j++) {
       var rule = rules[j];
       // check if there is a div.sourceCode rule
-      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
-        j++;
-        continue;
-      }
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
       var style = rule.style.cssText;
       // check if color or background-color is set
-      if (rule.style.color === '' && rule.style.backgroundColor === '') {
-        j++;
-        continue;
-      }
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
       // replace div.sourceCode by a pre.sourceCode rule
       sheets[i].deleteRule(j);
       sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
@@ -238,15 +231,11 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark the anchor link active (and if it's in a dropdown, also mark that active)
-  var dropdown = menuAnchor.closest('li.dropdown');
-  if (window.bootstrap) { // Bootstrap 4+
-    menuAnchor.addClass('active');
-    dropdown.find('> .dropdown-toggle').addClass('active');
-  } else { // Bootstrap 3
-    menuAnchor.parent().addClass('active');
-    dropdown.addClass('active');
-  }
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -430,7 +419,7 @@ R</b></b></font>
 Araya-Salas, PhD</a></font>
 </center></h4>
 <h4 class="date"><center>
-“2022-10-06”
+“2022-10-07”
 </center></h4>
 
 </div>
@@ -448,17 +437,18 @@ pre.numberSource code
 <ul>
 <li>La fecha de entrega es el 13 de octubre a las 11:59 pm</li>
 <li>La tarea debe ser escrita en el formato para reportes dinámicos
-Rmarkdown</li>
+Rmarkdown (5 pts)</li>
 <li>Debe entregar el archivo html generado del Rmarkdown por medio de
 mediación virtual (hay un enlace para someter la tarea). No envíe el
-archivo Rmd.</li>
+archivo Rmd salvo que no pueda generar el html.</li>
 <li>El archivo Rmarkdown debe utilizar secciones de código (“chunks”)
 separados para cada ejercicio y subtítulos para cada uno así como
-comentarios en texto</li>
+comentarios en texto (2.5 pts)</li>
 <li>El código dentro de los bloques de código debe estar documentado con
-comentarios usando ‘#’. En otras palabras: comente su código.</li>
-<li>Debe usar R básico para la manipulación de datos</li>
-<li>Cada item tiene un valor de 5 puntos</li>
+comentarios usando ‘#’. En otras palabras: comente su código (2.5
+pts)</li>
+<li>Debe usar R básico para la manipulación de datos (5 pts)</li>
+<li>Cada ejercicio tiene un valor de 5 puntos</li>
 </ul>
 </div>
 <p> </p>
@@ -519,53 +509,63 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <span id="cb4-12"><a href="#cb4-12"></a>resultados</span></code></pre></div>
 <pre><code>##  [1] 39  1  2 12 14  9 12  8 32 36 21 12 22 27 29 19  8 12 26</code></pre>
 <p> </p>
-<ol style="list-style-type: decimal">
+<ol start="2" style="list-style-type: decimal">
 <li>Haga un bucle <code>for</code> que devuelva el número de familias
 para cada archivo</li>
 </ol>
 <p> </p>
-<p>3 Cree un cuadro de datos (data frame) que contenga tres columnas,
-una para el nombre del archivo, otra para el número de especies y otra
-para el número de familias</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Cree un cuadro de datos (data frame) que contenga tres columnas, una
+para el nombre del archivo, otra para el número de especies y otra para
+el número de familias</li>
+</ol>
 <p> </p>
-<p>4 Añada una columna al cuadro de datos creado en el ejercicio
-anterior indicando la fecha de creación del video (esta información se
-encuentra en la columna ‘Date’ de cada archivo de texto). Note que cada
-archivo contiene solamente una fecha. Debe usar un bucle
-<code>for</code> para extraer esta información de los archivos.</p>
+<ol start="4" style="list-style-type: decimal">
+<li>Añada una columna al cuadro de datos creado en el ejercicio anterior
+indicando la fecha de creación del video (esta información se encuentra
+en la columna ‘Date’ de cada archivo de texto). Note que cada archivo
+contiene solamente una fecha. Debe usar un bucle <code>for</code> para
+extraer esta información de los archivos.</li>
+</ol>
 <p> </p>
-<p>5 Añada una columna al cuadro de datos creado en el ejercicio 3 (y
+<ol start="5" style="list-style-type: decimal">
+<li>Añada una columna al cuadro de datos creado en el ejercicio 3 (y
 modificado en 4) indicando la profundidad a la que se grabó el video.
 Debe usar un bucle <code>for</code> para extraer esta información de los
-archivos.</p>
+archivos.</li>
+</ol>
 <p> </p>
 <p>Note que la columna de profundidad no es numérica. Puede usar el
 siguiente código para convertir profundidad a un vector numérico (se
 necesita para el siguiente punto):</p>
 <div class="sourceCode" id="cb6"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>n_filas_df<span class="sc">$</span>profundidad <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot; m&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="fu">gsub</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">,&quot;</span>, <span class="st">&quot;.&quot;</span>, n_filas_df<span class="sc">$</span>profundidad))</span></code></pre></div>
-<p>5 Calcule es la correlación entre el número de especies observadas y
-la profundidad (pista: <code>cor.test()</code>)</p>
+<ol start="6" style="list-style-type: decimal">
+<li>Calcule es la correlación entre el número de especies observadas y
+la profundidad (pista: <code>cor.test()</code>)</li>
+</ol>
 <p> </p>
-<p>6 Calcule la correlación entre el número de familias y la
-profundidad</p>
+<ol start="7" style="list-style-type: decimal">
+<li>Calcule la correlación entre el número de familias y la
+profundidad</li>
+</ol>
 <p> </p>
 </div>
 <p> </p>
 <hr />
 <p><font size="4">Información de la sesión</font></p>
-<pre><code>## R version 4.2.0 (2022-04-22)
+<pre><code>## R version 4.1.1 (2021-08-10)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
-## Running under: Ubuntu 22.04.1 LTS
+## Running under: Ubuntu 20.04.2 LTS
 ## 
 ## Matrix products: default
-## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0
-## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0
+## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0
+## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0
 ## 
 ## locale:
-##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
-##  [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=en_US.UTF-8    
-##  [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=en_US.UTF-8   
+##  [1] LC_CTYPE=es_ES.UTF-8       LC_NUMERIC=C              
+##  [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=es_ES.UTF-8    
+##  [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=es_ES.UTF-8   
 ##  [7] LC_PAPER=es_CR.UTF-8       LC_NAME=C                 
 ##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
 ## [11] LC_MEASUREMENT=es_CR.UTF-8 LC_IDENTIFICATION=C       
@@ -574,20 +574,20 @@ profundidad</p>
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] kableExtra_1.3.4    knitr_1.40          xaringanExtra_0.7.0
+## [1] kableExtra_1.3.4    knitr_1.39          xaringanExtra_0.7.0
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] highr_0.9         formatR_1.12      pillar_1.8.1      bslib_0.4.0      
-##  [5] compiler_4.2.0    jquerylib_0.1.4   tools_4.2.0       uuid_1.1-0       
-##  [9] digest_0.6.29     jsonlite_1.8.0    evaluate_0.16     lifecycle_1.0.2  
-## [13] tibble_3.1.8      viridisLite_0.4.1 pkgconfig_2.0.3   rlang_1.0.6      
-## [17] cli_3.4.1         rstudioapi_0.13   yaml_2.3.5        xfun_0.33        
-## [21] fastmap_1.1.0     stringr_1.4.1     httr_1.4.4        xml2_1.3.3       
-## [25] vctrs_0.4.1       sass_0.4.2        systemfonts_1.0.4 webshot_0.5.3    
+##  [1] highr_0.9         formatR_1.12      pillar_1.8.0      bslib_0.3.1      
+##  [5] compiler_4.1.1    jquerylib_0.1.4   tools_4.1.1       uuid_1.1-0       
+##  [9] digest_0.6.29     jsonlite_1.8.0    evaluate_0.15     lifecycle_1.0.1  
+## [13] tibble_3.1.8      viridisLite_0.4.0 pkgconfig_2.0.3   rlang_1.0.4      
+## [17] cli_3.3.0         rstudioapi_0.13   yaml_2.3.5        xfun_0.31        
+## [21] fastmap_1.1.0     stringr_1.4.0     httr_1.4.3        xml2_1.3.3       
+## [25] vctrs_0.4.1       sass_0.4.1        systemfonts_1.0.4 webshot_0.5.3    
 ## [29] svglite_2.1.0     glue_1.6.2        R6_2.5.1          fansi_1.0.3      
-## [33] rmarkdown_2.16    magrittr_2.0.3    scales_1.2.1      htmltools_0.5.3  
+## [33] rmarkdown_2.14    magrittr_2.0.3    scales_1.2.0      htmltools_0.5.3  
 ## [37] rvest_1.0.2       colorspace_2.0-3  utf8_1.2.2        stringi_1.7.8    
-## [41] munsell_0.5.0     cachem_1.0.6</code></pre>
+## [41] munsell_0.5.0</code></pre>
 
 
 

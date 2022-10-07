@@ -67,7 +67,7 @@ registerS3method("knit_print", "data.frame", tibble)
 
 <!-- skyblue box -->
 
-<div class="alert alert-info">
+<div class="alert alert-success">
 
 1. Cree un mapa interactivo con leaflet que muestre el Parque Nacional Corcovado, el Parque Nacional Piedras Blancas y la Reserva Forestal Golfo Dulce (*pista: pueden encontrar las coordenadas usando [google maps](https://www.google.com/maps)*). Para cada sitio añada un marcador usando la función de leaftlet `addAwesomeMarkers`. El mapa debe ser similar a este:
 
@@ -90,8 +90,6 @@ ll_map <- setView(map = ll_map, lat = 8.534785, lng = -83.552219, zoom = 10)
 leaflet::addAwesomeMarkers(map = ll_map, lat = c(8.534785, 8.737077, 8.699383), lng = c( -83.552219, -83.498093, -83.275528))
 
 ```
-&nbsp;
-
 &nbsp;
 
 2. Utilice el paquete [DT](https://rstudio.github.io/DT/) para generar un cuadro (tabla) de los datos `iris`. Debe instalar y cargar el paquete primero. La tabla debe verse igual a esta:
@@ -119,7 +117,7 @@ cor(iris$Petal.Length, iris$Petal.Width)
 
 &nbsp;
 
-3. Incruste el resultado de la correlación en una línea de texto (fuera de un bloque de código). Debe verse así (recuerde redondear):
+1. Incruste el resultado de la correlación en una línea de texto (fuera de un bloque de código). Debe verse así (recuerde redondear):
 
   - *El coeficiente de correlación de Pearson entre largo de pétalo y ancho de pétalo es de `r round(cor(iris$Petal.Length, iris$Petal.Width), 2)`*
 
