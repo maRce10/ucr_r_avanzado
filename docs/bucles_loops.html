@@ -1163,17 +1163,17 @@ y el usuario no tiene control sobre el insumo a la función. El argumento
 a realizar:</p>
 <div class="sourceCode" id="cb41"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="fu">replicate</span>(<span class="at">n =</span> <span class="dv">3</span>, <span class="at">expr =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>))</span></code></pre></div>
-<pre><code>##           [,1]      [,2]     [,3]
-##  [1,] -1.18221  0.157931  1.49247
-##  [2,]  0.82814 -0.346551  1.09470
-##  [3,]  1.02634 -0.653531 -0.34881
-##  [4,]  0.14264  0.453287  2.01354
-##  [5,] -1.43203  0.475892 -1.09580
-##  [6,] -1.47615 -0.971729 -0.92561
-##  [7,]  0.35724 -0.070202  0.23122
-##  [8,]  0.84222 -1.620541 -1.58410
-##  [9,]  1.07022 -0.163825 -0.99331
-## [10,] -0.42025  0.346438  3.13941</code></pre>
+<pre><code>##             [,1]      [,2]     [,3]
+##  [1,]  0.3960810  1.304705 -0.13721
+##  [2,]  0.7280854 -0.228386  0.59304
+##  [3,] -0.3185001  0.085326  0.81317
+##  [4,]  0.7128199  1.130490  0.46627
+##  [5,] -0.8452318  1.082271 -0.69380
+##  [6,]  0.2365002 -1.250074 -0.47064
+##  [7,] -0.7421848  0.497838  1.17715
+##  [8,]  0.6915820 -1.589035  0.33108
+##  [9,]  0.0026696  1.679758 -0.28807
+## [10,]  1.0905996  0.254568  0.40797</code></pre>
 <p> </p>
 <p>Note que los resultados son agrupados en una matrix. ‘expr’ también
 puede replicar código que no ha sido “empaquetado en una función”.</p>
@@ -1232,7 +1232,7 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <span id="cb43-21"><a href="#cb43-21"></a>}</span>
 <span id="cb43-22"><a href="#cb43-22"></a></span>
 <span id="cb43-23"><a href="#cb43-23"></a><span class="fu">head</span>(cc_vector)</span></code></pre></div>
-<pre><code>## [1] -0.37870 -0.39414 -0.46545 -0.32357  0.12805 -0.15478</code></pre>
+<pre><code>## [1] -0.11028  0.40124 -0.23773 -0.22411  0.29556  0.27989</code></pre>
 <p> </p>
 <p>Podemos graficarlo el resultado asi así:</p>
 <div class="sourceCode" id="cb45"><pre
@@ -1319,7 +1319,7 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <p> </p>
 <p>3.1 Haga un bucle <code>while</code> que se detenga si la correlación
 es superior a 0.8 o si el bucle ha estado ejecutándose durante más de 10
-segundos (consejo: use la función<code>difftime</code> y / o
+segundos (consejo: use la función<code>difftime</code> y/o
 <code>as.numeric</code>)</p>
 <p> </p>
 <p>3.1 Haga un bucle <code>repeat</code> que se detenga solo si la
