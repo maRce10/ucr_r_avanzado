@@ -78,9 +78,9 @@ pre.numberSource code
 
 &nbsp; 
 
-# Linear models as a unifying framework
+# Modelos lineales como marco unificador
 
-Traditionally, statistical models have been taught as disconnected tools with no clear relationship between them. Take a look at a classic biology stats book (Sokal & Rolhf):
+Tradicionalmente, los modelos estadísticos se han enseñado como herramientas desconectadas sin una relación clara entre ellas. Sólo hace falta darle un vistazo a un libro clásico de estadística para biólogos (Sokal & Rolhf):
 
 ```{r, out.width = "100%", echo = FALSE, fig.align= "center"}
 
@@ -89,130 +89,124 @@ knitr::include_graphics("./images/sokal_rohlf.png")
 ```
 &nbsp; 
 
-However, most of those common statistical models are just special cases of linear models. Hence, learning them as such can largely simplify things. This approach has several advantages: 
+Sin embargo, la mayoría de esos modelos estadísticos comunes no son más que casos especiales de modelos lineales. Por lo tanto, aprenderlos como tales puede simplificar mucho las cosas. Este enfoque tiene varias ventajas: 
 
-- First of all, **it all comes down to *y=a⋅x+b***, which largely simplify learning
+- En primer lugar, **todo se reduce a *y=a⋅x+b***, lo que simplifica en gran medida el aprendizaje
 
-- This also means that there is **no need to learn about parameters, assumptions, and result interpretation for every single special case**
+- Esto también significa que no hay **necesidad de aprender sobre los parámetros, las hipótesis y la interpretación de los resultados para cada caso especial**.
 
-- Linear models have been extended to **account for complex distributions and data structures** (e.g. mixed models, generalized linear models, zero-inflated models, etc) providing a **more flexible platform**. 
+- Los modelos lineales se han ampliado para **tener en cuenta distribuciones y estructuras de datos complejas** (por ejemplo, modelos mixtos, modelos lineales generalizados, modelos cero-inflados, etc.) proporcionando una **plataforma más flexible**. 
 
-- Linear models are **applied across statistical paradigms** (e.g. frequentist, bayesian)
+- Los modelos lineales se **aplican en todos los paradigmas estadísticos** (por ejemplo, frecuentista, bayesiano)
 
 &nbsp;
 
 <div class="alert alert-info">
 
-# Purpose
+# Objetivo del manual
 
 &nbsp;
+- Comprender la inferencia estadística a través de una única herramienta de modelaje (modelos lineales en sentido amplio)
 
-- Understand statistical inference through a single modelling tool (broad sense linear models)
-
-- Get familiar with building linear models
+- Familiarizarse con la construcción de modelos lineales
  
-- Extent linear models to different data structures
+- Extender los modelos lineales a diferentes estructuras de datos
 
 </div>
 
 &nbsp; 
 
-<div class="alert alert-warning">
-
-# Workshop overview
-
-- [How to simulate data](#how-to-simulate-data) 
-
-- [How to use simulated data to understand the behavior of statistical tools](#how-to-use-simulated-data-to-understand-the-behavior-of-statistical-tools)
-
-- [Linear regression basic structure (in R)](#linear-regression-in-r)
-
-- [Use simulated data to understand linear models](#use-simulated-data-to-understand-linear-models)
-
-- [Common statistical tests as special cases of linear regression](#common-statistical-tests-as-special-cases-of-linear-regression)
-
-- [Extending the linear models to more complex data structures](#extending-the-linear-models-to-more-complex-data-structures)
-
-- [Additional resources](#additional-resources)
-
-</div>
-
-&nbsp;
-
-
-
 --- 
 
-Please load the following packages:
-```{r, eval = FALSE}
+Paquetes a utilizar en este manual:
 
-library(ggplot2)
-library(viridis)
-library(lmerTest)
-library(sjPlot)
+```{r}
+
+# vector con paquetes
+ptqs <- c("ggplot2", "viridis", "lmerTest", "sjPlot")
+
+# bucle para instalar/cargar paquetes
+instalado <- sapply(ptqs, function(y) {
+  
+  ptq <- strsplit(y, "/")[[1]]
+  ptq <- ptq[length(ptq)]
+  
+  if (!ptq %in% installed.packages()[,"Package"])  {
+      if (grepl("/", y))  remotes::install_github(y, force = TRUE) else install.packages(y) 
+  }
+  
+  try(require(ptq, character.only = TRUE), silent = TRUE)
+})
+
 
 ```
+&nbsp; 
 
 ---
 
-# How to simulate data
+# Cómo simular datos
 
-## Generating random numbers in R
+## Generación de números aleatorios en R
 
 
-Statistics allow us to infer patterns in the data. We tend to use real data sets to teach stats. However, it might get circular to understand the inner working of an statistical tool by testing its ability to infer a pattern that we are not sure its found in the data (and have no idea on the mechanism producing that pattern). **Simulations allow us to create controlled scenarios in which we know for sure the patterns** present in the data and the underlying processes that generated them.
+La estadística nos permite inferir patrones en los datos. Solemos utilizar conjuntos de datos reales para enseñar estadística. Sin embargo, puede ser circular entender el funcionamiento interno de una herramienta estadística probando su capacidad para inferir un patrón que no estamos seguros de encontrar en los datos (y no tenemos idea del mecanismo que produjo ese patrón). **Las simulaciones nos permiten crear escenarios controlados en los que conocemos con seguridad los patrones** presentes en los datos y los procesos subyacentes que los han generado.
 
-R offers some basic functions for data simulation. The most used ones are the random number generating functions. The names of these functions all start with *r* (`r____()`). For instance `runif()`:
+R ofrece algunas funciones básicas para la simulación de datos. Las más utilizadas son las funciones generadoras de números aleatorios. Los nombres de estas funciones comienzan con *r* (`r____()`). Por ejemplo, `runif()`:
+
 ```{r, echo=FALSE}
+
 set.seed(7)
+
 ```
 
 
 ```{r}
 
+# simular variable uniforme
 unif_var <- runif(n = 100, min = 0, max = 10)
 
 ```
 &nbsp; 
 
-The output is a numeric vector of length 1 thousand (`n = 100`):
+El resultado es un vector numérico de longitud 100 (`n = 100`):
 
 ```{r}
 
+# imprimir variable
 unif_var
 
 ```
+&nbsp; 
 
-
-We can explore the output by plotting a histogram:
+Podemos explorar el resultado trazando un histograma:
 
 ```{r}
 
-# create histogram
+# crear histograma
 ggplot(data = data.frame(unif_var), mapping = aes(x = unif_var)) + geom_histogram() 
 
 ```
 &nbsp; 
 
-It shows a uniform distribution ranging from 0 to 10. 
+Muestra una distribución uniforme que va de 0 a 10. 
 
-We can also simulate random numbers coming from a normal distribution using `rnorm()`:
+También podemos simular números aleatorios procedentes de una distribución normal utilizando `rnorm()`:
 
 ```{r}
 
-# create random variable
+# crear una variable normal
 norm_var <- rnorm(n = 1000, mean = 2, sd = 1)
 
-# plot histogram
+# graficar histograma
 ggplot(data = data.frame(norm_var), mapping = aes(x = norm_var)) + geom_histogram() 
 
 ```
 
 &nbsp; 
 
-Note that random number generating functions all have the argument 'n', which sets the length of the output vector (i.e. number of random numbers), plus some additional arguments related to specific parameters of the distribution.
+Tenga en cuenta que todas las funciones generadoras de números aleatorios tienen el argumento 'n', que determina la longitud del vector generado (es decir, el número de números aleatorios), además de algunos argumentos adicionales relacionados con parámetros específicos de la distribución.
 
-Continuous variables (i.e. numeric vectors) can be converted to discrete variables (i.e. integer numbers) simply by rounding them:
+Las variables continuas (es decir, los vectores numéricos) pueden convertirse en variables discretas (es decir, números enteros) simplemente redondeándolas:
 
 ```{r}
 
@@ -227,21 +221,21 @@ round(x = v1, digits = 0)
 
 <div class="alert alert-info">
 
-<font size="5">Exercise</font> 
+<font size="5">Ejercicio 1</font> 
 
-- What do the functions `rbinom()` and `rexp()` do? (tip: run `?rexp`)
+- ¿Qué hacen las funciones `rbinom()` y `rexp()`?
 
-- Run them and make histograms of their output
+- Ejecutela y haga histogramas de sus resultados
  
-- What do the arguments 'mean' and 'sd' in `rnorm()` do? Play with different values and check the histogram to get a sense of their effect in the simulation
+- ¿Qué hacen los argumentos 'mean' y  'sd' en `rnorm()`? Juege con diferentes valores y comprueba el histograma para hacerse una idea de su efecto en la simulación
 
 </div>
 
 &nbsp; 
 
-## Generating categorical variables
+## Generación de variables categóricas
 
-The easiest way to generate categorical variables is to use the 'letters' (or 'LETTERS') example vector to assign category levels. We can do this using the function `rep()`. For instance, the following code creates a categorical (character) vector with two levels, each one with 4 observations:
+La forma más sencilla de generar variables categóricas es utilizar el vector de ejemplo `letters' (o `LETTERS') para asignar niveles de categoría. Podemos hacerlo utilizando la función `rep()`. Por ejemplo, el siguiente código crea un vector categórico (caracteres) con dos niveles, cada uno con 4 observaciones:
 
 ```{r}
 
@@ -250,7 +244,7 @@ rep(letters[1:2], each = 4)
 ```
 &nbsp; 
 
-We can also replicate this pattern using the argument 'times'. This code replicates the previous vector 2 times:
+También podemos replicar este patrón utilizando el argumento 'times'. Este código replica el vector anterior 2 veces:
 
 ```{r}
 
@@ -259,10 +253,10 @@ rep(letters[1:2], each = 4, times = 2)
 ```
 &nbsp; 
 
-Another option is to simulate a variable from a binomial distribution and then convert it into a factor:
+Otra opción es simular una variable a partir de una distribución binomial y luego convertirla en un factor:
 
 ```{r}
-# run rbinom
+# correr rbinom
 binom_var <- rbinom(n = 50, size = 1, prob = 0.5)
 
 binom_var
@@ -270,15 +264,16 @@ binom_var
 
 
 ```{r}
+# convertir a factor
 categ_var <- factor(binom_var, labels = c("a", "b"))
 
 categ_var
 ```
 &nbsp; 
 
-## Random sampling
+## Muestreo aleatorio
 
-The other important R tool for playing with simulated data is `sample()`. This function allows you to take samples of specific sizes from vectors. For instance, take the example vector `letters`:
+La otra herramienta importante de R para jugar con datos simulados es `sample()`. Esta función permite tomar muestras de tamaños específicos de vectores. Por ejemplo, tomemos el ejemplo del vector 'letters':
 
 ```{r}
 
@@ -287,16 +282,17 @@ letters
 ```
 &nbsp; 
 
-We can take a sample of this vector like is:
+Podemos tomar una muestra de este vector como es:
 
 ```{r}
 
+# tomar muestra
 sample(x = letters, size = 10)
 
 ```
 &nbsp; 
 
-The argument 'size'  allow us to determine the size of the sample. Note that we get an error if the size is larger than the vector itself:
+El argumento 'size' nos permite determinar el tamaño de la muestra. Tenga en cuenta que obtendremos un error si el tamaño es mayor que el propio vector:
 
 ```{r, error=TRUE}
 
@@ -305,7 +301,7 @@ sample(x = letters, size = 30)
 ```
 &nbsp; 
 
-This can only be done when sampling with replacement. Sampling with replacement can be applied by setting the argument `replace = TRUE`:
+Esto sólo puede hacerse cuando el muestreo es con reemplazo (replacement). El muestreo con reemplazo puede aplicarse estableciendo el argumento `replace = TRUE`:
 
 ```{r}
 
@@ -314,40 +310,44 @@ sample(x = letters, size = 30, replace = TRUE)
 ```
 &nbsp; 
 
-## Iterating a process
+## Iterar un proceso
 
-Often simulations most be repeated several times to rule out spurious results due to chance or just to try different parameters. The functions for simulating data mentioned above can be run several times (e.g. iterated) using the function `replicate()`:
+A menudo, las simulaciones deben repetirse varias veces para descartar resultados espurios debidos al azar o simplemente para probar diferentes parámetros. Las funciones de simulación de datos mencionadas anteriormente pueden ejecutarse varias veces (por ejemplo, iteradas) utilizando la función `replicate()`:
 
 ```{r}
 
+# replicar
 repl_rnorm <- replicate(n = 3, expr = rnorm(2), simplify = FALSE)
 
+# ver clase
 class(repl_rnorm)
 
+# imprimir
 repl_rnorm
 ```
 &nbsp; 
 
-## Making simulations reproducible
+## Hacer que las simulaciones sean reproducibles
 
-The last trick we need to run simulations in R is the ability to reproduce a simulation (i.e. get the exact same simulated data and results). This can be useful for allowing other researchers to run our analyses in the exact same way. This can be easily done with the function `set.seed()`. Try running the following code. You should get the same output:
+El último truco que necesitamos para ejecutar simulaciones en R es la capacidad de reproducir una simulación (es decir, obtener exactamente los mismos datos y resultados simulados). Esto puede ser útil para que otros investigadores puedan ejecutar nuestros análisis exactamente de la misma manera. Esto puede hacerse fácilmente con la función `set.seed()`. Pruebe a ejecutar el siguiente código. Debería obtener la misma salida:
 
 ```{r}
 
+# definir semilla
 set.seed(10)
 
+# crear variable uniforme
 runif(n = 2)
 
 ```
 
 ---
 
-
-# Creating data sets
+# Crear juegos de datos
     
-## Datasets with numeric and categorical data
+## Juegos de datos con variables numéricas y categóricas
 
-Now that we know how to simulate continuous and categorical variable. We can put them together to create simulated data sets. This can be done using the function `data.frame()`:
+Ahora que sabemos cómo simular variables continuas y categóricas. Podemos juntarlas para crear conjuntos de datos simulados. Esto se puede hacer utilizando la función `data.frame()`:
 
 ```{r}
 
@@ -365,24 +365,22 @@ df
 
 ```
 
-Of course, we could add more variables to this data frame:
+Por supuesto, podríamos añadir más variables a este marco de datos:
 
 ```{r}
 
-
-# create categorical variable
+# crear variable categorica
 group <- rep(letters[1:2], each = 3)
 individual <- rep(LETTERS[1:6])
 
-# create continous data
+# crear variables continuas
 size <- rnorm(n = 6, mean = 5, sd = 1)
 weight <- rnorm(n = 6, mean = 100, sd = 10)
 
-
-# put them together in a data frame
+# poner todo en un data frame
 df <- data.frame(group, individual, size, weight)
 
-# print
+# imprimir
 df
 
 ```
@@ -391,19 +389,20 @@ And that's a simulated data set in its most basic form. That looks a lot like th
 
 ---
 
-# How to use simulated data to understand the behavior of statistical tools
+# Cómo utilizar datos simulados para entender el comportamiento de las herramientas estadísticas
 
-## A proof of concept: *the Central Limit Theorem*
+## Prueba de concepto: *el Teorema Central del Límite*
 
-The [Central Limit Theorem](https://en.wikipedia.org/wiki/Central_limit_theorem) states that, if we take repeated random samples of a population, the means of those samples will conform to a normal distribution, even if the population is not normally distributed. In addition, the resulting normal distribution must have a mean close to the population's mean. The theorem is a key concept for inferential statistics as it implies that statistical methods that work for normal distributions can be applicable to many problems involving other types of distributions. Nonetheless, the point here is only to showcase how simulations can be used to understand the behavior statistical methods.  
+El [Teorema del Límite Central](https://en.wikipedia.org/wiki/Central_limit_theorem) afirma que, si tomamos repetidas muestras aleatorias de una población, las medias de esas muestras se ajustarán a una distribución normal, aunque la población no esté distribuida normalmente. Además, la distribución normal resultante debe tener una media cercana a la media de la población. El teorema es un concepto clave para la estadística inferencial, ya que implica que los métodos estadísticos que funcionan para las distribuciones normales pueden ser aplicables a muchos problemas que implican otros tipos de distribuciones. No obstante, el objetivo aquí es sólo mostrar cómo se pueden utilizar las simulaciones para entender el comportamiento de los métodos estadísticos.  
 
-To check if those basic claims about the Central Limit Theorem hold true we can use simulated data in R. Let's simulate a 1000 observation population with a uniform distribution: 
+Para comprobar si esas afirmaciones básicas sobre el Teorema del Límite Central son ciertas, podemos utilizar datos simulados en R. Vamos a simular una población de 1000 observaciones con una distribución uniforme: 
 
 ```{r, eval=FALSE}
-# simulate uniform population
+
+# simular popublacion uniforme
 unif_pop <- runif(1000, min = 0, max = 10)
 
-# check distribution/ plot histogram
+# ver histograma
 ggplot(data = data.frame(unif_pop), mapping = aes(x = unif_pop)) + geom_histogram() 
 
 ```
@@ -422,7 +421,7 @@ ggplot(data = data.frame(unif_pop), mapping = aes(x = unif_pop)) + geom_histogra
 
 &nbsp; 
 
-We can take random samples using `sample()` like this:
+Podemos tomar muestras aleatorias usando `sample()` así:
 
 ```{r}
 
@@ -431,20 +430,21 @@ sample(x = unif_pop, size = 30)
 ```
 &nbsp; 
  
-This process can be replicated several times with `replicate()`: 
+Este proceso puede ser replicado varias veces con `replicate()`:
 
 ```{r}
 
+# replicar
 samples <- replicate(n = 100, expr = mean(sample(x = unif_pop, size = 30)))
 
 ```
 &nbsp; 
 
-The code above takes 100 samples with 30 values each. We can now check the distribution of the samples: 
+El código anterior toma 100 muestras con 30 valores cada una. Ahora podemos comprobar la distribución de las muestras: 
 
 ```{r, eval=FALSE}
 
-# check distribution/ plot histogram
+# ver distribucion/ histograma
 ggplot(data = data.frame(samples), mapping = aes(x = samples)) + geom_histogram() 
 
 
@@ -458,7 +458,7 @@ ggplot(data = data.frame(samples), mapping = aes(x = samples)) + geom_histogram(
 ```
 &nbsp; 
 
-... as well as the mean:
+... asi como el promedio:
 
 ```{r}
 
@@ -467,7 +467,7 @@ mean(samples)
 ```
 &nbsp; 
 
-As expected, the samples follows a normal distribution with a mean close to the mean of the population, which is:
+Como era de esperar, las muestras siguen una distribución normal con una media cercana a la media de la población, que es:
 
 ```{r}
 
@@ -476,21 +476,21 @@ mean(unif_pop)
 ```
 &nbsp;
 
-Let's try with a more complex distribution. For instance,  a bimodal distribution:
+Probemos con una distribución más compleja. Por ejemplo, una distribución bimodal:
 
 ```{r, eval=FALSE}
 
-# set seed
+# usar semilla
 set.seed(123)
 
-# simulate variables
+# simular variables
 norm1 <- rnorm(n = 1000, mean = 10, sd = 3)
 norm2 <- rnorm(n = 1000, mean = 20, sd = 3)
 
-# add them in a single one
+# juntar en una sola variable
 bimod_pop <- c(norm1, norm2)
 
-# check distribution/ plot histogram
+# ver histograma
 ggplot(data = data.frame(bimod_pop), mapping = aes(x = bimod_pop)) + geom_histogram() 
 
 ```
@@ -511,9 +511,10 @@ ggplot(data = data.frame(bimod_pop), mapping = aes(x = bimod_pop)) + geom_histog
 
 ```{r, eval=FALSE}
 
+# replicar muestreo
 samples <- replicate(200, mean(sample(bimod_pop, 10)))
 
-# check distribution/ plot histogram
+# ver histograma
 ggplot(data = data.frame(samples), mapping = aes(x = samples)) + geom_histogram() 
 
 ```
@@ -529,6 +530,7 @@ ggplot(data = data.frame(samples), mapping = aes(x = samples)) + geom_histogram(
 
 
 ```{r}
+# ver promedios
 mean(samples)
 
 mean(bimod_pop)
@@ -537,18 +539,18 @@ mean(bimod_pop)
 
 <div class="alert alert-info">
 
-<font size="5">Exercise</font> 
+<font size="5">Ejercicio 2</font> 
 
 &nbsp;
 
-- Try exploring the Central Limit Theorem as above but this time using:
+- Intenta explorar el Teorema del Límite Central como en el caso anterior, pero esta vez utilizando:
     
-    1. An exponential distribution (`rexp()`) 
-    1. A binomial distribution (`rbinom()`) 
+    1. Una distribución exponencial (`rexp()`) 
+    1. Una distribución binomial (`rbinom()`) 
 
 &nbsp;
 
-- For each distribution: plot a histogram and compare the means of the population and the samples
+- Para cada distribución: grafique un histograma y compare los promedios de la población y de las muestras
 
 </div>
 
@@ -558,25 +560,25 @@ mean(bimod_pop)
 
 <div class="alert alert-warning">
 
-<font size = 6><center>Simple linear regression</center></font>
+<font size = 6><center>Regresión lineal simple</center></font>
 
-Linear regressions are based on the linear equation *a = mx + b* we learned in high school. The formal representation looks like this:
+Las regresiones lineales se basan en la ecuación lineal *a = mx + b* que aprendimos en el colegio. La representación formal tiene este aspecto:
 
 <center><font size = 6>$\hat{Y} \sim \beta_{o} + \beta_{1} * x_{1}$</font></center>
 
 &nbsp; 
 
-- $\hat{Y}$: response variable
+- $\hat{Y}$: variable respuesta
 
-- $\beta_{o}$: intercept (y value)
+- $\beta_{o}$: intercepto
 
-- $\beta_{1}$: estimate of the magnitude of the effect of $x_{1}$ on $\hat{Y}$ (a.k.a. effect size, coefficient or simply the 'estimate')
+- $\beta_{1}$: estimado de la magnitud del efecto de $x_{1}$ en $\hat{Y}$ (también conocido como tamaño del efecto, coeficiente o simplemente "estimado")
 
-- $x_{1}$: predictor variable
+- $x_{1}$: variable predictora
 
 &nbsp; 
 
-The most common goal of a linear regression is estimating the $\beta_{*}$ values. This is achieved by finding the best fitting straight line representing the association between a predictor and the response:
+El objetivo más común de una regresión lineal es la estimación de los valores de ${beta_{*}$. Esto se consigue encontrando la línea recta que mejor se ajusta y que representa la asociación entre un predictor y la respuesta:
 
 ```{r, out.width = "100%", echo = FALSE, fig.align= "center"}
 
@@ -585,11 +587,12 @@ knitr::include_graphics("./images/regression.jpg")
 ```
 &nbsp; 
 
-Those $\beta_{*}$s are the estimated effect size of the correspondent predictor (e.g. $\beta_{1}$ is the effect size $x_{1}$). Their value represent the mean change in $\hat{Y}$ (in $\hat{Y}$ units) for a unit of change in $\beta_{*}$.  Hence the null hypothesis is that those $\beta_{*}$s are not different from 0:
+Estos $\beta_{*}$ son el tamaño del efecto estimado del predictor correspondiente (por ejemplo, $\beta_{1}$ es el tamaño del efecto $x_{1}$). Su valor representa el cambio medio en $\hat{Y}$ (en unidades $\hat{Y}$) para una unidad de cambio en $\beta_{*}$. Por lo tanto, la hipótesis nula es que esos $\beta_{*}$ no son diferentes de 0:
+
 
 <center><font size = 6>$\qquad \mathcal{H}_0: \hat{Y} = \beta_0 + 0 * x_{1}$</font></center>
 
-which is equivalent to this:
+lo que equivale a esto:
 
 <center><font size = 6>$\qquad \mathcal{H}_0: \hat{Y} = \beta_0$</font></center>
 
@@ -638,11 +641,11 @@ knitr::include_graphics("./images/model_betas.png")
 
 --- 
 
-# Linear regression in R
+# Regresión lineal en R
 
-To take full advantage of linear models we need to feel comfortable with them. We will do this by exploring R's linear regression function `lm()`. In R most linear models and their extensions share common data input and output formats which makes easy to apply them once we understand their basics. 
+Para sacar el máximo provecho de los modelos lineales necesitamos sentirnos cómodos con ellos. Empezaremos explorando la función de regresión lineal de R `lm()`. En R la mayoría de los modelos lineales y sus extensiones comparten formatos comunes de entrada de datos y resultados, lo que facilita su aplicación una vez que entendemos sus fundamentos. 
 
-We will use the data set 'trees' that comes by default with R. 'trees' provides measurements of the **diameter** (labeled as 'Girth'), **height** and **volume** of 31 felled black cherry trees: 
+Utilizaremos el conjunto de datos 'trees' que viene por defecto con R. 'trees' proporciona medidas del **diámetro** (etiquetado como 'Girth'), **altura** y **volumen** de 31 cerezos talados: 
 
 ```{r}
 
@@ -651,7 +654,7 @@ head(trees)
 ```
 &nbsp;
 
-The basic R function to build a linear model is `lm()`. Let's look at the basic components of a regression model using `lm()`:
+La función básica de R para construir un modelo lineal es `lm()`. Veamos los componentes básicos de un modelo de regresión utilizando `lm()`:
 
 
 ```{r, out.width = "100%", echo = FALSE, fig.align= "center"}
@@ -661,7 +664,7 @@ knitr::include_graphics("./images/lm.png")
 ```
 &nbsp; 
 
-We can fit this model to look at the output:
+Podemos ajustar este modelo para ver el resultado:
 ```{r}
 
 reg_mod <- lm(formula = Height ~ Girth, data = trees)
@@ -671,18 +674,18 @@ summary(reg_mod)
 ```
 &nbsp; 
 
-This is what the elements of the output mean:
+Esto es lo que significan los elementos de la salida:
 
-- **Call**: the function and parameters were used to create the model
+- **Llamada** (call): la función y los parámetros que se utilizaron para crear el modelo
 
-- **Residuals**: distribution of the residuals. Residuals are the difference between what the model predicted and the actual value of y. This is a graphic representation of the residuals:
+- **Residuales** (residuals): distribución de los residuales. Los residuales son la diferencia entre lo que predijo el modelo y el valor real de *y*. Esta es una representación gráfica de los residuales:
 
 ```{r, echo = FALSE}
 
-# add predicted values for plotting
+# añadir valores predichos
 trees$predicted <- reg_mod$fitted.values
 
-# plot
+# graficar
 ggplot(trees, aes(x = Girth, y = Height)) + 
   geom_smooth(method = "lm", se = FALSE) +  
   geom_segment(aes(xend = Girth, yend = predicted), alpha = .2) +
@@ -691,27 +694,27 @@ ggplot(trees, aes(x = Girth, y = Height)) +
 ```
 &nbsp; 
 
-- **Coefficients**: this one contains the effect sizes ('Estimates'), a measure of their uncertainty ('Std. Error'), the associated statistic ('t value') and p value ('Pr(>|t|)'). Estimates are given as the mean change in y for every increase in 1 unit in x. So for this example is 1.0544 $in / in$. Despite the fact that the units will cancel out (`1.0544 $in / in$ = 1.0544) keeping them in mind is still biologically meaningful. They mean that, in average, and 1 inch increase in girth you will expect an increase of 1.0544 inches in height. 
+- **Coeficientes**: contiene los tamaños de efecto ('Estimates'), una medida de su incertidumbre ('Standar error'), la estadística asociada ('t value') y el valor p ('Pr(>|t|)'). Los tamaño de efecto o estimados se dan como el cambio promedio en *y* por cada aumento de 1 unidad en *x*. Para este ejemplo el estimado es de 1,0544 $in / in$. A pesar de que las unidades se anulan (`1,0544 $in / in$ = 1,0544) tenerlas en cuenta sigue siendo biológicamente significativo. Significan que, en promedio, y un aumento de 1 pulgada en la circunferencia que se espera un aumento de 1,0544 pulgadas en la altura. 
 
-- **Residual standard error**: self-explanatory. The standard error of the residuals
+- **Error estándar de los residuales**: se explica por sí mismo. El error estándar de los residuales
 
-- **Multiple R-squared**: the coefficient of determination, this is intended as a measurement of how well your model fits to the data
+- **R-cuadrado múltiple**: el coeficiente de determinación, que pretende ser una medida de lo bien que su modelo se ajusta a los datos
 
-- **Adjusted R-Squared**: similar to the 'Multiple R-squared' but penalized for the number of parameters
+- **R-cuadrado ajustado**: similar al 'R-cuadrado múltiple' pero penalizado por el número de parámetros
 
-- **F-statistic**: statistic for a global test that checks if at least one of your coefficients are non-zero
+- **Estadístico F**: estadístico para una prueba global que comprueba si al menos uno de sus coeficientes es distinto de cero
 
-- **p-value**: probability for a global test that checks if at least one of your coefficients are non-zero
+- **Valor de p**: probabilidad de una prueba global que comprueba si al menos uno de sus coeficientes es distinto de cero
 
 &nbsp; 
 
-We will use `lm()` to showcase the flexibility of regression models. Regression components will be added gradually so we can take time of understand each of them as well as the correspondent changes in the regression output.
+Utilizaremos `lm()` para mostrar la flexibilidad de los modelos de regresión. Los componentes de regresión se añadirán gradualmente para que podamos tomarnos el tiempo de entender cada uno de ellos así como los correspondientes cambios en la salida de la regresión.
 
 ---
 
-## Response (intercept)-only model
+## Modelo solo con intercepto
 
-Let's first create a response numeric variable:
+Primero vamos a crear una variable numérica de respuesta:
 
 ```{r}
 
@@ -729,7 +732,7 @@ y_data <- data.frame(y)
 ```
 &nbsp;
 
-This single variable can be input in an **intercept-only regression model**. To do this we need to supply the model formula and the data to `lm()`:
+Esta única variable puede introducirse en un **modelo de regresión sólo con itercepto**. Para ello, debemos suministrar la fórmula del modelo y los datos a `lm()`:
 
 ```{r}
 
@@ -739,13 +742,13 @@ y_mod <- lm(formula = y ~ 1, data = y_data)
 ```
 &nbsp;
 
-Which is equivalent to:
+Lo que equivale a:
 
 <center><font size = 6>$\hat{Y} \sim \beta_{o}$</font></center>
 
 &nbsp; 
 
-We can get the default summary of the model results by running `summary()` on the output object 'y_mod':
+Podemos obtener el resumen por defecto de los resultados del modelo ejecutando `summary()` en el objeto de salida 'y_mod':
 
 ```{r}
 
@@ -754,7 +757,7 @@ summary(y_mod)
 ```
 &nbsp; 
 
-It can be quite informative to plot the effect sizes (although in this case we just have one):
+Puede ser bastante informativo graficar los tamaños de efecto (aunque en este caso sólo tenemos uno):
 ```{r}
 
 ci_df <- data.frame(param = names(y_mod$coefficients), 
@@ -763,7 +766,7 @@ ci_df <- data.frame(param = names(y_mod$coefficients),
 ggplot(ci_df, aes(x=param, y=est)) + 
   geom_hline(yintercept = 0, color="red", lty = 2) +
   geom_pointrange(aes(ymin = X2.5.., ymax = X97.5..)) + 
-  labs(x = "Parameter", y = "Effect size") + 
+  labs(x = "Parámetro", y = "Tamaño de efecto") + 
   coord_flip()
 
 ```
@@ -773,11 +776,11 @@ ggplot(ci_df, aes(x=param, y=est)) +
 
 &nbsp; 
 
-<center><font size="5"><b>Model interpretation</b></font></center>
+<center><font size="5"><b>Interpretación de los modelos</b></font></center>
 
 &nbsp; 
 
-For assessing the significance of the association we focus on the coefficients table:
+Para evaluar la importancia de la asociación nos centramos en la tabla de coeficientes:
 
 ```{r, echo= FALSE}
 
@@ -786,11 +789,11 @@ summ_y_mod <- summary(y_mod)
 summ_y_mod$coefficients
 ```
 
-- In this example there are no predictors in the model so we only got an estimate for the intercept ($\beta_0$)
+- En este ejemplo no hay predictores en el modelo, por lo que sólo tenemos una estimación para el intercepto ($\beta_0$)
 
-- The model tell us that the intercept is estimated at `r summ_y_mod$coefficients[1, 1]` and that this value is not significantly different from 0 (p-value = `r summ_y_mod$coefficients[1, 4]`)
+- El modelo nos dice que el intercepto se estima en `r summ_y_mod$coefficients[1, 1]` y que este valor no es significativamente diferente de 0 (valor p = `r summ_y_mod$coefficients[1, 4]`)
 
-- In this case the intercept is simply the mean of the response variable
+- En este caso el intercepto es simplemente la media de la variable de respuesta
 
 ```{r}
 
@@ -799,7 +802,7 @@ mean(y_data$y)
 ```
 &nbsp; 
 
-- We seldom have predictions about the intercept so we tend to ignore this estimate.
+- Rara vez tenemos predicciones sobre el intercepto, por lo que tendemos a ignorar esta estimación.
 
 </div>
 
@@ -807,13 +810,13 @@ mean(y_data$y)
 
 <div class="alert alert-info">
 
-<font size="5">Exercise</font> 
+<font size="5">Ejercicio 3</font> 
 
 &nbsp;
 
-- Change the `mean` argument in the `rnorm()` function call ([line 105](#cb53-8)) to a value other than 0 and look at how things change in the coefficients table 
+- Cambie el argumento 'mean' en la llamada de la función "rnorm()` ([línea 105](#cb53-8)) por un valor distinto de 0 y observe cómo cambian los valores en la tabla de coeficientes 
 
-- Change the `sd` argument in the `rnorm()` function call ([line 105](#cb53-8)) to a higher value and look at how things change in the coefficients table 
+- Cambia el argumento `sd` en la llamada a la función `rnorm()` ([línea 105](#cb53-8)) por un valor más alto y observe cómo cambian los valores en la tabla de coeficientes 
 
 </div>
 
@@ -821,9 +824,9 @@ mean(y_data$y)
 
 ---
 
-## Adding a non-associated predictor
+## Añadir un predictor no asociado
 
-We can create 2 unrelated numeric variables like this:
+Podemos crear 2 variables numéricas no relacionadas así:
 
 ```{r}
 
@@ -843,7 +846,7 @@ xy_data <- data.frame(x1, y)
 ```
 &nbsp;
 
-These two variables can be input in a regression model to evaluate the association between them:
+Estas dos variables pueden introducirse en un modelo de regresión para evaluar la asociación entre ellas:
 
 ```{r}
 
@@ -859,13 +862,13 @@ ggplot(xy_data, aes(x = x1, y = y)) +
 ```
 &nbsp;
 
-Which is equivalent to:
+Que es equivalente a esto:
 
 <center><font size = 6>$\hat{Y} \sim \beta_{o} + \beta_{1} * x_{1}$</font></center>
 
 &nbsp; 
 
-Let's print the summary for this model:
+Imprimimamos el resumen de este modelo:
 
 ```{r}
 
@@ -874,7 +877,7 @@ summary(xy_mod)
 ```
 &nbsp; 
 
-... and plot the effect sizes:
+... y graficar los tamaños de efecto:
 ```{r}
 
 ci_df <- data.frame(param = names(xy_mod$coefficients), 
@@ -883,13 +886,13 @@ ci_df <- data.frame(param = names(xy_mod$coefficients),
 ggplot(ci_df, aes(x=param, y=est)) + 
   geom_hline(yintercept = 0, color="red", lty = 2) +
   geom_pointrange(aes(ymin = X2.5.., ymax = X97.5..)) + 
-  labs(x = "Parameter", y = "Effect size") + 
+  labs(x = "Parámetro", y = "Tamaño de efecto") + 
   coord_flip()
 
 ```
 &nbsp;
 
-We should 'diagnose' the adequacy of the model by inspecting more closely the distribution of residuals.The function `plot_model()` from the package 'sjPlot' does a good job for creating diagnostic plots for linear models:
+Deberíamos "diagnosticar" la idoneidad del modelo inspeccionando más de cerca la distribución de los residuales. La función `plot_model()` del paquete `sjPlot` hace un buen trabajo para crear gráficos de diagnóstico para modelos lineales:
 
 ```{r, out.width= "80%", fig.height=4}
 
@@ -902,11 +905,11 @@ plot_model(xy_mod, type = "diag")
 
 &nbsp; 
 
-<center><font size="5"><b>Model interpretation</b></font></center>
+<center><font size="5"><b>Interpretación de los modelos</b></font></center>
 
 &nbsp; 
 
-Coefficients table:
+Cuadro con coeficientes:
 
 ```{r, echo= FALSE}
 
@@ -916,9 +919,9 @@ summ_xy_mod$coefficients
 ```
 &nbsp; 
 
-- In this example we added one predictor to the model so we got an additional estimate (and extra row, 'x1')
+  - En este ejemplo hemos añadido un predictor al modelo, por lo que hemos obtenido una estimado adicional (y una fila extra, 'x1')
 
-- The model tell us that the estimate of 'x1' is `r summ_xy_mod$coefficients[2, 1]` and that it is not significantly different from 0 (p-value = `r summ_xy_mod$coefficients[2, 4]`)
+- El modelo nos dice que la estimación de 'x1' es `r summ_xy_mod$coefficients[2, 1]` y que no es significativamente diferente de 0 (valor de p = `r summ_xy_mod$coefficients[2, 4]`)
 
 </div>
 
@@ -990,7 +993,7 @@ ci_df <- data.frame(param = names(xy_mod2$coefficients),
 ggplot(ci_df, aes(x=param, y=est)) + 
   geom_hline(yintercept = 0, color="red", lty = 2) +
   geom_pointrange(aes(ymin = X2.5.., ymax = X97.5..)) + 
-  labs(x = "Parameter", y = "Effect size") + 
+  labs(x = "Parámetro", y = "Tamaño de efecto") + 
   coord_flip()
 
 ```
@@ -1034,7 +1037,7 @@ summ_xy_mod2$coefficients
 
 <div class="alert alert-info">
 
-<font size="5">Exercise</font> 
+<font size="5">Ejercicio</font> 
 
 &nbsp;
 
@@ -1104,7 +1107,7 @@ ci_df <- data.frame(param = names(xy_mod_multp$coefficients),
 ggplot(ci_df, aes(x=param, y=est)) + 
   geom_hline(yintercept = 0, color="red", lty = 2) +
   geom_pointrange(aes(ymin = X2.5.., ymax = X97.5..)) + 
-  labs(x = "Parameter", y = "Effect size") + 
+  labs(x = "Parámetro", y = "Tamaño de efecto") + 
   coord_flip()
 
 ```
@@ -1151,7 +1154,7 @@ summ_xy_mod_multp$coefficients
 
 <div class="alert alert-info">
 
-<font size="5">Exercise</font> 
+<font size="5">Ejercicio</font> 
 
 &nbsp;
 
@@ -1289,7 +1292,7 @@ ci_df <- data.frame(param = names(xy_mod_cat$coefficients),
 ggplot(ci_df, aes(x=param, y=est)) + 
   geom_hline(yintercept = 0, color="red", lty = 2) +
   geom_pointrange(aes(ymin = X2.5.., ymax = X97.5..)) + 
-  labs(x = "Parameter", y = "Effect size") + 
+  labs(x = "Parámetro", y = "Tamaño de efecto") + 
   coord_flip()
 
 ```
@@ -1361,7 +1364,7 @@ mean(xy_data_cat$y[xy_data_cat$x1 == "a"])
 
 <div class="alert alert-info">
 
-<font size="5">Exercise</font> 
+<font size="5">Ejercicio</font> 
 
 &nbsp;
 
@@ -1523,7 +1526,7 @@ ci_df <- data.frame(param = names(xy_mod_intr$coefficients),
 ggplot(ci_df, aes(x=param, y=est)) + 
   geom_hline(yintercept = 0, color="red", lty = 2) +
   geom_pointrange(aes(ymin = X2.5.., ymax = X97.5..)) + 
-  labs(x = "Parameter", y = "Effect size") + 
+  labs(x = "Parámetro", y = "Tamaño de efecto") + 
   coord_flip()
 
 ```
@@ -1575,7 +1578,7 @@ xy_summ_intr$coefficients
 
 <div class="alert alert-info">
 
-<font size="5">Exercise</font> 
+<font size="5">Ejercicio</font> 
 
 &nbsp;
 
@@ -1787,7 +1790,7 @@ summ_glm_pois$coefficients
 
 <div class="alert alert-info">
 
-<font size="5">Exercise</font> 
+<font size="5">Ejercicio</font> 
 
 &nbsp;
 

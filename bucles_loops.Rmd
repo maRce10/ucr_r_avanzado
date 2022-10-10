@@ -226,7 +226,7 @@ for(i in vctr) {# inicio del bucle
 ```
 &nbsp;
 
-En este caso vemos como el bucle toma una pausa entre cada iteración y luego hace el calculo.
+En este caso vemos como el bucle toma una pausa entre cada iteración y luego hace el cálculo (cuando corre el código en su computadora).
 
 Si deseamos guardar el resultado de las operaciones debemos añadirlo a un vector vacío. Para hacer esto hay 2 opciones:
 
