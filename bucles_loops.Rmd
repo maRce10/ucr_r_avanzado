@@ -485,18 +485,18 @@ knitr::include_graphics("./images/xapply_esp.png")
 
 `lapply` toma un vector (atómico o de lista), aplica una función a cada elemento y devuelve una lista:
 
-```{r, eval = FALSE}
+```{r, eval = TRUE}
 
-lapply(X = lista_datos, FUN = nrow)
+lapply(X = c(4, 9, 16), FUN = sqrt)
 
 ```
 &nbsp;
 
 `sapply` también toma un vector (atómico o de lista) y aplica la función a cada elemento, sin embargo, el resultado es un vector atómico (si es que se puede empaquetar como un vector):
 
-```{r, eval = FALSE}
+```{r, eval = TRUE}
 
-sapply(X = lista_datos, FUN = nrow)
+lapply(X = c(4, 9, 16), FUN = sqrt)
 
 
 ```

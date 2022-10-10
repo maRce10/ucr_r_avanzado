@@ -178,7 +178,7 @@ unif_var
 ```
 &nbsp; 
 
-Podemos explorar el resultado trazando un histograma:
+Podemos explorar el resultado graficando un histograma:
 
 ```{r}
 
