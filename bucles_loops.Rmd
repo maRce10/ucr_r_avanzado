@@ -808,19 +808,15 @@ cc <- cc[(nrow(cc) -50):nrow(cc),]
 
 <div class="alert alert-info">
 
-<font size="5">Ejercicio 4</font> 
-
-&nbsp;
-4.1 Convierta en un bucle `while` el bucle `repeat` del ejercicio 3.1
-
+<font size="5">Ejercicio 3</font> 
 
 &nbsp;
 
-4.2 Haga un bucle `while` que se detenga si la correlación es superior a 0.8 o si el bucle ha estado ejecutándose durante más de 10 segundos (consejo: use la función` difftime` y / o `as.numeric`)
+3.1 Haga un bucle `while` que se detenga si la correlación es superior a 0.8 o si el bucle ha estado ejecutándose durante más de 10 segundos (consejo: use la función` difftime` y / o `as.numeric`)
 
 &nbsp;
 
-4.3  Haga un bucle `repeat` que se detenga solo si la correlación es mayor que 0.5 pero menor que 0.55
+3.1  Haga un bucle `repeat` que se detenga solo si la correlación es mayor que 0.5 pero menor que 0.55
 
   
 </div>

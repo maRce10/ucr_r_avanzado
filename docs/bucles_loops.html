@@ -1163,17 +1163,17 @@ y el usuario no tiene control sobre el insumo a la función. El argumento
 a realizar:</p>
 <div class="sourceCode" id="cb41"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="fu">replicate</span>(<span class="at">n =</span> <span class="dv">3</span>, <span class="at">expr =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>))</span></code></pre></div>
-<pre><code>##            [,1]      [,2]      [,3]
-##  [1,] -0.106182 -0.015045  0.192919
-##  [2,] -0.742147 -0.281608  1.417498
-##  [3,]  1.820091 -0.308943  0.947246
-##  [4,]  0.030544  0.122320 -0.399967
-##  [5,] -0.172792  1.089984  0.384858
-##  [6,]  0.886693 -1.060366 -1.109592
-##  [7,] -1.177762 -0.593745 -0.419459
-##  [8,]  0.814713  1.097201  0.094468
-##  [9,] -0.649868  0.736800  0.105504
-## [10,]  0.254464  0.556925 -1.639717</code></pre>
+<pre><code>##           [,1]      [,2]     [,3]
+##  [1,] -1.18221  0.157931  1.49247
+##  [2,]  0.82814 -0.346551  1.09470
+##  [3,]  1.02634 -0.653531 -0.34881
+##  [4,]  0.14264  0.453287  2.01354
+##  [5,] -1.43203  0.475892 -1.09580
+##  [6,] -1.47615 -0.971729 -0.92561
+##  [7,]  0.35724 -0.070202  0.23122
+##  [8,]  0.84222 -1.620541 -1.58410
+##  [9,]  1.07022 -0.163825 -0.99331
+## [10,] -0.42025  0.346438  3.13941</code></pre>
 <p> </p>
 <p>Note que los resultados son agrupados en una matrix. ‘expr’ también
 puede replicar código que no ha sido “empaquetado en una función”.</p>
@@ -1232,7 +1232,7 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <span id="cb43-21"><a href="#cb43-21"></a>}</span>
 <span id="cb43-22"><a href="#cb43-22"></a></span>
 <span id="cb43-23"><a href="#cb43-23"></a><span class="fu">head</span>(cc_vector)</span></code></pre></div>
-<pre><code>## [1] -0.160914  0.117408 -0.472717 -0.078513  0.447977  0.102299</code></pre>
+<pre><code>## [1] -0.37870 -0.39414 -0.46545 -0.32357  0.12805 -0.15478</code></pre>
 <p> </p>
 <p>Podemos graficarlo el resultado asi así:</p>
 <div class="sourceCode" id="cb45"><pre
@@ -1315,16 +1315,14 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <p><img src="bucles_loops_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
 <hr />
 <div class="alert alert-info">
-<p><font size="5">Ejercicio 4</font></p>
-<p>  4.1 Convierta en un bucle <code>while</code> el bucle
-<code>repeat</code> del ejercicio 3.1</p>
+<p><font size="5">Ejercicio 3</font></p>
 <p> </p>
-<p>4.2 Haga un bucle <code>while</code> que se detenga si la correlación
+<p>3.1 Haga un bucle <code>while</code> que se detenga si la correlación
 es superior a 0.8 o si el bucle ha estado ejecutándose durante más de 10
 segundos (consejo: use la función<code>difftime</code> y / o
 <code>as.numeric</code>)</p>
 <p> </p>
-<p>4.3 Haga un bucle <code>repeat</code> que se detenga solo si la
+<p>3.1 Haga un bucle <code>repeat</code> que se detenga solo si la
 correlación es mayor que 0.5 pero menor que 0.55</p>
 </div>
 <hr />
