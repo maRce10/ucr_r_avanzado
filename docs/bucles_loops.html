@@ -1163,17 +1163,17 @@ y el usuario no tiene control sobre el insumo a la función. El argumento
 a realizar:</p>
 <div class="sourceCode" id="cb41"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="fu">replicate</span>(<span class="at">n =</span> <span class="dv">3</span>, <span class="at">expr =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>))</span></code></pre></div>
-<pre><code>##           [,1]      [,2]      [,3]
-##  [1,]  0.42847 -0.882859  1.380364
-##  [2,] -1.63819  0.137822  1.017256
-##  [3,] -1.88849 -0.326094  0.592427
-##  [4,] -1.27420  1.139609  0.220187
-##  [5,] -1.82725  1.499944  2.270092
-##  [6,]  0.13982  0.932194 -0.047087
-##  [7,] -1.32136 -1.889269  0.981438
-##  [8,]  0.17042  0.053346 -0.397338
-##  [9,] -0.71875 -1.029168  1.235686
-## [10,] -0.85189  0.709413 -0.510855</code></pre>
+<pre><code>##            [,1]     [,2]     [,3]
+##  [1,] -0.780962  0.38448  0.91661
+##  [2,] -0.085456 -0.53248  1.31495
+##  [3,]  0.367789 -1.22417  0.74163
+##  [4,] -0.083728  0.20182 -0.15915
+##  [5,] -2.299886  0.36413 -1.45406
+##  [6,]  0.931418  0.37933  1.16803
+##  [7,] -0.834181  0.74830  0.62659
+##  [8,] -1.475633  1.17769 -1.37024
+##  [9,]  0.572715  0.84084 -1.66577
+## [10,]  0.230436  1.02233  0.36664</code></pre>
 <p> </p>
 <p>Note que los resultados son agrupados en una matrix. ‘expr’ también
 puede replicar código que no ha sido “empaquetado en una función”.</p>
@@ -1192,7 +1192,7 @@ de datos, similiar a lo hecho en el ejercicio 1.2</p>
 datos creado en el ejercicio anterior el total de individuos observados
 en un muestreo (pista: sumatoria de la columna ‘MaxN’).</p>
 <p> </p>
-<p>2.3 Haga un bucle <code>apply</code> para calcular el error estandar
+<p>2.4 Haga un bucle <code>apply</code> para calcular el error estandar
 para el ancho de sépalo en el juego de datos ‘iris’.</p>
 </div>
 <hr />
@@ -1232,7 +1232,7 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <span id="cb43-21"><a href="#cb43-21"></a>}</span>
 <span id="cb43-22"><a href="#cb43-22"></a></span>
 <span id="cb43-23"><a href="#cb43-23"></a><span class="fu">head</span>(cc_vector)</span></code></pre></div>
-<pre><code>## [1]  0.347012  0.089537 -0.107696 -0.027657  0.220931  0.177071</code></pre>
+<pre><code>## [1] -0.213801  0.075724  0.019091 -0.122029 -0.086738 -0.195391</code></pre>
 <p> </p>
 <p>Podemos graficarlo el resultado asi así:</p>
 <div class="sourceCode" id="cb45"><pre

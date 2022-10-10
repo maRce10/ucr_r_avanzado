@@ -615,7 +615,7 @@ Note que los resultados son agrupados en una matrix. 'expr' también puede repli
 
 &nbsp;
 
-2.3 Haga un bucle `apply` para calcular el error estandar para el ancho de sépalo en el juego de datos 'iris'.
+2.4 Haga un bucle `apply` para calcular el error estandar para el ancho de sépalo en el juego de datos 'iris'.
 
 </div>
 
