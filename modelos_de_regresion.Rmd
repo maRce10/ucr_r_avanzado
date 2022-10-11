@@ -1,5 +1,5 @@
 ---
-title: <center><font size="7"><b>Modelos de regresión lineal</b></font></center>
+title: <center><font size="7"><b>Modelos de regresión</b></font></center>
 subtitle: <center><font size="4"><b>Programación y métodos estadísticos avanzados en R</b> </font></center>
 author: <center><font size="5"><a href="http://marceloarayasalas.weebly.com/">Marcelo Araya-Salas, PhD</a></font></center>
 date: <center>"`r Sys.Date()`"</center>
@@ -365,7 +365,7 @@ df
 
 ```
 
-Por supuesto, podríamos añadir más variables a este marco de datos:
+Por supuesto, podríamos añadir más variables a este cuadro de datos:
 
 ```{r}
 
@@ -390,6 +390,8 @@ Y eso es un juego de datos simulados en su forma más básica. Se parece mucho a
 ---
 
 # Cómo utilizar datos simulados para entender el comportamiento de las herramientas estadísticas
+
+&nbsp; 
 
 ## Prueba de concepto: *el Teorema Central del Límite*
 
@@ -578,7 +580,7 @@ Las regresiones lineales se basan en la ecuación lineal *a = mx + b* que aprend
 
 &nbsp; 
 
-El objetivo más común de una regresión lineal es la estimación de los valores de ${beta_{*}$. Esto se consigue encontrando la línea recta que mejor se ajusta y que representa la asociación entre un predictor y la respuesta:
+El objetivo más común de una regresión lineal es la estimación de los valores de ${\beta_{*}$. Esto se consigue encontrando la línea recta que mejor se ajusta y que representa la asociación entre un predictor y la respuesta:
 
 ```{r, out.width = "100%", echo = FALSE, fig.align= "center"}
 
@@ -628,11 +630,15 @@ Results in the following predictive model:
 
 ```
 
-```{r, out.width = "100%", echo = FALSE, fig.align= "center"}
 
-knitr::include_graphics("./images/model_betas.png")
+Por ejemplo, un modelo de regresión con este resultado:
+
+```{r, out.width = "90%", echo = FALSE, fig.align= "center"}
+
+knitr::include_graphics("./images/model_betas_esp.png")
 
 ```
+
 &nbsp; 
 
 </div>
@@ -694,15 +700,15 @@ ggplot(trees, aes(x = Girth, y = Height)) +
 ```
 &nbsp; 
 
-- **Coeficientes**: contiene los tamaños de efecto ('Estimates'), una medida de su incertidumbre ('Standar error'), la estadística asociada ('t value') y el valor p ('Pr(>|t|)'). Los tamaño de efecto o estimados se dan como el cambio promedio en *y* por cada aumento de 1 unidad en *x*. Para este ejemplo el estimado es de 1,0544 $in / in$. A pesar de que las unidades se anulan (`1,0544 $in / in$ = 1,0544) tenerlas en cuenta sigue siendo biológicamente significativo. Significan que, en promedio, y un aumento de 1 pulgada en la circunferencia que se espera un aumento de 1,0544 pulgadas en la altura. 
+- **Coeficientes** (coefficients): contiene los tamaños de efecto ('Estimates'), una medida de su incertidumbre ('Standar error'), la estadística asociada ('t value') y el valor p ('Pr(>|t|)'). Los tamaño de efecto o estimados se dan como el cambio promedio en *y* por cada aumento de 1 unidad en *x*. Para este ejemplo el estimado es de 1,0544 $in / in$. A pesar de que las unidades se anulan (`1,0544 $in / in$ = 1,0544) tenerlas en cuenta sigue siendo biológicamente significativo. Significan que, en promedio, y un aumento de 1 pulgada en la circunferencia que se espera un aumento de 1,0544 pulgadas en la altura. 
 
-- **Error estándar de los residuales**: se explica por sí mismo. El error estándar de los residuales
+- **Error estándar de los residuales** (residual standard error): se explica por sí mismo. El error estándar de los residuales
 
-- **R-cuadrado múltiple**: el coeficiente de determinación, que pretende ser una medida de lo bien que su modelo se ajusta a los datos
+- **R-cuadrado múltiple** (multiple R-squared): el coeficiente de determinación, que pretende ser una medida de lo bien que su modelo se ajusta a los datos
 
-- **R-cuadrado ajustado**: similar al 'R-cuadrado múltiple' pero penalizado por el número de parámetros
+- **R-cuadrado ajustado** (adjusted R-squared): similar al 'R-cuadrado múltiple' pero penalizado por el número de parámetros
 
-- **Estadístico F**: estadístico para una prueba global que comprueba si al menos uno de sus coeficientes es distinto de cero
+- **Estadístico F** (F-statistic): estadístico para una prueba global que comprueba si al menos uno de sus coeficientes es distinto de cero
 
 - **Valor de p**: probabilidad de una prueba global que comprueba si al menos uno de sus coeficientes es distinto de cero
 
@@ -807,6 +813,30 @@ mean(y_data$y)
 </div>
 
 &nbsp;
+
+<div class="alert alert-warning">
+
+<center><font size="5"><b>Caso de estudio</b></font></center>
+
+&nbsp;
+
+- Ruhs, E. C., Martin, L. B., & Downs, C. J. (2020). [**The impacts of body mass on immune cell concentrations in birds**](https://royalsocietypublishing.org/doi/pdf/10.1098/rspb.2020.0655?download=true). *Proceedings of the Royal Society B*, 287(1934), 20200655.
+
+
+"*Encontramos que un modelo sólo con intercepto (intercept-only model) explicaba mejor las concentraciones de linfocitos y eosinófilos en las aves, indicando que las concentraciones de estos tipos de células eran independientes de la masa corporal.*"
+
+
+```{r, out.width = "70%", echo = FALSE, fig.align= "center"}
+
+knitr::include_graphics("./images/leukocytes.png")
+
+```
+&nbsp; 
+
+</div>
+
+&nbsp;
+
 
 <div class="alert alert-info">
 
@@ -1034,6 +1064,36 @@ summ_xy_mod2$coefficients
 
 &nbsp;
 
+<div class="alert alert-warning">
+
+<center><font size="5"><b>Caso de estudio</b></font></center>
+
+&nbsp;
+
+- Keenan EL, Odom  KJ, Araya-Salas M, Horton KG, Strimas-Mackey M, Meatte MA, Mann NI, Slater PJ, Price JJ, and Templeton  CN. 2020. [**Breeding season length predicts duet coordination and consistency in Neotropical wrens (Troglodytidae)**](https://royalsocietypublishing.org/doi/pdf/10.1098/rspb.2020.2482). *Proceeding of the Royal Society B*. 20202482
+
+```{r, out.width = "100%", echo = FALSE, fig.align= "center"}
+
+knitr::include_graphics("./images/duets.png")
+
+```
+&nbsp; 
+
+"*... la coordinación y la consistencia de los duetos son mayores en las especies con temporadas de apareamiento especialmente largas.*"
+
+
+```{r, out.width = "70%", echo = FALSE, fig.align= "center"}
+
+knitr::include_graphics("./images/duet_reg.png")
+
+```
+&nbsp; 
+
+</div>
+
+&nbsp;
+
+
 <div class="alert alert-info">
 
 <font size="5">Ejercicio 4</font> 
@@ -1151,6 +1211,29 @@ summ_xy_mod_multp$coefficients
 
 &nbsp;
 
+<div class="alert alert-warning">
+
+<center><font size="5"><b>Caso de estudio</b></font></center>
+
+&nbsp;
+
+- Araya-Salas M, P González-Gómez, K Wojczulanis-Jakubas, V López III & T Wright. 2018. [**Spatial memory is as important as weapon and body size for territorial ownership in a lekking hummingbird**](https://www.nature.com/articles/s41598-018-20441-x). *Scientific Reports*´. 13, e0189969
+
+
+"*La memoria espacial, el tamaño corporal y el largo de la punta del pico ... predijeron positivamente la probabilidad de adquirir y defender un territorio.*"
+
+
+```{r, out.width = "100%", echo = FALSE, fig.align= "center"}
+
+knitr::include_graphics("./images/lbh_cognition.png")
+
+```
+&nbsp; 
+
+</div>
+
+&nbsp;
+
 <div class="alert alert-info">
 
 <font size="5">Ejercicio 5</font> 
@@ -1224,7 +1307,7 @@ Por comodidad, hemos utilizado `coef()` para extraer sólo los estimado de la re
 
 ---
 
-## Tener un predictor categórico
+## Añadir un predictor categórico
 
 Para los predictores categóricos podemos crear primero una variable binaria (0, 1) y luego añadir etiquetas a cada valor:
 
@@ -1361,6 +1444,28 @@ mean(xy_data_cat$y[xy_data_cat$x1 == "a"])
 
 &nbsp;
 
+<div class="alert alert-warning">
+
+<center><font size="5"><b>Caso de estudio</b></font></center>
+
+&nbsp;
+
+- Rico-Guevara A, & M Araya-Salas. 2015. [**Bills as daggers? A test for sexually dimorphic weapons in a lekking hummingbird species**](https://academic.oup.com/beheco/article/26/1/21/2262689). *Behavioral Ecology*. 26 (1): 21-29. 
+
+"*Los machos con puntas de pico más grandes y puntiagudas tuvieron más éxito en ganar control de territorios en el lek.*"
+
+
+```{r, out.width = "70%", echo = FALSE, fig.align= "center"}
+
+knitr::include_graphics("./images/daggers_lbh.png")
+
+```
+&nbsp; 
+
+</div>
+
+&nbsp;
+
 <div class="alert alert-info">
 
 <font size="5">Ejercicio 6</font> 
@@ -1375,7 +1480,7 @@ mean(xy_data_cat$y[xy_data_cat$x1 == "a"])
 
 <div class="alert alert-warning">
 
-<font size = 6><center>Variables indicadoras (Dummy coding)</center></font>
+<font size = 6><center>Variables indicadoras (Dummy variables)</center></font>
 
 En un modelo de regresión, los predictores categóricos también se representan como vectores numéricos. Más concretamente, los predictores categóricos se codifican como 0s y 1s, en los que 1 significa "pertenece a la misma categoría" y 0 "pertenece a una categoría diferente". Mantuvimos el vector numérico original ('x1_num') al simular el juego de datos con el predictor categórico:
 
@@ -1575,6 +1680,28 @@ xy_summ_intr$coefficients
 
 &nbsp;
 
+<div class="alert alert-warning">
+
+<center><font size="5"><b>Caso de estudio</b></font></center>
+
+&nbsp;
+
+- Chirino F, B Wilink, Araya-Salas M. In prep. **Climatic factors affecting vocal activity in lemur leaf frogs**. 
+
+"*El aumento de la luz de la luna disminuye la actividad vocal de* Agalychnis lemur *aunque esta relación es mediada por la temperatura.*"
+
+
+```{r, out.width = "70%", echo = FALSE, fig.align= "center"}
+
+knitr::include_graphics("./images/lemur.png")
+
+```
+&nbsp; 
+
+</div>
+
+&nbsp;
+
 <div class="alert alert-info">
 
 <font size="5">Ejercicio 7</font> 
@@ -1715,7 +1842,7 @@ b2 <- 0
 
 
 #generar variables
-y <- rpois(n = 3, lambda = 6.5) # lambda = tasa promedio de exitos 
+y <- rpois(n = n, lambda = 6.5) # lambda = tasa promedio de exitos 
 x2 <- seq(-0.5, 0.5, , length(y))
 x1 <- (log(y) - b0 - b2 * x2) / b1
 
@@ -1784,8 +1911,30 @@ summ_glm_pois$coefficients
 
 </div>
 
+
 &nbsp;
 
+<div class="alert alert-warning">
+
+<center><font size="5"><b>Caso de estudio</b></font></center>
+
+&nbsp;
+
+- Topp, E. N., Tscharntke, T., & Loos, J. (2022). [**Fire and landscape context shape plant and butterfly diversity in a South African shrubland**](https://onlinelibrary.wiley.com/doi/pdf/10.1111/ddi.13257). *Diversity and Distributions*, 28(3), 357-371.
+
+"*La riqueza de especies de mariposas es de tres a cuatro veces mayor cuando aumenta el hábitat natural en el paisaje circundante (en un radio de 2 km), mientras que la abundancia de mariposas se asociaba negativamente con el aumento del tiempo transcurrido desde el último incendio.*"
+
+
+```{r, out.width = "100%", echo = FALSE, fig.align= "center"}
+
+knitr::include_graphics("./images/butterflies.png")
+
+```
+&nbsp; 
+
+</div>
+
+&nbsp;
 
 <div class="alert alert-info">
 
@@ -1896,7 +2045,7 @@ summary(mix_eff_mod)
 ```
 &nbsp;
 
-El modelo detectó correctamente el patrón simulado y la estimación de $\ta_1$ (`r fixef(mix_eff_mod)[2]`) es muy cercana al valor simulado.
+El modelo detectó correctamente el patrón simulado y la estimación de $\beta_1$ (`r round(fixef(mix_eff_mod)[2], 3)`) es muy cercana al valor simulado.
 
 ---
 

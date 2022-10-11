@@ -16,8 +16,8 @@ navbar:
         href: funciones.html
       - text: "Bucles"
         href: bucles_loops.html
-      - text: "Modelos de regresión lineal"
-        href: modelos_de_regresion_lineal.html
+      - text: "Modelos de regresión"
+        href: modelos_de_regresion.html
       - text: "Modelos comunes como regresiones"
         href: stadistica_tradicional_en_regresiones.html
       - text: "Gráficos con ggplot2"

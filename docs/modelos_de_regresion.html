@@ -11,9 +11,9 @@
 
 
 
-<title>modelos_de_regresion_lineal.knit</title>
+<title>modelos_de_regresion.knit</title>
 
-<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.16/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -132,13 +132,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   for (var i = 0; i < sheets.length; i++) {
     if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
     try { var rules = sheets[i].cssRules; } catch (e) { continue; }
-    for (var j = 0; j < rules.length; j++) {
+    var j = 0;
+    while (j < rules.length) {
       var rule = rules[j];
       // check if there is a div.sourceCode rule
-      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
       var style = rule.style.cssText;
       // check if color or background-color is set
-      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
       // replace div.sourceCode by a pre.sourceCode rule
       sheets[i].deleteRule(j);
       sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
@@ -234,11 +241,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -431,7 +442,7 @@ div.tocify {
       <a href="bucles_loops.html">Bucles</a>
     </li>
     <li>
-      <a href="modelos_de_regresion_lineal.html">Modelos de regresión lineal</a>
+      <a href="modelos_de_regresion.html">Modelos de regresión</a>
     </li>
     <li>
       <a href="stadistica_tradicional_en_regresiones.html">Modelos comunes como regresiones</a>
@@ -484,7 +495,7 @@ div.tocify {
 
 
 <h1 class="title toc-ignore"><center>
-<font size="7"><b>Modelos de regresión lineal</b></font>
+<font size="7"><b>Modelos de regresión</b></font>
 </center></h1>
 <h3 class="subtitle"><center>
 <font size="4"><b>Programación y métodos estadísticos avanzados en R</b>
@@ -495,7 +506,7 @@ div.tocify {
 Araya-Salas, PhD</a></font>
 </center></h4>
 <h4 class="date"><center>
-“2022-10-10”
+“2022-10-11”
 </center></h4>
 
 </div>
@@ -618,7 +629,7 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># crear histograma</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(unif_var), <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> unif_var)) <span class="sc">+</span></span>
 <span id="cb5-3"><a href="#cb5-3"></a>    <span class="fu">geom_histogram</span>()</span></code></pre></div>
-<p><img src="modelos_de_regresion_lineal_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-7-1.png" width="672" />
  </p>
 <p>Muestra una distribución uniforme que va de 0 a 10.</p>
 <p>También podemos simular números aleatorios procedentes de una
@@ -630,7 +641,7 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <span id="cb6-4"><a href="#cb6-4"></a><span class="co"># graficar histograma</span></span>
 <span id="cb6-5"><a href="#cb6-5"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(norm_var), <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> norm_var)) <span class="sc">+</span></span>
 <span id="cb6-6"><a href="#cb6-6"></a>    <span class="fu">geom_histogram</span>()</span></code></pre></div>
-<p><img src="modelos_de_regresion_lineal_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p> </p>
 <p>Tenga en cuenta que todas las funciones generadoras de números
 aleatorios tienen el argumento ‘n’, que determina la longitud del vector
@@ -860,7 +871,7 @@ b
 </tr>
 </tbody>
 </table>
-<p>Por supuesto, podríamos añadir más variables a este marco de
+<p>Por supuesto, podríamos añadir más variables a este cuadro de
 datos:</p>
 <div class="sourceCode" id="cb34"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="co"># crear variable categorica</span></span>
@@ -990,6 +1001,7 @@ id="cómo-utilizar-datos-simulados-para-entender-el-comportamiento-de-las-herram
 class="section level1">
 <h1>Cómo utilizar datos simulados para entender el comportamiento de las
 herramientas estadísticas</h1>
+<p> </p>
 <div id="prueba-de-concepto-el-teorema-central-del-límite"
 class="section level2">
 <h2>Prueba de concepto: <em>el Teorema Central del Límite</em></h2>
@@ -1017,7 +1029,7 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <span id="cb35-4"><a href="#cb35-4"></a><span class="co"># ver histograma</span></span>
 <span id="cb35-5"><a href="#cb35-5"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(unif_pop), <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> unif_pop)) <span class="sc">+</span></span>
 <span id="cb35-6"><a href="#cb35-6"></a>    <span class="fu">geom_histogram</span>()</span></code></pre></div>
-<p><img src="modelos_de_regresion_lineal_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 <p> </p>
 <p>Podemos tomar muestras aleatorias usando <code>sample()</code>
 así:</p>
@@ -1040,7 +1052,7 @@ podemos comprobar la distribución de las muestras:</p>
 <div class="sourceCode" id="cb39"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="co"># ver distribucion/ histograma</span></span>
 <span id="cb39-2"><a href="#cb39-2"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(samples), <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> samples)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code></pre></div>
-<p><img src="modelos_de_regresion_lineal_files/figure-html/unnamed-chunk-27-1.png" width="672" />
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-27-1.png" width="672" />
  </p>
 <p>… asi como el promedio:</p>
 <div class="sourceCode" id="cb40"><pre
@@ -1069,14 +1081,14 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <span id="cb44-11"><a href="#cb44-11"></a><span class="co"># ver histograma</span></span>
 <span id="cb44-12"><a href="#cb44-12"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(bimod_pop), <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> bimod_pop)) <span class="sc">+</span></span>
 <span id="cb44-13"><a href="#cb44-13"></a>    <span class="fu">geom_histogram</span>()</span></code></pre></div>
-<p><img src="modelos_de_regresion_lineal_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
 <div class="sourceCode" id="cb45"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="co"># replicar muestreo</span></span>
 <span id="cb45-2"><a href="#cb45-2"></a>samples <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">200</span>, <span class="fu">mean</span>(<span class="fu">sample</span>(bimod_pop, <span class="dv">10</span>)))</span>
 <span id="cb45-3"><a href="#cb45-3"></a></span>
 <span id="cb45-4"><a href="#cb45-4"></a><span class="co"># ver histograma</span></span>
 <span id="cb45-5"><a href="#cb45-5"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(samples), <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> samples)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code></pre></div>
-<p><img src="modelos_de_regresion_lineal_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
 <div class="sourceCode" id="cb46"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="co"># ver promedios</span></span>
 <span id="cb46-2"><a href="#cb46-2"></a><span class="fu">mean</span>(samples)</span></code></pre></div>
@@ -1132,7 +1144,7 @@ predictora</p></li>
 </ul>
 <p> </p>
 <p>El objetivo más común de una regresión lineal es la estimación de los
-valores de <span class="math inline">\({beta_{*}\)</span>. Esto se
+valores de <span class="math inline">\({\beta_{*}\)</span>. Esto se
 consigue encontrando la línea recta que mejor se ajusta y que representa
 la asociación entre un predictor y la respuesta:</p>
 <p><img src="images/regression.jpg" width="100%" style="display: block; margin: auto;" />
@@ -1156,8 +1168,9 @@ class="math inline">\(\beta_{*}\)</span> no son diferentes de 0:</p>
 = \beta_0\)</span></font>
 </center>
 <p> </p>
-<p><img src="images/model_betas.png" width="100%" style="display: block; margin: auto;" />
- </p>
+<p>Por ejemplo, un modelo de regresión con este resultado:</p>
+<p><img src="images/model_betas_esp.png" width="90%" style="display: block; margin: auto;" /></p>
+<p> </p>
 </div>
 <p> </p>
 <hr />
@@ -1299,30 +1312,32 @@ residuales. Los residuales son la diferencia entre lo que predijo el
 modelo y el valor real de <em>y</em>. Esta es una representación gráfica
 de los residuales:</p></li>
 </ul>
-<p><img src="modelos_de_regresion_lineal_files/figure-html/unnamed-chunk-41-1.png" width="672" />
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-41-1.png" width="672" />
  </p>
 <ul>
-<li><p><strong>Coeficientes</strong>: contiene los tamaños de efecto
-(‘Estimates’), una medida de su incertidumbre (‘Standar error’), la
-estadística asociada (‘t value’) y el valor p (‘Pr(&gt;|t|)’). Los
-tamaño de efecto o estimados se dan como el cambio promedio en
-<em>y</em> por cada aumento de 1 unidad en <em>x</em>. Para este ejemplo
-el estimado es de 1,0544 <span class="math inline">\(in / in\)</span>. A
-pesar de que las unidades se anulan (`1,0544 <span
+<li><p><strong>Coeficientes</strong> (coefficients): contiene los
+tamaños de efecto (‘Estimates’), una medida de su incertidumbre
+(‘Standar error’), la estadística asociada (‘t value’) y el valor p
+(‘Pr(&gt;|t|)’). Los tamaño de efecto o estimados se dan como el cambio
+promedio en <em>y</em> por cada aumento de 1 unidad en <em>x</em>. Para
+este ejemplo el estimado es de 1,0544 <span class="math inline">\(in /
+in\)</span>. A pesar de que las unidades se anulan (`1,0544 <span
 class="math inline">\(in / in\)</span> = 1,0544) tenerlas en cuenta
 sigue siendo biológicamente significativo. Significan que, en promedio,
 y un aumento de 1 pulgada en la circunferencia que se espera un aumento
 de 1,0544 pulgadas en la altura.</p></li>
-<li><p><strong>Error estándar de los residuales</strong>: se explica por
-sí mismo. El error estándar de los residuales</p></li>
-<li><p><strong>R-cuadrado múltiple</strong>: el coeficiente de
-determinación, que pretende ser una medida de lo bien que su modelo se
-ajusta a los datos</p></li>
-<li><p><strong>R-cuadrado ajustado</strong>: similar al ‘R-cuadrado
-múltiple’ pero penalizado por el número de parámetros</p></li>
-<li><p><strong>Estadístico F</strong>: estadístico para una prueba
-global que comprueba si al menos uno de sus coeficientes es distinto de
-cero</p></li>
+<li><p><strong>Error estándar de los residuales</strong> (residual
+standard error): se explica por sí mismo. El error estándar de los
+residuales</p></li>
+<li><p><strong>R-cuadrado múltiple</strong> (multiple R-squared): el
+coeficiente de determinación, que pretende ser una medida de lo bien que
+su modelo se ajusta a los datos</p></li>
+<li><p><strong>R-cuadrado ajustado</strong> (adjusted R-squared):
+similar al ‘R-cuadrado múltiple’ pero penalizado por el número de
+parámetros</p></li>
+<li><p><strong>Estadístico F</strong> (F-statistic): estadístico para
+una prueba global que comprueba si al menos uno de sus coeficientes es
+distinto de cero</p></li>
 <li><p><strong>Valor de p</strong>: probabilidad de una prueba global
 que comprueba si al menos uno de sus coeficientes es distinto de
 cero</p></li>
@@ -1390,7 +1405,7 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <span id="cb57-4"><a href="#cb57-4"></a><span class="fu">ggplot</span>(ci_df, <span class="fu">aes</span>(<span class="at">x =</span> param, <span class="at">y =</span> est)) <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>,</span>
 <span id="cb57-5"><a href="#cb57-5"></a>    <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lty =</span> <span class="dv">2</span>) <span class="sc">+</span> <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> X2.<span class="dv">5</span>.., <span class="at">ymax =</span> X97.<span class="dv">5</span>..)) <span class="sc">+</span></span>
 <span id="cb57-6"><a href="#cb57-6"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Parámetro&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Tamaño de efecto&quot;</span>) <span class="sc">+</span> <span class="fu">coord_flip</span>()</span></code></pre></div>
-<p><img src="modelos_de_regresion_lineal_files/figure-html/unnamed-chunk-45-1.png" width="672" />
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-45-1.png" width="672" />
  </p>
 <div class="alert alert-success">
 <p> </p>
@@ -1420,6 +1435,26 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <li>Rara vez tenemos predicciones sobre el intercepto, por lo que
 tendemos a ignorar esta estimación.</li>
 </ul>
+</div>
+<p> </p>
+<div class="alert alert-warning">
+<center>
+<font size="5"><b>Caso de estudio</b></font>
+</center>
+<p> </p>
+<ul>
+<li>Ruhs, E. C., Martin, L. B., &amp; Downs, C. J. (2020). <a
+href="https://royalsocietypublishing.org/doi/pdf/10.1098/rspb.2020.0655?download=true"><strong>The
+impacts of body mass on immune cell concentrations in
+birds</strong></a>. <em>Proceedings of the Royal Society B</em>,
+287(1934), 20200655.</li>
+</ul>
+<p>“<em>Encontramos que un modelo sólo con intercepto (intercept-only
+model) explicaba mejor las concentraciones de linfocitos y eosinófilos
+en las aves, indicando que las concentraciones de estos tipos de células
+eran independientes de la masa corporal.</em>”</p>
+<p><img src="images/leukocytes.png" width="70%" style="display: block; margin: auto;" />
+ </p>
 </div>
 <p> </p>
 <div class="alert alert-info">
@@ -1464,7 +1499,7 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <span id="cb62-4"><a href="#cb62-4"></a><span class="co"># graficar</span></span>
 <span id="cb62-5"><a href="#cb62-5"></a><span class="fu">ggplot</span>(xy_data, <span class="fu">aes</span>(<span class="at">x =</span> x1, <span class="at">y =</span> y)) <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
 <span id="cb62-6"><a href="#cb62-6"></a>    <span class="fu">geom_point</span>()  <span class="co"># plot points</span></span></code></pre></div>
-<p><img src="modelos_de_regresion_lineal_files/figure-html/unnamed-chunk-49-1.png" width="672" />
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-50-1.png" width="672" />
  </p>
 <p>Que es equivalente a esto:</p>
 <center>
@@ -1500,7 +1535,7 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <span id="cb65-4"><a href="#cb65-4"></a><span class="fu">ggplot</span>(ci_df, <span class="fu">aes</span>(<span class="at">x =</span> param, <span class="at">y =</span> est)) <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>,</span>
 <span id="cb65-5"><a href="#cb65-5"></a>    <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lty =</span> <span class="dv">2</span>) <span class="sc">+</span> <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> X2.<span class="dv">5</span>.., <span class="at">ymax =</span> X97.<span class="dv">5</span>..)) <span class="sc">+</span></span>
 <span id="cb65-6"><a href="#cb65-6"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Parámetro&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Tamaño de efecto&quot;</span>) <span class="sc">+</span> <span class="fu">coord_flip</span>()</span></code></pre></div>
-<p><img src="modelos_de_regresion_lineal_files/figure-html/unnamed-chunk-51-1.png" width="672" />
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-52-1.png" width="672" />
  </p>
 <p>Deberíamos “diagnosticar” la idoneidad del modelo inspeccionando más
 de cerca la distribución de los residuales. La función
@@ -1509,13 +1544,13 @@ trabajo para crear gráficos de diagnóstico para modelos lineales:</p>
 <div class="sourceCode" id="cb66"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1"></a><span class="fu">plot_model</span>(xy_mod, <span class="at">type =</span> <span class="st">&quot;diag&quot;</span>)</span></code></pre></div>
 <pre><code>## [[1]]</code></pre>
-<p><img src="modelos_de_regresion_lineal_files/figure-html/unnamed-chunk-52-1.png" width="80%" /></p>
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-53-1.png" width="80%" /></p>
 <pre><code>## 
 ## [[2]]</code></pre>
-<p><img src="modelos_de_regresion_lineal_files/figure-html/unnamed-chunk-52-2.png" width="80%" /></p>
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-53-2.png" width="80%" /></p>
 <pre><code>## 
 ## [[3]]</code></pre>
-<p><img src="modelos_de_regresion_lineal_files/figure-html/unnamed-chunk-52-3.png" width="80%" />
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-53-3.png" width="80%" />
  </p>
 <div class="alert alert-success">
 <p> </p>
@@ -1569,7 +1604,7 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <span id="cb72-4"><a href="#cb72-4"></a><span class="co"># graficar</span></span>
 <span id="cb72-5"><a href="#cb72-5"></a><span class="fu">ggplot</span>(xy_data2, <span class="fu">aes</span>(<span class="at">x =</span> x1, <span class="at">y =</span> y)) <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>,</span>
 <span id="cb72-6"><a href="#cb72-6"></a>    <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> <span class="fu">geom_point</span>()  <span class="co"># plot points</span></span></code></pre></div>
-<p><img src="modelos_de_regresion_lineal_files/figure-html/unnamed-chunk-55-1.png" width="672" />
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-56-1.png" width="672" />
  </p>
 <p>La fórmula es la misma que la del modelo anterior:</p>
 <center>
@@ -1607,19 +1642,19 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <span id="cb75-4"><a href="#cb75-4"></a><span class="fu">ggplot</span>(ci_df, <span class="fu">aes</span>(<span class="at">x =</span> param, <span class="at">y =</span> est)) <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>,</span>
 <span id="cb75-5"><a href="#cb75-5"></a>    <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lty =</span> <span class="dv">2</span>) <span class="sc">+</span> <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> X2.<span class="dv">5</span>.., <span class="at">ymax =</span> X97.<span class="dv">5</span>..)) <span class="sc">+</span></span>
 <span id="cb75-6"><a href="#cb75-6"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Parámetro&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Tamaño de efecto&quot;</span>) <span class="sc">+</span> <span class="fu">coord_flip</span>()</span></code></pre></div>
-<p><img src="modelos_de_regresion_lineal_files/figure-html/unnamed-chunk-57-1.png" width="672" />
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-58-1.png" width="672" />
  </p>
 <p>… y los gráficos diagnósticos del modelo:</p>
 <div class="sourceCode" id="cb76"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1"></a><span class="fu">plot_model</span>(xy_mod2, <span class="at">type =</span> <span class="st">&quot;diag&quot;</span>)</span></code></pre></div>
 <pre><code>## [[1]]</code></pre>
-<p><img src="modelos_de_regresion_lineal_files/figure-html/unnamed-chunk-58-1.png" width="80%" /></p>
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-59-1.png" width="80%" /></p>
 <pre><code>## 
 ## [[2]]</code></pre>
-<p><img src="modelos_de_regresion_lineal_files/figure-html/unnamed-chunk-58-2.png" width="80%" /></p>
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-59-2.png" width="80%" /></p>
 <pre><code>## 
 ## [[3]]</code></pre>
-<p><img src="modelos_de_regresion_lineal_files/figure-html/unnamed-chunk-58-3.png" width="80%" />
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-59-3.png" width="80%" />
  </p>
 <div class="alert alert-success">
 <p> </p>
@@ -1644,6 +1679,28 @@ idea de la precisión del modelo:</p>
 ‘x1’) was set to 3 and was estimated as 2.89 by the model</li>
 </ul></li>
 </ul>
+</div>
+<p> </p>
+<div class="alert alert-warning">
+<center>
+<font size="5"><b>Caso de estudio</b></font>
+</center>
+<p> </p>
+<ul>
+<li>Keenan EL, Odom KJ, Araya-Salas M, Horton KG, Strimas-Mackey M,
+Meatte MA, Mann NI, Slater PJ, Price JJ, and Templeton CN. 2020. <a
+href="https://royalsocietypublishing.org/doi/pdf/10.1098/rspb.2020.2482"><strong>Breeding
+season length predicts duet coordination and consistency in Neotropical
+wrens (Troglodytidae)</strong></a>. <em>Proceeding of the Royal Society
+B</em>. 20202482</li>
+</ul>
+<p><img src="images/duets.png" width="100%" style="display: block; margin: auto;" />
+ </p>
+<p>“<em>… la coordinación y la consistencia de los duetos son mayores en
+las especies con temporadas de apareamiento especialmente
+largas.</em>”</p>
+<p><img src="images/duet_reg.png" width="70%" style="display: block; margin: auto;" />
+ </p>
 </div>
 <p> </p>
 <div class="alert alert-info">
@@ -1733,19 +1790,19 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <span id="cb83-4"><a href="#cb83-4"></a><span class="fu">ggplot</span>(ci_df, <span class="fu">aes</span>(<span class="at">x =</span> param, <span class="at">y =</span> est)) <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>,</span>
 <span id="cb83-5"><a href="#cb83-5"></a>    <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lty =</span> <span class="dv">2</span>) <span class="sc">+</span> <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> X2.<span class="dv">5</span>.., <span class="at">ymax =</span> X97.<span class="dv">5</span>..)) <span class="sc">+</span></span>
 <span id="cb83-6"><a href="#cb83-6"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Parámetro&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Tamaño de efecto&quot;</span>) <span class="sc">+</span> <span class="fu">coord_flip</span>()</span></code></pre></div>
-<p><img src="modelos_de_regresion_lineal_files/figure-html/unnamed-chunk-61-1.png" width="672" />
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-64-1.png" width="672" />
  </p>
 <p>… y los gráficos diagnósticos:</p>
 <div class="sourceCode" id="cb84"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1"></a><span class="fu">plot_model</span>(xy_mod_multp, <span class="at">type =</span> <span class="st">&quot;diag&quot;</span>)</span></code></pre></div>
 <pre><code>## [[1]]</code></pre>
-<p><img src="modelos_de_regresion_lineal_files/figure-html/unnamed-chunk-62-1.png" width="80%" /></p>
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-65-1.png" width="80%" /></p>
 <pre><code>## 
 ## [[2]]</code></pre>
-<p><img src="modelos_de_regresion_lineal_files/figure-html/unnamed-chunk-62-2.png" width="80%" /></p>
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-65-2.png" width="80%" /></p>
 <pre><code>## 
 ## [[3]]</code></pre>
-<p><img src="modelos_de_regresion_lineal_files/figure-html/unnamed-chunk-62-3.png" width="80%" />
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-65-3.png" width="80%" />
  </p>
 <div class="alert alert-success">
 <p> </p>
@@ -1777,6 +1834,26 @@ estimó como 2.901.</p></li>
 de ‘x2’) se fijó en -2 y se estimó como -1.932.</p></li>
 </ul></li>
 </ul>
+</div>
+<p> </p>
+<div class="alert alert-warning">
+<center>
+<font size="5"><b>Caso de estudio</b></font>
+</center>
+<p> </p>
+<ul>
+<li>Araya-Salas M, P González-Gómez, K Wojczulanis-Jakubas, V López III
+&amp; T Wright. 2018. <a
+href="https://www.nature.com/articles/s41598-018-20441-x"><strong>Spatial
+memory is as important as weapon and body size for territorial ownership
+in a lekking hummingbird</strong></a>. <em>Scientific Reports</em>´. 13,
+e0189969</li>
+</ul>
+<p>“<em>La memoria espacial, el tamaño corporal y el largo de la punta
+del pico … predijeron positivamente la probabilidad de adquirir y
+defender un territorio.</em>”</p>
+<p><img src="images/lbh_cognition.png" width="100%" style="display: block; margin: auto;" />
+ </p>
 </div>
 <p> </p>
 <div class="alert alert-info">
@@ -1864,8 +1941,8 @@ los estimado de la regresión, pero los valores son los mismos que
 obtenemos con <code>summary(model)</code>.</p>
 <hr />
 </div>
-<div id="tener-un-predictor-categórico" class="section level2">
-<h2>Tener un predictor categórico</h2>
+<div id="añadir-un-predictor-categórico" class="section level2">
+<h2>Añadir un predictor categórico</h2>
 <p>Para los predictores categóricos podemos crear primero una variable
 binaria (0, 1) y luego añadir etiquetas a cada valor:</p>
 <div class="sourceCode" id="cb99"><pre
@@ -1984,7 +2061,7 @@ cajas (boxplot):</p>
 <div class="sourceCode" id="cb100"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1"></a><span class="co"># graficar</span></span>
 <span id="cb100-2"><a href="#cb100-2"></a><span class="fu">ggplot</span>(xy_data_cat, <span class="fu">aes</span>(<span class="at">x =</span> x1, <span class="at">y =</span> y)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>()</span></code></pre></div>
-<p><img src="modelos_de_regresion_lineal_files/figure-html/unnamed-chunk-67-1.png" width="672" />
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-71-1.png" width="672" />
  </p>
 <p>… y obtener los estimados del modelo:</p>
 <div class="sourceCode" id="cb101"><pre
@@ -2019,12 +2096,12 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <span id="cb103-4"><a href="#cb103-4"></a><span class="fu">ggplot</span>(ci_df, <span class="fu">aes</span>(<span class="at">x =</span> param, <span class="at">y =</span> est)) <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>,</span>
 <span id="cb103-5"><a href="#cb103-5"></a>    <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lty =</span> <span class="dv">2</span>) <span class="sc">+</span> <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> X2.<span class="dv">5</span>.., <span class="at">ymax =</span> X97.<span class="dv">5</span>..)) <span class="sc">+</span></span>
 <span id="cb103-6"><a href="#cb103-6"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Parámetro&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Tamaño de efecto&quot;</span>) <span class="sc">+</span> <span class="fu">coord_flip</span>()</span></code></pre></div>
-<p><img src="modelos_de_regresion_lineal_files/figure-html/unnamed-chunk-69-1.png" width="672" />
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-73-1.png" width="672" />
  </p>
 <p>… y los gráficos diagnósticos del modelo:</p>
 <div class="sourceCode" id="cb104"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1"></a><span class="fu">plot_model</span>(xy_mod_cat, <span class="at">type =</span> <span class="st">&quot;diag&quot;</span>)[[<span class="dv">2</span>]]</span></code></pre></div>
-<p><img src="modelos_de_regresion_lineal_files/figure-html/unnamed-chunk-70-1.png" width="80%" />
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-74-1.png" width="80%" />
  </p>
 <div class="alert alert-success">
 <p> </p>
@@ -2056,7 +2133,7 @@ base:</p></li>
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1"></a><span class="co"># plot</span></span>
 <span id="cb106-2"><a href="#cb106-2"></a><span class="fu">ggplot</span>(xy_data_cat, <span class="fu">aes</span>(<span class="at">x =</span> x1, <span class="at">y =</span> y)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> xy_mod_cat<span class="sc">$</span>coefficients[<span class="dv">1</span>],</span>
 <span id="cb106-3"><a href="#cb106-3"></a>    <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
-<p><img src="modelos_de_regresion_lineal_files/figure-html/unnamed-chunk-73-1.png" width="672" /></p>
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-77-1.png" width="672" /></p>
 <ul>
 <li>Por lo tanto, el intercepto es el mismo que la media de <em>y</em>
 para la categoría ‘a’:</li>
@@ -2074,6 +2151,24 @@ observaciones de la categoría ‘a’.</li>
 </ul>
 </div>
 <p> </p>
+<div class="alert alert-warning">
+<center>
+<font size="5"><b>Caso de estudio</b></font>
+</center>
+<p> </p>
+<ul>
+<li>Rico-Guevara A, &amp; M Araya-Salas. 2015. <a
+href="https://academic.oup.com/beheco/article/26/1/21/2262689"><strong>Bills
+as daggers? A test for sexually dimorphic weapons in a lekking
+hummingbird species</strong></a>. <em>Behavioral Ecology</em>. 26 (1):
+21-29.</li>
+</ul>
+<p>“<em>Los machos con puntas de pico más grandes y puntiagudas tuvieron
+más éxito en ganar control de territorios en el lek.</em>”</p>
+<p><img src="images/daggers_lbh.png" width="70%" style="display: block; margin: auto;" />
+ </p>
+</div>
+<p> </p>
 <div class="alert alert-info">
 <p><font size="5">Ejercicio 6</font></p>
 <p> </p>
@@ -2089,7 +2184,7 @@ desbalanceado y compruebe la precisión del modelo.</li>
 <div class="alert alert-warning">
 <font size = 6>
 <center>
-Variables indicadoras (Dummy coding)
+Variables indicadoras (Dummy variables)
 </center>
 <p></font></p>
 <p>En un modelo de regresión, los predictores categóricos también se
@@ -2364,7 +2459,7 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1"></a><span class="co"># plot</span></span>
 <span id="cb117-2"><a href="#cb117-2"></a><span class="fu">ggplot</span>(<span class="at">data =</span> xy_data_intr, <span class="fu">aes</span>(<span class="at">x =</span> x2, <span class="at">y =</span> y, <span class="at">color =</span> x1)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
 <span id="cb117-3"><a href="#cb117-3"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<p><img src="modelos_de_regresion_lineal_files/figure-html/unnamed-chunk-80-1.png" width="80%" />
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-85-1.png" width="80%" />
  </p>
 <p>… y los tamaños de efecto:</p>
 <div class="sourceCode" id="cb118"><pre
@@ -2374,22 +2469,22 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <span id="cb118-4"><a href="#cb118-4"></a><span class="fu">ggplot</span>(ci_df, <span class="fu">aes</span>(<span class="at">x =</span> param, <span class="at">y =</span> est)) <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>,</span>
 <span id="cb118-5"><a href="#cb118-5"></a>    <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lty =</span> <span class="dv">2</span>) <span class="sc">+</span> <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> X2.<span class="dv">5</span>.., <span class="at">ymax =</span> X97.<span class="dv">5</span>..)) <span class="sc">+</span></span>
 <span id="cb118-6"><a href="#cb118-6"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Parámetro&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Tamaño de efecto&quot;</span>) <span class="sc">+</span> <span class="fu">coord_flip</span>()</span></code></pre></div>
-<p><img src="modelos_de_regresion_lineal_files/figure-html/unnamed-chunk-81-1.png" width="672" />
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-86-1.png" width="672" />
  </p>
 <p>También deberíamos revisar los gráficos de diagnóstico:</p>
 <div class="sourceCode" id="cb119"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb119-1"><a href="#cb119-1"></a><span class="fu">plot_model</span>(xy_mod_intr, <span class="at">type =</span> <span class="st">&quot;diag&quot;</span>)</span></code></pre></div>
 <pre><code>## [[1]]</code></pre>
-<p><img src="modelos_de_regresion_lineal_files/figure-html/unnamed-chunk-82-1.png" width="80%" /></p>
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-87-1.png" width="80%" /></p>
 <pre><code>## 
 ## [[2]]</code></pre>
-<p><img src="modelos_de_regresion_lineal_files/figure-html/unnamed-chunk-82-2.png" width="80%" /></p>
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-87-2.png" width="80%" /></p>
 <pre><code>## 
 ## [[3]]</code></pre>
-<p><img src="modelos_de_regresion_lineal_files/figure-html/unnamed-chunk-82-3.png" width="80%" /></p>
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-87-3.png" width="80%" /></p>
 <pre><code>## 
 ## [[4]]</code></pre>
-<p><img src="modelos_de_regresion_lineal_files/figure-html/unnamed-chunk-82-4.png" width="80%" />
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-87-4.png" width="80%" />
  </p>
 <div class="alert alert-success">
 <p> </p>
@@ -2433,6 +2528,22 @@ was estimated as -2.972</p></li>
 </ul>
 </div>
 <hr />
+<p> </p>
+<div class="alert alert-warning">
+<center>
+<font size="5"><b>Caso de estudio</b></font>
+</center>
+<p> </p>
+<ul>
+<li>Chirino F, B Wilink, Araya-Salas M. In prep. <strong>Climatic
+factors affecting vocal activity in lemur leaf frogs</strong>.</li>
+</ul>
+<p>“<em>El aumento de la luz de la luna disminuye la actividad vocal
+de</em> Agalychnis lemur <em>aunque esta relación es mediada por la
+temperatura.</em>”</p>
+<p><img src="images/lemur.png" width="70%" style="display: block; margin: auto;" />
+ </p>
+</div>
 <p> </p>
 <div class="alert alert-info">
 <p><font size="5">Ejercicio 7</font></p>
@@ -2522,7 +2633,7 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <span id="cb127-11"><a href="#cb127-11"></a></span>
 <span id="cb127-12"><a href="#cb127-12"></a></span>
 <span id="cb127-13"><a href="#cb127-13"></a><span class="co"># generar variables</span></span>
-<span id="cb127-14"><a href="#cb127-14"></a>y <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="at">n =</span> <span class="dv">3</span>, <span class="at">lambda =</span> <span class="fl">6.5</span>)  <span class="co"># lambda = tasa promedio de exitos </span></span>
+<span id="cb127-14"><a href="#cb127-14"></a>y <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="at">n =</span> n, <span class="at">lambda =</span> <span class="fl">6.5</span>)  <span class="co"># lambda = tasa promedio de exitos </span></span>
 <span id="cb127-15"><a href="#cb127-15"></a>x2 <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="fl">0.5</span>, <span class="fl">0.5</span>, , <span class="fu">length</span>(y))</span>
 <span id="cb127-16"><a href="#cb127-16"></a>x1 <span class="ot">&lt;-</span> (<span class="fu">log</span>(y) <span class="sc">-</span> b0 <span class="sc">-</span> b2 <span class="sc">*</span> x2)<span class="sc">/</span>b1</span>
 <span id="cb127-17"><a href="#cb127-17"></a></span>
@@ -2550,7 +2661,7 @@ y
 0.1433
 </td>
 <td style="text-align:center;">
--0.5
+-0.5000
 </td>
 <td style="text-align:center;">
 4
@@ -2561,7 +2672,7 @@ y
 0.5738
 </td>
 <td style="text-align:center;">
-0.0
+-0.4796
 </td>
 <td style="text-align:center;">
 7
@@ -2572,7 +2683,40 @@ y
 0.5738
 </td>
 <td style="text-align:center;">
-0.5
+-0.4592
+</td>
+<td style="text-align:center;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+0.5738
+</td>
+<td style="text-align:center;">
+-0.4388
+</td>
+<td style="text-align:center;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+0.7671
+</td>
+<td style="text-align:center;">
+-0.4184
+</td>
+<td style="text-align:center;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+0.5738
+</td>
+<td style="text-align:center;">
+-0.3980
 </td>
 <td style="text-align:center;">
 7
@@ -2585,7 +2729,7 @@ y
 <div class="sourceCode" id="cb128"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1"></a><span class="co"># graficar</span></span>
 <span id="cb128-2"><a href="#cb128-2"></a><span class="fu">ggplot</span>(xy_data_pois, <span class="fu">aes</span>(<span class="at">x =</span> x1, <span class="at">y =</span> y)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="modelos_de_regresion_lineal_files/figure-html/unnamed-chunk-89-1.png" width="672" />
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-95-1.png" width="672" />
  </p>
 <p>La relación no parece muy lineal ni la varianza parece ser constante
 a través de ‘x1’.</p>
@@ -2611,19 +2755,22 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 ## glm(formula = y ~ x1 + x2, family = poisson(), data = xy_data_pois)
 ## 
 ## Deviance Residuals: 
-## [1]  0  0  0
+##       Min         1Q     Median         3Q        Max  
+## -1.49e-08  -1.49e-08   0.00e+00   0.00e+00   2.98e-08  
 ## 
 ## Coefficients:
-##              Estimate Std. Error z value Pr(&gt;|z|)
-## (Intercept) 1.200e+00  1.046e+00   1.147    0.251
-## x1          1.300e+00  2.281e+00   0.570    0.569
-## x2          1.187e-16  1.069e+00   0.000    1.000
+##              Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept) 1.200e+00  1.289e-01   9.311  &lt; 2e-16 ***
+## x1          1.300e+00  2.196e-01   5.920 3.22e-09 ***
+## x2          1.388e-16  1.902e-01   0.000        1    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## (Dispersion parameter for poisson family taken to be 1)
 ## 
-##     Null deviance: 1.0725e+00  on 2  degrees of freedom
-## Residual deviance: 2.6645e-15  on 0  degrees of freedom
-## AIC: 16.881
+##     Null deviance: 3.9471e+01  on 49  degrees of freedom
+## Residual deviance: 2.2204e-16  on 47  degrees of freedom
+## AIC: 186.89
 ## 
 ## Number of Fisher Scoring iterations: 3</code></pre>
 <p> </p>
@@ -2635,22 +2782,43 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 </center>
 <p> </p>
 <p>Cuadro de los coeficientes (estimados):</p>
-<pre><code>##                 Estimate Std. Error      z value  Pr(&gt;|z|)
-## (Intercept) 1.200000e+00   1.046119 1.147097e+00 0.2513416
-## x1          1.300000e+00   2.281163 5.698848e-01 0.5687558
-## x2          1.186878e-16   1.069045 1.110223e-16 1.0000000</code></pre>
+<pre><code>##                 Estimate Std. Error      z value     Pr(&gt;|z|)
+## (Intercept) 1.200000e+00  0.1288851 9.310615e+00 1.270940e-20
+## x1          1.300000e+00  0.2195953 5.919980e+00 3.219809e-09
+## x2          1.388244e-16  0.1901631 7.300281e-16 1.000000e+00</code></pre>
 <ul>
 <li><p>El modelo nos dice que <span
 class="math inline">\(\beta_1\)</span> (el tamaño de efecto de ‘x1’) es
-1.3 y que es significativamente diferente de 0 (p = 0.5687558). Esto se
-interpreta en realidad como que un aumento de 1 unidad de ‘x1’ resulta
-en ‘y’ (tasa) en un factor de exp(1.3) = 3.6692967.</p></li>
+1.3 y que es significativamente diferente de 0 (p = 3.2198086^{-9}).
+Esto se interpreta en realidad como que un aumento de 1 unidad de ‘x1’
+resulta en ‘y’ (tasa) en un factor de exp(1.3) = 3.6692967.</p></li>
 <li><p>El modelo también nos dice que <span
 class="math inline">\(\beta_2\)</span> (el tamaño de efecto de ‘x2’) es
-1.1868783^{-16} y que es significativamente diferente de 0 (p = 1). Esto
+1.3882439^{-16} y que es significativamente diferente de 0 (p = 1). Esto
 significa que un aumento en 1 unidad de ‘x2’ resulta en ‘y’ (tasa) en un
-factor de exp(1.1868783^{-16}) = 1.</p></li>
+factor de exp(1.3882439^{-16}) = 1.</p></li>
 </ul>
+</div>
+<p> </p>
+<div class="alert alert-warning">
+<center>
+<font size="5"><b>Caso de estudio</b></font>
+</center>
+<p> </p>
+<ul>
+<li>Topp, E. N., Tscharntke, T., &amp; Loos, J. (2022). <a
+href="https://onlinelibrary.wiley.com/doi/pdf/10.1111/ddi.13257"><strong>Fire
+and landscape context shape plant and butterfly diversity in a South
+African shrubland</strong></a>. <em>Diversity and Distributions</em>,
+28(3), 357-371.</li>
+</ul>
+<p>“<em>La riqueza de especies de mariposas es de tres a cuatro veces
+mayor cuando aumenta el hábitat natural en el paisaje circundante (en un
+radio de 2 km), mientras que la abundancia de mariposas se asociaba
+negativamente con el aumento del tiempo transcurrido desde el último
+incendio.</em>”</p>
+<p><img src="images/butterflies.png" width="100%" style="display: block; margin: auto;" />
+ </p>
 </div>
 <p> </p>
 <div class="alert alert-info">
@@ -2831,7 +2999,7 @@ h
 <p>Podemos explorar la relación entre ‘y’ y ‘x1’ con un gráfico:</p>
 <div class="sourceCode" id="cb134"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb134-1"><a href="#cb134-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> xy_data_pops, <span class="fu">aes</span>(<span class="at">x =</span> x1, <span class="at">y =</span> y)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="modelos_de_regresion_lineal_files/figure-html/unnamed-chunk-95-1.png" width="672" />
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-102-1.png" width="672" />
  </p>
 <p>¿Puede ver claramente el patrón de asociación entre las dos variables
 que hemos utilizado para simular los datos? Podemos seguir explorando
@@ -2871,7 +3039,7 @@ nuestro poder de inferencia. Coloreemos cada una de las poblaciones para
 ver cómo covarían las variables en cada subgrupo de datos:</p>
 <div class="sourceCode" id="cb137"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb137-1"><a href="#cb137-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> xy_data_pops, <span class="fu">aes</span>(<span class="at">x =</span> x1, <span class="at">y =</span> y, <span class="at">color =</span> pops)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="modelos_de_regresion_lineal_files/figure-html/unnamed-chunk-97-1.png" width="672" />
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-104-1.png" width="672" />
  </p>
 <p>Parece haber un patrón claro de asociación positiva entre x1 e y. El
 patrón se hace un poco más evidente si representamos cada población en
@@ -2879,7 +3047,7 @@ su propio panel:</p>
 <div class="sourceCode" id="cb138"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb138-1"><a href="#cb138-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> xy_data_pops, <span class="fu">aes</span>(<span class="at">x =</span> x1, <span class="at">y =</span> y, <span class="at">color =</span> pops)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb138-2"><a href="#cb138-2"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>pops) <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<p><img src="modelos_de_regresion_lineal_files/figure-html/unnamed-chunk-98-1.png" width="100%" />
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-105-1.png" width="100%" />
  </p>
 <p>Construyamos un modelo de efectos mixtos utilizando la población como
 intercepto variable:</p>
@@ -2915,7 +3083,7 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 ## x1 -0.003</code></pre>
 <p> </p>
 <p>El modelo detectó correctamente el patrón simulado y la estimación de
-<span class="math inline">\(\ta_1\)</span> (1.3166493) es muy cercana al
+<span class="math inline">\(\beta_1\)</span> (1.317) es muy cercana al
 valor simulado.</p>
 <hr />
 </div>
@@ -2942,18 +3110,18 @@ data in R</a></p></li>
 <hr />
 <p> </p>
 <p><font size="4">Información de la sesión</font></p>
-<pre><code>## R version 4.1.1 (2021-08-10)
+<pre><code>## R version 4.2.0 (2022-04-22)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
-## Running under: Ubuntu 20.04.2 LTS
+## Running under: Ubuntu 22.04.1 LTS
 ## 
 ## Matrix products: default
-## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0
-## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0
+## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0
+## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0
 ## 
 ## locale:
-##  [1] LC_CTYPE=es_ES.UTF-8       LC_NUMERIC=C              
-##  [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=es_ES.UTF-8    
-##  [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=es_ES.UTF-8   
+##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+##  [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=en_US.UTF-8    
+##  [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=en_US.UTF-8   
 ##  [7] LC_PAPER=es_CR.UTF-8       LC_NAME=C                 
 ##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
 ## [11] LC_MEASUREMENT=es_CR.UTF-8 LC_IDENTIFICATION=C       
@@ -2962,39 +3130,41 @@ data in R</a></p></li>
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-##  [1] car_3.1-0         carData_3.0-5     sjPlot_2.8.10     lmerTest_3.1-3   
-##  [5] lme4_1.1-29       Matrix_1.3-4      viridis_0.6.2     viridisLite_0.4.0
-##  [9] ggplot2_3.3.6     knitr_1.39        kableExtra_1.3.4 
+##  [1] car_3.1-0         carData_3.0-5     sjPlot_2.8.11     lmerTest_3.1-3   
+##  [5] lme4_1.1-30       Matrix_1.4-1      viridis_0.6.2     viridisLite_0.4.1
+##  [9] ggplot2_3.3.6     knitr_1.40        kableExtra_1.3.4 
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] httr_1.4.3          sass_0.4.1          tidyr_1.2.0        
-##  [4] jsonlite_1.8.0      splines_4.1.1       modelr_0.1.8       
-##  [7] bslib_0.3.1         datawizard_0.4.1    assertthat_0.2.1   
-## [10] highr_0.9           yaml_2.3.5          bayestestR_0.12.1  
-## [13] numDeriv_2016.8-1.1 pillar_1.8.0        backports_1.4.1    
-## [16] lattice_0.20-44     glue_1.6.2          uuid_1.1-0         
-## [19] digest_0.6.29       rvest_1.0.2         minqa_1.2.4        
-## [22] colorspace_2.0-3    htmltools_0.5.3     pkgconfig_2.0.3    
-## [25] broom_0.8.0         purrr_0.3.4         xtable_1.8-4       
-## [28] mvtnorm_1.1-3       scales_1.2.0        webshot_0.5.3      
-## [31] svglite_2.1.0       emmeans_1.7.4-1     tibble_3.1.8       
-## [34] mgcv_1.8-36         farver_2.1.1        generics_0.1.2     
-## [37] sjlabelled_1.2.0    withr_2.5.0         cli_3.3.0          
-## [40] magrittr_2.0.3      effectsize_0.7.0    estimability_1.3   
-## [43] evaluate_0.15       fansi_1.0.3         nlme_3.1-152       
-## [46] MASS_7.3-54         xml2_1.3.3          tools_4.1.1        
-## [49] formatR_1.12        lifecycle_1.0.1     stringr_1.4.0      
-## [52] munsell_0.5.0       ggeffects_1.1.2     compiler_4.1.1     
-## [55] jquerylib_0.1.4     systemfonts_1.0.4   rlang_1.0.4        
-## [58] grid_4.1.1          nloptr_2.0.3        parameters_0.18.1  
-## [61] rstudioapi_0.13     labeling_0.4.2      rmarkdown_2.14     
-## [64] xaringanExtra_0.7.0 boot_1.3-28         gtable_0.3.0       
-## [67] abind_1.4-5         sjstats_0.18.1      DBI_1.1.3          
-## [70] sjmisc_2.8.9        R6_2.5.1            gridExtra_2.3      
-## [73] dplyr_1.0.9         performance_0.9.0   fastmap_1.1.0      
-## [76] utf8_1.2.2          insight_0.17.1      stringi_1.7.8      
-## [79] Rcpp_1.0.9          vctrs_0.4.1         tidyselect_1.1.2   
-## [82] xfun_0.31           coda_0.19-4</code></pre>
+##  [1] nlme_3.1-157        insight_0.18.4      webshot_0.5.3      
+##  [4] httr_1.4.4          numDeriv_2016.8-1.1 tools_4.2.0        
+##  [7] backports_1.4.1     bslib_0.4.0         utf8_1.2.2         
+## [10] R6_2.5.1            sjlabelled_1.2.0    mgcv_1.8-40        
+## [13] DBI_1.1.2           colorspace_2.0-3    withr_2.5.0        
+## [16] tidyselect_1.1.2    gridExtra_2.3       emmeans_1.8.1-1    
+## [19] compiler_4.2.0      performance_0.9.2   cli_3.4.1          
+## [22] rvest_1.0.2         formatR_1.12        xml2_1.3.3         
+## [25] sandwich_3.0-1      labeling_0.4.2      bayestestR_0.13.0  
+## [28] sass_0.4.2          scales_1.2.1        mvtnorm_1.1-3      
+## [31] systemfonts_1.0.4   stringr_1.4.1       digest_0.6.29      
+## [34] minqa_1.2.4         rmarkdown_2.16      svglite_2.1.0      
+## [37] pkgconfig_2.0.3     htmltools_0.5.3     fastmap_1.1.0      
+## [40] highr_0.9           rlang_1.0.6         rstudioapi_0.13    
+## [43] jquerylib_0.1.4     generics_0.1.2      farver_2.1.1       
+## [46] zoo_1.8-10          jsonlite_1.8.0      dplyr_1.0.9        
+## [49] magrittr_2.0.3      parameters_0.18.2   Rcpp_1.0.9         
+## [52] munsell_0.5.0       fansi_1.0.3         abind_1.4-5        
+## [55] lifecycle_1.0.2     stringi_1.7.8       multcomp_1.4-18    
+## [58] yaml_2.3.5          MASS_7.3-57         grid_4.2.0         
+## [61] sjmisc_2.8.9        lattice_0.20-45     ggeffects_1.1.3    
+## [64] splines_4.2.0       sjstats_0.18.1      pillar_1.8.1       
+## [67] uuid_1.1-0          boot_1.3-28         estimability_1.4.1 
+## [70] effectsize_0.7.0.5  codetools_0.2-18    glue_1.6.2         
+## [73] evaluate_0.16       modelr_0.1.8        vctrs_0.4.1        
+## [76] nloptr_2.0.0        gtable_0.3.1        purrr_0.3.4        
+## [79] tidyr_1.2.0         assertthat_0.2.1    datawizard_0.6.1   
+## [82] cachem_1.0.6        xfun_0.33           xtable_1.8-4       
+## [85] broom_0.8.0         coda_0.19-4         survival_3.2-13    
+## [88] tibble_3.1.8        TH.data_1.1-0       xaringanExtra_0.7.0</code></pre>
 </div>
 </div>
 

@@ -13,7 +13,7 @@
 
 <title>bucles_loops.knit</title>
 
-<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.16/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -132,13 +132,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   for (var i = 0; i < sheets.length; i++) {
     if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
     try { var rules = sheets[i].cssRules; } catch (e) { continue; }
-    for (var j = 0; j < rules.length; j++) {
+    var j = 0;
+    while (j < rules.length) {
       var rule = rules[j];
       // check if there is a div.sourceCode rule
-      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
       var style = rule.style.cssText;
       // check if color or background-color is set
-      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
       // replace div.sourceCode by a pre.sourceCode rule
       sheets[i].deleteRule(j);
       sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
@@ -234,11 +241,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -1163,17 +1174,17 @@ y el usuario no tiene control sobre el insumo a la función. El argumento
 a realizar:</p>
 <div class="sourceCode" id="cb41"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="fu">replicate</span>(<span class="at">n =</span> <span class="dv">3</span>, <span class="at">expr =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>))</span></code></pre></div>
-<pre><code>##             [,1]      [,2]     [,3]
-##  [1,]  0.3960810  1.304705 -0.13721
-##  [2,]  0.7280854 -0.228386  0.59304
-##  [3,] -0.3185001  0.085326  0.81317
-##  [4,]  0.7128199  1.130490  0.46627
-##  [5,] -0.8452318  1.082271 -0.69380
-##  [6,]  0.2365002 -1.250074 -0.47064
-##  [7,] -0.7421848  0.497838  1.17715
-##  [8,]  0.6915820 -1.589035  0.33108
-##  [9,]  0.0026696  1.679758 -0.28807
-## [10,]  1.0905996  0.254568  0.40797</code></pre>
+<pre><code>##           [,1]      [,2]      [,3]
+##  [1,]  0.15216 -1.248025  0.042071
+##  [2,] -2.65162 -0.672481 -0.431501
+##  [3,]  0.36230 -0.444341  1.004271
+##  [4,] -1.10964  1.314671 -1.054422
+##  [5,]  1.81338 -0.287175 -2.099166
+##  [6,] -1.07040 -0.413224  0.153335
+##  [7,]  1.52899  0.800111  0.779050
+##  [8,] -0.31828 -0.021834  1.478480
+##  [9,] -1.64120 -0.591344  0.488227
+## [10,] -0.65590  0.194728  0.621760</code></pre>
 <p> </p>
 <p>Note que los resultados son agrupados en una matrix. ‘expr’ también
 puede replicar código que no ha sido “empaquetado en una función”.</p>
@@ -1232,7 +1243,7 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <span id="cb43-21"><a href="#cb43-21"></a>}</span>
 <span id="cb43-22"><a href="#cb43-22"></a></span>
 <span id="cb43-23"><a href="#cb43-23"></a><span class="fu">head</span>(cc_vector)</span></code></pre></div>
-<pre><code>## [1] -0.11028  0.40124 -0.23773 -0.22411  0.29556  0.27989</code></pre>
+<pre><code>## [1]  0.046151  0.244439 -0.057920 -0.186227  0.434133 -0.087918</code></pre>
 <p> </p>
 <p>Podemos graficarlo el resultado asi así:</p>
 <div class="sourceCode" id="cb45"><pre
@@ -1322,7 +1333,7 @@ es superior a 0.8 o si el bucle ha estado ejecutándose durante más de 10
 segundos (consejo: use la función<code>difftime</code> y/o
 <code>as.numeric</code>)</p>
 <p> </p>
-<p>3.1 Haga un bucle <code>repeat</code> que se detenga solo si la
+<p>3.2 Haga un bucle <code>repeat</code> que se detenga solo si la
 correlación es mayor que 0.5 pero menor que 0.55</p>
 </div>
 <hr />
@@ -1337,18 +1348,18 @@ Tutorial on Loops in R - Usage and Alternatives, DataCamp</a></li>
 </ul>
 <hr />
 <p><font size="5">Session information</font></p>
-<pre><code>## R version 4.1.1 (2021-08-10)
+<pre><code>## R version 4.2.0 (2022-04-22)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
-## Running under: Ubuntu 20.04.2 LTS
+## Running under: Ubuntu 22.04.1 LTS
 ## 
 ## Matrix products: default
-## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0
-## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0
+## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0
+## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0
 ## 
 ## locale:
-##  [1] LC_CTYPE=es_ES.UTF-8       LC_NUMERIC=C              
-##  [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=es_ES.UTF-8    
-##  [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=es_ES.UTF-8   
+##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+##  [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=en_US.UTF-8    
+##  [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=en_US.UTF-8   
 ##  [7] LC_PAPER=es_CR.UTF-8       LC_NAME=C                 
 ##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
 ## [11] LC_MEASUREMENT=es_CR.UTF-8 LC_IDENTIFICATION=C       
@@ -1358,22 +1369,23 @@ Tutorial on Loops in R - Usage and Alternatives, DataCamp</a></li>
 ## 
 ## other attached packages:
 ## [1] xaringanExtra_0.7.0 ggplot2_3.3.6       RColorBrewer_1.1-3 
-## [4] kableExtra_1.3.4    knitr_1.39         
+## [4] kableExtra_1.3.4    knitr_1.40         
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] tidyselect_1.1.2  xfun_0.31         bslib_0.3.1       purrr_0.3.4      
+##  [1] tidyselect_1.1.2  xfun_0.33         bslib_0.4.0       purrr_0.3.4      
 ##  [5] colorspace_2.0-3  vctrs_0.4.1       generics_0.1.2    htmltools_0.5.3  
-##  [9] viridisLite_0.4.0 yaml_2.3.5        utf8_1.2.2        rlang_1.0.4      
-## [13] jquerylib_0.1.4   pillar_1.8.0      glue_1.6.2        withr_2.5.0      
-## [17] DBI_1.1.3         uuid_1.1-0        lifecycle_1.0.1   stringr_1.4.0    
-## [21] munsell_0.5.0     gtable_0.3.0      rvest_1.0.2       evaluate_0.15    
+##  [9] viridisLite_0.4.1 yaml_2.3.5        utf8_1.2.2        rlang_1.0.6      
+## [13] jquerylib_0.1.4   pillar_1.8.1      glue_1.6.2        withr_2.5.0      
+## [17] DBI_1.1.2         uuid_1.1-0        lifecycle_1.0.2   stringr_1.4.1    
+## [21] munsell_0.5.0     gtable_0.3.1      rvest_1.0.2       evaluate_0.16    
 ## [25] labeling_0.4.2    fastmap_1.1.0     fansi_1.0.3       highr_0.9        
-## [29] scales_1.2.0      formatR_1.12      webshot_0.5.3     jsonlite_1.8.0   
-## [33] farver_2.1.1      systemfonts_1.0.4 digest_0.6.29     stringi_1.7.8    
-## [37] dplyr_1.0.9       grid_4.1.1        cli_3.3.0         tools_4.1.1      
-## [41] magrittr_2.0.3    sass_0.4.1        tibble_3.1.8      pkgconfig_2.0.3  
-## [45] xml2_1.3.3        assertthat_0.2.1  rmarkdown_2.14    svglite_2.1.0    
-## [49] httr_1.4.3        rstudioapi_0.13   R6_2.5.1          compiler_4.1.1</code></pre>
+## [29] scales_1.2.1      formatR_1.12      cachem_1.0.6      webshot_0.5.3    
+## [33] jsonlite_1.8.0    farver_2.1.1      systemfonts_1.0.4 digest_0.6.29    
+## [37] stringi_1.7.8     dplyr_1.0.9       grid_4.2.0        cli_3.4.1        
+## [41] tools_4.2.0       magrittr_2.0.3    sass_0.4.2        tibble_3.1.8     
+## [45] pkgconfig_2.0.3   xml2_1.3.3        assertthat_0.2.1  rmarkdown_2.16   
+## [49] svglite_2.1.0     httr_1.4.4        rstudioapi_0.13   R6_2.5.1         
+## [53] compiler_4.2.0</code></pre>
 </div>
 </div>
 

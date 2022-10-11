@@ -816,7 +816,7 @@ cc <- cc[(nrow(cc) -50):nrow(cc),]
 
 &nbsp;
 
-3.1  Haga un bucle `repeat` que se detenga solo si la correlación es mayor que 0.5 pero menor que 0.55
+3.2  Haga un bucle `repeat` que se detenga solo si la correlación es mayor que 0.5 pero menor que 0.55
 
   
 </div>
