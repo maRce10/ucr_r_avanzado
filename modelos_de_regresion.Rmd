@@ -2170,7 +2170,7 @@ La interdependencia de observaciones pertenecientes al mismo grupo puede ser tom
 
 <div class="alert alert-info">
 
-<center><b><font size="5">Modelos lineales como abordaje estadístico estándar </font><b/></center> 
+<center><b><font size="5">Modelos lineales como abordaje estadístico estándar </font></b></center> 
 
 ```{r, out.width = "40%", echo = FALSE, fig.align= "center"}
 
