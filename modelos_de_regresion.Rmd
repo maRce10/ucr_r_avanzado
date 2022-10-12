@@ -2182,7 +2182,7 @@ knitr::include_graphics("./images/swiss_knife.png")
 
 - Este modelo básico incluye una función de enlace que cuando es gausiana equivale aun modelo linear y cuando no a un modelo generalizado
 
-- Cuando el $\beta_{grupo}$ es diferente entre grupos (i.e. cuando el intercepto difiere entre grupos) es una modelo mixto con intercepto variable (i.e. aleatorio)
+- Cuando el $\beta_{grupo}$ es diferente entre grupos (i.e. cuando el intercepto difiere entre grupos) es un modelo mixto con intercepto variable (i.e. aleatorio)
 
 &nbsp; 
 
