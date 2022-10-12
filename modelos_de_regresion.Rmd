@@ -2164,7 +2164,7 @@ knitr::include_graphics("./images/simpsons_paradox.gif")
 
 &nbsp;
 
-La interdependencia de observaciones pertenecientes al mismo grupo puede ser tomada en cuenta como usando el grupo como un factor aleatorio, tal y como se hizo en el ejemplo anterior.
+La estructura de los datos debido a observaciones pertenecientes al mismo grupo puede ser tomada en cuenta usando el grupo como un factor aleatorio, tal y como se hizo en el ejemplo anterior.
 
 &nbsp;
 
