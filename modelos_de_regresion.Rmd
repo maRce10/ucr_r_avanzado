@@ -2190,7 +2190,7 @@ knitr::include_graphics("./images/swiss_knife.png")
 
 &nbsp; 
 
-Este manual solo pretende sugerir un abordaje estadístico centrado en los modelos de regresión desde el cual se pueden llevar a cabo adecuadamente la mayoría de los análisis estadísticos que usamos en biología. **El manual no tiene como objetivo explicar en detalle las particularidades de los modelos generalizados y mixtos**. Note que estos modelos, principalmente los mixtos, pueden ajustarse a otras estructuras de datos mas complejas no cubiertas aquí, como lo son las pendientes aleatorias, pendientes e interceptos aleatorios, y el uso de pseudoreplicas. 
+Este manual solo pretende sugerir un abordaje estadístico centrado en los modelos de regresión desde el cual se pueden llevar a cabo adecuadamente la mayoría de los análisis estadísticos que usamos en biología. **El manual no tiene como objetivo explicar en detalle las particularidades de los modelos generalizados y mixtos**. Note que estos modelos, principalmente los mixtos, pueden ajustarse a otras estructuras de datos mas complejas no cubiertas aquí, como lo son las pendientes aleatorias, pendientes e interceptos aleatorios, estructuras de correlación (i.e. autocorrelación espacial o temporal, pedigrís o árboles filogenéticos) y el uso de pseudoreplicas. 
 
 &nbsp; 
 
