@@ -1,5 +1,5 @@
 ---
-title: <center><font size="7"><b>Tarea 5</b></font></center>
+title: <center><font size="7"><b>Solución a la tarea 5</b></font></center>
 subtitle: <center><font size="5"><b>Programación y métodos estadísticos avanzados en R</b></b></font></center>
 author: <center><font size="5"><a href="http://marceloarayasalas.weebly.com/">Marcelo Araya-Salas, PhD</a></font></center>
 date: <center>"`r Sys.Date()`"</center>
@@ -25,24 +25,6 @@ body
 pre.numberSource code
   { counter-reset: none; }
 </style>
-
-&nbsp; 
-
-<div class="alert alert-warning">
-
-**Instrucciones**
-
-  * La fecha de entrega es el 13 de octubre a las 11:59 pm
-  * La tarea debe ser escrita en el formato para reportes dinámicos Rmarkdown (5 pts)
-  * Debe entregar el archivo html generado del Rmarkdown por medio de mediación virtual (hay un enlace para someter la tarea). No envíe el archivo Rmd salvo que no pueda generar el html.
-  * El archivo Rmarkdown debe utilizar secciones de código ("chunks") separados para cada ejercicio y subtítulos para cada uno así como comentarios en texto (2.5 pts)
-  * El código dentro de los bloques de código debe estar documentado con comentarios usando '#'. En otras palabras: comente su código (2.5 pts)
-  * Debe usar R básico para la manipulación de datos (5 pts)
-  * Cada ejercicio tiene un valor de 5 puntos
-
-</div>
-
-&nbsp; 
 
 ```{r, echo = FALSE}
 
@@ -125,27 +107,11 @@ length(archivos_txt)
 ```
 &nbsp; 
 
-Estos datos muestran la salida de un programa de identificación automática de especies marinas en videos pasivos tomados en la columna de agua. Para cada video analizado el programa genera un archivo de texto (.TXT) con una fila para cada especie detectada mas una serie de metadatos asociados a la detección. Los datos se ven así:
-
-```{r, echo=FALSE,out.width="100%", fig.align="center"}
-
-knitr::include_graphics("./images/datos.png")
-
-```
-&nbsp;
-
-Recordemos que los nombres de los archivos .TXT están guardados en un vector llamado `archivos_txt`.
-
- ---
-
-<!-- skyblue box -->
-
-<div class="alert alert-info">
-
+<div class="alert alert-success">
 
 1. Haga un bucle `for` que devuelva el número de especies para cada archivo (y si, es lo mismo que hicimos en clase)
 
-```{r, eval = FALSE, echo = FALSE}
+```{r}
 
 resultados <- vector() # vector vacio
 
@@ -165,7 +131,7 @@ resultados
 
 2. Haga un bucle `for` que devuelva el número de familias para cada archivo
 
-```{r, eval = FALSE, echo = FALSE}
+```{r}
 
 resultados_fam <- vector() # vector vacio
 
@@ -182,10 +148,11 @@ for(i in archivos_txt){ # inicio del bucle
 
 3. Cree un cuadro de datos (data frame) que contenga tres columnas, una para el nombre del archivo, otra para el número de especies y otra para el número de familias
 
-```{r, eval = FALSE, echo = FALSE}
+```{r}
 
 n_filas_df <- data.frame(archivo = basename(archivos_txt), especies = resultados, familias = resultados_fam)
 
+n_filas_df
 ```
 
 
@@ -193,7 +160,7 @@ n_filas_df <- data.frame(archivo = basename(archivos_txt), especies = resultados
 
 4. Añada una columna al cuadro de datos creado en el ejercicio anterior indicando la fecha de creación del video (esta información se encuentra en la columna 'Date' de cada archivo de texto). Note que cada archivo contiene solamente una fecha. Debe usar un bucle `for` para extraer esta información de los archivos.
 
-```{r, eval = FALSE, echo = FALSE}
+```{r}
 
 resultados <- vector() # vector vacio
 
@@ -213,7 +180,7 @@ n_filas_df$fecha <- resultados
 
 5. Añada una columna al cuadro de datos creado en el ejercicio 3 (y modificado en 4) indicando la profundidad a la que se grabó el video. Debe usar un bucle `for` para extraer esta información de los archivos.
 
-```{r, eval = FALSE, echo = FALSE}
+```{r}
 
 resultados <- vector() # vector vacio
 
@@ -233,18 +200,34 @@ n_filas_df$profundidad <- as.numeric(resultados)
 &nbsp;
 
 Note que la columna de profundidad no es numérica. Puede usar el siguiente código para convertir profundidad a un vector numérico (se necesita para el siguiente punto):
-```{r, eval=FALSE}
+```{r}
 
-n_filas_df$profundidad <- gsub(" m", "", gsub("\\,", ".", n_filas_df$profundidad))
+n_filas_df$profundidad <- as.numeric(gsub(" m", "", gsub("\\,", ".", n_filas_df$profundidad)))
 
 ```
+&nbsp;
 
 
 6. Calcule es la correlación entre el número de especies observadas y la profundidad (pista: `cor.test()`) 
 
+```{r}
+
+# correlacion
+cor.test(n_filas_df$especies, n_filas_df$profundidad)
+
+```
+
+
 &nbsp;
 
 7. Calcule la correlación entre el número de familias y la profundidad
+
+```{r}
+
+# correlacion
+cor.test(n_filas_df$familias, n_filas_df$profundidad)
+
+```
 
 &nbsp;
 

@@ -34,6 +34,8 @@ navbar:
         href:  respuestas_tarea_4.html
       - text: "Tarea 5"
         href:  tarea_5.html
+      - text: "Solución: tarea 5"
+        href:  respuestas_tarea_5.html
     - text: "Programa del curso"
       href: https://github.com/maRce10/ucr_r_avanzado/raw/master/additional_files/2022-08-05_Probl%20Esp%20Ecol_Estadistica%20Avanzada%20en%20R.pdf
     - text: "Instructor"

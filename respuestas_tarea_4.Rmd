@@ -65,7 +65,6 @@ tibble <- function(x, ...) {
 registerS3method("knit_print", "data.frame", tibble)
 ```
 
-<!-- skyblue box -->
 
 <div class="alert alert-success">
 

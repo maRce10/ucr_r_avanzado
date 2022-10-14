@@ -465,6 +465,9 @@ div.tocify {
     <li>
       <a href="tarea_5.html">Tarea 5</a>
     </li>
+    <li>
+      <a href="respuestas_tarea_5.html">Solución: tarea 5</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -497,7 +500,7 @@ div.tocify {
 Araya-Salas, PhD</a></font>
 </center></h4>
 <h4 class="date"><center>
-“2022-10-11”
+“2022-10-14”
 </center></h4>
 
 </div>
@@ -910,34 +913,98 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <pre><code>## [1] 5 3</code></pre>
 <div class="sourceCode" id="cb48"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a>m</span></code></pre></div>
-<pre><code>## # A tibble: 5 × 3
-##   ID     size observed
-##   &lt;chr&gt; &lt;dbl&gt; &lt;lgl&gt;   
-## 1 a         1 FALSE   
-## 2 b         2 TRUE    
-## 3 c         3 FALSE   
-## 4 d         4 FALSE   
-## 5 e         5 FALSE</code></pre>
-<div class="sourceCode" id="cb50"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a><span class="fu">class</span>(m)</span></code></pre></div>
+<table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+ID
+</th>
+<th style="text-align:center;">
+size
+</th>
+<th style="text-align:center;">
+observed
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+a
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+FALSE
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+b
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+TRUE
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+c
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+FALSE
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+d
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+FALSE
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+e
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+FALSE
+</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb49"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a><span class="fu">class</span>(m)</span></code></pre></div>
 <pre><code>## [1] &quot;data.frame&quot;</code></pre>
-<div class="sourceCode" id="cb52"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a><span class="fu">is.data.frame</span>(m)</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a><span class="fu">is.data.frame</span>(m)</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb54"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a><span class="fu">is.list</span>(m)</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a><span class="fu">is.list</span>(m)</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb56"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a><span class="fu">str</span>(m)</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a><span class="fu">str</span>(m)</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    5 obs. of  3 variables:
 ##  $ ID      : chr  &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...
 ##  $ size    : num  1 2 3 4 5
 ##  $ observed: logi  FALSE TRUE FALSE FALSE FALSE</code></pre>
 <p> </p>
 <p>Pero los vectores deben tener la misma longitud:</p>
-<div class="sourceCode" id="cb58"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1"></a>m <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">ID =</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;e&quot;</span>), <span class="at">size =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>,</span>
-<span id="cb58-2"><a href="#cb58-2"></a>    <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>), <span class="at">observed =</span> <span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a>m <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">ID =</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;e&quot;</span>), <span class="at">size =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>,</span>
+<span id="cb57-2"><a href="#cb57-2"></a>    <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>), <span class="at">observed =</span> <span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>))</span></code></pre></div>
 <pre><code>## Error in data.frame(ID = c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;), size = c(1, 2, 3, : arguments imply differing number of rows: 5, 6</code></pre>
 <p> </p>
 <hr />
@@ -948,179 +1015,458 @@ class="section level2">
 <p>Los elementos dentro de los objetos pueden ser llamados por medio de
 la indexación. Para sub-conjuntar un vector simplemente llame a la
 posición del objeto usando corchetes:</p>
-<div class="sourceCode" id="cb60"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">50</span>, <span class="dv">1</span>, <span class="dv">6</span>)</span>
-<span id="cb60-2"><a href="#cb60-2"></a></span>
-<span id="cb60-3"><a href="#cb60-3"></a>x[<span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">50</span>, <span class="dv">1</span>, <span class="dv">6</span>)</span>
+<span id="cb59-2"><a href="#cb59-2"></a></span>
+<span id="cb59-3"><a href="#cb59-3"></a>x[<span class="dv">1</span>]</span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
-<div class="sourceCode" id="cb62"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1"></a>x[<span class="dv">2</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a>x[<span class="dv">2</span>]</span></code></pre></div>
 <pre><code>## [1] 3</code></pre>
-<div class="sourceCode" id="cb64"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1"></a>x[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1"></a>x[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>]</span></code></pre></div>
 <pre><code>## [1] 3 4</code></pre>
-<div class="sourceCode" id="cb66"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1"></a>x[<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1"></a>x[<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>)]</span></code></pre></div>
 <pre><code>## [1] 1 4</code></pre>
 <p> </p>
 <p>Los elementos se pueden eliminar de la misma manera:</p>
-<div class="sourceCode" id="cb68"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1"></a>x[<span class="sc">-</span><span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1"></a>x[<span class="sc">-</span><span class="dv">1</span>]</span></code></pre></div>
 <pre><code>## [1]  3  4 10 15 20 50  1  6</code></pre>
-<div class="sourceCode" id="cb70"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1"></a>x[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1"></a>x[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>)]</span></code></pre></div>
 <pre><code>## [1]  3 10 15 20 50  1  6</code></pre>
 <p> </p>
 <p>Las matrices y los marcos de datos requieren 2 índices
 <code>[fila, columna]</code>:</p>
-<div class="sourceCode" id="cb72"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1"></a>m <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">11</span>, <span class="dv">12</span>, <span class="dv">13</span>), <span class="at">nrow =</span> <span class="dv">2</span>)</span>
-<span id="cb72-2"><a href="#cb72-2"></a></span>
-<span id="cb72-3"><a href="#cb72-3"></a>m[<span class="dv">1</span>, ]</span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1"></a>m <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">11</span>, <span class="dv">12</span>, <span class="dv">13</span>), <span class="at">nrow =</span> <span class="dv">2</span>)</span>
+<span id="cb71-2"><a href="#cb71-2"></a></span>
+<span id="cb71-3"><a href="#cb71-3"></a>m[<span class="dv">1</span>, ]</span></code></pre></div>
 <pre><code>## [1]  1  3 12</code></pre>
-<div class="sourceCode" id="cb74"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1"></a>m[, <span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1"></a>m[, <span class="dv">1</span>]</span></code></pre></div>
 <pre><code>## [1] 1 2</code></pre>
-<div class="sourceCode" id="cb76"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1"></a>m[<span class="dv">1</span>, <span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1"></a>m[<span class="dv">1</span>, <span class="dv">1</span>]</span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
-<div class="sourceCode" id="cb78"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1"></a>m[<span class="sc">-</span><span class="dv">1</span>, ]</span></code></pre></div>
+<div class="sourceCode" id="cb77"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1"></a>m[<span class="sc">-</span><span class="dv">1</span>, ]</span></code></pre></div>
 <pre><code>## [1]  2 11 13</code></pre>
-<div class="sourceCode" id="cb80"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1"></a>m[, <span class="sc">-</span><span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1"></a>m[, <span class="sc">-</span><span class="dv">1</span>]</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    3   12
 ## [2,]   11   13</code></pre>
-<div class="sourceCode" id="cb82"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1"></a>m[<span class="sc">-</span><span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1"></a>m[<span class="sc">-</span><span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>]</span></code></pre></div>
 <pre><code>## [1] 11 13</code></pre>
+<div class="sourceCode" id="cb83"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">family =</span> <span class="fu">c</span>(<span class="st">&quot;Psittacidae&quot;</span>, <span class="st">&quot;Trochilidae&quot;</span>, <span class="st">&quot;Psittacidae&quot;</span>),</span>
+<span id="cb83-2"><a href="#cb83-2"></a>    <span class="at">genus =</span> <span class="fu">c</span>(<span class="st">&quot;Amazona&quot;</span>, <span class="st">&quot;Phaethornis&quot;</span>, <span class="st">&quot;Ara&quot;</span>), <span class="at">species =</span> <span class="fu">c</span>(<span class="st">&quot;aestiva&quot;</span>,</span>
+<span id="cb83-3"><a href="#cb83-3"></a>        <span class="st">&quot;philippii&quot;</span>, <span class="st">&quot;ararauna&quot;</span>))</span>
+<span id="cb83-4"><a href="#cb83-4"></a></span>
+<span id="cb83-5"><a href="#cb83-5"></a>df</span></code></pre></div>
+<table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+family
+</th>
+<th style="text-align:center;">
+genus
+</th>
+<th style="text-align:center;">
+species
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Psittacidae
+</td>
+<td style="text-align:center;">
+Amazona
+</td>
+<td style="text-align:center;">
+aestiva
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Trochilidae
+</td>
+<td style="text-align:center;">
+Phaethornis
+</td>
+<td style="text-align:center;">
+philippii
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Psittacidae
+</td>
+<td style="text-align:center;">
+Ara
+</td>
+<td style="text-align:center;">
+ararauna
+</td>
+</tr>
+</tbody>
+</table>
 <div class="sourceCode" id="cb84"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">family =</span> <span class="fu">c</span>(<span class="st">&quot;Psittacidae&quot;</span>, <span class="st">&quot;Trochilidae&quot;</span>, <span class="st">&quot;Psittacidae&quot;</span>),</span>
-<span id="cb84-2"><a href="#cb84-2"></a>    <span class="at">genus =</span> <span class="fu">c</span>(<span class="st">&quot;Amazona&quot;</span>, <span class="st">&quot;Phaethornis&quot;</span>, <span class="st">&quot;Ara&quot;</span>), <span class="at">species =</span> <span class="fu">c</span>(<span class="st">&quot;aestiva&quot;</span>,</span>
-<span id="cb84-3"><a href="#cb84-3"></a>        <span class="st">&quot;philippii&quot;</span>, <span class="st">&quot;ararauna&quot;</span>))</span>
-<span id="cb84-4"><a href="#cb84-4"></a></span>
-<span id="cb84-5"><a href="#cb84-5"></a>df</span></code></pre></div>
-<pre><code>## # A tibble: 3 × 3
-##   family      genus       species  
-##   &lt;chr&gt;       &lt;chr&gt;       &lt;chr&gt;    
-## 1 Psittacidae Amazona     aestiva  
-## 2 Trochilidae Phaethornis philippii
-## 3 Psittacidae Ara         ararauna</code></pre>
-<div class="sourceCode" id="cb86"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1"></a>df[<span class="dv">1</span>, ]</span></code></pre></div>
-<pre><code>## # A tibble: 1 × 3
-##   family      genus   species
-##   &lt;chr&gt;       &lt;chr&gt;   &lt;chr&gt;  
-## 1 Psittacidae Amazona aestiva</code></pre>
-<div class="sourceCode" id="cb88"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1"></a>df[, <span class="dv">1</span>]</span></code></pre></div>
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1"></a>df[<span class="dv">1</span>, ]</span></code></pre></div>
+<table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+family
+</th>
+<th style="text-align:center;">
+genus
+</th>
+<th style="text-align:center;">
+species
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Psittacidae
+</td>
+<td style="text-align:center;">
+Amazona
+</td>
+<td style="text-align:center;">
+aestiva
+</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb85"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1"></a>df[, <span class="dv">1</span>]</span></code></pre></div>
 <pre><code>## [1] &quot;Psittacidae&quot; &quot;Trochilidae&quot; &quot;Psittacidae&quot;</code></pre>
-<div class="sourceCode" id="cb90"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1"></a>df[<span class="dv">1</span>, <span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb87"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1"></a>df[<span class="dv">1</span>, <span class="dv">1</span>]</span></code></pre></div>
 <pre><code>## [1] &quot;Psittacidae&quot;</code></pre>
+<div class="sourceCode" id="cb89"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1"></a>df[<span class="sc">-</span><span class="dv">1</span>, ]</span></code></pre></div>
+<table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+family
+</th>
+<th style="text-align:center;">
+genus
+</th>
+<th style="text-align:center;">
+species
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Trochilidae
+</td>
+<td style="text-align:center;">
+Phaethornis
+</td>
+<td style="text-align:center;">
+philippii
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Psittacidae
+</td>
+<td style="text-align:center;">
+Ara
+</td>
+<td style="text-align:center;">
+ararauna
+</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb90"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1"></a>df[, <span class="sc">-</span><span class="dv">1</span>]</span></code></pre></div>
+<table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+genus
+</th>
+<th style="text-align:center;">
+species
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Amazona
+</td>
+<td style="text-align:center;">
+aestiva
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Phaethornis
+</td>
+<td style="text-align:center;">
+philippii
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ara
+</td>
+<td style="text-align:center;">
+ararauna
+</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb91"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1"></a>df[<span class="sc">-</span><span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>]</span></code></pre></div>
+<table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+genus
+</th>
+<th style="text-align:center;">
+species
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Phaethornis
+</td>
+<td style="text-align:center;">
+philippii
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Ara
+</td>
+<td style="text-align:center;">
+ararauna
+</td>
+</tr>
+</tbody>
+</table>
 <div class="sourceCode" id="cb92"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1"></a>df[<span class="sc">-</span><span class="dv">1</span>, ]</span></code></pre></div>
-<pre><code>## # A tibble: 2 × 3
-##   family      genus       species  
-##   &lt;chr&gt;       &lt;chr&gt;       &lt;chr&gt;    
-## 1 Trochilidae Phaethornis philippii
-## 2 Psittacidae Ara         ararauna</code></pre>
-<div class="sourceCode" id="cb94"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1"></a>df[, <span class="sc">-</span><span class="dv">1</span>]</span></code></pre></div>
-<pre><code>## # A tibble: 3 × 2
-##   genus       species  
-##   &lt;chr&gt;       &lt;chr&gt;    
-## 1 Amazona     aestiva  
-## 2 Phaethornis philippii
-## 3 Ara         ararauna</code></pre>
-<div class="sourceCode" id="cb96"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1"></a>df[<span class="sc">-</span><span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>]</span></code></pre></div>
-<pre><code>## # A tibble: 2 × 2
-##   genus       species  
-##   &lt;chr&gt;       &lt;chr&gt;    
-## 1 Phaethornis philippii
-## 2 Ara         ararauna</code></pre>
-<div class="sourceCode" id="cb98"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1"></a>df[, <span class="st">&quot;family&quot;</span>]</span></code></pre></div>
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1"></a>df[, <span class="st">&quot;family&quot;</span>]</span></code></pre></div>
 <pre><code>## [1] &quot;Psittacidae&quot; &quot;Trochilidae&quot; &quot;Psittacidae&quot;</code></pre>
-<div class="sourceCode" id="cb100"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1"></a>df[, <span class="fu">c</span>(<span class="st">&quot;family&quot;</span>, <span class="st">&quot;genus&quot;</span>)]</span></code></pre></div>
-<pre><code>## # A tibble: 3 × 2
-##   family      genus      
-##   &lt;chr&gt;       &lt;chr&gt;      
-## 1 Psittacidae Amazona    
-## 2 Trochilidae Phaethornis
-## 3 Psittacidae Ara</code></pre>
+<div class="sourceCode" id="cb94"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1"></a>df[, <span class="fu">c</span>(<span class="st">&quot;family&quot;</span>, <span class="st">&quot;genus&quot;</span>)]</span></code></pre></div>
+<table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+family
+</th>
+<th style="text-align:center;">
+genus
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Psittacidae
+</td>
+<td style="text-align:center;">
+Amazona
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Trochilidae
+</td>
+<td style="text-align:center;">
+Phaethornis
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Psittacidae
+</td>
+<td style="text-align:center;">
+Ara
+</td>
+</tr>
+</tbody>
+</table>
 <p> </p>
 <p>Las listas requieren 1 índice entre dobles corchetes
 <code>[[índice]]</code>:</p>
-<div class="sourceCode" id="cb102"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1"></a>l <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">ID =</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;e&quot;</span>), <span class="at">size =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>),</span>
-<span id="cb102-2"><a href="#cb102-2"></a>    <span class="at">observed =</span> <span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>))</span>
-<span id="cb102-3"><a href="#cb102-3"></a></span>
-<span id="cb102-4"><a href="#cb102-4"></a>l[[<span class="dv">1</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1"></a>l <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">ID =</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;e&quot;</span>), <span class="at">size =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>),</span>
+<span id="cb95-2"><a href="#cb95-2"></a>    <span class="at">observed =</span> <span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>))</span>
+<span id="cb95-3"><a href="#cb95-3"></a></span>
+<span id="cb95-4"><a href="#cb95-4"></a>l[[<span class="dv">1</span>]]</span></code></pre></div>
 <pre><code>## [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot;</code></pre>
-<div class="sourceCode" id="cb104"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1"></a>l[[<span class="dv">3</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1"></a>l[[<span class="dv">3</span>]]</span></code></pre></div>
 <pre><code>## [1] FALSE  TRUE FALSE FALSE FALSE</code></pre>
 <p> </p>
 <p>Los elementos dentro de las listas también pueden ser subconjuntos en
 la misma cadena de código:</p>
-<div class="sourceCode" id="cb106"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1"></a>l[[<span class="dv">1</span>]][<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb99"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1"></a>l[[<span class="dv">1</span>]][<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span></code></pre></div>
 <pre><code>## [1] &quot;a&quot; &quot;b&quot;</code></pre>
-<div class="sourceCode" id="cb108"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1"></a>l[[<span class="dv">3</span>]][<span class="dv">2</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb101"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1"></a>l[[<span class="dv">3</span>]][<span class="dv">2</span>]</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p> </p>
 </div>
 <div id="explorar-objectos" class="section level2">
 <h2>Explorar objectos</h2>
-<div class="sourceCode" id="cb110"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    3 obs. of  3 variables:
 ##  $ family : chr  &quot;Psittacidae&quot; &quot;Trochilidae&quot; &quot;Psittacidae&quot;
 ##  $ genus  : chr  &quot;Amazona&quot; &quot;Phaethornis&quot; &quot;Ara&quot;
 ##  $ species: chr  &quot;aestiva&quot; &quot;philippii&quot; &quot;ararauna&quot;</code></pre>
-<div class="sourceCode" id="cb112"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1"></a><span class="fu">names</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1"></a><span class="fu">names</span>(df)</span></code></pre></div>
 <pre><code>## [1] &quot;family&quot;  &quot;genus&quot;   &quot;species&quot;</code></pre>
-<div class="sourceCode" id="cb114"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1"></a><span class="fu">dim</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb107"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1"></a><span class="fu">dim</span>(df)</span></code></pre></div>
 <pre><code>## [1] 3 3</code></pre>
-<div class="sourceCode" id="cb116"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1"></a><span class="fu">nrow</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb109"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1"></a><span class="fu">nrow</span>(df)</span></code></pre></div>
 <pre><code>## [1] 3</code></pre>
-<div class="sourceCode" id="cb118"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1"></a><span class="fu">ncol</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb111"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1"></a><span class="fu">ncol</span>(df)</span></code></pre></div>
 <pre><code>## [1] 3</code></pre>
-<div class="sourceCode" id="cb120"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1"></a><span class="fu">head</span>(df)</span></code></pre></div>
-<pre><code>## # A tibble: 3 × 3
-##   family      genus       species  
-##   &lt;chr&gt;       &lt;chr&gt;       &lt;chr&gt;    
-## 1 Psittacidae Amazona     aestiva  
-## 2 Trochilidae Phaethornis philippii
-## 3 Psittacidae Ara         ararauna</code></pre>
-<div class="sourceCode" id="cb122"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1"></a><span class="fu">tail</span>(df)</span></code></pre></div>
-<pre><code>## # A tibble: 3 × 3
-##   family      genus       species  
-##   &lt;chr&gt;       &lt;chr&gt;       &lt;chr&gt;    
-## 1 Psittacidae Amazona     aestiva  
-## 2 Trochilidae Phaethornis philippii
-## 3 Psittacidae Ara         ararauna</code></pre>
-<div class="sourceCode" id="cb124"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1"></a><span class="fu">table</span>(df<span class="sc">$</span>genus)</span></code></pre></div>
+<div class="sourceCode" id="cb113"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1"></a><span class="fu">head</span>(df)</span></code></pre></div>
+<table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+family
+</th>
+<th style="text-align:center;">
+genus
+</th>
+<th style="text-align:center;">
+species
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Psittacidae
+</td>
+<td style="text-align:center;">
+Amazona
+</td>
+<td style="text-align:center;">
+aestiva
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Trochilidae
+</td>
+<td style="text-align:center;">
+Phaethornis
+</td>
+<td style="text-align:center;">
+philippii
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Psittacidae
+</td>
+<td style="text-align:center;">
+Ara
+</td>
+<td style="text-align:center;">
+ararauna
+</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb114"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1"></a><span class="fu">tail</span>(df)</span></code></pre></div>
+<table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+family
+</th>
+<th style="text-align:center;">
+genus
+</th>
+<th style="text-align:center;">
+species
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Psittacidae
+</td>
+<td style="text-align:center;">
+Amazona
+</td>
+<td style="text-align:center;">
+aestiva
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Trochilidae
+</td>
+<td style="text-align:center;">
+Phaethornis
+</td>
+<td style="text-align:center;">
+philippii
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Psittacidae
+</td>
+<td style="text-align:center;">
+Ara
+</td>
+<td style="text-align:center;">
+ararauna
+</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb115"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1"></a><span class="fu">table</span>(df<span class="sc">$</span>genus)</span></code></pre></div>
 <pre><code>## 
 ##     Amazona         Ara Phaethornis 
 ##           1           1           1</code></pre>
-<div class="sourceCode" id="cb126"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb126-1"><a href="#cb126-1"></a><span class="fu">typeof</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb117"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1"></a><span class="fu">typeof</span>(df)</span></code></pre></div>
 <pre><code>## [1] &quot;list&quot;</code></pre>
-<div class="sourceCode" id="cb128"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1"></a><span class="fu">View</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb119"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb119-1"><a href="#cb119-1"></a><span class="fu">View</span>(df)</span></code></pre></div>
 <p> </p>
 </div>
 <div id="ejercicio-1" class="section level2 alert alert-info">
@@ -1150,32 +1496,32 @@ siguen la misma estructura:</p>
 <p><font size="2">* Modified from <i>Grolemund 2014</i></font>  </p>
 <p>R viene con muchas funciones que puedes usar para hacer tareas
 sofisticadas:</p>
-<div class="sourceCode" id="cb129"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb129-1"><a href="#cb129-1"></a><span class="co"># built in functions</span></span>
-<span id="cb129-2"><a href="#cb129-2"></a>bi <span class="ot">&lt;-</span> <span class="fu">builtins</span>()</span>
-<span id="cb129-3"><a href="#cb129-3"></a></span>
-<span id="cb129-4"><a href="#cb129-4"></a><span class="fu">length</span>(bi)</span></code></pre></div>
-<pre><code>## [1] 1370</code></pre>
-<div class="sourceCode" id="cb131"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb131-1"><a href="#cb131-1"></a><span class="fu">sample</span>(bi, <span class="dv">10</span>)</span></code></pre></div>
-<pre><code>##  [1] &quot;apply&quot;                    &quot;assign&quot;                  
-##  [3] &quot;default.stringsAsFactors&quot; &quot;geterrmessage&quot;           
-##  [5] &quot;print.libraryIQR&quot;         &quot;anyNA.POSIXlt&quot;           
-##  [7] &quot;.Call.graphics&quot;           &quot;class&lt;-&quot;                 
-##  [9] &quot;as.difftime&quot;              &quot;as.integer&quot;</code></pre>
+<div class="sourceCode" id="cb120"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1"></a><span class="co"># built in functions</span></span>
+<span id="cb120-2"><a href="#cb120-2"></a>bi <span class="ot">&lt;-</span> <span class="fu">builtins</span>()</span>
+<span id="cb120-3"><a href="#cb120-3"></a></span>
+<span id="cb120-4"><a href="#cb120-4"></a><span class="fu">length</span>(bi)</span></code></pre></div>
+<pre><code>## [1] 1372</code></pre>
+<div class="sourceCode" id="cb122"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1"></a><span class="fu">sample</span>(bi, <span class="dv">10</span>)</span></code></pre></div>
+<pre><code>##  [1] &quot;print.libraryIQR&quot;     &quot;.detach&quot;             
+##  [3] &quot;.GlobalEnv&quot;           &quot;as.character.default&quot;
+##  [5] &quot;closeAllConnections&quot;  &quot;assign&quot;              
+##  [7] &quot;max&quot;                  &quot;bindtextdomain&quot;      
+##  [9] &quot;rowMeans&quot;             &quot;.First.sys&quot;</code></pre>
 <p> </p>
 <p>Los operadores son funciones:</p>
-<div class="sourceCode" id="cb133"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb133-1"><a href="#cb133-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code></pre></div>
+<div class="sourceCode" id="cb124"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code></pre></div>
 <pre><code>## [1] 2</code></pre>
-<div class="sourceCode" id="cb135"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb135-1"><a href="#cb135-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code></pre></div>
+<div class="sourceCode" id="cb126"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb126-1"><a href="#cb126-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code></pre></div>
 <pre><code>## [1] 2</code></pre>
-<div class="sourceCode" id="cb137"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb137-1"><a href="#cb137-1"></a><span class="dv">2</span> <span class="sc">*</span> <span class="dv">3</span></span></code></pre></div>
+<div class="sourceCode" id="cb128"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1"></a><span class="dv">2</span> <span class="sc">*</span> <span class="dv">3</span></span></code></pre></div>
 <pre><code>## [1] 6</code></pre>
-<div class="sourceCode" id="cb139"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb139-1"><a href="#cb139-1"></a><span class="dv">2</span> <span class="sc">*</span> <span class="dv">3</span></span></code></pre></div>
+<div class="sourceCode" id="cb130"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb130-1"><a href="#cb130-1"></a><span class="dv">2</span> <span class="sc">*</span> <span class="dv">3</span></span></code></pre></div>
 <pre><code>## [1] 6</code></pre>
 <p> </p>
 <div id="operadores-mas-utilizados" class="section level3">
@@ -1236,20 +1582,20 @@ exponente
 </tbody>
 </table>
 <p> </p>
-<div class="sourceCode" id="cb141"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb141-1"><a href="#cb141-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb132"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb132-1"><a href="#cb132-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] -1</code></pre>
-<div class="sourceCode" id="cb143"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb143-1"><a href="#cb143-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb134"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb134-1"><a href="#cb134-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] 3</code></pre>
-<div class="sourceCode" id="cb145"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb145-1"><a href="#cb145-1"></a><span class="dv">2</span><span class="sc">^</span><span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb136"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb136-1"><a href="#cb136-1"></a><span class="dv">2</span><span class="sc">^</span><span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] 4</code></pre>
-<div class="sourceCode" id="cb147"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb147-1"><a href="#cb147-1"></a><span class="dv">2</span><span class="sc">^</span><span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb138"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb138-1"><a href="#cb138-1"></a><span class="dv">2</span><span class="sc">^</span><span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] 4</code></pre>
-<div class="sourceCode" id="cb149"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb149-1"><a href="#cb149-1"></a><span class="dv">2</span><span class="sc">:</span><span class="dv">3</span> <span class="sc">%in%</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">4</span></span></code></pre></div>
+<div class="sourceCode" id="cb140"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb140-1"><a href="#cb140-1"></a><span class="dv">2</span><span class="sc">:</span><span class="dv">3</span> <span class="sc">%in%</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">4</span></span></code></pre></div>
 <pre><code>## [1] TRUE TRUE</code></pre>
 <p> </p>
 <p>Operadores lógicos:</p>
@@ -1348,56 +1694,56 @@ correspondencia
 </tbody>
 </table>
 <p> </p>
-<div class="sourceCode" id="cb151"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb151-1"><a href="#cb151-1"></a><span class="dv">1</span> <span class="sc">&lt;</span> <span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb142"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb142-1"><a href="#cb142-1"></a><span class="dv">1</span> <span class="sc">&lt;</span> <span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb153"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb153-1"><a href="#cb153-1"></a><span class="dv">1</span> <span class="sc">&gt;</span> <span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb144"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb144-1"><a href="#cb144-1"></a><span class="dv">1</span> <span class="sc">&gt;</span> <span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
-<div class="sourceCode" id="cb155"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb155-1"><a href="#cb155-1"></a><span class="dv">1</span> <span class="sc">&lt;=</span> <span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb146"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb146-1"><a href="#cb146-1"></a><span class="dv">1</span> <span class="sc">&lt;=</span> <span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb157"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb157-1"><a href="#cb157-1"></a><span class="dv">1</span> <span class="sc">==</span> <span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb148"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb148-1"><a href="#cb148-1"></a><span class="dv">1</span> <span class="sc">==</span> <span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
-<div class="sourceCode" id="cb159"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb159-1"><a href="#cb159-1"></a><span class="dv">1</span> <span class="sc">!=</span> <span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb150"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb150-1"><a href="#cb150-1"></a><span class="dv">1</span> <span class="sc">!=</span> <span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb161"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb161-1"><a href="#cb161-1"></a><span class="dv">1</span> <span class="sc">&gt;</span> <span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb152"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb152-1"><a href="#cb152-1"></a><span class="dv">1</span> <span class="sc">&gt;</span> <span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
-<div class="sourceCode" id="cb163"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb163-1"><a href="#cb163-1"></a><span class="dv">5</span> <span class="sc">%in%</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span></span></code></pre></div>
+<div class="sourceCode" id="cb154"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb154-1"><a href="#cb154-1"></a><span class="dv">5</span> <span class="sc">%in%</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span></span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb165"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb165-1"><a href="#cb165-1"></a><span class="dv">5</span> <span class="sc">%in%</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span></span></code></pre></div>
+<div class="sourceCode" id="cb156"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb156-1"><a href="#cb156-1"></a><span class="dv">5</span> <span class="sc">%in%</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span></span></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
 <p> </p>
 <p>La mayoría de las funciones están vectorizadas:</p>
-<div class="sourceCode" id="cb167"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb167-1"><a href="#cb167-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">6</span> <span class="sc">*</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span></span></code></pre></div>
+<div class="sourceCode" id="cb158"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb158-1"><a href="#cb158-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">6</span> <span class="sc">*</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span></span></code></pre></div>
 <p><img src="images/vectorize.png" alt="R" height="350" width="900"></p>
 <p><font size="2">* Modified from <i>Grolemund &amp; Wickham
 2017</i></font></p>
 <p> </p>
 <pre><code>## [1]  1  4  9 16 25 36</code></pre>
-<div class="sourceCode" id="cb169"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb169-1"><a href="#cb169-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">6</span> <span class="sc">-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span></span></code></pre></div>
+<div class="sourceCode" id="cb160"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb160-1"><a href="#cb160-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">6</span> <span class="sc">-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span></span></code></pre></div>
 <pre><code>## [1] 0 0 0 0 0 0</code></pre>
 <p>R recicla vectores de longitud desigual:</p>
-<div class="sourceCode" id="cb171"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb171-1"><a href="#cb171-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">6</span> <span class="sc">*</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span></code></pre></div>
+<div class="sourceCode" id="cb162"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb162-1"><a href="#cb162-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">6</span> <span class="sc">*</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span></code></pre></div>
 <p><img src="images/recycle.png" alt="R" height="350" width="900"></p>
 <p><font size="2">* Modified from <i>Grolemund &amp; Wickham
 2017</i></font></p>
 <p> </p>
-<pre><code>## Warning in 1:6 * 1:5: longitud de objeto mayor no es múltiplo de la longitud de
-## uno menor</code></pre>
+<pre><code>## Warning in 1:6 * 1:5: longitud de objeto mayor no es
+## múltiplo de la longitud de uno menor</code></pre>
 <pre><code>## [1]  1  4  9 16 25  6</code></pre>
-<div class="sourceCode" id="cb174"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb174-1"><a href="#cb174-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">6</span> <span class="sc">+</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span></code></pre></div>
-<pre><code>## Warning in 1:6 + 1:5: longitud de objeto mayor no es múltiplo de la longitud de
-## uno menor</code></pre>
+<div class="sourceCode" id="cb165"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb165-1"><a href="#cb165-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">6</span> <span class="sc">+</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span></code></pre></div>
+<pre><code>## Warning in 1:6 + 1:5: longitud de objeto mayor no es
+## múltiplo de la longitud de uno menor</code></pre>
 <pre><code>## [1]  2  4  6  8 10  7</code></pre>
 <p> </p>
 <hr />
@@ -1429,10 +1775,10 @@ funciones</li>
 es fácil)</li>
 <li>Avoid using names of existing functions of variables</li>
 </ul>
-<div class="sourceCode" id="cb177"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb177-1"><a href="#cb177-1"></a>  <span class="sc">-</span> Bien<span class="sc">:</span> dia_uno<span class="sc">:</span> dia_1, <span class="fu">peso_promedio</span>(),</span>
-<span id="cb177-2"><a href="#cb177-2"></a>  </span>
-<span id="cb177-3"><a href="#cb177-3"></a>  <span class="sc">-</span> Mal<span class="sc">:</span> diauno, dia1, primer.dia_delmes, mean <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">sum</span>(x), c <span class="ot">&lt;-</span> <span class="dv">10</span></span></code></pre></div>
+<div class="sourceCode" id="cb168"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb168-1"><a href="#cb168-1"></a>  <span class="sc">-</span> Bien<span class="sc">:</span> dia_uno<span class="sc">:</span> dia_1, <span class="fu">peso_promedio</span>(),</span>
+<span id="cb168-2"><a href="#cb168-2"></a>  </span>
+<span id="cb168-3"><a href="#cb168-3"></a>  <span class="sc">-</span> Mal<span class="sc">:</span> diauno, dia1, primer.dia_delmes, mean <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">sum</span>(x), c <span class="ot">&lt;-</span> <span class="dv">10</span></span></code></pre></div>
 <p> </p>
 </div>
 <div id="syntaxis" class="section level2">
@@ -1447,24 +1793,24 @@ el inglés normal)</li>
 <li>Coloque un espacio antes del paréntesis izquierdo, excepto en una
 llamada a una función</li>
 </ul>
-<div class="sourceCode" id="cb178"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb178-1"><a href="#cb178-1"></a>  <span class="sc">-</span> Bien<span class="sc">:</span> </span>
-<span id="cb178-2"><a href="#cb178-2"></a>          a <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">10</span>, <span class="at">mean =</span> <span class="dv">1</span>)</span>
-<span id="cb178-3"><a href="#cb178-3"></a>          tab.prior <span class="ot">&lt;-</span> <span class="fu">table</span>(df[df<span class="sc">$</span>dias <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="st">&quot;campaign.id&quot;</span>])</span>
-<span id="cb178-4"><a href="#cb178-4"></a>          total <span class="ot">&lt;-</span> <span class="fu">sum</span>(x[, <span class="dv">1</span>])</span>
-<span id="cb178-5"><a href="#cb178-5"></a>          total <span class="ot">&lt;-</span> <span class="fu">sum</span>(x[<span class="dv">1</span>, ])</span>
-<span id="cb178-6"><a href="#cb178-6"></a>          <span class="cf">if</span> (debug)</span>
-<span id="cb178-7"><a href="#cb178-7"></a>          <span class="fu">mean</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
-<span id="cb178-8"><a href="#cb178-8"></a>          </span>
-<span id="cb178-9"><a href="#cb178-9"></a>  <span class="sc">-</span> Mal<span class="sc">:</span> </span>
-<span id="cb178-10"><a href="#cb178-10"></a>         a<span class="ot">&lt;-</span><span class="fu">rnorm</span>(<span class="at">n=</span><span class="dv">10</span>,<span class="at">sd=</span><span class="dv">10</span>,<span class="at">mean=</span><span class="dv">1</span>)</span>
-<span id="cb178-11"><a href="#cb178-11"></a>         tab.prior <span class="ot">&lt;-</span> <span class="fu">table</span>(df[df<span class="sc">$</span>days.from.opt<span class="sc">&lt;</span><span class="dv">0</span>, <span class="st">&quot;campaign.id&quot;</span>])  <span class="co"># necesita espacio alrededor de &#39;&lt;&#39;</span></span>
-<span id="cb178-12"><a href="#cb178-12"></a>         tab.prior <span class="ot">&lt;-</span> <span class="fu">table</span>(df[df<span class="sc">$</span>days.from.opt <span class="sc">&lt;</span> <span class="dv">0</span>,<span class="st">&quot;campaign.id&quot;</span>])  <span class="co"># Necesita espacio despues de la coma</span></span>
-<span id="cb178-13"><a href="#cb178-13"></a>         tab.prior<span class="ot">&lt;-</span> <span class="fu">table</span>(df[df<span class="sc">$</span>days.from.opt <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="st">&quot;campaign.id&quot;</span>])  <span class="co"># Necesita espacio antes de &lt;-</span></span>
-<span id="cb178-14"><a href="#cb178-14"></a>         tab.prior<span class="ot">&lt;-</span><span class="fu">table</span>(df[df<span class="sc">$</span>days.from.opt <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="st">&quot;campaign.id&quot;</span>])  <span class="co"># Necesita espacio alrededor de &lt;-</span></span>
-<span id="cb178-15"><a href="#cb178-15"></a>         total <span class="ot">&lt;-</span> <span class="fu">sum</span>(x[,<span class="dv">1</span>])  <span class="co"># Necesita espacio antes de la coma  </span></span>
-<span id="cb178-16"><a href="#cb178-16"></a>         <span class="cf">if</span>(debug) <span class="co"># Necesita espacio antes del parentesis</span></span>
-<span id="cb178-17"><a href="#cb178-17"></a>         <span class="fu">mean</span> (<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) <span class="co"># Espacio extra luego del nombre de la funcion</span></span></code></pre></div>
+<div class="sourceCode" id="cb169"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb169-1"><a href="#cb169-1"></a>  <span class="sc">-</span> Bien<span class="sc">:</span> </span>
+<span id="cb169-2"><a href="#cb169-2"></a>          a <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">10</span>, <span class="at">mean =</span> <span class="dv">1</span>)</span>
+<span id="cb169-3"><a href="#cb169-3"></a>          tab.prior <span class="ot">&lt;-</span> <span class="fu">table</span>(df[df<span class="sc">$</span>dias <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="st">&quot;campaign.id&quot;</span>])</span>
+<span id="cb169-4"><a href="#cb169-4"></a>          total <span class="ot">&lt;-</span> <span class="fu">sum</span>(x[, <span class="dv">1</span>])</span>
+<span id="cb169-5"><a href="#cb169-5"></a>          total <span class="ot">&lt;-</span> <span class="fu">sum</span>(x[<span class="dv">1</span>, ])</span>
+<span id="cb169-6"><a href="#cb169-6"></a>          <span class="cf">if</span> (debug)</span>
+<span id="cb169-7"><a href="#cb169-7"></a>          <span class="fu">mean</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
+<span id="cb169-8"><a href="#cb169-8"></a>          </span>
+<span id="cb169-9"><a href="#cb169-9"></a>  <span class="sc">-</span> Mal<span class="sc">:</span> </span>
+<span id="cb169-10"><a href="#cb169-10"></a>         a<span class="ot">&lt;-</span><span class="fu">rnorm</span>(<span class="at">n=</span><span class="dv">10</span>,<span class="at">sd=</span><span class="dv">10</span>,<span class="at">mean=</span><span class="dv">1</span>)</span>
+<span id="cb169-11"><a href="#cb169-11"></a>         tab.prior <span class="ot">&lt;-</span> <span class="fu">table</span>(df[df<span class="sc">$</span>days.from.opt<span class="sc">&lt;</span><span class="dv">0</span>, <span class="st">&quot;campaign.id&quot;</span>])  <span class="co"># necesita espacio alrededor de &#39;&lt;&#39;</span></span>
+<span id="cb169-12"><a href="#cb169-12"></a>         tab.prior <span class="ot">&lt;-</span> <span class="fu">table</span>(df[df<span class="sc">$</span>days.from.opt <span class="sc">&lt;</span> <span class="dv">0</span>,<span class="st">&quot;campaign.id&quot;</span>])  <span class="co"># Necesita espacio despues de la coma</span></span>
+<span id="cb169-13"><a href="#cb169-13"></a>         tab.prior<span class="ot">&lt;-</span> <span class="fu">table</span>(df[df<span class="sc">$</span>days.from.opt <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="st">&quot;campaign.id&quot;</span>])  <span class="co"># Necesita espacio antes de &lt;-</span></span>
+<span id="cb169-14"><a href="#cb169-14"></a>         tab.prior<span class="ot">&lt;-</span><span class="fu">table</span>(df[df<span class="sc">$</span>days.from.opt <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="st">&quot;campaign.id&quot;</span>])  <span class="co"># Necesita espacio alrededor de &lt;-</span></span>
+<span id="cb169-15"><a href="#cb169-15"></a>         total <span class="ot">&lt;-</span> <span class="fu">sum</span>(x[,<span class="dv">1</span>])  <span class="co"># Necesita espacio antes de la coma  </span></span>
+<span id="cb169-16"><a href="#cb169-16"></a>         <span class="cf">if</span>(debug) <span class="co"># Necesita espacio antes del parentesis</span></span>
+<span id="cb169-17"><a href="#cb169-17"></a>         <span class="fu">mean</span> (<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) <span class="co"># Espacio extra luego del nombre de la funcion</span></span></code></pre></div>
 <p> </p>
 <div id="corchetes" class="section level4">
 <h4>Corchetes</h4>
@@ -1474,23 +1820,23 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <li>Puede omitir las llaves cuando un bloque consiste en una sola
 declaración</li>
 </ul>
-<div class="sourceCode" id="cb179"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb179-1"><a href="#cb179-1"></a><span class="sc">-</span>Bien<span class="sc">:</span><span class="cf">if</span> (<span class="fu">is.null</span>(ylim)) {</span>
-<span id="cb179-2"><a href="#cb179-2"></a>    ylim <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.06</span>)</span>
-<span id="cb179-3"><a href="#cb179-3"></a>}</span>
-<span id="cb179-4"><a href="#cb179-4"></a></span>
-<span id="cb179-5"><a href="#cb179-5"></a><span class="cf">if</span> (<span class="fu">is.null</span>(ylim)) ylim <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.06</span>)</span>
-<span id="cb179-6"><a href="#cb179-6"></a></span>
-<span id="cb179-7"><a href="#cb179-7"></a><span class="sc">-</span>Mal<span class="sc">:</span> <span class="sc">-</span>Mal<span class="sc">:</span></span>
-<span id="cb179-8"><a href="#cb179-8"></a><span class="cf">if</span> (<span class="fu">is.null</span>(ylim)) ylim <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.06</span>)</span>
-<span id="cb179-9"><a href="#cb179-9"></a></span>
-<span id="cb179-10"><a href="#cb179-10"></a><span class="cf">if</span> (<span class="fu">is.null</span>(ylim)) {</span>
-<span id="cb179-11"><a href="#cb179-11"></a>    ylim <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.06</span>)</span>
-<span id="cb179-12"><a href="#cb179-12"></a>}</span>
-<span id="cb179-13"><a href="#cb179-13"></a></span>
-<span id="cb179-14"><a href="#cb179-14"></a><span class="cf">if</span> (<span class="fu">is.null</span>(ylim)) {</span>
-<span id="cb179-15"><a href="#cb179-15"></a>    ylim <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.06</span>)</span>
-<span id="cb179-16"><a href="#cb179-16"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb170"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb170-1"><a href="#cb170-1"></a><span class="sc">-</span>Bien<span class="sc">:</span><span class="cf">if</span> (<span class="fu">is.null</span>(ylim)) {</span>
+<span id="cb170-2"><a href="#cb170-2"></a>    ylim <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.06</span>)</span>
+<span id="cb170-3"><a href="#cb170-3"></a>}</span>
+<span id="cb170-4"><a href="#cb170-4"></a></span>
+<span id="cb170-5"><a href="#cb170-5"></a><span class="cf">if</span> (<span class="fu">is.null</span>(ylim)) ylim <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.06</span>)</span>
+<span id="cb170-6"><a href="#cb170-6"></a></span>
+<span id="cb170-7"><a href="#cb170-7"></a><span class="sc">-</span>Mal<span class="sc">:</span> <span class="sc">-</span>Mal<span class="sc">:</span></span>
+<span id="cb170-8"><a href="#cb170-8"></a><span class="cf">if</span> (<span class="fu">is.null</span>(ylim)) ylim <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.06</span>)</span>
+<span id="cb170-9"><a href="#cb170-9"></a></span>
+<span id="cb170-10"><a href="#cb170-10"></a><span class="cf">if</span> (<span class="fu">is.null</span>(ylim)) {</span>
+<span id="cb170-11"><a href="#cb170-11"></a>    ylim <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.06</span>)</span>
+<span id="cb170-12"><a href="#cb170-12"></a>}</span>
+<span id="cb170-13"><a href="#cb170-13"></a></span>
+<span id="cb170-14"><a href="#cb170-14"></a><span class="cf">if</span> (<span class="fu">is.null</span>(ylim)) {</span>
+<span id="cb170-15"><a href="#cb170-15"></a>    ylim <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.06</span>)</span>
+<span id="cb170-16"><a href="#cb170-16"></a>}</span></code></pre></div>
 <p> </p>
 </div>
 <div id="crear-objetos" class="section level4">
@@ -1498,10 +1844,10 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <ul>
 <li>Use &lt;-, no =</li>
 </ul>
-<div class="sourceCode" id="cb180"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb180-1"><a href="#cb180-1"></a><span class="sc">-</span>GOOD<span class="sc">:</span>x <span class="ot">&lt;-</span> <span class="dv">5</span></span>
-<span id="cb180-2"><a href="#cb180-2"></a></span>
-<span id="cb180-3"><a href="#cb180-3"></a><span class="sc">-</span>BAD<span class="sc">:</span>x <span class="ot">=</span> <span class="dv">5</span></span></code></pre></div>
+<div class="sourceCode" id="cb171"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb171-1"><a href="#cb171-1"></a><span class="sc">-</span>GOOD<span class="sc">:</span>x <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb171-2"><a href="#cb171-2"></a></span>
+<span id="cb171-3"><a href="#cb171-3"></a><span class="sc">-</span>BAD<span class="sc">:</span>x <span class="ot">=</span> <span class="dv">5</span></span></code></pre></div>
 <p> </p>
 </div>
 <div id="sugerencias-para-añadir-comentarios" class="section level4">
@@ -1512,13 +1858,13 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <li>Los comentarios cortos pueden colocarse después del código precedido
 por dos espacios, #, y luego un espacio</li>
 </ul>
-<div class="sourceCode" id="cb181"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb181-1"><a href="#cb181-1"></a><span class="co"># Create histogram of frequency of campaigns by pct budget spent.</span></span>
-<span id="cb181-2"><a href="#cb181-2"></a><span class="fu">hist</span>(df<span class="sc">$</span>pct.spent,</span>
-<span id="cb181-3"><a href="#cb181-3"></a>     <span class="at">breaks =</span> <span class="st">&quot;scott&quot;</span>,  <span class="co"># method for choosing number of buckets</span></span>
-<span id="cb181-4"><a href="#cb181-4"></a>     <span class="at">main   =</span> <span class="st">&quot;Histograma: individuos por unidad de tiempo&quot;</span>,</span>
-<span id="cb181-5"><a href="#cb181-5"></a>     <span class="at">xlab   =</span> <span class="st">&quot;Número de individuos&quot;</span>,</span>
-<span id="cb181-6"><a href="#cb181-6"></a>     <span class="at">ylab   =</span> <span class="st">&quot;Frecuencia&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb172"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb172-1"><a href="#cb172-1"></a><span class="co"># Create histogram of frequency of campaigns by pct budget spent.</span></span>
+<span id="cb172-2"><a href="#cb172-2"></a><span class="fu">hist</span>(df<span class="sc">$</span>pct.spent,</span>
+<span id="cb172-3"><a href="#cb172-3"></a>     <span class="at">breaks =</span> <span class="st">&quot;scott&quot;</span>,  <span class="co"># method for choosing number of buckets</span></span>
+<span id="cb172-4"><a href="#cb172-4"></a>     <span class="at">main   =</span> <span class="st">&quot;Histograma: individuos por unidad de tiempo&quot;</span>,</span>
+<span id="cb172-5"><a href="#cb172-5"></a>     <span class="at">xlab   =</span> <span class="st">&quot;Número de individuos&quot;</span>,</span>
+<span id="cb172-6"><a href="#cb172-6"></a>     <span class="at">ylab   =</span> <span class="st">&quot;Frecuencia&quot;</span>)</span></code></pre></div>
 <p> </p>
 </div>
 <div id="disposición-general-y-ordenación-estilo-de-google"
@@ -1567,10 +1913,10 @@ de baRulho</a></p></li>
 <h2>Documentación de las funciones</h2>
 <p>Todas las funciones (por defecto o de paquetes cargados) deben tener
 una documentación que siga un formato estándar:</p>
-<div class="sourceCode" id="cb182"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb182-1"><a href="#cb182-1"></a><span class="st">`</span><span class="at">?</span><span class="st">`</span>(mean)</span>
-<span id="cb182-2"><a href="#cb182-2"></a></span>
-<span id="cb182-3"><a href="#cb182-3"></a><span class="fu">help</span>(<span class="st">&quot;mean&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb173"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb173-1"><a href="#cb173-1"></a><span class="st">`</span><span class="at">?</span><span class="st">`</span>(mean)</span>
+<span id="cb173-2"><a href="#cb173-2"></a></span>
+<span id="cb173-3"><a href="#cb173-3"></a><span class="fu">help</span>(<span class="st">&quot;mean&quot;</span>)</span></code></pre></div>
 <p><img src="images/documentation.png" alt="R" height="700" width="800" style="border:3px solid gray">
  </p>
 <p>Esta documentación también puede mostrarse en Rstudio pulsando
@@ -1578,11 +1924,14 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <p> </p>
 <p>Si no recuerda el nombre de la función pruebe con
 <code>apropos()</code>:</p>
-<div class="sourceCode" id="cb183"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb183-1"><a href="#cb183-1"></a><span class="fu">apropos</span>(<span class="st">&quot;mean&quot;</span>)</span></code></pre></div>
-<pre><code>##  [1] &quot;.colMeans&quot;     &quot;.rowMeans&quot;     &quot;colMeans&quot;      &quot;kmeans&quot;       
-##  [5] &quot;mean&quot;          &quot;mean.Date&quot;     &quot;mean.default&quot;  &quot;mean.difftime&quot;
-##  [9] &quot;mean.POSIXct&quot;  &quot;mean.POSIXlt&quot;  &quot;rowMeans&quot;      &quot;weighted.mean&quot;</code></pre>
+<div class="sourceCode" id="cb174"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb174-1"><a href="#cb174-1"></a><span class="fu">apropos</span>(<span class="st">&quot;mean&quot;</span>)</span></code></pre></div>
+<pre><code>##  [1] &quot;.colMeans&quot;      &quot;.rowMeans&quot;      &quot;colMeans&quot;      
+##  [4] &quot;kmeans&quot;         &quot;mean&quot;           &quot;mean_cl_boot&quot;  
+##  [7] &quot;mean_cl_normal&quot; &quot;mean_sdl&quot;       &quot;mean_se&quot;       
+## [10] &quot;mean.Date&quot;      &quot;mean.default&quot;   &quot;mean.difftime&quot; 
+## [13] &quot;mean.POSIXct&quot;   &quot;mean.POSIXlt&quot;   &quot;rowMeans&quot;      
+## [16] &quot;weighted.mean&quot;</code></pre>
 <p> </p>
 </div>
 <div id="viñetas-vignettes" class="section level2">
@@ -1591,10 +1940,10 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 detallan el uso de un paquete (opcional, pueden ser varios por
 paquete).</p>
 <p>Las viñetas se pueden llamar directamente desde R:</p>
-<div class="sourceCode" id="cb185"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb185-1"><a href="#cb185-1"></a>vgn <span class="ot">&lt;-</span> <span class="fu">browseVignettes</span>()</span></code></pre></div>
-<div class="sourceCode" id="cb186"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb186-1"><a href="#cb186-1"></a><span class="fu">vignette</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb176"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb176-1"><a href="#cb176-1"></a>vgn <span class="ot">&lt;-</span> <span class="fu">browseVignettes</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb177"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb177-1"><a href="#cb177-1"></a><span class="fu">vignette</span>()</span></code></pre></div>
 <p>También deberían aparecer en la página del paquete en CRAN.</p>
 <p> </p>
 </div>
@@ -1603,11 +1952,11 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <p>Los paquetes también pueden incluir demostraciones de código
 extendidas (“demos”). Para listar las demos de un paquete ejecute
 <code>demo("nombre del paquete")</code>:</p>
-<div class="sourceCode" id="cb187"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb187-1"><a href="#cb187-1"></a><span class="fu">demo</span>(<span class="at">package =</span> <span class="st">&quot;stats&quot;</span>)</span>
-<span id="cb187-2"><a href="#cb187-2"></a></span>
-<span id="cb187-3"><a href="#cb187-3"></a><span class="co"># call demo directly</span></span>
-<span id="cb187-4"><a href="#cb187-4"></a><span class="fu">demo</span>(<span class="st">&quot;nlm&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb178"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb178-1"><a href="#cb178-1"></a><span class="fu">demo</span>(<span class="at">package =</span> <span class="st">&quot;stats&quot;</span>)</span>
+<span id="cb178-2"><a href="#cb178-2"></a></span>
+<span id="cb178-3"><a href="#cb178-3"></a><span class="co"># call demo directly</span></span>
+<span id="cb178-4"><a href="#cb178-4"></a><span class="fu">demo</span>(<span class="st">&quot;nlm&quot;</span>)</span></code></pre></div>
 <p> </p>
 </div>
 <div id="ejercicio-2" class="section level2 alert alert-info">
@@ -1645,34 +1994,69 @@ Style Guide</a><br />
 ## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0
 ## 
 ## locale:
-##  [1] LC_CTYPE=es_ES.UTF-8       LC_NUMERIC=C              
-##  [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=es_ES.UTF-8    
-##  [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=es_ES.UTF-8   
-##  [7] LC_PAPER=es_CR.UTF-8       LC_NAME=C                 
-##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
-## [11] LC_MEASUREMENT=es_CR.UTF-8 LC_IDENTIFICATION=C       
+##  [1] LC_CTYPE=es_ES.UTF-8      
+##  [2] LC_NUMERIC=C              
+##  [3] LC_TIME=es_CR.UTF-8       
+##  [4] LC_COLLATE=es_ES.UTF-8    
+##  [5] LC_MONETARY=es_CR.UTF-8   
+##  [6] LC_MESSAGES=es_ES.UTF-8   
+##  [7] LC_PAPER=es_CR.UTF-8      
+##  [8] LC_NAME=C                 
+##  [9] LC_ADDRESS=C              
+## [10] LC_TELEPHONE=C            
+## [11] LC_MEASUREMENT=es_CR.UTF-8
+## [12] LC_IDENTIFICATION=C       
 ## 
 ## attached base packages:
-## [1] stats     graphics  grDevices utils     datasets  methods   base     
+## [1] stats     graphics  grDevices utils     datasets 
+## [6] methods   base     
 ## 
 ## other attached packages:
-## [1] kableExtra_1.3.4 knitr_1.39      
+## [1] emo_0.0.0.9000      viridis_0.6.2      
+## [3] viridisLite_0.4.0   xaringanExtra_0.7.0
+## [5] ggplot2_3.3.6       RColorBrewer_1.1-3 
+## [7] kableExtra_1.3.4    knitr_1.39         
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] xaringanExtra_0.7.0 formatR_1.12        pillar_1.8.0       
-##  [4] bslib_0.3.1         compiler_4.1.1      jquerylib_0.1.4    
-##  [7] tools_4.1.1         uuid_1.1-0          digest_0.6.29      
-## [10] jsonlite_1.8.0      evaluate_0.15       lifecycle_1.0.1    
-## [13] tibble_3.1.8        viridisLite_0.4.0   pkgconfig_2.0.3    
-## [16] rlang_1.0.4         cli_3.3.0           rstudioapi_0.13    
-## [19] yaml_2.3.5          xfun_0.31           fastmap_1.1.0      
-## [22] stringr_1.4.0       httr_1.4.3          xml2_1.3.3         
-## [25] vctrs_0.4.1         sass_0.4.1          systemfonts_1.0.4  
-## [28] webshot_0.5.3       svglite_2.1.0       glue_1.6.2         
-## [31] R6_2.5.1            fansi_1.0.3         rmarkdown_2.14     
-## [34] magrittr_2.0.3      scales_1.2.0        htmltools_0.5.3    
-## [37] rvest_1.0.2         colorspace_2.0-3    utf8_1.2.2         
-## [40] stringi_1.7.8       munsell_0.5.0</code></pre>
+##  [1] httr_1.4.3        sass_0.4.1       
+##  [3] pkgload_1.2.4     jsonlite_1.8.0   
+##  [5] bslib_0.3.1       brio_1.1.3       
+##  [7] assertthat_0.2.1  highr_0.9        
+##  [9] yaml_2.3.5        remotes_2.4.2    
+## [11] sessioninfo_1.2.2 pillar_1.8.0     
+## [13] glue_1.6.2        uuid_1.1-0       
+## [15] digest_0.6.29     rvest_1.0.2      
+## [17] colorspace_2.0-3  htmltools_0.5.3  
+## [19] pkgconfig_2.0.3   devtools_2.4.3   
+## [21] purrr_0.3.4       scales_1.2.0     
+## [23] webshot_0.5.3     processx_3.6.1   
+## [25] svglite_2.1.0     tibble_3.1.8     
+## [27] farver_2.1.1      generics_0.1.2   
+## [29] usethis_2.1.6     ellipsis_0.3.2   
+## [31] cachem_1.0.6      withr_2.5.0      
+## [33] cli_3.3.0         magrittr_2.0.3   
+## [35] crayon_1.5.1      memoise_2.0.1    
+## [37] evaluate_0.15     ps_1.7.1         
+## [39] fs_1.5.2          fansi_1.0.3      
+## [41] MASS_7.3-54       xml2_1.3.3       
+## [43] pkgbuild_1.3.1    rsconnect_0.8.26 
+## [45] tools_4.1.1       prettyunits_1.1.1
+## [47] formatR_1.12      lifecycle_1.0.1  
+## [49] stringr_1.4.0     munsell_0.5.0    
+## [51] callr_3.7.0       compiler_4.1.1   
+## [53] jquerylib_0.1.4   systemfonts_1.0.4
+## [55] rlang_1.0.4       grid_4.1.1       
+## [57] rstudioapi_0.13   htmlwidgets_1.5.4
+## [59] crosstalk_1.2.0   labeling_0.4.2   
+## [61] rmarkdown_2.14    testthat_3.1.4   
+## [63] gtable_0.3.0      DBI_1.1.3        
+## [65] R6_2.5.1          lubridate_1.8.0  
+## [67] gridExtra_2.3     dplyr_1.0.9      
+## [69] fastmap_1.1.0     utf8_1.2.2       
+## [71] rprojroot_2.0.3   desc_1.4.1       
+## [73] stringi_1.7.8     vctrs_0.4.1      
+## [75] leaflet_2.1.1     tidyselect_1.1.2 
+## [77] xfun_0.31</code></pre>
 </div>
 </div>
 

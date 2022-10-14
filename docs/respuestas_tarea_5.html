@@ -11,7 +11,7 @@
 
 
 
-<title>tarea_5.knit</title>
+<title>respuestas_tarea_5.knit</title>
 
 <script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -411,7 +411,7 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore"><center>
-<font size="7"><b>Tarea 5</b></font>
+<font size="7"><b>Solución a la tarea 5</b></font>
 </center></h1>
 <h3 class="subtitle"><center>
 <font size="5"><b>Programación y métodos estadísticos avanzados en
@@ -434,27 +434,6 @@ body
 pre.numberSource code
   { counter-reset: none; }
 </style>
-<p> </p>
-<div class="alert alert-warning">
-<p><strong>Instrucciones</strong></p>
-<ul>
-<li>La fecha de entrega es el 13 de octubre a las 11:59 pm</li>
-<li>La tarea debe ser escrita en el formato para reportes dinámicos
-Rmarkdown (5 pts)</li>
-<li>Debe entregar el archivo html generado del Rmarkdown por medio de
-mediación virtual (hay un enlace para someter la tarea). No envíe el
-archivo Rmd salvo que no pueda generar el html.</li>
-<li>El archivo Rmarkdown debe utilizar secciones de código (“chunks”)
-separados para cada ejercicio y subtítulos para cada uno así como
-comentarios en texto (2.5 pts)</li>
-<li>El código dentro de los bloques de código debe estar documentado con
-comentarios usando ‘#’. En otras palabras: comente su código (2.5
-pts)</li>
-<li>Debe usar R básico para la manipulación de datos (5 pts)</li>
-<li>Cada ejercicio tiene un valor de 5 puntos</li>
-</ul>
-</div>
-<p> </p>
 <p>Primero debemos preparar los archivos de ejemplo:</p>
 <div class="sourceCode" id="cb1"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># definir directorio a donde guardar los archivos</span></span>
@@ -481,33 +460,279 @@ elementos:</p>
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">length</span>(archivos_txt)</span></code></pre></div>
 <pre><code>## [1] 19</code></pre>
 <p> </p>
-<p>Estos datos muestran la salida de un programa de identificación
-automática de especies marinas en videos pasivos tomados en la columna
-de agua. Para cada video analizado el programa genera un archivo de
-texto (.TXT) con una fila para cada especie detectada mas una serie de
-metadatos asociados a la detección. Los datos se ven así:</p>
-<p><img src="images/datos.png" width="100%" style="display: block; margin: auto;" />
- </p>
-<p>Recordemos que los nombres de los archivos .TXT están guardados en un
-vector llamado <code>archivos_txt</code>.</p>
-<hr />
-<!-- skyblue box -->
-<div class="alert alert-info">
+<div class="alert alert-success">
 <ol style="list-style-type: decimal">
 <li>Haga un bucle <code>for</code> que devuelva el número de especies
 para cada archivo (y si, es lo mismo que hicimos en clase)</li>
 </ol>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>resultados <span class="ot">&lt;-</span> <span class="fu">vector</span>()  <span class="co"># vector vacio</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="cf">for</span> (i <span class="cf">in</span> archivos_txt) {</span>
+<span id="cb4-4"><a href="#cb4-4"></a>    <span class="co"># inicio del bucle</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a></span>
+<span id="cb4-6"><a href="#cb4-6"></a>    txt <span class="ot">&lt;-</span> <span class="fu">read.table</span>(i, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">skip =</span> <span class="dv">4</span>, <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>)  <span class="co"># leer archivo</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a>    nrw <span class="ot">&lt;-</span> <span class="fu">nrow</span>(txt)  <span class="co"># calcular numero de filas</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a></span>
+<span id="cb4-9"><a href="#cb4-9"></a>    resultados <span class="ot">&lt;-</span> <span class="fu">append</span>(resultados, nrw)  <span class="co"># guardar resultados en vector vacio</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a>}</span>
+<span id="cb4-11"><a href="#cb4-11"></a></span>
+<span id="cb4-12"><a href="#cb4-12"></a>resultados</span></code></pre></div>
+<pre><code>##  [1] 39  1  2 12 14  9 12  8 32 36 21 12 22 27 29 19  8
+## [18] 12 26</code></pre>
 <p> </p>
 <ol start="2" style="list-style-type: decimal">
 <li>Haga un bucle <code>for</code> que devuelva el número de familias
 para cada archivo</li>
 </ol>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>resultados_fam <span class="ot">&lt;-</span> <span class="fu">vector</span>()  <span class="co"># vector vacio</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="cf">for</span> (i <span class="cf">in</span> archivos_txt) {</span>
+<span id="cb6-4"><a href="#cb6-4"></a>    <span class="co"># inicio del bucle</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a></span>
+<span id="cb6-6"><a href="#cb6-6"></a>    txt <span class="ot">&lt;-</span> <span class="fu">read.table</span>(i, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">skip =</span> <span class="dv">4</span>, <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>)  <span class="co"># leer archivo</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a>    nfam <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">unique</span>(txt<span class="sc">$</span>Family))  <span class="co"># calcular numero de familias</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a></span>
+<span id="cb6-9"><a href="#cb6-9"></a>    resultados_fam <span class="ot">&lt;-</span> <span class="fu">append</span>(resultados_fam, nfam)  <span class="co"># guardar resultados en vector vacio</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a>}</span></code></pre></div>
 <p> </p>
 <ol start="3" style="list-style-type: decimal">
 <li>Cree un cuadro de datos (data frame) que contenga tres columnas, una
 para el nombre del archivo, otra para el número de especies y otra para
 el número de familias</li>
 </ol>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>n_filas_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">archivo =</span> <span class="fu">basename</span>(archivos_txt), <span class="at">especies =</span> resultados,</span>
+<span id="cb7-2"><a href="#cb7-2"></a>    <span class="at">familias =</span> resultados_fam)</span>
+<span id="cb7-3"><a href="#cb7-3"></a></span>
+<span id="cb7-4"><a href="#cb7-4"></a>n_filas_df</span></code></pre></div>
+<table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+archivo
+</th>
+<th style="text-align:center;">
+especies
+</th>
+<th style="text-align:center;">
+familias
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+2022-09-02_R3-LcamT3-RcamN4_Pel1_2021-09-24_MaxN.TXT
+</td>
+<td style="text-align:center;">
+39
+</td>
+<td style="text-align:center;">
+19
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2022-09-03_S6-LB13-RB12_PuntaMariaOeste_2022-03-24_MaxN.TXT
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2022-09-03_T4-LB19-RB18_PuntaMariaOeste_2022-03-24_MaxN.TXT
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2022-09-04_S1-LB10-RN9_Arco2_2022-07-15_MaxN.TXT
+</td>
+<td style="text-align:center;">
+12
+</td>
+<td style="text-align:center;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2022-09-07_P1-LB12-RB13_Gissler_2022-03-30_MaxN.TXT
+</td>
+<td style="text-align:center;">
+14
+</td>
+<td style="text-align:center;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2022-09-11_P1-LB14-RB13_Risco_2022-03-26_MaxN.TXT
+</td>
+<td style="text-align:center;">
+9
+</td>
+<td style="text-align:center;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2022-09-12_S6-LN4-RN8_Chatham_2022-03-28_MaxN.TXT
+</td>
+<td style="text-align:center;">
+12
+</td>
+<td style="text-align:center;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2022-09-14_R2C4_Catalinas1_21-7-2021_MaxN.TXT
+</td>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:center;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2022-09-14_S2C4_Virador1-20-7-2021_MaxN.TXT
+</td>
+<td style="text-align:center;">
+32
+</td>
+<td style="text-align:center;">
+20
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2022-09-14_S6-LB7-RB8_Silverado_2022-03-28_MaxN.TXT
+</td>
+<td style="text-align:center;">
+36
+</td>
+<td style="text-align:center;">
+16
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2022-09-15_S6-LB9-RB11_Vikinga_2022-03-30_MaxN.TXT
+</td>
+<td style="text-align:center;">
+21
+</td>
+<td style="text-align:center;">
+14
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2022-09-15_T4-LcamT8-RcamOFI-5_Barlovento2_2021-10-17_MaxN.TXT
+</td>
+<td style="text-align:center;">
+12
+</td>
+<td style="text-align:center;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2022-09-16_S2C8_Bajo Rojo1_2021-07-28_MaxN.TXT
+</td>
+<td style="text-align:center;">
+22
+</td>
+<td style="text-align:center;">
+18
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2022-09-16_T4-LcamN5-RcamT6_ISJ2_2021-09-25_MaxN.TXT
+</td>
+<td style="text-align:center;">
+27
+</td>
+<td style="text-align:center;">
+19
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2022-09-17_SB3-LcamT4-RcamN6_CanalSJ_2021-09-25_MaxN.TXT
+</td>
+<td style="text-align:center;">
+29
+</td>
+<td style="text-align:center;">
+15
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2022-09-20_T3C7_Dampier2_2021-10-19_MaxN.TXT
+</td>
+<td style="text-align:center;">
+19
+</td>
+<td style="text-align:center;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2022-09-22_T4-LN9-RT1_Bautista_2022-03-26_MaxN.TXT
+</td>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:center;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2022-09-24_T4-LcamT3-RcamSN7_Esfinge2_2021-10-17_MaxN.TXT
+</td>
+<td style="text-align:center;">
+12
+</td>
+<td style="text-align:center;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2022-09-25_T3C2_SJ2_2021-09-25_MaxN.TXT
+</td>
+<td style="text-align:center;">
+26
+</td>
+<td style="text-align:center;">
+18
+</td>
+</tr>
+</tbody>
+</table>
 <p> </p>
 <ol start="4" style="list-style-type: decimal">
 <li>Añada una columna al cuadro de datos creado en el ejercicio anterior
@@ -516,6 +741,19 @@ en la columna ‘Date’ de cada archivo de texto). Note que cada archivo
 contiene solamente una fecha. Debe usar un bucle <code>for</code> para
 extraer esta información de los archivos.</li>
 </ol>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>resultados <span class="ot">&lt;-</span> <span class="fu">vector</span>()  <span class="co"># vector vacio</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="cf">for</span> (i <span class="cf">in</span> archivos_txt) {</span>
+<span id="cb8-4"><a href="#cb8-4"></a>    <span class="co"># inicio del bucle</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a></span>
+<span id="cb8-6"><a href="#cb8-6"></a>    txt <span class="ot">&lt;-</span> <span class="fu">read.table</span>(i, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">skip =</span> <span class="dv">4</span>, <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>)  <span class="co"># leer archivo</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a>    fecha <span class="ot">&lt;-</span> txt<span class="sc">$</span>Date[<span class="dv">1</span>]  <span class="co"># calcular numero de familias</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a></span>
+<span id="cb8-9"><a href="#cb8-9"></a>    resultados <span class="ot">&lt;-</span> <span class="fu">append</span>(resultados, fecha)  <span class="co"># guardar resultados en vector vacio</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a>}</span>
+<span id="cb8-11"><a href="#cb8-11"></a></span>
+<span id="cb8-12"><a href="#cb8-12"></a>n_filas_df<span class="sc">$</span>fecha <span class="ot">&lt;-</span> resultados</span></code></pre></div>
 <p> </p>
 <ol start="5" style="list-style-type: decimal">
 <li>Añada una columna al cuadro de datos creado en el ejercicio 3 (y
@@ -523,21 +761,66 @@ modificado en 4) indicando la profundidad a la que se grabó el video.
 Debe usar un bucle <code>for</code> para extraer esta información de los
 archivos.</li>
 </ol>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>resultados <span class="ot">&lt;-</span> <span class="fu">vector</span>()  <span class="co"># vector vacio</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="cf">for</span> (i <span class="cf">in</span> archivos_txt) {</span>
+<span id="cb9-4"><a href="#cb9-4"></a>    <span class="co"># inicio del bucle</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a></span>
+<span id="cb9-6"><a href="#cb9-6"></a>    txt <span class="ot">&lt;-</span> <span class="fu">read.table</span>(i, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">skip =</span> <span class="dv">4</span>, <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>)  <span class="co"># leer archivo</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a>    prof <span class="ot">&lt;-</span> txt<span class="sc">$</span>Depth[<span class="dv">1</span>]  <span class="co"># calcular numero de familias</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a></span>
+<span id="cb9-9"><a href="#cb9-9"></a>    resultados <span class="ot">&lt;-</span> <span class="fu">append</span>(resultados, prof)  <span class="co"># guardar resultados en vector vacio</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a>}</span>
+<span id="cb9-11"><a href="#cb9-11"></a></span>
+<span id="cb9-12"><a href="#cb9-12"></a>resultados <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot; m&quot;</span>, <span class="st">&quot;&quot;</span>, resultados)</span>
+<span id="cb9-13"><a href="#cb9-13"></a>resultados <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">,&quot;</span>, <span class="st">&quot;.&quot;</span>, resultados)</span>
+<span id="cb9-14"><a href="#cb9-14"></a>n_filas_df<span class="sc">$</span>profundidad <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(resultados)</span></code></pre></div>
 <p> </p>
 <p>Note que la columna de profundidad no es numérica. Puede usar el
 siguiente código para convertir profundidad a un vector numérico (se
 necesita para el siguiente punto):</p>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>n_filas_df<span class="sc">$</span>profundidad <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot; m&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="fu">gsub</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">,&quot;</span>, <span class="st">&quot;.&quot;</span>, n_filas_df<span class="sc">$</span>profundidad))</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>n_filas_df<span class="sc">$</span>profundidad <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">&quot; m&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="fu">gsub</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">,&quot;</span>, <span class="st">&quot;.&quot;</span>,</span>
+<span id="cb10-2"><a href="#cb10-2"></a>    n_filas_df<span class="sc">$</span>profundidad)))</span></code></pre></div>
+<p> </p>
 <ol start="6" style="list-style-type: decimal">
 <li>Calcule es la correlación entre el número de especies observadas y
 la profundidad (pista: <code>cor.test()</code>)</li>
 </ol>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># correlacion</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="fu">cor.test</span>(n_filas_df<span class="sc">$</span>especies, n_filas_df<span class="sc">$</span>profundidad)</span></code></pre></div>
+<pre><code>## 
+##  Pearson&#39;s product-moment correlation
+## 
+## data:  n_filas_df$especies and n_filas_df$profundidad
+## t = -0.5, df = 17, p-value = 0.6
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.546  0.352
+## sample estimates:
+##    cor 
+## -0.122</code></pre>
 <p> </p>
 <ol start="7" style="list-style-type: decimal">
 <li>Calcule la correlación entre el número de familias y la
 profundidad</li>
 </ol>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># correlacion</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="fu">cor.test</span>(n_filas_df<span class="sc">$</span>familias, n_filas_df<span class="sc">$</span>profundidad)</span></code></pre></div>
+<pre><code>## 
+##  Pearson&#39;s product-moment correlation
+## 
+## data:  n_filas_df$familias and n_filas_df$profundidad
+## t = -1, df = 17, p-value = 0.3
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.619  0.252
+## sample estimates:
+##    cor 
+## -0.229</code></pre>
 <p> </p>
 </div>
 <p> </p>
