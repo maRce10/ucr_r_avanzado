@@ -580,7 +580,7 @@ Las regresiones lineales se basan en la ecuación lineal *a = mx + b* que aprend
 
 &nbsp; 
 
-El objetivo más común de una regresión lineal es la estimación de los valores de ${\beta_{*}$. Esto se consigue encontrando la línea recta que mejor se ajusta y que representa la asociación entre un predictor y la respuesta:
+El objetivo más común de una regresión lineal es la estimación de los valores de $\beta_{*}$. Esto se consigue encontrando la línea recta que mejor se ajusta y que representa la asociación entre un predictor y la respuesta:
 
 ```{r, out.width = "100%", echo = FALSE, fig.align= "center"}
 
@@ -738,7 +738,7 @@ y_data <- data.frame(y)
 ```
 &nbsp;
 
-Esta única variable puede introducirse en un **modelo de regresión sólo con itercepto**. Para ello, debemos suministrar la fórmula del modelo y los datos a `lm()`:
+Esta única variable puede introducirse en un **modelo de regresión sólo con intercepto**. Para ello, debemos suministrar la fórmula del modelo y los datos a `lm()`:
 
 ```{r}
 
@@ -844,9 +844,9 @@ knitr::include_graphics("./images/leukocytes.png")
 
 &nbsp;
 
-- Cambie el argumento 'mean' en la llamada de la función "rnorm()` ([línea 105](#cb53-8)) por un valor distinto de 0 y observe cómo cambian los valores en la tabla de coeficientes 
+- Cambie el argumento 'mean' en la llamada de la función "rnorm()` ([línea 130](#cb53-8)) por un valor distinto de 0 y observe cómo cambian los valores en la tabla de coeficientes 
 
-- Cambia el argumento `sd` en la llamada a la función `rnorm()` ([línea 105](#cb53-8)) por un valor más alto y observe cómo cambian los valores en la tabla de coeficientes 
+- Cambia el argumento `sd` en la llamada a la función `rnorm()` ([línea 130](#cb53-8)) por un valor más alto y observe cómo cambian los valores en la tabla de coeficientes 
 
 </div>
 
