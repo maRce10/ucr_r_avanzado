@@ -694,6 +694,7 @@ trees$predicted <- reg_mod$fitted.values
 # graficar
 ggplot(trees, aes(x = Girth, y = Height)) + 
   geom_smooth(method = "lm", se = FALSE) +  
+  labs(x = "Diámetro (Girth)", y = "Alto (height)") +
   geom_segment(aes(xend = Girth, yend = predicted), alpha = .2) +
   geom_point()
 
