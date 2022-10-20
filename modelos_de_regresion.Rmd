@@ -887,7 +887,7 @@ xy_mod <- lm(formula = y ~ x1, data = xy_datos)
 # graficar
 ggplot(xy_datos, aes(x = x1, y = y)) + 
   geom_smooth(method = "lm", se = FALSE) + 
-  geom_point() # plot points
+  geom_point() # graficar points
 
 
 ```
@@ -995,7 +995,7 @@ xy_mod2 <- lm(formula = y ~ x1, data = xy_datos2)
 # graficar
 ggplot(xy_datos2, aes(x = x1, y = y)) + 
   geom_smooth(method = "lm", se = FALSE) +  
-  geom_point() # plot points
+  geom_point() # graficar points
 
 ```
 &nbsp;
@@ -1198,9 +1198,9 @@ summ_xy_mod_multp <- summary(xy_mod_multp)
 summ_xy_mod_multp$coefficients
 ```
 
-- El modelo encontró que $\beta_1$ (el tamaño de efecto de 'x1') es `r summ_xy_mod_multp$coefficients[2, 1]` y que es significativamente diferente de 0 (p = `r summ_xy_mod_multp$coefficients[2, 4]`)
+- El modelo encontró que $\beta_1$ (el tamaño de efecto de 'x1') es `r summ_xy_mod_multp$coefficients[2, 1]` y que es significativamente diferente de 0 (p = `r summ_xy_mod_multp$coefficients[2, 4]`). Este es el efecto de 'x1' sobre 'y' una vez removida la variación explicada por 'x2'.
 
-- También se encontró que el $\beta_2$ (el tamaño de efecto de 'x2') es `r summ_xy_mod_multp$coefficients[3, 1]` y que también es significativamente diferente de 0 (p = `r summ_xy_mod_multp$coefficients[3, 4]`)
+- También se encontró que el $\beta_2$ (el tamaño de efecto de 'x2') es `r summ_xy_mod_multp$coefficients[3, 1]` y que también es significativamente diferente de 0 (p = `r summ_xy_mod_multp$coefficients[3, 4]`). Este es el efecto de 'x2' sobre 'y' una vez removida la variación explicada por 'x1'.
 
 - Los valores simulados de los parámetros de regresión pueden compararse con el resumen del modelo `lm()` para tener una idea de la precisión del modelo:
 
@@ -1235,24 +1235,7 @@ knitr::include_graphics("./images/lbh_cognition.png")
 
 &nbsp;
 
-<div class="alert alert-info">
-
-<font size="5">Ejercicio 5</font> 
-
-&nbsp;
-
-- Modifique uno de los tamaños de efecto ($\beta$) a 0 (o muy cerca de 0) y corra de nuevo el modelo y su resumen
-
-- ¿Cómo ha cambiado el valor de p?
-
-- Simule un escenario con dos predictores en el que sólo uno de ellos esté asociado a la respuesta
-
-</div>
-
-&nbsp; 
-
-
-Hay un punto importante que es necesario enfatizar aquí: **La regresión múltiple estima el efecto de un predictor después de tener en cuenta el efecto de los demás predictores del modelo**. En otras palabras, los nuevos predictores del modelo tratarán de explicar la variación de los datos que no fue explicada por los otros predictores. Así que **el resultado de la regresión múltiple no es equivalente a los resultados de las regresiones lineales simples** sobre los mismos predictores. Esto puede demostrarse fácilmente corriendo esas regresiones:
+Hay un punto importante que es necesario enfatizar aquí: **la regresión múltiple estima el efecto de un predictor después de tener en cuenta el efecto de los demás predictores del modelo**. En otras palabras, los nuevos predictores del modelo tratarán de explicar la variación de los datos que no fue explicada por los otros predictores. Así que **el resultado de la regresión múltiple no es equivalente a los resultados de las regresiones lineales simples** sobre los mismos predictores. Esto puede demostrarse fácilmente corriendo esas regresiones:
 
 ```{r}
 
@@ -1304,6 +1287,61 @@ coef(x1y_mod)
 El estimado de $\beta_1$ fue casi el mismo en la regresión múltiple (`r coef(xy_mod)[2]`) y en la regresión de un solo predictor (`r coef(x1y_mod)[2]`)
 
 Por comodidad, hemos utilizado `coef()` para extraer sólo los estimado de la regresión, pero los valores son los mismos que obtenemos con `summary(model)`.
+
+&nbsp;
+
+<div class="alert alert-info">
+
+<font size="5">Ejercicio 5</font> 
+
+&nbsp;
+
+La siguiente simulación genera un par de predictores continuos altamente colineales:
+```{r}
+# definir semilla
+set.seed(123)
+
+# numero de observaciones
+n <- 30
+b0 <- -4
+b1 <- 3
+b2 <- -2
+error <- rnorm(n = n, mean = 0, sd = 1)
+
+#  variables aleatorias colineales
+x1 <-  rnorm(n = n, mean = 0, sd = 1)
+x2 <-  x1 + rnorm(n = n, mean = 0, sd = 0.2) # hacer x2 colineal con x1
+y <- b0 + b1 * x1 + b2 * x2 + error
+
+# crear data frame
+xy_datos <- data.frame(x1, x2, y)
+
+cor(x1, x2)
+```
+
+
+```{r, eval = FALSE}
+# graficar
+ggplot(data = xy_datos, aes(x = x1, y = x2)) +
+    geom_point(size = 3) +
+
+```
+
+```{r, echo = FALSE}
+# graficar
+ggplot(data = xy_datos, aes(x = x1, y = x2)) +
+    geom_point(size = 3) +
+theme(panel.background = element_rect(fill = "#d9edf7"), plot.background = element_rect(fill = "#d9edf7", colour=NA))
+
+```
+
+- Construya un modelo lineal  multiple (con `lm()`) con 'y' como respuesta y 'x1' y 'x2' como predictores
+
+- Compare los betas estimados por el modelo con los usados para generar los datos. ¿Es una buena estimación?. También observe los valores de p. ¿Esperaría que fueran significativos? 
+
+</div>
+
+&nbsp; 
 
 
 ---
@@ -1416,7 +1454,7 @@ summ_xy_mod_cat$coefficients
 
 ```{r, eval=FALSE}
 
-# plot
+# graficar
 ggplot(xy_datos_cat, aes(x = x1, y = y)) + 
   geom_boxplot() +
 geom_hline(yintercept = xy_mod_cat$coefficients[1], col = "blue")
@@ -1607,7 +1645,7 @@ También ayuda graficar los datos:
 
 ```{r, eval = FALSE}
 
-# plot
+# graficar
 ggplot(data = xy_datos_intr, aes(x = x2, y = y, color = x1)) +
     geom_point(size = 3) +
     geom_smooth(method = "lm", se = FALSE)
@@ -1616,7 +1654,7 @@ ggplot(data = xy_datos_intr, aes(x = x2, y = y, color = x1)) +
 
 ```{r, echo = FALSE, out.width = "80%"}
 
-# plot
+# graficar
 ggplot(data = xy_datos_intr, aes(x = x2, y = y, color = x1)) +
     geom_point(size = 3) + scale_color_viridis_d(end = 0.9, begin = 0.2, alpha = 0.6) +
     ggplot2::geom_smooth(method = "lm", se = FALSE)
@@ -2191,7 +2229,7 @@ knitr::include_graphics("./images/swiss_knife.png")
 
 &nbsp; 
 
-Este manual solo pretende sugerir un abordaje estadístico centrado en los modelos de regresión desde el cual se pueden llevar a cabo adecuadamente la mayoría de los análisis estadísticos que usamos en biología. **El manual no tiene como objetivo explicar en detalle las particularidades de los modelos generalizados y mixtos**. Note que estos modelos, principalmente los mixtos, pueden ajustarse a otras estructuras de datos mas complejas no cubiertas aquí, como lo son las pendientes aleatorias, pendientes e interceptos aleatorios, estructuras de correlación (i.e. autocorrelación espacial o temporal, pedigrís o árboles filogenéticos) y el uso de pseudoreplicas. 
+Este manual solo pretende sugerir un abordaje estadístico centrado en los modelos de regresión desde el cual se pueden llevar a cabo adecuadamente la mayoría de los análisis estadísticos que usamos en biología. **El manual no tiene como objetivo explicar en detalle las particularidades de los modelos generalizados y mixtos**. Note que estos modelos, principalmente los mixtos, pueden ajustarse a otras estructuras de datos mas complejas no cubiertas aquí, como lo son las pendientes aleatorias, pendientes e interceptos aleatorios, estructuras de correlación (i.e. autocorrelación espacial o temporal, pedigrís o árboles filogenéticos), medidas repetidas y el uso de pseudoreplicas, entre otras. 
 
 &nbsp; 
 

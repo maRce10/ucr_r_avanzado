@@ -498,7 +498,7 @@ div.tocify {
 Araya-Salas, PhD</a></font>
 </center></h4>
 <h4 class="date"><center>
-“2022-10-17”
+“2022-10-19”
 </center></h4>
 
 </div>
@@ -1490,7 +1490,7 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <span id="cb62-3"><a href="#cb62-3"></a></span>
 <span id="cb62-4"><a href="#cb62-4"></a><span class="co"># graficar</span></span>
 <span id="cb62-5"><a href="#cb62-5"></a><span class="fu">ggplot</span>(xy_datos, <span class="fu">aes</span>(<span class="at">x =</span> x1, <span class="at">y =</span> y)) <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>,</span>
-<span id="cb62-6"><a href="#cb62-6"></a>    <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> <span class="fu">geom_point</span>()  <span class="co"># plot points</span></span></code></pre></div>
+<span id="cb62-6"><a href="#cb62-6"></a>    <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> <span class="fu">geom_point</span>()  <span class="co"># graficar points</span></span></code></pre></div>
 <p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-50-1.png" width="672" />
  </p>
 <p>Que es equivalente a esto:</p>
@@ -1595,7 +1595,7 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <span id="cb72-3"><a href="#cb72-3"></a></span>
 <span id="cb72-4"><a href="#cb72-4"></a><span class="co"># graficar</span></span>
 <span id="cb72-5"><a href="#cb72-5"></a><span class="fu">ggplot</span>(xy_datos2, <span class="fu">aes</span>(<span class="at">x =</span> x1, <span class="at">y =</span> y)) <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>,</span>
-<span id="cb72-6"><a href="#cb72-6"></a>    <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> <span class="fu">geom_point</span>()  <span class="co"># plot points</span></span></code></pre></div>
+<span id="cb72-6"><a href="#cb72-6"></a>    <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> <span class="fu">geom_point</span>()  <span class="co"># graficar points</span></span></code></pre></div>
 <p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-56-1.png" width="672" />
  </p>
 <p>La fórmula es la misma que la del modelo anterior:</p>
@@ -1810,11 +1810,13 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <li><p>El modelo encontró que <span
 class="math inline">\(\beta_1\)</span> (el tamaño de efecto de ‘x1’) es
 2.9014993 y que es significativamente diferente de 0 (p =
-6.4136764^{-8})</p></li>
+6.4136764^{-8}). Este es el efecto de ‘x1’ sobre ‘y’ una vez removida la
+variación explicada por ‘x2’.</p></li>
 <li><p>También se encontró que el <span
 class="math inline">\(\beta_2\)</span> (el tamaño de efecto de ‘x2’) es
 -1.9323526 y que también es significativamente diferente de 0 (p =
-2.5851282^{-5})</p></li>
+2.5851282^{-5}). Este es el efecto de ‘x2’ sobre ‘y’ una vez removida la
+variación explicada por ‘x1’.</p></li>
 <li><p>Los valores simulados de los parámetros de regresión pueden
 compararse con el resumen del modelo <code>lm()</code> para tener una
 idea de la precisión del modelo:</p>
@@ -1847,20 +1849,7 @@ defender un territorio.</em>”</p>
  </p>
 </div>
 <p> </p>
-<div class="alert alert-info">
-<p><font size="5">Ejercicio 5</font></p>
-<p> </p>
-<ul>
-<li><p>Modifique uno de los tamaños de efecto (<span
-class="math inline">\(\beta\)</span>) a 0 (o muy cerca de 0) y corra de
-nuevo el modelo y su resumen</p></li>
-<li><p>¿Cómo ha cambiado el valor de p?</p></li>
-<li><p>Simule un escenario con dos predictores en el que sólo uno de
-ellos esté asociado a la respuesta</p></li>
-</ul>
-</div>
-<p> </p>
-<p>Hay un punto importante que es necesario enfatizar aquí: <strong>La
+<p>Hay un punto importante que es necesario enfatizar aquí: <strong>la
 regresión múltiple estima el efecto de un predictor después de tener en
 cuenta el efecto de los demás predictores del modelo</strong>. En otras
 palabras, los nuevos predictores del modelo tratarán de explicar la
@@ -1930,32 +1919,73 @@ solo predictor (2.9633211)</p>
 <p>Por comodidad, hemos utilizado <code>coef()</code> para extraer sólo
 los estimado de la regresión, pero los valores son los mismos que
 obtenemos con <code>summary(model)</code>.</p>
+<p> </p>
+<div class="alert alert-info">
+<p><font size="5">Ejercicio 5</font></p>
+<p> </p>
+<p>La siguiente simulación genera un par de predictores continuos
+altamente colineales:</p>
+<div class="sourceCode" id="cb99"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1"></a><span class="co"># definir semilla</span></span>
+<span id="cb99-2"><a href="#cb99-2"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb99-3"><a href="#cb99-3"></a></span>
+<span id="cb99-4"><a href="#cb99-4"></a><span class="co"># numero de observaciones</span></span>
+<span id="cb99-5"><a href="#cb99-5"></a>n <span class="ot">&lt;-</span> <span class="dv">30</span></span>
+<span id="cb99-6"><a href="#cb99-6"></a>b0 <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">4</span></span>
+<span id="cb99-7"><a href="#cb99-7"></a>b1 <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb99-8"><a href="#cb99-8"></a>b2 <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">2</span></span>
+<span id="cb99-9"><a href="#cb99-9"></a>error <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb99-10"><a href="#cb99-10"></a></span>
+<span id="cb99-11"><a href="#cb99-11"></a><span class="co"># variables aleatorias colineales</span></span>
+<span id="cb99-12"><a href="#cb99-12"></a>x1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb99-13"><a href="#cb99-13"></a>x2 <span class="ot">&lt;-</span> x1 <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="fl">0.2</span>)  <span class="co"># hacer x2 colineal con x1</span></span>
+<span id="cb99-14"><a href="#cb99-14"></a>y <span class="ot">&lt;-</span> b0 <span class="sc">+</span> b1 <span class="sc">*</span> x1 <span class="sc">+</span> b2 <span class="sc">*</span> x2 <span class="sc">+</span> error</span>
+<span id="cb99-15"><a href="#cb99-15"></a></span>
+<span id="cb99-16"><a href="#cb99-16"></a><span class="co"># crear data frame</span></span>
+<span id="cb99-17"><a href="#cb99-17"></a>xy_datos <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(x1, x2, y)</span>
+<span id="cb99-18"><a href="#cb99-18"></a></span>
+<span id="cb99-19"><a href="#cb99-19"></a><span class="fu">cor</span>(x1, x2)</span></code></pre></div>
+<pre><code>## [1] 0.9781229</code></pre>
+<div class="sourceCode" id="cb101"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1"></a><span class="co"># graficar</span></span>
+<span id="cb101-2"><a href="#cb101-2"></a><span class="fu">ggplot</span>(<span class="at">data =</span> xy_datos, <span class="fu">aes</span>(<span class="at">x =</span> x1, <span class="at">y =</span> x2)) <span class="sc">+</span></span>
+<span id="cb101-3"><a href="#cb101-3"></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span></code></pre></div>
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-72-1.png" width="672" /></p>
+<ul>
+<li><p>Construya un modelo lineal multiple (con <code>lm()</code>) con
+‘y’ como respuesta y ‘x1’ y ‘x2’ como predictores</p></li>
+<li><p>Compare los betas estimados por el modelo con los usados para
+generar los datos. ¿Es una buena estimación?. También observe los
+valores de p. ¿Esperaría que fueran significativos?</p></li>
+</ul>
+</div>
+<p> </p>
 <hr />
 </div>
 <div id="añadir-un-predictor-categórico" class="section level2">
 <h2>Añadir un predictor categórico</h2>
 <p>Para los predictores categóricos podemos crear primero una variable
 binaria (0, 1) y luego añadir etiquetas a cada valor:</p>
-<div class="sourceCode" id="cb99"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1"></a><span class="co"># definir semilla</span></span>
-<span id="cb99-2"><a href="#cb99-2"></a><span class="fu">set.seed</span>(<span class="dv">13</span>)</span>
-<span id="cb99-3"><a href="#cb99-3"></a></span>
-<span id="cb99-4"><a href="#cb99-4"></a><span class="co"># numero de observaciones</span></span>
-<span id="cb99-5"><a href="#cb99-5"></a>n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
-<span id="cb99-6"><a href="#cb99-6"></a>b0 <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">3</span></span>
-<span id="cb99-7"><a href="#cb99-7"></a>b1 <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb99-8"><a href="#cb99-8"></a>error <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">3</span>)</span>
-<span id="cb99-9"><a href="#cb99-9"></a></span>
-<span id="cb99-10"><a href="#cb99-10"></a><span class="co"># variables aleatorias</span></span>
-<span id="cb99-11"><a href="#cb99-11"></a>x1_num <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>, <span class="at">size =</span> n, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb99-12"><a href="#cb99-12"></a>y <span class="ot">&lt;-</span> b0 <span class="sc">+</span> b1 <span class="sc">*</span> x1_num <span class="sc">+</span> error</span>
-<span id="cb99-13"><a href="#cb99-13"></a></span>
-<span id="cb99-14"><a href="#cb99-14"></a>x1 <span class="ot">&lt;-</span> <span class="fu">factor</span>(x1_num, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>))</span>
-<span id="cb99-15"><a href="#cb99-15"></a></span>
-<span id="cb99-16"><a href="#cb99-16"></a><span class="co"># crear data frame</span></span>
-<span id="cb99-17"><a href="#cb99-17"></a>xy_datos_cat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(x1, x1_num, y)</span>
-<span id="cb99-18"><a href="#cb99-18"></a></span>
-<span id="cb99-19"><a href="#cb99-19"></a><span class="fu">head</span>(xy_datos_cat)</span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1"></a><span class="co"># definir semilla</span></span>
+<span id="cb102-2"><a href="#cb102-2"></a><span class="fu">set.seed</span>(<span class="dv">13</span>)</span>
+<span id="cb102-3"><a href="#cb102-3"></a></span>
+<span id="cb102-4"><a href="#cb102-4"></a><span class="co"># numero de observaciones</span></span>
+<span id="cb102-5"><a href="#cb102-5"></a>n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb102-6"><a href="#cb102-6"></a>b0 <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">3</span></span>
+<span id="cb102-7"><a href="#cb102-7"></a>b1 <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb102-8"><a href="#cb102-8"></a>error <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">3</span>)</span>
+<span id="cb102-9"><a href="#cb102-9"></a></span>
+<span id="cb102-10"><a href="#cb102-10"></a><span class="co"># variables aleatorias</span></span>
+<span id="cb102-11"><a href="#cb102-11"></a>x1_num <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>, <span class="at">size =</span> n, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb102-12"><a href="#cb102-12"></a>y <span class="ot">&lt;-</span> b0 <span class="sc">+</span> b1 <span class="sc">*</span> x1_num <span class="sc">+</span> error</span>
+<span id="cb102-13"><a href="#cb102-13"></a></span>
+<span id="cb102-14"><a href="#cb102-14"></a>x1 <span class="ot">&lt;-</span> <span class="fu">factor</span>(x1_num, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>))</span>
+<span id="cb102-15"><a href="#cb102-15"></a></span>
+<span id="cb102-16"><a href="#cb102-16"></a><span class="co"># crear data frame</span></span>
+<span id="cb102-17"><a href="#cb102-17"></a>xy_datos_cat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(x1, x1_num, y)</span>
+<span id="cb102-18"><a href="#cb102-18"></a></span>
+<span id="cb102-19"><a href="#cb102-19"></a><span class="fu">head</span>(xy_datos_cat)</span></code></pre></div>
 <table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -2049,17 +2079,17 @@ a
 <p>Lo mismo que con los predictores continuos.</p>
 <p>Podemos explorar el patrón de los datos utilizando un diagrama de
 cajas (boxplot):</p>
-<div class="sourceCode" id="cb100"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1"></a><span class="co"># graficar</span></span>
-<span id="cb100-2"><a href="#cb100-2"></a><span class="fu">ggplot</span>(xy_datos_cat, <span class="fu">aes</span>(<span class="at">x =</span> x1, <span class="at">y =</span> y)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>()</span></code></pre></div>
-<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-71-1.png" width="672" />
+<div class="sourceCode" id="cb103"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1"></a><span class="co"># graficar</span></span>
+<span id="cb103-2"><a href="#cb103-2"></a><span class="fu">ggplot</span>(xy_datos_cat, <span class="fu">aes</span>(<span class="at">x =</span> x1, <span class="at">y =</span> y)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>()</span></code></pre></div>
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-74-1.png" width="672" />
  </p>
 <p>… y obtener los estimados del modelo:</p>
-<div class="sourceCode" id="cb101"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1"></a><span class="co"># construir modelos</span></span>
-<span id="cb101-2"><a href="#cb101-2"></a>xy_mod_cat <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> y <span class="sc">~</span> x1, <span class="at">data =</span> xy_datos_cat)</span>
-<span id="cb101-3"><a href="#cb101-3"></a></span>
-<span id="cb101-4"><a href="#cb101-4"></a><span class="fu">summary</span>(xy_mod_cat)</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1"></a><span class="co"># construir modelos</span></span>
+<span id="cb104-2"><a href="#cb104-2"></a>xy_mod_cat <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> y <span class="sc">~</span> x1, <span class="at">data =</span> xy_datos_cat)</span>
+<span id="cb104-3"><a href="#cb104-3"></a></span>
+<span id="cb104-4"><a href="#cb104-4"></a><span class="fu">summary</span>(xy_mod_cat)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = y ~ x1, data = xy_datos_cat)
@@ -2080,19 +2110,19 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 ## F-statistic: 4.646 on 1 and 48 DF,  p-value: 0.03617</code></pre>
 <p> </p>
 <p>… graficar los tamaños de efecto:</p>
-<div class="sourceCode" id="cb103"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1"></a>ci_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">param =</span> <span class="fu">names</span>(xy_mod_cat<span class="sc">$</span>coefficients), <span class="at">est =</span> xy_mod_cat<span class="sc">$</span>coefficients,</span>
-<span id="cb103-2"><a href="#cb103-2"></a>    <span class="fu">confint</span>(xy_mod_cat))</span>
-<span id="cb103-3"><a href="#cb103-3"></a></span>
-<span id="cb103-4"><a href="#cb103-4"></a><span class="fu">ggplot</span>(ci_df, <span class="fu">aes</span>(<span class="at">x =</span> param, <span class="at">y =</span> est)) <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>,</span>
-<span id="cb103-5"><a href="#cb103-5"></a>    <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lty =</span> <span class="dv">2</span>) <span class="sc">+</span> <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> X2.<span class="dv">5</span>.., <span class="at">ymax =</span> X97.<span class="dv">5</span>..)) <span class="sc">+</span></span>
-<span id="cb103-6"><a href="#cb103-6"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Parámetro&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Tamaño de efecto&quot;</span>) <span class="sc">+</span> <span class="fu">coord_flip</span>()</span></code></pre></div>
-<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-73-1.png" width="672" />
+<div class="sourceCode" id="cb106"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1"></a>ci_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">param =</span> <span class="fu">names</span>(xy_mod_cat<span class="sc">$</span>coefficients), <span class="at">est =</span> xy_mod_cat<span class="sc">$</span>coefficients,</span>
+<span id="cb106-2"><a href="#cb106-2"></a>    <span class="fu">confint</span>(xy_mod_cat))</span>
+<span id="cb106-3"><a href="#cb106-3"></a></span>
+<span id="cb106-4"><a href="#cb106-4"></a><span class="fu">ggplot</span>(ci_df, <span class="fu">aes</span>(<span class="at">x =</span> param, <span class="at">y =</span> est)) <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>,</span>
+<span id="cb106-5"><a href="#cb106-5"></a>    <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lty =</span> <span class="dv">2</span>) <span class="sc">+</span> <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> X2.<span class="dv">5</span>.., <span class="at">ymax =</span> X97.<span class="dv">5</span>..)) <span class="sc">+</span></span>
+<span id="cb106-6"><a href="#cb106-6"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Parámetro&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Tamaño de efecto&quot;</span>) <span class="sc">+</span> <span class="fu">coord_flip</span>()</span></code></pre></div>
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-76-1.png" width="672" />
  </p>
 <p>… y los gráficos diagnósticos del modelo:</p>
-<div class="sourceCode" id="cb104"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1"></a><span class="fu">plot_model</span>(xy_mod_cat, <span class="at">type =</span> <span class="st">&quot;diag&quot;</span>)[[<span class="dv">2</span>]]</span></code></pre></div>
-<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-74-1.png" width="80%" />
+<div class="sourceCode" id="cb107"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1"></a><span class="fu">plot_model</span>(xy_mod_cat, <span class="at">type =</span> <span class="st">&quot;diag&quot;</span>)[[<span class="dv">2</span>]]</span></code></pre></div>
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-77-1.png" width="80%" />
  </p>
 <div class="alert alert-success">
 <p> </p>
@@ -2120,17 +2150,17 @@ estimó como 1.814.</li>
 estimación del nivel ‘a’ en el predictor categórico, que se utilizó como
 base:</p></li>
 </ul>
-<div class="sourceCode" id="cb106"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1"></a><span class="co"># plot</span></span>
-<span id="cb106-2"><a href="#cb106-2"></a><span class="fu">ggplot</span>(xy_datos_cat, <span class="fu">aes</span>(<span class="at">x =</span> x1, <span class="at">y =</span> y)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> xy_mod_cat<span class="sc">$</span>coefficients[<span class="dv">1</span>],</span>
-<span id="cb106-3"><a href="#cb106-3"></a>    <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
-<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-77-1.png" width="672" /></p>
+<div class="sourceCode" id="cb109"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1"></a><span class="co"># graficar</span></span>
+<span id="cb109-2"><a href="#cb109-2"></a><span class="fu">ggplot</span>(xy_datos_cat, <span class="fu">aes</span>(<span class="at">x =</span> x1, <span class="at">y =</span> y)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> xy_mod_cat<span class="sc">$</span>coefficients[<span class="dv">1</span>],</span>
+<span id="cb109-3"><a href="#cb109-3"></a>    <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-80-1.png" width="672" /></p>
 <ul>
 <li>Por lo tanto, el intercepto es el mismo que la media de <em>y</em>
 para la categoría ‘a’:</li>
 </ul>
-<div class="sourceCode" id="cb107"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1"></a><span class="fu">mean</span>(xy_datos_cat<span class="sc">$</span>y[xy_datos_cat<span class="sc">$</span>x1 <span class="sc">==</span> <span class="st">&quot;a&quot;</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1"></a><span class="fu">mean</span>(xy_datos_cat<span class="sc">$</span>y[xy_datos_cat<span class="sc">$</span>x1 <span class="sc">==</span> <span class="st">&quot;a&quot;</span>])</span></code></pre></div>
 <pre><code>## [1] -2.997415</code></pre>
 <ul>
 <li>Observe también que la etiqueta del estimado es ‘x1b’, no ‘x1’ como
@@ -2185,8 +2215,8 @@ categóricos se codifican como 0s y 1s, en los que 1 significa “pertenece
 a la misma categoría” y 0 “pertenece a una categoría diferente”.
 Mantuvimos el vector numérico original (‘x1_num’) al simular el juego de
 datos con el predictor categórico:</p>
-<div class="sourceCode" id="cb109"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1"></a><span class="fu">head</span>(xy_datos_cat)</span></code></pre></div>
+<div class="sourceCode" id="cb112"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1"></a><span class="fu">head</span>(xy_datos_cat)</span></code></pre></div>
 <table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -2276,18 +2306,18 @@ indicadora y el proceso se conoce como ‘codificación indicadora’ (dummy
 coding).</p>
 <p>En realidad, podemos utilizar el vector numérico en el modelo de
 regresión y obtener exactamente los mismos resultados:</p>
-<div class="sourceCode" id="cb110"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1"></a><span class="co"># summary model with categorical variable</span></span>
-<span id="cb110-2"><a href="#cb110-2"></a><span class="fu">summary</span>(xy_mod_cat)<span class="sc">$</span>coefficients</span></code></pre></div>
+<div class="sourceCode" id="cb113"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1"></a><span class="co"># summary model with categorical variable</span></span>
+<span id="cb113-2"><a href="#cb113-2"></a><span class="fu">summary</span>(xy_mod_cat)<span class="sc">$</span>coefficients</span></code></pre></div>
 <pre><code>##              Estimate Std. Error   t value     Pr(&gt;|t|)
 ## (Intercept) -2.997415  0.5582513 -5.369293 2.267724e-06
 ## x1b          1.813997  0.8415955  2.155426 3.617227e-02</code></pre>
-<div class="sourceCode" id="cb112"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1"></a><span class="co"># construir modelos with dummy variable</span></span>
-<span id="cb112-2"><a href="#cb112-2"></a>xy_mod_num <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> y <span class="sc">~</span> x1_num, <span class="at">data =</span> xy_datos_cat)</span>
-<span id="cb112-3"><a href="#cb112-3"></a></span>
-<span id="cb112-4"><a href="#cb112-4"></a><span class="co"># summary with dummy coding</span></span>
-<span id="cb112-5"><a href="#cb112-5"></a><span class="fu">summary</span>(xy_mod_num)<span class="sc">$</span>coefficients</span></code></pre></div>
+<div class="sourceCode" id="cb115"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1"></a><span class="co"># construir modelos with dummy variable</span></span>
+<span id="cb115-2"><a href="#cb115-2"></a>xy_mod_num <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> y <span class="sc">~</span> x1_num, <span class="at">data =</span> xy_datos_cat)</span>
+<span id="cb115-3"><a href="#cb115-3"></a></span>
+<span id="cb115-4"><a href="#cb115-4"></a><span class="co"># summary with dummy coding</span></span>
+<span id="cb115-5"><a href="#cb115-5"></a><span class="fu">summary</span>(xy_mod_num)<span class="sc">$</span>coefficients</span></code></pre></div>
 <pre><code>##              Estimate Std. Error   t value     Pr(&gt;|t|)
 ## (Intercept) -2.997415  0.5582513 -5.369293 2.267724e-06
 ## x1_num       1.813997  0.8415955  2.155426 3.617227e-02</code></pre>
@@ -2310,31 +2340,31 @@ x_{2}\)</span></font>
 <p> </p>
 <p>Esto es más fácil de entender si se observa la interacción de una
 variable continua y una binaria:</p>
-<div class="sourceCode" id="cb114"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1"></a><span class="co"># definir semilla</span></span>
-<span id="cb114-2"><a href="#cb114-2"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb114-3"><a href="#cb114-3"></a></span>
-<span id="cb114-4"><a href="#cb114-4"></a><span class="co"># numero de observaciones</span></span>
-<span id="cb114-5"><a href="#cb114-5"></a>n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
-<span id="cb114-6"><a href="#cb114-6"></a>b0 <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">4</span></span>
-<span id="cb114-7"><a href="#cb114-7"></a>b1 <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb114-8"><a href="#cb114-8"></a>b2 <span class="ot">&lt;-</span> <span class="fl">1.7</span></span>
-<span id="cb114-9"><a href="#cb114-9"></a>b3 <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">3</span></span>
-<span id="cb114-10"><a href="#cb114-10"></a>error <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">3</span>)</span>
-<span id="cb114-11"><a href="#cb114-11"></a></span>
-<span id="cb114-12"><a href="#cb114-12"></a><span class="co"># variables aleatorias</span></span>
-<span id="cb114-13"><a href="#cb114-13"></a>x1 <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="at">n =</span> n, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span>
-<span id="cb114-14"><a href="#cb114-14"></a>x2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb114-15"><a href="#cb114-15"></a></span>
-<span id="cb114-16"><a href="#cb114-16"></a><span class="co"># interaccion se añade como el producto dex1 y x2</span></span>
-<span id="cb114-17"><a href="#cb114-17"></a>y <span class="ot">&lt;-</span> b0 <span class="sc">+</span> b1 <span class="sc">*</span> x1 <span class="sc">+</span> b2 <span class="sc">*</span> x2 <span class="sc">+</span> b3 <span class="sc">*</span> x1 <span class="sc">*</span> x2 <span class="sc">+</span> error</span>
-<span id="cb114-18"><a href="#cb114-18"></a></span>
-<span id="cb114-19"><a href="#cb114-19"></a>x1 <span class="ot">&lt;-</span> <span class="fu">factor</span>(x1, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>))</span>
-<span id="cb114-20"><a href="#cb114-20"></a></span>
-<span id="cb114-21"><a href="#cb114-21"></a><span class="co"># crear data frame</span></span>
-<span id="cb114-22"><a href="#cb114-22"></a>xy_datos_intr <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(x1, x2, y)</span>
-<span id="cb114-23"><a href="#cb114-23"></a></span>
-<span id="cb114-24"><a href="#cb114-24"></a><span class="fu">head</span>(xy_datos_intr)</span></code></pre></div>
+<div class="sourceCode" id="cb117"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1"></a><span class="co"># definir semilla</span></span>
+<span id="cb117-2"><a href="#cb117-2"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb117-3"><a href="#cb117-3"></a></span>
+<span id="cb117-4"><a href="#cb117-4"></a><span class="co"># numero de observaciones</span></span>
+<span id="cb117-5"><a href="#cb117-5"></a>n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb117-6"><a href="#cb117-6"></a>b0 <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">4</span></span>
+<span id="cb117-7"><a href="#cb117-7"></a>b1 <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb117-8"><a href="#cb117-8"></a>b2 <span class="ot">&lt;-</span> <span class="fl">1.7</span></span>
+<span id="cb117-9"><a href="#cb117-9"></a>b3 <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">3</span></span>
+<span id="cb117-10"><a href="#cb117-10"></a>error <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">3</span>)</span>
+<span id="cb117-11"><a href="#cb117-11"></a></span>
+<span id="cb117-12"><a href="#cb117-12"></a><span class="co"># variables aleatorias</span></span>
+<span id="cb117-13"><a href="#cb117-13"></a>x1 <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="at">n =</span> n, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span>
+<span id="cb117-14"><a href="#cb117-14"></a>x2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb117-15"><a href="#cb117-15"></a></span>
+<span id="cb117-16"><a href="#cb117-16"></a><span class="co"># interaccion se añade como el producto dex1 y x2</span></span>
+<span id="cb117-17"><a href="#cb117-17"></a>y <span class="ot">&lt;-</span> b0 <span class="sc">+</span> b1 <span class="sc">*</span> x1 <span class="sc">+</span> b2 <span class="sc">*</span> x2 <span class="sc">+</span> b3 <span class="sc">*</span> x1 <span class="sc">*</span> x2 <span class="sc">+</span> error</span>
+<span id="cb117-18"><a href="#cb117-18"></a></span>
+<span id="cb117-19"><a href="#cb117-19"></a>x1 <span class="ot">&lt;-</span> <span class="fu">factor</span>(x1, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>))</span>
+<span id="cb117-20"><a href="#cb117-20"></a></span>
+<span id="cb117-21"><a href="#cb117-21"></a><span class="co"># crear data frame</span></span>
+<span id="cb117-22"><a href="#cb117-22"></a>xy_datos_intr <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(x1, x2, y)</span>
+<span id="cb117-23"><a href="#cb117-23"></a></span>
+<span id="cb117-24"><a href="#cb117-24"></a><span class="fu">head</span>(xy_datos_intr)</span></code></pre></div>
 <table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -2418,14 +2448,14 @@ b
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb115"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1"></a><span class="co"># construir modelos</span></span>
-<span id="cb115-2"><a href="#cb115-2"></a>xy_mod_intr <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> y <span class="sc">~</span> x1 <span class="sc">+</span> x2 <span class="sc">+</span> x1 <span class="sc">*</span> x2, <span class="at">data =</span> xy_datos_intr)</span>
-<span id="cb115-3"><a href="#cb115-3"></a></span>
-<span id="cb115-4"><a href="#cb115-4"></a><span class="co"># guardar resumen para graficar lineas de mejor ajuste</span></span>
-<span id="cb115-5"><a href="#cb115-5"></a>xy_summ_intr <span class="ot">&lt;-</span> <span class="fu">summary</span>(xy_mod_intr)</span>
-<span id="cb115-6"><a href="#cb115-6"></a></span>
-<span id="cb115-7"><a href="#cb115-7"></a>xy_summ_intr</span></code></pre></div>
+<div class="sourceCode" id="cb118"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1"></a><span class="co"># construir modelos</span></span>
+<span id="cb118-2"><a href="#cb118-2"></a>xy_mod_intr <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> y <span class="sc">~</span> x1 <span class="sc">+</span> x2 <span class="sc">+</span> x1 <span class="sc">*</span> x2, <span class="at">data =</span> xy_datos_intr)</span>
+<span id="cb118-3"><a href="#cb118-3"></a></span>
+<span id="cb118-4"><a href="#cb118-4"></a><span class="co"># guardar resumen para graficar lineas de mejor ajuste</span></span>
+<span id="cb118-5"><a href="#cb118-5"></a>xy_summ_intr <span class="ot">&lt;-</span> <span class="fu">summary</span>(xy_mod_intr)</span>
+<span id="cb118-6"><a href="#cb118-6"></a></span>
+<span id="cb118-7"><a href="#cb118-7"></a>xy_summ_intr</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = y ~ x1 + x2 + x1 * x2, data = xy_datos_intr)
@@ -2447,36 +2477,36 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 ## Multiple R-squared:  0.3959, Adjusted R-squared:  0.3565 
 ## F-statistic: 10.05 on 3 and 46 DF,  p-value: 3.291e-05</code></pre>
 <p>También ayuda graficar los datos:</p>
-<div class="sourceCode" id="cb117"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1"></a><span class="co"># plot</span></span>
-<span id="cb117-2"><a href="#cb117-2"></a><span class="fu">ggplot</span>(<span class="at">data =</span> xy_datos_intr, <span class="fu">aes</span>(<span class="at">x =</span> x2, <span class="at">y =</span> y, <span class="at">color =</span> x1)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb117-3"><a href="#cb117-3"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-85-1.png" width="80%" />
+<div class="sourceCode" id="cb120"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1"></a><span class="co"># graficar</span></span>
+<span id="cb120-2"><a href="#cb120-2"></a><span class="fu">ggplot</span>(<span class="at">data =</span> xy_datos_intr, <span class="fu">aes</span>(<span class="at">x =</span> x2, <span class="at">y =</span> y, <span class="at">color =</span> x1)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb120-3"><a href="#cb120-3"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-88-1.png" width="80%" />
  </p>
 <p>… y los tamaños de efecto:</p>
-<div class="sourceCode" id="cb118"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1"></a>ci_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">param =</span> <span class="fu">names</span>(xy_mod_intr<span class="sc">$</span>coefficients), <span class="at">est =</span> xy_mod_intr<span class="sc">$</span>coefficients,</span>
-<span id="cb118-2"><a href="#cb118-2"></a>    <span class="fu">confint</span>(xy_mod_intr))</span>
-<span id="cb118-3"><a href="#cb118-3"></a></span>
-<span id="cb118-4"><a href="#cb118-4"></a><span class="fu">ggplot</span>(ci_df, <span class="fu">aes</span>(<span class="at">x =</span> param, <span class="at">y =</span> est)) <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>,</span>
-<span id="cb118-5"><a href="#cb118-5"></a>    <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lty =</span> <span class="dv">2</span>) <span class="sc">+</span> <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> X2.<span class="dv">5</span>.., <span class="at">ymax =</span> X97.<span class="dv">5</span>..)) <span class="sc">+</span></span>
-<span id="cb118-6"><a href="#cb118-6"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Parámetro&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Tamaño de efecto&quot;</span>) <span class="sc">+</span> <span class="fu">coord_flip</span>()</span></code></pre></div>
-<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-86-1.png" width="672" />
+<div class="sourceCode" id="cb121"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1"></a>ci_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">param =</span> <span class="fu">names</span>(xy_mod_intr<span class="sc">$</span>coefficients), <span class="at">est =</span> xy_mod_intr<span class="sc">$</span>coefficients,</span>
+<span id="cb121-2"><a href="#cb121-2"></a>    <span class="fu">confint</span>(xy_mod_intr))</span>
+<span id="cb121-3"><a href="#cb121-3"></a></span>
+<span id="cb121-4"><a href="#cb121-4"></a><span class="fu">ggplot</span>(ci_df, <span class="fu">aes</span>(<span class="at">x =</span> param, <span class="at">y =</span> est)) <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>,</span>
+<span id="cb121-5"><a href="#cb121-5"></a>    <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lty =</span> <span class="dv">2</span>) <span class="sc">+</span> <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> X2.<span class="dv">5</span>.., <span class="at">ymax =</span> X97.<span class="dv">5</span>..)) <span class="sc">+</span></span>
+<span id="cb121-6"><a href="#cb121-6"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Parámetro&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Tamaño de efecto&quot;</span>) <span class="sc">+</span> <span class="fu">coord_flip</span>()</span></code></pre></div>
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-89-1.png" width="672" />
  </p>
 <p>También deberíamos revisar los gráficos de diagnóstico:</p>
-<div class="sourceCode" id="cb119"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb119-1"><a href="#cb119-1"></a><span class="fu">plot_model</span>(xy_mod_intr, <span class="at">type =</span> <span class="st">&quot;diag&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb122"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1"></a><span class="fu">plot_model</span>(xy_mod_intr, <span class="at">type =</span> <span class="st">&quot;diag&quot;</span>)</span></code></pre></div>
 <pre><code>## [[1]]</code></pre>
-<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-87-1.png" width="80%" /></p>
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-90-1.png" width="80%" /></p>
 <pre><code>## 
 ## [[2]]</code></pre>
-<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-87-2.png" width="80%" /></p>
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-90-2.png" width="80%" /></p>
 <pre><code>## 
 ## [[3]]</code></pre>
-<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-87-3.png" width="80%" /></p>
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-90-3.png" width="80%" /></p>
 <pre><code>## 
 ## [[4]]</code></pre>
-<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-87-4.png" width="80%" />
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-90-4.png" width="80%" />
  </p>
 <div class="alert alert-success">
 <p> </p>
@@ -2561,24 +2591,24 @@ siguiente código crea dos predictores altamente colineales (‘x1’ y
 ‘x2’). La última línea de código muestra la correlación entre
 ellos.</p></li>
 </ul>
-<div class="sourceCode" id="cb125"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb125-1"><a href="#cb125-1"></a><span class="co"># definir semilla</span></span>
-<span id="cb125-2"><a href="#cb125-2"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb125-3"><a href="#cb125-3"></a></span>
-<span id="cb125-4"><a href="#cb125-4"></a><span class="co"># numero de observaciones</span></span>
-<span id="cb125-5"><a href="#cb125-5"></a>n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
-<span id="cb125-6"><a href="#cb125-6"></a>b0 <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">4</span></span>
-<span id="cb125-7"><a href="#cb125-7"></a>b1 <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb125-8"><a href="#cb125-8"></a>b2 <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">2</span></span>
-<span id="cb125-9"><a href="#cb125-9"></a>error <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb125-10"><a href="#cb125-10"></a></span>
-<span id="cb125-11"><a href="#cb125-11"></a><span class="co"># variables aleatorias</span></span>
-<span id="cb125-12"><a href="#cb125-12"></a>x1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb125-13"><a href="#cb125-13"></a></span>
-<span id="cb125-14"><a href="#cb125-14"></a><span class="co"># hacer x2 muy parecido a x1</span></span>
-<span id="cb125-15"><a href="#cb125-15"></a>x2 <span class="ot">&lt;-</span> x1 <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="fl">0.3</span>)</span>
-<span id="cb125-16"><a href="#cb125-16"></a></span>
-<span id="cb125-17"><a href="#cb125-17"></a><span class="fu">cor</span>(x1, x2)</span></code></pre></div>
+<div class="sourceCode" id="cb128"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1"></a><span class="co"># definir semilla</span></span>
+<span id="cb128-2"><a href="#cb128-2"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb128-3"><a href="#cb128-3"></a></span>
+<span id="cb128-4"><a href="#cb128-4"></a><span class="co"># numero de observaciones</span></span>
+<span id="cb128-5"><a href="#cb128-5"></a>n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb128-6"><a href="#cb128-6"></a>b0 <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">4</span></span>
+<span id="cb128-7"><a href="#cb128-7"></a>b1 <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb128-8"><a href="#cb128-8"></a>b2 <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">2</span></span>
+<span id="cb128-9"><a href="#cb128-9"></a>error <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb128-10"><a href="#cb128-10"></a></span>
+<span id="cb128-11"><a href="#cb128-11"></a><span class="co"># variables aleatorias</span></span>
+<span id="cb128-12"><a href="#cb128-12"></a>x1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb128-13"><a href="#cb128-13"></a></span>
+<span id="cb128-14"><a href="#cb128-14"></a><span class="co"># hacer x2 muy parecido a x1</span></span>
+<span id="cb128-15"><a href="#cb128-15"></a>x2 <span class="ot">&lt;-</span> x1 <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="fl">0.3</span>)</span>
+<span id="cb128-16"><a href="#cb128-16"></a></span>
+<span id="cb128-17"><a href="#cb128-17"></a><span class="fu">cor</span>(x1, x2)</span></code></pre></div>
 <pre><code>## [1] 0.9464161</code></pre>
 <ul>
 <li><p>Construya un modelo de regresión múltiple para estos datos (y ~
@@ -2611,28 +2641,28 @@ no se ajustan a una distribución normal. Además, permiten modelar
 distribuciones que se asemejan más al proceso que generó los datos. El
 siguiente código crea un juego de datos con una respuesta que representa
 cuentas (por lo tanto, no normal):</p>
-<div class="sourceCode" id="cb127"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb127-1"><a href="#cb127-1"></a><span class="co"># definir semilla</span></span>
-<span id="cb127-2"><a href="#cb127-2"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb127-3"><a href="#cb127-3"></a></span>
-<span id="cb127-4"><a href="#cb127-4"></a><span class="co"># numero de muestas</span></span>
-<span id="cb127-5"><a href="#cb127-5"></a>n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
-<span id="cb127-6"><a href="#cb127-6"></a></span>
-<span id="cb127-7"><a href="#cb127-7"></a><span class="co"># coeficientes</span></span>
-<span id="cb127-8"><a href="#cb127-8"></a>b0 <span class="ot">&lt;-</span> <span class="fl">1.2</span></span>
-<span id="cb127-9"><a href="#cb127-9"></a>b1 <span class="ot">&lt;-</span> <span class="fl">1.3</span></span>
-<span id="cb127-10"><a href="#cb127-10"></a>b2 <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb127-11"><a href="#cb127-11"></a></span>
-<span id="cb127-12"><a href="#cb127-12"></a></span>
-<span id="cb127-13"><a href="#cb127-13"></a><span class="co"># generar variables</span></span>
-<span id="cb127-14"><a href="#cb127-14"></a>y <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="at">n =</span> n, <span class="at">lambda =</span> <span class="fl">6.5</span>)  <span class="co"># lambda = tasa promedio de exitos </span></span>
-<span id="cb127-15"><a href="#cb127-15"></a>x2 <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="fl">0.5</span>, <span class="fl">0.5</span>, , <span class="fu">length</span>(y))</span>
-<span id="cb127-16"><a href="#cb127-16"></a>x1 <span class="ot">&lt;-</span> (<span class="fu">log</span>(y) <span class="sc">-</span> b0 <span class="sc">-</span> b2 <span class="sc">*</span> x2)<span class="sc">/</span>b1</span>
-<span id="cb127-17"><a href="#cb127-17"></a></span>
-<span id="cb127-18"><a href="#cb127-18"></a><span class="co"># crear data frame</span></span>
-<span id="cb127-19"><a href="#cb127-19"></a>xy_datos_pois <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(x1, x2, y)</span>
-<span id="cb127-20"><a href="#cb127-20"></a></span>
-<span id="cb127-21"><a href="#cb127-21"></a><span class="fu">head</span>(xy_datos_pois)</span></code></pre></div>
+<div class="sourceCode" id="cb130"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb130-1"><a href="#cb130-1"></a><span class="co"># definir semilla</span></span>
+<span id="cb130-2"><a href="#cb130-2"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb130-3"><a href="#cb130-3"></a></span>
+<span id="cb130-4"><a href="#cb130-4"></a><span class="co"># numero de muestas</span></span>
+<span id="cb130-5"><a href="#cb130-5"></a>n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb130-6"><a href="#cb130-6"></a></span>
+<span id="cb130-7"><a href="#cb130-7"></a><span class="co"># coeficientes</span></span>
+<span id="cb130-8"><a href="#cb130-8"></a>b0 <span class="ot">&lt;-</span> <span class="fl">1.2</span></span>
+<span id="cb130-9"><a href="#cb130-9"></a>b1 <span class="ot">&lt;-</span> <span class="fl">1.3</span></span>
+<span id="cb130-10"><a href="#cb130-10"></a>b2 <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb130-11"><a href="#cb130-11"></a></span>
+<span id="cb130-12"><a href="#cb130-12"></a></span>
+<span id="cb130-13"><a href="#cb130-13"></a><span class="co"># generar variables</span></span>
+<span id="cb130-14"><a href="#cb130-14"></a>y <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="at">n =</span> n, <span class="at">lambda =</span> <span class="fl">6.5</span>)  <span class="co"># lambda = tasa promedio de exitos </span></span>
+<span id="cb130-15"><a href="#cb130-15"></a>x2 <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="fl">0.5</span>, <span class="fl">0.5</span>, , <span class="fu">length</span>(y))</span>
+<span id="cb130-16"><a href="#cb130-16"></a>x1 <span class="ot">&lt;-</span> (<span class="fu">log</span>(y) <span class="sc">-</span> b0 <span class="sc">-</span> b2 <span class="sc">*</span> x2)<span class="sc">/</span>b1</span>
+<span id="cb130-17"><a href="#cb130-17"></a></span>
+<span id="cb130-18"><a href="#cb130-18"></a><span class="co"># crear data frame</span></span>
+<span id="cb130-19"><a href="#cb130-19"></a>xy_datos_pois <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(x1, x2, y)</span>
+<span id="cb130-20"><a href="#cb130-20"></a></span>
+<span id="cb130-21"><a href="#cb130-21"></a><span class="fu">head</span>(xy_datos_pois)</span></code></pre></div>
 <table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -2718,10 +2748,10 @@ y
 </table>
 <p> </p>
 <p>También grafiquemos ‘x1’ <em>vs</em> ‘y’:</p>
-<div class="sourceCode" id="cb128"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1"></a><span class="co"># graficar</span></span>
-<span id="cb128-2"><a href="#cb128-2"></a><span class="fu">ggplot</span>(xy_datos_pois, <span class="fu">aes</span>(<span class="at">x =</span> x1, <span class="at">y =</span> y)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-95-1.png" width="672" />
+<div class="sourceCode" id="cb131"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb131-1"><a href="#cb131-1"></a><span class="co"># graficar</span></span>
+<span id="cb131-2"><a href="#cb131-2"></a><span class="fu">ggplot</span>(xy_datos_pois, <span class="fu">aes</span>(<span class="at">x =</span> x1, <span class="at">y =</span> y)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-98-1.png" width="672" />
  </p>
 <p>La relación no parece muy lineal ni la varianza parece ser constante
 a través de ‘x1’.</p>
@@ -2730,8 +2760,8 @@ a través de ‘x1’.</p>
 truco. Para este ejemplo la distribución más apropiada es
 <em>Poisson</em>. Esto se puede establecer en el argumento `family’
 así:</p>
-<div class="sourceCode" id="cb129"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb129-1"><a href="#cb129-1"></a>glm_pois <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="at">formula =</span> y <span class="sc">~</span> x1 <span class="sc">+</span> x2, <span class="at">data =</span> xy_datos_pois, <span class="at">family =</span> <span class="fu">poisson</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb132"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb132-1"><a href="#cb132-1"></a>glm_pois <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="at">formula =</span> y <span class="sc">~</span> x1 <span class="sc">+</span> x2, <span class="at">data =</span> xy_datos_pois, <span class="at">family =</span> <span class="fu">poisson</span>())</span></code></pre></div>
 <p> </p>
 <p>Que es equivalente a esto:</p>
 <center>
@@ -2746,8 +2776,8 @@ de nuevo, podemos aprovechar nuestros conocimientos sobre los modelos
 lineales para extenderlos a estructuras de datos más complejas.</p>
 <p>También necesitamos ejecutar <code>summary()</code> para obtener el
 resultado del modelo:</p>
-<div class="sourceCode" id="cb130"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb130-1"><a href="#cb130-1"></a><span class="fu">summary</span>(glm_pois)</span></code></pre></div>
+<div class="sourceCode" id="cb133"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb133-1"><a href="#cb133-1"></a><span class="fu">summary</span>(glm_pois)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = y ~ x1 + x2, family = poisson(), data = xy_datos_pois)
@@ -2845,28 +2875,28 @@ patrones en el nivel inferior (individuos).</p>
 <p>Vamos a simular algunos datos que se asemejan a ese escenario.
 Tenemos dos predictores continuos (x1) y una respuesta continua (y).
 Cada muestra procede de 1 de 8 poblaciones diferentes (poblacion):</p>
-<div class="sourceCode" id="cb133"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb133-1"><a href="#cb133-1"></a><span class="co"># x&lt;- 1 definir semilla</span></span>
-<span id="cb133-2"><a href="#cb133-2"></a><span class="fu">set.seed</span>(<span class="dv">28</span>)</span>
-<span id="cb133-3"><a href="#cb133-3"></a></span>
-<span id="cb133-4"><a href="#cb133-4"></a><span class="co"># numero de observaciones</span></span>
-<span id="cb133-5"><a href="#cb133-5"></a>n <span class="ot">&lt;-</span> <span class="dv">300</span></span>
-<span id="cb133-6"><a href="#cb133-6"></a>b0 <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb133-7"><a href="#cb133-7"></a>b1 <span class="ot">&lt;-</span> <span class="fl">1.3</span></span>
-<span id="cb133-8"><a href="#cb133-8"></a>poblacion <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">8</span>, <span class="at">size =</span> n, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb133-9"><a href="#cb133-9"></a>error <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span>
-<span id="cb133-10"><a href="#cb133-10"></a></span>
-<span id="cb133-11"><a href="#cb133-11"></a><span class="co"># variables aleatorias</span></span>
-<span id="cb133-12"><a href="#cb133-12"></a>x1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb133-13"><a href="#cb133-13"></a>y <span class="ot">&lt;-</span> b0 <span class="sc">+</span> poblacion <span class="sc">*</span> <span class="dv">2</span> <span class="sc">+</span> b1 <span class="sc">*</span> x1 <span class="sc">+</span> error</span>
-<span id="cb133-14"><a href="#cb133-14"></a></span>
-<span id="cb133-15"><a href="#cb133-15"></a><span class="co"># add letters</span></span>
-<span id="cb133-16"><a href="#cb133-16"></a>poblacion <span class="ot">&lt;-</span> letters[poblacion <span class="sc">+</span> <span class="dv">1</span>]</span>
-<span id="cb133-17"><a href="#cb133-17"></a></span>
-<span id="cb133-18"><a href="#cb133-18"></a><span class="co"># create data set</span></span>
-<span id="cb133-19"><a href="#cb133-19"></a>xy_datos_mixto <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(x1, y, poblacion)</span>
-<span id="cb133-20"><a href="#cb133-20"></a></span>
-<span id="cb133-21"><a href="#cb133-21"></a><span class="fu">head</span>(xy_datos_mixto, <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb136"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb136-1"><a href="#cb136-1"></a><span class="co"># x&lt;- 1 definir semilla</span></span>
+<span id="cb136-2"><a href="#cb136-2"></a><span class="fu">set.seed</span>(<span class="dv">28</span>)</span>
+<span id="cb136-3"><a href="#cb136-3"></a></span>
+<span id="cb136-4"><a href="#cb136-4"></a><span class="co"># numero de observaciones</span></span>
+<span id="cb136-5"><a href="#cb136-5"></a>n <span class="ot">&lt;-</span> <span class="dv">300</span></span>
+<span id="cb136-6"><a href="#cb136-6"></a>b0 <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb136-7"><a href="#cb136-7"></a>b1 <span class="ot">&lt;-</span> <span class="fl">1.3</span></span>
+<span id="cb136-8"><a href="#cb136-8"></a>poblacion <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">8</span>, <span class="at">size =</span> n, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb136-9"><a href="#cb136-9"></a>error <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span>
+<span id="cb136-10"><a href="#cb136-10"></a></span>
+<span id="cb136-11"><a href="#cb136-11"></a><span class="co"># variables aleatorias</span></span>
+<span id="cb136-12"><a href="#cb136-12"></a>x1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb136-13"><a href="#cb136-13"></a>y <span class="ot">&lt;-</span> b0 <span class="sc">+</span> poblacion <span class="sc">*</span> <span class="dv">2</span> <span class="sc">+</span> b1 <span class="sc">*</span> x1 <span class="sc">+</span> error</span>
+<span id="cb136-14"><a href="#cb136-14"></a></span>
+<span id="cb136-15"><a href="#cb136-15"></a><span class="co"># add letters</span></span>
+<span id="cb136-16"><a href="#cb136-16"></a>poblacion <span class="ot">&lt;-</span> letters[poblacion <span class="sc">+</span> <span class="dv">1</span>]</span>
+<span id="cb136-17"><a href="#cb136-17"></a></span>
+<span id="cb136-18"><a href="#cb136-18"></a><span class="co"># create data set</span></span>
+<span id="cb136-19"><a href="#cb136-19"></a>xy_datos_mixto <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(x1, y, poblacion)</span>
+<span id="cb136-20"><a href="#cb136-20"></a></span>
+<span id="cb136-21"><a href="#cb136-21"></a><span class="fu">head</span>(xy_datos_mixto, <span class="dv">10</span>)</span></code></pre></div>
 <table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -2996,15 +3026,15 @@ h
 </table>
 <p> </p>
 <p>Podemos explorar la relación entre ‘y’ y ‘x1’ con un gráfico:</p>
-<div class="sourceCode" id="cb134"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb134-1"><a href="#cb134-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> xy_datos_mixto, <span class="fu">aes</span>(<span class="at">x =</span> x1, <span class="at">y =</span> y)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-102-1.png" width="672" />
+<div class="sourceCode" id="cb137"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb137-1"><a href="#cb137-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> xy_datos_mixto, <span class="fu">aes</span>(<span class="at">x =</span> x1, <span class="at">y =</span> y)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-105-1.png" width="672" />
  </p>
 <p>¿Puede ver claramente el patrón de asociación entre las dos variables
 que hemos utilizado para simular los datos? Podemos seguir explorando
 los datos con un modelo de regresión lineal simple:</p>
-<div class="sourceCode" id="cb135"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb135-1"><a href="#cb135-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(y <span class="sc">~</span> x1, <span class="at">data =</span> xy_datos_mixto))</span></code></pre></div>
+<div class="sourceCode" id="cb138"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb138-1"><a href="#cb138-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(y <span class="sc">~</span> x1, <span class="at">data =</span> xy_datos_mixto))</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = y ~ x1, data = xy_datos_mixto)
@@ -3036,24 +3066,24 @@ multinivel o modelos de efectos variables) pueden ayudarnos a tener en
 cuenta estas características adicionales, mejorando significativamente
 nuestro poder de inferencia. Coloreemos cada una de las poblaciones para
 ver cómo covarían las variables en cada subgrupo de datos:</p>
-<div class="sourceCode" id="cb137"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb137-1"><a href="#cb137-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> xy_datos_mixto, <span class="fu">aes</span>(<span class="at">x =</span> x1, <span class="at">y =</span> y, <span class="at">color =</span> poblacion)) <span class="sc">+</span></span>
-<span id="cb137-2"><a href="#cb137-2"></a>    <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-104-1.png" width="672" />
+<div class="sourceCode" id="cb140"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb140-1"><a href="#cb140-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> xy_datos_mixto, <span class="fu">aes</span>(<span class="at">x =</span> x1, <span class="at">y =</span> y, <span class="at">color =</span> poblacion)) <span class="sc">+</span></span>
+<span id="cb140-2"><a href="#cb140-2"></a>    <span class="fu">geom_point</span>()</span></code></pre></div>
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-107-1.png" width="672" />
  </p>
 <p>Parece haber un patrón claro de asociación positiva entre x1 e y. El
 patrón se hace un poco más evidente si representamos cada población en
 su propio panel:</p>
-<div class="sourceCode" id="cb138"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb138-1"><a href="#cb138-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> xy_datos_mixto, <span class="fu">aes</span>(<span class="at">x =</span> x1, <span class="at">y =</span> y, <span class="at">color =</span> poblacion)) <span class="sc">+</span></span>
-<span id="cb138-2"><a href="#cb138-2"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>poblacion) <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>,</span>
-<span id="cb138-3"><a href="#cb138-3"></a>    <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-105-1.png" width="100%" />
+<div class="sourceCode" id="cb141"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb141-1"><a href="#cb141-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> xy_datos_mixto, <span class="fu">aes</span>(<span class="at">x =</span> x1, <span class="at">y =</span> y, <span class="at">color =</span> poblacion)) <span class="sc">+</span></span>
+<span id="cb141-2"><a href="#cb141-2"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>poblacion) <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>,</span>
+<span id="cb141-3"><a href="#cb141-3"></a>    <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p><img src="modelos_de_regresion_files/figure-html/unnamed-chunk-108-1.png" width="100%" />
  </p>
 <p>Construyamos un modelo de efectos mixtos utilizando la población como
 intercepto variable:</p>
-<div class="sourceCode" id="cb139"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb139-1"><a href="#cb139-1"></a>mix_eff_mod <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">formula =</span> y <span class="sc">~</span> x1 <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> poblacion), <span class="at">data =</span> xy_datos_mixto)</span></code></pre></div>
+<div class="sourceCode" id="cb142"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb142-1"><a href="#cb142-1"></a>mix_eff_mod <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">formula =</span> y <span class="sc">~</span> x1 <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> poblacion), <span class="at">data =</span> xy_datos_mixto)</span></code></pre></div>
 <p>Que es equivalente a esto:</p>
 <center>
 <font size = 6><span class="math inline">\(\hat{Y} \sim_{gausiana}
@@ -3062,8 +3092,8 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <p> </p>
 <p>Podemos ver el resultado del modelo igual que con un modelo
 <code>lm()</code>:</p>
-<div class="sourceCode" id="cb140"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb140-1"><a href="#cb140-1"></a><span class="fu">summary</span>(mix_eff_mod)</span></code></pre></div>
+<div class="sourceCode" id="cb143"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb143-1"><a href="#cb143-1"></a><span class="fu">summary</span>(mix_eff_mod)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 ## lmerModLmerTest]
 ## Formula: y ~ x1 + (1 | poblacion)
@@ -3142,8 +3172,8 @@ estimó como 1.317.</li>
 y la desviación estándar de 5.473229</p></li>
 <li><p>Los interceptos estimados para cada población son:</p></li>
 </ul>
-<div class="sourceCode" id="cb143"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb143-1"><a href="#cb143-1"></a><span class="fu">ranef</span>(mix_eff_mod)<span class="sc">$</span>poblacion</span></code></pre></div>
+<div class="sourceCode" id="cb146"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb146-1"><a href="#cb146-1"></a><span class="fu">ranef</span>(mix_eff_mod)<span class="sc">$</span>poblacion</span></code></pre></div>
 <table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -3205,15 +3235,15 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <li>Podemos compararlos con los promedios para cada población en los
 datos:</li>
 </ul>
-<div class="sourceCode" id="cb144"><pre
-class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb144-1"><a href="#cb144-1"></a><span class="co"># sumar interceptos por poblacion a el intercepto total</span></span>
-<span id="cb144-2"><a href="#cb144-2"></a>interceptos <span class="ot">&lt;-</span> <span class="fu">ranef</span>(mix_eff_mod)<span class="sc">$</span>poblacion <span class="sc">+</span> <span class="fu">fixef</span>(mix_eff_mod)[<span class="dv">1</span>]</span>
-<span id="cb144-3"><a href="#cb144-3"></a></span>
-<span id="cb144-4"><a href="#cb144-4"></a><span class="co"># calcular los promedios por poblacion en los datos</span></span>
-<span id="cb144-5"><a href="#cb144-5"></a>prom_pobs <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(y <span class="sc">~</span> poblacion, xy_datos_mixto, mean)</span>
-<span id="cb144-6"><a href="#cb144-6"></a></span>
-<span id="cb144-7"><a href="#cb144-7"></a><span class="co"># unir</span></span>
-<span id="cb144-8"><a href="#cb144-8"></a><span class="fu">cbind</span>(interceptos, <span class="at">prom_pobs =</span> prom_pobs[, <span class="dv">2</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb147"><pre
+class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb147-1"><a href="#cb147-1"></a><span class="co"># sumar interceptos por poblacion a el intercepto total</span></span>
+<span id="cb147-2"><a href="#cb147-2"></a>interceptos <span class="ot">&lt;-</span> <span class="fu">ranef</span>(mix_eff_mod)<span class="sc">$</span>poblacion <span class="sc">+</span> <span class="fu">fixef</span>(mix_eff_mod)[<span class="dv">1</span>]</span>
+<span id="cb147-3"><a href="#cb147-3"></a></span>
+<span id="cb147-4"><a href="#cb147-4"></a><span class="co"># calcular los promedios por poblacion en los datos</span></span>
+<span id="cb147-5"><a href="#cb147-5"></a>prom_pobs <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(y <span class="sc">~</span> poblacion, xy_datos_mixto, mean)</span>
+<span id="cb147-6"><a href="#cb147-6"></a></span>
+<span id="cb147-7"><a href="#cb147-7"></a><span class="co"># unir</span></span>
+<span id="cb147-8"><a href="#cb147-8"></a><span class="fu">cbind</span>(interceptos, <span class="at">prom_pobs =</span> prom_pobs[, <span class="dv">2</span>])</span></code></pre></div>
 <table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -3354,7 +3384,8 @@ Note que estos modelos, principalmente los mixtos, pueden ajustarse a
 otras estructuras de datos mas complejas no cubiertas aquí, como lo son
 las pendientes aleatorias, pendientes e interceptos aleatorios,
 estructuras de correlación (i.e. autocorrelación espacial o temporal,
-pedigrís o árboles filogenéticos) y el uso de pseudoreplicas.</p>
+pedigrís o árboles filogenéticos), medidas repetidas y el uso de
+pseudoreplicas, entre otras.</p>
 <p> </p>
 <hr />
 </div>
