@@ -1,0 +1,356 @@
+---
+title: <center><font size="7"><b>Tarea 6</b></font></center>
+subtitle: <center><font size="5"><b>Programación y métodos estadísticos avanzados en R</b></b></font></center>
+author: <center><font size="5"><a href="http://marceloarayasalas.weebly.com/">Marcelo Araya-Salas, PhD</a></font></center>
+date: <center>"`r Sys.Date()`"</center>
+output:
+  html_document:
+    css: extra.css
+    df_print: tibble
+    highlight: pygments
+    toc: false
+    toc_depth: 3
+    toc_float:
+      collapsed: yes
+      smooth_scroll: yes
+fontsize: 12pt 
+editor_options: 
+  chunk_output_type: console
+---
+
+
+<style>
+body
+  { counter-reset: source-line 0; }
+pre.numberSource code
+  { counter-reset: none; }
+</style>
+
+&nbsp; 
+
+<div class="alert alert-warning">
+
+**Instrucciones**
+
+  * La fecha de entrega es el 27 de octubre a las 11:59 pm
+  * La tarea debe ser escrita en el formato para reportes dinámicos Rmarkdown (5 pts)
+  * Debe entregar el archivo html generado del Rmarkdown por medio de mediación virtual (hay un enlace para someter la tarea). No envíe el archivo Rmd salvo que no pueda generar el html.
+  * El archivo Rmarkdown debe utilizar secciones de código ("chunks") separados para cada ejercicio y subtítulos para cada uno así como comentarios en texto (2.5 pts)
+  * El código dentro de los bloques de código debe estar documentado con comentarios usando '#'. En otras palabras: comente su código (2.5 pts)
+  * Debe usar R básico para la manipulación de datos (5 pts)
+  * Cada ejercicio tiene un valor de 5 puntos
+
+</div>
+
+&nbsp; 
+
+```{r, echo = FALSE}
+
+# devtools::install_github("hadley/emo")
+library("xaringanExtra")
+library("knitr")
+library("kableExtra")
+# options to customize chunk outputs
+knitr::opts_chunk$set(
+  class.source = "numberLines lineAnchors", # for code line numbers
+  tidy.opts = list(width.cutoff = 65), 
+  tidy = TRUE,
+  message = FALSE
+ )
+
+htmltools::tagList(
+  xaringanExtra::use_clipboard(
+    button_text = "<i class=\"fa fa-clipboard\"></i>",
+    success_text = "<i class=\"fa fa-check\" style=\"color: #90BE6D\"></i>",
+    error_text = "<i class=\"fa fa-times-circle\" style=\"color: #F94144\"></i>"
+  ),
+  rmarkdown::html_dependency_font_awesome()
+)
+
+# this is a customized printing style data frames 
+# screws up tibble function
+tibble <- function(x, ...) { 
+  x <- kbl(x, digits=4, align= 'c', row.names = FALSE) 
+   x <- kable_styling(x, position ="center", full_width = FALSE,  bootstrap_options = c("striped", "hover", "condensed", "responsive")) 
+   asis_output(x)
+}
+
+registerS3method("knit_print", "data.frame", tibble)
+```
+
+
+El siguiente código simula un juego de datos donde el predictor y la variable respuesta **no están asociados**:
+
+```{r}
+
+# definir semilla
+set.seed(123)
+
+# numero de observaciones
+n <- 50
+
+# variables aleatorias
+x1 <- rnorm(n = n, mean = 0, sd = 1)
+y <- rnorm(n = n, mean = 0, sd = 1)
+
+# crear data frame
+xy_datos <- data.frame(x1, y)
+
+```
+
+Podemos correr un modelo lineal que estime la (falta de) asociación entre las variables:
+
+```{r}
+# construir model
+xy_mod <- lm(formula = y ~ x1, data = xy_datos)
+
+# calcular el resumen
+summ <- summary(xy_mod)
+
+# extraer el valor de p
+summ$coefficients[2, 4]
+```
+
+Note que la última linea de código devuelve el valor de p.
+
+También podemos hacer el mismo ejercicio con un juego de datos donde las variables están asociadas de la siguiente forma:
+
+```{r}
+# numero de observaciones
+n <- 50
+b0 <- -4
+b1 <- 0.55
+
+# variables aleatorias
+x1 <- rnorm(n = n, mean = 0, sd = 1)
+error <- rnorm(n = n, mean = 0, sd = 1)
+y <- b0 + b1 * x1 + error
+
+# crear data frame
+xy_datos <- data.frame(x1, y)
+
+xy_mod <- lm(formula = y ~ x1, data = xy_datos)
+
+summ <- summary(xy_mod)
+
+# extraer el valor de p
+summ$coefficients[2, 4]
+
+```
+
+---
+
+<!-- skyblue box -->
+
+<div class="alert alert-info">
+
+
+1. Haga un bucle `replicate` que repita la simulación de **variables no asociadas** 1000 veces y que calcule el valor de p para cada juego de datos simulado en cada iteración. ¿Qué proporción de las 1000 repeticiones produjo un valor de p mayor o igual a 0.05 (osea, no fueron significativos)?  
+
+```{r, eval = FALSE, echo=FALSE}
+
+# numero de observaciones
+n <- 30
+
+reps <- replicate(n = 1000, expr = {
+
+  # variables aleatorias
+  x1 <-  rnorm(n = n, mean = 0, sd = 1)
+  y <- rnorm(n = n, mean = 0, sd = 1)
+ 
+  # crear data frame
+  xy_datos <- data.frame(x1, y)
+  
+  xy_mod <- lm(formula = y ~ x1, data = xy_datos)
+  
+  summ <- summary(xy_mod)
+  
+  pval <- summ$coefficients[2, 4]
+  
+  return(pval)
+
+})
+
+sum(reps > 0.05) / length(reps)
+
+```
+&nbsp;
+
+2. Corra el bucle anterior pero esta vez haga que la simulación genere solo 5 observaciones por replica (en vez de las 30 observaciones, pista: `n = 5`). ¿Como afecta este cambio la proporción de repeticiones con un valor de p mayor o igual a 0.05?
+
+```{r, eval = FALSE, echo=FALSE}
+
+# numero de observaciones
+n <- 5
+
+reps <- replicate(n = 1000, expr = {
+
+  # variables aleatorias
+  x1 <- rnorm(n = n, mean = 0, sd = 1)
+  y <- rnorm(n = n, mean = 0, sd = 1)
+ 
+  # crear data frame
+  xy_datos <- data.frame(x1, y)
+  
+  xy_mod <- lm(formula = y ~ x1, data = xy_datos)
+  
+  summ <- summary(xy_mod)
+  
+  pval <- summ$coefficients[2, 4]
+  
+  return(pval)
+
+})
+
+sum(reps > 0.05) / length(reps)
+
+```
+&nbsp;
+
+3. Haga un bucle `replicate` que repita la simulación de **variables asociadas** 1000 veces y que calcule el valor de p para cada juego de datos simulado en cada iteración. ¿Qué proporción de las 1000 repeticiones produjo un valor de p mayor o igual a 0.05?  
+
+```{r, eval = FALSE, echo=FALSE}
+
+  # numero de observaciones
+n <- 50
+b0 <- -4
+b1 <- 0.55
+
+reps <- replicate(n = 1000, expr = {
+
+  # variables aleatorias
+  x1 <- rnorm(n = n, mean = 0, sd = 1)
+  error <- rnorm(n = n, mean = 0, sd = 1)
+  y <- b0 + b1 * x1 + error
+
+  # crear data frame
+  xy_datos <- data.frame(x1, y)
+  
+  xy_mod <- lm(formula = y ~ x1, data = xy_datos)
+  
+  summ <- summary(xy_mod)
+  
+  pval <- summ$coefficients[2, 4]
+  
+  return(pval)
+
+})
+
+sum(reps > 0.05) / length(reps)
+
+```
+&nbsp;
+
+4. Corra el bucle anterior pero esta vez haga que la simulación genere solo 5 observaciones por replica (en vez de las 30 observaciones, pista: `n = 5`). ¿Como afecta este cambio la proporción de repeticiones con un valor de p mayor o igual a 0.05?
+
+```{r, eval = FALSE, echo=FALSE}
+
+  # numero de observaciones
+n <- 5
+b0 <- -4
+b1 <- 0.55
+
+reps <- replicate(n = 1000, expr = {
+
+  # variables aleatorias
+  x1 <- rnorm(n = n, mean = 0, sd = 1)
+  y <- b0 + b1 * x1 + rnorm(n)
+ 
+  # crear data frame
+  xy_datos <- data.frame(x1, y)
+  
+  xy_mod <- lm(formula = y ~ x1, data = xy_datos)
+  
+  summ <- summary(xy_mod)
+  
+  pval <- summ$coefficients[2, 4]
+  
+  return(pval)
+
+})
+
+sum(reps > 0.05) / length(reps)
+
+```
+&nbsp;
+
+5. Corra de nuevo el bucle del punto 1 (variables no asociadas) pero esta vez use la función `rbinom()` para generar 'x1' (puede usar `rbinom(n = n, size = 4, prob = 0.6)` para esto). ¿Como afecta este cambio la proporción de repeticiones con un valor de p mayor o igual a 0.05?
+
+```{r, eval = FALSE, echo=FALSE}
+
+# numero de observaciones
+n <- 30
+
+reps <- replicate(n = 1000, expr = {
+
+  # variables aleatorias
+  x1 <- rbinom(n = n, size = 4, prob = 0.6)
+  y <- rnorm(n = n, mean = 0, sd = 1)
+ 
+  # crear data frame
+  xy_datos <- data.frame(x1, y)
+  
+  xy_mod <- lm(formula = y ~ x1, data = xy_datos)
+  
+  summ <- summary(xy_mod)
+  
+  pval <- summ$coefficients[2, 4]
+  
+  return(pval)
+
+})
+
+sum(reps > 0.05) / length(reps)
+
+```
+&nbsp;
+
+5. Corra de nuevo el bucle del punto 2 (variables  asociadas) pero esta vez use la función `rbinom()` para generar 'x1' (puede usar `rbinom(n = n, size = 4, prob = 0.6)` para esto). ¿Como afecta este cambio la proporción de repeticiones con un valor de p mayor o igual a 0.05?
+
+```{r, eval = FALSE, echo=FALSE}
+
+  # numero de observaciones
+n <- 30
+b0 <- -4
+b1 <- 0.55
+
+reps <- replicate(n = 1000, expr = {
+
+  # variables aleatorias
+  x1 <- rbinom(n = n, size = 4, prob = 0.6)
+  y <- b0 + b1 * x1 + rnorm(n)
+ 
+  # crear data frame
+  xy_datos <- data.frame(x1, y)
+  
+  xy_mod <- lm(formula = y ~ x1, data = xy_datos)
+  
+  summ <- summary(xy_mod)
+  
+  pval <- summ$coefficients[2, 4]
+  
+  return(pval)
+
+})
+
+sum(reps > 0.05) / length(reps)
+
+```
+&nbsp;
+
+
+</div>
+
+&nbsp; 
+
+
+
+---
+
+<font size="4">Información de la sesión</font>
+
+```{r session info, echo=F}
+
+sessionInfo()
+
+```

@@ -466,6 +466,12 @@ div.tocify {
     <li>
       <a href="respuestas_tarea_5.html">Solución: tarea 5</a>
     </li>
+    <li>
+      <a href="tarea_6.html">Tarea 6</a>
+    </li>
+    <li class="dropdown-header">Solución: tarea 6</li>
+    <li class="dropdown-header">Tarea 7</li>
+    <li class="dropdown-header">Solución: tarea 7</li>
   </ul>
 </li>
 <li>
@@ -498,7 +504,7 @@ R</b></font>
 Araya-Salas, PhD</a></font>
 </center></h4>
 <h4 class="date"><center>
-“2022-10-14”
+“2022-10-19”
 </center></h4>
 
 </div>
@@ -875,7 +881,8 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <span id="cb17-10"><a href="#cb17-10"></a>}</span>
 <span id="cb17-11"><a href="#cb17-11"></a></span>
 <span id="cb17-12"><a href="#cb17-12"></a>resultados</span></code></pre></div>
-<pre><code>##  [1] 39  1  2 12 14  9 12  8 32 36 21 12 22 27 29 19  8 12 26</code></pre>
+<pre><code>##  [1] 39  1  2 12 14  9 12  8 32 36 21 12 22 27 29 19  8
+## [18] 12 26</code></pre>
 <p> </p>
 <p>Podemos ordenar estos resultados fácilmente haciendo un cuadro de
 datos (data.frame). Para esto creamos una columna con el nombre del
@@ -1013,8 +1020,9 @@ secuencia de objetos (vectores <em>sensu lato</em>). Por lo tanto hay
 varias funciones <code>(X)apply</code> en R:</p>
 <div class="sourceCode" id="cb25"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">apropos</span>(<span class="st">&quot;apply$&quot;</span>)</span></code></pre></div>
-<pre><code>##  [1] &quot;apply&quot;      &quot;dendrapply&quot; &quot;eapply&quot;     &quot;kernapply&quot;  &quot;lapply&quot;    
-##  [6] &quot;mapply&quot;     &quot;rapply&quot;     &quot;sapply&quot;     &quot;tapply&quot;     &quot;vapply&quot;</code></pre>
+<pre><code>##  [1] &quot;apply&quot;      &quot;dendrapply&quot; &quot;eapply&quot;     &quot;kernapply&quot; 
+##  [5] &quot;lapply&quot;     &quot;mapply&quot;     &quot;rapply&quot;     &quot;sapply&quot;    
+##  [9] &quot;tapply&quot;     &quot;vapply&quot;</code></pre>
 <p> </p>
 <p>Sin embargo, las más utilizadas son
 <code>apply</code>,<code>sapply</code>, <code>lapply</code>
@@ -1166,17 +1174,17 @@ y el usuario no tiene control sobre el insumo a la función. El argumento
 a realizar:</p>
 <div class="sourceCode" id="cb41"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="fu">replicate</span>(<span class="at">n =</span> <span class="dv">3</span>, <span class="at">expr =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>))</span></code></pre></div>
-<pre><code>##            [,1]     [,2]     [,3]
-##  [1,]  2.115045 -0.27885 -2.31146
-##  [2,]  0.387706 -1.39778 -0.97722
-##  [3,] -0.707120 -1.11774 -1.03442
-##  [4,] -0.962360  0.21005  0.64160
-##  [5,] -1.469499 -0.78729  0.81450
-##  [6,] -0.566408 -0.92164 -1.19717
-##  [7,] -0.369809  0.80489  0.61604
-##  [8,] -0.010279 -2.06532 -1.82303
-##  [9,]  0.170748 -1.78607  0.16275
-## [10,]  1.078963 -0.20741 -0.24169</code></pre>
+<pre><code>##           [,1]      [,2]     [,3]
+##  [1,]  0.94171  0.487512 -1.97428
+##  [2,] -2.93144 -1.674129 -0.11172
+##  [3,]  0.14663 -0.229876 -0.35571
+##  [4,]  1.30168 -0.021087 -1.44895
+##  [5,] -1.82334 -1.193760  1.02568
+##  [6,]  0.62147  0.102720 -0.62858
+##  [7,] -0.38437  2.331864 -0.56133
+##  [8,]  0.50386 -0.605064 -2.06591
+##  [9,] -1.78595 -0.512291 -0.21046
+## [10,]  1.30011  1.899956  0.44664</code></pre>
 <p> </p>
 <p>Note que los resultados son agrupados en una matrix. ‘expr’ también
 puede replicar código que no ha sido “empaquetado en una función”.</p>
@@ -1235,7 +1243,8 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <span id="cb43-21"><a href="#cb43-21"></a>}</span>
 <span id="cb43-22"><a href="#cb43-22"></a></span>
 <span id="cb43-23"><a href="#cb43-23"></a><span class="fu">head</span>(cc_vector)</span></code></pre></div>
-<pre><code>## [1]  0.015083  0.293359  0.194777  0.192187 -0.254203 -0.054562</code></pre>
+<pre><code>## [1] -0.317552 -0.488904  0.229025 -0.126653  0.029784
+## [6] -0.077362</code></pre>
 <p> </p>
 <p>Podemos graficarlo el resultado asi así:</p>
 <div class="sourceCode" id="cb45"><pre
@@ -1283,8 +1292,9 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <span id="cb46-18"><a href="#cb46-18"></a>}</span>
 <span id="cb46-19"><a href="#cb46-19"></a></span>
 <span id="cb46-20"><a href="#cb46-20"></a>corr_coef</span></code></pre></div>
-<pre><code>##  [1]  0.0872575  0.3865472  0.1199017 -0.2902941  0.2413406 -0.1667497
-##  [7]  0.1272541  0.0011283 -0.1344395 -0.0184824  0.5966901</code></pre>
+<pre><code>##  [1]  0.0872575  0.3865472  0.1199017 -0.2902941
+##  [5]  0.2413406 -0.1667497  0.1272541  0.0011283
+##  [9] -0.1344395 -0.0184824  0.5966901</code></pre>
 <p> </p>
 <p>Con un pequeño ajuste, un bucle <code>while</code> también puede
 evaluar varias condiciones a la vez. Por ejemplo, también podemos
@@ -1313,7 +1323,8 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <span id="cb48-21"><a href="#cb48-21"></a>}</span>
 <span id="cb48-22"><a href="#cb48-22"></a></span>
 <span id="cb48-23"><a href="#cb48-23"></a><span class="fu">head</span>(cc_vector)</span></code></pre></div>
-<pre><code>## [1] -0.047693  0.232015  0.133767 -0.089900  0.364152  0.203306</code></pre>
+<pre><code>## [1] -0.047693  0.232015  0.133767 -0.089900  0.364152
+## [6]  0.203306</code></pre>
 <p> </p>
 <p><img src="bucles_loops_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
 <hr />
@@ -1349,34 +1360,67 @@ Tutorial on Loops in R - Usage and Alternatives, DataCamp</a></li>
 ## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0
 ## 
 ## locale:
-##  [1] LC_CTYPE=es_ES.UTF-8       LC_NUMERIC=C              
-##  [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=es_ES.UTF-8    
-##  [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=es_ES.UTF-8   
-##  [7] LC_PAPER=es_CR.UTF-8       LC_NAME=C                 
-##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
-## [11] LC_MEASUREMENT=es_CR.UTF-8 LC_IDENTIFICATION=C       
+##  [1] LC_CTYPE=es_ES.UTF-8      
+##  [2] LC_NUMERIC=C              
+##  [3] LC_TIME=es_CR.UTF-8       
+##  [4] LC_COLLATE=es_ES.UTF-8    
+##  [5] LC_MONETARY=es_CR.UTF-8   
+##  [6] LC_MESSAGES=es_ES.UTF-8   
+##  [7] LC_PAPER=es_CR.UTF-8      
+##  [8] LC_NAME=C                 
+##  [9] LC_ADDRESS=C              
+## [10] LC_TELEPHONE=C            
+## [11] LC_MEASUREMENT=es_CR.UTF-8
+## [12] LC_IDENTIFICATION=C       
 ## 
 ## attached base packages:
-## [1] stats     graphics  grDevices utils     datasets  methods   base     
+## [1] stats     graphics  grDevices utils     datasets 
+## [6] methods   base     
 ## 
 ## other attached packages:
-## [1] xaringanExtra_0.7.0 ggplot2_3.3.6       RColorBrewer_1.1-3 
-## [4] kableExtra_1.3.4    knitr_1.39         
+## [1] xaringanExtra_0.7.0 ggplot2_3.3.6      
+## [3] RColorBrewer_1.1-3  kableExtra_1.3.4   
+## [5] knitr_1.39         
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] tidyselect_1.1.2  xfun_0.31         bslib_0.3.1       purrr_0.3.4      
-##  [5] colorspace_2.0-3  vctrs_0.4.1       generics_0.1.2    htmltools_0.5.3  
-##  [9] viridisLite_0.4.0 yaml_2.3.5        utf8_1.2.2        rlang_1.0.4      
-## [13] jquerylib_0.1.4   pillar_1.8.0      glue_1.6.2        withr_2.5.0      
-## [17] DBI_1.1.3         uuid_1.1-0        lifecycle_1.0.1   stringr_1.4.0    
-## [21] munsell_0.5.0     gtable_0.3.0      rvest_1.0.2       evaluate_0.15    
-## [25] labeling_0.4.2    fastmap_1.1.0     fansi_1.0.3       highr_0.9        
-## [29] scales_1.2.0      formatR_1.12      webshot_0.5.3     jsonlite_1.8.0   
-## [33] farver_2.1.1      systemfonts_1.0.4 digest_0.6.29     stringi_1.7.8    
-## [37] dplyr_1.0.9       grid_4.1.1        cli_3.3.0         tools_4.1.1      
-## [41] magrittr_2.0.3    sass_0.4.1        tibble_3.1.8      pkgconfig_2.0.3  
-## [45] xml2_1.3.3        assertthat_0.2.1  rmarkdown_2.14    svglite_2.1.0    
-## [49] httr_1.4.3        rstudioapi_0.13   R6_2.5.1          compiler_4.1.1</code></pre>
+##  [1] svglite_2.1.0     prettyunits_1.1.1
+##  [3] ps_1.7.1          assertthat_0.2.1 
+##  [5] rprojroot_2.0.3   digest_0.6.29    
+##  [7] utf8_1.2.2        R6_2.5.1         
+##  [9] evaluate_0.15     highr_0.9        
+## [11] httr_1.4.3        pillar_1.8.0     
+## [13] rlang_1.0.4       uuid_1.1-0       
+## [15] rstudioapi_0.13   callr_3.7.0      
+## [17] jquerylib_0.1.4   rmarkdown_2.14   
+## [19] desc_1.4.1        labeling_0.4.2   
+## [21] devtools_2.4.3    webshot_0.5.3    
+## [23] stringr_1.4.0     htmlwidgets_1.5.4
+## [25] munsell_0.5.0     compiler_4.1.1   
+## [27] xfun_0.31         systemfonts_1.0.4
+## [29] pkgconfig_2.0.3   pkgbuild_1.3.1   
+## [31] htmltools_0.5.3   tidyselect_1.1.2 
+## [33] tibble_3.1.8      viridisLite_0.4.0
+## [35] fansi_1.0.3       crayon_1.5.1     
+## [37] dplyr_1.0.9       withr_2.5.0      
+## [39] brio_1.1.3        grid_4.1.1       
+## [41] jsonlite_1.8.0    gtable_0.3.0     
+## [43] lifecycle_1.0.1   DBI_1.1.3        
+## [45] formatR_1.12      magrittr_2.0.3   
+## [47] scales_1.2.0      cli_3.3.0        
+## [49] stringi_1.7.8     cachem_1.0.6     
+## [51] farver_2.1.1      fs_1.5.2         
+## [53] remotes_2.4.2     leaflet_2.1.1    
+## [55] testthat_3.1.4    xml2_1.3.3       
+## [57] bslib_0.3.1       ellipsis_0.3.2   
+## [59] generics_0.1.2    vctrs_0.4.1      
+## [61] tools_4.1.1       glue_1.6.2       
+## [63] purrr_0.3.4       crosstalk_1.2.0  
+## [65] rsconnect_0.8.26  processx_3.6.1   
+## [67] pkgload_1.2.4     fastmap_1.1.0    
+## [69] yaml_2.3.5        colorspace_2.0-3 
+## [71] sessioninfo_1.2.2 rvest_1.0.2      
+## [73] memoise_2.0.1     sass_0.4.1       
+## [75] usethis_2.1.6</code></pre>
 </div>
 </div>
 
