@@ -42,7 +42,6 @@ pre.numberSource code
 
 </div>
 
-&nbsp; 
 
 ```{r, echo = FALSE}
 
@@ -77,9 +76,35 @@ tibble <- function(x, ...) {
 
 registerS3method("knit_print", "data.frame", tibble)
 ```
+&nbsp;
+
+<div class="alert alert-success">
+
+&nbsp; 
+
+<center><font size="5"><b>Robustez de los modelos estadísticos</b></font></center>
+
+&nbsp; 
+
+Los conceptos del error tipo I y error tipo II nos permiten entender la robustez (o fragilidad) de nuestras herramientas estádisticas:
 
 
-El siguiente código simula un juego de datos donde el predictor y la variable respuesta **no están asociados**:
+```{r, out.width = "80%", echo = FALSE, fig.align= "center"}
+
+knitr::include_graphics("./images/errores_estad.png")
+
+```
+&nbsp; 
+
+Estos conceptos se suelen cuantificar con 2 medidas relacionadas: el poder estadístico y la tasa de error tipo I.
+El **poder estadístico** es la probabilidad de que una prueba rechace (correctamente) una hipótesis nula falsa. Osea la probabilidad de encontrar una diferencia significativa cuando si la hay. La **tasa de error tipo I** se refiere a la probabilidad de encontrar una diferencia significativa cuando no la hay. En esta tarea exploraremos estos conceptos combinando bucles con simulaciones estadísticas.
+
+&nbsp;
+</div>
+
+&nbsp;
+
+Primero vamos a definir las simulaciones que usaremos. El siguiente código simula un juego de datos donde el predictor y la variable respuesta **no están asociados**:
 
 ```{r}
 
@@ -145,7 +170,7 @@ summ$coefficients[2, 4]
 <div class="alert alert-info">
 
 
-1. Haga un bucle `replicate` que repita la simulación de **variables no asociadas** 1000 veces y que calcule el valor de p para cada juego de datos simulado en cada iteración. ¿Qué proporción de las 1000 repeticiones produjo un valor de p mayor o igual a 0.05 (osea, no fueron significativos)?  
+1. Haga un bucle `replicate` que repita la simulación de **variables no asociadas** 1000 veces y que calcule el valor de p para cada juego de datos simulado en cada iteración. ¿Qué proporción de las 1000 repeticiones produjo un valor de p mayor o igual a 0.05 (osea, no fueron significativos)? Note que estamos calculando la tasa de error tipo I.
 
 ```{r, eval = FALSE, echo=FALSE}
 
@@ -207,7 +232,7 @@ sum(reps > 0.05) / length(reps)
 ```
 &nbsp;
 
-3. Haga un bucle `replicate` que repita la simulación de **variables asociadas** 1000 veces y que calcule el valor de p para cada juego de datos simulado en cada iteración. ¿Qué proporción de las 1000 repeticiones produjo un valor de p mayor o igual a 0.05?  
+3. Haga un bucle `replicate` que repita la simulación de **variables asociadas** 1000 veces y que calcule el valor de p para cada juego de datos simulado en cada iteración. ¿Qué proporción de las 1000 repeticiones produjo un valor de p mayor o igual a 0.05?  Note que esta es una medida del poder estadístico.
 
 ```{r, eval = FALSE, echo=FALSE}
 

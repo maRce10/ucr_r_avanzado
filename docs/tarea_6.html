@@ -13,7 +13,7 @@
 
 <title>tarea_6.knit</title>
 
-<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.16/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -129,13 +129,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   for (var i = 0; i < sheets.length; i++) {
     if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
     try { var rules = sheets[i].cssRules; } catch (e) { continue; }
-    for (var j = 0; j < rules.length; j++) {
+    var j = 0;
+    while (j < rules.length) {
       var rule = rules[j];
       // check if there is a div.sourceCode rule
-      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
       var style = rule.style.cssText;
       // check if color or background-color is set
-      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
       // replace div.sourceCode by a pre.sourceCode rule
       sheets[i].deleteRule(j);
       sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
@@ -231,11 +238,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -428,7 +439,7 @@ R</b></b></font>
 Araya-Salas, PhD</a></font>
 </center></h4>
 <h4 class="date"><center>
-“2022-10-19”
+“2022-10-21”
 </center></h4>
 
 </div>
@@ -461,8 +472,30 @@ pts)</li>
 </ul>
 </div>
 <p> </p>
-<p>El siguiente código simula un juego de datos donde el predictor y la
-variable respuesta <strong>no están asociados</strong>:</p>
+<div class="alert alert-success">
+<p> </p>
+<center>
+<font size="5"><b>Robustez de los modelos estadísticos</b></font>
+</center>
+<p> </p>
+<p>Los conceptos del error tipo I y error tipo II nos permiten entender
+la robustez (o fragilidad) de nuestras herramientas estádisticas:</p>
+<p><img src="images/errores_estad.png" width="80%" style="display: block; margin: auto;" />
+ </p>
+<p>Estos conceptos se suelen cuantificar con 2 medidas relacionadas: el
+poder estadístico y la tasa de error tipo I. El <strong>poder
+estadístico</strong> es la probabilidad de que una prueba rechace
+(correctamente) una hipótesis nula falsa. Osea la probabilidad de
+encontrar una diferencia significativa cuando si la hay. La <strong>tasa
+de error tipo I</strong> se refiere a la probabilidad de encontrar una
+diferencia significativa cuando no la hay. En esta tarea exploraremos
+estos conceptos combinando bucles con simulaciones estadísticas.</p>
+<p> </p>
+</div>
+<p> </p>
+<p>Primero vamos a definir las simulaciones que usaremos. El siguiente
+código simula un juego de datos donde el predictor y la variable
+respuesta <strong>no están asociados</strong>:</p>
 <div class="sourceCode" id="cb1"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># definir semilla</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
@@ -520,7 +553,8 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <strong>variables no asociadas</strong> 1000 veces y que calcule el
 valor de p para cada juego de datos simulado en cada iteración. ¿Qué
 proporción de las 1000 repeticiones produjo un valor de p mayor o igual
-a 0.05 (osea, no fueron significativos)?</li>
+a 0.05 (osea, no fueron significativos)? Note que estamos calculando la
+tasa de error tipo I.</li>
 </ol>
 <p> </p>
 <ol start="2" style="list-style-type: decimal">
@@ -535,7 +569,7 @@ repeticiones con un valor de p mayor o igual a 0.05?</li>
 <strong>variables asociadas</strong> 1000 veces y que calcule el valor
 de p para cada juego de datos simulado en cada iteración. ¿Qué
 proporción de las 1000 repeticiones produjo un valor de p mayor o igual
-a 0.05?</li>
+a 0.05? Note que esta es una medida del poder estadístico.</li>
 </ol>
 <p> </p>
 <ol start="4" style="list-style-type: decimal">
@@ -565,18 +599,18 @@ o igual a 0.05?</li>
 <p> </p>
 <hr />
 <p><font size="4">Información de la sesión</font></p>
-<pre><code>## R version 4.1.1 (2021-08-10)
+<pre><code>## R version 4.2.0 (2022-04-22)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
-## Running under: Ubuntu 20.04.2 LTS
+## Running under: Ubuntu 22.04.1 LTS
 ## 
 ## Matrix products: default
-## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0
-## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0
+## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0
+## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0
 ## 
 ## locale:
-##  [1] LC_CTYPE=es_ES.UTF-8       LC_NUMERIC=C              
-##  [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=es_ES.UTF-8    
-##  [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=es_ES.UTF-8   
+##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+##  [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=en_US.UTF-8    
+##  [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=en_US.UTF-8   
 ##  [7] LC_PAPER=es_CR.UTF-8       LC_NAME=C                 
 ##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
 ## [11] LC_MEASUREMENT=es_CR.UTF-8 LC_IDENTIFICATION=C       
@@ -585,19 +619,20 @@ o igual a 0.05?</li>
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] kableExtra_1.3.4    knitr_1.39          xaringanExtra_0.7.0
+## [1] kableExtra_1.3.4    knitr_1.40          xaringanExtra_0.7.0
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] formatR_1.12      pillar_1.8.0      bslib_0.3.1       compiler_4.1.1   
-##  [5] jquerylib_0.1.4   tools_4.1.1       uuid_1.1-0        digest_0.6.29    
-##  [9] jsonlite_1.8.0    evaluate_0.15     lifecycle_1.0.1   tibble_3.1.8     
-## [13] viridisLite_0.4.0 pkgconfig_2.0.3   rlang_1.0.4       cli_3.3.0        
-## [17] rstudioapi_0.13   yaml_2.3.5        xfun_0.31         fastmap_1.1.0    
-## [21] stringr_1.4.0     httr_1.4.3        xml2_1.3.3        vctrs_0.4.1      
-## [25] sass_0.4.1        systemfonts_1.0.4 webshot_0.5.3     svglite_2.1.0    
-## [29] glue_1.6.2        R6_2.5.1          fansi_1.0.3       rmarkdown_2.14   
-## [33] magrittr_2.0.3    scales_1.2.0      htmltools_0.5.3   rvest_1.0.2      
-## [37] colorspace_2.0-3  utf8_1.2.2        stringi_1.7.8     munsell_0.5.0</code></pre>
+##  [1] formatR_1.12      highr_0.9         pillar_1.8.1      bslib_0.4.0      
+##  [5] compiler_4.2.0    jquerylib_0.1.4   tools_4.2.0       uuid_1.1-0       
+##  [9] digest_0.6.29     jsonlite_1.8.0    evaluate_0.16     lifecycle_1.0.2  
+## [13] tibble_3.1.8      viridisLite_0.4.1 pkgconfig_2.0.3   rlang_1.0.6      
+## [17] cli_3.4.1         rstudioapi_0.13   yaml_2.3.5        xfun_0.33        
+## [21] fastmap_1.1.0     stringr_1.4.1     httr_1.4.4        xml2_1.3.3       
+## [25] vctrs_0.4.1       sass_0.4.2        systemfonts_1.0.4 webshot_0.5.3    
+## [29] svglite_2.1.0     glue_1.6.2        R6_2.5.1          fansi_1.0.3      
+## [33] rmarkdown_2.16    magrittr_2.0.3    scales_1.2.1      htmltools_0.5.3  
+## [37] rvest_1.0.2       colorspace_2.0-3  utf8_1.2.2        stringi_1.7.8    
+## [41] munsell_0.5.0     cachem_1.0.6</code></pre>
 
 
 
