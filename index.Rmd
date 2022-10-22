@@ -1,4 +1,20 @@
 
+&nbsp;
+
+<div class="alert alert-success">
+
+<center><font size="5"><b>Curso: Herramientas prácticas para investigación reproducible</b></font></center>
+
+Objetivos: 
+
+1. repositorios en linea para compartir datos y productos de la investigación 
+1. herramientas digitales de libre acceso
+1. implementación de buenas pŕacticas de manejo y análisis de datos
+
+<center><font size="5"><b><i><a href="https://marce10.github.io/ciencia_reproducible/">En el sitio del curso pueden encontrar el programa y los manuales</a></i></b></font></center>
+
+</div>
+
 <center>
 <font size="6"><b>Programación y métodos estadísticos avanzados en R</b></font>
 </center>
