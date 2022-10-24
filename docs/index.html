@@ -13,7 +13,7 @@
 
 <title>index.knit</title>
 
-<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.16/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -142,11 +142,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -305,8 +309,6 @@ $(document).ready(function () {
       <a href="tarea_6.html">Tarea 6</a>
     </li>
     <li class="dropdown-header">Solución: tarea 6</li>
-    <li class="dropdown-header">Tarea 7</li>
-    <li class="dropdown-header">Solución: tarea 7</li>
   </ul>
 </li>
 <li>
@@ -331,11 +333,10 @@ $(document).ready(function () {
 </div>
 
 
-<p> </p>
 <div class="alert alert-success">
 <center>
-<font size="5"><b>Curso: Herramientas prácticas para investigación
-reproducible</b></font>
+<font size="5"><b>Nuevo curso: <i>Herramientas prácticas para
+investigación reproducible</i></b></font>
 </center>
 <p>Objetivos:</p>
 <ol style="list-style-type: decimal">
@@ -346,11 +347,11 @@ investigación</li>
 datos</li>
 </ol>
 <center>
-<font size="5"><b><i><a href="https://marce10.github.io/ciencia_reproducible/">En
-el sitio del curso pueden encontrar el programa y los
-manuales</a></i></b></font>
+<font size="5"><b><i><a href="https://marce10.github.io/ciencia_reproducible/">Enlace
+al curso</a></i></b></font>
 </center>
 </div>
+<p> </p>
 <center>
 <font size="6"><b>Programación y métodos estadísticos avanzados en
 R</b></font>

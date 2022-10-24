@@ -395,7 +395,7 @@ Y eso es un juego de datos simulados en su forma más básica. Se parece mucho a
 
 ## Prueba de concepto: *el Teorema Central del Límite*
 
-El [Teorema del Límite Central](https://en.wikipedia.org/wiki/Central_limit_theorem) afirma que, si tomamos muestras aleatorias de una población, los promedios de esas muestras se ajustarán a una distribución normal, aunque la población no esté distribuida normalmente. Además, la distribución normal resultante debe tener un promedio cercanp al promedio de la población. El teorema es un concepto clave para la estadística inferencial, ya que implica que los métodos estadísticos que funcionan para las distribuciones normales pueden ser aplicables a muchos problemas que implican otros tipos de distribuciones. No obstante, el objetivo aquí es sólo mostrar cómo se pueden utilizar las simulaciones para entender el comportamiento de los métodos estadísticos.  
+El [Teorema del Límite Central](https://en.wikipedia.org/wiki/Central_limit_theorem) afirma que, si tomamos muestras aleatorias de una población, los promedios de esas muestras seguirán una distribución normal, aunque la población no esté distribuida normalmente. Además, la distribución normal resultante debe tener un promedio cercano al promedio de la población. El teorema es un concepto clave para la estadística inferencial, ya que implica que los métodos estadísticos que funcionan para las distribuciones normales pueden ser aplicables a muchos problemas que implican otros tipos de distribuciones. No obstante, el objetivo aquí es sólo mostrar cómo se pueden utilizar las simulaciones para entender el comportamiento de los métodos estadísticos.  
 
 Para comprobar si esas afirmaciones básicas sobre el Teorema del Límite Central son ciertas, podemos utilizar datos simulados en R. Vamos a simular una población de 1000 observaciones con una distribución uniforme: 
 
@@ -670,7 +670,7 @@ knitr::include_graphics("./images/lm.png")
 ```
 &nbsp; 
 
-Podemos ajustar este modelo para ver el resultado:
+Podemos correr este modelo para ver el resultado:
 ```{r}
 
 reg_mod <- lm(formula = Height ~ Girth, data = trees)
@@ -1709,11 +1709,11 @@ xy_summ_intr$coefficients
 
 - Los valores simulados para los parámetros de regresión pueden compararse con el resumen del modelo `lm()` para tener una idea de la precisión del modelo:
 
-    - $\beta_1$ was set to `r b1` and was estimated as `r round(xy_summ_intr$coefficients[2, 1], 3)`
+    - $\beta_1$ se simuló con un valor de `r b1` y se estimó en `r round(xy_summ_intr$coefficients[2, 1], 3)`
 
-    - $\beta_2$ was set to `r b2` and was estimated as `r round(xy_summ_intr$coefficients[3, 1], 3)`
+    - $\beta_2$ se simuló con un valor de `r b2` y se estimó en `r round(xy_summ_intr$coefficients[3, 1], 3)`
 
-    - $\beta_3$ was set to `r b3` and was estimated as `r round(xy_summ_intr$coefficients[4, 1], 3)`
+    - $\beta_3$ se simuló con un valor de `r b3` y se estimó en `r round(xy_summ_intr$coefficients[4, 1], 3)`
 
 </div>
 
@@ -1866,7 +1866,7 @@ summary(xy_mod)
 
 ## Modelos lineales generalizados (GLM)
 
-Los GLM nos permiten modelar la asociación a variables respuesta que no se ajustan a una distribución normal. Además, permiten modelar distribuciones que se asemejan más al proceso que generó los datos. El siguiente código crea un juego de datos con una respuesta que representa cuentas (por lo tanto, no normal):
+Los GLM nos permiten modelar la asociación a variables respuesta que no siguen una distribución normal. Además, permiten modelar distribuciones que se asemejan más al proceso que generó los datos. El siguiente código crea un juego de datos con una respuesta que representa cuentas (por lo tanto, no normal):
 
 ```{r}
 
@@ -2069,7 +2069,7 @@ ggplot(data = xy_datos_mixto, aes(x = x1, y = y, color = poblacion)) +
 ```
 &nbsp;
 
-Parece haber un patrón claro de asociación positiva entre x1 e y. El patrón se hace un poco más evidente si representamos cada población en su propio panel:
+Parece haber un patrón claro de asociación positiva entre x1 e y. El patrón se hace un poco más evidente si mostramos cada población en su propio panel:
 
 ```{r, out.width= "100%"}
 
@@ -2219,7 +2219,7 @@ knitr::include_graphics("./images/swiss_knife.png")
 
 <center><font size = 5>$\hat{Y} \sim_{función\ de\ enlace} (\beta_{o} + \beta_{grupo}) + \beta_{1} * x_{1} + \cdots + \beta_{n} * x_{n}$</font></center>
 
-- Este modelo básico incluye una función de enlace que cuando es gausiana equivale aun modelo linear y cuando no a un modelo generalizado
+- Este modelo básico incluye una función de enlace que cuando es gausiana (i.e. normal) equivale a un modelo lineal y cuando no, a un modelo generalizado
 
 - Cuando el $\beta_{grupo}$ es diferente entre grupos (i.e. cuando el intercepto difiere entre grupos) es un modelo mixto con intercepto variable (i.e. aleatorio)
 
@@ -2229,7 +2229,7 @@ knitr::include_graphics("./images/swiss_knife.png")
 
 &nbsp; 
 
-Este manual solo pretende sugerir un abordaje estadístico centrado en los modelos de regresión desde el cual se pueden llevar a cabo adecuadamente la mayoría de los análisis estadísticos que usamos en biología. **El manual no tiene como objetivo explicar en detalle las particularidades de los modelos generalizados y mixtos**. Note que estos modelos, principalmente los mixtos, pueden ajustarse a otras estructuras de datos mas complejas no cubiertas aquí, como lo son las pendientes aleatorias, pendientes e interceptos aleatorios, estructuras de correlación (i.e. autocorrelación espacial o temporal, pedigrís o árboles filogenéticos), medidas repetidas y el uso de pseudoreplicas, entre otras. 
+Este manual solo pretende sugerir un abordaje estadístico centrado en los modelos de regresión desde el cual se pueden llevar a cabo adecuadamente la mayoría de los análisis estadísticos que usamos en biología. **El manual no tiene como objetivo explicar en detalle las particularidades de los modelos generalizados y mixtos**. Note que estos modelos, principalmente los mixtos, pueden adaptarse a otras estructuras de datos mas complejas no cubiertas aquí, como lo son las pendientes aleatorias, pendientes e interceptos aleatorios, estructuras de correlación (i.e. autocorrelación espacial o temporal, pedigrís o árboles filogenéticos), medidas repetidas y el uso de pseudoreplicas, entre otras. 
 
 &nbsp; 
 

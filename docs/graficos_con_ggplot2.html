@@ -13,7 +13,7 @@
 
 <title>graficos_con_ggplot2.knit</title>
 
-<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.16/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -132,13 +132,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   for (var i = 0; i < sheets.length; i++) {
     if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
     try { var rules = sheets[i].cssRules; } catch (e) { continue; }
-    for (var j = 0; j < rules.length; j++) {
+    var j = 0;
+    while (j < rules.length) {
       var rule = rules[j];
       // check if there is a div.sourceCode rule
-      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
       var style = rule.style.cssText;
       // check if color or background-color is set
-      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
       // replace div.sourceCode by a pre.sourceCode rule
       sheets[i].deleteRule(j);
       sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
@@ -234,11 +241,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -470,8 +481,6 @@ div.tocify {
       <a href="tarea_6.html">Tarea 6</a>
     </li>
     <li class="dropdown-header">Solución: tarea 6</li>
-    <li class="dropdown-header">Tarea 7</li>
-    <li class="dropdown-header">Solución: tarea 7</li>
   </ul>
 </li>
 <li>
@@ -504,7 +513,7 @@ div.tocify {
 Araya-Salas, PhD</a></font>
 </center></h4>
 <h4 class="date"><center>
-“2022-10-19”
+“2022-10-24”
 </center></h4>
 
 </div>
@@ -762,8 +771,7 @@ class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCod
 <div class="sourceCode" id="cb21"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(Petal.Length)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">fill =</span> <span class="fu">adjustcolor</span>(<span class="st">&quot;red2&quot;</span>,</span>
 <span id="cb21-2"><a href="#cb21-2"></a>    <span class="at">alpha.f =</span> <span class="fl">0.3</span>))</span></code></pre></div>
-<pre><code>## Warning: Duplicated aesthetics after name
-## standardisation: fill</code></pre>
+<pre><code>## Warning: Duplicated aesthetics after name standardisation: fill</code></pre>
 <p><img src="graficos_con_ggplot2_files/figure-html/unnamed-chunk-25-1.png" width="672" />
  </p>
 <p>And compare the distribution of different groups within the same
@@ -845,14 +853,12 @@ function:</p>
 <div class="sourceCode" id="cb32"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> msleep[msleep<span class="sc">$</span>order <span class="sc">%in%</span> <span class="fu">names</span>(tab)[tab <span class="sc">&gt;</span> <span class="dv">5</span>], ], <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> bodywt,</span>
 <span id="cb32-2"><a href="#cb32-2"></a>    <span class="at">y =</span> brainwt)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>order, <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>)</span></code></pre></div>
-<pre><code>## Warning: Removed 21 rows containing missing values
-## (geom_point).</code></pre>
+<pre><code>## Warning: Removed 21 rows containing missing values (geom_point).</code></pre>
 <p><img src="graficos_con_ggplot2_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
 <div class="sourceCode" id="cb34"><pre
 class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="co"># Export</span></span>
 <span id="cb34-2"><a href="#cb34-2"></a><span class="fu">ggsave</span>(<span class="st">&quot;plot.png&quot;</span>, <span class="at">width =</span> <span class="dv">5</span>, <span class="at">height =</span> <span class="dv">5</span>)</span></code></pre></div>
-<pre><code>## Warning: Removed 21 rows containing missing values
-## (geom_point).</code></pre>
+<pre><code>## Warning: Removed 21 rows containing missing values (geom_point).</code></pre>
 <p> </p>
 <p>The image file type will be identify by the extension in the file
 name</p>
@@ -1024,82 +1030,45 @@ computing, 2nd edn. Springer, New York</li>
 <hr />
 <hr />
 <p><font size="4">Información de la sesión</font></p>
-<pre><code>## R version 4.1.1 (2021-08-10)
+<pre><code>## R version 4.1.0 (2021-05-18)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
 ## Running under: Ubuntu 20.04.2 LTS
 ## 
 ## Matrix products: default
-## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0
-## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0
+## BLAS:   /usr/lib/x86_64-linux-gnu/atlas/libblas.so.3.10.3
+## LAPACK: /usr/lib/x86_64-linux-gnu/atlas/liblapack.so.3.10.3
 ## 
 ## locale:
-##  [1] LC_CTYPE=es_ES.UTF-8      
-##  [2] LC_NUMERIC=C              
-##  [3] LC_TIME=es_CR.UTF-8       
-##  [4] LC_COLLATE=es_ES.UTF-8    
-##  [5] LC_MONETARY=es_CR.UTF-8   
-##  [6] LC_MESSAGES=es_ES.UTF-8   
-##  [7] LC_PAPER=es_CR.UTF-8      
-##  [8] LC_NAME=C                 
-##  [9] LC_ADDRESS=C              
-## [10] LC_TELEPHONE=C            
-## [11] LC_MEASUREMENT=es_CR.UTF-8
-## [12] LC_IDENTIFICATION=C       
+##  [1] LC_CTYPE=pt_BR.UTF-8       LC_NUMERIC=C               LC_TIME=es_CR.UTF-8       
+##  [4] LC_COLLATE=pt_BR.UTF-8     LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=pt_BR.UTF-8   
+##  [7] LC_PAPER=es_CR.UTF-8       LC_NAME=C                  LC_ADDRESS=C              
+## [10] LC_TELEPHONE=C             LC_MEASUREMENT=es_CR.UTF-8 LC_IDENTIFICATION=C       
 ## 
 ## attached base packages:
-## [1] stats     graphics  grDevices utils     datasets 
-## [6] methods   base     
+## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-##  [1] scales_1.2.0        MASS_7.3-54        
-##  [3] emo_0.0.0.9000      viridis_0.6.2      
-##  [5] viridisLite_0.4.0   xaringanExtra_0.7.0
-##  [7] ggplot2_3.3.6       RColorBrewer_1.1-3 
-##  [9] kableExtra_1.3.4    knitr_1.39         
+##  [1] scales_1.2.0        MASS_7.3-54         emo_0.0.0.9000      viridis_0.6.2      
+##  [5] viridisLite_0.4.0   xaringanExtra_0.7.0 ggplot2_3.3.6       RColorBrewer_1.1-3 
+##  [9] kableExtra_1.3.1    knitr_1.39         
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] httr_1.4.3        sass_0.4.1       
-##  [3] pkgload_1.2.4     splines_4.1.1    
-##  [5] jsonlite_1.8.0    bslib_0.3.1      
-##  [7] brio_1.1.3        assertthat_0.2.1 
-##  [9] highr_0.9         yaml_2.3.5       
-## [11] remotes_2.4.2     sessioninfo_1.2.2
-## [13] lattice_0.20-44   pillar_1.8.0     
-## [15] glue_1.6.2        uuid_1.1-0       
-## [17] digest_0.6.29     rvest_1.0.2      
-## [19] colorspace_2.0-3  Matrix_1.3-4     
-## [21] htmltools_0.5.3   pkgconfig_2.0.3  
-## [23] devtools_2.4.3    purrr_0.3.4      
-## [25] webshot_0.5.3     processx_3.6.1   
-## [27] svglite_2.1.0     tibble_3.1.8     
-## [29] mgcv_1.8-36       generics_0.1.2   
-## [31] farver_2.1.1      usethis_2.1.6    
-## [33] ellipsis_0.3.2    cachem_1.0.6     
-## [35] withr_2.5.0       cli_3.3.0        
-## [37] magrittr_2.0.3    crayon_1.5.1     
-## [39] memoise_2.0.1     evaluate_0.15    
-## [41] ps_1.7.1          fs_1.5.2         
-## [43] fansi_1.0.3       nlme_3.1-152     
-## [45] xml2_1.3.3        pkgbuild_1.3.1   
-## [47] textshaping_0.3.6 rsconnect_0.8.26 
-## [49] tools_4.1.1       prettyunits_1.1.1
-## [51] formatR_1.12      lifecycle_1.0.1  
-## [53] stringr_1.4.0     munsell_0.5.0    
-## [55] callr_3.7.0       isoband_0.2.5    
-## [57] compiler_4.1.1    jquerylib_0.1.4  
-## [59] systemfonts_1.0.4 rlang_1.0.4      
-## [61] grid_4.1.1        rstudioapi_0.13  
-## [63] htmlwidgets_1.5.4 crosstalk_1.2.0  
-## [65] labeling_0.4.2    rmarkdown_2.14   
-## [67] testthat_3.1.4    gtable_0.3.0     
-## [69] DBI_1.1.3         R6_2.5.1         
-## [71] lubridate_1.8.0   gridExtra_2.3    
-## [73] dplyr_1.0.9       fastmap_1.1.0    
-## [75] utf8_1.2.2        rprojroot_2.0.3  
-## [77] ragg_1.2.2        desc_1.4.1       
-## [79] stringi_1.7.8     vctrs_0.4.1      
-## [81] leaflet_2.1.1     tidyselect_1.1.2 
-## [83] xfun_0.31</code></pre>
+##  [1] Rcpp_1.0.9        lubridate_1.7.10  lattice_0.20-44   assertthat_0.2.1 
+##  [5] digest_0.6.29     utf8_1.2.2        R6_2.5.1          evaluate_0.15    
+##  [9] httr_1.4.2        highr_0.9         pillar_1.8.0      rlang_1.0.5      
+## [13] uuid_0.1-4        rstudioapi_0.13   jquerylib_0.1.4   Matrix_1.3-4     
+## [17] rmarkdown_2.16    textshaping_0.3.5 labeling_0.4.2    splines_4.1.0    
+## [21] webshot_0.5.2     stringr_1.4.0     munsell_0.5.0     compiler_4.1.0   
+## [25] xfun_0.31         systemfonts_1.0.2 pkgconfig_2.0.3   mgcv_1.8-36      
+## [29] htmltools_0.5.3   tidyselect_1.1.1  tibble_3.1.8      gridExtra_2.3    
+## [33] fansi_1.0.3       crayon_1.5.1      dplyr_1.0.7       withr_2.5.0      
+## [37] grid_4.1.0        nlme_3.1-152      jsonlite_1.8.0    gtable_0.3.0     
+## [41] lifecycle_1.0.1   DBI_1.1.1         magrittr_2.0.3    formatR_1.11     
+## [45] cli_3.3.0         stringi_1.7.8     farver_2.1.1      remotes_2.4.0    
+## [49] xml2_1.3.2        bslib_0.2.5.1     ragg_1.1.3        generics_0.1.0   
+## [53] vctrs_0.4.1       tools_4.1.0       glue_1.6.2        purrr_0.3.4      
+## [57] rsconnect_0.8.27  fastmap_1.1.0     yaml_2.3.5        colorspace_2.0-3 
+## [61] isoband_0.2.5     rvest_1.0.0       sass_0.4.0</code></pre>
 </div>
 
 

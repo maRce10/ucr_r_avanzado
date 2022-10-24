@@ -86,7 +86,7 @@ registerS3method("knit_print", "data.frame", tibble)
 
 &nbsp; 
 
-Los conceptos del error tipo I y error tipo II nos permiten entender la robustez (o fragilidad) de nuestras herramientas estádisticas:
+Los conceptos **error tipo I** y **error tipo II** nos permiten entender la robustez (o fragilidad) de nuestras herramientas estádisticas:
 
 
 ```{r, out.width = "80%", echo = FALSE, fig.align= "center"}
@@ -330,7 +330,7 @@ sum(reps > 0.05) / length(reps)
 ```
 &nbsp;
 
-5. Corra de nuevo el bucle del punto 2 (variables  asociadas) pero esta vez use la función `rbinom()` para generar 'x1' (puede usar `rbinom(n = n, size = 4, prob = 0.6)` para esto). ¿Como afecta este cambio la proporción de repeticiones con un valor de p mayor o igual a 0.05?
+6. Corra de nuevo el bucle del punto 2 (variables  asociadas) pero esta vez use la función `rbinom()` para generar 'x1' (puede usar `rbinom(n = n, size = 4, prob = 0.6)` para esto). ¿Como afecta este cambio la proporción de repeticiones con un valor de p mayor o igual a 0.05?
 
 ```{r, eval = FALSE, echo=FALSE}
 
