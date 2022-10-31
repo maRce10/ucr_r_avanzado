@@ -1,5 +1,5 @@
 ---
-title: <center><font size="7"><b>Tarea 6</b></font></center>
+title: <center><font size="7"><b>Solución a la tarea 6</b></font></center>
 subtitle: <center><font size="5"><b>Programación y métodos estadísticos avanzados en R</b></b></font></center>
 author: <center><font size="5"><a href="http://marceloarayasalas.weebly.com/">Marcelo Araya-Salas, PhD</a></font></center>
 date: <center>"`r Sys.Date()`"</center>
@@ -18,30 +18,12 @@ editor_options:
   chunk_output_type: console
 ---
 
-
 <style>
 body
   { counter-reset: source-line 0; }
 pre.numberSource code
   { counter-reset: none; }
 </style>
-
-&nbsp; 
-
-<div class="alert alert-warning">
-
-**Instrucciones**
-
-  * La fecha de entrega es el 27 de octubre a las 11:59 pm
-  * La tarea debe ser escrita en el formato para reportes dinámicos Rmarkdown (5 pts)
-  * Debe entregar el archivo html generado del Rmarkdown por medio de mediación virtual (hay un enlace para someter la tarea). No envíe el archivo Rmd salvo que no pueda generar el html.
-  * El archivo Rmarkdown debe utilizar secciones de código ("chunks") separados para cada ejercicio y subtítulos para cada uno así como comentarios en texto (2.5 pts)
-  * El código dentro de los bloques de código debe estar documentado con comentarios usando '#'. En otras palabras: comente su código (2.5 pts)
-  * Debe usar R básico para la manipulación de datos (5 pts)
-  * Cada ejercicio tiene un valor de 5 puntos
-
-</div>
-
 
 ```{r, echo = FALSE}
 
@@ -172,7 +154,7 @@ summ$coefficients[2, 4]
 
 1. Haga un bucle `replicate` que repita la simulación de **variables no asociadas** 1000 veces y que calcule el valor de p para cada juego de datos simulado en cada iteración. ¿Qué proporción de las 1000 repeticiones produjo un valor de p mayor o igual a 0.05 (osea, no fueron significativos)? Note que estamos calculando la tasa de error tipo I.
 
-```{r, eval = FALSE, echo=FALSE}
+```{r, eval = TRUE, echo=TRUE}
 
 # numero de observaciones
 n <- 30
@@ -201,9 +183,9 @@ sum(reps > 0.05) / length(reps)
 ```
 &nbsp;
 
-2. Corra el bucle anterior pero esta vez haga que la simulación genere solo 5 observaciones por replica (en vez de las 30 observaciones, pista: `n = 5`). ¿Como afecta este cambio la proporción de repeticiones con un valor de p mayor o igual a 0.05?
+2. Corra el bucle anterior pero esta vez haga que la simulación genere solo 5 observaciones por replica (en vez de las 30 observaciones, pista: `n <- 5`). ¿Como afecta este cambio la proporción de repeticiones con un valor de p mayor o igual a 0.05?
 
-```{r, eval = FALSE, echo=FALSE}
+```{r, eval = TRUE, echo=TRUE}
 
 # numero de observaciones
 n <- 5
@@ -234,7 +216,7 @@ sum(reps > 0.05) / length(reps)
 
 3. Haga un bucle `replicate` que repita la simulación de **variables asociadas** 1000 veces y que calcule el valor de p para cada juego de datos simulado en cada iteración. ¿Qué proporción de las 1000 repeticiones produjo un valor de p mayor o igual a 0.05?  Note que esta es una medida del poder estadístico.
 
-```{r, eval = FALSE, echo=FALSE}
+```{r, eval = TRUE, echo=TRUE}
 
   # numero de observaciones
 n <- 50
@@ -266,9 +248,9 @@ sum(reps > 0.05) / length(reps)
 ```
 &nbsp;
 
-4. Corra el bucle anterior pero esta vez haga que la simulación genere solo 5 observaciones por replica (en vez de las 30 observaciones, pista: `n <- 5`). ¿Como afecta este cambio la proporción de repeticiones con un valor de p mayor o igual a 0.05?
+4. Corra el bucle anterior pero esta vez haga que la simulación genere solo 5 observaciones por replica (en vez de las 30 observaciones, pista: `n = 5`). ¿Como afecta este cambio la proporción de repeticiones con un valor de p mayor o igual a 0.05?
 
-```{r, eval = FALSE, echo=FALSE}
+```{r, eval = TRUE, echo=TRUE}
 
   # numero de observaciones
 n <- 5
@@ -301,7 +283,7 @@ sum(reps > 0.05) / length(reps)
 
 5. Corra de nuevo el bucle del punto 1 (variables no asociadas) pero esta vez use la función `rbinom()` para generar 'x1' (puede usar `rbinom(n = n, size = 4, prob = 0.6)` para esto). ¿Como afecta este cambio la proporción de repeticiones con un valor de p mayor o igual a 0.05?
 
-```{r, eval = FALSE, echo=FALSE}
+```{r, eval = TRUE, echo=TRUE}
 
 # numero de observaciones
 n <- 30
@@ -332,7 +314,7 @@ sum(reps > 0.05) / length(reps)
 
 6. Corra de nuevo el bucle del punto 2 (variables  asociadas) pero esta vez use la función `rbinom()` para generar 'x1' (puede usar `rbinom(n = n, size = 4, prob = 0.6)` para esto). ¿Como afecta este cambio la proporción de repeticiones con un valor de p mayor o igual a 0.05?
 
-```{r, eval = FALSE, echo=FALSE}
+```{r, eval = TRUE, echo=TRUE}
 
   # numero de observaciones
 n <- 30
